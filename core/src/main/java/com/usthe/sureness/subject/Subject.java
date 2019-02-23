@@ -10,7 +10,8 @@ import java.util.Collection;
  */
 public interface Subject {
 
-    void login(String var1) throws AuthenticationException;
+    void login(SubjectAuToken var1) throws AuthenticationException;
+
     void logout();
     // 是否认证
     boolean isAuthenticated();
@@ -22,5 +23,9 @@ public interface Subject {
     boolean hasRole(String var1);
 
     boolean hasAllRoles(Collection<String> var1);
+
+    Object getRoles();
+
+    Object cloneImage();
 
 }

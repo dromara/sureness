@@ -200,7 +200,7 @@ public class TireTreePathMatcher {
         /* *
          * @Description 孩子节点
          */
-        private Map<String, Node> children = new HashMap<>();
+        private Map<String, Node> children = new HashMap<String, Node>();
 
         public void insertChild(String data) {
             this.children.put(data,new Node(data));

@@ -7,7 +7,7 @@
     <groupId>com.usthe</groupId>
     <artifactId>sureness</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1</version>
     <modules>
         <module>core</module>
         <module>samples</module>
