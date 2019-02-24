@@ -11,6 +11,8 @@ import com.usthe.sureness.subject.SubjectContext;
  */
 public interface SecurityManager {
 
+    void checkIn();
+
     Subject login(Subject var1, SubjectAuToken var2);
 
 

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /* *
  * @Author tomsun28
- * @Description  hold the each thread subject and more ,  learn from shiro
+ * @Description  hold the each thread subject and more ,  learn from spring security
  * @Date 16:25 2019-02-24
  */
 public class SecurityContextHolder {

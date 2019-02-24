@@ -13,6 +13,7 @@ public interface Subject {
     void login(SubjectAuToken var1) throws AuthenticationException;
 
     void logout();
+
     // 是否认证
     boolean isAuthenticated();
     // 是否有权限
