@@ -19,7 +19,7 @@ public class DefaultSecurityManager implements SecurityManager {
 
 
 
-    public Subject login(Subject var1, SubjectAuToken var2) throws AuthenticationException {
+    public Subject login(Subject var1, SubjectAuToken var2) {
         return null;
     }
 

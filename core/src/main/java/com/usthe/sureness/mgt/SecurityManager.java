@@ -3,7 +3,6 @@ package com.usthe.sureness.mgt;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectAuToken;
 import com.usthe.sureness.subject.SubjectContext;
-import javax.security.sasl.AuthenticationException;
 
 /* *
  * @Author tomsun28
@@ -12,7 +11,7 @@ import javax.security.sasl.AuthenticationException;
  */
 public interface SecurityManager {
 
-    Subject login(Subject var1, SubjectAuToken var2) throws AuthenticationException;
+    Subject login(Subject var1, SubjectAuToken var2);
 
 
     Subject createSubject(SubjectContext var1);

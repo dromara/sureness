@@ -5,7 +5,7 @@ import java.util.Map;
 
 /* *
  * @Author tomsun28
- * @Description from shiro
+ * @Description learn from shiro
  * @Date 23:01 2019-01-09
  */
 public class ThreadContext {
