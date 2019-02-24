@@ -16,7 +16,7 @@ public class haha {
 
     public static void main(String[] args) {
         TireTreePathMatcher pathTireTree = TireTreePathMatcher.getInstance();
-        Set<String> paths = new HashSet<String>();
+        Set<String> paths = new HashSet<>();
         paths.add("/api/v2/host===post===jwt[role2,role3,role4]");
         paths.add("/api/v2/host===get===jwt[role2,role3,role4]");
         paths.add("/api/v2/host===delete===jwt[role2,role3,role4]");
