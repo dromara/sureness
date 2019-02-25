@@ -18,6 +18,10 @@ public class DefaultSecurityManager implements SecurityManager {
     private SubjectFactory subjectFactory;
 
 
+    @Override
+    public void checkIn() {
+
+    }
 
     public Subject login(Subject var1, SubjectAuToken var2) {
         return null;

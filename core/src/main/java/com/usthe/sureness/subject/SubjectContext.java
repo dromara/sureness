@@ -7,4 +7,8 @@ package com.usthe.sureness.subject;
  */
 public interface SubjectContext {
 
+    String getUri();
+    Object getPrincipal();
+    Object getCredentials();
+
 }
