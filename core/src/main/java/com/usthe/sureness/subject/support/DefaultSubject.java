@@ -8,10 +8,9 @@ import javax.naming.AuthenticationException;
 import java.io.Serializable;
 import java.util.Collection;
 
-/* *
- * @Author tomsun28
- * @Description
- * @Date 22:03 2019-01-22
+/**
+ * @author tomsun28
+ * @date 22:03 2019-01-22
  */
 public class DefaultSubject implements Subject {
 
@@ -21,7 +20,9 @@ public class DefaultSubject implements Subject {
     private String principal;
     private String[] roles;
 
-    // 当有一次调用onceLogin之后,特指方法才生效
+    /**
+     *  当有一次调用onceLogin之后,特指方法才生效
+     */
     private boolean onceLogin = false;
 
     private boolean isOnceLogin() {
@@ -29,40 +30,49 @@ public class DefaultSubject implements Subject {
     }
 
 
+    @Override
     public void login(SubjectAuToken var1) throws AuthenticationException {
         onceLogin = !onceLogin || onceLogin;
 
     }
 
+    @Override
     public void logout() {
         authenticated = false;
     }
 
+    @Override
     public boolean isAuthenticated() {
         return authenticated;
     }
 
 
+    @Override
     public boolean isAuthorizated() {
         return false;
     }
 
+    @Override
     public Object getPrincipal() {
         return null;
     }
 
+    @Override
     public boolean hasRole(String var1) {
         return false;
     }
 
+    @Override
     public boolean hasAllRoles(Collection<String> var1) {
         return false;
     }
 
+    @Override
     public Object getRoles() {
         return null;
     }
 
+    @Override
     public Object cloneImage() {
         return new ImageDefaultSubject(authenticated,principal,roles);
     }

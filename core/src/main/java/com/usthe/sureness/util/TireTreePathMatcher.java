@@ -6,10 +6,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* *
- * @Author tomsun28
- * @Description
- * @Date 19:25 2019-01-18
+/**
+ * @author tomsun28
+ * @date 19:25 2019-01-18
  */
 public class TireTreePathMatcher {
 
@@ -17,6 +16,9 @@ public class TireTreePathMatcher {
     private static final String NODE_TYPE_PATH_END = "isPathEnd";
     private static final String NODE_TYPE_METHOD = "methodNode";
     private static final String NODE_TYPE_FILTER_ROLES = "filterRolesNode";
+
+    private static final int PATH_NODE_NUM_3 = 3;
+    private static final int PATH_NODE_NUM_2 = 2;
 
 
     private final Node root = new Node("root");
@@ -29,17 +31,17 @@ public class TireTreePathMatcher {
         return PathTireTreeHandler.instance;
     }
 
-    /* *
-     * @Description  插入节点
-     * @Param [path] path = /api/v1/host/detail===GET===jwt[role2,role3,role4]
-     * @Return void
+    /**
+     * description 插入节点
+     *
+     * @param path path = /api/v1/host/detail===GET===jwt[role2,role3,role4]
      */
     private void insertNode(String path) {
         if (path == null || "".equals(path)) {
             return;
         }
         String[] tmp = path.split("===");
-        if (tmp.length != 3) {
+        if (tmp.length != PATH_NODE_NUM_3) {
             return;
         }
         String[] urlPac = tmp[0].split("/");
@@ -67,10 +69,9 @@ public class TireTreePathMatcher {
 
     }
 
-    /* *
-     * @Description 新建字典匹配树
-     * @Param [paths]
-     * @Return void
+    /**
+     *  新建字典匹配树
+     * @param paths 1
      */
     public void buildTree(Set<String> paths) {
         for (String path : paths) {
@@ -78,10 +79,9 @@ public class TireTreePathMatcher {
         }
     }
 
-    /* *
-     * @Description 重建字典匹配树
-     * @Param [paths]
-     * @Return boolean
+    /**
+     *  重建字典匹配树
+     * @param paths 1
      */
     public synchronized void reBuildTree(Set<String> paths) {
         destoryTree();
@@ -90,26 +90,24 @@ public class TireTreePathMatcher {
         }
     }
 
-    /* *
-     * @Description 清空字典树
-     * @Param []
-     * @Return void
+    /**
+     * 清空字典树
      */
     private void destoryTree() {
         this.root.getChildren().clear();
     }
 
-    /* *
-     * @Description 根据path从树里匹配该路径需要的 filter[role2,role3,role4]
-     * @Param [path]   /api/v2/host/detail===GET
-     * @Return java.lang.String
+    /**
+     * 根据path从树里匹配该路径需要的 filter[role2,role3,role4]
+     * @param path   /api/v2/host/detail===GET
+     * @return java.lang.String
      */
     public String searchPathFilterRoles(String path) {
         if (path == null || "".equals(path)) {
             return null;
         }
         String[] tmp = path.split("===");
-        if (tmp.length != 2) {
+        if (tmp.length != PATH_NODE_NUM_2) {
             return null;
         }
         String[] urlPac = tmp[0].split("/");
@@ -189,16 +187,16 @@ public class TireTreePathMatcher {
             this.data = data;
             this.nodeType = NODE_TYPE_PATH_NODE;
         }
-        /* *
-         * @Description 当前节点的类型
+        /**
+         *  当前节点的类型
          */
         private String nodeType;
-        /* *
-         * @Description 节点对应的数据
+        /**
+         *  节点对应的数据
          */
         private String data;
-        /* *
-         * @Description 孩子节点
+        /**
+         *  孩子节点
          */
         private Map<String, Node> children = new HashMap<String, Node>();
 

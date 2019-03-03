@@ -4,17 +4,18 @@ import com.usthe.sureness.subject.SubjectAuToken;
 import java.util.LinkedList;
 import java.util.List;
 
-/* *
- * @Author tomsun28
- * @Description
- * @Date 23:28 2019-01-23
+/**
+ * @author tomsun28
+ * @date 23:28 2019-01-23
  */
 public class DefaultSubjectAuToken implements SubjectAuToken {
 
     private String appId;
     private String credential;
     private List<String> roles;
-    // url===httpMethod
+    /**
+     *  url===httpMethod
+     */
     private String targetUri;
 
     private DefaultSubjectAuToken(Builder builder) {
@@ -24,18 +25,22 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
         this.targetUri = builder.targetUri;
     }
 
+    @Override
     public Object getPrincipal() {
         return this.appId;
     }
 
+    @Override
     public Object getCredentials() {
         return this.credential;
     }
 
+    @Override
     public Object getRoles() {
         return this.roles;
     }
 
+    @Override
     public Object getTargetResource() {
         return this.targetUri;
     }
@@ -67,7 +72,7 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
 
         public Builder addRole(String role) {
             if (roles == null) {
-                this.roles = new LinkedList<String>();
+                this.roles = new LinkedList<>();
             }
             this.roles.add(role);
             return this;
@@ -75,7 +80,7 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
 
         public Builder addRoles(List<String> roles) {
             if (this.roles == null) {
-                this.roles = new LinkedList<String>();
+                this.roles = new LinkedList<>();
             }
             this.roles.addAll(roles);
             return this;

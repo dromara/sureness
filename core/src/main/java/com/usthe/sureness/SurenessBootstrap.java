@@ -8,10 +8,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-/* *
- * @Author tomsun28
- * @Description
- * @Date 20:43 2019-02-25
+/**
+ * @author tomsun28
+ * @date 20:43 2019-02-25
  */
 public class SurenessBootstrap {
 

@@ -6,12 +6,11 @@ import com.usthe.sureness.util.TireTreePathMatcher;
 import java.util.HashSet;
 import java.util.Set;
 
-/* *
- * @Author tomsun28
- * @Description
- * @Date 22:49 2019-01-09
+/**
+ * @author tomsun28
+ * @date 22:49 2019-01-09
  */
-public class haha {
+public class HaTest {
 
 
     public static void main(String[] args) {
@@ -29,12 +28,12 @@ public class haha {
         paths.add("/api/mi/**===put===jwt[role2,role3,role4]");
         pathTireTree.reBuildTree(paths);
         String filterRole = pathTireTree.searchPathFilterRoles("/api/v2/host===get");
-        String ff1 = pathTireTree.searchPathFilterRoles("/api/v1/mom===put");
-        String ff2 = pathTireTree.searchPathFilterRoles("/api/v2/host===put");
-        String ff3 = pathTireTree.searchPathFilterRoles("/api/v2/details===put");
-        String ff4 = pathTireTree.searchPathFilterRoles("/api/v2/detail===put");
-        String ff5 = pathTireTree.searchPathFilterRoles("/api/dd/mom/ha===put");
-        String ff6 = pathTireTree.searchPathFilterRoles("/api/mi/mom/ha===put");
+        String var1 = pathTireTree.searchPathFilterRoles("/api/v1/mom===put");
+        String var2 = pathTireTree.searchPathFilterRoles("/api/v2/host===put");
+        String var3 = pathTireTree.searchPathFilterRoles("/api/v2/details===put");
+        String var4 = pathTireTree.searchPathFilterRoles("/api/v2/detail===put");
+        String var5 = pathTireTree.searchPathFilterRoles("/api/dd/mom/ha===put");
+        String var6 = pathTireTree.searchPathFilterRoles("/api/mi/mom/ha===put");
 
     }
 }

@@ -1,9 +1,8 @@
 package com.usthe.sureness.util;
 
-/* *
- * @Author tomsun28
- * @Description
- * @Date 22:40 2019-01-23
+/**
+ * @author tomsun28
+ * @date 22:40 2019-01-23
  */
 public class SurenessException extends RuntimeException {
 
