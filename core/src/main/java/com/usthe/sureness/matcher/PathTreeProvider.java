@@ -12,6 +12,7 @@ public interface PathTreeProvider {
      * description TODO
      *
      * @return java.util.Set<java.lang.String>
+     * @throws SurenessLoadDataException when加载数据异常
      */
-    Set<String> providePathData();
+    Set<String> providePathData() throws SurenessLoadDataException;
 }

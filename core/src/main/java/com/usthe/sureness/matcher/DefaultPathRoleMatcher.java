@@ -18,6 +18,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultPathRoleMatcher.class);
 
+
     /**
      *  path-role 匹配树存储点
      */
@@ -43,13 +44,20 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> root tree is not init");
         }
         String targetResource = (String) auToken.getTargetResource();
+        if (targetResource == null || "".equals(targetResource)) {
+            throw new SurenessNoInitException("DefaultPathRoleMatcher -> matchRole -> SubjectAuToken not init token's targetResource ");
+        }
         //[role1,role2,role3], [role1], null
         String matchRoleString = TirePathTreeUtil.searchPathFilterRoles(targetResource, root);
-        if (matchRoleString == null || "".equals(matchRoleString) ||
-                matchRoleString.length() <= 2) {
+        if (matchRoleString == null) {
+            return;
+        }
+        String leftCom = "[";
+        String rightCom = "]";
+        if (!matchRoleString.startsWith(leftCom) || !matchRoleString.endsWith(rightCom)) {
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> matchRoleString error");
         }
-        String[] roles = matchRoleString.substring(1, matchRoleString.length()-2).split(",");
+        String[] roles = matchRoleString.substring(1, matchRoleString.length()-1).split(",");
         List<String> roleList = new LinkedList<>(Arrays.asList(roles));
         auToken.setSupportRoles(roleList);
     }
@@ -58,21 +66,20 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         if (pathTreeProvider == null) {
             throw new SurenessNoInitException("DefaultPathRoleMatcher init error : component init not complete");
         }
-
     }
 
     public void setPathTreeProvider(PathTreeProvider pathTreeProvider) {
         this.pathTreeProvider = pathTreeProvider;
     }
 
-    public void buildTree() throws SurenessNoInitException{
+    public void buildTree() throws SurenessNoInitException, SurenessLoadDataException{
         checkComponentInit();
         Set<String> resources = pathTreeProvider.providePathData();
         TirePathTreeUtil.buildTree(resources, root);
         isTreeInit = true;
     }
 
-    public void rebuildTree() {
+    public void rebuildTree() throws SurenessLoadDataException {
         clearTree();
         isTreeInit = false;
         buildTree();
