@@ -28,7 +28,7 @@ public class TirePathTreeUtil {
      *
      * @param path path = /api/v1/host/detail===GET===jwt[role2,role3,role4]
      */
-    public static void insertNode(String path, Node root) {
+    private static void insertNode(String path, Node root) {
         if (path == null || "".equals(path)) {
             return;
         }
@@ -75,7 +75,7 @@ public class TirePathTreeUtil {
      *  重建字典匹配树
      * @param paths 1
      */
-    public static synchronized void reBuildTree(Set<String> paths, Node root) {
+    public static void reBuildTree(Set<String> paths, Node root) {
         clearTree(root);
         for (String path : paths) {
             insertNode(path, root);
@@ -85,7 +85,7 @@ public class TirePathTreeUtil {
     /**
      * 清空字典树
      */
-    private static void clearTree(Node root) {
+    public static void clearTree(Node root) {
         root.getChildren().clear();
     }
 

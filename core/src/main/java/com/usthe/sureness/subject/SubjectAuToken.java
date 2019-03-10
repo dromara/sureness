@@ -44,4 +44,11 @@ public interface SubjectAuToken {
      */
     Object getSupportRoles();
 
+    /**
+     * description 设置所匹配出的role
+     *
+     * @param var1 1
+     */
+    void setSupportRoles(Object var1);
+
 }

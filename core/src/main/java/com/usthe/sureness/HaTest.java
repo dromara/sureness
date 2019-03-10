@@ -1,5 +1,6 @@
 package com.usthe.sureness;
 
+import com.sun.tools.javac.util.StringUtils;
 import com.usthe.sureness.matcher.util.TirePathTreeUtil;
 
 
@@ -37,6 +38,11 @@ public class HaTest {
         String var4 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/detail===put", root);
         String var5 = TirePathTreeUtil.searchPathFilterRoles("/api/dd/mom/ha===put", root);
         String var6 = TirePathTreeUtil.searchPathFilterRoles("/api/mi/mom/ha===put", root);
+
+        String vat = "[role2,role3,role4]";
+        System.out.println(vat.substring(1, vat.length()-2));
+        String[] ss = vat.substring(1, vat.length()-2).split(",");
+        System.out.println(ss[0] + ss[1] + ss[2]);
 
     }
 }

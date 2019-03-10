@@ -11,7 +11,7 @@ public interface ProcessorManager {
 
     /**
      * description 处理器处理token入口
-     *
+     * @param auToken 1
      */
     void process(SubjectAuToken auToken);
 }

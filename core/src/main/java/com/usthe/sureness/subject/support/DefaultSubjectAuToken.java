@@ -13,6 +13,7 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
     private String appId;
     private String credential;
     private List<String> roles;
+    private List<String> supportRoles;
     /**
      *  url===httpMethod
      */
@@ -47,8 +48,15 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
 
     @Override
     public Object getSupportRoles() {
-        return null;
+        return this.supportRoles;
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void setSupportRoles(Object var1) {
+        this.supportRoles = (List<String>) var1;
+    }
+
 
     public static Builder getBuilder() {
         return new Builder();
