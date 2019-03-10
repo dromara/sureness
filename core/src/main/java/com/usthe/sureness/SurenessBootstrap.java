@@ -1,10 +1,9 @@
 package com.usthe.sureness;
 
-import com.usthe.sureness.provider.PathTreeProvider;
+import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.subject.SubjectAuToken;
-import com.usthe.sureness.util.TireTreePathMatcher;
+import com.usthe.sureness.matcher.util.TirePathTreeUtil;
 
-import java.util.HashSet;
 import java.util.Set;
 
 
@@ -34,7 +33,7 @@ public class SurenessBootstrap {
 
     private static void initPathTree() {
         Set<String> pathData = getPathData();
-        TireTreePathMatcher.getInstance().buildTree(pathData);
+        TirePathTreeUtil.getInstance().buildTree(pathData);
     }
 
     private static Set<String> getPathData() {

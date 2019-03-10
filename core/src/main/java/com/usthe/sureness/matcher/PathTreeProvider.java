@@ -1,4 +1,4 @@
-package com.usthe.sureness.provider;
+package com.usthe.sureness.matcher;
 
 import java.util.Set;
 

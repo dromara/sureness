@@ -1,6 +1,6 @@
 package com.usthe.sureness;
 
-import com.usthe.sureness.util.TireTreePathMatcher;
+import com.usthe.sureness.matcher.util.TirePathTreeUtil;
 
 
 import java.util.HashSet;
@@ -14,7 +14,7 @@ public class HaTest {
 
 
     public static void main(String[] args) {
-        TireTreePathMatcher pathTireTree = TireTreePathMatcher.getInstance();
+        TirePathTreeUtil pathTireTree = TirePathTreeUtil.getInstance();
         Set<String> paths = new HashSet<>();
         paths.add("/api/v2/host===post===jwt[role2,role3,role4]");
         paths.add("/api/v2/host===get===jwt[role2,role3,role4]");

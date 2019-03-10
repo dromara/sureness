@@ -1,4 +1,4 @@
-package com.usthe.sureness.util;
+package com.usthe.sureness.matcher.util;
 
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import java.util.Set;
  * @author tomsun28
  * @date 19:25 2019-01-18
  */
-public class TireTreePathMatcher {
+public class TirePathTreeUtil {
 
     private static final String NODE_TYPE_PATH_NODE = "pathNode";
     private static final String NODE_TYPE_PATH_END = "isPathEnd";
@@ -23,11 +23,11 @@ public class TireTreePathMatcher {
 
     private final Node root = new Node("root");
 
-    private TireTreePathMatcher() {
+    private TirePathTreeUtil() {
 
     }
 
-    public static synchronized TireTreePathMatcher getInstance() {
+    public static synchronized TirePathTreeUtil getInstance() {
         return PathTireTreeHandler.instance;
     }
 
@@ -233,7 +233,7 @@ public class TireTreePathMatcher {
     }
 
     private static class PathTireTreeHandler {
-        private static TireTreePathMatcher instance = new TireTreePathMatcher();
+        private static TirePathTreeUtil instance = new TirePathTreeUtil();
     }
 
 }
