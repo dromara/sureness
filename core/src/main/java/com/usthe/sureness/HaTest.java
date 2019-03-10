@@ -14,7 +14,9 @@ public class HaTest {
 
 
     public static void main(String[] args) {
-        TirePathTreeUtil pathTireTree = TirePathTreeUtil.getInstance();
+        TirePathTreeUtil.Node root = new TirePathTreeUtil.Node("root");
+
+
         Set<String> paths = new HashSet<>();
         paths.add("/api/v2/host===post===jwt[role2,role3,role4]");
         paths.add("/api/v2/host===get===jwt[role2,role3,role4]");
@@ -26,14 +28,15 @@ public class HaTest {
         paths.add("/api/v2/mom===put===jwt[role2,role3,role4]");
         paths.add("/api/*/mom/ha===put===jwt[role2,role3,role4]");
         paths.add("/api/mi/**===put===jwt[role2,role3,role4]");
-        pathTireTree.reBuildTree(paths);
-        String filterRole = pathTireTree.searchPathFilterRoles("/api/v2/host===get");
-        String var1 = pathTireTree.searchPathFilterRoles("/api/v1/mom===put");
-        String var2 = pathTireTree.searchPathFilterRoles("/api/v2/host===put");
-        String var3 = pathTireTree.searchPathFilterRoles("/api/v2/details===put");
-        String var4 = pathTireTree.searchPathFilterRoles("/api/v2/detail===put");
-        String var5 = pathTireTree.searchPathFilterRoles("/api/dd/mom/ha===put");
-        String var6 = pathTireTree.searchPathFilterRoles("/api/mi/mom/ha===put");
+        TirePathTreeUtil.buildTree(paths, root);
+
+        String filterRole = TirePathTreeUtil.searchPathFilterRoles("/api/v2/host===get", root);
+        String var1 = TirePathTreeUtil.searchPathFilterRoles("/api/v1/mom===put", root);
+        String var2 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/host===put", root);
+        String var3 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/details===put", root);
+        String var4 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/detail===put", root);
+        String var5 = TirePathTreeUtil.searchPathFilterRoles("/api/dd/mom/ha===put", root);
+        String var6 = TirePathTreeUtil.searchPathFilterRoles("/api/mi/mom/ha===put", root);
 
     }
 }

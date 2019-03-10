@@ -9,7 +9,7 @@ package com.usthe.sureness.subject;
 public interface SubjectAuToken {
 
     /**
-     * description TODO
+     * description 账户名  string
      *
      * @return java.lang.Object
      */

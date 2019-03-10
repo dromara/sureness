@@ -21,22 +21,14 @@ public class TirePathTreeUtil {
     private static final int PATH_NODE_NUM_2 = 2;
 
 
-    private final Node root = new Node("root");
 
-    private TirePathTreeUtil() {
-
-    }
-
-    public static synchronized TirePathTreeUtil getInstance() {
-        return PathTireTreeHandler.instance;
-    }
 
     /**
      * description 插入节点
      *
      * @param path path = /api/v1/host/detail===GET===jwt[role2,role3,role4]
      */
-    private void insertNode(String path) {
+    public static void insertNode(String path, Node root) {
         if (path == null || "".equals(path)) {
             return;
         }
@@ -47,7 +39,7 @@ public class TirePathTreeUtil {
         String[] urlPac = tmp[0].split("/");
         String method = tmp[1];
         String filterRoles = tmp[2];
-        Node current = this.root;
+        Node current = root;
         //开始插入URL节点
         for (String urlData : urlPac) {
             if (!current.getChildren().containsKey(urlData.toUpperCase())) {
@@ -73,9 +65,9 @@ public class TirePathTreeUtil {
      *  新建字典匹配树
      * @param paths 1
      */
-    public void buildTree(Set<String> paths) {
+    public static void buildTree(Set<String> paths, Node root) {
         for (String path : paths) {
-            insertNode(path);
+            insertNode(path , root);
         }
     }
 
@@ -83,18 +75,18 @@ public class TirePathTreeUtil {
      *  重建字典匹配树
      * @param paths 1
      */
-    public synchronized void reBuildTree(Set<String> paths) {
-        destoryTree();
+    public static synchronized void reBuildTree(Set<String> paths, Node root) {
+        clearTree(root);
         for (String path : paths) {
-            insertNode(path);
+            insertNode(path, root);
         }
     }
 
     /**
      * 清空字典树
      */
-    private void destoryTree() {
-        this.root.getChildren().clear();
+    private static void clearTree(Node root) {
+        root.getChildren().clear();
     }
 
     /**
@@ -102,7 +94,7 @@ public class TirePathTreeUtil {
      * @param path   /api/v2/host/detail===GET
      * @return java.lang.String
      */
-    public String searchPathFilterRoles(String path) {
+    public static String searchPathFilterRoles(String path, Node root) {
         if (path == null || "".equals(path)) {
             return null;
         }
@@ -112,7 +104,7 @@ public class TirePathTreeUtil {
         }
         String[] urlPac = tmp[0].split("/");
         String method = tmp[1];
-        Node current = this.root;
+        Node current = root;
         //支持基于ant的模式匹配
         for (String data : urlPac) {
             if (current.getChildren().containsKey(data.toUpperCase())) {
@@ -177,7 +169,7 @@ public class TirePathTreeUtil {
     }
 
 
-    private static class Node {
+    public static class Node {
 
         public Node(String data, String nodeType) {
             this.data = data;
@@ -232,8 +224,5 @@ public class TirePathTreeUtil {
         }
     }
 
-    private static class PathTireTreeHandler {
-        private static TirePathTreeUtil instance = new TirePathTreeUtil();
-    }
 
 }

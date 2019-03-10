@@ -13,5 +13,5 @@ public interface PathTreeProvider {
      *
      * @return java.util.Set<java.lang.String>
      */
-    Set<String> providPathData();
+    Set<String> providePathData();
 }

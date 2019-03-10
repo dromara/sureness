@@ -2,8 +2,6 @@ package com.usthe.sureness.matcher;
 
 import com.usthe.sureness.subject.SubjectAuToken;
 
-import java.util.List;
-
 /**
  * path - role 匹配 matcher
  * @author tomsun28

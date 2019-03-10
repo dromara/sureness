@@ -46,15 +46,20 @@ public class DefaultSubject implements Subject, Serializable {
         return targetResource;
     }
 
-    public void setPrincipal(String principal) {
+    public DefaultSubject setPrincipal(String principal) {
         this.principal = principal;
+        return this;
     }
 
-    public void setRoles(List<String> roles) {
+    public DefaultSubject setRoles(List<String> roles) {
         this.roles = roles;
+        return this;
     }
 
-    public void setTargetResource(String targetResource) {
+    public DefaultSubject setTargetResource(String targetResource) {
         this.targetResource = targetResource;
+        return this;
     }
+
+
 }

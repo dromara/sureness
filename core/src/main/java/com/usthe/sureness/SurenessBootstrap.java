@@ -30,14 +30,13 @@ public class SurenessBootstrap {
 
     }
 
-
     private static void initPathTree() {
         Set<String> pathData = getPathData();
-        TirePathTreeUtil.getInstance().buildTree(pathData);
+
     }
 
     private static Set<String> getPathData() {
-        return pathTreeProvider.providPathData();
+        return pathTreeProvider.providePathData();
     }
 
 }
