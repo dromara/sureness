@@ -27,7 +27,7 @@ public interface SubjectAuToken {
      *
      * @return java.lang.Object
      */
-    Object getRoles();
+    Object getOwnRoles();
 
     /**
      * description TODO
@@ -35,5 +35,13 @@ public interface SubjectAuToken {
      * @return java.lang.Object
      */
     Object getTargetResource();
+
+    /**
+     * description 获取token 在url-role树中匹配出来的roles
+     * 访问 getTargetResource() 所支持的 roles
+     *
+     * @return java.lang.Object
+     */
+    Object getSupportRoles();
 
 }

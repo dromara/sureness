@@ -45,6 +45,7 @@ public class DefaultSecurityManager implements SecurityManager {
     private void checkComponentInit() throws SurenessNoInitException{
         if (subjectFactory == null || pathRoleMatcher == null ||
                 processorManager == null) {
+            LOG.error("SecurityManager init error : DefaultSecurityManager not init fill component");
             throw new SurenessNoInitException("DefaultSecurityManager not init fill component");
         }
     }

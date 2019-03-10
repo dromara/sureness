@@ -4,44 +4,21 @@ import javax.naming.AuthenticationException;
 import java.util.Collection;
 
 /**
+ * Subject 只有内容  没有认证鉴权动作
+ * 此subject只有在 认证鉴权 成功后下发
  * @author tomsun28
  * @date 22:59 2019-01-09
  */
 public interface Subject {
 
     /**
-     * description TODO
-     *
-     * @param var1 1
-     * @throws AuthenticationException  when
-     */
-    void login(SubjectAuToken var1) throws AuthenticationException;
-
-    /**
-     * description TODO
-     */
-    void logout();
-
-
-    /**
-     * 是否认证
-     * @return boolean
-     */
-    boolean isAuthenticated();
-    /**
-     * description 是否有权限
-     * @return boolean
-     */
-    boolean isAuthorizated();
-
-    /**
-     * description TODO
+     * description 获取认证对象的账户
      * @return java.lang.Object
      */
     Object getPrincipal();
 
     /**
-     * description TODO
+     * description 是否有特定角色
      *
      * @param var1 1
      * @return boolean
@@ -49,7 +26,7 @@ public interface Subject {
     boolean hasRole(String var1);
 
     /**
-     * description TODO
+     * description 是否有对应全部角色
      *
      * @param var1 1
      * @return boolean
@@ -57,17 +34,17 @@ public interface Subject {
     boolean hasAllRoles(Collection<String> var1);
 
     /**
-     * description TODO
+     * description 获取拥有的角色
      *
      * @return java.lang.Object
      */
     Object getRoles();
 
     /**
-     * description TODO
+     * description 获取这次想访问目标资源
      *
      * @return java.lang.Object
      */
-    Object cloneImage();
+    Object getTargetResource();
 
 }

@@ -7,98 +7,54 @@ import org.slf4j.LoggerFactory;
 import javax.naming.AuthenticationException;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author tomsun28
  * @date 22:03 2019-01-22
  */
-public class DefaultSubject implements Subject {
+public class DefaultSubject implements Subject, Serializable {
 
-    private static transient final Logger LOGGER = LoggerFactory.getLogger(DefaultSubject.class);
+    private static final long serialVersionUID = 1L;
 
-    private boolean authenticated = false;
     private String principal;
-    private String[] roles;
-
-    /**
-     *  当有一次调用onceLogin之后,特指方法才生效
-     */
-    private boolean onceLogin = false;
-
-    private boolean isOnceLogin() {
-        return onceLogin;
-    }
-
-
-    @Override
-    public void login(SubjectAuToken var1) throws AuthenticationException {
-        onceLogin = !onceLogin || onceLogin;
-
-    }
-
-    @Override
-    public void logout() {
-        authenticated = false;
-    }
-
-    @Override
-    public boolean isAuthenticated() {
-        return authenticated;
-    }
-
-
-    @Override
-    public boolean isAuthorizated() {
-        return false;
-    }
+    private List<String> roles;
+    private String targetResource;
 
     @Override
     public Object getPrincipal() {
-        return null;
+        return principal;
     }
 
     @Override
     public boolean hasRole(String var1) {
-        return false;
+        return roles.contains(var1);
     }
 
     @Override
     public boolean hasAllRoles(Collection<String> var1) {
-        return false;
+        return roles.containsAll(var1);
     }
 
     @Override
     public Object getRoles() {
-        return null;
+        return roles;
     }
 
     @Override
-    public Object cloneImage() {
-        return new ImageDefaultSubject(authenticated,principal,roles);
+    public Object getTargetResource() {
+        return targetResource;
     }
 
-    public  class ImageDefaultSubject implements Serializable {
-        private boolean authenticated;
-        private String principal;
-        private String[] roles;
+    public void setPrincipal(String principal) {
+        this.principal = principal;
+    }
 
-        private ImageDefaultSubject(boolean authenticated, String principal, String[] roles) {
-            this.authenticated = authenticated;
-            this.principal = principal;
-            this.roles = roles;
-        }
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 
-        public boolean isAuthenticated() {
-            return authenticated;
-        }
-
-        public String[] getRoles() {
-            return roles;
-        }
-
-        public String getPrincipal() {
-            return principal;
-        }
-
+    public void setTargetResource(String targetResource) {
+        this.targetResource = targetResource;
     }
 }

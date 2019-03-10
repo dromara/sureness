@@ -36,13 +36,18 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
     }
 
     @Override
-    public Object getRoles() {
+    public Object getOwnRoles() {
         return this.roles;
     }
 
     @Override
     public Object getTargetResource() {
         return this.targetUri;
+    }
+
+    @Override
+    public Object getSupportRoles() {
+        return null;
     }
 
     public static Builder getBuilder() {
