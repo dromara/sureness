@@ -65,7 +65,8 @@ public class DefaultSecurityManager implements SecurityManager {
     }
 
     @Override
-    public SubjectAuToken createSubjectAuToken(Object var1) {
+    public SubjectAuToken createSubjectAuToken(Object var1) throws SurenessNoInitException {
+        subjectFactory.checkComponentInit();
         return subjectFactory.createSubjectAuToken(var1);
     }
 
