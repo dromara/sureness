@@ -1,14 +1,13 @@
 package com.usthe.sureness.subject.support;
 
 import com.usthe.sureness.mgt.DefaultSecurityManager;
+import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectAuToken;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.util.ThreadContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,6 +17,8 @@ import java.util.List;
 public class DefaultSubjectFactory implements SubjectFactory {
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultSecurityManager.class);
+
+    private boolean initFlag = false;
 
     /**
      * description DefaultSubjectAuToken  +  DefaultSubject
@@ -50,6 +51,14 @@ public class DefaultSubjectFactory implements SubjectFactory {
      */
     @Override
     public SubjectAuToken createSubjectAuToken(Object var1) {
+        initFlag = false;
         return null;
+    }
+
+    @Override
+    public void checkComponentInit() throws SurenessNoInitException {
+        if (!initFlag) {
+            throw new SurenessNoInitException("the subjectFactory not complete ye");
+        }
     }
 }

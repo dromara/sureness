@@ -1,5 +1,7 @@
 package com.usthe.sureness.subject;
 
+import com.usthe.sureness.mgt.SurenessNoInitException;
+
 /**
  * subject , token 工厂
  * @author tomsun28
@@ -23,6 +25,13 @@ public interface SubjectFactory {
      * @return com.usthe.sureness.subject.SubjectAuToken
      */
     SubjectAuToken createSubjectAuToken(Object var1);
+
+
+    /**
+     * description 检查是否初始化完成
+     * @throws SurenessNoInitException when
+     */
+    void checkComponentInit() throws SurenessNoInitException;
 
 
 }
