@@ -1,5 +1,6 @@
 package com.usthe.sureness.processor;
 
+import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectAuToken;
 
 /**
@@ -8,10 +9,11 @@ import com.usthe.sureness.subject.SubjectAuToken;
  */
 public interface ProcessorManager {
 
-
     /**
      * description 处理器处理token入口
+     *
      * @param auToken 1
+     * @return com.usthe.sureness.subject.Subject
      */
-    void process(SubjectAuToken auToken);
+    Subject process(SubjectAuToken auToken);
 }
