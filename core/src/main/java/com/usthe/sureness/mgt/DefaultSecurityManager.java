@@ -51,17 +51,17 @@ public class DefaultSecurityManager implements SecurityManager {
     }
 
     @Override
-    public void checkIn(SubjectAuToken token) throws SurenessNoInitException {
+    public Subject checkIn(SubjectAuToken token) throws SurenessNoInitException {
         checkComponentInit();
         pathRoleMatcher.matchRole(token);
-        processorManager.process(token);
+        return processorManager.process(token);
     }
 
     @Override
-    public void checkIn(Object var1) throws SurenessNoInitException {
+    public Subject checkIn(Object var1) throws SurenessNoInitException {
         checkComponentInit();
         SubjectAuToken auToken =  createSubjectAuToken(var1);
-        checkIn(auToken);
+        return checkIn(auToken);
     }
 
     @Override

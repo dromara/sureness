@@ -18,15 +18,17 @@ public interface SecurityManager {
      * 认证鉴权总入口,  不仅仅是login 还有鉴权
      * TODO 抛出不同的异常
      * @param token 1
+     * @return com.usthe.sureness.subject.Subject
      */
-    void checkIn(SubjectAuToken token);
+    Subject checkIn(SubjectAuToken token);
 
     /**
      * description 如上 封装 createSubjectAuToken by object
      *
      * @param var1 1
+     * @return com.usthe.sureness.subject.Subject
      */
-    void checkIn(Object var1);
+    Subject checkIn(Object var1);
 
     /**
      * description 传入请求信息,信息里有对应的请求认证消息，请求资源路径等 eg: httpRequest
