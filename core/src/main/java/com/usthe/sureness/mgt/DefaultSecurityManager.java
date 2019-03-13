@@ -87,6 +87,10 @@ public class DefaultSecurityManager implements SecurityManager {
         this.processorManager = processorManager;
     }
 
+    public SubjectFactory getSubjectFactory() {
+        return subjectFactory;
+    }
+
     /**
      * 单例静态内部类
      * @author tomsun28

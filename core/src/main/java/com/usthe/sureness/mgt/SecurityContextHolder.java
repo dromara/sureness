@@ -17,18 +17,18 @@ public class SecurityContextHolder {
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityContextHolder.class);
 
     @SuppressWarnings("unchecked")
-    private static final ThreadLocal<Subject> CONTEXT_HODLER = new InheritableThreadLocal();
+    private static final ThreadLocal<Subject> CONTEXT_HOLDER = new InheritableThreadLocal();
 
     public void clearContext() {
-        CONTEXT_HODLER.remove();
+        CONTEXT_HOLDER.remove();
     }
 
     public void bindContext(Subject context) {
         Assert.checkNonNull(context, "Only non-null SubjectContext instances are permitted");
-        CONTEXT_HODLER.set(context);
+        CONTEXT_HOLDER.set(context);
     }
 
     public Optional<Subject> getContext() {
-        return Optional.ofNullable(CONTEXT_HODLER.get());
+        return Optional.ofNullable(CONTEXT_HOLDER.get());
     }
 }
