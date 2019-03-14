@@ -14,9 +14,9 @@ import org.slf4j.LoggerFactory;
  * @author tomsun28
  * @date 15:30 2019-03-03
  */
-public class DefaultSecurityManager implements SecurityManager {
+public class SurenessSecurityManager implements SecurityManager {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DefaultSecurityManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SurenessSecurityManager.class);
 
     /**
      *  subject 工厂
@@ -33,7 +33,7 @@ public class DefaultSecurityManager implements SecurityManager {
      */
     private ProcessorManager processorManager;
 
-    private DefaultSecurityManager() {
+    private SurenessSecurityManager() {
 
     }
 
@@ -45,8 +45,8 @@ public class DefaultSecurityManager implements SecurityManager {
     private void checkComponentInit() throws SurenessNoInitException{
         if (subjectFactory == null || pathRoleMatcher == null ||
                 processorManager == null) {
-            LOG.error("SecurityManager init error : DefaultSecurityManager not init fill component");
-            throw new SurenessNoInitException("DefaultSecurityManager not init fill component");
+            LOG.error("SecurityManager init error : SurenessSecurityManager not init fill component");
+            throw new SurenessNoInitException("SurenessSecurityManager not init fill component");
         }
     }
 
@@ -97,10 +97,10 @@ public class DefaultSecurityManager implements SecurityManager {
      * @date 15:30 2019-03-10
      */
     private static class SingleDefaultSecurityManager {
-        private static final DefaultSecurityManager INSTANCE = new DefaultSecurityManager();
+        private static final SurenessSecurityManager INSTANCE = new SurenessSecurityManager();
     }
 
-    public static DefaultSecurityManager getInstance() {
+    public static SurenessSecurityManager getInstance() {
         return SingleDefaultSecurityManager.INSTANCE;
     }
 }

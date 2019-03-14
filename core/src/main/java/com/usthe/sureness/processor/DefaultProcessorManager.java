@@ -1,5 +1,6 @@
 package com.usthe.sureness.processor;
 
+import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
@@ -8,6 +9,7 @@ import com.usthe.sureness.subject.SubjectAuToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.chrono.IsoChronology;
 import java.util.List;
 
 /**
@@ -57,5 +59,15 @@ public class DefaultProcessorManager implements ProcessorManager {
 
     private List<Processor> getProcessorList() {
         return processorList;
+    }
+
+    public void setProcessorList(List<Processor> processorList) {
+        this.processorList = processorList;
+    }
+
+    public void checkComponentInit() throws SurenessNoInitException{
+        if (this.processorList == null) {
+            throw new SurenessNoInitException("processorManager not init component processorList");
+        }
     }
 }

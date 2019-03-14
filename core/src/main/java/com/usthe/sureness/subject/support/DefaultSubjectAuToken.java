@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class DefaultSubjectAuToken implements SubjectAuToken {
 
+    private static final long serialVersionUID = 1L;
+
     private String appId;
     private String credential;
     private List<String> roles;

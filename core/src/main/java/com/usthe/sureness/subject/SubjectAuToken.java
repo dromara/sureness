@@ -1,12 +1,14 @@
 package com.usthe.sureness.subject;
 
 
+import java.io.Serializable;
+
 /**
  *    AuthenticationToken   AuthorizationToken
  * @author tomsun28
  * @date 21:58 2019-01-22
  */
-public interface SubjectAuToken {
+public interface SubjectAuToken extends Serializable {
 
     /**
      * description 账户名  string

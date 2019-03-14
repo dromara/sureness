@@ -1,6 +1,6 @@
 package com.usthe.sureness.processor;
 
-import com.usthe.sureness.mgt.DefaultSecurityManager;
+import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.subject.Subject;
@@ -25,7 +25,7 @@ public abstract class BaseProcessor implements Processor{
     @Override
     public Subject process(SubjectAuToken var) throws SurenessAuthenticationException, SurenessAuthorizationException {
         if (authenticated() && authorized()) {
-            return DefaultSecurityManager.getInstance().getSubjectFactory().createSubject(var);
+            return SurenessSecurityManager.getInstance().getSubjectFactory().createSubject(var);
         }
         return null;
     }

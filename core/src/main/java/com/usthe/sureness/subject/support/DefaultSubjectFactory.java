@@ -1,6 +1,6 @@
 package com.usthe.sureness.subject.support;
 
-import com.usthe.sureness.mgt.DefaultSecurityManager;
+import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectAuToken;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class DefaultSubjectFactory implements SubjectFactory {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DefaultSecurityManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SurenessSecurityManager.class);
 
     private boolean initFlag = false;
 
