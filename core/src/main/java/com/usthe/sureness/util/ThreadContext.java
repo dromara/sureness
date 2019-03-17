@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  *   from shiro ThreadContext
+ * @author from shiro
  * @date 23:01 2019-01-09
  */
 public class ThreadContext {

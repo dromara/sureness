@@ -7,7 +7,7 @@ import com.usthe.sureness.subject.SubjectAuToken;
  * @author tomsun28
  * @date 19:07 2019-03-09
  */
-public abstract class SurenessUtil {
+public abstract class BaseSurenessUtil {
 
     /**
      * description 通过传入的Object来创建具有基本信息的token

@@ -1,6 +1,6 @@
 package com.usthe.sureness.subject;
 
-import javax.naming.AuthenticationException;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -9,7 +9,7 @@ import java.util.Collection;
  * @author tomsun28
  * @date 22:59 2019-01-09
  */
-public interface Subject {
+public interface Subject extends Serializable {
 
     /**
      * description 获取认证对象的账户

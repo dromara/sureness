@@ -64,7 +64,7 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
         return new Builder();
     }
 
-    public static class Builder {
+    private static class Builder {
         private String appId;
         private String credential;
         private List<String> roles;
