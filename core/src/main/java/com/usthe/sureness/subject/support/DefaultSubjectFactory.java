@@ -32,8 +32,11 @@ public class DefaultSubjectFactory implements SubjectFactory {
         String principal = (String)auToken.getPrincipal();
         List<String> roles = (List<String>)auToken.getOwnRoles();
         String targetUri = (String)auToken.getTargetResource();
-        Subject subject = new DefaultSubject().setPrincipal(principal)
-                .setRoles(roles).setTargetResource(targetUri);
+        Subject subject =  DefaultSubject.getBuilder()
+                .setTargetResource(targetUri)
+                .addRoles(roles)
+                .setPrincipal(principal)
+                .build();
         // 将subject 绑定到localThread变量中
         ThreadContext.bind(subject);
         // 如果是网关认证中心, 之后可以考虑把subject绑定到request请求中,供子系统使用
@@ -61,4 +64,5 @@ public class DefaultSubjectFactory implements SubjectFactory {
             throw new SurenessNoInitException("the subjectFactory not complete ye");
         }
     }
+
 }

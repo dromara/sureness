@@ -34,7 +34,11 @@ public class JwtSubjectToken implements SubjectAuToken {
      */
     private List<String> roles;
     /**
-     *
+     * 所访问资源地址
+     */
+    private String targetUri;
+    /**
+     * 所访问资源他支持的角色
      */
     private List<String> supportRoles;
 
@@ -50,21 +54,21 @@ public class JwtSubjectToken implements SubjectAuToken {
 
     @Override
     public Object getOwnRoles() {
-        return null;
+        return this.roles;
     }
 
     @Override
     public Object getTargetResource() {
-        return null;
+        return this.targetUri;
     }
 
     @Override
     public Object getSupportRoles() {
-        return null;
+        return this.supportRoles;
     }
 
     @Override
     public void setSupportRoles(Object var1) {
-
+        this.supportRoles = (List<String>) var1;
     }
 }

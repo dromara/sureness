@@ -13,40 +13,38 @@ public class PasswordSubjectToken implements SubjectAuToken {
     private static final long serialVersionUID = 1L;
     private String appId;
     private String password;
-    private String timestamp;
     private String host;
-    private String tokenKey;
+    private String targetUri;
     private List<String> roles;
     private List<String> supportRoles;
 
 
     @Override
     public Object getPrincipal() {
-        return null;
+        return this.appId;
     }
 
     @Override
     public Object getCredentials() {
-        return null;
+        return this.password;
     }
 
     @Override
     public Object getOwnRoles() {
-        return null;
+        return this.roles;
     }
 
     @Override
     public Object getTargetResource() {
-        return null;
+        return this.targetUri;
     }
 
     @Override
     public Object getSupportRoles() {
-        return null;
+        return supportRoles;
     }
 
     @Override
     public void setSupportRoles(Object var1) {
-
     }
 }

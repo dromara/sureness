@@ -61,7 +61,7 @@ public class DefaultSubject implements Subject {
         return new Builder();
     }
 
-    private static class Builder {
+    public static class Builder {
         private String principal;
         private List<String> roles;
         private String targetResource;

@@ -40,15 +40,17 @@ public abstract class BaseProcessor implements Processor{
      * description 认证会调用的接口，在这里面完成认证
      * @param var 1
      * @return boolean
+     * @throws SurenessAuthenticationException when发生认证相关异常
      */
-    public abstract boolean authenticated (SubjectAuToken var);
+    public abstract boolean authenticated (SubjectAuToken var) throws SurenessAuthenticationException;
 
     /**
      * description 鉴权会调用的接口，在这里面完成鉴权
      * @param var 1
      * @return boolean
+     * @throws SurenessAuthorizationException when发生鉴权相关异常
      */
-    public abstract boolean authorized(SubjectAuToken var);
+    public abstract boolean authorized(SubjectAuToken var) throws SurenessAuthorizationException;
 
     /**
      * description 当认证鉴权完成通过后，通过token创建subject

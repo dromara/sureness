@@ -13,12 +13,24 @@
 
     <properties>
         <slf4j.version>1.7.21</slf4j.version>
+        <jjwt.version>0.9.0</jjwt.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <!-- java版本升级少包-->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
         </dependency>
     </dependencies>
 
