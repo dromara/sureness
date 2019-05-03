@@ -21,10 +21,6 @@ public class TirePathTreeUtil {
     private static final int PATH_NODE_NUM_3 = 3;
     private static final int PATH_NODE_NUM_2 = 2;
 
-
-
-
-
     /**
      * description 插入节点
      *
@@ -72,16 +68,6 @@ public class TirePathTreeUtil {
      * @param paths 1
      */
     public static void buildTree(Set<String> paths, Node root) {
-        for (String path : paths) {
-            insertNode(path, root);
-        }
-    }
-
-    /**
-     *  重建字典匹配树
-     * @param paths 1
-     */
-    public static void reBuildTree(Set<String> paths, Node root) {
         clearTree(root);
         for (String path : paths) {
             insertNode(path, root);
@@ -180,14 +166,6 @@ public class TirePathTreeUtil {
 
     public static class Node {
 
-        private Node(String data, String nodeType) {
-            this.data = data;
-            this.nodeType = nodeType;
-        }
-        public Node(String data) {
-            this.data = data;
-            this.nodeType = NODE_TYPE_PATH_NODE;
-        }
         /**
          *  当前节点的类型
          */
@@ -199,28 +177,39 @@ public class TirePathTreeUtil {
         /**
          *  孩子节点
          */
-        private Map<String, Node> children = new HashMap<>();
+        private Map<String, Node> children;
 
-        public void insertChild(String data) {
+        private Node(String data, String nodeType) {
+            this.data = data;
+            this.nodeType = nodeType;
+            this.children = new HashMap<>();
+        }
+        public Node(String data) {
+            this.data = data;
+            this.nodeType = NODE_TYPE_PATH_NODE;
+            this.children = new HashMap<>();
+        }
+
+        private void insertChild(String data) {
             this.children.put(data,new Node(data));
         }
-        public void insertChild(String data,String nodeType) {
+        private void insertChild(String data,String nodeType) {
             this.children.put(data,new Node(data,nodeType));
         }
 
-        public String getNodeType() {
+        private String getNodeType() {
             return nodeType;
         }
 
-        public void setNodeType(String nodeType) {
+        private void setNodeType(String nodeType) {
             this.nodeType = nodeType;
         }
 
-        public String getData() {
+        private String getData() {
             return data;
         }
 
-        public void setData(String data) {
+        private void setData(String data) {
             this.data = data;
         }
 
@@ -228,7 +217,7 @@ public class TirePathTreeUtil {
             return children;
         }
 
-        public void setChildren(Map<String, Node> children) {
+        private void setChildren(Map<String, Node> children) {
             this.children = children;
         }
     }

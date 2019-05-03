@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 public class SecurityContextHolder {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SecurityContextHolder.class);
+    private static final Logger logger = LoggerFactory.getLogger(SecurityContextHolder.class);
 
     @SuppressWarnings("unchecked")
     private static final ThreadLocal<Subject> CONTEXT_HOLDER = new InheritableThreadLocal();

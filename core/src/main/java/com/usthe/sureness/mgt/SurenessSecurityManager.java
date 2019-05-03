@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SurenessSecurityManager implements SecurityManager {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SurenessSecurityManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(SurenessSecurityManager.class);
 
     /**
      *  subject 工厂
@@ -45,7 +45,7 @@ public class SurenessSecurityManager implements SecurityManager {
     private void checkComponentInit() throws SurenessNoInitException{
         if (subjectFactory == null || pathRoleMatcher == null ||
                 processorManager == null) {
-            LOG.error("SecurityManager init error : SurenessSecurityManager not init fill component");
+            logger.error("SecurityManager init error : SurenessSecurityManager not init fill component");
             throw new SurenessNoInitException("SurenessSecurityManager not init fill component");
         }
     }

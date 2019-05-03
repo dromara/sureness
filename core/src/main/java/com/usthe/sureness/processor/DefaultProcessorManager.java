@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class DefaultProcessorManager implements ProcessorManager {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DefaultProcessorManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultProcessorManager.class);
 
     private List<Processor> processorList;
 
@@ -28,6 +28,7 @@ public class DefaultProcessorManager implements ProcessorManager {
 
     @Override
     public Subject process(SubjectAuToken auToken) throws SurenessAuthenticationException, SurenessAuthorizationException {
+        checkComponentInit();
         SurenessAuthenticationException lastAuthenticationException = null;
         SurenessAuthorizationException lastAuthorizationException = null;
         Subject subjectResult = null;

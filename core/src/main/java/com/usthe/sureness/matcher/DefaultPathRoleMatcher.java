@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 默认的path - role 匹配 matcher实现
  * @author tomsun28
  * @date 20:23 2019-03-10
  */
 public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultPathRoleMatcher.class);
-
 
     /**
      *  path-role 匹配树存储点
@@ -41,6 +41,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     @Override
     public void matchRole(SubjectAuToken auToken) throws SurenessNoInitException {
         if (!isTreeInit) {
+            logger.error("DefaultPathRoleMatcher -> root tree is not init");
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> root tree is not init");
         }
         String targetResource = (String) auToken.getTargetResource();
@@ -73,19 +74,15 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     }
 
     public void buildTree() throws SurenessNoInitException, SurenessLoadDataException{
+        isTreeInit = false;
         checkComponentInit();
+        clearTree();
         Set<String> resources = pathTreeProvider.providePathData();
         TirePathTreeUtil.buildTree(resources, root);
         isTreeInit = true;
     }
 
-    public void rebuildTree() throws SurenessLoadDataException {
-        clearTree();
-        isTreeInit = false;
-        buildTree();
-    }
-
-    public void clearTree() {
+    private void clearTree() {
         TirePathTreeUtil.clearTree(root);
     }
 

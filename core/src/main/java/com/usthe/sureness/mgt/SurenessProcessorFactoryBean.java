@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class SurenessProcessorFactoryBean implements FactoryBean {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SurenessProcessorFactoryBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(SurenessProcessorFactoryBean.class);
     private Map<String, Processor> processorList = new LinkedHashMap<>();
 
     @Override

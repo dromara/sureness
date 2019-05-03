@@ -41,7 +41,7 @@ public class PasswordProcessor extends BaseProcessor {
         if (account == null) {
             throw new  UnknownAccountException("no the account: " + appId);
         }
-        String password = Md5Util.md5((String) var.getCredentials() + account.getSalt());
+        String password = Md5Util.md5( var.getCredentials() + account.getSalt());
         if (password == null || !password.equals(account.getPassword())) {
             throw new IncorrectCredentialsException("incorrect password");
         }

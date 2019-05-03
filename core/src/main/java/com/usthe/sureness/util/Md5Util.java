@@ -12,7 +12,7 @@ import java.security.MessageDigest;
  */
 public class Md5Util {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Md5Util.class);
+    private static final Logger logger = LoggerFactory.getLogger(Md5Util.class);
 
     public static String md5(String content) {
         // 用于加密的字符
@@ -43,7 +43,7 @@ public class Md5Util {
             return new String(str);
 
         }catch (Exception e) {
-            LOGGER.warn(e.getMessage(),e);
+            logger.warn(e.getMessage(),e);
             return null;
         }
 

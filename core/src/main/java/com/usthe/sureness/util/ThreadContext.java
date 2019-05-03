@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class ThreadContext {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ThreadContext.class);
+    private static final Logger logger = LoggerFactory.getLogger(ThreadContext.class);
 
     public static final String SUBJECT_KEY = ThreadContext.class.getName() + "_SUBJECT_KEY";
     @SuppressWarnings("unchecked")
@@ -39,23 +39,23 @@ public class ThreadContext {
         } else {
             ensureResourcesInitialized();
             (RESOURCES.get()).put(key, value);
-            if (LOG.isTraceEnabled()) {
+            if (logger.isTraceEnabled()) {
                 String msg = "Bound value of type [" + value.getClass().getName() + "] for key [" + key + "] to thread [" + Thread.currentThread().getName() + "]";
-                LOG.trace(msg);
+                logger.trace(msg);
             }
         }
     }
 
     private static Object get(Object key) {
-        if (LOG.isTraceEnabled()) {
+        if (logger.isTraceEnabled()) {
             String msg = "get() - in thread [" + Thread.currentThread().getName() + "]";
-            LOG.trace(msg);
+            logger.trace(msg);
         }
         Map<Object, Object> perThreadResources = RESOURCES.get();
         Object value = perThreadResources != null ? perThreadResources.get(key) : null;
-        if (value != null && LOG.isTraceEnabled()) {
+        if (value != null && logger.isTraceEnabled()) {
             String msg = "Retrieved value of type [" + value.getClass().getName() + "] for key [" + key + "] bound to thread [" + Thread.currentThread().getName() + "]";
-            LOG.trace(msg);
+            logger.trace(msg);
         }
         return value;
     }
@@ -63,9 +63,9 @@ public class ThreadContext {
     private static Object remove(Object key) {
         Map<Object, Object> perThreadResources = RESOURCES.get();
         Object value = perThreadResources != null ? perThreadResources.remove(key) : null;
-        if (value != null && LOG.isTraceEnabled()) {
+        if (value != null && logger.isTraceEnabled()) {
             String msg = "Removed value of type [" + value.getClass().getName() + "] for key [" + key + "]from thread [" + Thread.currentThread().getName() + "]";
-            LOG.trace(msg);
+            logger.trace(msg);
         }
         return value;
     }
