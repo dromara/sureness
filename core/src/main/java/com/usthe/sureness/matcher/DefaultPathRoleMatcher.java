@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DefaultPathRoleMatcher.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultPathRoleMatcher.class);
 
 
     /**

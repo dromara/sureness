@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class DefaultSubjectFactory implements SubjectFactory {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SurenessSecurityManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(SurenessSecurityManager.class);
 
     private boolean initFlag = false;
 

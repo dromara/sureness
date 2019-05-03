@@ -1,10 +1,13 @@
 package com.usthe.sureness;
 
-import com.sun.tools.javac.util.StringUtils;
 import com.usthe.sureness.matcher.util.TirePathTreeUtil;
 
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
 import java.util.HashSet;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -15,10 +18,15 @@ public class HaTest {
 
 
     public static void main(String[] args) {
+        String[] ps = "/".split("/");
+        for (String temp : ps) {
+            System.out.println(temp);
+        }
         TirePathTreeUtil.Node root = new TirePathTreeUtil.Node("root");
 
 
         Set<String> paths = new HashSet<>();
+        paths.add("/===post===jwt[role2,role3,role4]");
         paths.add("/api/v2/host===post===jwt[role2,role3,role4]");
         paths.add("/api/v2/host===get===jwt[role2,role3,role4]");
         paths.add("/api/v2/host===delete===jwt[role2,role3,role4]");
@@ -44,5 +52,25 @@ public class HaTest {
 //        String[] ss = vat.substring(1, vat.length()-2).split(",");
 //        System.out.println(ss[0] + ss[1] + ss[2]);
 
+    }
+    public static void ddmain(String[] args){
+        double x,y,r;
+        Scanner sc = new Scanner(System.in);
+        long seed = sc.nextLong();
+        Random s = new Random(seed);
+        int n = sc.nextInt();
+        int m = 0;
+        for(int i=0;i<n;i++){
+            x= s.nextDouble() * 2 - 1;
+//            x= x/(double) n;
+            y= s.nextDouble()  * 2 - 1;
+//            y = y/(double) n;
+            if (Math.sqrt(Math.pow(x,2) + Math.pow(y,2)) < 1)  {
+                m++;
+            }
+
+        }
+        r= 4 * (double)m/(double)n;
+        System.out.println(r);
     }
 }

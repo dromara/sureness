@@ -77,7 +77,7 @@ public class JwtProcessor extends BaseProcessor {
         List<String> ownRoles = (List<String>)var.getOwnRoles();
         List<String> supportRoles = (List<String>)var.getSupportRoles();
         return supportRoles == null || supportRoles.isEmpty()
-                || supportRoles.stream().anyMatch(role -> ownRoles.contains(role));
+                || supportRoles.stream().anyMatch(ownRoles::contains);
     }
 
     @Override

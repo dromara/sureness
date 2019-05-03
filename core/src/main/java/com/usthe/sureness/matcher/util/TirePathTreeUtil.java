@@ -1,6 +1,7 @@
 package com.usthe.sureness.matcher.util;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,9 +17,10 @@ public class TirePathTreeUtil {
     private static final String NODE_TYPE_PATH_END = "isPathEnd";
     private static final String NODE_TYPE_METHOD = "methodNode";
     private static final String NODE_TYPE_FILTER_ROLES = "filterRolesNode";
-
+    private static final String URL_PATH_SPLIT = "/";
     private static final int PATH_NODE_NUM_3 = 3;
     private static final int PATH_NODE_NUM_2 = 2;
+
 
 
 
@@ -29,14 +31,18 @@ public class TirePathTreeUtil {
      * @param path path = /api/v1/host/detail===GET===jwt[role2,role3,role4]
      */
     private static void insertNode(String path, Node root) {
-        if (path == null || "".equals(path)) {
+        if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
             return;
         }
         String[] tmp = path.split("===");
         if (tmp.length != PATH_NODE_NUM_3) {
             return;
         }
-        String[] urlPac = tmp[0].split("/");
+        String[] urlPac = tmp[0].split(URL_PATH_SPLIT);
+        if (urlPac.length > 1) {
+            // 去除第一位的空 ""
+            urlPac = Arrays.copyOfRange(urlPac, 1, urlPac.length);
+        }
         String method = tmp[1];
         String filterRoles = tmp[2];
         Node current = root;
@@ -67,7 +73,7 @@ public class TirePathTreeUtil {
      */
     public static void buildTree(Set<String> paths, Node root) {
         for (String path : paths) {
-            insertNode(path , root);
+            insertNode(path, root);
         }
     }
 
@@ -95,7 +101,7 @@ public class TirePathTreeUtil {
      * @return java.lang.String
      */
     public static String searchPathFilterRoles(String path, Node root) {
-        if (path == null || "".equals(path)) {
+        if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
             return null;
         }
         String[] tmp = path.split("===");
@@ -103,6 +109,9 @@ public class TirePathTreeUtil {
             return null;
         }
         String[] urlPac = tmp[0].split("/");
+        if (urlPac.length > 1) {
+            urlPac = Arrays.copyOfRange(urlPac, 1, urlPac.length);
+        }
         String method = tmp[1];
         Node current = root;
         //支持基于ant的模式匹配
@@ -171,7 +180,7 @@ public class TirePathTreeUtil {
 
     public static class Node {
 
-        public Node(String data, String nodeType) {
+        private Node(String data, String nodeType) {
             this.data = data;
             this.nodeType = nodeType;
         }
@@ -190,7 +199,7 @@ public class TirePathTreeUtil {
         /**
          *  孩子节点
          */
-        private Map<String, Node> children = new HashMap<String, Node>();
+        private Map<String, Node> children = new HashMap<>();
 
         public void insertChild(String data) {
             this.children.put(data,new Node(data));
