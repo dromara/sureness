@@ -3,8 +3,6 @@ package com.usthe.sureness;
 import com.usthe.sureness.matcher.util.TirePathTreeUtil;
 
 
-import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
@@ -18,10 +16,6 @@ public class HaTest {
 
 
     public static void main(String[] args) {
-        String[] ps = "/".split("/");
-        for (String temp : ps) {
-            System.out.println(temp);
-        }
         TirePathTreeUtil.Node root = new TirePathTreeUtil.Node("root");
 
 
