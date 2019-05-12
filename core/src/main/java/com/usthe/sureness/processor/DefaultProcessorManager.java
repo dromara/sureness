@@ -62,11 +62,7 @@ public class DefaultProcessorManager implements ProcessorManager {
         return processorList;
     }
 
-    public void setProcessorList(List<Processor> processorList) {
-        this.processorList = processorList;
-    }
-
-    public void checkComponentInit() throws SurenessNoInitException{
+    private void checkComponentInit() throws SurenessNoInitException{
         if (this.processorList == null) {
             throw new SurenessNoInitException("processorManager not init component processorList");
         }

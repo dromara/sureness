@@ -58,4 +58,8 @@ public class PasswordProcessor extends BaseProcessor {
         return null;
     }
 
+    public void setAccountProvider(AccountProvider provider) {
+        this.accountProvider = provider;
+    }
+
 }
