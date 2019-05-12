@@ -37,9 +37,11 @@ public class SurenessFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
         // TODO 认证及权限拦截
         // if ok filterChain.doFilter(servletRequest, servletResponse)
+        filterChain.doFilter(servletRequest, servletResponse);
         // else 拦截
     }
 }

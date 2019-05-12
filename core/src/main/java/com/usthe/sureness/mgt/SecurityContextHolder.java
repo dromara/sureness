@@ -1,6 +1,6 @@
 package com.usthe.sureness.mgt;
 
-import com.sun.tools.javac.util.Assert;
+
 import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,6 @@ public class SecurityContextHolder {
     }
 
     public void bindContext(Subject context) {
-        Assert.checkNonNull(context, "Only non-null SubjectContext instances are permitted");
         CONTEXT_HOLDER.set(context);
     }
 
