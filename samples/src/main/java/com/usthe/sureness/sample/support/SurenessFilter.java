@@ -1,5 +1,7 @@
 package com.usthe.sureness.sample.support;
 
+import com.usthe.sureness.mgt.SurenessSecurityManager;
+import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -20,7 +22,6 @@ import java.io.IOException;
 @Order(1)
 @WebFilter(filterName = "SurenessFilter", urlPatterns = "/*", asyncSupported = true)
 public class SurenessFilter implements Filter {
-
     /**
      * 日志操作
      */
@@ -39,9 +40,17 @@ public class SurenessFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
-        // TODO 认证及权限拦截
-        // if ok filterChain.doFilter(servletRequest, servletResponse)
+        try {
+            Subject subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
+            // TODO 考虑将生成的subject信息塞入request
+            servletRequest.setAttribute("subject", subject);
+        } catch (RuntimeException e) {
+            logger.info("exception happen: ", e);
+            // TODO 拦截并返回定制信息
+            servletResponse.getWriter().flush();
+            return;
+        }
+        // if ok doFilter and add subject in request
         filterChain.doFilter(servletRequest, servletResponse);
-        // else 拦截
     }
 }

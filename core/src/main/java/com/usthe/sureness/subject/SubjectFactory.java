@@ -22,7 +22,7 @@ public interface SubjectFactory {
      * 由于sureness-core想在设计的时候不加其他特定的依赖, 这里就不实现
      * 在httpRequest中获取内容在填充subject了
      * 填充内容源设计成任何内容对象,不绑定框架
-     * 基于web的实现在 sureness-web中实现它
+     * 基于web的实现在 webFactory中实现它
      * @param var1 1
      * @return com.usthe.sureness.subject.SubjectAuToken
      */
