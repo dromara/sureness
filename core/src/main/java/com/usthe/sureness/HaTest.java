@@ -16,6 +16,17 @@ public class HaTest {
 
 
     public static void main(String[] args) {
+        String jwt = "JWT eyJhbGciOiJIUzUxMi...";
+        jwt = jwt.replace("JWT", "").trim();
+
+
+
+
+
+
+
+
+
         TirePathTreeUtil.Node root = new TirePathTreeUtil.Node("root");
 
 

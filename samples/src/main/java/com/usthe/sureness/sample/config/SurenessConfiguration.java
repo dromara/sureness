@@ -3,7 +3,6 @@ package com.usthe.sureness.sample.config;
 import com.usthe.sureness.matcher.DefaultPathRoleMatcher;
 import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.mgt.SurenessSecurityManager;
-import com.usthe.sureness.processor.BaseProcessor;
 import com.usthe.sureness.processor.DefaultProcessorManager;
 import com.usthe.sureness.processor.Processor;
 import com.usthe.sureness.processor.ProcessorManager;

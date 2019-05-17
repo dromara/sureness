@@ -71,4 +71,8 @@ public class JwtSubjectToken implements SubjectAuToken {
     public void setSupportRoles(Object var1) {
         this.supportRoles = (List<String>) var1;
     }
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
+    }
 }

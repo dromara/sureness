@@ -47,4 +47,12 @@ public class PasswordSubjectToken implements SubjectAuToken {
     @Override
     public void setSupportRoles(Object var1) {
     }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
