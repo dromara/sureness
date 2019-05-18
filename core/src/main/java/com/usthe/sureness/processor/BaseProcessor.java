@@ -4,6 +4,9 @@ import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.support.SurenessSubject;
+
+import java.util.List;
 
 /**
  * @author tomsun28
@@ -31,26 +34,23 @@ public abstract class BaseProcessor implements Processor{
 
     @Override
     public Subject process(SubjectAuToken var) throws SurenessAuthenticationException, SurenessAuthorizationException {
-        if (authenticated(var) && authorized(var)) {
-            return createSubject(var);
-        }
-        return null;
+        authorized(authenticated(var));
+        return createSubject(var);
     }
     /**
      * description 认证会调用的接口，在这里面完成认证
      * @param var 1
-     * @return boolean
+     * @return SubjectAuToken auToken
      * @throws SurenessAuthenticationException when发生认证相关异常
      */
-    public abstract boolean authenticated (SubjectAuToken var) throws SurenessAuthenticationException;
+    public abstract SubjectAuToken authenticated (SubjectAuToken var) throws SurenessAuthenticationException;
 
     /**
      * description 鉴权会调用的接口，在这里面完成鉴权
      * @param var 1
-     * @return boolean
      * @throws SurenessAuthorizationException when发生鉴权相关异常
      */
-    public abstract boolean authorized(SubjectAuToken var) throws SurenessAuthorizationException;
+    public abstract void authorized(SubjectAuToken var) throws SurenessAuthorizationException;
 
     /**
      * description 当认证鉴权完成通过后，通过token创建subject
@@ -58,5 +58,12 @@ public abstract class BaseProcessor implements Processor{
      * @param var 1
      * @return com.usthe.sureness.subject.Subject
      */
-    public abstract Subject createSubject(SubjectAuToken var);
+    @SuppressWarnings("unchecked")
+    private Subject createSubject(SubjectAuToken var) {
+        return SurenessSubject.builder()
+                .setPrincipal(String.valueOf(var.getPrincipal()))
+                .setTargetResource(String.valueOf(var.getTargetResource()))
+                .setRoles((List<String>) var.getOwnRoles())
+                .build();
+    }
 }

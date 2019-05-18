@@ -4,13 +4,17 @@ import com.usthe.sureness.processor.BaseProcessor;
 import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
+import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
 import com.usthe.sureness.provider.Account;
 import com.usthe.sureness.provider.AccountProvider;
-import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectAuToken;
 import com.usthe.sureness.subject.support.PasswordSubjectToken;
 import com.usthe.sureness.util.Md5Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /**
  * 支持 username password 类型token的处理器实例
@@ -19,6 +23,7 @@ import com.usthe.sureness.util.Md5Util;
  */
 public class PasswordProcessor extends BaseProcessor {
 
+    private static final Logger logger = LoggerFactory.getLogger(PasswordProcessor.class);
 
     private AccountProvider accountProvider;
 
@@ -35,27 +40,37 @@ public class PasswordProcessor extends BaseProcessor {
     }
 
     @Override
-    public boolean authenticated(SubjectAuToken var) throws SurenessAuthenticationException {
+    public SubjectAuToken authenticated(SubjectAuToken var) throws SurenessAuthenticationException {
         String appId = (String) var.getPrincipal();
         Account account = accountProvider.loadAccount(appId);
         if (account == null) {
-            throw new  UnknownAccountException("no the account: " + appId);
+            if (logger.isDebugEnabled()) {
+                logger.debug("PasswordProcessor authenticated fail, no this user: {}",
+                        var.getPrincipal());
+            }
+            throw new  UnknownAccountException("do not exist the account: " + appId);
         }
         String password = Md5Util.md5( var.getCredentials() + account.getSalt());
         if (password == null || !password.equals(account.getPassword())) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("PasswordProcessor authenticated fail, user: {}",
+                        var.getPrincipal());
+            }
             throw new IncorrectCredentialsException("incorrect password");
         }
-        return true;
+        return PasswordSubjectToken.builder(var)
+                .setOwnRoles(account.getOwnRoles())
+                .build();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public boolean authorized(SubjectAuToken var) throws SurenessAuthorizationException {
-        return true;
-    }
-
-    @Override
-    public Subject createSubject(SubjectAuToken var) {
-        return null;
+    public void authorized(SubjectAuToken var) throws SurenessAuthorizationException {
+        List<String> ownRoles = (List<String>)var.getOwnRoles();
+        List<String> supportRoles = (List<String>)var.getSupportRoles();
+        if (supportRoles != null && supportRoles.stream().noneMatch(ownRoles::contains)) {
+            throw new UnauthorizedException("do not have the role access");
+        }
     }
 
     public void setAccountProvider(AccountProvider provider) {

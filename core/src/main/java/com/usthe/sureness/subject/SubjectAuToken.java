@@ -13,28 +13,28 @@ public interface SubjectAuToken extends Serializable {
     /**
      * description 账户名  string
      *
-     * @return java.lang.Object
+     * @return 账户标识
      */
     Object getPrincipal();
 
     /**
-     * description TODO
+     * description 认证证书
      *
-     * @return java.lang.Object
+     * @return 对应账户的认证证书或秘钥
      */
     Object getCredentials();
 
     /**
-     * description TODO
+     * description 对应账户所拥有的角色
      *
-     * @return java.lang.Object
+     * @return 角色信息
      */
     Object getOwnRoles();
 
     /**
-     * description TODO
+     * description 需要访问的资源
      *
-     * @return java.lang.Object
+     * @return 资源信息
      */
     Object getTargetResource();
 
@@ -42,14 +42,14 @@ public interface SubjectAuToken extends Serializable {
      * description 获取token 在url-role树中匹配出来的roles
      * 访问 getTargetResource() 所支持的 roles
      *
-     * @return java.lang.Object
+     * @return 访问此资源所需的角色信息
      */
     Object getSupportRoles();
 
     /**
      * description 设置所匹配出的role
      *
-     * @param var1 1
+     * @param var1 所支持角色
      */
     void setSupportRoles(Object var1);
 

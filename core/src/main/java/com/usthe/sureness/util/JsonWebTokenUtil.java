@@ -1,21 +1,9 @@
 package com.usthe.sureness.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.impl.DefaultHeader;
-import io.jsonwebtoken.impl.DefaultJwsHeader;
-import io.jsonwebtoken.impl.TextCodec;
-import io.jsonwebtoken.impl.compression.DefaultCompressionCodecResolver;
-import io.jsonwebtoken.lang.Assert;
-
 
 import javax.xml.bind.DatatypeConverter;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author tomsun28
@@ -23,14 +11,8 @@ import java.util.Set;
  */
 public class JsonWebTokenUtil {
 
-    public static final String SECRET_KEY = "?::4343fdf4fdf6cvf):";
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-    private static final int COUNT_2 = 2;
-    private static  CompressionCodecResolver codecResolver = new DefaultCompressionCodecResolver();
-
-    private JsonWebTokenUtil() {
-
-    }
+    private static final String SECRET_KEY = "?::4343fdf4fdf6cvf):";
+    private static final int COUNT_3 = 3;
 
     /**
      *   json web token 签发
@@ -45,9 +27,9 @@ public class JsonWebTokenUtil {
      */
     public static String issueJWT(String id, String subject, String issuer, Long period, String roles, String permissions, SignatureAlgorithm algorithm) {
         // 当前时间戳
-        Long currentTimeMillis = System.currentTimeMillis();
+        long currentTimeMillis = System.currentTimeMillis();
         // 秘钥
-        byte[] secreKeyBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
+        byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
         JwtBuilder jwtBuilder = Jwts.builder();
         if (id != null) {
             jwtBuilder.setId(id);
@@ -73,79 +55,29 @@ public class JsonWebTokenUtil {
         // 压缩，可选GZIP
         jwtBuilder.compressWith(CompressionCodecs.DEFLATE);
         // 加密设置
-        jwtBuilder.signWith(algorithm,secreKeyBytes);
+        jwtBuilder.signWith(algorithm, secretKeyBytes);
         return jwtBuilder.compact();
     }
 
     /**
-     * 解析JWT的Payload
+     * 判断其是否是JWT，这里主要用格式来判断，不校验
+     * @param jwt JWT TOKEN
+     * @return 为JWT返回false 否则 true
      */
-    public static String parseJwtPayload(String jwt){
-        Assert.hasText(jwt, "JWT String argument cannot be null or empty.");
-        String base64UrlEncodedHeader = null;
-        String base64UrlEncodedPayload = null;
-        String base64UrlEncodedDigest = null;
-        int delimiterCount = 0;
-        StringBuilder sb = new StringBuilder(128);
-        for (char c : jwt.toCharArray()) {
-            if (c == '.') {
-                CharSequence tokenSeq = io.jsonwebtoken.lang.Strings.clean(sb);
-                String token = tokenSeq!=null?tokenSeq.toString():null;
-
-                if (delimiterCount == 0) {
-                    base64UrlEncodedHeader = token;
-                } else if (delimiterCount == 1) {
-                    base64UrlEncodedPayload = token;
-                }
-
-                delimiterCount++;
-                sb.setLength(0);
-            } else {
-                sb.append(c);
-            }
-        }
-        if (delimiterCount != COUNT_2) {
-            String msg = "JWT strings must contain exactly 2 period characters. Found: " + delimiterCount;
-            throw new MalformedJwtException(msg);
-        }
-        if (sb.length() > 0) {
-            base64UrlEncodedDigest = sb.toString();
-        }
-        if (base64UrlEncodedPayload == null) {
-            throw new MalformedJwtException("JWT string '" + jwt + "' is missing a body/payload.");
-        }
-        // =============== Header =================
-        Header header = null;
-        CompressionCodec compressionCodec = null;
-        if (base64UrlEncodedHeader != null) {
-            String origValue = TextCodec.BASE64URL.decodeToString(base64UrlEncodedHeader);
-            Map<String, Object> m = readValue(origValue);
-            if (base64UrlEncodedDigest != null) {
-                header = new DefaultJwsHeader(m);
-            } else {
-                header = new DefaultHeader(m);
-            }
-            compressionCodec = codecResolver.resolveCompressionCodec(header);
-        }
-        // =============== Body =================
-        String payload;
-        if (compressionCodec != null) {
-            byte[] decompressed = compressionCodec.decompress(TextCodec.BASE64URL.decode(base64UrlEncodedPayload));
-            payload = new String(decompressed, io.jsonwebtoken.lang.Strings.UTF_8);
-        } else {
-            payload = TextCodec.BASE64URL.decodeToString(base64UrlEncodedPayload);
-        }
-        return payload;
+    public static boolean isNotJsonWebToken(String jwt) {
+        // base64url_encode(Header) + '.' + base64url_encode(Claims) + '.' + base64url_encode(Signature)
+        return jwt.split("\\.").length != COUNT_3;
     }
+
 
     /**
      * 验签JWT
      *
      * @param jwt json web token
      */
-    public static Claims parseJwt(String jwt, String appKey) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException {
+    public static Claims parseJwt(String jwt) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException {
         return  Jwts.parser()
-                .setSigningKey(DatatypeConverter.parseBase64Binary(appKey))
+                .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
                 .parseClaimsJws(jwt)
                 .getBody();
 
@@ -165,35 +97,4 @@ public class JsonWebTokenUtil {
 //        // 访问主张-权限
 //        jwtAccount.setPerms(claims.get("perms", String.class));
     }
-
-
-    /**
-     * description 从json数据中读取格式化map
-     *
-     * @param val 1
-     * @return java.util.Map<java.lang.String,java.lang.Object>
-     */
-    @SuppressWarnings("unchecked")
-    public static Map<String, Object> readValue(String val) {
-        try {
-            return MAPPER.readValue(val, Map.class);
-        } catch (IOException e) {
-            throw new MalformedJwtException("Unable to read JSON value: " + val, e);
-        }
-    }
-
-    /**
-     * 分割字符串进SET
-     */
-    @SuppressWarnings("unchecked")
-    public static Set<String> split(String str) {
-
-        Set<String> set = new HashSet<>();
-        if (str == null || "".equals(str)) {
-            return set;
-        }
-                Arrays.asList(str.split(","));
-        return set;
-    }
-
 }

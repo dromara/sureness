@@ -50,17 +50,15 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         }
         //[role1,role2,role3], [role1], null
         String matchRoleString = TirePathTreeUtil.searchPathFilterRoles(targetResource, root);
-        if (matchRoleString == null) {
-            return;
+        if (matchRoleString != null) {
+            String leftCom = "[";
+            String rightCom = "]";
+            if (!matchRoleString.startsWith(leftCom) || !matchRoleString.endsWith(rightCom)) {
+                throw new SurenessNoInitException("DefaultPathRoleMatcher -> matchRoleString error");
+            }
+            String[] roles = matchRoleString.substring(1, matchRoleString.length()-1).split(",");
+            auToken.setSupportRoles(Arrays.asList(roles));
         }
-        String leftCom = "[";
-        String rightCom = "]";
-        if (!matchRoleString.startsWith(leftCom) || !matchRoleString.endsWith(rightCom)) {
-            throw new SurenessNoInitException("DefaultPathRoleMatcher -> matchRoleString error");
-        }
-        String[] roles = matchRoleString.substring(1, matchRoleString.length()-1).split(",");
-        List<String> roleList = new LinkedList<>(Arrays.asList(roles));
-        auToken.setSupportRoles(roleList);
     }
 
     private void checkComponentInit() throws SurenessNoInitException{

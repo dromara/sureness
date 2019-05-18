@@ -16,7 +16,7 @@ public abstract class BaseSubjectFactory implements SubjectFactory {
     private boolean initFlag = false;
 
     /**
-     * description DefaultSubjectAuToken  +  DefaultSubject
+     * description DefaultSubjectAuToken  +  SurenessSubject
      *
      * @param auToken 1
      * @return com.usthe.sureness.subject.Subject
@@ -27,9 +27,9 @@ public abstract class BaseSubjectFactory implements SubjectFactory {
         String principal = (String)auToken.getPrincipal();
         List<String> roles = (List<String>)auToken.getOwnRoles();
         String targetUri = (String)auToken.getTargetResource();
-        Subject subject =  DefaultSubject.getBuilder()
+        Subject subject =  SurenessSubject.builder()
                 .setTargetResource(targetUri)
-                .addRoles(roles)
+                .setRoles(roles)
                 .setPrincipal(principal)
                 .build();
         // 将subject 绑定到localThread变量中

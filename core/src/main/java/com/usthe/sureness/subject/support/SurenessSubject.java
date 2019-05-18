@@ -9,7 +9,7 @@ import java.util.List;
  * @author tomsun28
  * @date 22:03 2019-01-22
  */
-public class DefaultSubject implements Subject {
+public class SurenessSubject implements Subject {
 
     private static final long serialVersionUID = 1L;
     /**
@@ -26,7 +26,7 @@ public class DefaultSubject implements Subject {
     private String targetResource;
 
 
-    private DefaultSubject(Builder builder) {
+    private SurenessSubject(Builder builder) {
         this.principal = builder.principal;
         this.roles = builder.roles;
         this.targetResource = builder.targetResource;
@@ -57,7 +57,7 @@ public class DefaultSubject implements Subject {
         return targetResource;
     }
 
-    public static Builder getBuilder() {
+    public static Builder builder() {
         return new Builder();
     }
 
@@ -76,24 +76,13 @@ public class DefaultSubject implements Subject {
             return this;
         }
 
-        public Builder addRole(String role) {
-            if (roles == null) {
-                this.roles = new LinkedList<>();
-            }
-            this.roles.add(role);
+        public Builder setRoles(List<String> roles) {
+            this.roles = roles;
             return this;
         }
 
-        public Builder addRoles(List<String> roles) {
-            if (this.roles == null) {
-                this.roles = new LinkedList<>();
-            }
-            this.roles.addAll(roles);
-            return this;
-        }
-
-        public DefaultSubject build() {
-            return new DefaultSubject(this);
+        public SurenessSubject build() {
+            return new SurenessSubject(this);
         }
 
 

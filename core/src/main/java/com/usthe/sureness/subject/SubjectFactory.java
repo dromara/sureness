@@ -1,6 +1,7 @@
 package com.usthe.sureness.subject;
 
 import com.usthe.sureness.mgt.SurenessNoInitException;
+import com.usthe.sureness.processor.exception.UnsupportedTokenException;
 
 /**
  * subject , token 工厂
@@ -25,8 +26,9 @@ public interface SubjectFactory {
      * 基于web的实现在 webFactory中实现它
      * @param var1 1
      * @return com.usthe.sureness.subject.SubjectAuToken
+     * @throws UnsupportedTokenException 无法通过request message创建token时抛出
      */
-    SubjectAuToken createSubjectAuToken(Object var1);
+    SubjectAuToken createSubjectAuToken(Object var1) throws UnsupportedTokenException;
 
     /**
      * description 检查是否初始化完成
