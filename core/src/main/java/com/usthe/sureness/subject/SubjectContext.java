@@ -5,6 +5,7 @@ package com.usthe.sureness.subject;
  * @author tomsun28
  * @date 22:57 2019-01-23
  */
+@Deprecated
 public interface SubjectContext {
 
     /**

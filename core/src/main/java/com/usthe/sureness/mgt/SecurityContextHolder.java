@@ -12,6 +12,7 @@ import java.util.Optional;
  * @author tomsun28
  * @date 16:25 2019-02-24
  */
+@Deprecated
 public class SecurityContextHolder {
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityContextHolder.class);

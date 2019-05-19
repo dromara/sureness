@@ -8,7 +8,7 @@ import com.usthe.sureness.processor.Processor;
 import com.usthe.sureness.processor.ProcessorManager;
 import com.usthe.sureness.processor.support.JwtProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
-import com.usthe.sureness.provider.AccountProvider;
+import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.support.WebSubjectFactory;
 import org.springframework.context.annotation.Bean;
@@ -42,7 +42,7 @@ public class SurenessConfiguration {
     }
 
     @Bean
-    public ProcessorManager processorManager(AccountProvider accountProvider) {
+    public ProcessorManager processorManager(SurenessAccountProvider accountProvider) {
         List<Processor> processorList = new LinkedList<>();
         JwtProcessor jwtProcessor = new JwtProcessor();
         processorList.add(jwtProcessor);

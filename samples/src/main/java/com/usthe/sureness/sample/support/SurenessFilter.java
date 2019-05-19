@@ -42,7 +42,7 @@ public class SurenessFilter implements Filter {
             throws IOException, ServletException {
         try {
             Subject subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
-            // TODO 考虑将生成的subject信息塞入request
+            // 考虑将生成的subject信息塞入request
             servletRequest.setAttribute("subject", subject);
         } catch (RuntimeException e) {
             logger.info("exception happen: ", e);

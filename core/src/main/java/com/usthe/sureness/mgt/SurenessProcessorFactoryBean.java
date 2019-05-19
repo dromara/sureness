@@ -11,6 +11,7 @@ import java.util.Map;
  * @author tomsun28
  * @date 15:22 2019-03-03
  */
+@Deprecated
 public class SurenessProcessorFactoryBean implements FactoryBean {
 
     private static final Logger logger = LoggerFactory.getLogger(SurenessProcessorFactoryBean.class);

@@ -52,10 +52,13 @@ public class DefaultProcessorManager implements ProcessorManager {
         }
         // 如果最终异常都为空 ,说明没有processor匹配到token
         if (lastAuthenticationException == null && lastAuthorizationException == null) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("not found token : {} -- target processor", auToken.getClass() );
+            }
             throw new ProcessorNotFoundException("not found token : " + auToken.getClass()
                     + " --target processor");
         }
-        throw lastAuthenticationException == null? lastAuthorizationException : lastAuthenticationException;
+        throw lastAuthenticationException == null ? lastAuthorizationException : lastAuthenticationException;
     }
 
     private List<Processor> getProcessorList() {

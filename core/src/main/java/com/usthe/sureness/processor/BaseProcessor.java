@@ -5,6 +5,7 @@ import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectAuToken;
 import com.usthe.sureness.subject.support.SurenessSubject;
+import com.usthe.sureness.util.ThreadContext;
 
 import java.util.List;
 
@@ -60,10 +61,14 @@ public abstract class BaseProcessor implements Processor{
      */
     @SuppressWarnings("unchecked")
     private Subject createSubject(SubjectAuToken var) {
-        return SurenessSubject.builder()
+        SurenessSubject subject = SurenessSubject.builder()
                 .setPrincipal(String.valueOf(var.getPrincipal()))
                 .setTargetResource(String.valueOf(var.getTargetResource()))
                 .setRoles((List<String>) var.getOwnRoles())
                 .build();
+        // 将subject 绑定到localThread变量中
+        ThreadContext.bind(subject);
+        // 如果是网关认证中心, 之后可以考虑把subject绑定到request请求中,供子系统使用
+        return subject;
     }
 }

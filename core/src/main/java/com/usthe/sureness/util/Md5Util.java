@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 /**
+ * md5 加密工具类
  * @author tomsun28
  * @date 20:48 2018/2/27
  */
@@ -34,18 +35,14 @@ public class Md5Util {
             int j = md.length;
             char[] str = new char[j*2];
             int k = 0;
-            for (int i=0; i<j; i++) {
-                byte byte0 = md[i];
+            for (byte byte0 : md) {
                 str[k++] = md5String[byte0 >>> 4 & 0xf];
                 str[k++] = md5String[byte0 & 0xf];
             }
-            // 返回加密后的字符串
             return new String(str);
-
         }catch (Exception e) {
-            logger.warn(e.getMessage(),e);
+            logger.warn(e.getMessage(), e);
             return null;
         }
-
     }
 }

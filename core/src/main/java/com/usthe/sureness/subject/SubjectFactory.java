@@ -1,6 +1,5 @@
 package com.usthe.sureness.subject;
 
-import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.processor.exception.UnsupportedTokenException;
 
 /**
@@ -29,12 +28,5 @@ public interface SubjectFactory {
      * @throws UnsupportedTokenException 无法通过request message创建token时抛出
      */
     SubjectAuToken createSubjectAuToken(Object var1) throws UnsupportedTokenException;
-
-    /**
-     * description 检查是否初始化完成
-     * @throws SurenessNoInitException when
-     */
-    void checkComponentInit() throws SurenessNoInitException;
-
 
 }

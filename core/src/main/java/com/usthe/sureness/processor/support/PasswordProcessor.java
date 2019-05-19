@@ -6,8 +6,8 @@ import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
-import com.usthe.sureness.provider.Account;
-import com.usthe.sureness.provider.AccountProvider;
+import com.usthe.sureness.provider.SurenessAccount;
+import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.subject.SubjectAuToken;
 import com.usthe.sureness.subject.support.PasswordSubjectToken;
 import com.usthe.sureness.util.Md5Util;
@@ -25,7 +25,7 @@ public class PasswordProcessor extends BaseProcessor {
 
     private static final Logger logger = LoggerFactory.getLogger(PasswordProcessor.class);
 
-    private AccountProvider accountProvider;
+    private SurenessAccountProvider accountProvider;
 
     @Override
     public boolean canSupportAuTokenClass(Class<?> var) {
@@ -42,7 +42,7 @@ public class PasswordProcessor extends BaseProcessor {
     @Override
     public SubjectAuToken authenticated(SubjectAuToken var) throws SurenessAuthenticationException {
         String appId = (String) var.getPrincipal();
-        Account account = accountProvider.loadAccount(appId);
+        SurenessAccount account = accountProvider.loadAccount(appId);
         if (account == null) {
             if (logger.isDebugEnabled()) {
                 logger.debug("PasswordProcessor authenticated fail, no this user: {}",
@@ -73,7 +73,7 @@ public class PasswordProcessor extends BaseProcessor {
         }
     }
 
-    public void setAccountProvider(AccountProvider provider) {
+    public void setAccountProvider(SurenessAccountProvider provider) {
         this.accountProvider = provider;
     }
 

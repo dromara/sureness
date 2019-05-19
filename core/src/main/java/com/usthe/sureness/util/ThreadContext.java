@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *   from shiro ThreadContext
+ *   learn from shiro ThreadContext
  * @author from shiro
  * @date 23:01 2019-01-09
  */
@@ -28,6 +28,10 @@ public class ThreadContext {
 
     public static Subject unbindSubject() {
         return (Subject)remove(SUBJECT_KEY);
+    }
+
+    public static Subject getBindSubject() {
+        return (Subject)get(SUBJECT_KEY);
     }
 
 

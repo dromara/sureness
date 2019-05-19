@@ -5,7 +5,7 @@ import com.usthe.sureness.subject.SubjectAuToken;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 一些处理工具类
+ * 一些公共处理工具类
  * @author tomsun28
  * @date 19:07 2019-03-09
  */

@@ -6,12 +6,13 @@ import javax.xml.bind.DatatypeConverter;
 import java.util.Date;
 
 /**
+ * json web token相关工具类
  * @author tomsun28
  * @date 16:29 2018/3/8
  */
 public class JsonWebTokenUtil {
 
-    private static final String SECRET_KEY = "?::4343fdf4fdf6cvf):";
+    private static final String SECRET_KEY = "?::4390fsf4sdl6opf):";
     private static final int COUNT_3 = 3;
 
     /**
@@ -81,20 +82,13 @@ public class JsonWebTokenUtil {
                 .parseClaimsJws(jwt)
                 .getBody();
 
-//        JwtAccount jwtAccount = new JwtAccount();
-//        //令牌ID
-//        jwtAccount.setTokenId(claims.getId());
-//        // 客户标识
-//        jwtAccount.setAppId(claims.getSubject());
-//        // 签发者
-//        jwtAccount.setIssuer(claims.getIssuer());
-//        // 签发时间
-//        jwtAccount.setIssuedAt(claims.getIssuedAt());
-//        // 接收方
-//        jwtAccount.setAudience(claims.getAudience());
-//        // 访问主张-角色
-//        jwtAccount.setRoles(claims.get("roles", String.class));
-//        // 访问主张-权限
-//        jwtAccount.setPerms(claims.get("perms", String.class));
+        // 令牌ID -- claims.getId()
+        // 客户标识 -- claims.getSubject()
+        // 客户标识
+        // 签发者 -- claims.getIssuer()
+        // 签发时间 -- claims.getIssuedAt()
+        // 接收方 -- claims.getAudience()
+        // 访问主张-角色 -- claims.get("roles", String.class)
+        // 访问主张-权限 -- claims.get("perms", String.class)
     }
 }

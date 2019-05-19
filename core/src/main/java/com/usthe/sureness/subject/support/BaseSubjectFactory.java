@@ -1,6 +1,5 @@
 package com.usthe.sureness.subject.support;
 
-import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectAuToken;
 import com.usthe.sureness.subject.SubjectFactory;
@@ -12,8 +11,6 @@ import java.util.List;
  * @date 00:40 2019-01-24
  */
 public abstract class BaseSubjectFactory implements SubjectFactory {
-
-    private boolean initFlag = false;
 
     /**
      * description DefaultSubjectAuToken  +  SurenessSubject
@@ -36,13 +33,6 @@ public abstract class BaseSubjectFactory implements SubjectFactory {
         ThreadContext.bind(subject);
         // 如果是网关认证中心, 之后可以考虑把subject绑定到request请求中,供子系统使用
         return subject;
-    }
-
-    @Override
-    public void checkComponentInit() throws SurenessNoInitException {
-        if (!initFlag) {
-            throw new SurenessNoInitException("the subjectFactory not complete ye");
-        }
     }
 
 }

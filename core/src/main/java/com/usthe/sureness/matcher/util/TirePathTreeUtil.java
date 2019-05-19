@@ -22,50 +22,9 @@ public class TirePathTreeUtil {
     private static final int PATH_NODE_NUM_2 = 2;
 
     /**
-     * description 插入节点
-     *
-     * @param path path = /api/v1/host/detail===GET===jwt[role2,role3,role4]
-     */
-    private static void insertNode(String path, Node root) {
-        if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
-            return;
-        }
-        String[] tmp = path.split("===");
-        if (tmp.length != PATH_NODE_NUM_3) {
-            return;
-        }
-        String[] urlPac = tmp[0].split(URL_PATH_SPLIT);
-        if (urlPac.length > 1) {
-            // 去除第一位的空 ""
-            urlPac = Arrays.copyOfRange(urlPac, 1, urlPac.length);
-        }
-        String method = tmp[1];
-        String filterRoles = tmp[2];
-        Node current = root;
-        //开始插入URL节点
-        for (String urlData : urlPac) {
-            if (!current.getChildren().containsKey(urlData.toUpperCase())) {
-                current.insertChild(urlData.toUpperCase());
-            }
-            current = current.getChildren().get(urlData.toUpperCase());
-        }
-        current.setNodeType(NODE_TYPE_PATH_END);
-        //开始插入httpMethod节点
-        if (!current.getChildren().containsKey(method.toUpperCase())) {
-            current.insertChild(method.toUpperCase(), NODE_TYPE_METHOD);
-        }
-        current = current.getChildren().get(method.toUpperCase());
-        //开始插入filterRoles节点
-        //每条资源只能对应一种filter,httpMethod下最多一个孩子节点
-        if (current.getChildren().isEmpty()) {
-            current.insertChild(filterRoles.toUpperCase(), NODE_TYPE_FILTER_ROLES);
-        }
-
-    }
-
-    /**
-     *  新建字典匹配树
-     * @param paths 1
+     * 新建字典匹配树
+     * @param paths 资路径
+     * @param root 根节点
      */
     public static void buildTree(Set<String> paths, Node root) {
         clearTree(root);
@@ -76,6 +35,7 @@ public class TirePathTreeUtil {
 
     /**
      * 清空字典树
+     * @param root 根节点
      */
     public static void clearTree(Node root) {
         root.getChildren().clear();
@@ -84,7 +44,8 @@ public class TirePathTreeUtil {
     /**
      * 根据path从树里匹配该路径需要的 filter[role2,role3,role4]
      * @param path   /api/v2/host/detail===GET
-     * @return java.lang.String
+     * @param root 根节点
+     * @return java.lang.String [role1,role2]
      */
     public static String searchPathFilterRoles(String path, Node root) {
         if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
@@ -163,20 +124,60 @@ public class TirePathTreeUtil {
         return null;
     }
 
+    /**
+     * description 插入节点
+     * @param path path = /api/v1/host/detail===GET===jwt[role2,role3,role4]
+     * @param root 根节点
+     */
+    private static void insertNode(String path, Node root) {
+        if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
+            return;
+        }
+        String[] tmp = path.split("===");
+        if (tmp.length != PATH_NODE_NUM_3) {
+            return;
+        }
+        String[] urlPac = tmp[0].split(URL_PATH_SPLIT);
+        if (urlPac.length > 1) {
+            // 去除第一位的空 ""
+            urlPac = Arrays.copyOfRange(urlPac, 1, urlPac.length);
+        }
+        String method = tmp[1];
+        String filterRoles = tmp[2];
+        Node current = root;
+        //开始插入URL节点
+        for (String urlData : urlPac) {
+            if (!current.getChildren().containsKey(urlData.toUpperCase())) {
+                current.insertChild(urlData.toUpperCase());
+            }
+            current = current.getChildren().get(urlData.toUpperCase());
+        }
+        current.setNodeType(NODE_TYPE_PATH_END);
+        //开始插入httpMethod节点
+        if (!current.getChildren().containsKey(method.toUpperCase())) {
+            current.insertChild(method.toUpperCase(), NODE_TYPE_METHOD);
+        }
+        current = current.getChildren().get(method.toUpperCase());
+        //开始插入filterRoles节点
+        //每条资源只能对应一种filter,httpMethod下最多一个孩子节点
+        if (current.getChildren().isEmpty()) {
+            current.insertChild(filterRoles.toUpperCase(), NODE_TYPE_FILTER_ROLES);
+        }
 
+    }
+
+    /**
+     * 树节点类
+     */
     public static class Node {
 
-        /**
-         *  当前节点的类型
-         */
+        /** 当前节点的类型 **/
         private String nodeType;
-        /**
-         *  节点对应的数据
-         */
+
+        /** 节点对应的数据 **/
         private String data;
-        /**
-         *  孩子节点
-         */
+
+        /** 孩子节点 **/
         private Map<String, Node> children;
 
         private Node(String data, String nodeType) {
@@ -221,6 +222,4 @@ public class TirePathTreeUtil {
             this.children = children;
         }
     }
-
-
 }
