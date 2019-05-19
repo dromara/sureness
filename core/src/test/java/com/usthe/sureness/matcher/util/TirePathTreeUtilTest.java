@@ -9,23 +9,23 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-
-
-/**
+/**  path tree util test
  * @author tomsun28
  * @date 12:22 2019-04-09
  */
 public class TirePathTreeUtilTest {
 
     private static TirePathTreeUtil.Node root = null;
+
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         root = new TirePathTreeUtil.Node("root");
     }
 
     @AfterClass
-    public static void tearDown() throws Exception {
-        root = null;
+    public static void tearDown() {
+        root.getChildren().clear();
+        root= null;
     }
 
     @Test
@@ -46,14 +46,22 @@ public class TirePathTreeUtilTest {
     }
 
     @Test
-    public void reBuildTree() {
-    }
-
-    @Test
-    public void clearTree() {
-    }
-
-    @Test
     public void searchPathFilterRoles() {
+        buildTree();
+        String filterRole = TirePathTreeUtil.searchPathFilterRoles("/api/v2/host===get", root);
+        Assert.assertEquals(filterRole, "jwt[role2,role3,role4]".toUpperCase());
+        String var1 = TirePathTreeUtil.searchPathFilterRoles("/api/v1/mom===put", root);
+        Assert.assertNull(var1);
+        String var2 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/host===put", root);
+        Assert.assertEquals(var2, "jwt[role2,role3,role4]".toUpperCase());
+        String var3 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/detail===put", root);
+        Assert.assertEquals(var3, "jwt[role2,role3,role4]".toUpperCase());
+        String var4 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/details===put", root);
+        Assert.assertNull(var4);
+        String var5 = TirePathTreeUtil.searchPathFilterRoles("/api/dd/mom/ha===put", root);
+        Assert.assertEquals(var5, "jwt[role2,role3,role4]".toUpperCase());
+        String var6 = TirePathTreeUtil.searchPathFilterRoles("/api/mi/mom/ha===put", root);
+        Assert.assertEquals(var6, "jwt[role2,role3,role4]".toUpperCase());
+
     }
 }
