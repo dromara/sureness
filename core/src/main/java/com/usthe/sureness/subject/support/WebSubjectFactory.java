@@ -29,7 +29,7 @@ public class WebSubjectFactory extends BaseSubjectFactory {
             // 现在支持 json web token, Basic auth, ...
             // ("Authorization", "Bearer eyJhbGciOiJIUzUxMi...")  --- jwt auth
             // ("Authorization", "Basic YWRtaW46YWRtaW4=")        --- basic auth
-            if (authorization.startsWith(BEARER)) {
+            if (authorization != null && authorization.startsWith(BEARER)) {
                 // jwt token
                 String jwtValue = authorization.replace(BEARER, "").trim();
                 if (JsonWebTokenUtil.isNotJsonWebToken(jwtValue)) {
@@ -45,7 +45,7 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                         .setTargetResource(targetUri)
                         .setUserAgent(userAgent)
                         .build();
-            } else if (authorization.startsWith(BASIC)) {
+            } else if (authorization != null && authorization.startsWith(BASIC)) {
                 //basic auth
                 String basicAuth = authorization.replace(BASIC, "").trim();
                 basicAuth = new String(Base64.getDecoder().decode(basicAuth), StandardCharsets.UTF_8);

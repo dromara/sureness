@@ -39,32 +39,32 @@ public class DefaultAccount implements SurenessAccount {
 
     @Override
     public String getAppId() {
-        return null;
+        return this.appId;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getSalt() {
-        return null;
+        return this.salt;
     }
 
     @Override
     public List<String> getOwnRoles() {
-        return null;
+        return this.ownRoles;
     }
 
     @Override
     public boolean isDisabledAccount() {
-        return false;
+        return this.disabledAccount;
     }
 
     @Override
     public boolean isExcessiveAttempts() {
-        return false;
+        return this.excessiveAttempts;
     }
 
     public static Builder builder() {

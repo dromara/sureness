@@ -19,8 +19,8 @@ public class FileTextSurenessAccountProvider implements SurenessAccountProvider 
     public SurenessAccount loadAccount(String appId) {
         // 暂时模拟数据测试
         return DefaultAccount.builder()
-                .setAppId("tom")
-                .setPassword("1234")
+                .setAppId("admin")
+                .setPassword("0192023A7BBD73250516F069DF18B500")
                 .setSalt("123")
                 .setOwnRoles(Collections.singletonList("role1"))
                 .setDisabledAccount(false)

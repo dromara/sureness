@@ -49,19 +49,19 @@ public class TirePathTreeUtilTest {
     public void searchPathFilterRoles() {
         buildTree();
         String filterRole = TirePathTreeUtil.searchPathFilterRoles("/api/v2/host===get", root);
-        Assert.assertEquals(filterRole, "jwt[role2,role3,role4]".toUpperCase());
+        Assert.assertEquals(filterRole, "jwt[role2,role3,role4]");
         String var1 = TirePathTreeUtil.searchPathFilterRoles("/api/v1/mom===put", root);
         Assert.assertNull(var1);
         String var2 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/host===put", root);
-        Assert.assertEquals(var2, "jwt[role2,role3,role4]".toUpperCase());
+        Assert.assertEquals(var2, "jwt[role2,role3,role4]");
         String var3 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/detail===put", root);
-        Assert.assertEquals(var3, "jwt[role2,role3,role4]".toUpperCase());
+        Assert.assertEquals(var3, "jwt[role2,role3,role4]");
         String var4 = TirePathTreeUtil.searchPathFilterRoles("/api/v2/details===put", root);
         Assert.assertNull(var4);
         String var5 = TirePathTreeUtil.searchPathFilterRoles("/api/dd/mom/ha===put", root);
-        Assert.assertEquals(var5, "jwt[role2,role3,role4]".toUpperCase());
+        Assert.assertEquals(var5, "jwt[role2,role3,role4]");
         String var6 = TirePathTreeUtil.searchPathFilterRoles("/api/mi/mom/ha===put", root);
-        Assert.assertEquals(var6, "jwt[role2,role3,role4]".toUpperCase());
+        Assert.assertEquals(var6, "jwt[role2,role3,role4]");
 
     }
 }

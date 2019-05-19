@@ -26,8 +26,8 @@ public class CommonUtil {
     /**
      * description 封装response  统一json返回
      *
-     * @param outStr 1
-     * @param response 2
+     * @param content 内容
+     * @param response response
      */
     public static void responseWrite(ResponseEntity content, ServletResponse response) {
         response.setCharacterEncoding("UTF-8");
@@ -38,5 +38,12 @@ public class CommonUtil {
         }catch (Exception e) {
             logger.error("responseWrite response error: ", e);
         }
+    }
+
+    public static void main(String[] args) {
+        String matchRoleString = "[role2]";
+        String tmp = matchRoleString.substring(1, matchRoleString.length()-1);
+        String[] roless = tmp.split(",");
+        String[] roles = matchRoleString.substring(1, matchRoleString.length()-1).split(",");
     }
 }

@@ -42,8 +42,8 @@ public class TirePathTreeUtil {
     }
 
     /**
-     * 根据path从树里匹配该路径需要的 filter[role2,role3,role4]
-     * @param path   /api/v2/host/detail===GET
+     * 根据path从树里匹配该路径需要的 [role2,role3,role4]
+     * @param path   /api/v2/host/detail===get
      * @param root 根节点
      * @return java.lang.String [role1,role2]
      */
@@ -63,8 +63,8 @@ public class TirePathTreeUtil {
         Node current = root;
         //支持基于ant的模式匹配
         for (String data : urlPac) {
-            if (current.getChildren().containsKey(data.toUpperCase())) {
-                current = current.getChildren().get(data.toUpperCase());
+            if (current.getChildren().containsKey(data.toLowerCase())) {
+                current = current.getChildren().get(data.toLowerCase());
             } else if (current.getChildren().containsKey("*")) {
                 // * 代表匹配一个data节点
                 current = current.getChildren().get("*");
@@ -72,8 +72,8 @@ public class TirePathTreeUtil {
                 // ** 代表匹配后面全部节点
                 current = current.getChildren().get("**");
                 if (current.getNodeType().equals(NODE_TYPE_PATH_END)) {
-                    if (current.getChildren().containsKey(method.toUpperCase())) {
-                        current = current.getChildren().get(method.toUpperCase());
+                    if (current.getChildren().containsKey(method.toLowerCase())) {
+                        current = current.getChildren().get(method.toLowerCase());
                         if (current.getNodeType().equals(NODE_TYPE_METHOD)) {
                             if (!current.getChildren().isEmpty()) {
                                 Iterator<Map.Entry<String,Node>> iterator = current.getChildren().entrySet().iterator();
@@ -104,10 +104,10 @@ public class TirePathTreeUtil {
             return null;
         }
         // 匹配httpMethod
-        if (!current.getChildren().containsKey(method.toUpperCase())) {
+        if (!current.getChildren().containsKey(method.toLowerCase())) {
             return null;
         }
-        current = current.getChildren().get(method.toUpperCase());
+        current = current.getChildren().get(method.toLowerCase());
         if (!current.getNodeType().equals(NODE_TYPE_METHOD)) {
             return null;
         }
@@ -143,25 +143,25 @@ public class TirePathTreeUtil {
             urlPac = Arrays.copyOfRange(urlPac, 1, urlPac.length);
         }
         String method = tmp[1];
-        String filterRoles = tmp[2];
+        String supportRoles = tmp[2];
         Node current = root;
         //开始插入URL节点
         for (String urlData : urlPac) {
-            if (!current.getChildren().containsKey(urlData.toUpperCase())) {
-                current.insertChild(urlData.toUpperCase());
+            if (!current.getChildren().containsKey(urlData.toLowerCase())) {
+                current.insertChild(urlData.toLowerCase());
             }
-            current = current.getChildren().get(urlData.toUpperCase());
+            current = current.getChildren().get(urlData.toLowerCase());
         }
         current.setNodeType(NODE_TYPE_PATH_END);
         //开始插入httpMethod节点
-        if (!current.getChildren().containsKey(method.toUpperCase())) {
-            current.insertChild(method.toUpperCase(), NODE_TYPE_METHOD);
+        if (!current.getChildren().containsKey(method.toLowerCase())) {
+            current.insertChild(method.toLowerCase(), NODE_TYPE_METHOD);
         }
-        current = current.getChildren().get(method.toUpperCase());
-        //开始插入filterRoles节点
-        //每条资源只能对应一种filter,httpMethod下最多一个孩子节点
+        current = current.getChildren().get(method.toLowerCase());
+        //开始插入 supportRoles 节点 supportRoles 保持其原始大小写
+        //每条资源只能对应一 supportRoles ,httpMethod下最多一个孩子节点
         if (current.getChildren().isEmpty()) {
-            current.insertChild(filterRoles.toUpperCase(), NODE_TYPE_FILTER_ROLES);
+            current.insertChild(supportRoles, NODE_TYPE_FILTER_ROLES);
         }
 
     }

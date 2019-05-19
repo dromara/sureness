@@ -57,10 +57,10 @@ public class ExampleSurenessFilter implements Filter {
             Subject subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
             // 考虑将生成的subject信息塞入request
             servletRequest.setAttribute("subject", subject);
-        } catch (SurenessNoInitException e1) {
-            logger.error("SurenessSecurityManager not init, please check error :", e1);
-            CommonUtil.responseWrite(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(),
-                    servletResponse);
+        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedTokenException e4) {
+            logger.debug("this request is illegal: ", e4);
+            CommonUtil.responseWrite(ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST).body(e4.getMessage()), servletResponse);
             return;
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
             logger.debug("the account is disabled: ", e2);
@@ -72,17 +72,17 @@ public class ExampleSurenessFilter implements Filter {
             CommonUtil.responseWrite(ResponseEntity
                     .status(HttpStatus.FORBIDDEN).body(e3.getMessage()), servletResponse);
             return;
-        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedTokenException e4) {
-            logger.debug("this account is illegal: ", e4);
-            CommonUtil.responseWrite(ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST).body(e4.getMessage()), servletResponse);
-            return;
         } catch (UnauthorizedException e5) {
             logger.debug("this account can not access this resource");
             CommonUtil.responseWrite(ResponseEntity
                     .status(HttpStatus.FORBIDDEN).body(e5.getMessage()), servletResponse);
             return;
-        } catch (RuntimeException e) {
+        } catch (SurenessNoInitException e1) {
+            logger.error("SurenessSecurityManager not init, please check error :", e1);
+            CommonUtil.responseWrite(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(),
+                    servletResponse);
+            return;
+        }catch (RuntimeException e) {
             logger.error("other exception happen: ", e);
             CommonUtil.responseWrite(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(),
                     servletResponse);
