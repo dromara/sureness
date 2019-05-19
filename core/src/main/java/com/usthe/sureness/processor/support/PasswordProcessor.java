@@ -1,6 +1,8 @@
 package com.usthe.sureness.processor.support;
 
 import com.usthe.sureness.processor.BaseProcessor;
+import com.usthe.sureness.processor.exception.DisabledAccountException;
+import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
 import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
@@ -57,6 +59,12 @@ public class PasswordProcessor extends BaseProcessor {
                         var.getPrincipal());
             }
             throw new IncorrectCredentialsException("incorrect password");
+        }
+        if (account.isDisabledAccount()) {
+            throw new DisabledAccountException("account is disabled");
+        }
+        if (account.isExcessiveAttempts()) {
+            throw new ExcessiveAttemptsException("account is disable due to many time authenticated, try later");
         }
         return PasswordSubjectToken.builder(var)
                 .setOwnRoles(account.getOwnRoles())
