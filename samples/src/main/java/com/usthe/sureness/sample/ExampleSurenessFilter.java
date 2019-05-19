@@ -2,6 +2,14 @@ package com.usthe.sureness.sample;
 
 import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.mgt.SurenessSecurityManager;
+import com.usthe.sureness.processor.exception.DisabledAccountException;
+import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
+import com.usthe.sureness.processor.exception.ExpiredCredentialsException;
+import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
+import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
+import com.usthe.sureness.processor.exception.UnauthorizedException;
+import com.usthe.sureness.processor.exception.UnknownAccountException;
+import com.usthe.sureness.processor.exception.UnsupportedTokenException;
 import com.usthe.sureness.sample.util.CommonUtil;
 import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
@@ -44,6 +52,7 @@ public class ExampleSurenessFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
+
         try {
             Subject subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
             // 考虑将生成的subject信息塞入request
@@ -53,11 +62,27 @@ public class ExampleSurenessFilter implements Filter {
             CommonUtil.responseWrite(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(),
                     servletResponse);
             return;
-        }
-
-
-
-        catch (RuntimeException e) {
+        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
+            logger.debug("the account is disabled: ", e2);
+            CommonUtil.responseWrite(ResponseEntity
+                    .status(HttpStatus.FORBIDDEN).body(e2.getMessage()), servletResponse);
+            return;
+        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
+            logger.debug("this account credential is incorrect or expired");
+            CommonUtil.responseWrite(ResponseEntity
+                    .status(HttpStatus.FORBIDDEN).body(e3.getMessage()), servletResponse);
+            return;
+        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedTokenException e4) {
+            logger.debug("this account is illegal: ", e4);
+            CommonUtil.responseWrite(ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST).body(e4.getMessage()), servletResponse);
+            return;
+        } catch (UnauthorizedException e5) {
+            logger.debug("this account can not access this resource");
+            CommonUtil.responseWrite(ResponseEntity
+                    .status(HttpStatus.FORBIDDEN).body(e5.getMessage()), servletResponse);
+            return;
+        } catch (RuntimeException e) {
             logger.error("other exception happen: ", e);
             CommonUtil.responseWrite(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(),
                     servletResponse);

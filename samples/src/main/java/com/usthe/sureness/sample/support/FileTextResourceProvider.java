@@ -28,6 +28,8 @@ public class FileTextResourceProvider implements PathTreeProvider {
         paths.add("/api/v2/mom===put===jwt[role2,role3,role4]");
         paths.add("/api/*/mom/ha===put===jwt[role2,role3,role4]");
         paths.add("/api/mi/**===put===jwt[role2,role3,role4]");
+        paths.add("/api/v1/getSource1===get===[role1]");
+        paths.add("/api/v2/getSource2/*/*===get===[role2]");
         return paths;
     }
 }
