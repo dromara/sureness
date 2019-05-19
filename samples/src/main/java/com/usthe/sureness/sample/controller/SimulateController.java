@@ -1,6 +1,6 @@
 package com.usthe.sureness.sample.controller;
 
-import com.usthe.sureness.sample.util.SurenessUtil;
+import com.usthe.sureness.sample.util.CommonUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ public class SimulateController {
     public ResponseEntity<String> getSource1(HttpServletRequest request) {
         String requestUri = request.getRequestURI();
         String requestType = request.getMethod();
-        return ResponseEntity.ok(String.format(SurenessUtil.SUCCESS_ACCESS_RESOURCE, requestUri + requestType));
+        return ResponseEntity.ok(String.format(CommonUtil.SUCCESS_ACCESS_RESOURCE, requestUri + requestType));
     }
 
     @GetMapping("/api/v2/getSource2/{var1}/{var2}")
@@ -41,7 +41,7 @@ public class SimulateController {
             builder.append(var2);
             builder.append("--");
         }
-        return ResponseEntity.ok(String.format(SurenessUtil.SUCCESS_ACCESS_RESOURCE, builder.toString()));
+        return ResponseEntity.ok(String.format(CommonUtil.SUCCESS_ACCESS_RESOURCE, builder.toString()));
     }
 
     // TODO 模拟更多资源

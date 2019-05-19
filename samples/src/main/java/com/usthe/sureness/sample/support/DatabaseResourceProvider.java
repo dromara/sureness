@@ -6,6 +6,7 @@ import com.usthe.sureness.matcher.SurenessLoadDataException;
 import java.util.Set;
 
 /**
+ * 从数据库中加载资源 -- 提供者
  * @author tomsun28
  * @date 23:52 2019-05-12
  */

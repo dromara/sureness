@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * sureness 配置
  * @author tomsun28
  * @date 23:38 2019-05-12
  */
