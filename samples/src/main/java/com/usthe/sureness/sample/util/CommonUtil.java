@@ -1,10 +1,13 @@
 package com.usthe.sureness.sample.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -32,10 +35,21 @@ public class CommonUtil {
     public static void responseWrite(ResponseEntity content, ServletResponse response) {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
-        try {
-            PrintWriter printWriter = response.getWriter();
-            printWriter.write(content.toString());
-        }catch (Exception e) {
+        ((HttpServletResponse)response).setStatus(content.getStatusCodeValue());
+        content.getHeaders().forEach((key, value) ->
+                ((HttpServletResponse) response).addHeader(key, value.get(0)));
+        try (PrintWriter printWriter = response.getWriter()) {
+            if (content.getBody() != null) {
+                if (content.getBody() instanceof String) {
+                    printWriter.write(content.getBody().toString());
+                } else {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    printWriter.write(objectMapper.writeValueAsString(content.getBody()));
+                }
+            } else {
+                printWriter.flush();
+            }
+        } catch (IOException e) {
             logger.error("responseWrite response error: ", e);
         }
     }
