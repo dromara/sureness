@@ -1,2 +1,32 @@
 server:
   port: 8088
+
+
+sureness:
+  path-role:
+    - /api/v2/host===post===[role2,role3,role4]
+    - /api/v2/host===get===[role2,role3,role4]
+    - /api/v2/host===delete===[role2,role3,role4]
+    - /api/v2/host===put===[role2,role3,role4]
+    - /api/mi/**===put===[role2,role3,role4]
+    - /api/v1/getSource1===get===[role1]
+    - /api/v2/getSource2/*/*===get===[role2]
+  user:
+    - appId: admin
+      credential: 0192023A7BBD73250516F069DF18B500
+      salt: 123
+    - appId: root
+      credential: 23456
+    - appId: tom
+      credential: 32113
+  user-role:
+    - appId: admin
+      role:
+        - role2
+    - appId: root
+      role:
+        - role1
+        - role2
+        - role3
+    - appId: tom
+      role:

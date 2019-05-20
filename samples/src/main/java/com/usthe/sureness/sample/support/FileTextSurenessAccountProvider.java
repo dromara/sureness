@@ -5,8 +5,9 @@ import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * 从文件中加载账户信息 -- 提供者
@@ -15,9 +16,38 @@ import java.util.Collections;
  */
 @Component
 public class FileTextSurenessAccountProvider implements SurenessAccountProvider {
+
+    private YamlFileResource fileResource;
+
+    public FileTextSurenessAccountProvider(YamlFileResource fileResource) {
+        this.fileResource = fileResource;
+    }
+
+
     @Override
     public SurenessAccount loadAccount(String appId) {
-        // 暂时模拟数据测试
+        Optional<Map<String, String>> mapOptional = fileResource.getUser().stream()
+                .filter(map -> appId.equals(map.get("appId")))
+                .findFirst();
+//        if (mapOptional.isPresent()) {
+//            Map<String, String> accountMap = mapOptional.get();
+//            DefaultAccount.Builder builder = new DefaultAccount.Builder();
+//            builder.setAppId(appId);
+//            if (accountMap.get("credential") != null) {
+//                builder.setPassword(accountMap.get("credential"));
+//            }
+//            if (accountMap.get("salt") != null) {
+//                builder.setSalt(accountMap.get("salt"));
+//            }
+//            fileResource.getUserRole().stream()
+//                    .filter(map -> map.containsKey(appId))
+//                    .findFirst();
+//            builder.setDisabledAccount(false)
+//                    .setExcessiveAttempts(false)
+//        } else {
+//            return null;
+//        }
+
         return DefaultAccount.builder()
                 .setAppId("admin")
                 .setPassword("0192023A7BBD73250516F069DF18B500")

@@ -13,23 +13,15 @@ import java.util.Set;
  */
 @Component
 public class FileTextResourceProvider implements PathTreeProvider {
+
+    private YamlFileResource fileResource;
+
+    public FileTextResourceProvider(YamlFileResource fileResource) {
+        this.fileResource = fileResource;
+    }
+
     @Override
     public Set<String> providePathData() throws SurenessLoadDataException {
-        Set<String> paths = new HashSet<>();
-        // 暂时不从文件  构造一些伪数据测试
-        paths.add("/===post===jwt[role2,role3,role4]");
-        paths.add("/api/v2/host===post===jwt[role2,role3,role4]");
-        paths.add("/api/v2/host===get===jwt[role2,role3,role4]");
-        paths.add("/api/v2/host===delete===jwt[role2,role3,role4]");
-        paths.add("/api/v2/host===put===jwt[role2,role3,role4]");
-        paths.add("/api/v1/host===put===jwt[role2,role3,role4]");
-        paths.add("/api/v3/host===put===jwt[role2,role3,role4]");
-        paths.add("/api/v2/detail===put===jwt[role2,role3,role4]");
-        paths.add("/api/v2/mom===put===jwt[role2,role3,role4]");
-        paths.add("/api/*/mom/ha===put===jwt[role2,role3,role4]");
-        paths.add("/api/mi/**===put===jwt[role2,role3,role4]");
-        paths.add("/api/v1/getSource1===get===[role1]");
-        paths.add("/api/v2/getSource2/*/*===get===[role2]");
-        return paths;
+        return new HashSet<>(fileResource.getPathRole());
     }
 }
