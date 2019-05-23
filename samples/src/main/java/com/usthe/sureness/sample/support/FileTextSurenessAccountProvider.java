@@ -26,9 +26,18 @@ public class FileTextSurenessAccountProvider implements SurenessAccountProvider 
 
     @Override
     public SurenessAccount loadAccount(String appId) {
+        if (appId == null) {
+            throw new NullPointerException("appId can not null");
+        }
         Optional<Map<String, String>> mapOptional = fileResource.getUser().stream()
                 .filter(map -> appId.equals(map.get("appId")))
                 .findFirst();
+        DefaultAccount.Builder builder = new DefaultAccount.Builder();
+        mapOptional.ifPresent(accountMap ->
+                builder.setAppId(appId).setPassword(accountMap.get("credential"))
+                        .setSalt(accountMap.get("salt"))
+        );
+
 //        if (mapOptional.isPresent()) {
 //            Map<String, String> accountMap = mapOptional.get();
 //            DefaultAccount.Builder builder = new DefaultAccount.Builder();
