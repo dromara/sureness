@@ -14,6 +14,7 @@
     <properties>
         <slf4j.version>1.7.21</slf4j.version>
         <jjwt.version>0.9.0</jjwt.version>
+        <yaml.version>1.17</yaml.version>
     </properties>
     <dependencies>
         <dependency>
@@ -27,11 +28,19 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        <!-- jwt util -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>${jjwt.version}</version>
         </dependency>
+        <!-- yaml load -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${yaml.version}</version>
+        </dependency>
+
         <!-- java版本升级少包-->
         <dependency>
             <groupId>javax.xml.bind</groupId>

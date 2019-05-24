@@ -67,8 +67,8 @@ public class DefaultAccount implements SurenessAccount {
         return this.excessiveAttempts;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public static Builder builder(String appId) {
+        return new Builder(appId);
     }
 
     public static class Builder {
@@ -79,6 +79,10 @@ public class DefaultAccount implements SurenessAccount {
         private List<String> ownRoles;
         private boolean disabledAccount;
         private boolean excessiveAttempts;
+
+        public Builder(String appId) {
+            this.appId = appId;
+        }
 
         public Builder setAppId(String appId) {
             this.appId = appId;

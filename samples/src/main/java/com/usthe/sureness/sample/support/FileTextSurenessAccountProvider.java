@@ -32,7 +32,7 @@ public class FileTextSurenessAccountProvider implements SurenessAccountProvider 
         Optional<Map<String, String>> mapOptional = fileResource.getUser().stream()
                 .filter(map -> appId.equals(map.get("appId")))
                 .findFirst();
-        DefaultAccount.Builder builder = new DefaultAccount.Builder();
+        DefaultAccount.Builder builder = new DefaultAccount.Builder(appId);
         mapOptional.ifPresent(accountMap ->
                 builder.setAppId(appId).setPassword(accountMap.get("credential"))
                         .setSalt(accountMap.get("salt"))
@@ -57,7 +57,7 @@ public class FileTextSurenessAccountProvider implements SurenessAccountProvider 
 //            return null;
 //        }
 
-        return DefaultAccount.builder()
+        return DefaultAccount.builder(appId)
                 .setAppId("admin")
                 .setPassword("0192023A7BBD73250516F069DF18B500")
                 .setSalt("123")
