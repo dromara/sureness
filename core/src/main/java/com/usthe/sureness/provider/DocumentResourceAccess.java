@@ -16,11 +16,12 @@ import java.io.Writer;
  */
 public class DocumentResourceAccess {
 
+    private static final String DEFAULT_FILE_NAME = "sureness.yml";
     /** 默认的资源文件名称位置 sureness.yml **/
     private static String yamlFilePath;
 
     static {
-        yamlFilePath = "sureness.yml";
+        yamlFilePath = ClassLoader.getSystemResource(DEFAULT_FILE_NAME).getPath();
     }
 
     /**
@@ -32,9 +33,9 @@ public class DocumentResourceAccess {
 
         Yaml yaml = new Yaml();
         File yamlFile = new File(yamlFilePath);
-        if (yamlFile.exists()) {
+        if (!yamlFile.exists()) {
             throw new FileNotFoundException("sureness file: " + yamlFile + "not found, " +
-                    "please create the file if you need config resource in one file");
+                    "please create the file if you need config resource");
         }
         try (FileInputStream inputStream = new FileInputStream(yamlFile)) {
             return yaml.loadAs(inputStream, DocumentResourceEntity.class);

@@ -8,6 +8,7 @@ import com.usthe.sureness.processor.Processor;
 import com.usthe.sureness.processor.ProcessorManager;
 import com.usthe.sureness.processor.support.JwtProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
+import com.usthe.sureness.provider.DocumentResourceDefaultProvider;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.support.WebSubjectFactory;
@@ -51,6 +52,11 @@ public class SurenessConfiguration {
         passwordProcessor.setAccountProvider(accountProvider);
         processorList.add(passwordProcessor);
         return new DefaultProcessorManager(processorList);
+    }
+
+    @Bean
+    public PathTreeProvider pathTreeProvider() {
+        return new DocumentResourceDefaultProvider();
     }
 
 }

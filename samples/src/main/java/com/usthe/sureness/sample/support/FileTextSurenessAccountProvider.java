@@ -14,7 +14,7 @@ import java.util.Optional;
  * @author tomsun28
  * @date 00:08 2019-05-13
  */
-@Component
+
 public class FileTextSurenessAccountProvider implements SurenessAccountProvider {
 
     private YamlFileResource fileResource;

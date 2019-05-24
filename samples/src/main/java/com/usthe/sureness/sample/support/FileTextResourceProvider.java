@@ -11,7 +11,6 @@ import java.util.Set;
  * @author tomsun28
  * @date 23:53 2019-05-12
  */
-@Component
 public class FileTextResourceProvider implements PathTreeProvider {
 
     private YamlFileResource fileResource;
