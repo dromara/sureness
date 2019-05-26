@@ -55,7 +55,7 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                 }
                 String username = auth[0];
                 if (username == null || "".equals(username)) {
-                    throw new UnsupportedTokenException(" the appId can not null");
+                    throw new UnsupportedTokenException("the appId can not null");
                 }
                 String password = auth[1];
                 String remoteHost = ((HttpServletRequest) request).getRemoteHost();
@@ -67,7 +67,14 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                         .setTargetResource(targetUri)
                         .build();
             } else {
-                throw new UnsupportedTokenException("can not create token due the request message");
+                String remoteHost = ((HttpServletRequest) request).getRemoteHost();
+                String requestUri = ((HttpServletRequest) request).getRequestURI();
+                String requestType = ((HttpServletRequest) request).getMethod();
+                String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
+                String userAgent = SurenessCommonUtil.findUserAgent((HttpServletRequest) request);
+                return NoneToken.builder().setRemoteHost(remoteHost)
+                        .setTargetUri(targetUri)
+                        .setUserAgent(userAgent).build();
             }
         } else {
             throw new UnsupportedTokenException("can not create token due the request message");

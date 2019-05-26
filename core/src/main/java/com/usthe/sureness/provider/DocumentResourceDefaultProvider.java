@@ -56,7 +56,7 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
                     builder.setPassword(String.valueOf(accountMap.get(CREDENTIAL)));
                 }
                 if (accountMap.get(SALT) != null) {
-                    builder.setPassword(String.valueOf(accountMap.get(SALT)));
+                    builder.setSalt(String.valueOf(accountMap.get(SALT)));
                 }
                 if (accountMap.get(ROLE) != null) {
                     builder.setOwnRoles((List<String>)accountMap.get(ROLE));

@@ -5,6 +5,7 @@ import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.processor.DefaultProcessorManager;
 import com.usthe.sureness.processor.Processor;
 import com.usthe.sureness.processor.support.JwtProcessor;
+import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
 import com.usthe.sureness.provider.DocumentResourceDefaultProvider;
 import com.usthe.sureness.subject.SubjectFactory;
@@ -36,6 +37,8 @@ public class DefaultSurenessConfig {
 
         // process init
         List<Processor> processorList = new LinkedList<>();
+        NoneProcessor noneProcessor = new NoneProcessor();
+        processorList.add(noneProcessor);
         JwtProcessor jwtProcessor = new JwtProcessor();
         processorList.add(jwtProcessor);
         PasswordProcessor passwordProcessor = new PasswordProcessor();

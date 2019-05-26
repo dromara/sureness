@@ -1,9 +1,20 @@
 package com.usthe.sureness.util;
 
-import io.jsonwebtoken.*;
+
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.CompressionCodecs;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 
 import javax.xml.bind.DatatypeConverter;
 import java.util.Date;
+import java.util.List;
 
 /**
  * json web token相关工具类
@@ -24,9 +35,11 @@ public class JsonWebTokenUtil {
      * @param roles 访问主张-角色
      * @param permissions 访问主张-权限
      * @param algorithm 加密算法
-     * @return java.lang.String
+     * @return java.lang.String jwt
      */
-    public static String issueJWT(String id, String subject, String issuer, Long period, String roles, String permissions, SignatureAlgorithm algorithm) {
+    public static String issueJWT(String id, String subject, String issuer, Long period,
+                                  List<String> roles, List<String> permissions,
+                                  Boolean isRefresh, SignatureAlgorithm algorithm) {
         // 当前时间戳
         long currentTimeMillis = System.currentTimeMillis();
         // 秘钥
@@ -45,13 +58,16 @@ public class JsonWebTokenUtil {
         jwtBuilder.setIssuedAt(new Date(currentTimeMillis));
         // 设置到期时间
         if (null != period) {
-            jwtBuilder.setExpiration(new Date(currentTimeMillis+period*1000));
+            jwtBuilder.setExpiration(new Date(currentTimeMillis + period * 1000));
         }
         if (roles != null) {
             jwtBuilder.claim("roles", roles);
         }
         if (permissions != null) {
             jwtBuilder.claim("perms", permissions);
+        }
+        if (isRefresh != null) {
+            jwtBuilder.claim("isRefresh", isRefresh);
         }
         // 压缩，可选GZIP
         jwtBuilder.compressWith(CompressionCodecs.DEFLATE);
