@@ -8,6 +8,7 @@ import com.usthe.sureness.provider.SurenessAccountProvider;
  * @author tomsun28
  * @date 00:08 2019-05-13
  */
+@Deprecated
 public class DatabaseSurenessAccountProvider implements SurenessAccountProvider {
     @Override
     public SurenessAccount loadAccount(String appId) {

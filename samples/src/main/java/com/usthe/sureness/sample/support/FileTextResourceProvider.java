@@ -2,7 +2,6 @@ package com.usthe.sureness.sample.support;
 
 import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.matcher.SurenessLoadDataException;
-import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +10,7 @@ import java.util.Set;
  * @author tomsun28
  * @date 23:53 2019-05-12
  */
+@Deprecated
 public class FileTextResourceProvider implements PathTreeProvider {
 
     private YamlFileResource fileResource;

@@ -3,7 +3,6 @@ package com.usthe.sureness.sample.support;
 import com.usthe.sureness.provider.DefaultAccount;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
-import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.Map;
@@ -14,7 +13,7 @@ import java.util.Optional;
  * @author tomsun28
  * @date 00:08 2019-05-13
  */
-
+@Deprecated
 public class FileTextSurenessAccountProvider implements SurenessAccountProvider {
 
     private YamlFileResource fileResource;

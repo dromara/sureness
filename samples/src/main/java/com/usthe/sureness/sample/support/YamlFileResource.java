@@ -1,8 +1,5 @@
 package com.usthe.sureness.sample.support;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +8,9 @@ import java.util.Map;
  * @author tomsun28
  * @date 23:00 2019-05-20
  */
-@Component
-@ConfigurationProperties(prefix = "sureness")
+//@Component
+//@ConfigurationProperties(prefix = "sureness")
+@Deprecated
 public class YamlFileResource {
 
     private List<String> pathRole;

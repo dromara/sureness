@@ -12,9 +12,7 @@ public class DocumentResourceEntity {
 
     private List<String> resourceRole;
 
-    private List<Map<String, String>> account;
-
-    private List<Map<String, List<String>>> accountRole;
+    private List<Map<String, Object>> account;
 
     public List<String> getResourceRole() {
         return resourceRole;
@@ -24,19 +22,11 @@ public class DocumentResourceEntity {
         this.resourceRole = resourceRole;
     }
 
-    public List<Map<String, String>> getAccount() {
+    public List<Map<String, Object>> getAccount() {
         return account;
     }
 
-    public void setAccount(List<Map<String, String>> account) {
+    public void setAccount(List<Map<String, Object>> account) {
         this.account = account;
-    }
-
-    public List<Map<String, List<String>>> getAccountRole() {
-        return accountRole;
-    }
-
-    public void setAccountRole(List<Map<String, List<String>>> accountRole) {
-        this.accountRole = accountRole;
     }
 }

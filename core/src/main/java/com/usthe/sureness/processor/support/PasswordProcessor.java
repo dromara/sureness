@@ -36,8 +36,7 @@ public class PasswordProcessor extends BaseProcessor {
 
     @Override
     public Class<?> getSupportAuTokenClass() {
-        // 这里只支持passwordToken
-        // username/appId/email/phoneNum + password
+        // 这里只支持passwordToken  -- username/appId/email/phoneNum + password
         return PasswordSubjectToken.class;
     }
 
@@ -52,13 +51,18 @@ public class PasswordProcessor extends BaseProcessor {
             }
             throw new  UnknownAccountException("do not exist the account: " + appId);
         }
-        String password = Md5Util.md5( var.getCredentials() + account.getSalt());
-        if (password == null || !password.equals(account.getPassword())) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("PasswordProcessor authenticated fail, user: {}",
-                        var.getPrincipal());
+        if (var.getCredentials() != null && account.getPassword() != null) {
+            String password = String.valueOf(var.getCredentials());
+            if (account.getSalt() != null && !"".equals(account.getSalt())) {
+                password = Md5Util.md5( password + account.getSalt());
             }
-            throw new IncorrectCredentialsException("incorrect password");
+            if (password == null || !password.equals(account.getPassword())) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("PasswordProcessor authenticated fail, user: {}",
+                            var.getPrincipal());
+                }
+                throw new IncorrectCredentialsException("incorrect password");
+            }
         }
         if (account.isDisabledAccount()) {
             throw new DisabledAccountException("account is disabled");

@@ -54,6 +54,9 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                     throw new UnsupportedTokenException("can not create token due the request message");
                 }
                 String username = auth[0];
+                if (username == null || "".equals(username)) {
+                    throw new UnsupportedTokenException(" the appId can not null");
+                }
                 String password = auth[1];
                 String remoteHost = ((HttpServletRequest) request).getRemoteHost();
                 String requestUri = ((HttpServletRequest) request).getRequestURI();

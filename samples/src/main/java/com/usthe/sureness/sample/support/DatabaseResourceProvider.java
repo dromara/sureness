@@ -10,6 +10,7 @@ import java.util.Set;
  * @author tomsun28
  * @date 23:52 2019-05-12
  */
+@Deprecated
 public class DatabaseResourceProvider implements PathTreeProvider {
 
     @Override
