@@ -13,17 +13,18 @@ import javax.websocket.server.ServerEndpoint;
  * @author tomsun28
  * @date 22:21 2019-05-26
  */
-@ServerEndpoint(value = "/webSocket/demo")
 @Component
+@ServerEndpoint(value = "/webSocket/demo")
 public class WebSocketEndpoint {
 
     @OnOpen
     public void onOpen(Session session) {
+        System.out.println(session);
     }
 
     @OnMessage
     public void onMessage(String message, Session session) {
-
+        System.out.println(message);
     }
 
     @OnClose
@@ -32,8 +33,8 @@ public class WebSocketEndpoint {
     }
 
     @OnError
-    public void onError() {
-
+    public void onError(Session session, Throwable error) {
+        System.out.println(session);
     }
 
 }
