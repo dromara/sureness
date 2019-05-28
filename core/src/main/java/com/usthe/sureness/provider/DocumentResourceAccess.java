@@ -5,9 +5,11 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 资源文件里内容的操作类
@@ -56,7 +58,7 @@ public class DocumentResourceAccess {
             throw new FileNotFoundException("sureness file: " + yamlFilePath + "not found, " +
                     "please create the file if you need config resource in one file");
         }
-        try (Writer writer = new FileWriter(yamlFile)) {
+        try (Writer writer = new OutputStreamWriter(new FileOutputStream(yamlFile), StandardCharsets.UTF_8)) {
             yaml.dump(entity, writer);
         } catch (IOException e) {
             throw new IOException(e);

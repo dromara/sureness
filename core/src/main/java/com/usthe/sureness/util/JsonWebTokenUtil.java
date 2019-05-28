@@ -27,6 +27,7 @@ public class JsonWebTokenUtil {
     /** JWT格式3个点 **/
     private static final int COUNT_3 = 3;
 
+    /** 加密解密签名 **/
     private static String secretKey;
 
     static {

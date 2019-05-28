@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
+/** 对用文件做持久层权限资源方式的默认配置
  * @author tomsun28
  * @date 11:26 2019-05-26
  */
