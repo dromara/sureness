@@ -1,7 +1,7 @@
 package com.usthe.sureness.subject;
 
 /**
- *  *   包含subject的基础信息  可以通过subjectContext创建subject
+ * 包含subject的基础信息  可以通过subjectContext创建subject
  * @author tomsun28
  * @date 22:57 2019-01-23
  */

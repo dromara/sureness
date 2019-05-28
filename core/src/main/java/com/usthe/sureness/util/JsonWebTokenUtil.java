@@ -1,7 +1,5 @@
 package com.usthe.sureness.util;
 
-
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.CompressionCodecs;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -23,8 +21,18 @@ import java.util.List;
  */
 public class JsonWebTokenUtil {
 
-    private static final String SECRET_KEY = "?::4390fsf4sdl6opf):";
+    /** 默认SUBJECT加密解密签名KEY **/
+    private static final String DEFAULT_SECRET_KEY = "?::4390fsf4sdl6opf):";
+
+    /** JWT格式3个点 **/
     private static final int COUNT_3 = 3;
+
+    private static String secretKey;
+
+    static {
+        secretKey = DEFAULT_SECRET_KEY;
+    }
+
 
     /**
      *   json web token 签发
@@ -43,7 +51,7 @@ public class JsonWebTokenUtil {
         // 当前时间戳
         long currentTimeMillis = System.currentTimeMillis();
         // 秘钥
-        byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
+        byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(secretKey);
         JwtBuilder jwtBuilder = Jwts.builder();
         if (id != null) {
             jwtBuilder.setId(id);
@@ -86,15 +94,19 @@ public class JsonWebTokenUtil {
         return jwt.split("\\.").length != COUNT_3;
     }
 
-
     /**
-     * 验签JWT
      *
      * @param jwt json web token
+     * @return 解签实体
+     * @throws ExpiredJwtException token过期
+     * @throws UnsupportedJwtException 不支持的TOKEN
+     * @throws MalformedJwtException 参数格式形变等异常
+     * @throws SignatureException 签名异常
+     * @throws IllegalArgumentException 非法参数
      */
     public static Claims parseJwt(String jwt) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException {
         return  Jwts.parser()
-                .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
+                .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
                 .parseClaimsJws(jwt)
                 .getBody();
 
@@ -106,5 +118,13 @@ public class JsonWebTokenUtil {
         // 接收方 -- claims.getAudience()
         // 访问主张-角色 -- claims.get("roles", String.class)
         // 访问主张-权限 -- claims.get("perms", String.class)
+    }
+
+    /**
+     * 设置新的JWT加密解密签名
+     * @param secretNowKey 签名KEY
+     */
+    public static void setSecretKey(String secretNowKey) {
+        secretKey = secretNowKey;
     }
 }
