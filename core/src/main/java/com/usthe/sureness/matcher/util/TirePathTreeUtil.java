@@ -71,14 +71,14 @@ public class TirePathTreeUtil {
             } else if (current.getChildren().containsKey("**")) {
                 // ** 代表匹配后面全部节点
                 current = current.getChildren().get("**");
-                if (current.getNodeType().equals(NODE_TYPE_PATH_END)) {
+                if (NODE_TYPE_PATH_END.equals(current.getNodeType())) {
                     if (current.getChildren().containsKey(method.toLowerCase())) {
                         current = current.getChildren().get(method.toLowerCase());
-                        if (current.getNodeType().equals(NODE_TYPE_METHOD)) {
+                        if (NODE_TYPE_METHOD.equals(current.getNodeType())) {
                             if (!current.getChildren().isEmpty()) {
                                 Iterator<Map.Entry<String,Node>> iterator = current.getChildren().entrySet().iterator();
                                 Map.Entry<String,Node> filterRole = iterator.next();
-                                if (filterRole.getValue().getNodeType().equals(NODE_TYPE_FILTER_ROLES)) {
+                                if (NODE_TYPE_FILTER_ROLES.equals(filterRole.getValue().getNodeType())) {
                                     return filterRole.getKey();
                                 } else {
                                     return null;
@@ -100,7 +100,7 @@ public class TirePathTreeUtil {
             }
         }
         //此时node应为pathEnd节点
-        if (!current.getNodeType().equals(NODE_TYPE_PATH_END)) {
+        if (!NODE_TYPE_PATH_END.equals(current.getNodeType())) {
             return null;
         }
         // 匹配httpMethod
@@ -108,14 +108,14 @@ public class TirePathTreeUtil {
             return null;
         }
         current = current.getChildren().get(method.toLowerCase());
-        if (!current.getNodeType().equals(NODE_TYPE_METHOD)) {
+        if (!NODE_TYPE_METHOD.equals(current.getNodeType())) {
             return null;
         }
         // 取filterRoles
         if (!current.getChildren().isEmpty()) {
             Iterator<Map.Entry<String,Node>> iterator = current.getChildren().entrySet().iterator();
             Map.Entry<String,Node> filterRole = iterator.next();
-            if (filterRole.getValue().getNodeType().equals(NODE_TYPE_FILTER_ROLES)) {
+            if (NODE_TYPE_FILTER_ROLES.equals(filterRole.getValue().getNodeType())) {
                 return filterRole.getKey();
             } else {
                 return null;

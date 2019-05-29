@@ -10,8 +10,8 @@
     <version>0.0.1</version>
     <modules>
         <module>core</module>
-        <module>samples</module>
-        <module>web</module>
+        <module>sample-bootstrap</module>
+        <module>sample-tom</module>
     </modules>
 
     <properties>
