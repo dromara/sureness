@@ -33,11 +33,11 @@ import java.io.IOException;
  * @date 17:22 2019-05-12
  */
 @Order(1)
-@WebFilter(filterName = "ExampleSurenessFilter", urlPatterns = "/*", asyncSupported = true)
-public class ExampleSurenessFilter implements Filter {
+@WebFilter(filterName = "SurenessFilterExample", urlPatterns = "/*", asyncSupported = true)
+public class SurenessFilterExample implements Filter {
 
     /** 日志操作 **/
-    private static final Logger logger = LoggerFactory.getLogger(ExampleSurenessFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(SurenessFilterExample.class);
 
     @Override
     public void init(FilterConfig filterConfig) {
