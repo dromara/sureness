@@ -6,6 +6,10 @@ resourceRole:
 - /api/mi/**===put===[role2,role3,role4]
 - /api/v1/getSource1===get===[role1,role2]
 - /api/v2/getSource2/*/*===get===[role2]
+- /api/v1/source1===get===[role2]
+- /api/v1/source1===post===[role1]
+- /api/v1/source1===delete===[role3]
+- /api/v1/source1===put===[role1,role2]
 account:
 - appId: admin
   # 如果填写了加密盐--salt,则credential为MD5(password+salt)的32位结果
