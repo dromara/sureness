@@ -28,7 +28,7 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
- * 过滤类   程序的入口过滤类  所有request请求都需经过此类
+ * 程序的http request请求入口过滤类示例  所有request请求都需经过此类
  * @author tomsun28
  * @date 17:22 2019-05-12
  */

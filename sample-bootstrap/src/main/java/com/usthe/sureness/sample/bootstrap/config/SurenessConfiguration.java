@@ -12,6 +12,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SurenessConfiguration {
 
+    /**
+     * 获取sureness默认配置加入bean池
+     * @return default config bean
+     */
     @Bean
     public DefaultSurenessConfig surenessConfig() {
         return DefaultSurenessConfig.getInstance();

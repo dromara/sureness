@@ -53,11 +53,4 @@ public class CommonUtil {
             logger.error("responseWrite response error: ", e);
         }
     }
-
-    public static void main(String[] args) {
-        String matchRoleString = "[role2]";
-        String tmp = matchRoleString.substring(1, matchRoleString.length()-1);
-        String[] roless = tmp.split(",");
-        String[] roles = matchRoleString.substring(1, matchRoleString.length()-1).split(",");
-    }
 }

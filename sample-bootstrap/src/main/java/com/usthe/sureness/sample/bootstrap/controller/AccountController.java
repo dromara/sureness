@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,9 @@ import java.util.UUID;
 @RestController()
 public class AccountController {
 
+    /**
+     * 账户数据提供
+     */
     private SurenessAccountProvider accountProvider = new DocumentResourceDefaultProvider();
 
     @PostMapping("/api/v1/account/login")
@@ -51,8 +55,7 @@ public class AccountController {
         String jwt = JsonWebTokenUtil.issueJWT(UUID.randomUUID().toString(), appId,
                 "token-server", refreshPeriodTime >> 1, roles,
                 null, Boolean.FALSE, SignatureAlgorithm.HS512);
-        Map<String, String> body = new HashMap<>(1);
-        body.put("token", jwt);
+        Map<String, String> body = Collections.singletonMap("token", jwt);
         return ResponseEntity.ok().body(body);
     }
 
