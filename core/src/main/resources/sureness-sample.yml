@@ -1,3 +1,4 @@
+## -- example for sureness load data from file -- ##
 resourceRole:
 - /api/v2/host===post===[role2,role3,role4]
 - /api/v2/host===get===[role2,role3,role4]
