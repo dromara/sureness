@@ -1,2 +1,8 @@
 server:
   port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: admintomsun
+    url: jdbc:mysql://47.110.55.246:3306/sureness?useUnicode=true&characterEncoding=utf-8&useSSL=false
