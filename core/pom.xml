@@ -10,6 +10,36 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sureness-core</artifactId>
+    <name>sureness</name>
+    <url>https://github.com/tomsun28/sureness</url>
+    <description>The Protection For Restful Api</description>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>tomsun28</name>
+            <email>tomsun28@outlook.com</email>
+            <organization>usthe</organization>
+            <organizationUrl>usthe.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>
+            scm:git:https://github.com/tomsun28/sureness.git
+        </connection>
+        <developerConnection>
+            scm:git:https://github.com/tomsun28/sureness.git
+        </developerConnection>
+        <url>https://github.com/tomsun28/sureness</url>
+        <tag>0.0.1</tag>
+    </scm>
 
     <properties>
         <slf4j.version>1.7.21</slf4j.version>
@@ -62,7 +92,45 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- Javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- GPG -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>tom</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>tom</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
 </project>

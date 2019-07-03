@@ -4,8 +4,8 @@
 
 ## <font color="green">Introduction</font>
 
-> `sureness` 是面对`restful api`的鉴权`java`实现,在使用`shiro`过程中吸取其良好的设计加上一些自己想法实现的.  
-其功能比较单一,基于`RABC`主要关注于对`restful api`的保护
+> `sureness` 是在使用`java`权限框架`shiro`过程中吸取其良好的设计加上一些自己想法实现的,面对`restful api`的认证鉴权,基于`RABC`主要关注于对`restful api`的保护  
+`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护
 
 仓库的组成部分:  
 - [sureness的核心代码--sureness-core](core)
