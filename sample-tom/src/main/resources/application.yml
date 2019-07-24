@@ -1,8 +1,22 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: admintomsun
-    url: jdbc:mysql://47.110.55.246:3306/sureness?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    url: jdbc:h2:mem:testdb
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  jpa:
+    database: h2
+    show-sql: true
+
+  profiles:
+    active: dev

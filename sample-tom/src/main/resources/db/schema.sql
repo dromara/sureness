@@ -1,0 +1,96 @@
+CREATE TABLE staff
+(
+    id   char(20) not null primary key,
+    name char(20),
+    age  INTEGER
+);
+
+-- ----------------------------
+-- Table structure for auth_resource
+-- ----------------------------
+DROP TABLE IF EXISTS  auth_resource ;
+CREATE TABLE  auth_resource
+(
+     id           bigint       not null auto_increment comment '资源ID',
+     name         varchar(20)  not null comment '资源名称',
+     code         varchar(20)  not null comment '资源编码',
+     uri          varchar(255) not null comment '访问地址URL',
+     type         varchar(20)  comment '类型 资源的类别',
+     method       varchar(10)  not null comment '访问方式 GET POST PUT DELETE PATCH',
+     status       smallint(4)  not null default 1 comment '状态   1:正常、9：禁用',
+     description  varchar(255) comment '资源描述',
+     gmt_create   datetime     default current_time comment '创建时间',
+--      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
+     gmt_update   datetime     null_to_default comment '更新时间',
+     primary key (id)
+);
+
+-- ----------------------------
+-- Table structure for auth_role
+-- ----------------------------
+DROP TABLE IF EXISTS  auth_role ;
+CREATE TABLE  auth_role
+(
+     id           bigint       not null auto_increment comment '角色ID',
+     name         varchar(20)  not null comment '角色名称',
+     code         varchar(20)  not null comment '角色编码',
+     status       smallint(4)  not null default 1 comment '状态   1:正常、9：禁用',
+     description  varchar(255) comment '角色描述',
+     gmt_create   datetime     default current_timestamp() comment '创建时间',
+--      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
+     gmt_update   datetime     null_to_default comment '更新时间',
+    primary key ( id )
+);
+
+-- ----------------------------
+-- Table structure for auth_role_resource_bind
+-- ----------------------------
+DROP TABLE IF EXISTS auth_role_resource_bind;
+CREATE TABLE auth_role_resource_bind
+(
+    id          bigint not null auto_increment comment '主键ID',
+    role_id     bigint not null comment '角色ID',
+    resource_id bigint not null comment '资源ID',
+    gmt_create  datetime default current_timestamp() comment '创建时间',
+--      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
+    gmt_update  datetime null_to_default comment '更新时间',
+    primary key (id)
+);
+
+-- ----------------------------
+-- Table structure for auth_user
+-- ----------------------------
+DROP TABLE IF EXISTS  auth_user ;
+CREATE TABLE auth_user
+(
+    id           bigint      not null auto_increment comment '主键ID',
+    username     varchar(30) not null comment '用户名(nick_name)',
+    password     varchar(50) not null comment '密码(MD5(密码+盐))',
+    salt         varchar(20) null_to_default comment '盐',
+    avatar       varchar(100) null_to_default comment '头像',
+    phone        varchar(20) null_to_default comment '电话号码(唯一)',
+    email        varchar(50) null_to_default comment '邮件地址(唯一)',
+    sex          tinyint(4) null_to_default comment '性别(1.男 2.女)',
+    status       tinyint(4)  not null default 1 comment '账户状态(1.正常 2.锁定 3.删除 4.非法)',
+    create_where tinyint(4) null_to_default comment '创建来源(1.web 2.android 3.ios 4.win 5.macos 6.ubuntu)',
+    gmt_create   datetime             default current_timestamp() comment '创建时间',
+--      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
+    gmt_update   datetime null_to_default comment '更新时间',
+    primary key (id),
+    unique (username, phone, email)
+);
+
+-- ----------------------------
+-- Table structure for auth_user_role_bind
+-- ----------------------------
+DROP TABLE IF EXISTS  auth_user_role_bind ;
+CREATE TABLE auth_user_role_bind
+(
+    id         bigint not null auto_increment comment '主键ID',
+    user_id    bigint not null comment '用户ID',
+    role_id    bigint not null comment '角色ID',
+    gmt_create datetime default current_timestamp() comment '创建时间',
+--      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
+    gmt_update datetime null_to_default comment '更新时间',
+    primary key (id)
+);
