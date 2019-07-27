@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 /**
  * @author tomsun28
@@ -14,4 +15,13 @@ import javax.persistence.Table;
 @Data
 public class AuthUserRoleBindDO {
 
+    private Long id;
+
+    private Long userId;
+
+    private Long roleId;
+
+    private LocalDateTime gmtCreate;
+
+    private LocalDateTime gmtUpdate;
 }

@@ -3,7 +3,11 @@ package com.usthe.sureness.sample.tom.pojo.entity;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 /**
  * @author tomsun28
@@ -13,4 +17,20 @@ import javax.persistence.Table;
 @Table(name = "auth_role")
 @Data
 public class AuthRoleDO {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    private String code;
+
+    private Integer status;
+
+    private String description;
+
+    private LocalDateTime gmtCreate;
+
+    private LocalDateTime gmtUpdate;
 }
