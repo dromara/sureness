@@ -1,6 +1,9 @@
 package com.usthe.sureness.sample.tom.pojo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +19,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "auth_user")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuthUserDO {
 
     @Id
