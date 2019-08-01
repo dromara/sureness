@@ -19,7 +19,7 @@ insert into auth_role values (103, '访客角色', 'role_guest', 1, null, null, 
 insert into auth_role values (104, '非角色', 'role_anon', 1, null, null, null);
 
 -- ----------------------------
--- Records of auth_role_resource
+-- Records of auth_role_resource_bind
 -- ----------------------------
 insert into auth_role_resource_bind values (1, 100, 101, null, null);
 insert into auth_role_resource_bind values (3, 102, 112, null, null);
@@ -34,6 +34,6 @@ insert into  auth_user  values (111, 'admin', 'admin', '7777', null, null, null,
 
 
 -- ----------------------------
--- Records of auth_user_role
+-- Records of auth_user_role_bind
 -- ----------------------------
 insert into  auth_user_role_bind  values (12, 111, 103, null, null);

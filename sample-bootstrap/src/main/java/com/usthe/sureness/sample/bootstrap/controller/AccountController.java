@@ -31,7 +31,7 @@ public class AccountController {
      */
     private SurenessAccountProvider accountProvider = new DocumentResourceDefaultProvider();
 
-    @PostMapping("/api/v1/account/login")
+    @PostMapping("/api/v1/account/auth")
     public ResponseEntity<Object> login(@RequestParam String appId, @RequestParam String password) {
         if (appId == null || "".equals(appId)) {
             return ResponseEntity.badRequest().build();
@@ -52,7 +52,7 @@ public class AccountController {
         // 获取其对应所拥有的角色(这里设计为角色对应资源，没有权限对应资源)
         List<String> roles = account.getOwnRoles();
         long refreshPeriodTime = 36000L;
-        String jwt = JsonWebTokenUtil.issueJWT(UUID.randomUUID().toString(), appId,
+        String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), appId,
                 "token-server", refreshPeriodTime >> 1, roles,
                 null, Boolean.FALSE, SignatureAlgorithm.HS512);
         Map<String, String> body = Collections.singletonMap("token", jwt);

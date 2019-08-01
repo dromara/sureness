@@ -46,7 +46,7 @@ public class JsonWebTokenUtil {
      * @param algorithm 加密算法
      * @return java.lang.String jwt
      */
-    public static String issueJWT(String id, String subject, String issuer, Long period,
+    public static String issueJwt(String id, String subject, String issuer, Long period,
                                   List<String> roles, List<String> permissions,
                                   Boolean isRefresh, SignatureAlgorithm algorithm) {
         // 当前时间戳
