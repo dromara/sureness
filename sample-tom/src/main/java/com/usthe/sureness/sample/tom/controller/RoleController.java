@@ -1,9 +1,7 @@
 package com.usthe.sureness.sample.tom.controller;
 
 import com.usthe.sureness.sample.tom.pojo.dto.Message;
-import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthRoleDO;
-import com.usthe.sureness.sample.tom.service.ResourceService;
 import com.usthe.sureness.sample.tom.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +31,6 @@ import java.util.Optional;
 @RequestMapping("/api/v1/role")
 @Slf4j
 public class RoleController {
-
-    @Autowired
-    private ResourceService resourceService;
 
     @Autowired
     private RoleService roleService;
