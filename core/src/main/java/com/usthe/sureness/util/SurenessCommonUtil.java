@@ -3,6 +3,7 @@ package com.usthe.sureness.util;
 import com.usthe.sureness.subject.SubjectAuToken;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
 
 /**
  * 一些公共处理工具类
@@ -19,6 +20,7 @@ public class SurenessCommonUtil {
     private static final String WINDOWS = "Windows";
     private static final String CHROME = "Chrome";
 
+    private static final String RANDOM_CHAR = "abcdefghijklmnopqrstuvwxyz0123456789";
 
     /**
      * description 通过传入的Object来创建具有基本信息的token
@@ -53,4 +55,23 @@ public class SurenessCommonUtil {
     }
 
 
+    /**
+     *  获取指定位数的随机字符串
+     *
+     * @param length 长度
+     * @return 随机字符串
+     */
+    public static String getRandomString(int length) {
+        // 默认6位
+        if (length < 1) {
+            length = 6;
+        }
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(RANDOM_CHAR.length());
+            sb.append(RANDOM_CHAR.charAt(number));
+        }
+        return sb.toString();
+    }
 }

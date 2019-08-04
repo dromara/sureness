@@ -45,7 +45,7 @@ public class AccountController {
         }
         List<String> ownRole = accountService.loadAccountRoles(account.getUsername());
         long refreshPeriodTime = 36000L;
-        String jwt = JsonWebTokenUtil.issueJWT(UUID.randomUUID().toString(), account.getUsername(),
+        String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), account.getUsername(),
                 "tom-auth-server", refreshPeriodTime >> 1, ownRole,
                 null, false, SignatureAlgorithm.HS512);
         Map<String, String> responseData = Collections.singletonMap("token", jwt);
