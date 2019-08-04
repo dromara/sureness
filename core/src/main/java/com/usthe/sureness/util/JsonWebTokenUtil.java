@@ -43,6 +43,7 @@ public class JsonWebTokenUtil {
      * @param period 有效时间(毫秒)
      * @param roles 访问主张-角色
      * @param permissions 访问主张-权限
+     * @param isRefresh 是否是刷新token
      * @param algorithm 加密算法
      * @return java.lang.String jwt
      */

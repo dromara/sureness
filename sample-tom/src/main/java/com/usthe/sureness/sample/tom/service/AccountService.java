@@ -2,6 +2,8 @@ package com.usthe.sureness.sample.tom.service;
 
 import com.usthe.sureness.sample.tom.pojo.dto.Account;
 
+import java.util.List;
+
 /**
  * @author tomsun28
  * @date 00:12 2019-08-01
@@ -19,5 +21,19 @@ public interface AccountService {
      * @param username 账户名称
      * @return 角色拼接字符串 eg role1,role3,role2
      */
-    String loadAccountRoles(String username);
+    List<String> loadAccountRoles(String username);
+
+    /**
+     * 注册账户
+     * @param account 简单的账户密码注册
+     * @return 注册成功返回true 失败false
+     */
+    boolean registerAccount(Account account);
+
+    /**
+     * 判断账户是否已经存在
+     * @param account 账户信息
+     * @return 存在true 不存在false
+     */
+    boolean isAccountExist(Account account);
 }

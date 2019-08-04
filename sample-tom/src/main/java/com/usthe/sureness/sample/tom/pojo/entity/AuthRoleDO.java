@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 /**
@@ -28,8 +30,12 @@ public class AuthRoleDO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "name can not null")
+    @Length(min = 3, max = 100, message = "name length in 3-100")
     private String name;
 
+    @NotBlank(message = "code can not null")
+    @Length(min = 3, max = 100, message = "code length in 3-100")
     private String code;
 
     private Integer status;
