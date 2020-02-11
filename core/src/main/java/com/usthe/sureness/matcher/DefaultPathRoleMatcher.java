@@ -1,6 +1,6 @@
 package com.usthe.sureness.matcher;
 
-import com.usthe.sureness.matcher.util.TirePathTreeUtil;
+import com.usthe.sureness.matcher.util.TirePathTree;
 import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.subject.SubjectAuToken;
 import org.slf4j.Logger;
@@ -22,7 +22,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     private static final String RIGHT_CON = "]";
 
     /** path-role 匹配树存储点 **/
-    private final TirePathTreeUtil.Node root = new TirePathTreeUtil.Node("root");
+    private final TirePathTree root = new TirePathTree();
 
     /** 匹配树数据内容提供者 **/
     private PathTreeProvider pathTreeProvider;
@@ -44,7 +44,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         }
         String targetResource = (String) auToken.getTargetResource();
         //[role1,role2,role3], [role1], null
-        String matchRoleString = TirePathTreeUtil.searchPathFilterRoles(targetResource, root);
+        String matchRoleString = root.searchPathFilterRoles(targetResource);
         if (matchRoleString != null && matchRoleString.startsWith(LEFT_CON)
                 && matchRoleString.endsWith(RIGHT_CON)
                 && matchRoleString.length() != 2) {
@@ -59,7 +59,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         checkComponentInit();
         clearTree();
         Set<String> resources = pathTreeProvider.providePathData();
-        TirePathTreeUtil.buildTree(resources, root);
+        root.buildTree(resources);
         isTreeInit = true;
     }
 
@@ -70,7 +70,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     }
 
     private void clearTree() {
-        TirePathTreeUtil.clearTree(root);
+        root.clearTree();
     }
 
     public void setPathTreeProvider(PathTreeProvider pathTreeProvider) {

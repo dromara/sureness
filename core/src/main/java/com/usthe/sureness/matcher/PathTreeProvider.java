@@ -10,8 +10,8 @@ import java.util.Set;
 public interface PathTreeProvider {
 
     /**
-     *  加载URL资源的接口，可从数据库加载数据，文本加载数据等
-     * @return java.util.Set<java.lang.String>
+     *  加载URL资源的接口，可从数据库加载数据，文本加载数据等 eg: /api/v2/host===post===[role2,role3,role4]
+     * @return uri资源set
      * @throws SurenessLoadDataException when加载数据异常
      */
     Set<String> providePathData() throws SurenessLoadDataException;

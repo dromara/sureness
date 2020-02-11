@@ -8,10 +8,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 字典匹配树
  * @author tomsun28
  * @date 19:25 2019-01-18
  */
-public class TirePathTreeUtil {
+public class TirePathTree {
 
     private static final String NODE_TYPE_PATH_NODE = "pathNode";
     private static final String NODE_TYPE_PATH_END = "isPathEnd";
@@ -22,32 +23,46 @@ public class TirePathTreeUtil {
     private static final int PATH_NODE_NUM_2 = 2;
 
     /**
+     * 根节点
+     */
+    private Node root;
+
+    public TirePathTree() {
+        this.root = new Node("root");
+    }
+
+    /**
      * 新建字典匹配树
      * @param paths 资路径
-     * @param root 根节点
      */
-    public static void buildTree(Set<String> paths, Node root) {
-        clearTree(root);
+    public void buildTree(Set<String> paths) {
+        clearTree();
         for (String path : paths) {
-            insertNode(path, root);
+            insertNode(path);
         }
     }
 
     /**
      * 清空字典树
-     * @param root 根节点
      */
-    public static void clearTree(Node root) {
+    public void clearTree() {
         root.getChildren().clear();
+    }
+
+    /**
+     * 获取当前匹配树存在的匹配资源(URL+METHOD)数量
+     * @return int 资源数量
+     */
+    public int getResourceNum() {
+        return 0;
     }
 
     /**
      * 根据path从树里匹配该路径需要的 [role2,role3,role4]
      * @param path   /api/v2/host/detail===get
-     * @param root 根节点
      * @return java.lang.String [role1,role2]
      */
-    public static String searchPathFilterRoles(String path, Node root) {
+    public String searchPathFilterRoles(String path) {
         if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
             return null;
         }
@@ -127,9 +142,8 @@ public class TirePathTreeUtil {
     /**
      * description 插入节点
      * @param path path = /api/v1/host/detail===GET===jwt[role2,role3,role4]
-     * @param root 根节点
      */
-    private static void insertNode(String path, Node root) {
+    private void insertNode(String path) {
         if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
             return;
         }
@@ -169,7 +183,7 @@ public class TirePathTreeUtil {
     /**
      * 树节点类
      */
-    public static class Node {
+    private class Node {
 
         /** 当前节点的类型 **/
         private String nodeType;
@@ -185,7 +199,7 @@ public class TirePathTreeUtil {
             this.nodeType = nodeType;
             this.children = new HashMap<>();
         }
-        public Node(String data) {
+        private Node(String data) {
             this.data = data;
             this.nodeType = NODE_TYPE_PATH_NODE;
             this.children = new HashMap<>();
@@ -194,6 +208,7 @@ public class TirePathTreeUtil {
         private void insertChild(String data) {
             this.children.put(data,new Node(data));
         }
+
         private void insertChild(String data,String nodeType) {
             this.children.put(data,new Node(data,nodeType));
         }
@@ -214,7 +229,7 @@ public class TirePathTreeUtil {
             this.data = data;
         }
 
-        public Map<String, Node> getChildren() {
+        private Map<String, Node> getChildren() {
             return children;
         }
 
