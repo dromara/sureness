@@ -33,6 +33,7 @@ public class TirePathTreeTest {
         Set<String> paths = new HashSet<>();
         paths.add("/api/v2/host===post===[role2,role3,role4]");
         paths.add("/api/v2/host===get===[role2,role3,role4]");
+        paths.add("/api/v2/host===get===[role2,role3]");
         paths.add("/api/v2/host===delete===[role2,role3,role4]");
         paths.add("/api/v2/host===put===[role2,role3,role4]");
         paths.add("/api/v1/host===put===[role2,role3,role4]");
@@ -41,8 +42,9 @@ public class TirePathTreeTest {
         paths.add("/api/v2/mom===put===[role2,role3,role4]");
         paths.add("/api/*/mom/ha===put===[role2,role3,role4]");
         paths.add("/api/mi/**===put===[role2,role3,role4]");
+        paths.add("/api/mi/**===put===[role2,role4]");
         root.buildTree(paths);
-        Assert.assertEquals(root.getResourceNum(), 1);
+        Assert.assertEquals(10, root.getResourceNum());
     }
 
     @Test
