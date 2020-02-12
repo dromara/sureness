@@ -4,7 +4,9 @@ package com.usthe.sureness.matcher.util;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -54,7 +56,20 @@ public class TirePathTree {
      * @return int 资源数量
      */
     public int getResourceNum() {
-        return 0;
+        int resourceNum = 0;
+        // 广度层级遍历
+        Queue<Node> resourceList = new LinkedList<>();
+        resourceList.add(root);
+        while (!resourceList.isEmpty()) {
+            Node currentNode = resourceList.poll();
+            if (NODE_TYPE_METHOD.equals(currentNode.nodeType)) {
+                resourceNum ++;
+            }
+            if (currentNode.getChildren() != null && !currentNode.getChildren().isEmpty()) {
+                resourceList.addAll(currentNode.getChildren().values());
+            }
+        }
+        return resourceNum;
     }
 
     /**
