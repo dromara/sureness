@@ -31,7 +31,7 @@ public class PasswordProcessor extends BaseProcessor {
 
     @Override
     public boolean canSupportAuTokenClass(Class<?> var) {
-        return var != null && var == PasswordSubjectToken.class;
+        return var == PasswordSubjectToken.class;
     }
 
     @Override

@@ -22,7 +22,7 @@ public class NoneProcessor extends BaseProcessor {
 
     @Override
     public boolean canSupportAuTokenClass(Class<?> var) {
-        return var != null && var == NoneToken.class;
+        return var == NoneToken.class;
     }
 
     @Override

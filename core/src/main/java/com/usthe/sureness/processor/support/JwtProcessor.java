@@ -6,7 +6,6 @@ import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
-import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectAuToken;
 import com.usthe.sureness.subject.support.JwtSubjectToken;
 import com.usthe.sureness.util.JsonWebTokenUtil;
@@ -32,7 +31,7 @@ public class JwtProcessor extends BaseProcessor {
 
     @Override
     public boolean canSupportAuTokenClass(Class<?> var) {
-        return var != null && var == JwtSubjectToken.class;
+        return var == JwtSubjectToken.class;
     }
 
     @Override
