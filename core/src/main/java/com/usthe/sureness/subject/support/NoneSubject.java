@@ -9,7 +9,7 @@ import java.util.List;
  * @author tomsun28
  * @date 21:03 2019-05-26
  */
-public class NoneToken implements SubjectAuToken {
+public class NoneSubject implements SubjectAuToken {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class NoneToken implements SubjectAuToken {
     /** 所访问资源他支持的角色 **/
     private List<String> supportRoles;
 
-    private NoneToken(Builder builder) {
+    private NoneSubject(Builder builder) {
         this.remoteHost = builder.remoteHost;
         this.userAgent = builder.userAgent;
         this.targetUri = builder.targetUri;
@@ -109,8 +109,8 @@ public class NoneToken implements SubjectAuToken {
             return this;
         }
 
-        public NoneToken build() {
-            return new NoneToken(this);
+        public NoneSubject build() {
+            return new NoneSubject(this);
         }
     }
 }

@@ -1,39 +1,47 @@
 package com.usthe.sureness.subject.support;
 
 import com.usthe.sureness.subject.SubjectAuToken;
+
 import java.util.List;
 
 /**
- * 默认的认证TOKEN
+ * 支持JWT AUTH 的TOKEN
  * @author tomsun28
- * @date 23:28 2019-01-23
+ * @date 12:28 2019-03-14
  */
-public class DefaultSubjectAuToken implements SubjectAuToken {
+public class JwtSubject implements SubjectAuToken {
 
-    /** 日志操作 **/
     private static final long serialVersionUID = 1L;
 
-    /** 用户表示ID **/
+    /** 用户的标识 **/
     private String appId;
 
-    /** 用户账户秘钥 **/
-    private String credential;
+    /** json web token值 **/
+    private String jwt;
 
-    /** 用户所拥有角色 **/
+    /** 访问用户的IP **/
+    private String remoteHost;
+
+    /** 访问用户的设备信息 **/
+    private String userAgent;
+
+    /** 所拥有的角色 在解析完jwt之后把用户角色放到这里 **/
     private List<String> ownRoles;
 
-    /** url===httpMethod **/
+    /** 所访问资源地址 **/
     private String targetUri;
 
-    /** 访问此资源所支持的角色 **/
+    /** 所访问资源他支持的角色 **/
     private List<String> supportRoles;
 
-    private DefaultSubjectAuToken(Builder builder) {
+    private JwtSubject(Builder builder) {
         this.appId = builder.appId;
-        this.credential = builder.credential;
+        this.jwt = builder.jwt;
+        this.remoteHost = builder.remoteHost;
+        this.userAgent = builder.userAgent;
         this.ownRoles = builder.ownRoles;
-        this.targetUri = builder.targetUri;
         this.supportRoles = builder.supportRoles;
+        this.targetUri = builder.targetUri;
     }
 
     @Override
@@ -43,7 +51,7 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
 
     @Override
     public Object getCredentials() {
-        return this.credential;
+        return this.jwt;
     }
 
     @Override
@@ -67,9 +75,16 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
         this.supportRoles = (List<String>) var1;
     }
 
+    public String getRemoteHost() {
+        return remoteHost;
+    }
 
-    public static Builder builder(String appId, String credential) {
-        return new Builder(appId, credential);
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public static Builder builder(String jwt) {
+        return new Builder(jwt);
     }
 
     public static Builder builder(SubjectAuToken auToken) {
@@ -79,20 +94,21 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
     public static class Builder {
 
         private String appId;
-        private String credential;
+        private String jwt;
+        private String remoteHost;
+        private String userAgent;
         private List<String> ownRoles;
         private String targetUri;
         private List<String> supportRoles;
 
-        public Builder(String appId, String credential) {
-            this.appId = appId;
-            this.credential = credential;
+        public Builder(String jwt) {
+            this.jwt = jwt;
         }
 
         @SuppressWarnings("unchecked")
         public Builder(SubjectAuToken auToken) {
             this.appId = String.valueOf(auToken.getPrincipal());
-            this.credential = String.valueOf(auToken.getCredentials());
+            this.jwt = String.valueOf(auToken.getCredentials());
             this.ownRoles = (List<String>) auToken.getOwnRoles();
             this.targetUri = String.valueOf(auToken.getTargetResource());
             this.supportRoles = (List<String>) auToken.getSupportRoles();
@@ -103,8 +119,8 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
             return this;
         }
 
-        public Builder setCredentials(String credential) {
-            this.credential = credential;
+        public Builder setCredentials(String jwt) {
+            this.jwt = jwt;
             return this;
         }
 
@@ -123,8 +139,18 @@ public class DefaultSubjectAuToken implements SubjectAuToken {
             return this;
         }
 
-        public DefaultSubjectAuToken build() {
-            return new DefaultSubjectAuToken(this);
+        public Builder setRemoteHost(String remoteHost) {
+            this.remoteHost = remoteHost;
+            return this;
+        }
+
+        public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+        }
+
+        public JwtSubject build() {
+            return new JwtSubject(this);
         }
 
     }

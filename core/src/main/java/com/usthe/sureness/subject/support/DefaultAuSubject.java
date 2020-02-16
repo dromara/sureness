@@ -1,41 +1,36 @@
 package com.usthe.sureness.subject.support;
 
 import com.usthe.sureness.subject.SubjectAuToken;
-
 import java.util.List;
 
 /**
- * 支持 BASIC AUTH 的TOKEN
+ * 默认的认证TOKEN
  * @author tomsun28
- * @date 12:42 2019-03-14
+ * @date 23:28 2019-01-23
  */
-public class PasswordSubjectToken implements SubjectAuToken {
+public class DefaultAuSubject implements SubjectAuToken {
 
+    /** 日志操作 **/
     private static final long serialVersionUID = 1L;
 
-    /** 用户标识 **/
+    /** 用户表示ID **/
     private String appId;
 
-    /** 账户密码 **/
-    private String password;
+    /** 用户账户秘钥 **/
+    private String credential;
 
-    /** 访问用户的IP **/
-    private String remoteHost;
-
-    /** 所拥有的角色 在解析完jwt之后把用户角色放到这里 **/
+    /** 用户所拥有角色 **/
     private List<String> ownRoles;
 
-    /** 所访问资源地址 **/
+    /** url===httpMethod **/
     private String targetUri;
 
-    /** 所访问资源他支持的角色 **/
+    /** 访问此资源所支持的角色 **/
     private List<String> supportRoles;
 
-
-    private PasswordSubjectToken(Builder builder) {
+    private DefaultAuSubject(Builder builder) {
         this.appId = builder.appId;
-        this.password = builder.password;
-        this.remoteHost = builder.remoteHost;
+        this.credential = builder.credential;
         this.ownRoles = builder.ownRoles;
         this.targetUri = builder.targetUri;
         this.supportRoles = builder.supportRoles;
@@ -48,7 +43,7 @@ public class PasswordSubjectToken implements SubjectAuToken {
 
     @Override
     public Object getCredentials() {
-        return this.password;
+        return this.credential;
     }
 
     @Override
@@ -63,7 +58,7 @@ public class PasswordSubjectToken implements SubjectAuToken {
 
     @Override
     public Object getSupportRoles() {
-        return supportRoles;
+        return this.supportRoles;
     }
 
     @SuppressWarnings("unchecked")
@@ -72,8 +67,9 @@ public class PasswordSubjectToken implements SubjectAuToken {
         this.supportRoles = (List<String>) var1;
     }
 
-    public static Builder builder(String appId, String password) {
-        return new Builder(appId, password);
+
+    public static Builder builder(String appId, String credential) {
+        return new Builder(appId, credential);
     }
 
     public static Builder builder(SubjectAuToken auToken) {
@@ -83,21 +79,20 @@ public class PasswordSubjectToken implements SubjectAuToken {
     public static class Builder {
 
         private String appId;
-        private String password;
-        private String remoteHost;
+        private String credential;
         private List<String> ownRoles;
         private String targetUri;
         private List<String> supportRoles;
 
-        public Builder(String appId, String password) {
+        public Builder(String appId, String credential) {
             this.appId = appId;
-            this.password = password;
+            this.credential = credential;
         }
 
         @SuppressWarnings("unchecked")
         public Builder(SubjectAuToken auToken) {
             this.appId = String.valueOf(auToken.getPrincipal());
-            this.password = String.valueOf(auToken.getCredentials());
+            this.credential = String.valueOf(auToken.getCredentials());
             this.ownRoles = (List<String>) auToken.getOwnRoles();
             this.targetUri = String.valueOf(auToken.getTargetResource());
             this.supportRoles = (List<String>) auToken.getSupportRoles();
@@ -108,8 +103,8 @@ public class PasswordSubjectToken implements SubjectAuToken {
             return this;
         }
 
-        public Builder setCredentials(String password) {
-            this.password = password;
+        public Builder setCredentials(String credential) {
+            this.credential = credential;
             return this;
         }
 
@@ -128,13 +123,8 @@ public class PasswordSubjectToken implements SubjectAuToken {
             return this;
         }
 
-        public Builder setRemoteHost(String remoteHost) {
-            this.remoteHost = remoteHost;
-            return this;
-        }
-
-        public PasswordSubjectToken build() {
-            return new PasswordSubjectToken(this);
+        public DefaultAuSubject build() {
+            return new DefaultAuSubject(this);
         }
 
     }

@@ -11,7 +11,7 @@ import com.usthe.sureness.processor.exception.UnknownAccountException;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.subject.SubjectAuToken;
-import com.usthe.sureness.subject.support.PasswordSubjectToken;
+import com.usthe.sureness.subject.support.PasswordSubject;
 import com.usthe.sureness.util.Md5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +31,13 @@ public class PasswordProcessor extends BaseProcessor {
 
     @Override
     public boolean canSupportAuTokenClass(Class<?> var) {
-        return var == PasswordSubjectToken.class;
+        return var == PasswordSubject.class;
     }
 
     @Override
     public Class<?> getSupportAuTokenClass() {
         // 这里只支持passwordToken  -- username/appId/email/phoneNum + password
-        return PasswordSubjectToken.class;
+        return PasswordSubject.class;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class PasswordProcessor extends BaseProcessor {
         if (account.isExcessiveAttempts()) {
             throw new ExcessiveAttemptsException("account is disable due to many time authenticated, try later");
         }
-        return PasswordSubjectToken.builder(var)
+        return PasswordSubject.builder(var)
                 .setOwnRoles(account.getOwnRoles())
                 .build();
     }

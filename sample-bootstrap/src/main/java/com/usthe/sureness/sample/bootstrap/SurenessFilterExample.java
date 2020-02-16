@@ -82,7 +82,7 @@ public class SurenessFilterExample implements Filter {
             CommonUtil.responseWrite(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(),
                     servletResponse);
             return;
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             logger.error("other exception happen: ", e);
             CommonUtil.responseWrite(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(),
                     servletResponse);

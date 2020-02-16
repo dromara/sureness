@@ -5,7 +5,7 @@ import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.subject.SubjectAuToken;
-import com.usthe.sureness.subject.support.NoneToken;
+import com.usthe.sureness.subject.support.NoneSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,12 +22,12 @@ public class NoneProcessor extends BaseProcessor {
 
     @Override
     public boolean canSupportAuTokenClass(Class<?> var) {
-        return var == NoneToken.class;
+        return var == NoneSubject.class;
     }
 
     @Override
     public Class<?> getSupportAuTokenClass() {
-        return NoneToken.class;
+        return NoneSubject.class;
     }
 
     @Override

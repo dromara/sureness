@@ -5,25 +5,22 @@ import com.usthe.sureness.subject.SubjectAuToken;
 import java.util.List;
 
 /**
- * 支持JWT AUTH 的TOKEN
+ * 支持 BASIC AUTH 的TOKEN
  * @author tomsun28
- * @date 12:28 2019-03-14
+ * @date 12:42 2019-03-14
  */
-public class JwtSubjectToken implements SubjectAuToken {
+public class PasswordSubject implements SubjectAuToken {
 
     private static final long serialVersionUID = 1L;
 
-    /** 用户的标识 **/
+    /** 用户标识 **/
     private String appId;
 
-    /** json web token值 **/
-    private String jwt;
+    /** 账户密码 **/
+    private String password;
 
     /** 访问用户的IP **/
     private String remoteHost;
-
-    /** 访问用户的设备信息 **/
-    private String userAgent;
 
     /** 所拥有的角色 在解析完jwt之后把用户角色放到这里 **/
     private List<String> ownRoles;
@@ -34,14 +31,14 @@ public class JwtSubjectToken implements SubjectAuToken {
     /** 所访问资源他支持的角色 **/
     private List<String> supportRoles;
 
-    private JwtSubjectToken(Builder builder) {
+
+    private PasswordSubject(Builder builder) {
         this.appId = builder.appId;
-        this.jwt = builder.jwt;
+        this.password = builder.password;
         this.remoteHost = builder.remoteHost;
-        this.userAgent = builder.userAgent;
         this.ownRoles = builder.ownRoles;
-        this.supportRoles = builder.supportRoles;
         this.targetUri = builder.targetUri;
+        this.supportRoles = builder.supportRoles;
     }
 
     @Override
@@ -51,7 +48,7 @@ public class JwtSubjectToken implements SubjectAuToken {
 
     @Override
     public Object getCredentials() {
-        return this.jwt;
+        return this.password;
     }
 
     @Override
@@ -66,7 +63,7 @@ public class JwtSubjectToken implements SubjectAuToken {
 
     @Override
     public Object getSupportRoles() {
-        return this.supportRoles;
+        return supportRoles;
     }
 
     @SuppressWarnings("unchecked")
@@ -75,16 +72,8 @@ public class JwtSubjectToken implements SubjectAuToken {
         this.supportRoles = (List<String>) var1;
     }
 
-    public String getRemoteHost() {
-        return remoteHost;
-    }
-
-    public String getUserAgent() {
-        return userAgent;
-    }
-
-    public static Builder builder(String jwt) {
-        return new Builder(jwt);
+    public static Builder builder(String appId, String password) {
+        return new Builder(appId, password);
     }
 
     public static Builder builder(SubjectAuToken auToken) {
@@ -94,21 +83,21 @@ public class JwtSubjectToken implements SubjectAuToken {
     public static class Builder {
 
         private String appId;
-        private String jwt;
+        private String password;
         private String remoteHost;
-        private String userAgent;
         private List<String> ownRoles;
         private String targetUri;
         private List<String> supportRoles;
 
-        public Builder(String jwt) {
-            this.jwt = jwt;
+        public Builder(String appId, String password) {
+            this.appId = appId;
+            this.password = password;
         }
 
         @SuppressWarnings("unchecked")
         public Builder(SubjectAuToken auToken) {
             this.appId = String.valueOf(auToken.getPrincipal());
-            this.jwt = String.valueOf(auToken.getCredentials());
+            this.password = String.valueOf(auToken.getCredentials());
             this.ownRoles = (List<String>) auToken.getOwnRoles();
             this.targetUri = String.valueOf(auToken.getTargetResource());
             this.supportRoles = (List<String>) auToken.getSupportRoles();
@@ -119,8 +108,8 @@ public class JwtSubjectToken implements SubjectAuToken {
             return this;
         }
 
-        public Builder setCredentials(String jwt) {
-            this.jwt = jwt;
+        public Builder setCredentials(String password) {
+            this.password = password;
             return this;
         }
 
@@ -144,13 +133,8 @@ public class JwtSubjectToken implements SubjectAuToken {
             return this;
         }
 
-        public Builder setUserAgent(String userAgent) {
-            this.userAgent = userAgent;
-            return this;
-        }
-
-        public JwtSubjectToken build() {
-            return new JwtSubjectToken(this);
+        public PasswordSubject build() {
+            return new PasswordSubject(this);
         }
 
     }

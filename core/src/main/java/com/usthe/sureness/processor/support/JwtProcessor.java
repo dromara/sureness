@@ -7,7 +7,7 @@ import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.subject.SubjectAuToken;
-import com.usthe.sureness.subject.support.JwtSubjectToken;
+import com.usthe.sureness.subject.support.JwtSubject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -31,12 +31,12 @@ public class JwtProcessor extends BaseProcessor {
 
     @Override
     public boolean canSupportAuTokenClass(Class<?> var) {
-        return var == JwtSubjectToken.class;
+        return var == JwtSubject.class;
     }
 
     @Override
     public Class<?> getSupportAuTokenClass() {
-        return JwtSubjectToken.class;
+        return JwtSubject.class;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class JwtProcessor extends BaseProcessor {
             }
             throw new ExpiredCredentialsException("this jwt has expired");
         }
-        JwtSubjectToken.Builder builder = JwtSubjectToken.builder(var)
+        JwtSubject.Builder builder = JwtSubject.builder(var)
                 .setPrincipal(claims.getSubject());
         String ownRoles = claims.get("roles", String.class);
         if (ownRoles != null) {

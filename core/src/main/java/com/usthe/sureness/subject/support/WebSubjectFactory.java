@@ -40,7 +40,7 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                 String requestType = ((HttpServletRequest) request).getMethod();
                 String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
                 String userAgent = SurenessCommonUtil.findUserAgent((HttpServletRequest) request);
-                return JwtSubjectToken.builder(jwtValue)
+                return JwtSubject.builder(jwtValue)
                         .setRemoteHost(remoteHost)
                         .setTargetResource(targetUri)
                         .setUserAgent(userAgent)
@@ -62,7 +62,7 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                 String requestUri = ((HttpServletRequest) request).getRequestURI();
                 String requestType = ((HttpServletRequest) request).getMethod();
                 String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
-                return PasswordSubjectToken.builder(username, password)
+                return PasswordSubject.builder(username, password)
                         .setRemoteHost(remoteHost)
                         .setTargetResource(targetUri)
                         .build();
@@ -72,7 +72,7 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                 String requestType = ((HttpServletRequest) request).getMethod();
                 String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
                 String userAgent = SurenessCommonUtil.findUserAgent((HttpServletRequest) request);
-                return NoneToken.builder().setRemoteHost(remoteHost)
+                return NoneSubject.builder().setRemoteHost(remoteHost)
                         .setTargetUri(targetUri)
                         .setUserAgent(userAgent).build();
             }

@@ -17,7 +17,6 @@ public class SpringContextHolder implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-//        SpringContextHolder.applicationContext = applicationContext;
         set(applicationContext);
     }
 
@@ -29,6 +28,7 @@ public class SpringContextHolder implements ApplicationContextAware {
         assertApplicationContext();
         return applicationContext;
     }
+
     @SuppressWarnings("unchecked")
     public static <T> T getBean(String beanName) {
         assertApplicationContext();
