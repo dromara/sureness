@@ -10,6 +10,9 @@ import com.usthe.sureness.util.BaseSurenessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Iterator;
+import java.util.List;
+
 
 /**
  * 认证鉴权总方法调用默认入口类
@@ -61,12 +64,24 @@ public class SurenessSecurityManager implements SecurityManager {
 
     @Override
     public SubjectDeclare checkIn(Object var1) throws BaseSurenessException {
-        Subject auToken =  createSubjectAuToken(var1);
-        return checkIn(auToken);
+        List<Subject> subjectList =  createSubjectAuToken(var1);
+        // 对于创建的几个门面钥匙 一把一把试错
+        // 若钥匙都不对 抛异常在最后一把 即最后一把试错的结果为展示的错误信息
+        Iterator<Subject> subjectIterator = subjectList.iterator();
+        RuntimeException lastException = null;
+        while (subjectIterator.hasNext()) {
+            Subject thisSubject = subjectIterator.next();
+            try {
+                return checkIn(thisSubject);
+            } catch (RuntimeException e) {
+                lastException = e;
+            }
+        }
+        throw lastException != null ? lastException : new RuntimeException("todo unused subjectList");
     }
 
     @Override
-    public Subject createSubjectAuToken(Object var1) throws UnsupportedTokenException {
+    public List<Subject> createSubjectAuToken(Object var1) throws UnsupportedTokenException {
         return subjectFactory.createSubjectAuToken(var1);
     }
 

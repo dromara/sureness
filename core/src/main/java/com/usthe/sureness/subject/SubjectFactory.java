@@ -2,6 +2,8 @@ package com.usthe.sureness.subject;
 
 import com.usthe.sureness.processor.exception.UnsupportedTokenException;
 
+import java.util.List;
+
 /**
  * subject 工厂
  * @author tomsun28
@@ -28,6 +30,6 @@ public interface SubjectFactory {
      * @return com.usthe.sureness.subject.SubjectAuToken
      * @throws UnsupportedTokenException 无法通过request message创建token时抛出
      */
-    Subject createSubjectAuToken(Object var1) throws UnsupportedTokenException;
+    List<Subject> createSubjectAuToken(Object var1) throws UnsupportedTokenException;
 
 }

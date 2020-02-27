@@ -5,6 +5,8 @@ import com.usthe.sureness.subject.SubjectDeclare;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.util.BaseSurenessException;
 
+import java.util.List;
+
 /**
  * 认证鉴权总方法调用入口接口
  * @author tomsun28
@@ -39,7 +41,7 @@ public interface SecurityManager {
      * @return com.usthe.sureness.subject.SubjectAuToken
      * @throws UnsupportedTokenException 不支持的TOKEN时抛出异常
      */
-     Subject createSubjectAuToken(Object var1) throws UnsupportedTokenException;
+     List<Subject> createSubjectAuToken(Object var1) throws UnsupportedTokenException;
 
     /**
      * description 通过subjectAuToken信息创建subject,此发生在完成认证鉴权成功后

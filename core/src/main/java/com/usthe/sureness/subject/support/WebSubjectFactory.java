@@ -4,11 +4,12 @@ import com.usthe.sureness.processor.exception.UnsupportedTokenException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import com.usthe.sureness.util.SurenessCommonUtil;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author tomsun28
@@ -22,7 +23,8 @@ public class WebSubjectFactory extends BaseSubjectFactory {
     private static final int COUNT_2 = 2;
 
     @Override
-    public Subject createSubjectAuToken(Object request) throws UnsupportedTokenException {
+    public List<Subject> createSubjectAuToken(Object request) throws UnsupportedTokenException {
+        List<Subject> subjectList = new LinkedList<>();
         if (request instanceof ServletRequest) {
             String authorization = ((HttpServletRequest)request).getHeader(AUTHORIZATION);
             // 根据head里面的参数内容，判断其请求认证鉴权的方式，新建对应的token
@@ -40,11 +42,12 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                 String requestType = ((HttpServletRequest) request).getMethod();
                 String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
                 String userAgent = SurenessCommonUtil.findUserAgent((HttpServletRequest) request);
-                return JwtSubject.builder(jwtValue)
+                subjectList.add(JwtSubject.builder(jwtValue)
                         .setRemoteHost(remoteHost)
                         .setTargetResource(targetUri)
                         .setUserAgent(userAgent)
-                        .build();
+                        .build());
+                // todo 暂时先这样
             } else if (authorization != null && authorization.startsWith(BASIC)) {
                 //basic auth
                 String basicAuth = authorization.replace(BASIC, "").trim();
@@ -62,22 +65,23 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                 String requestUri = ((HttpServletRequest) request).getRequestURI();
                 String requestType = ((HttpServletRequest) request).getMethod();
                 String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
-                return PasswordSubject.builder(username, password)
+                subjectList.add(PasswordSubject.builder(username, password)
                         .setRemoteHost(remoteHost)
                         .setTargetResource(targetUri)
-                        .build();
+                        .build());
             } else {
                 String remoteHost = ((HttpServletRequest) request).getRemoteHost();
                 String requestUri = ((HttpServletRequest) request).getRequestURI();
                 String requestType = ((HttpServletRequest) request).getMethod();
                 String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
                 String userAgent = SurenessCommonUtil.findUserAgent((HttpServletRequest) request);
-                return NoneSubject.builder().setRemoteHost(remoteHost)
+                subjectList.add(NoneSubject.builder().setRemoteHost(remoteHost)
                         .setTargetUri(targetUri)
-                        .setUserAgent(userAgent).build();
+                        .setUserAgent(userAgent).build());
             }
         } else {
             throw new UnsupportedTokenException("can not create token due the request message");
         }
+        return subjectList;
     }
 }
