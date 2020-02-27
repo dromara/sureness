@@ -85,12 +85,6 @@ public class SurenessSecurityManager implements SecurityManager {
         return subjectFactory.createSubjectAuToken(var1);
     }
 
-    @Override
-    @Deprecated
-    public SubjectDeclare createSubject(Subject var1) {
-        return subjectFactory.createSubject(var1);
-    }
-
     public void setSubjectFactory(SubjectFactory subjectFactory) {
         this.subjectFactory = subjectFactory;
     }

@@ -43,11 +43,4 @@ public interface SecurityManager {
      */
      List<Subject> createSubjectAuToken(Object var1) throws UnsupportedTokenException;
 
-    /**
-     * description 通过subjectAuToken信息创建subject,此发生在完成认证鉴权成功后
-     * @param var1 1
-     * @return com.usthe.sureness.subject.Subject
-     */
-    SubjectDeclare createSubject(Subject var1);
-
 }
