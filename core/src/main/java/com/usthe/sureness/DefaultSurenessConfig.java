@@ -9,7 +9,7 @@ import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
 import com.usthe.sureness.provider.DocumentResourceDefaultProvider;
 import com.usthe.sureness.subject.SubjectFactory;
-import com.usthe.sureness.subject.support.WebSubjectFactory;
+import com.usthe.sureness.subject.SurenessSubjectFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,7 +60,7 @@ public class DefaultSurenessConfig {
         // surenessSecurityManager init
         SurenessSecurityManager securityManager = SurenessSecurityManager.getInstance();
         securityManager.setPathRoleMatcher(pathRoleMatcher);
-        SubjectFactory subjectFactory = new WebSubjectFactory();
+        SubjectFactory subjectFactory = new SurenessSubjectFactory();
         securityManager.setSubjectFactory(subjectFactory);
         securityManager.setProcessorManager(processorManager);
         if (logger.isDebugEnabled()) {

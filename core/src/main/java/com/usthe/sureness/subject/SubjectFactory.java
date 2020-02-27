@@ -24,4 +24,16 @@ public interface SubjectFactory {
      */
     List<Subject> createSubjects(Object var1);
 
+    /**
+     * 向工厂注册subject的creator
+     * @param creator subject creator
+     */
+    void registerSubjectCreator(SubjectCreate creator);
+
+    /**
+     * 加载已经存在于工厂的creators出来使用
+     * @return creators
+     */
+    List<SubjectCreate> loadSubjectCreators();
+
 }

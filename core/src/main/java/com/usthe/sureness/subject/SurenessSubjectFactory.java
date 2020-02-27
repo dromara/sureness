@@ -1,8 +1,12 @@
-package com.usthe.sureness.subject.support;
+package com.usthe.sureness.subject;
 
 import com.usthe.sureness.processor.exception.UnsupportedTokenException;
 import com.usthe.sureness.subject.Subject;
+import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.SubjectFactory;
+import com.usthe.sureness.subject.support.JwtSubject;
+import com.usthe.sureness.subject.support.NoneSubject;
+import com.usthe.sureness.subject.support.PasswordSubject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import com.usthe.sureness.util.SurenessCommonUtil;
 import javax.servlet.ServletRequest;
@@ -16,7 +20,7 @@ import java.util.List;
  * @author tomsun28
  * @date 23:35 2019-05-12
  */
-public class WebSubjectFactory implements SubjectFactory {
+public class SurenessSubjectFactory implements SubjectFactory {
 
     private static final String BEARER = "Bearer";
     private static final String AUTHORIZATION = "Authorization";
@@ -82,5 +86,15 @@ public class WebSubjectFactory implements SubjectFactory {
             }
         }
         return subjectList;
+    }
+
+    @Override
+    public void registerSubjectCreator(SubjectCreate creator) {
+
+    }
+
+    @Override
+    public List<SubjectCreate> loadSubjectCreators() {
+        return null;
     }
 }
