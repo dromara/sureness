@@ -18,8 +18,6 @@ public class JwtSubjectCreator implements SubjectCreate {
 
     private static final String BEARER = "Bearer";
     private static final String AUTHORIZATION = "Authorization";
-    private static final String BASIC = "Basic";
-    private static final int COUNT_2 = 2;
 
     @Override
     public boolean canSupportSubject(Object context) {
