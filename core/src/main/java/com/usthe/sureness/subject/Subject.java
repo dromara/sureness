@@ -1,10 +1,14 @@
 package com.usthe.sureness.subject;
 
 
+import com.usthe.sureness.subject.support.SurenessSubjectDeclare;
+import com.usthe.sureness.util.ThreadContext;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
- *    AuthenticationToken   AuthorizationToken
+ * AuthenticationToken AuthorizationToken 认证鉴权对象
  * @author tomsun28
  * @date 21:58 2019-01-22
  */
@@ -53,4 +57,24 @@ public interface Subject extends Serializable {
      */
     void setSupportRoles(Object var1);
 
+    /**
+     * description 通过 自身subject内容创建对应精简内容的subjectContext
+     *
+     * @return com.usthe.sureness.subject.Subject
+     */
+    @SuppressWarnings("unchecked")
+    default SubjectDeclare generateSubjectContext() {
+        String principal = (String)getPrincipal();
+        List<String> roles = (List<String>)getOwnRoles();
+        String targetUri = (String)getTargetResource();
+        SubjectDeclare subject =  SurenessSubjectDeclare.builder()
+                .setTargetResource(targetUri)
+                .setRoles(roles)
+                .setPrincipal(principal)
+                .build();
+        // 将subject 绑定到localThread变量中
+        ThreadContext.bind(subject);
+        // 如果是网关认证中心, 之后可以考虑把subject绑定到request请求中,供子系统使用
+        return subject;
+    }
 }

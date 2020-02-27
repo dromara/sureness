@@ -64,7 +64,7 @@ public class SurenessSecurityManager implements SecurityManager {
 
     @Override
     public SubjectDeclare checkIn(Object var1) throws BaseSurenessException {
-        List<Subject> subjectList =  createSubjectAuToken(var1);
+        List<Subject> subjectList = createSubject(var1);
         // 对于创建的几个门面钥匙 一把一把试错
         // 若钥匙都不对 抛异常在最后一把 即最后一把试错的结果为展示的错误信息
         Iterator<Subject> subjectIterator = subjectList.iterator();
@@ -77,12 +77,16 @@ public class SurenessSecurityManager implements SecurityManager {
                 lastException = e;
             }
         }
-        throw lastException != null ? lastException : new RuntimeException("todo unused subjectList");
+        if (lastException == null) {
+            return null;
+        } else {
+            throw lastException;
+        }
     }
 
     @Override
-    public List<Subject> createSubjectAuToken(Object var1) throws UnsupportedTokenException {
-        return subjectFactory.createSubjectAuToken(var1);
+    public List<Subject> createSubject(Object var1) {
+        return subjectFactory.createSubjects(var1);
     }
 
     public void setSubjectFactory(SubjectFactory subjectFactory) {

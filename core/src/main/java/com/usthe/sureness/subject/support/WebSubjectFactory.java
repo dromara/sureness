@@ -2,6 +2,7 @@ package com.usthe.sureness.subject.support;
 
 import com.usthe.sureness.processor.exception.UnsupportedTokenException;
 import com.usthe.sureness.subject.Subject;
+import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import com.usthe.sureness.util.SurenessCommonUtil;
 import javax.servlet.ServletRequest;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author tomsun28
  * @date 23:35 2019-05-12
  */
-public class WebSubjectFactory extends BaseSubjectFactory {
+public class WebSubjectFactory implements SubjectFactory {
 
     private static final String BEARER = "Bearer";
     private static final String AUTHORIZATION = "Authorization";
@@ -23,7 +24,7 @@ public class WebSubjectFactory extends BaseSubjectFactory {
     private static final int COUNT_2 = 2;
 
     @Override
-    public List<Subject> createSubjectAuToken(Object request) throws UnsupportedTokenException {
+    public List<Subject> createSubjects(Object request) {
         List<Subject> subjectList = new LinkedList<>();
         if (request instanceof ServletRequest) {
             String authorization = ((HttpServletRequest)request).getHeader(AUTHORIZATION);
@@ -79,8 +80,6 @@ public class WebSubjectFactory extends BaseSubjectFactory {
                         .setTargetUri(targetUri)
                         .setUserAgent(userAgent).build());
             }
-        } else {
-            throw new UnsupportedTokenException("can not create token due the request message");
         }
         return subjectList;
     }

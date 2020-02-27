@@ -58,7 +58,7 @@ public class SurenessFilterExample implements Filter {
             // 考虑将生成的subject信息塞入request
             servletRequest.setAttribute("subject", subject);
             // todo UnsupportedTokenException request没有创建出对应的subject
-        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedTokenException e4) {
+        } catch (ProcessorNotFoundException | UnknownAccountException e4) {
             logger.debug("this request is illegal: ", e4);
             CommonUtil.responseWrite(ResponseEntity
                     .status(HttpStatus.BAD_REQUEST).body(e4.getMessage()), servletResponse);

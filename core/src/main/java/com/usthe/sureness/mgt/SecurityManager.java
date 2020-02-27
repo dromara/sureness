@@ -28,7 +28,7 @@ public interface SecurityManager {
      * description 如上 封装 createSubjectAuToken by object
      *
      * @param var1 内容对象
-     * @return com.usthe.sureness.subject.Subject
+     * @return com.usthe.sureness.subject.Subject, return null when not match any subject type
      * @throws BaseSurenessException 抛出不同的异常
      */
     SubjectDeclare checkIn(Object var1) throws BaseSurenessException;
@@ -41,6 +41,6 @@ public interface SecurityManager {
      * @return com.usthe.sureness.subject.SubjectAuToken
      * @throws UnsupportedTokenException 不支持的TOKEN时抛出异常
      */
-     List<Subject> createSubjectAuToken(Object var1) throws UnsupportedTokenException;
+     List<Subject> createSubject(Object var1) throws UnsupportedTokenException;
 
 }
