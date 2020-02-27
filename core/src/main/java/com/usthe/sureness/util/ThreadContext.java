@@ -1,6 +1,6 @@
 package com.usthe.sureness.util;
 
-import com.usthe.sureness.subject.Subject;
+import com.usthe.sureness.subject.SubjectDeclare;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,18 +20,18 @@ public class ThreadContext {
     @SuppressWarnings("unchecked")
     private static final ThreadLocal<Map<Object, Object>> RESOURCES = new ThreadContext.InheritableThreadLocalMap();
 
-    public static void bind(Subject subject) {
+    public static void bind(SubjectDeclare subject) {
         if (subject != null) {
             put(SUBJECT_KEY, subject);
         }
     }
 
-    public static Subject unbindSubject() {
-        return (Subject)remove(SUBJECT_KEY);
+    public static SubjectDeclare unbindSubject() {
+        return (SubjectDeclare)remove(SUBJECT_KEY);
     }
 
-    public static Subject getBindSubject() {
-        return (Subject)get(SUBJECT_KEY);
+    public static SubjectDeclare getBindSubject() {
+        return (SubjectDeclare)get(SUBJECT_KEY);
     }
 
 

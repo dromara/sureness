@@ -2,7 +2,7 @@ package com.usthe.sureness.matcher;
 
 import com.usthe.sureness.matcher.util.TirePathTree;
 import com.usthe.sureness.mgt.SurenessNoInitException;
-import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Arrays;
@@ -37,7 +37,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     }
 
     @Override
-    public void matchRole(SubjectAuToken auToken) throws SurenessNoInitException {
+    public void matchRole(Subject auToken) throws SurenessNoInitException {
         if (!isTreeInit) {
             logger.error("DefaultPathRoleMatcher -> root tree is not init");
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> root tree is not init");

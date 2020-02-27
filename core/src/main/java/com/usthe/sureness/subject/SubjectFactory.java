@@ -3,7 +3,7 @@ package com.usthe.sureness.subject;
 import com.usthe.sureness.processor.exception.UnsupportedTokenException;
 
 /**
- * subject , token 工厂
+ * subject 工厂
  * @author tomsun28
  * @date 00:39 2019-01-24
  */
@@ -15,7 +15,7 @@ public interface SubjectFactory {
      * @param auToken 1
      * @return com.usthe.sureness.subject.Subject
      */
-    Subject createSubject(SubjectAuToken auToken);
+    SubjectDeclare createSubject(Subject auToken);
 
     /**
      * description 通过传入的内容对象信息创建对应的token
@@ -23,10 +23,11 @@ public interface SubjectFactory {
      * 在httpRequest中获取内容在填充subject了
      * 填充内容源设计成任何内容对象,不绑定框架
      * 基于web的实现在 webFactory中实现它
+     * todo subject工厂应该是可以创建多个Subject 就像有多个钥匙 其中有几个都是正确的
      * @param var1 1
      * @return com.usthe.sureness.subject.SubjectAuToken
      * @throws UnsupportedTokenException 无法通过request message创建token时抛出
      */
-    SubjectAuToken createSubjectAuToken(Object var1) throws UnsupportedTokenException;
+    Subject createSubjectAuToken(Object var1) throws UnsupportedTokenException;
 
 }

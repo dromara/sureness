@@ -4,7 +4,7 @@ import com.usthe.sureness.processor.BaseProcessor;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
-import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.support.NoneSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +31,13 @@ public class NoneProcessor extends BaseProcessor {
     }
 
     @Override
-    public SubjectAuToken authenticated(SubjectAuToken var) throws SurenessAuthenticationException {
+    public Subject authenticated(Subject var) throws SurenessAuthenticationException {
         return var;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void authorized(SubjectAuToken var) throws SurenessAuthorizationException {
+    public void authorized(Subject var) throws SurenessAuthorizationException {
         List<String> supportRoles = (List<String>)var.getSupportRoles();
         if (supportRoles != null && !supportRoles.isEmpty()) {
             if (logger.isDebugEnabled()) {

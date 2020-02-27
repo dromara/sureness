@@ -1,7 +1,7 @@
 package com.usthe.sureness.matcher;
 
 import com.usthe.sureness.mgt.SurenessNoInitException;
-import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.Subject;
 
 /**
  * path - role 匹配 matcher
@@ -15,7 +15,7 @@ public interface TreePathRoleMatcher {
      * @param auToken 根据接入对象所创建的TOKEN,成功后会将其所需角色塞入TOKEN
      * @throws SurenessNoInitException when matcher not init
      */
-    void matchRole(SubjectAuToken auToken) throws SurenessNoInitException;
+    void matchRole(Subject auToken) throws SurenessNoInitException;
 
     /**
      * 建立起匹配树

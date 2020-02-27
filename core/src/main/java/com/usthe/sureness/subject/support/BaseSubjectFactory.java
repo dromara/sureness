@@ -1,7 +1,7 @@
 package com.usthe.sureness.subject.support;
 
+import com.usthe.sureness.subject.SubjectDeclare;
 import com.usthe.sureness.subject.Subject;
-import com.usthe.sureness.subject.SubjectAuToken;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.util.ThreadContext;
 import java.util.List;
@@ -20,11 +20,11 @@ public abstract class BaseSubjectFactory implements SubjectFactory {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Subject createSubject(SubjectAuToken auToken) {
+    public SubjectDeclare createSubject(Subject auToken) {
         String principal = (String)auToken.getPrincipal();
         List<String> roles = (List<String>)auToken.getOwnRoles();
         String targetUri = (String)auToken.getTargetResource();
-        Subject subject =  SurenessSubject.builder()
+        SubjectDeclare subject =  SurenessSubjectDeclare.builder()
                 .setTargetResource(targetUri)
                 .setRoles(roles)
                 .setPrincipal(principal)

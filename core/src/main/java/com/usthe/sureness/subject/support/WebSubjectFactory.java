@@ -1,7 +1,7 @@
 package com.usthe.sureness.subject.support;
 
 import com.usthe.sureness.processor.exception.UnsupportedTokenException;
-import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import com.usthe.sureness.util.SurenessCommonUtil;
 
@@ -22,7 +22,7 @@ public class WebSubjectFactory extends BaseSubjectFactory {
     private static final int COUNT_2 = 2;
 
     @Override
-    public SubjectAuToken createSubjectAuToken(Object request) throws UnsupportedTokenException {
+    public Subject createSubjectAuToken(Object request) throws UnsupportedTokenException {
         if (request instanceof ServletRequest) {
             String authorization = ((HttpServletRequest)request).getHeader(AUTHORIZATION);
             // 根据head里面的参数内容，判断其请求认证鉴权的方式，新建对应的token

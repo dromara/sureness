@@ -10,7 +10,7 @@ import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
-import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.support.PasswordSubject;
 import com.usthe.sureness.util.Md5Util;
 import org.slf4j.Logger;
@@ -41,7 +41,7 @@ public class PasswordProcessor extends BaseProcessor {
     }
 
     @Override
-    public SubjectAuToken authenticated(SubjectAuToken var) throws SurenessAuthenticationException {
+    public Subject authenticated(Subject var) throws SurenessAuthenticationException {
         String appId = (String) var.getPrincipal();
         SurenessAccount account = accountProvider.loadAccount(appId);
         if (account == null) {
@@ -77,7 +77,7 @@ public class PasswordProcessor extends BaseProcessor {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void authorized(SubjectAuToken var) throws SurenessAuthorizationException {
+    public void authorized(Subject var) throws SurenessAuthorizationException {
         List<String> ownRoles = (List<String>)var.getOwnRoles();
         List<String> supportRoles = (List<String>)var.getSupportRoles();
         if (supportRoles != null && supportRoles.stream().noneMatch(ownRoles::contains)) {

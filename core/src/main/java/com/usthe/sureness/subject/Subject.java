@@ -1,50 +1,56 @@
 package com.usthe.sureness.subject;
 
+
 import java.io.Serializable;
-import java.util.Collection;
 
 /**
- * Subject 只有内容  没有认证鉴权动作
- * 此subject只有在 认证鉴权 成功后下发
+ *    AuthenticationToken   AuthorizationToken
  * @author tomsun28
- * @date 22:59 2019-01-09
+ * @date 21:58 2019-01-22
  */
 public interface Subject extends Serializable {
 
     /**
-     * description 获取认证对象的账户
-     * @return java.lang.Object
+     * description 账户名  string
+     *
+     * @return 账户标识
      */
     Object getPrincipal();
 
     /**
-     * description 是否有特定角色
+     * description 认证证书
      *
-     * @param var1 1
-     * @return boolean
+     * @return 对应账户的认证证书或秘钥
      */
-    boolean hasRole(String var1);
+    Object getCredentials();
 
     /**
-     * description 是否有对应全部角色
+     * description 对应账户所拥有的角色
      *
-     * @param var1 1
-     * @return boolean
+     * @return 角色信息
      */
-    boolean hasAllRoles(Collection<String> var1);
+    Object getOwnRoles();
 
     /**
-     * description 获取拥有的角色
+     * description 需要访问的资源
      *
-     * @return java.lang.Object
-     */
-    Object getRoles();
-
-    /**
-     * description 获取这次想访问目标资源
-     *
-     * @return java.lang.Object
+     * @return 资源信息
      */
     Object getTargetResource();
+
+    /**
+     * description 获取token 在url-role树中匹配出来的roles
+     * 访问 getTargetResource() 所支持的 roles
+     *
+     * @return 访问此资源所需的角色信息
+     */
+    Object getSupportRoles();
+
+    /**
+     * description 设置所匹配出的role
+     *
+     * @param var1 所支持角色
+     */
+    void setSupportRoles(Object var1);
 
 }

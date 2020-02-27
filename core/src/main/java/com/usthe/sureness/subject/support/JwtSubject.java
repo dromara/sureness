@@ -1,6 +1,6 @@
 package com.usthe.sureness.subject.support;
 
-import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.Subject;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @author tomsun28
  * @date 12:28 2019-03-14
  */
-public class JwtSubject implements SubjectAuToken {
+public class JwtSubject implements Subject {
 
     private static final long serialVersionUID = 1L;
 
@@ -87,7 +87,7 @@ public class JwtSubject implements SubjectAuToken {
         return new Builder(jwt);
     }
 
-    public static Builder builder(SubjectAuToken auToken) {
+    public static Builder builder(Subject auToken) {
         return new Builder(auToken);
     }
 
@@ -106,7 +106,7 @@ public class JwtSubject implements SubjectAuToken {
         }
 
         @SuppressWarnings("unchecked")
-        public Builder(SubjectAuToken auToken) {
+        public Builder(Subject auToken) {
             this.appId = String.valueOf(auToken.getPrincipal());
             this.jwt = String.valueOf(auToken.getCredentials());
             this.ownRoles = (List<String>) auToken.getOwnRoles();

@@ -1,6 +1,6 @@
 package com.usthe.sureness.util;
 
-import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.Subject;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
@@ -29,7 +29,7 @@ public class SurenessCommonUtil {
      * @param var1 1
      * @return com.usthe.sureness.subject.SubjectAuToken
      */
-    public static SubjectAuToken createSubjectAuToken(Object var1) {
+    public static Subject createSubjectAuToken(Object var1) {
         return null;
     }
 

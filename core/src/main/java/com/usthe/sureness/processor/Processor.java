@@ -2,8 +2,8 @@ package com.usthe.sureness.processor;
 
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
+import com.usthe.sureness.subject.SubjectDeclare;
 import com.usthe.sureness.subject.Subject;
-import com.usthe.sureness.subject.SubjectAuToken;
 
 /**
  * 处理器，处理传进来的认证对象,对其进行认证账号与权限
@@ -36,5 +36,5 @@ public interface Processor {
      * @throws SurenessAuthorizationException when
      * @return com.usthe.sureness.subject.Subject
      */
-    Subject process(SubjectAuToken var) throws SurenessAuthenticationException, SurenessAuthorizationException;
+    SubjectDeclare process(Subject var) throws SurenessAuthenticationException, SurenessAuthorizationException;
 }

@@ -2,9 +2,9 @@ package com.usthe.sureness.processor;
 
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
+import com.usthe.sureness.subject.SubjectDeclare;
 import com.usthe.sureness.subject.Subject;
-import com.usthe.sureness.subject.SubjectAuToken;
-import com.usthe.sureness.subject.support.SurenessSubject;
+import com.usthe.sureness.subject.support.SurenessSubjectDeclare;
 import com.usthe.sureness.util.ThreadContext;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public abstract class BaseProcessor implements Processor{
     public abstract Class<?> getSupportAuTokenClass();
 
     @Override
-    public Subject process(SubjectAuToken var) throws SurenessAuthenticationException, SurenessAuthorizationException {
+    public SubjectDeclare process(Subject var) throws SurenessAuthenticationException, SurenessAuthorizationException {
         authorized(authenticated(var));
         return createSubject(var);
     }
@@ -44,14 +44,14 @@ public abstract class BaseProcessor implements Processor{
      * @return SubjectAuToken auToken
      * @throws SurenessAuthenticationException when发生认证相关异常
      */
-    public abstract SubjectAuToken authenticated (SubjectAuToken var) throws SurenessAuthenticationException;
+    public abstract Subject authenticated (Subject var) throws SurenessAuthenticationException;
 
     /**
      * description 鉴权会调用的接口，在这里面完成鉴权
      * @param var 1
      * @throws SurenessAuthorizationException when发生鉴权相关异常
      */
-    public abstract void authorized(SubjectAuToken var) throws SurenessAuthorizationException;
+    public abstract void authorized(Subject var) throws SurenessAuthorizationException;
 
     /**
      * description 当认证鉴权完成通过后，通过token创建subject
@@ -60,8 +60,8 @@ public abstract class BaseProcessor implements Processor{
      * @return com.usthe.sureness.subject.Subject
      */
     @SuppressWarnings("unchecked")
-    private Subject createSubject(SubjectAuToken var) {
-        SurenessSubject subject = SurenessSubject.builder()
+    private SubjectDeclare createSubject(Subject var) {
+        SurenessSubjectDeclare subject = SurenessSubjectDeclare.builder()
                 .setPrincipal(String.valueOf(var.getPrincipal()))
                 .setTargetResource(String.valueOf(var.getTargetResource()))
                 .setRoles((List<String>) var.getOwnRoles())

@@ -1,7 +1,7 @@
 package com.usthe.sureness.mgt;
 
 
-import com.usthe.sureness.subject.Subject;
+import com.usthe.sureness.subject.SubjectDeclare;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,17 +18,17 @@ public class SecurityContextHolder {
     private static final Logger logger = LoggerFactory.getLogger(SecurityContextHolder.class);
 
     @SuppressWarnings("unchecked")
-    private static final ThreadLocal<Subject> CONTEXT_HOLDER = new InheritableThreadLocal();
+    private static final ThreadLocal<SubjectDeclare> CONTEXT_HOLDER = new InheritableThreadLocal();
 
     public void clearContext() {
         CONTEXT_HOLDER.remove();
     }
 
-    public void bindContext(Subject context) {
+    public void bindContext(SubjectDeclare context) {
         CONTEXT_HOLDER.set(context);
     }
 
-    public Optional<Subject> getContext() {
+    public Optional<SubjectDeclare> getContext() {
         return Optional.ofNullable(CONTEXT_HOLDER.get());
     }
 }

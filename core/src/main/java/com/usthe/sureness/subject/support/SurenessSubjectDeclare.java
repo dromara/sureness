@@ -1,15 +1,14 @@
 package com.usthe.sureness.subject.support;
 
-import com.usthe.sureness.subject.Subject;
+import com.usthe.sureness.subject.SubjectDeclare;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * @author tomsun28
  * @date 22:03 2019-01-22
  */
-public class SurenessSubject implements Subject {
+public class SurenessSubjectDeclare implements SubjectDeclare {
 
     private static final long serialVersionUID = 1L;
     /**
@@ -26,7 +25,7 @@ public class SurenessSubject implements Subject {
     private String targetResource;
 
 
-    private SurenessSubject(Builder builder) {
+    private SurenessSubjectDeclare(Builder builder) {
         this.principal = builder.principal;
         this.roles = builder.roles;
         this.targetResource = builder.targetResource;
@@ -81,8 +80,8 @@ public class SurenessSubject implements Subject {
             return this;
         }
 
-        public SurenessSubject build() {
-            return new SurenessSubject(this);
+        public SurenessSubjectDeclare build() {
+            return new SurenessSubjectDeclare(this);
         }
 
 

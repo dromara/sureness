@@ -6,7 +6,7 @@ import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
-import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.support.JwtSubject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import io.jsonwebtoken.Claims;
@@ -40,7 +40,7 @@ public class JwtProcessor extends BaseProcessor {
     }
 
     @Override
-    public SubjectAuToken authenticated(SubjectAuToken var) throws SurenessAuthenticationException {
+    public Subject authenticated(Subject var) throws SurenessAuthenticationException {
         String jwt = (String) var.getCredentials();
         if (JsonWebTokenUtil.isNotJsonWebToken(jwt)) {
             throw new  IncorrectCredentialsException("this jwt credential is illegal");
@@ -75,7 +75,7 @@ public class JwtProcessor extends BaseProcessor {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void authorized(SubjectAuToken var) throws SurenessAuthorizationException {
+    public void authorized(Subject var) throws SurenessAuthorizationException {
         List<String> ownRoles = (List<String>)var.getOwnRoles();
         List<String> supportRoles = (List<String>)var.getSupportRoles();
         if (supportRoles != null && supportRoles.stream().noneMatch(ownRoles::contains)) {

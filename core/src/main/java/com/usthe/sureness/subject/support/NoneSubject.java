@@ -1,6 +1,6 @@
 package com.usthe.sureness.subject.support;
 
-import com.usthe.sureness.subject.SubjectAuToken;
+import com.usthe.sureness.subject.Subject;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @author tomsun28
  * @date 21:03 2019-05-26
  */
-public class NoneSubject implements SubjectAuToken {
+public class NoneSubject implements Subject {
 
     private static final long serialVersionUID = 1L;
 
