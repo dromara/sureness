@@ -69,7 +69,8 @@ public class SurenessSecurityManager implements SecurityManager {
         // 对于创建的几个门面钥匙 一把一把试错
         // 若钥匙都不对 抛异常在最后一把 即最后一把试错的结果为展示的错误信息
         Iterator<Subject> subjectIterator = subjectList.iterator();
-        BaseSurenessException lastException = new UnsupportedSubjectException("creators not create subject, " +
+
+        RuntimeException lastException = new UnsupportedSubjectException("creators not create subject, " +
                 "check load noneSubjectCreator");
         while (subjectIterator.hasNext()) {
             Subject thisSubject = subjectIterator.next();
@@ -79,6 +80,7 @@ public class SurenessSecurityManager implements SecurityManager {
                 lastException = e;
             }
         }
+        // 若是 UnsupportedSubjectException 其为配置项异常 不往上抛出
         throw lastException;
     }
 
