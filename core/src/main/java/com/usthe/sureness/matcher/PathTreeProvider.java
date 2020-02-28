@@ -15,4 +15,10 @@ public interface PathTreeProvider {
      * @throws SurenessLoadDataException when加载数据异常
      */
     Set<String> providePathData();
+
+    /**
+     * 加载需要被过滤排除的URL资源的接口，同上，可从数据库或文本加载 eg: /api/v4/host===post
+     * @return uri资源集合: URL===METHOD
+     */
+    Set<String> provideExcludedResource();
 }

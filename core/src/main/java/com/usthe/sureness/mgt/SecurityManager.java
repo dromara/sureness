@@ -25,11 +25,12 @@ public interface SecurityManager {
     SubjectSum checkIn(Subject token) throws BaseSurenessException;
 
     /**
-     * description 如上 封装 createSubjectAuToken by object
+     * description checkin 进入认证鉴权入口
      *
-     * @param var1 内容对象
-     * @return com.usthe.sureness.subject.Subject, return null when not match any subject type
-     * @throws BaseSurenessException 抛出不同的异常
+     * @param var1 请求内容对象
+     * @return com.usthe.sureness.subject.Subject
+     * return null when the request uri===method is in excluded resource
+     * @throws BaseSurenessException 抛出不同的认证鉴权异常
      */
     SubjectSum checkIn(Object var1) throws BaseSurenessException;
 

@@ -24,4 +24,17 @@ public interface TreePathRoleMatcher {
      */
     void buildTree();
 
+    /**
+     * 通过拥有的排除资源名单判断这个请求所请求的资源是否在排除名单里
+     * 资源: requestUri===method
+     * @param request 请求内容
+     * @return 是排除资源true 否则false
+     */
+    boolean isExcludedResource(Object request);
+
+
+    /**
+     * 加载排除资源名单
+     */
+    void loadExcludedResource();
 }

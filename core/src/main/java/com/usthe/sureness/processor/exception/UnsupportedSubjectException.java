@@ -7,7 +7,7 @@ package com.usthe.sureness.processor.exception;
  * @author tomsun28
  * @date 19:23 2019-03-11
  */
-public class UnsupportedSubjectException extends ExtSurenessException {
+public class UnsupportedSubjectException extends SurenessAuthenticationException {
 
     public UnsupportedSubjectException(String message) {
         super(message);

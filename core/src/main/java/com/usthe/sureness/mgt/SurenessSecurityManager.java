@@ -65,22 +65,26 @@ public class SurenessSecurityManager implements SecurityManager {
 
     @Override
     public SubjectSum checkIn(Object var1) throws BaseSurenessException {
+        // 判断请求资源是否是配置的排除过滤资源
+        // 若是直接通行,返回NULL不抛异常
+        if (pathRoleMatcher.isExcludedResource(var1)) {
+            return null;
+        }
+
+        // 创建subject list去一次一次认证鉴权尝试
         List<Subject> subjectList = createSubject(var1);
+        RuntimeException lastException = new UnsupportedSubjectException("this request not create subject by creators");
+
         // 对于创建的几个门面钥匙 一把一把试错
         // 若钥匙都不对 抛异常在最后一把 即最后一把试错的结果为展示的错误信息
-        Iterator<Subject> subjectIterator = subjectList.iterator();
-
-        RuntimeException lastException = new UnsupportedSubjectException("creators not create subject, " +
-                "check load noneSubjectCreator");
-        while (subjectIterator.hasNext()) {
-            Subject thisSubject = subjectIterator.next();
+        for (Subject thisSubject : subjectList) {
             try {
                 return checkIn(thisSubject);
             } catch (BaseSurenessException e) {
                 lastException = e;
             }
         }
-        // 若是 UnsupportedSubjectException 其为配置项异常 不往上抛出
+        // 尝试所有subject都失败 抛出最后一个异常
         throw lastException;
     }
 

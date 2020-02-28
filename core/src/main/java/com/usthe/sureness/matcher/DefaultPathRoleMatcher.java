@@ -6,8 +6,10 @@ import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -27,6 +29,9 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
 
     /** path-role 匹配树存储点 **/
     private final TirePathTree root = new TirePathTree();
+
+    /** 排除资源名单 **/
+    private final Set<String> excludedResource = new HashSet<>(16);
 
     /** 匹配树数据内容提供者 **/
     private PathTreeProvider pathTreeProvider;
@@ -68,6 +73,19 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         Set<String> resources = pathTreeProvider.providePathData();
         root.buildTree(resources);
         isTreeInit = true;
+    }
+
+    @Override
+    public boolean isExcludedResource(Object request) {
+        String requestUri = ((HttpServletRequest) request).getRequestURI();
+        String requestType = ((HttpServletRequest) request).getMethod();
+        String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
+        return excludedResource.contains(targetUri);
+    }
+
+    @Override
+    public void loadExcludedResource() {
+        excludedResource.addAll(pathTreeProvider.provideExcludedResource());
     }
 
     private void checkComponentInit() {

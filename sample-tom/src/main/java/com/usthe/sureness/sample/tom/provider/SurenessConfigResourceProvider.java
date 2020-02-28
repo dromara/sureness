@@ -7,6 +7,7 @@ import com.usthe.sureness.sample.tom.dao.AuthResourceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -30,6 +31,11 @@ public class SurenessConfigResourceProvider implements PathTreeProvider, Surenes
 //            throw new SurenessLoadDataException("can load pathRoleData from database");
 //        }
         return null;
+    }
+
+    @Override
+    public Set<String> provideExcludedResource() {
+        return new HashSet<>();
     }
 
     @Override

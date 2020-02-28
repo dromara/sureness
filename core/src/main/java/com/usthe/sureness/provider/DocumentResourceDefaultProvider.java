@@ -39,6 +39,12 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
     }
 
     @Override
+    public Set<String> provideExcludedResource() {
+        // todo 暂时返回空集合 即不排除
+        return new HashSet<>();
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public SurenessAccount loadAccount(String appId) {
         if (appId == null) {
