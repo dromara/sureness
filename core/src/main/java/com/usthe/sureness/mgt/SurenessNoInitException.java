@@ -1,7 +1,7 @@
 package com.usthe.sureness.mgt;
 
 
-import com.usthe.sureness.util.BaseSurenessException;
+import com.usthe.sureness.processor.exception.BaseSurenessException;
 
 /**
  * not init 异常

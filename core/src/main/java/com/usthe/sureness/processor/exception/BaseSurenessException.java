@@ -1,4 +1,4 @@
-package com.usthe.sureness.util;
+package com.usthe.sureness.processor.exception;
 
 /**
  * @author tomsun28

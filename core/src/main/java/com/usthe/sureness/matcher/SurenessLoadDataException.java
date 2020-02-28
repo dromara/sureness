@@ -1,6 +1,6 @@
 package com.usthe.sureness.matcher;
 
-import com.usthe.sureness.util.BaseSurenessException;
+import com.usthe.sureness.processor.exception.BaseSurenessException;
 
 /**
  * 数据源加载异常

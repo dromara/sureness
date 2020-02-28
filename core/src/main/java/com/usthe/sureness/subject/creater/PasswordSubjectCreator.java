@@ -1,6 +1,6 @@
 package com.usthe.sureness.subject.creater;
 
-import com.usthe.sureness.processor.exception.UnsupportedTokenException;
+import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.PasswordSubject;
@@ -39,11 +39,11 @@ public class PasswordSubjectCreator implements SubjectCreate {
         basicAuth = new String(Base64.getDecoder().decode(basicAuth), StandardCharsets.UTF_8);
         String[] auth = basicAuth.split(":");
         if (auth.length != COUNT_2) {
-            throw new UnsupportedTokenException("can not create token due the request message");
+            throw new UnsupportedSubjectException("can not create token due the request message");
         }
         String username = auth[0];
         if (username == null || "".equals(username)) {
-            throw new UnsupportedTokenException("the appId can not null");
+            throw new UnsupportedSubjectException("the appId can not null");
         }
         String password = auth[1];
         String remoteHost = ((HttpServletRequest) context).getRemoteHost();

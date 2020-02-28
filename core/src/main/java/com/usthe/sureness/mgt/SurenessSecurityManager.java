@@ -2,10 +2,11 @@ package com.usthe.sureness.mgt;
 
 import com.usthe.sureness.matcher.TreePathRoleMatcher;
 import com.usthe.sureness.processor.ProcessorManager;
+import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectFactory;
-import com.usthe.sureness.util.BaseSurenessException;
+import com.usthe.sureness.processor.exception.BaseSurenessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +47,7 @@ public class SurenessSecurityManager implements SecurityManager {
      *
      * @throws SurenessNoInitException check结果false 抛出异常
      */
-    private void checkComponentInit() throws SurenessNoInitException{
+    private void checkComponentInit() throws SurenessNoInitException {
         if (subjectFactory == null || pathRoleMatcher == null ||
                 processorManager == null) {
             logger.error("SecurityManager init error : SurenessSecurityManager not init fill component");
@@ -67,20 +68,17 @@ public class SurenessSecurityManager implements SecurityManager {
         // 对于创建的几个门面钥匙 一把一把试错
         // 若钥匙都不对 抛异常在最后一把 即最后一把试错的结果为展示的错误信息
         Iterator<Subject> subjectIterator = subjectList.iterator();
-        RuntimeException lastException = null;
+        BaseSurenessException lastException = new UnsupportedSubjectException("creators not create subject, " +
+                "check load noneSubjectCreator");
         while (subjectIterator.hasNext()) {
             Subject thisSubject = subjectIterator.next();
             try {
                 return checkIn(thisSubject);
-            } catch (RuntimeException e) {
+            } catch (BaseSurenessException e) {
                 lastException = e;
             }
         }
-        if (lastException == null) {
-            return null;
-        } else {
-            throw lastException;
-        }
+        throw lastException;
     }
 
     @Override

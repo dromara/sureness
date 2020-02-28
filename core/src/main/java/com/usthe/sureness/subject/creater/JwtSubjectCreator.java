@@ -1,6 +1,6 @@
 package com.usthe.sureness.subject.creater;
 
-import com.usthe.sureness.processor.exception.UnsupportedTokenException;
+import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.JwtSubject;
@@ -40,7 +40,7 @@ public class JwtSubjectCreator implements SubjectCreate {
             // jwt token
             String jwtValue = authorization.replace(BEARER, "").trim();
             if (JsonWebTokenUtil.isNotJsonWebToken(jwtValue)) {
-                throw new UnsupportedTokenException("Bearer token now support jwt");
+                throw new UnsupportedSubjectException("Bearer token now support jwt");
             }
             String remoteHost = ((HttpServletRequest) context).getRemoteHost();
             String requestUri = ((HttpServletRequest) context).getRequestURI();

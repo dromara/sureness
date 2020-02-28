@@ -1,9 +1,9 @@
 package com.usthe.sureness.mgt;
 
-import com.usthe.sureness.processor.exception.UnsupportedTokenException;
+import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
-import com.usthe.sureness.util.BaseSurenessException;
+import com.usthe.sureness.processor.exception.BaseSurenessException;
 
 import java.util.List;
 
@@ -39,8 +39,8 @@ public interface SecurityManager {
      *
      * @param var1 内容对象
      * @return com.usthe.sureness.subject.SubjectAuToken
-     * @throws UnsupportedTokenException 不支持的TOKEN时抛出异常
+     * @throws UnsupportedSubjectException 不支持的TOKEN时抛出异常
      */
-     List<Subject> createSubject(Object var1) throws UnsupportedTokenException;
+     List<Subject> createSubject(Object var1) throws UnsupportedSubjectException;
 
 }

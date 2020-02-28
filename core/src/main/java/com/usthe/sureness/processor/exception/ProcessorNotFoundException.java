@@ -1,7 +1,5 @@
 package com.usthe.sureness.processor.exception;
 
-import com.usthe.sureness.util.BaseSurenessException;
-
 /**
  * 认证鉴权中没有找到对应token支持的Processor
  * @author tomsun28
