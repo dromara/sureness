@@ -77,11 +77,6 @@ public class SurenessFilterExample implements Filter {
             CommonUtil.responseWrite(ResponseEntity
                     .status(HttpStatus.FORBIDDEN).body(e5.getMessage()), servletResponse);
             return;
-        } catch (SurenessNoInitException e1) {
-            logger.error("SurenessSecurityManager not init, please check error :", e1);
-            CommonUtil.responseWrite(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(),
-                    servletResponse);
-            return;
         } catch (RuntimeException e) {
             logger.error("other exception happen: ", e);
             CommonUtil.responseWrite(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(),
