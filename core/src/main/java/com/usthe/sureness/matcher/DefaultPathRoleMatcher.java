@@ -39,12 +39,6 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     /** 是否匹配树数据加载完成 **/
     private boolean isTreeInit;
 
-    private DefaultPathRoleMatcher() {}
-
-    public static DefaultPathRoleMatcher getInstance() {
-        return SingleDefaultPathRoleMatcher.INSTANCE;
-    }
-
     @Override
     public void matchRole(Subject auToken) {
         if (!isTreeInit) {

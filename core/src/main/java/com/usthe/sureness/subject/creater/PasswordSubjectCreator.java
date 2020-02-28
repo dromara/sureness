@@ -24,15 +24,12 @@ public class PasswordSubjectCreator implements SubjectCreate {
     public boolean canSupportSubject(Object context) {
         // todo 判断password 的请求特性
         String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
-        if (authorization != null && authorization.startsWith(BASIC)) {
-            return true;
-        } else {
-            return false;
-        }
+        return authorization != null && authorization.startsWith(BASIC);
     }
 
     @Override
     public Subject createSubject(Object context) {
+        // todo 完善
         String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
         //basic auth
         String basicAuth = authorization.replace(BASIC, "").trim();

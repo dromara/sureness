@@ -18,7 +18,7 @@ public class SurenessConfiguration {
      */
     @Bean
     public DefaultSurenessConfig surenessConfig() {
-        return DefaultSurenessConfig.getInstance();
+        return new DefaultSurenessConfig();
     }
 
 }

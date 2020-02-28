@@ -22,15 +22,12 @@ public class JwtSubjectCreator implements SubjectCreate {
     @Override
     public boolean canSupportSubject(Object context) {
         String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
-        if (authorization != null && authorization.startsWith(BEARER)) {
-            return true;
-        } else {
-            return false;
-        }
+        return authorization != null && authorization.startsWith(BEARER);
     }
 
     @Override
     public Subject createSubject(Object context) {
+        // todo 完善
         String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
         // 根据head里面的参数内容，判断其请求认证鉴权的方式，新建对应的token
         // 现在支持 json web token, Basic auth, ...

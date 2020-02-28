@@ -8,11 +8,17 @@ import com.usthe.sureness.processor.support.JwtProcessor;
 import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
 import com.usthe.sureness.provider.DocumentResourceDefaultProvider;
+import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
+import com.usthe.sureness.subject.creater.JwtSubjectCreator;
+import com.usthe.sureness.subject.creater.NoneSubjectCreator;
+import com.usthe.sureness.subject.creater.PasswordSubjectCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +30,7 @@ public class DefaultSurenessConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultSurenessConfig.class);
 
-    private DefaultSurenessConfig() {
+    public DefaultSurenessConfig() {
         this.init();
     }
 
@@ -50,7 +56,7 @@ public class DefaultSurenessConfig {
         }
 
         // pathRoleMatcher init
-        DefaultPathRoleMatcher pathRoleMatcher = DefaultPathRoleMatcher.getInstance();
+        DefaultPathRoleMatcher pathRoleMatcher = new DefaultPathRoleMatcher();
         pathRoleMatcher.setPathTreeProvider(resourceProvider);
         pathRoleMatcher.buildTree();
         pathRoleMatcher.loadExcludedResource();
@@ -58,25 +64,23 @@ public class DefaultSurenessConfig {
             logger.debug("DefaultPathRoleMatcher init");
         }
 
+        // SubjectFactory init
+        SubjectFactory subjectFactory = new SurenessSubjectFactory();
+        subjectFactory.registerSubjectCreator(Arrays.asList(
+                new PasswordSubjectCreator(),
+                new JwtSubjectCreator(),
+                new NoneSubjectCreator()));
+        if (logger.isDebugEnabled()) {
+            logger.debug("SurenessSubjectFactory init");
+        }
+
         // surenessSecurityManager init
         SurenessSecurityManager securityManager = SurenessSecurityManager.getInstance();
         securityManager.setPathRoleMatcher(pathRoleMatcher);
-        SubjectFactory subjectFactory = new SurenessSubjectFactory();
         securityManager.setSubjectFactory(subjectFactory);
         securityManager.setProcessorManager(processorManager);
         if (logger.isDebugEnabled()) {
             logger.debug("SurenessSecurityManager init");
         }
-    }
-
-    /**
-     * 单例静态内部类
-     */
-    public static class SingleDefaultSurenessConfig {
-        private static final DefaultSurenessConfig INSTANCE = new DefaultSurenessConfig();
-    }
-
-    public static DefaultSurenessConfig getInstance() {
-        return SingleDefaultSurenessConfig.INSTANCE;
     }
 }

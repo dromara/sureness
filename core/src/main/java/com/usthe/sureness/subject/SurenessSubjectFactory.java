@@ -28,11 +28,11 @@ public class SurenessSubjectFactory implements SubjectFactory {
     }
 
     @Override
-    public void registerSubjectCreator(SubjectCreate creator) {
+    public void registerSubjectCreator(List<SubjectCreate> creator) {
         if (subjectCreators == null) {
             subjectCreators = new LinkedList<>();
         }
-        subjectCreators.add(creator);
+        subjectCreators.addAll(creator);
     }
 
     @Override

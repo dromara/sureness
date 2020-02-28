@@ -108,6 +108,14 @@ public class SurenessSecurityManager implements SecurityManager {
         return subjectFactory;
     }
 
+    public TreePathRoleMatcher getPathRoleMatcher() {
+        return pathRoleMatcher;
+    }
+
+    public ProcessorManager getProcessorManager() {
+        return processorManager;
+    }
+
     /**
      * 单例静态内部类
      * @author tomsun28

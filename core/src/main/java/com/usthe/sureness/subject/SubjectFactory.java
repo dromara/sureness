@@ -12,20 +12,17 @@ import java.util.List;
 public interface SubjectFactory {
 
     /**
-     * description 通过传入的内容对象信息创建对应的token
-     * 由于sureness-core想在设计的时候不加其他特定的依赖, 这里就不实现
-     * 在httpRequest中获取内容在填充subject了
-     * 填充内容源设计成任何内容对象,不绑定框架
+     * description 通过加载的creators去创建其所支持的subject
      * @param var1 请求对象内容
      * @return com.usthe.sureness.subject.SubjectAuToken return 0 list when can not create subject from var1
      */
     List<Subject> createSubjects(final Object var1);
 
     /**
-     * 向工厂注册subject的creator
-     * @param creator subject creator
+     * 向工厂注册subject的creators
+     * @param creators subject creator list
      */
-    void registerSubjectCreator(SubjectCreate creator);
+    void registerSubjectCreator(List<SubjectCreate> creators);
 
     /**
      * 加载已经存在于工厂的creators出来使用
