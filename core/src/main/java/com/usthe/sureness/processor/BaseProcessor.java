@@ -2,9 +2,9 @@ package com.usthe.sureness.processor;
 
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
-import com.usthe.sureness.subject.SubjectDeclare;
+import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
-import com.usthe.sureness.subject.support.SurenessSubjectDeclare;
+import com.usthe.sureness.subject.support.SurenessSubjectSum;
 import com.usthe.sureness.util.ThreadContext;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public abstract class BaseProcessor implements Processor{
     public abstract Class<?> getSupportAuTokenClass();
 
     @Override
-    public SubjectDeclare process(Subject var) throws SurenessAuthenticationException, SurenessAuthorizationException {
+    public SubjectSum process(Subject var) throws SurenessAuthenticationException, SurenessAuthorizationException {
         authorized(authenticated(var));
         return createSubject(var);
     }
@@ -60,8 +60,8 @@ public abstract class BaseProcessor implements Processor{
      * @return com.usthe.sureness.subject.Subject
      */
     @SuppressWarnings("unchecked")
-    private SubjectDeclare createSubject(Subject var) {
-        SurenessSubjectDeclare subject = SurenessSubjectDeclare.builder()
+    private SubjectSum createSubject(Subject var) {
+        SurenessSubjectSum subject = SurenessSubjectSum.builder()
                 .setPrincipal(String.valueOf(var.getPrincipal()))
                 .setTargetResource(String.valueOf(var.getTargetResource()))
                 .setRoles((List<String>) var.getOwnRoles())

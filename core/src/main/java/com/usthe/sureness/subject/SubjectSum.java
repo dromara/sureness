@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * Subject 只有内容  没有认证鉴权动作
- * 此subject只有在 认证鉴权 成功后下发
+ * Subject 简单概要 包含一些基本信息内容
  * @author tomsun28
  * @date 22:59 2019-01-09
  */
-public interface SubjectDeclare extends Serializable {
+public interface SubjectSum extends Serializable {
 
     /**
      * description 获取认证对象的账户

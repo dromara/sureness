@@ -1,6 +1,6 @@
 package com.usthe.sureness.subject.support;
 
-import com.usthe.sureness.subject.SubjectDeclare;
+import com.usthe.sureness.subject.SubjectSum;
 import java.util.Collection;
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * @author tomsun28
  * @date 22:03 2019-01-22
  */
-public class SurenessSubjectDeclare implements SubjectDeclare {
+public class SurenessSubjectSum implements SubjectSum {
 
     private static final long serialVersionUID = 1L;
     /**
@@ -25,7 +25,7 @@ public class SurenessSubjectDeclare implements SubjectDeclare {
     private String targetResource;
 
 
-    private SurenessSubjectDeclare(Builder builder) {
+    private SurenessSubjectSum(Builder builder) {
         this.principal = builder.principal;
         this.roles = builder.roles;
         this.targetResource = builder.targetResource;
@@ -80,8 +80,8 @@ public class SurenessSubjectDeclare implements SubjectDeclare {
             return this;
         }
 
-        public SurenessSubjectDeclare build() {
-            return new SurenessSubjectDeclare(this);
+        public SurenessSubjectSum build() {
+            return new SurenessSubjectSum(this);
         }
 
 

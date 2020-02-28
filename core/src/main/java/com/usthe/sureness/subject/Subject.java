@@ -1,7 +1,7 @@
 package com.usthe.sureness.subject;
 
 
-import com.usthe.sureness.subject.support.SurenessSubjectDeclare;
+import com.usthe.sureness.subject.support.SurenessSubjectSum;
 import com.usthe.sureness.util.ThreadContext;
 
 import java.io.Serializable;
@@ -63,11 +63,11 @@ public interface Subject extends Serializable {
      * @return com.usthe.sureness.subject.Subject
      */
     @SuppressWarnings("unchecked")
-    default SubjectDeclare generateSubjectContext() {
+    default SubjectSum generateSubjectContext() {
         String principal = (String)getPrincipal();
         List<String> roles = (List<String>)getOwnRoles();
         String targetUri = (String)getTargetResource();
-        SubjectDeclare subject =  SurenessSubjectDeclare.builder()
+        SubjectSum subject =  SurenessSubjectSum.builder()
                 .setTargetResource(targetUri)
                 .setRoles(roles)
                 .setPrincipal(principal)

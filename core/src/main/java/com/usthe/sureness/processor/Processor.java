@@ -2,7 +2,7 @@ package com.usthe.sureness.processor;
 
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
-import com.usthe.sureness.subject.SubjectDeclare;
+import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
 
 /**
@@ -36,5 +36,5 @@ public interface Processor {
      * @throws SurenessAuthorizationException when
      * @return com.usthe.sureness.subject.Subject
      */
-    SubjectDeclare process(Subject var) throws SurenessAuthenticationException, SurenessAuthorizationException;
+    SubjectSum process(Subject var) throws SurenessAuthenticationException, SurenessAuthorizationException;
 }

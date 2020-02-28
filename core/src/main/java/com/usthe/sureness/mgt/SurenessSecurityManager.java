@@ -2,8 +2,7 @@ package com.usthe.sureness.mgt;
 
 import com.usthe.sureness.matcher.TreePathRoleMatcher;
 import com.usthe.sureness.processor.ProcessorManager;
-import com.usthe.sureness.processor.exception.UnsupportedTokenException;
-import com.usthe.sureness.subject.SubjectDeclare;
+import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.util.BaseSurenessException;
@@ -56,14 +55,14 @@ public class SurenessSecurityManager implements SecurityManager {
     }
 
     @Override
-    public SubjectDeclare checkIn(Subject token) throws BaseSurenessException {
+    public SubjectSum checkIn(Subject token) throws BaseSurenessException {
         checkComponentInit();
         pathRoleMatcher.matchRole(token);
         return processorManager.process(token);
     }
 
     @Override
-    public SubjectDeclare checkIn(Object var1) throws BaseSurenessException {
+    public SubjectSum checkIn(Object var1) throws BaseSurenessException {
         List<Subject> subjectList = createSubject(var1);
         // 对于创建的几个门面钥匙 一把一把试错
         // 若钥匙都不对 抛异常在最后一把 即最后一把试错的结果为展示的错误信息

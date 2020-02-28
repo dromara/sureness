@@ -9,9 +9,8 @@ import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
-import com.usthe.sureness.processor.exception.UnsupportedTokenException;
 import com.usthe.sureness.sample.bootstrap.util.CommonUtil;
-import com.usthe.sureness.subject.SubjectDeclare;
+import com.usthe.sureness.subject.SubjectSum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -54,7 +53,7 @@ public class SurenessFilterExample implements Filter {
             throws IOException, ServletException {
 
         try {
-            SubjectDeclare subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
+            SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
             // 考虑将生成的subject信息塞入request
             servletRequest.setAttribute("subject", subject);
             // todo UnsupportedTokenException request没有创建出对应的subject

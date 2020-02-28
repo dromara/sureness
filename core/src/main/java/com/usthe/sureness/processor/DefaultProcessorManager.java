@@ -4,7 +4,7 @@ import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
-import com.usthe.sureness.subject.SubjectDeclare;
+import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +26,11 @@ public class DefaultProcessorManager implements ProcessorManager {
     }
 
     @Override
-    public SubjectDeclare process(Subject auToken) throws SurenessAuthenticationException, SurenessAuthorizationException {
+    public SubjectSum process(Subject auToken) throws SurenessAuthenticationException, SurenessAuthorizationException {
         checkComponentInit();
         SurenessAuthenticationException lastAuthenticationException = null;
         SurenessAuthorizationException lastAuthorizationException = null;
-        SubjectDeclare subjectResult = null;
+        SubjectSum subjectResult = null;
         Class<? extends Subject> auTokenClazz = auToken.getClass();
 
         // 对process链  一个process成功即可

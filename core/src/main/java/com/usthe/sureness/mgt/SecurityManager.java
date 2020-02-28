@@ -1,7 +1,7 @@
 package com.usthe.sureness.mgt;
 
 import com.usthe.sureness.processor.exception.UnsupportedTokenException;
-import com.usthe.sureness.subject.SubjectDeclare;
+import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.util.BaseSurenessException;
 
@@ -22,7 +22,7 @@ public interface SecurityManager {
      * @return com.usthe.sureness.subject.Subject
      * @throws BaseSurenessException 抛出不同的异常
      */
-    SubjectDeclare checkIn(Subject token) throws BaseSurenessException;
+    SubjectSum checkIn(Subject token) throws BaseSurenessException;
 
     /**
      * description 如上 封装 createSubjectAuToken by object
@@ -31,7 +31,7 @@ public interface SecurityManager {
      * @return com.usthe.sureness.subject.Subject, return null when not match any subject type
      * @throws BaseSurenessException 抛出不同的异常
      */
-    SubjectDeclare checkIn(Object var1) throws BaseSurenessException;
+    SubjectSum checkIn(Object var1) throws BaseSurenessException;
 
     /**
      * description 传入请求信息,信息里有对应的请求认证消息，请求资源路径等 eg: httpRequest

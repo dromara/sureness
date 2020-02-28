@@ -1,6 +1,6 @@
 package com.usthe.sureness.processor;
 
-import com.usthe.sureness.subject.SubjectDeclare;
+import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
 
 /**
@@ -16,5 +16,5 @@ public interface ProcessorManager {
      * @param auToken 1
      * @return com.usthe.sureness.subject.Subject
      */
-    SubjectDeclare process(Subject auToken);
+    SubjectSum process(Subject auToken);
 }
