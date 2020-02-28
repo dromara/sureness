@@ -1,6 +1,5 @@
 package com.usthe.sureness.sample.bootstrap;
 
-import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.processor.exception.DisabledAccountException;
 import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
