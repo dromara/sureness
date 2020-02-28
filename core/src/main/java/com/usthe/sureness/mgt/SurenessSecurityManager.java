@@ -10,7 +10,6 @@ import com.usthe.sureness.processor.exception.BaseSurenessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -58,13 +57,13 @@ public class SurenessSecurityManager implements SecurityManager {
 
     @Override
     public SubjectSum checkIn(Subject token) throws BaseSurenessException {
-        checkComponentInit();
         pathRoleMatcher.matchRole(token);
         return processorManager.process(token);
     }
 
     @Override
     public SubjectSum checkIn(Object var1) throws BaseSurenessException {
+        checkComponentInit();
         // 判断请求资源是否是配置的排除过滤资源
         // 若是直接通行,返回NULL不抛异常
         if (pathRoleMatcher.isExcludedResource(var1)) {

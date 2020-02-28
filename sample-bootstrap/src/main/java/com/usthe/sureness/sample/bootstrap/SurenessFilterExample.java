@@ -8,6 +8,7 @@ import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
+import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
 import com.usthe.sureness.sample.bootstrap.util.CommonUtil;
 import com.usthe.sureness.subject.SubjectSum;
 import org.slf4j.Logger;
@@ -56,7 +57,7 @@ public class SurenessFilterExample implements Filter {
             // 考虑将生成的subject信息塞入request
             servletRequest.setAttribute("subject", subject);
             // todo UnsupportedTokenException request没有创建出对应的subject
-        } catch (ProcessorNotFoundException | UnknownAccountException e4) {
+        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
             logger.debug("this request is illegal: ", e4);
             CommonUtil.responseWrite(ResponseEntity
                     .status(HttpStatus.BAD_REQUEST).body(e4.getMessage()), servletResponse);
