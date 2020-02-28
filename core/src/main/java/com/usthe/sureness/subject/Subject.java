@@ -58,12 +58,12 @@ public interface Subject extends Serializable {
     void setSupportRoles(Object var1);
 
     /**
-     * description 通过 自身subject内容创建对应精简内容的subjectContext
+     * description 通过 自身subject内容创建对应精简内容的subjectSum
      *
      * @return com.usthe.sureness.subject.Subject
      */
     @SuppressWarnings("unchecked")
-    default SubjectSum generateSubjectContext() {
+    default SubjectSum generateSubjectSummary() {
         String principal = (String)getPrincipal();
         List<String> roles = (List<String>)getOwnRoles();
         String targetUri = (String)getTargetResource();
