@@ -59,12 +59,12 @@ public class SurenessFilterExample implements Filter {
                 servletRequest.setAttribute("subject", subject);
             }
         } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
-            logger.debug("this request is illegal: ", e4);
+            logger.debug("this request is illegal");
             CommonUtil.responseWrite(ResponseEntity
                     .status(HttpStatus.BAD_REQUEST).body(e4.getMessage()), servletResponse);
             return;
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            logger.debug("the account is disabled: ", e2);
+            logger.debug("the account is disabled");
             CommonUtil.responseWrite(ResponseEntity
                     .status(HttpStatus.FORBIDDEN).body(e2.getMessage()), servletResponse);
             return;
