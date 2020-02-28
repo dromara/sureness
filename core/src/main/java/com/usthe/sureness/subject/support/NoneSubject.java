@@ -5,7 +5,7 @@ import com.usthe.sureness.subject.Subject;
 import java.util.List;
 
 /**
- * 无账号的TOKEN
+ * 无认证信息的subject
  * @author tomsun28
  * @date 21:03 2019-05-26
  */

@@ -5,6 +5,8 @@ import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -20,6 +22,8 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     private static final String LEFT_CON = "[";
 
     private static final String RIGHT_CON = "]";
+
+    private static final String NULL_ROLE = "[]";
 
     /** path-role 匹配树存储点 **/
     private final TirePathTree root = new TirePathTree();
@@ -43,13 +47,16 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> root tree is not init");
         }
         String targetResource = (String) auToken.getTargetResource();
-        //[role1,role2,role3], [role1], null
+        //[role1,role2,role3], [role1], [], null
         String matchRoleString = root.searchPathFilterRoles(targetResource);
         if (matchRoleString != null && matchRoleString.startsWith(LEFT_CON)
-                && matchRoleString.endsWith(RIGHT_CON)
-                && matchRoleString.length() != 2) {
-            String[] roles = matchRoleString.substring(1, matchRoleString.length()-1).split(",");
-            auToken.setSupportRoles(Arrays.asList(roles));
+                && matchRoleString.endsWith(RIGHT_CON)) {
+            if (NULL_ROLE.equals(matchRoleString)) {
+                auToken.setSupportRoles(new ArrayList<>(0));
+            } else {
+                String[] roles = matchRoleString.substring(1, matchRoleString.length()-1).split(",");
+                auToken.setSupportRoles(Arrays.asList(roles));
+            }
         }
     }
 

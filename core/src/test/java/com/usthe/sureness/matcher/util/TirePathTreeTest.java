@@ -6,7 +6,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**  path tree util test
@@ -43,8 +45,9 @@ public class TirePathTreeTest {
         paths.add("/api/*/mom/ha===put===[role2,role3,role4]");
         paths.add("/api/mi/**===put===[role2,role3,role4]");
         paths.add("/api/mi/**===put===[role2,role4]");
+        paths.add("/api/demo/book===get===[]");
         root.buildTree(paths);
-        Assert.assertEquals(10, root.getResourceNum());
+        Assert.assertEquals(11, root.getResourceNum());
     }
 
     @Test
@@ -64,6 +67,7 @@ public class TirePathTreeTest {
         Assert.assertEquals(var5, "[role2,role3,role4]");
         String var6 = root.searchPathFilterRoles("/api/mi/mom/ha===put");
         Assert.assertEquals(var6, "[role2,role3,role4]");
-
+        String var7 = root.searchPathFilterRoles("/api/demo/book===get");
+        Assert.assertEquals(var7, "[]");
     }
 }

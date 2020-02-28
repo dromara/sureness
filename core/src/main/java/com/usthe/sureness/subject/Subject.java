@@ -44,6 +44,7 @@ public interface Subject extends Serializable {
 
     /**
      * description 获取token 在url-role树中匹配出来的roles
+     * null表示没有匹配出url，数据集合为0表示匹配出来需要的role为空，即支持所有role
      * 访问 getTargetResource() 所支持的 roles
      *
      * @return 访问此资源所需的角色信息
