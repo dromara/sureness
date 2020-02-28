@@ -14,5 +14,5 @@ public interface PathTreeProvider {
      * @return uri资源set
      * @throws SurenessLoadDataException when加载数据异常
      */
-    Set<String> providePathData() throws SurenessLoadDataException;
+    Set<String> providePathData();
 }

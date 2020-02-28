@@ -1,14 +1,12 @@
 package com.usthe.sureness.sample.tom.provider;
 
 import com.usthe.sureness.matcher.PathTreeProvider;
-import com.usthe.sureness.matcher.SurenessLoadDataException;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.sample.tom.dao.AuthResourceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -23,7 +21,7 @@ public class SurenessConfigResourceProvider implements PathTreeProvider, Surenes
     private AuthResourceDao authResourceDao;
 
     @Override
-    public Set<String> providePathData() throws SurenessLoadDataException {
+    public Set<String> providePathData() {
 
 //        Optional<Set<String>> pathOptional = authResourceDao.getPathRoleData();
 //        if (pathOptional.isPresent()) {

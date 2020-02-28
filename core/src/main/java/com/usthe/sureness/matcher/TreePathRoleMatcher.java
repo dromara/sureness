@@ -15,13 +15,13 @@ public interface TreePathRoleMatcher {
      * @param auToken 根据接入对象所创建的TOKEN,成功后会将其所需角色塞入TOKEN
      * @throws SurenessNoInitException when matcher not init
      */
-    void matchRole(Subject auToken) throws SurenessNoInitException;
+    void matchRole(Subject auToken);
 
     /**
      * 建立起匹配树
      * @throws SurenessNoInitException when matcher not init
      * @throws SurenessLoadDataException when 数据源 not init
      */
-    void buildTree() throws SurenessNoInitException, SurenessLoadDataException;
+    void buildTree();
 
 }

@@ -28,7 +28,7 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
     private static final String ROLE = "role";
 
     @Override
-    public Set<String> providePathData() throws SurenessLoadDataException {
+    public Set<String> providePathData() {
         try {
             DocumentResourceEntity entity = DocumentResourceAccess.loadConfig();
             return new HashSet<>(entity.getResourceRole());

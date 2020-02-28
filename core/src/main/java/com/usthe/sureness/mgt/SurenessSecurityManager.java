@@ -47,10 +47,11 @@ public class SurenessSecurityManager implements SecurityManager {
      *
      * @throws SurenessNoInitException check结果false 抛出异常
      */
-    private void checkComponentInit() throws SurenessNoInitException {
+    private void checkComponentInit() {
         if (subjectFactory == null || pathRoleMatcher == null ||
                 processorManager == null) {
             logger.error("SecurityManager init error : SurenessSecurityManager not init fill component");
+            // 组件自己的相关异常或者配置行异常不往上抛出
             throw new SurenessNoInitException("SurenessSecurityManager not init fill component");
         }
     }

@@ -41,7 +41,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     }
 
     @Override
-    public void matchRole(Subject auToken) throws SurenessNoInitException {
+    public void matchRole(Subject auToken) {
         if (!isTreeInit) {
             logger.error("DefaultPathRoleMatcher -> root tree is not init");
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> root tree is not init");
@@ -61,7 +61,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     }
 
     @Override
-    public void buildTree() throws SurenessNoInitException, SurenessLoadDataException {
+    public void buildTree() {
         isTreeInit = false;
         checkComponentInit();
         clearTree();
@@ -70,7 +70,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         isTreeInit = true;
     }
 
-    private void checkComponentInit() throws SurenessNoInitException{
+    private void checkComponentInit() {
         if (pathTreeProvider == null) {
             throw new SurenessNoInitException("DefaultPathRoleMatcher init error : component init not complete");
         }
