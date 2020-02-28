@@ -8,16 +8,13 @@ import com.usthe.sureness.processor.support.JwtProcessor;
 import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
 import com.usthe.sureness.provider.DocumentResourceDefaultProvider;
-import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
 import com.usthe.sureness.subject.creater.JwtSubjectCreator;
-import com.usthe.sureness.subject.creater.NoneSubjectCreator;
 import com.usthe.sureness.subject.creater.PasswordSubjectCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -68,8 +65,7 @@ public class DefaultSurenessConfig {
         SubjectFactory subjectFactory = new SurenessSubjectFactory();
         subjectFactory.registerSubjectCreator(Arrays.asList(
                 new PasswordSubjectCreator(),
-                new JwtSubjectCreator(),
-                new NoneSubjectCreator()));
+                new JwtSubjectCreator()));
         if (logger.isDebugEnabled()) {
             logger.debug("SurenessSubjectFactory init");
         }
