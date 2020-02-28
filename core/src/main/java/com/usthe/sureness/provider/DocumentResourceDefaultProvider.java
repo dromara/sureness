@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,15 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
 
     @Override
     public Set<String> provideExcludedResource() {
-        // todo 暂时返回空集合 即不排除
+        try {
+            DocumentResourceEntity entity = DocumentResourceAccess.loadConfig();
+            List<String> resource = entity.getExcludedResource();
+            if (resource != null) {
+                return new HashSet<>(resource);
+            }
+        } catch (IOException e) {
+            logger.error("load config data from yaml file error: ", e);
+        }
         return new HashSet<>();
     }
 

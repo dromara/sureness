@@ -12,6 +12,8 @@ public class DocumentResourceEntity {
 
     private List<String> resourceRole;
 
+    private List<String> excludedResource;
+
     private List<Map<String, Object>> account;
 
     public List<String> getResourceRole() {
@@ -28,5 +30,13 @@ public class DocumentResourceEntity {
 
     public void setAccount(List<Map<String, Object>> account) {
         this.account = account;
+    }
+
+    public List<String> getExcludedResource() {
+        return excludedResource;
+    }
+
+    public void setExcludedResource(List<String> excludedResource) {
+        this.excludedResource = excludedResource;
     }
 }

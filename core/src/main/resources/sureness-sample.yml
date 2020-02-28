@@ -7,6 +7,9 @@ resourceRole:
 - /api/mi/**===put===[role2,role3,role4]
 - /api/v1/getSource1===get===[role1]
 - /api/v2/getSource2/*/*===get===[role2]
+excludedResource:
+  - /api/v3/host===get
+  - /api/v3/book===get
 account:
 - appId: admin
   # 如果填写了加密盐--salt,则credential为MD5(password+salt)的32位结果
