@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
+ * 用户登录认证controller
  * @author tomsun28
  * @date 13:11 2019-05-26
  */
@@ -32,6 +33,12 @@ public class AccountController {
      */
     private SurenessAccountProvider accountProvider = new DocumentResourceDefaultProvider();
 
+    /**
+     * 登录，此提供一个用户登录获取jwt接口.方便用jwt测试其他接口
+     * @param requestBody 请求体
+     * @return 响应信息
+     *
+     */
     @PostMapping("/api/v1/account/auth")
     public ResponseEntity<Object> login(@RequestBody Map<String,String> requestBody) {
         if (requestBody == null || !requestBody.containsKey("appId")

@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 模拟资源
+ * 模拟资源controller,供测试调用
  * @author tomsun28
  * @date 17:35 2019-05-12
  */
