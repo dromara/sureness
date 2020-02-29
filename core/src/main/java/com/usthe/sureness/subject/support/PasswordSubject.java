@@ -5,7 +5,7 @@ import com.usthe.sureness.subject.Subject;
 import java.util.List;
 
 /**
- * 支持 BASIC AUTH 的TOKEN
+ * 支持 BASIC AUTH和其他账户密码认证鉴权形式的Subject
  * @author tomsun28
  * @date 12:42 2019-03-14
  */

@@ -11,7 +11,7 @@ import com.usthe.sureness.provider.DocumentResourceDefaultProvider;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
 import com.usthe.sureness.subject.creater.JwtSubjectCreator;
-import com.usthe.sureness.subject.creater.PasswordSubjectCreator;
+import com.usthe.sureness.subject.creater.BasicAuthPasswordSubjectCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,7 +64,7 @@ public class DefaultSurenessConfig {
         // SubjectFactory init
         SubjectFactory subjectFactory = new SurenessSubjectFactory();
         subjectFactory.registerSubjectCreator(Arrays.asList(
-                new PasswordSubjectCreator(),
+                new BasicAuthPasswordSubjectCreator(),
                 new JwtSubjectCreator()));
         if (logger.isDebugEnabled()) {
             logger.debug("SurenessSubjectFactory init");

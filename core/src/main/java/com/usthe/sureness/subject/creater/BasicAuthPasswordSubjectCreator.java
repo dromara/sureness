@@ -11,13 +11,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * PasswordSubject 的创建者
+ * 支持通过basic auth 创建PasswordSubject 的创建者
  * @author tomsun28
  * @date 23:53 2020-02-27
  */
-public class PasswordSubjectCreator implements SubjectCreate {
+public class BasicAuthPasswordSubjectCreator implements SubjectCreate {
 
-    private static final Logger logger = LoggerFactory.getLogger(PasswordSubjectCreator.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicAuthPasswordSubjectCreator.class);
 
     private static final String AUTHORIZATION = "Authorization";
     private static final String BASIC = "Basic";
