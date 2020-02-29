@@ -2,6 +2,7 @@
 
 sureness 10分钟例子项目  
 
+- 基于`springboot`
 - 从默认的配置文件`sureness.yml`加载账户信息,资源角色,过滤资源等信息  
 - 使用默认的`sureness-config`  
 - 使用默认的`jwt,basic auth`方式认证鉴权  
