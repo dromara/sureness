@@ -24,7 +24,7 @@ public class NoneSubjectCreator implements SubjectCreate {
         String remoteHost = ((HttpServletRequest) context).getRemoteHost();
         String requestUri = ((HttpServletRequest) context).getRequestURI();
         String requestType = ((HttpServletRequest) context).getMethod();
-        String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
+        String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
         String userAgent = SurenessCommonUtil.findUserAgent((HttpServletRequest) context);
         return NoneSubject.builder().setRemoteHost(remoteHost)
                 .setTargetUri(targetUri)

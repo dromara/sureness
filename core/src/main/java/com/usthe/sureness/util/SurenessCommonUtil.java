@@ -1,6 +1,5 @@
 package com.usthe.sureness.util;
 
-import com.usthe.sureness.subject.Subject;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
@@ -22,17 +21,6 @@ public class SurenessCommonUtil {
 
     private static final String RANDOM_CHAR = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-    /**
-     * description 通过传入的Object来创建具有基本信息的token
-     * 基本信息： url===method
-     * 此方法在web模块实现
-     * @param var1 1
-     * @return com.usthe.sureness.subject.SubjectAuToken
-     */
-    public static Subject createSubjectAuToken(Object var1) {
-        return null;
-    }
-
     public static String findUserAgent(HttpServletRequest request) {
         String userAgent = request.getHeader(USER_AGENT);
         if (userAgent == null || "".equals(userAgent)) {
@@ -50,7 +38,6 @@ public class SurenessCommonUtil {
         } else {
             userAgent = UNKNOWN;
         }
-        // TODO more
         return userAgent;
     }
 
