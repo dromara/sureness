@@ -1,9 +1,10 @@
 package com.usthe.sureness.subject.creater;
 
-import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.PasswordSubject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
@@ -16,37 +17,48 @@ import java.util.Base64;
  */
 public class PasswordSubjectCreator implements SubjectCreate {
 
+    private static final Logger logger = LoggerFactory.getLogger(PasswordSubjectCreator.class);
+
     private static final String AUTHORIZATION = "Authorization";
     private static final String BASIC = "Basic";
     private static final int COUNT_2 = 2;
 
     @Override
     public boolean canSupportSubject(Object context) {
-        // todo 判断password 的请求特性
-        String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
-        return authorization != null && authorization.startsWith(BASIC);
+        // basic auth判断
+        if (context instanceof HttpServletRequest) {
+            String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
+            return authorization != null && authorization.startsWith(BASIC);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public Subject createSubject(Object context) {
-        // todo 完善
         String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
         //basic auth
         String basicAuth = authorization.replace(BASIC, "").trim();
         basicAuth = new String(Base64.getDecoder().decode(basicAuth), StandardCharsets.UTF_8);
         String[] auth = basicAuth.split(":");
         if (auth.length != COUNT_2) {
-            throw new UnsupportedSubjectException("can not create token due the request message");
+            if (logger.isInfoEnabled()) {
+                logger.info("can not create basic auth PasswordSubject by this request message");
+            }
+            return null;
         }
         String username = auth[0];
         if (username == null || "".equals(username)) {
-            throw new UnsupportedSubjectException("the appId can not null");
+            if (logger.isInfoEnabled()) {
+                logger.info("can not create basic auth PasswordSubject by this request message, appId can not null");
+            }
+            return null;
         }
         String password = auth[1];
         String remoteHost = ((HttpServletRequest) context).getRemoteHost();
         String requestUri = ((HttpServletRequest) context).getRequestURI();
         String requestType = ((HttpServletRequest) context).getMethod();
-        String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
+        String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
         return PasswordSubject.builder(username, password)
                 .setRemoteHost(remoteHost)
                 .setTargetResource(targetUri)
