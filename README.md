@@ -44,6 +44,41 @@
 compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2'
 ```
 
+入口,一般放在拦截所有请求的`filter`:  
+```
+SurenessSecurityManager.getInstance().checkIn(servletRequest)
+```
+
+认证鉴权成功直接通过,失败抛出特定异常,捕获异常: 
+
+```
+        try {
+            SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
+        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
+            // 账户创建相关异常 
+        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
+            // 账户禁用相关异常
+        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
+            // 认证失败相关异常
+        } catch (UnauthorizedException e5) {
+            // 鉴权失败相关异常
+        } catch (RuntimeException e) {
+            // 其他自定义异常
+        }
+```
+
+sureness异常                              | 异常描述
+---                                       | ---
+ProcessorNotFoundException                | 未找到支持此subject的processor
+UnknownAccountException                   | 不存在此账户
+UnSupportedSubjectException               | 不支持的请求,未创建出subject
+DisabledAccountException                  | 账户禁用
+ExcessiveAttemptsException                | 账户尝试认证次数过多
+IncorrectCredentialsException             | 密钥错误
+ExpiredCredentialsException               | 密钥认证过期
+UnauthorizedException                     | 没有权限访问此资源
+
+
 若权限配置数据来自文本,请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](sample-bootstrap)  
 
 若权限配置数据来自数据库,请参考[使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
