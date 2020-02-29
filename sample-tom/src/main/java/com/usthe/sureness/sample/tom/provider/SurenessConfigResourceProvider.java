@@ -23,13 +23,6 @@ public class SurenessConfigResourceProvider implements PathTreeProvider, Surenes
 
     @Override
     public Set<String> providePathData() {
-
-//        Optional<Set<String>> pathOptional = authResourceDao.getPathRoleData();
-//        if (pathOptional.isPresent()) {
-//            return pathOptional.get();
-//        } else {
-//            throw new SurenessLoadDataException("can load pathRoleData from database");
-//        }
         return null;
     }
 

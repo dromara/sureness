@@ -50,7 +50,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public Optional<Page<AuthResourceDO>> getPageResource(Integer currentPage, Integer pageSize) {
-        PageRequest pageRequest = new PageRequest(currentPage, pageSize);
+        PageRequest pageRequest = PageRequest.of(currentPage, pageSize);
         Page<AuthResourceDO> page = authResourceDao.findAll(pageRequest);
         return Optional.of(page);
     }

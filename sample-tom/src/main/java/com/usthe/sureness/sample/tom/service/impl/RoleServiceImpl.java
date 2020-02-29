@@ -50,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Optional<Page<AuthRoleDO>> getPageRole(Integer currentPage, Integer pageSize) {
-        PageRequest pageRequest = new PageRequest(currentPage, pageSize);
+        PageRequest pageRequest = PageRequest.of(currentPage, pageSize);
         Page<AuthRoleDO> page = authRoleDao.findAll(pageRequest);
         return Optional.of(page);
     }
