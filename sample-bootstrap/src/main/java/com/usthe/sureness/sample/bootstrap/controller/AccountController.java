@@ -9,6 +9,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,10 +33,13 @@ public class AccountController {
     private SurenessAccountProvider accountProvider = new DocumentResourceDefaultProvider();
 
     @PostMapping("/api/v1/account/auth")
-    public ResponseEntity<Object> login(@RequestParam String appId, @RequestParam String password) {
-        if (appId == null || "".equals(appId)) {
+    public ResponseEntity<Object> login(@RequestBody Map<String,String> requestBody) {
+        if (requestBody == null || !requestBody.containsKey("appId")
+                || !requestBody.containsKey("password")) {
             return ResponseEntity.badRequest().build();
         }
+        String appId = requestBody.get("appId");
+        String password = requestBody.get("password");
         SurenessAccount account = accountProvider.loadAccount(appId);
         if (account == null || account.isDisabledAccount() || account.isExcessiveAttempts()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

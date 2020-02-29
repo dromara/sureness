@@ -40,6 +40,7 @@ public class JwtProcessor extends BaseProcessor {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
         String jwt = (String) var.getCredentials();
         if (JsonWebTokenUtil.isNotJsonWebToken(jwt)) {
@@ -65,10 +66,9 @@ public class JwtProcessor extends BaseProcessor {
         }
         JwtSubject.Builder builder = JwtSubject.builder(var)
                 .setPrincipal(claims.getSubject());
-        String ownRoles = claims.get("roles", String.class);
+        List<String> ownRoles = claims.get("roles", List.class);
         if (ownRoles != null) {
-            List<String> roleList = Arrays.asList(ownRoles.split(","));
-            builder.setOwnRoles(roleList);
+            builder.setOwnRoles(ownRoles);
         }
         return builder.build();
     }
