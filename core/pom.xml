@@ -5,7 +5,7 @@
     <parent>
         <artifactId>sureness</artifactId>
         <groupId>com.usthe.sureness</groupId>
-        <version>0.0.1</version>
+        <version>0.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +13,7 @@
     <name>sureness</name>
     <url>https://github.com/tomsun28/sureness</url>
     <description>The Protection For Restful Api</description>
-    <version>0.0.1.1</version>
+    <version>0.0.2</version>
 
     <licenses>
         <license>
