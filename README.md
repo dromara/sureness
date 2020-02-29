@@ -6,7 +6,7 @@
 
 > `sureness` 是作者在使用`java`权限框架`shiro`之后,吸取其良好的设计加上一些自己想法实现的全新认证鉴权项目  
 >  面对`restful api`的认证鉴权,基于`RABC`主要关注于对`restful api`的保护  
->  原生支持 `restful api`  
+>  原生支持 `restful api, websocket protection`  
 >  原生支持动态权限(权限配置的动态加载)  
 >  原生支持 `jwt`, `Basic Auth` ... 可扩展自定义支持的认证方式  
 >  基于改进的字典匹配树大大提高性能  
