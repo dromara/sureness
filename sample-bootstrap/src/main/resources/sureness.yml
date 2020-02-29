@@ -14,6 +14,7 @@ resourceRole:
 excludedResource:
   - /api/v3/host===get
   - /api/v3/book===get
+  - /api/v1/account/auth===post
 
 account:
   - appId: admin

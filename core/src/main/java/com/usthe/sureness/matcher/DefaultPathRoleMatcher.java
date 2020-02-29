@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 默认的path - role 匹配 matcher实现
@@ -73,13 +74,17 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     public boolean isExcludedResource(Object request) {
         String requestUri = ((HttpServletRequest) request).getRequestURI();
         String requestType = ((HttpServletRequest) request).getMethod();
-        String targetUri = requestUri.concat("===").concat(requestType.toUpperCase());
+        String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
         return excludedResource.contains(targetUri);
     }
 
     @Override
     public void loadExcludedResource() {
-        excludedResource.addAll(pathTreeProvider.provideExcludedResource());
+        Set<String> provideResource = pathTreeProvider.provideExcludedResource();
+        if (provideResource != null) {
+            provideResource = provideResource.stream().map(String::toLowerCase).collect(Collectors.toSet());
+            excludedResource.addAll(provideResource);
+        }
     }
 
     private void checkComponentInit() {

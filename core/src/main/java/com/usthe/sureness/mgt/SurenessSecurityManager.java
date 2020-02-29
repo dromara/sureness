@@ -72,7 +72,8 @@ public class SurenessSecurityManager implements SecurityManager {
 
         // 创建subject list去一次一次认证鉴权尝试
         List<Subject> subjectList = createSubject(var1);
-        RuntimeException lastException = new UnsupportedSubjectException("this request not create subject by creators");
+        RuntimeException lastException = new UnsupportedSubjectException("this request can not " +
+                "create subject by creators");
 
         // 对于创建的几个门面钥匙 一把一把试错
         // 若钥匙都不对 抛异常在最后一把 即最后一把试错的结果为展示的错误信息
