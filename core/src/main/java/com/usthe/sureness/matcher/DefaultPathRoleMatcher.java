@@ -105,12 +105,4 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     public void setPathTreeProvider(PathTreeProvider pathTreeProvider) {
         this.pathTreeProvider = pathTreeProvider;
     }
-    /**
-     * 内部单例静态类
-     * @author tomsun28
-     * @date 20:50 2019-03-10
-     */
-    private static class SingleDefaultPathRoleMatcher {
-        private static final DefaultPathRoleMatcher INSTANCE = new DefaultPathRoleMatcher();
-    }
 }
