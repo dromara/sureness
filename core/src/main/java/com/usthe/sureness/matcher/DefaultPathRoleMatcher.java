@@ -66,8 +66,13 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         checkComponentInit();
         clearTree();
         Set<String> resources = pathTreeProvider.providePathData();
-        root.buildTree(resources);
-        isTreeInit = true;
+        if (resources != null) {
+            resources = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
+            root.buildTree(resources);
+            isTreeInit = true;
+        } else {
+            isTreeInit = false;
+        }
     }
 
     @Override

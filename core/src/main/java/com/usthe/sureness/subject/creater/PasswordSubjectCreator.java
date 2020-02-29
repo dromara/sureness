@@ -26,6 +26,7 @@ public class PasswordSubjectCreator implements SubjectCreate {
     @Override
     public boolean canSupportSubject(Object context) {
         // basic auth判断
+        // ("Authorization", "Basic YWRtaW46YWRtaW4=")        --- basic auth
         if (context instanceof HttpServletRequest) {
             String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
             return authorization != null && authorization.startsWith(BASIC);
