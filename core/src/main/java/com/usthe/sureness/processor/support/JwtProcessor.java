@@ -52,14 +52,14 @@ public class JwtProcessor extends BaseProcessor {
             // JWT令牌错误
             if (logger.isDebugEnabled()) {
                 logger.debug("jwtProcessor authenticated fail, user: {}, jwt: {}",
-                        var.getPrincipal(), jwt, e);
+                        var.getPrincipal(), jwt);
             }
             throw new IncorrectCredentialsException("this jwt error:" + e.getMessage());
         } catch (ExpiredJwtException e) {
             // JWT 令牌过期
             if (logger.isDebugEnabled()) {
                 logger.debug("jwtProcessor authenticated expired, user: {}, jwt: {}",
-                        var.getPrincipal(), jwt, e);
+                        var.getPrincipal(), jwt);
             }
             throw new ExpiredCredentialsException("this jwt has expired");
         }
