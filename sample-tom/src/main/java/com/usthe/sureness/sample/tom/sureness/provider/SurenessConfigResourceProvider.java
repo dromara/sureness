@@ -1,4 +1,4 @@
-package com.usthe.sureness.sample.tom.provider;
+package com.usthe.sureness.sample.tom.sureness.provider;
 
 import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.provider.SurenessAccount;
