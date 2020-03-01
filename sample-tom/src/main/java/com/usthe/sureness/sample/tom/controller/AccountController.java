@@ -36,7 +36,7 @@ public class AccountController {
     public ResponseEntity<Message> issueToken(@RequestBody @Validated Account account) {
         boolean authenticatedFlag = accountService.authenticateAccount(account);
         if (!authenticatedFlag) {
-            Message message = Message.builder().errorType("authenticated fail")
+            Message message = Message.builder()
                     .errorMsg("username or password not incorrect").build();
             if (log.isDebugEnabled()) {
                 log.debug("account: {} authenticated fail", account);
@@ -58,11 +58,6 @@ public class AccountController {
 
     @PostMapping("/register")
     public ResponseEntity<Message> accountRegister(@RequestBody @Validated Account account) {
-        if (accountService.isAccountExist(account)) {
-            Message message = Message.builder().errorType("register fail")
-                    .errorMsg("username already exist").build();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
-        }
         if (accountService.registerAccount(account)) {
             Map<String, String> responseData = Collections.singletonMap("success", "sign up success, login after");
             Message message = Message.builder().data(responseData).build();
@@ -71,10 +66,9 @@ public class AccountController {
             }
             return ResponseEntity.status(HttpStatus.CREATED).body(message);
         } else {
-            Message message = Message.builder().errorType("sign up")
-                    .errorMsg("sign up fail, please try again later").build();
-            log.error("account: {} sign up fail", account);
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
+            Message message = Message.builder()
+                    .errorMsg("username already exist").build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
         }
     }
 }
