@@ -20,6 +20,7 @@ spring:
     platform: mysql
     schema: classpath:db/schema.sql
     data: classpath:db/data.sql
+    # 每次重启都会根据data.sql schema.sql重建表数据, 设置 NEVER 就不启动重建
     initialization-mode: always
   jpa:
     database: mysql
