@@ -24,7 +24,7 @@ public abstract class BaseProcessor implements Processor{
     /**
      * description 获取此Processor能支持的AuTokenClass
      *
-     * @return java.lang.Class<?>
+     * @return java.lang.Class?
      */
     @Override
     public abstract Class<?> getSupportAuTokenClass();

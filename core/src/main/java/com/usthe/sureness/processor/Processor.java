@@ -25,7 +25,7 @@ public interface Processor {
     /**
      * description 获取此Processor能支持的AuTokenClass
      *
-     * @return java.lang.Class<?>
+     * @return java.lang.Class?
      */
     Class<?> getSupportAuTokenClass();
 
