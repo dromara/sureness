@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,6 +47,8 @@ public class AuthResourceDO {
     @NotBlank(message = "method can not null")
     private String method;
 
+    @NotBlank(message = "status can not null")
+    @Range(min = 0, max = 9, message = "1 enable, 9 disable")
     private Integer status;
 
     private String description;
