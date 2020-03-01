@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -35,44 +36,29 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
-
     @PostMapping
     public ResponseEntity<Message> addResource(@RequestBody @Validated AuthResourceDO authResource) {
-        if (resourceService.isResourceExist(authResource)) {
-            Message message = Message.builder().errorType("add resource fail")
-                    .errorMsg("resource already exist").build();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
-        }
         if (resourceService.addResource(authResource)) {
             if (log.isDebugEnabled()) {
                 log.debug("add resource success: {}", authResource);
             }
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {
-            Message message = Message.builder().errorType("resource")
-                    .errorMsg("add resource fail, please try again later").build();
-            log.error("add resource fail: {}", authResource);
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
+            Message message = Message.builder().errorMsg("resource already exist").build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
         }
     }
 
     @PutMapping
     public ResponseEntity<Message> updateResource(@RequestBody @Validated AuthResourceDO authResource) {
-        if (!resourceService.isResourceExist(authResource)) {
-            Message message = Message.builder().errorType("update resource fail")
-                    .errorMsg("resource not exist").build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        }
         if (resourceService.updateResource(authResource)) {
             if (log.isDebugEnabled()) {
                 log.debug("update resource success: {}", authResource);
             }
             return ResponseEntity.ok().build();
         } else {
-            Message message = Message.builder().errorType("resource")
-                    .errorMsg("update resource fail, please try again later").build();
-            log.error("update resource fail: {}", authResource);
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
+            Message message = Message.builder().errorMsg("resource not exist").build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
         }
     }
 
@@ -84,8 +70,7 @@ public class ResourceController {
             }
             return ResponseEntity.ok().build();
         } else {
-            Message message = Message.builder().errorType("resource")
-                    .errorMsg("delete resource fail, please try again later").build();
+            Message message = Message.builder().errorMsg("delete resource fail, please try again later").build();
             log.error("delete resource fail: {}", resourceId);
             return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
         }
@@ -97,26 +82,17 @@ public class ResourceController {
             // 不分页,查询总
             Optional<List<AuthResourceDO>> resourceListOptional = resourceService.getAllResource();
             if (resourceListOptional.isPresent()) {
-                Message message = Message.builder().body(resourceListOptional.get()).build();
+                Message message = Message.builder().data(resourceListOptional.get()).build();
                 return ResponseEntity.ok().body(message);
             } else {
-                Message message = Message.builder().errorType("resource")
-                        .errorMsg("get all resource fail, please try again later").build();
-                log.error("get all resource fail");
-                return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
+                Message message = Message.builder().data(new ArrayList<>(0)).build();
+                return ResponseEntity.ok().body(message);
             }
         } else {
             // 分页查询
-            Optional<Page<AuthResourceDO>> resourcePageOptional = resourceService.getPageResource(currentPage, pageSize);
-            if (resourcePageOptional.isPresent()) {
-                Message message = Message.builder().body(resourcePageOptional.get()).build();
-                return ResponseEntity.ok().body(message);
-            } else {
-                Message message = Message.builder().errorType("resource")
-                        .errorMsg("get resource page fail, please try again later").build();
-                log.error("get page resource fail, currentPage: {}, pageSize: {}", currentPage, pageSize);
-                return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
-            }
+            Page<AuthResourceDO> resourcePage = resourceService.getPageResource(currentPage, pageSize);
+            Message message = Message.builder().data(resourcePage.get()).build();
+            return ResponseEntity.ok().body(message);
         }
     }
 

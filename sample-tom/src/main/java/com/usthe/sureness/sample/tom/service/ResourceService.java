@@ -34,9 +34,9 @@ public interface ResourceService {
     boolean updateResource(AuthResourceDO authResource);
 
     /**
-     * 删除指定uri资源 不存在也是删除成功
+     * 删除指定uri资源
      * @param resourceId 资源ID
-     * @return 删除成功true 失败false
+     * @return 删除成功true 不存在false
      */
     boolean deleteResource(Long resourceId);
 
@@ -52,5 +52,5 @@ public interface ResourceService {
      * @param pageSize 页大小
      * @return 资源的分页
      */
-    Optional<Page<AuthResourceDO>> getPageResource(Integer currentPage, Integer pageSize);
+    Page<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize);
 }

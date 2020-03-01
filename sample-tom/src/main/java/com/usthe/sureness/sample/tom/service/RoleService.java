@@ -36,7 +36,7 @@ public interface RoleService {
     /**
      * 删除角色
      * @param roleId 角色ID
-     * @return 删除成功true 失败false
+     * @return 删除成功true 不存在失败false
      */
     boolean deleteRole(Long roleId);
 
@@ -52,5 +52,5 @@ public interface RoleService {
      * @param pageSize 页大小
      * @return 角色的分页
      */
-    Optional<Page<AuthRoleDO>> getPageRole(Integer currentPage, Integer pageSize);
+    Page<AuthRoleDO> getPageRole(Integer currentPage, Integer pageSize);
 }

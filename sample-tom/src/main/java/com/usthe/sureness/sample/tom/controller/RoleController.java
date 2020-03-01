@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -37,41 +38,29 @@ public class RoleController {
 
     @PostMapping
     public ResponseEntity<Message> addRole(@RequestBody @Validated AuthRoleDO authRole) {
-        if (roleService.isRoleExist(authRole)) {
-            Message message = Message.builder().errorType("add role fail")
-                    .errorMsg("role already exist").build();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
-        }
         if (roleService.addRole(authRole)) {
             if (log.isDebugEnabled()) {
                 log.debug("add role success: {}", authRole);
             }
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {
-            Message message = Message.builder().errorType("resource")
-                    .errorMsg("add role fail, please try again later").build();
-            log.error("add role fail: {}", authRole);
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
+            Message message = Message.builder()
+                    .errorMsg("role already exist").build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
         }
     }
 
     @PutMapping
     public ResponseEntity<Message> updateRole(@RequestBody @Validated AuthRoleDO authRole) {
-        if (!roleService.isRoleExist(authRole)) {
-            Message message = Message.builder().errorType("update role fail")
-                    .errorMsg("role not exist").build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        }
         if (roleService.updateRole(authRole)) {
             if (log.isDebugEnabled()) {
                 log.debug("update role success: {}", authRole);
             }
             return ResponseEntity.ok().build();
         } else {
-            Message message = Message.builder().errorType("role")
-                    .errorMsg("update role fail, please try again later").build();
-            log.error("update role fail: {}", authRole);
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
+            Message message = Message.builder()
+                    .errorMsg("role not exist").build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
         }
     }
 
@@ -83,10 +72,10 @@ public class RoleController {
             }
             return ResponseEntity.ok().build();
         } else {
-            Message message = Message.builder().errorType("role")
-                    .errorMsg("delete role fail, please try again later").build();
-            log.error("delete role fail: {}", roleId);
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
+            Message message = Message.builder()
+                    .errorMsg("delete role fail, no this role here").build();
+            log.debug("delete role fail: {}", roleId);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
         }
     }
 
@@ -96,26 +85,17 @@ public class RoleController {
             // 不分页,查询总
             Optional<List<AuthRoleDO>> roleListOptional = roleService.getAllRole();
             if (roleListOptional.isPresent()) {
-                Message message = Message.builder().body(roleListOptional.get()).build();
+                Message message = Message.builder().data(roleListOptional.get()).build();
                 return ResponseEntity.ok().body(message);
             } else {
-                Message message = Message.builder().errorType("role")
-                        .errorMsg("get all role fail, please try again later").build();
-                log.error("get all role fail");
-                return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
+                Message message = Message.builder().data(new ArrayList<>()).build();
+                return ResponseEntity.ok().body(message);
             }
         } else {
             // 分页查询
-            Optional<Page<AuthRoleDO>> rolePageOptional = roleService.getPageRole(currentPage, pageSize);
-            if (rolePageOptional.isPresent()) {
-                Message message = Message.builder().body(rolePageOptional.get()).build();
-                return ResponseEntity.ok().body(message);
-            } else {
-                Message message = Message.builder().errorType("role")
-                        .errorMsg("get role page fail, please try again later").build();
-                log.error("get page role fail, currentPage: {}, pageSize: {}", currentPage, pageSize);
-                return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(message);
-            }
+            Page<AuthRoleDO> rolePage = roleService.getPageRole(currentPage, pageSize);
+            Message message = Message.builder().data(rolePage).build();
+            return ResponseEntity.ok().body(message);
         }
     }
 

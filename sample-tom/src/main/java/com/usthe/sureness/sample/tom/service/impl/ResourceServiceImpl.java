@@ -4,9 +4,11 @@ import com.usthe.sureness.sample.tom.dao.AuthResourceDao;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
 import com.usthe.sureness.sample.tom.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,7 @@ import java.util.Optional;
  * @date 13:09 2019-08-04
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ResourceServiceImpl implements ResourceService {
 
     @Autowired
@@ -23,23 +26,42 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public boolean addResource(AuthResourceDO authResource) {
-        return authResourceDao.save(authResource) != null;
+        if (isResourceExist(authResource)) {
+            return false;
+        } else {
+            authResourceDao.saveAndFlush(authResource);
+            return true;
+        }
     }
 
     @Override
     public boolean isResourceExist(AuthResourceDO authResource) {
-        return authResourceDao.existsById(authResource.getId());
+        AuthResourceDO resource = AuthResourceDO.builder()
+                .uri(authResource.getUri())
+                .method(authResource.getMethod())
+                .build();
+        Example<AuthResourceDO> example = Example.of(resource);
+        return authResourceDao.exists(example);
     }
 
     @Override
     public boolean updateResource(AuthResourceDO authResource) {
-        return authResourceDao.save(authResource) != null;
+        if (authResourceDao.existsById(authResource.getId())) {
+            authResourceDao.saveAndFlush(authResource);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean deleteResource(Long resourceId) {
-        authResourceDao.deleteById(resourceId);
-        return true;
+        if (authResourceDao.existsById(resourceId)) {
+            authResourceDao.deleteById(resourceId);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -49,9 +71,8 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public Optional<Page<AuthResourceDO>> getPageResource(Integer currentPage, Integer pageSize) {
+    public Page<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(currentPage, pageSize);
-        Page<AuthResourceDO> page = authResourceDao.findAll(pageRequest);
-        return Optional.of(page);
+        return authResourceDao.findAll(pageRequest);
     }
 }

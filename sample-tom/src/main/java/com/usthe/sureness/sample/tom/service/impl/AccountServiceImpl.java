@@ -8,6 +8,7 @@ import com.usthe.sureness.util.Md5Util;
 import com.usthe.sureness.util.SurenessCommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +19,7 @@ import java.util.Optional;
  * @date 10:58 2019-08-04
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
@@ -31,7 +33,10 @@ public class AccountServiceImpl implements AccountService {
         }
         AuthUserDO authUser = authUserOptional.get();
         String password = account.getPassword();
-        if (!Objects.isNull(authUser.getSalt())) {
+        if (password == null) {
+            return false;
+        }
+        if (Objects.nonNull(authUser.getSalt())) {
             // 用盐加密
             password = Md5Util.md5(password + authUser.getSalt());
 
@@ -46,11 +51,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public boolean registerAccount(Account account) {
+        if (isAccountExist(account)) {
+            return false;
+        }
         String salt = SurenessCommonUtil.getRandomString(6);
         String password = Md5Util.md5(account.getPassword() + salt);
         AuthUserDO authUser = AuthUserDO.builder().username(account.getUsername())
                 .password(password).salt(salt).status(1).build();
-        return authUserDao.save(authUser) != null;
+        authUserDao.save(authUser);
+        return true;
     }
 
     @Override
