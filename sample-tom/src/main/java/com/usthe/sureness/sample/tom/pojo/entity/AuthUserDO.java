@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
+ * 用户实体
  * @author tomsun28
  * @date 00:29 2019-07-27
  */

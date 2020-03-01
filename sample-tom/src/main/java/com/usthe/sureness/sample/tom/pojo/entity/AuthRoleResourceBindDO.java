@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
+ * 资源与角色映射实体
  * @author tomsun28
  * @date 00:28 2019-07-27
  */

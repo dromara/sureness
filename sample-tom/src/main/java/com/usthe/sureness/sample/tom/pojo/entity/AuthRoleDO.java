@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 /**
+ * 角色实体
  * @author tomsun28
  * @date 00:27 2019-07-27
  */
