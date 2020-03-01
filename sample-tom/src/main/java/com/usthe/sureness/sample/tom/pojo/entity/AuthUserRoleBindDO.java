@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
@@ -30,10 +30,10 @@ public class AuthUserRoleBindDO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "userId can not null")
+    @NotNull(message = "userId can not null")
     private Long userId;
 
-    @NotBlank(message = "roleId can not null")
+    @NotNull(message = "roleId can not null")
     private Long roleId;
 
     private LocalDateTime gmtCreate;

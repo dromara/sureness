@@ -55,11 +55,13 @@ class AuthRoleResourceBindDaoTest extends TomApplicationTest {
         AuthResourceDO resource1 = AuthResourceDO.builder()
                 .name("角色管理").code("ROLE_MANAGE")
                 .uri("/index/role").status(1)
+                .method("post")
                 .build();
         resourceDao.save(resource1);
         AuthResourceDO resource2 = AuthResourceDO.builder()
                 .name("资源管理").code("RESOURCE_MANAGE")
                 .uri("/index/resource").status(1)
+                .method("get")
                 .build();
         resourceDao.save(resource2);
         AuthRoleDO authRole = AuthRoleDO.builder()

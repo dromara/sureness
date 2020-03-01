@@ -47,7 +47,6 @@ public class AuthResourceDO {
     @NotBlank(message = "method can not null")
     private String method;
 
-    @NotBlank(message = "status can not null")
     @Range(min = 0, max = 9, message = "1 enable, 9 disable")
     private Integer status;
 

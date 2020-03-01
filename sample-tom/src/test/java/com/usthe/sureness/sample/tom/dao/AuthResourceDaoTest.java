@@ -27,7 +27,7 @@ class AuthResourceDaoTest extends TomApplicationTest {
         AuthResourceDO resource = AuthResourceDO.builder()
                 .name("角色管理").code("ROLE_MANAGE")
                 .uri("/index/role").status(1)
-                .build();
+                .method("post").build();
         resource = authResourceDao.save(resource);
         Assertions.assertThat(resource).isNotNull();
     }
@@ -41,13 +41,13 @@ class AuthResourceDaoTest extends TomApplicationTest {
         AuthResourceDO resource = AuthResourceDO.builder()
                 .name("角色管理").code("ROLE_MANAGE")
                 .uri("/index/role").status(1)
-                .build();
+                .method("post").build();
         resource  = authResourceDao.saveAndFlush(resource);
         AuthResourceDO resourceUpdate = AuthResourceDO.builder()
                 .id(resource.getId())
                 .name("角色管理2").code("ROLE_MANAGE2")
                 .uri("/index/role2").status(2)
-                .build();
+                .method("get").build();
         resourceUpdate = authResourceDao.saveAndFlush(resourceUpdate);
         authResourceDao.delete(resourceUpdate);
         Assertions.assertThat(resourceUpdate).isNotNull().isNotEqualTo(resource);
@@ -60,7 +60,7 @@ class AuthResourceDaoTest extends TomApplicationTest {
         AuthResourceDO resource = AuthResourceDO.builder()
                 .name("角色管理").code("ROLE_MANAGE")
                 .uri("/index/role").status(1)
-                .build();
+                .method("post").build();
         resource = authResourceDao.save(resource);
         authResourceDao.delete(resource);
         Assertions.assertThat(authResourceDao.findById(resource.getId()).isPresent()).isFalse();

@@ -40,7 +40,6 @@ public class AuthRoleDO {
     @Length(min = 3, max = 100, message = "code length in 3-100")
     private String code;
 
-    @NotBlank(message = "status can not null")
     @Range(min = 0, max = 9, message = "1 enable, 9 disable")
     private Integer status;
 

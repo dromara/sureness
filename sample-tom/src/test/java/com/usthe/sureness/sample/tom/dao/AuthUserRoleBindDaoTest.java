@@ -61,7 +61,8 @@ class AuthUserRoleBindDaoTest extends TomApplicationTest {
                 .status(1).build();
         roleDao.save(authRole2);
         AuthUserDO authUser = AuthUserDO.builder()
-                .username("tom").password("1234").build();
+                .username("tom").password("1234")
+                .status(1).build();
         userDao.save(authUser);
         AuthUserRoleBindDO userRoleBind = AuthUserRoleBindDO.builder()
                 .userId(authUser.getId()).roleId(authRole1.getId()).build();

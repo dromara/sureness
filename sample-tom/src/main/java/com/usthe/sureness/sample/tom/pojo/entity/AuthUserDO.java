@@ -50,7 +50,6 @@ public class AuthUserDO {
 
     private Integer sex;
 
-    @NotBlank(message = "status can not null")
     @Range(min = 0, max = 9, message = "1 enable, 2 locked, 3 deleted, 4 illegal")
     private Integer status;
 
