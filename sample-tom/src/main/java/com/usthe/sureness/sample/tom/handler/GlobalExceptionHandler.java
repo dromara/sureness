@@ -2,6 +2,7 @@ package com.usthe.sureness.sample.tom.handler;
 
 import com.usthe.sureness.sample.tom.pojo.dto.Message;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,16 +28,48 @@ public class GlobalExceptionHandler {
     @ResponseBody
     ResponseEntity<Message> handleInputValidException(MethodArgumentNotValidException exception) {
         StringBuffer errorMessage = new StringBuffer();
-        if (exception != null && exception.getBindingResult() != null
-                && exception.getBindingResult().getAllErrors() != null) {
+        if (exception != null) {
             exception.getBindingResult().getAllErrors().forEach(error ->
-                    errorMessage.append(error.getDefaultMessage()));
+                    errorMessage.append(error.getDefaultMessage()).append("."));
         }
         if (log.isDebugEnabled()) {
             log.debug("[sample-tom]-[input argument not valid happen]-{}", errorMessage, exception);
         }
-        Message message = Message.builder()
-                .errorType("input valid").errorMsg(errorMessage.toString()).build();
+        Message message = Message.builder().errorMsg(errorMessage.toString()).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+    }
+
+    /**
+     * 对于所有数据库dao操作的异常统一处理
+     * @param exception 数据库异常
+     * @return 统一错误信息体
+     */
+    @ExceptionHandler(DataAccessException.class)
+    @ResponseBody
+    ResponseEntity<Message> handleDataAccessException(DataAccessException exception) {
+        String errorMessage = "database error happen";
+        if (exception != null) {
+            errorMessage = exception.getMessage();
+        }
+        log.warn("[sample-tom]-[database error happen]-{}", errorMessage, exception);
+        Message message = Message.builder().errorMsg(errorMessage).build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+    }
+
+    /**
+     * 对所以未捕获未知异常统一处理
+     * @param exception UnknownException
+     * @return 统一错误信息体
+     */
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    ResponseEntity<Message> handleUnknownException(Exception exception) {
+        String errorMessage = "unknown error happen";
+        if (exception != null) {
+            errorMessage = exception.getMessage();
+        }
+        log.error("[sample-tom]-[unknown error happen]-{}", errorMessage, exception);
+        Message message = Message.builder().errorMsg(errorMessage).build();
         return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
     }
 
