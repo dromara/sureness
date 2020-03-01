@@ -12,11 +12,10 @@ CREATE TABLE  auth_resource
      method       varchar(10)  not null comment '访问方式 GET POST PUT DELETE PATCH',
      status       smallint(4)  not null default 1 comment '状态   1:正常、9：禁用',
      description  varchar(255) comment '资源描述',
-     gmt_create   datetime     default current_time comment '创建时间',
---      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
-     gmt_update   datetime     comment '更新时间',
+     gmt_create   timestamp    default current_timestamp comment '创建时间',
+     gmt_update   datetime     default current_timestamp on update current_timestamp comment '更新时间',
      primary key (id)
-);
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for auth_role
@@ -29,11 +28,10 @@ CREATE TABLE  auth_role
      code         varchar(50)  not null comment '角色编码',
      status       smallint(4)  not null default 1 comment '状态   1:正常、9：禁用',
      description  varchar(255) comment '角色描述',
-     gmt_create   datetime     default current_timestamp() comment '创建时间',
---      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
-     gmt_update   datetime     comment '更新时间',
-    primary key ( id )
-);
+     gmt_create   timestamp    default current_timestamp comment '创建时间',
+     gmt_update   datetime     default current_timestamp on update current_timestamp comment '更新时间',
+     primary key ( id )
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for auth_role_resource_bind
@@ -44,11 +42,10 @@ CREATE TABLE auth_role_resource_bind
     id          bigint not null auto_increment comment '主键ID',
     role_id     bigint not null comment '角色ID',
     resource_id bigint not null comment '资源ID',
-    gmt_create  datetime default current_timestamp() comment '创建时间',
---      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
-    gmt_update  datetime comment '更新时间',
+    gmt_create   timestamp    default current_timestamp comment '创建时间',
+    gmt_update   datetime     default current_timestamp on update current_timestamp comment '更新时间',
     primary key (id)
-);
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for auth_user
@@ -65,13 +62,12 @@ CREATE TABLE auth_user
     email        varchar(50) comment '邮件地址(唯一)',
     sex          tinyint(4) comment '性别(1.男 2.女)',
     status       tinyint(4)  not null default 1 comment '账户状态(1.正常 2.锁定 3.删除 4.非法)',
-    create_where tinyint(4) comment '创建来源(1.web 2.android 3.ios 4.win 5.macos 6.ubuntu)',
-    gmt_create   datetime             default current_timestamp() comment '创建时间',
---      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
-    gmt_update   datetime comment '更新时间',
+    create_where tinyint(4) comment '创建来源(1.web 2.android 3.ios 4.win 5.mac 6.linux)',
+    gmt_create   timestamp    default current_timestamp comment '创建时间',
+    gmt_update   datetime     default current_timestamp on update current_timestamp comment '更新时间',
     primary key (id),
     unique (username, phone, email)
-);
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for auth_user_role_bind
@@ -82,8 +78,7 @@ CREATE TABLE auth_user_role_bind
     id         bigint not null auto_increment comment '主键ID',
     user_id    bigint not null comment '用户ID',
     role_id    bigint not null comment '角色ID',
-    gmt_create datetime default current_timestamp() comment '创建时间',
---      gmt_update   datetime     default current_timestamp() on update current_timestamp() comment '更新时间',
-    gmt_update datetime comment '更新时间',
+    gmt_create   timestamp    default current_timestamp comment '创建时间',
+    gmt_update   datetime     default current_timestamp on update current_timestamp comment '更新时间',
     primary key (id)
-);
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
