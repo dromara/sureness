@@ -51,7 +51,7 @@ public class SurenessFilterExample implements Filter {
         } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
             logger.debug("this request is illegal");
             responseWrite(ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST).body(e4.getMessage()), servletResponse);
+                    .status(HttpStatus.BAD_REQUEST).body("bad request, can not Auth"), servletResponse);
             return;
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
             logger.debug("the account is disabled");
