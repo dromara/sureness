@@ -55,7 +55,15 @@ public interface ResourceService {
      */
     Page<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize);
 
+    /**
+     * 获取有效的资源路径角色
+     * @return 资源路径角色
+     */
     Set<String> getAllEnableResourcePath();
 
+    /**
+     * 获取无效的资源路径
+     * @return 资源路径
+     */
     Set<String> getAllDisableResourcePath();
 }

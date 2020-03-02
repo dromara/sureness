@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+import java.util.Set;
+
 
 /**
  * @author tomsun28
@@ -66,5 +69,25 @@ class AuthResourceDaoTest extends TomApplicationTest {
         Assertions.assertThat(authResourceDao.findById(resource.getId()).isPresent()).isFalse();
     }
 
+    @DisplayName("查询数据Resource===Method===Role应正确")
+    @Test
+    @Transactional
+    public void shouldReturnSuccessWhenGetEnableResourcePathRoleData() {
+        Optional<Set<String>> optional = authResourceDao.getEnableResourcePathRoleData();
+        Assertions.assertThat(optional.isPresent()).isTrue();
+    }
+
+    @DisplayName("查询disable数据Resource===Method应正确")
+    @Test
+    @Transactional
+    public void shouldSuccessWhenGetDisableResourcePathData() {
+        AuthResourceDO resource = AuthResourceDO.builder()
+                .name("角色管理").code("ROLE_MANAGE")
+                .uri("/index/role/book").status(9)
+                .method("post").build();
+        authResourceDao.save(resource);
+        Optional<Set<String>> optional = authResourceDao.getDisableResourcePathData();
+        Assertions.assertThat(optional.isPresent()).isTrue();
+    }
 
 }
