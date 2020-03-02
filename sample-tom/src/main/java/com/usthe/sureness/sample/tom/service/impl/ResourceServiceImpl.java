@@ -10,8 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author tomsun28
@@ -74,5 +76,17 @@ public class ResourceServiceImpl implements ResourceService {
     public Page<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(currentPage, pageSize);
         return authResourceDao.findAll(pageRequest);
+    }
+
+    @Override
+    public Set<String> getAllEnableResourcePath() {
+        Optional<Set<String>> optional = authResourceDao.getEnableResourcePathRoleData();
+        return optional.orElseGet(() -> new HashSet<>(0));
+    }
+
+    @Override
+    public Set<String> getAllDisableResourcePath() {
+        Optional<Set<String>> optional = authResourceDao.getDisableResourcePathData();
+        return optional.orElseGet(() -> new HashSet<>(0));
     }
 }

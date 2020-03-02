@@ -1,5 +1,6 @@
 package com.usthe.sureness.sample.tom.service;
 
+import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.sample.tom.pojo.dto.Account;
 
 import java.util.List;
@@ -37,4 +38,11 @@ public interface AccountService {
      * @return 存在true 不存在false
      */
     boolean isAccountExist(Account account);
+
+    /**
+     * 通过username加载对于的account信息
+     * @param username 账户名
+     * @return account
+     */
+    SurenessAccount loadAccount(String username);
 }

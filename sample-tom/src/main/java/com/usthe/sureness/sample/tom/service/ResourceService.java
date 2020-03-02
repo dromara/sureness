@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author tomsun28
@@ -53,4 +54,8 @@ public interface ResourceService {
      * @return 资源的分页
      */
     Page<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize);
+
+    Set<String> getAllEnableResourcePath();
+
+    Set<String> getAllDisableResourcePath();
 }

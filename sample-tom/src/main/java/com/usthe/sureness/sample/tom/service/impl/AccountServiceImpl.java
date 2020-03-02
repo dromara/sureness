@@ -1,5 +1,7 @@
 package com.usthe.sureness.sample.tom.service.impl;
 
+import com.usthe.sureness.provider.DefaultAccount;
+import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.sample.tom.dao.AuthUserDao;
 import com.usthe.sureness.sample.tom.pojo.dto.Account;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthUserDO;
@@ -66,5 +68,25 @@ public class AccountServiceImpl implements AccountService {
     public boolean isAccountExist(Account account) {
         Optional<AuthUserDO> authUserOptional = authUserDao.findAuthUserByUsername(account.getUsername());
         return authUserOptional.isPresent();
+    }
+
+    @Override
+    public SurenessAccount loadAccount(String username) {
+        Optional<AuthUserDO> authUserOptional = authUserDao.findAuthUserByUsername(username);
+        if (authUserOptional.isPresent()) {
+            AuthUserDO authUser = authUserOptional.get();
+            DefaultAccount.Builder accountBuilder = DefaultAccount.builder(username)
+                    .setPassword(authUser.getPassword())
+                    .setSalt(authUser.getSalt())
+                    .setDisabledAccount(1 != authUser.getStatus())
+                    .setExcessiveAttempts(2 == authUser.getStatus());
+            List<String> roles = loadAccountRoles(username);
+            if (roles != null) {
+                accountBuilder.setOwnRoles(roles);
+            }
+            return accountBuilder.build();
+        } else {
+            return null;
+        }
     }
 }
