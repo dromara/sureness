@@ -25,7 +25,7 @@ import java.util.UUID;
  * @date 00:24 2019-08-01
  */
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
 @Slf4j
 public class AccountController {
 

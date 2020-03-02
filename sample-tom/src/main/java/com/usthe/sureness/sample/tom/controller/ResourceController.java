@@ -28,7 +28,7 @@ import java.util.Optional;
  * @author tomsun28
  * @date 00:24 2019-08-01
  */
-@RequestMapping("/api/v1/resource")
+@RequestMapping("/resource")
 @RestController
 @Slf4j
 public class ResourceController {

@@ -29,7 +29,7 @@ import java.util.Optional;
  * @date 00:24 2019-08-01
  */
 @RestController
-@RequestMapping("/api/v1/role")
+@RequestMapping("/role")
 @Slf4j
 public class RoleController {
 
