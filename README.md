@@ -13,6 +13,8 @@
 
 >`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护  
 
+[English Documentation](README_EN.md)  
+
 ### 仓库的组成部分:  
 - [sureness的核心代码--sureness-core](core)
 - [使用sureness10分钟搭建权限项目--sample-bootstrap](sample-bootstrap)
@@ -25,7 +27,7 @@
   即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源  
   `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据     
 - 用户所属角色--角色拥有资源--用户拥有资源(用户就能访问此`api`)   
-- `have fun`  
+
 
 ### 使用  
 
@@ -87,6 +89,7 @@ UnauthorizedException                     | 鉴权异常,没有权限访问此�
 
 若权限配置数据来自数据库,请参考[使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
 
+HAVE FUN
 
 ### 进阶扩展  
 
@@ -136,4 +139,4 @@ D(以上一次成功即成功并结束,失败即下一个钥匙锁尝试直到�
 ![sureness-core](/img/sureness-core.svg)  
 
 ### License  
-`sureness is licensed under` [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)
+[`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)
