@@ -10,7 +10,7 @@ CREATE TABLE  auth_resource
      uri          varchar(255) not null comment '访问地址URL',
      type         varchar(20)  comment '类型 资源的类别',
      method       varchar(10)  not null comment '访问方式 GET POST PUT DELETE PATCH',
-     status       smallint(4)  not null default 1 comment '状态   1:正常、9：禁用',
+     status       smallint(4)  not null default 1 comment '状态   1:正常、9：过滤(保护排除)',
      description  varchar(255) comment '资源描述',
      gmt_create   timestamp    default current_timestamp comment '创建时间',
      gmt_update   datetime     default current_timestamp on update current_timestamp comment '更新时间',
