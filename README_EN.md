@@ -8,7 +8,7 @@
 > Sureness is a new, permission project which author learn from apache shiro and add some ideas to cretae it  
 > Authentication for restful api, based on RABC, Mainly focused on the protection of restful api  
 > Native supports  restful api, websocket's protection  
-> Native supports dynamic permissions
+> Native supports dynamic permissions  
 > Native supports JWT, Basic Auth... Can extend custom supported authentication methods  
 > High performance due dictionary matching tree  
 > Sorry about google english.   
@@ -23,9 +23,10 @@
 ### <font color="red">Some Conventions</font>  
 
 - Based RABC, but only has role-resource, no permission action    
-- We treat restful api requests as a resource,  Resource format like `requestUri===httpMethod`.   
+- We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
   That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
   `eg: /api/v2/book===get`    
+- User belong some Role -- Role owns Resource -- User can access the resource  
 
 ### Use  
 
