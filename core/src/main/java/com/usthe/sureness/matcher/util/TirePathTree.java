@@ -2,12 +2,15 @@ package com.usthe.sureness.matcher.util;
 
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
+import java.util.regex.Pattern;
 
 /**
  * 字典匹配树
@@ -17,12 +20,18 @@ import java.util.Set;
 public class TirePathTree {
 
     private static final String NODE_TYPE_PATH_NODE = "pathNode";
-    private static final String NODE_TYPE_PATH_END = "isPathEnd";
+//    /**
+//     * path end also maybe path node
+//     */
+//    private static final String NODE_TYPE_PATH_END = "isPathEnd";
     private static final String NODE_TYPE_METHOD = "methodNode";
     private static final String NODE_TYPE_FILTER_ROLES = "filterRolesNode";
     private static final String URL_PATH_SPLIT = "/";
+    private static final String MATCH_ONE = "*";
+    private static final String MATCH_ALL = "**";
     private static final int PATH_NODE_NUM_3 = 3;
     private static final int PATH_NODE_NUM_2 = 2;
+    private static final Pattern PATH_SPLIT_PATTERN = Pattern.compile("/+");
 
     /**
      * 根节点
@@ -81,16 +90,48 @@ public class TirePathTree {
         if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
             return null;
         }
+        path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
+        path = path.substring(1);
         String[] tmp = path.split("===");
         if (tmp.length != PATH_NODE_NUM_2) {
             return null;
         }
         String[] urlPac = tmp[0].split("/");
-        if (urlPac.length > 1) {
-            urlPac = Arrays.copyOfRange(urlPac, 1, urlPac.length);
-        }
         String method = tmp[1];
+
+        // todo 基于ant的模式匹配   ? * **
         Node current = root;
+        Stack<Node> flowStack = new Stack<>();
+        // 所在层数它的访问历史 0 未访问，1 访问一般路径，2 访问带?路径，3 访问*，4 访问**
+        int[] accessType = new int[urlPac.length + 1];
+        // 当前处理的层数
+        int currentFlow = 0;
+        while (!flowStack.isEmpty() || currentFlow != urlPac.length) {
+            switch (accessType[currentFlow]) {
+                case 0 :
+                    String currentUrlPac = urlPac[currentFlow].toLowerCase();
+                    // 判断是否匹配一般路径
+                    if (current.getChildren().containsKey(currentUrlPac)) {
+                        flowStack.push(current);
+                        current = current.getChildren().get(currentUrlPac);
+                        currentFlow ++;
+                    } else if ()
+
+                    // 访问一般路径
+                    stack.push();
+                    currentFlow ++;
+                    break;
+                case 1 : break;
+                case 2 : break;
+                case 3 : break;
+                default:
+                    throw new RuntimeException("resource path match error happen");
+                    break;
+            }
+
+        }
+
+
         //支持基于ant的模式匹配
         for (String data : urlPac) {
             if (current.getChildren().containsKey(data.toLowerCase())) {
@@ -154,41 +195,81 @@ public class TirePathTree {
         return null;
     }
 
+
+    private boolean search(int preAccessType, String[] urlPac, int pacIndex) {
+
+
+
+        // todo 基于ant的模式匹配   ? * **
+        Node current = root;
+        Stack<Node> stack = new Stack<>();
+        stack.push(current);
+        while (!stack.isEmpty()) {
+
+
+        }
+
+        return true;
+    }
+
     /**
      * description 插入节点
-     * @param path path = /api/v1/host/detail===GET===jwt[role2,role3,role4]
+     * @param path path = /api/v1/host/detail===GET===[role2,role3,role4]
      */
     private void insertNode(String path) {
         if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
             return;
         }
+        path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
+        // 去除第一个 /
+        path = path.substring(1);
         String[] tmp = path.split("===");
         if (tmp.length != PATH_NODE_NUM_3) {
             return;
         }
         String[] urlPac = tmp[0].split(URL_PATH_SPLIT);
-        if (urlPac.length > 1) {
-            // 去除第一位的空 ""
-            urlPac = Arrays.copyOfRange(urlPac, 1, urlPac.length);
-        }
         String method = tmp[1];
         String supportRoles = tmp[2];
         Node current = root;
-        //开始插入URL节点
+        // 开始插入URL节点
         for (String urlData : urlPac) {
-            if (!current.getChildren().containsKey(urlData.toLowerCase())) {
+            if (current.getChildren().containsKey(MATCH_ONE)) {
+                current = current.getChildren().get(MATCH_ONE);
+            } else if (MATCH_ONE.equals(urlData)) {
+                Node matchOneNode = new Node(MATCH_ONE, NODE_TYPE_PATH_NODE);
+
+                // 将其他非MATCH_ALL的node的孩子转移到MATCH_ONE
+                Iterator<Map.Entry<String, Node>> iterator = current.getChildren().entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry<String, Node> entry = iterator.next();
+                    if (MATCH_ALL.equals(entry.getKey())
+                            || NODE_TYPE_METHOD.equals(entry.getValue().getNodeType())
+                            || NODE_TYPE_FILTER_ROLES.equals(entry.getValue().getNodeType())) {
+                        continue;
+                    }
+                    if (entry.getValue().getChildren() != null) {
+                        matchOneNode.insertChild(entry.getValue().getChildren().values());
+                    }
+                    iterator.remove();
+                }
+                current.insertChild(matchOneNode);
+                current = matchOneNode;
+
+            } else if (current.getChildren().containsKey(urlData.toLowerCase())) {
+                current = current.getChildren().get(urlData.toLowerCase());
+            } else {
                 current.insertChild(urlData.toLowerCase());
+                current = current.getChildren().get(urlData.toLowerCase());
             }
-            current = current.getChildren().get(urlData.toLowerCase());
         }
-        current.setNodeType(NODE_TYPE_PATH_END);
-        //开始插入httpMethod节点
+
+        // 开始插入httpMethod节点
         if (!current.getChildren().containsKey(method.toLowerCase())) {
             current.insertChild(method.toLowerCase(), NODE_TYPE_METHOD);
         }
         current = current.getChildren().get(method.toLowerCase());
-        //开始插入 supportRoles 节点 supportRoles 保持其原始大小写
-        //每条资源只能对应一 supportRoles ,httpMethod下最多一个孩子节点
+        // 开始插入 supportRoles 节点 supportRoles 保持其原始大小写
+        // 每条资源只能对应一 supportRoles ,httpMethod下最多一个孩子节点
         if (current.getChildren().isEmpty()) {
             current.insertChild(supportRoles, NODE_TYPE_FILTER_ROLES);
         }
@@ -228,6 +309,16 @@ public class TirePathTree {
             this.children.put(data,new Node(data,nodeType));
         }
 
+        private void insertChild(Node node) {
+            this.children.put(node.data, node);
+        }
+
+        public void insertChild(Collection<Node> nodes) {
+            if (nodes != null) {
+                nodes.forEach(this::insertChild);
+            }
+        }
+
         private String getNodeType() {
             return nodeType;
         }
@@ -251,5 +342,6 @@ public class TirePathTree {
         private void setChildren(Map<String, Node> children) {
             this.children = children;
         }
+
     }
 }
