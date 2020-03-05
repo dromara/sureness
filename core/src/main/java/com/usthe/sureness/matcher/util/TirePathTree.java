@@ -1,7 +1,9 @@
 package com.usthe.sureness.matcher.util;
 
 
-import java.util.Arrays;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,23 +11,22 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-import java.util.Stack;
 import java.util.regex.Pattern;
 
 /**
- * 字典匹配树
+ * 字典匹配树  支持 * **, 暂不支持?
+ * 为什么不支持ant的?匹配, 目前的算法加入?效率不高, ?在sureness这种过滤链使用场景不高,完全可以其他取代,没有必要为了支持而支持
  * @author tomsun28
  * @date 19:25 2019-01-18
  */
 public class TirePathTree {
 
+    private static final Logger logger = LoggerFactory.getLogger(TirePathTree.class);
+
     private static final String NODE_TYPE_PATH_NODE = "pathNode";
-//    /**
-//     * path end also maybe path node
-//     */
-//    private static final String NODE_TYPE_PATH_END = "isPathEnd";
+    private static final String NODE_TYPE_MAY_PATH_END = "mayPathEnd";
     private static final String NODE_TYPE_METHOD = "methodNode";
-    private static final String NODE_TYPE_FILTER_ROLES = "filterRolesNode";
+    private static final String NODE_TYPE_FILTER_ROLES = "rolesNode";
     private static final String URL_PATH_SPLIT = "/";
     private static final String MATCH_ONE = "*";
     private static final String MATCH_ALL = "**";
@@ -91,7 +92,7 @@ public class TirePathTree {
             return null;
         }
         path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
-        path = path.substring(1);
+        path = path.substring(1).toLowerCase();
         String[] tmp = path.split("===");
         if (tmp.length != PATH_NODE_NUM_2) {
             return null;
@@ -99,70 +100,40 @@ public class TirePathTree {
         String[] urlPac = tmp[0].split("/");
         String method = tmp[1];
 
-        // todo 基于ant的模式匹配   ? * **
+        // 模式匹配   * **
         Node current = root;
-        Stack<Node> flowStack = new Stack<>();
-        // 所在层数它的访问历史 0 未访问，1 访问一般路径，2 访问带?路径，3 访问*，4 访问**
-        int[] accessType = new int[urlPac.length + 1];
-        // 当前处理的层数
-        int currentFlow = 0;
-        while (!flowStack.isEmpty() || currentFlow != urlPac.length) {
-            switch (accessType[currentFlow]) {
-                case 0 :
-                    String currentUrlPac = urlPac[currentFlow].toLowerCase();
-                    // 判断是否匹配一般路径
-                    if (current.getChildren().containsKey(currentUrlPac)) {
-                        flowStack.push(current);
-                        current = current.getChildren().get(currentUrlPac);
-                        currentFlow ++;
-                    } else if ()
-
-                    // 访问一般路径
-                    stack.push();
-                    currentFlow ++;
-                    break;
-                case 1 : break;
-                case 2 : break;
-                case 3 : break;
-                default:
-                    throw new RuntimeException("resource path match error happen");
-                    break;
+        String matchRole;
+        for(Map.Entry<String, Node> entry : current.getChildren().entrySet()) {
+            matchRole = searchPathRole(entry.getValue(), urlPac, 0, method);
+            if (matchRole != null) {
+                return matchRole;
             }
-
         }
+        return null;
+    }
 
 
-        //支持基于ant的模式匹配
-        for (String data : urlPac) {
-            if (current.getChildren().containsKey(data.toLowerCase())) {
-                current = current.getChildren().get(data.toLowerCase());
-            } else if (current.getChildren().containsKey("*")) {
-                // * 代表匹配一个data节点
-                current = current.getChildren().get("*");
-            } else if (current.getChildren().containsKey("**")) {
-                // ** 代表匹配后面全部节点
-                current = current.getChildren().get("**");
-                if (NODE_TYPE_PATH_END.equals(current.getNodeType())) {
-                    if (current.getChildren().containsKey(method.toLowerCase())) {
-                        current = current.getChildren().get(method.toLowerCase());
-                        if (NODE_TYPE_METHOD.equals(current.getNodeType())) {
-                            if (!current.getChildren().isEmpty()) {
-                                Iterator<Map.Entry<String,Node>> iterator = current.getChildren().entrySet().iterator();
-                                Map.Entry<String,Node> filterRole = iterator.next();
-                                if (NODE_TYPE_FILTER_ROLES.equals(filterRole.getValue().getNodeType())) {
-                                    return filterRole.getKey();
-                                } else {
-                                    return null;
-                                }
-                            } else {
-                                return null;
-                            }
-                        } else {
-                            return null;
-                        }
-                    } else {
-                        return null;
-                    }
+    /**
+     * 从当前node匹配查找对应分支的叶子节点
+     * @param current 当前node
+     * @param urlPac urlPath字符串组
+     * @param currentFlow 当前第一个字符串
+     * @param method http请求方法
+     * @return 匹配到返回[role,role2] 匹配不到返回null
+     */
+    private String searchPathRole(Node current, String[] urlPac, int currentFlow, String method) {
+        if (current == null || urlPac == null || currentFlow >= urlPac.length
+                || currentFlow < 0 || method == null || "".equals(method)) {
+            return null;
+        }
+        String currentUrlPac = urlPac[currentFlow];
+
+        if (currentFlow == urlPac.length - 1) {
+            if (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType())
+                    && isMatchString(current.getData(), urlPac[currentFlow])) {
+                Node methodNode = current.getChildren().get(method);
+                if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
+                    return methodNode.getChildren().keySet().iterator().next();
                 } else {
                     return null;
                 }
@@ -170,46 +141,72 @@ public class TirePathTree {
                 return null;
             }
         }
-        //此时node应为pathEnd节点
-        if (!NODE_TYPE_PATH_END.equals(current.getNodeType())) {
-            return null;
-        }
-        // 匹配httpMethod
-        if (!current.getChildren().containsKey(method.toLowerCase())) {
-            return null;
-        }
-        current = current.getChildren().get(method.toLowerCase());
-        if (!NODE_TYPE_METHOD.equals(current.getNodeType())) {
-            return null;
-        }
-        // 取filterRoles
-        if (!current.getChildren().isEmpty()) {
-            Iterator<Map.Entry<String,Node>> iterator = current.getChildren().entrySet().iterator();
-            Map.Entry<String,Node> filterRole = iterator.next();
-            if (NODE_TYPE_FILTER_ROLES.equals(filterRole.getValue().getNodeType())) {
-                return filterRole.getKey();
+
+        if (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType())
+                && current.getChildren().size() == 1) {
+            Node methodNode = current.getChildren().get(method);
+            if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
+                return methodNode.getChildren().keySet().iterator().next();
             } else {
                 return null;
+            }
+        }
+
+        String matchRole;
+        if (isMatchString(current.getData(), urlPac[currentFlow])) {
+            if (current.getChildren().containsKey(currentUrlPac)) {
+                matchRole = searchPathRole(current.getChildren().get(currentUrlPac), urlPac, currentFlow + 1, method);
+                if (matchRole != null) {
+                    return matchRole;
+                }
+            }
+            if (current.getChildren().containsKey(MATCH_ONE)) {
+                matchRole = searchPathRole(current.getChildren().get(MATCH_ONE), urlPac, currentFlow + 1, method);
+                if (matchRole != null) {
+                    return matchRole;
+                }
+            }
+            if (current.getChildren().containsKey(MATCH_ALL)) {
+                Node matchAllNode = current.getChildren().get(MATCH_ALL);
+                if (NODE_TYPE_MAY_PATH_END.equals(matchAllNode.getNodeType())) {
+                    Node methodNode = matchAllNode.getChildren().get(method);
+                    if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
+                        return methodNode.getChildren().keySet().iterator().next();
+                    }
+                } else {
+                    for (String key : matchAllNode.getChildren().keySet()) {
+                        int flow = currentFlow;
+                        while (flow < urlPac.length) {
+                            if (key.equals(urlPac[flow])) {
+                                matchRole = searchPathRole(matchAllNode.getChildren().get(key), urlPac, flow, method);
+                                if (matchRole != null) {
+                                    return matchRole;
+                                }
+                            }
+                            flow ++;
+                        }
+                    }
+                }
             }
         }
         return null;
     }
 
-
-    private boolean search(int preAccessType, String[] urlPac, int pacIndex) {
-
-
-
-        // todo 基于ant的模式匹配   ? * **
-        Node current = root;
-        Stack<Node> stack = new Stack<>();
-        stack.push(current);
-        while (!stack.isEmpty()) {
-
-
+    /**
+     * 判断 pattern是否匹配pathNode
+     * @param pattern 匹配串 * **
+     * @param pathNode 被匹配串
+     * @return 匹配成功 true 否则 false
+     */
+    private boolean isMatchString(String pattern, String pathNode) {
+        if (pattern == null && pathNode == null) {
+            return true;
         }
-
-        return true;
+        if (pattern == null || pathNode == null) {
+            return false;
+        }
+        return pattern.equals(pathNode) || MATCH_ONE.equals(pattern)
+                || MATCH_ALL.equals(pattern);
     }
 
     /**
@@ -222,7 +219,7 @@ public class TirePathTree {
         }
         path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
         // 去除第一个 /
-        path = path.substring(1);
+        path = path.substring(1).toLowerCase();
         String[] tmp = path.split("===");
         if (tmp.length != PATH_NODE_NUM_3) {
             return;
@@ -233,6 +230,16 @@ public class TirePathTree {
         Node current = root;
         // 开始插入URL节点
         for (String urlData : urlPac) {
+
+            if (MATCH_ALL.equals(urlData)) {
+                if (current.getChildren().containsKey(MATCH_ALL)) {
+                    current = current.getChildren().get(MATCH_ALL);
+                } else {
+                    current.insertChild(MATCH_ALL);
+                    current = current.getChildren().get(MATCH_ALL);
+                }
+            }
+
             if (current.getChildren().containsKey(MATCH_ONE)) {
                 current = current.getChildren().get(MATCH_ONE);
             } else if (MATCH_ONE.equals(urlData)) {
@@ -250,30 +257,34 @@ public class TirePathTree {
                     if (entry.getValue().getChildren() != null) {
                         matchOneNode.insertChild(entry.getValue().getChildren().values());
                     }
+                    if (!NODE_TYPE_MAY_PATH_END.equals(matchOneNode.getNodeType())
+                            && NODE_TYPE_MAY_PATH_END.equals(entry.getValue().getNodeType())) {
+                        matchOneNode.setNodeType(NODE_TYPE_MAY_PATH_END);
+                    }
                     iterator.remove();
                 }
                 current.insertChild(matchOneNode);
                 current = matchOneNode;
-
-            } else if (current.getChildren().containsKey(urlData.toLowerCase())) {
-                current = current.getChildren().get(urlData.toLowerCase());
+            } else if (current.getChildren().containsKey(urlData)) {
+                current = current.getChildren().get(urlData);
             } else {
-                current.insertChild(urlData.toLowerCase());
-                current = current.getChildren().get(urlData.toLowerCase());
+                current.insertChild(urlData);
+                current = current.getChildren().get(urlData);
             }
         }
-
-        // 开始插入httpMethod节点
-        if (!current.getChildren().containsKey(method.toLowerCase())) {
-            current.insertChild(method.toLowerCase(), NODE_TYPE_METHOD);
+        // 设置NODE_TYPE_MAY_PATH_END节点类型
+        current.setNodeType(NODE_TYPE_MAY_PATH_END);
+        // 开始插入httpMethod节点,如果已经存在，则不覆盖修改原来配置
+        if (!current.getChildren().containsKey(method)) {
+            current.insertChild(method, NODE_TYPE_METHOD);
         }
-        current = current.getChildren().get(method.toLowerCase());
-        // 开始插入 supportRoles 节点 supportRoles 保持其原始大小写
+        current = current.getChildren().get(method);
+        // 开始插入叶子节点 supportRoles
         // 每条资源只能对应一 supportRoles ,httpMethod下最多一个孩子节点
+        // 如果已经存在，则不覆盖修改原来配置
         if (current.getChildren().isEmpty()) {
             current.insertChild(supportRoles, NODE_TYPE_FILTER_ROLES);
         }
-
     }
 
     /**
