@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 /**
  * 字典匹配树  支持 * **, 暂不支持?
  * 为什么不支持ant的?匹配, 目前的算法加入?效率不高, ?在sureness这种过滤链使用场景不高,完全可以其他取代,没有必要为了支持而支持
+ * 匹配优先级: 原始字符串 > * > **
  * @author tomsun28
  * @date 19:25 2019-01-18
  */
@@ -153,9 +154,10 @@ public class TirePathTree {
         }
 
         String matchRole;
+        String nextUrlPac = urlPac[currentFlow + 1];
         if (isMatchString(current.getData(), urlPac[currentFlow])) {
-            if (current.getChildren().containsKey(currentUrlPac)) {
-                matchRole = searchPathRole(current.getChildren().get(currentUrlPac), urlPac, currentFlow + 1, method);
+            if (current.getChildren().containsKey(nextUrlPac)) {
+                matchRole = searchPathRole(current.getChildren().get(nextUrlPac), urlPac, currentFlow + 1, method);
                 if (matchRole != null) {
                     return matchRole;
                 }
@@ -230,47 +232,10 @@ public class TirePathTree {
         Node current = root;
         // 开始插入URL节点
         for (String urlData : urlPac) {
-
-            if (MATCH_ALL.equals(urlData)) {
-                if (current.getChildren().containsKey(MATCH_ALL)) {
-                    current = current.getChildren().get(MATCH_ALL);
-                } else {
-                    current.insertChild(MATCH_ALL);
-                    current = current.getChildren().get(MATCH_ALL);
-                }
-            }
-
-            if (current.getChildren().containsKey(MATCH_ONE)) {
-                current = current.getChildren().get(MATCH_ONE);
-            } else if (MATCH_ONE.equals(urlData)) {
-                Node matchOneNode = new Node(MATCH_ONE, NODE_TYPE_PATH_NODE);
-
-                // 将其他非MATCH_ALL的node的孩子转移到MATCH_ONE
-                Iterator<Map.Entry<String, Node>> iterator = current.getChildren().entrySet().iterator();
-                while (iterator.hasNext()) {
-                    Map.Entry<String, Node> entry = iterator.next();
-                    if (MATCH_ALL.equals(entry.getKey())
-                            || NODE_TYPE_METHOD.equals(entry.getValue().getNodeType())
-                            || NODE_TYPE_FILTER_ROLES.equals(entry.getValue().getNodeType())) {
-                        continue;
-                    }
-                    if (entry.getValue().getChildren() != null) {
-                        matchOneNode.insertChild(entry.getValue().getChildren().values());
-                    }
-                    if (!NODE_TYPE_MAY_PATH_END.equals(matchOneNode.getNodeType())
-                            && NODE_TYPE_MAY_PATH_END.equals(entry.getValue().getNodeType())) {
-                        matchOneNode.setNodeType(NODE_TYPE_MAY_PATH_END);
-                    }
-                    iterator.remove();
-                }
-                current.insertChild(matchOneNode);
-                current = matchOneNode;
-            } else if (current.getChildren().containsKey(urlData)) {
-                current = current.getChildren().get(urlData);
-            } else {
+            if (!current.getChildren().containsKey(urlData)) {
                 current.insertChild(urlData);
-                current = current.getChildren().get(urlData);
             }
+            current = current.getChildren().get(urlData);
         }
         // 设置NODE_TYPE_MAY_PATH_END节点类型
         current.setNodeType(NODE_TYPE_MAY_PATH_END);
