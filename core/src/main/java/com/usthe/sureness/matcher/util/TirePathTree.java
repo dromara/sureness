@@ -105,7 +105,7 @@ public class TirePathTree {
         Node current = root;
         String matchRole;
         for(Map.Entry<String, Node> entry : current.getChildren().entrySet()) {
-            matchRole = searchPathRole(entry.getValue(), urlPac, 0, method);
+             matchRole = searchPathRole(entry.getValue(), urlPac, 0, method);
             if (matchRole != null) {
                 return matchRole;
             }
