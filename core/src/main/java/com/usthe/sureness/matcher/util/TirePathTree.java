@@ -4,9 +4,7 @@ package com.usthe.sureness.matcher.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -104,11 +102,21 @@ public class TirePathTree {
         // 模式匹配   * **
         Node current = root;
         String matchRole;
-        for(Map.Entry<String, Node> entry : current.getChildren().entrySet()) {
-             matchRole = searchPathRole(entry.getValue(), urlPac, 0, method);
+        if (current.getChildren().containsKey(urlPac[0])) {
+            matchRole = searchPathRole(current.getChildren().get(urlPac[0]), urlPac, 0, method);
             if (matchRole != null) {
                 return matchRole;
             }
+        }
+        if (current.getChildren().containsKey(MATCH_ONE)) {
+            matchRole = searchPathRole(current.getChildren().get(MATCH_ONE), urlPac, 0, method);
+            if (matchRole != null) {
+                return matchRole;
+            }
+        }
+        if (current.getChildren().containsKey(MATCH_ALL)) {
+            matchRole = searchPathRole(current.getChildren().get(MATCH_ALL), urlPac, 0, method);
+            return matchRole;
         }
         return null;
     }
@@ -127,7 +135,6 @@ public class TirePathTree {
                 || currentFlow < 0 || method == null || "".equals(method)) {
             return null;
         }
-        String currentUrlPac = urlPac[currentFlow];
 
         if (currentFlow == urlPac.length - 1) {
             if (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType())
@@ -283,16 +290,6 @@ public class TirePathTree {
 
         private void insertChild(String data,String nodeType) {
             this.children.put(data,new Node(data,nodeType));
-        }
-
-        private void insertChild(Node node) {
-            this.children.put(node.data, node);
-        }
-
-        public void insertChild(Collection<Node> nodes) {
-            if (nodes != null) {
-                nodes.forEach(this::insertChild);
-            }
         }
 
         private String getNodeType() {
