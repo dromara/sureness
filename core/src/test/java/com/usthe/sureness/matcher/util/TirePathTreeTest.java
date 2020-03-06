@@ -33,24 +33,35 @@ public class TirePathTreeTest {
     @Test
     public void buildTree() {
         Set<String> paths = new HashSet<>();
-        paths.add("/api///v2//book//===get===[]");
-        paths.add("/api///v2////book/////2/===get===[]");
-        paths.add("/////api///////v2//book/////===get===[]");
-        paths.add("/api/v2/host===post===[role2,role3,role4]");
-        paths.add("/api/v2/host===get===[role2,role3,role4]");
+        // 多'/'路径
+        paths.add("/api///v2////book///node//===get===[]");
+        // 配置不会覆盖,也不会叠加
+        paths.add("/api/v2/host===get===[role2]");
         paths.add("/api/v2/host===get===[role2,role3]");
-        paths.add("/api/v2/host===delete===[role2,role3,role4]");
-        paths.add("/api/v2/host===put===[role2,role3,role4]");
+        // 多种请求方式
+        paths.add("/api/v2/host===post===[role1]");
+        paths.add("/api/v2/host===delete===[role2,role3]");
+        paths.add("/api/v2/host===put===[role3,role4]");
         paths.add("/api/v1/host===put===[role2,role3,role4]");
         paths.add("/api/v3/host===put===[role2,role3,role4]");
         paths.add("/api/v2/detail===put===[role2,role3,role4]");
         paths.add("/api/v2/mom===put===[role2,role3,role4]");
+        // *匹配
+        paths.add("/api/*/ha/*===put===[role2,role3,role4]");
+        // 普通优先级>*
+        paths.add("/api/v4/mom/ha===put===[role3,role4]");
         paths.add("/api/*/mom/ha===put===[role2,role3,role4]");
-        paths.add("/api/mi/**===put===[role2,role3,role4]");
-        paths.add("/api/mi/**===put===[role2,role4]");
-        paths.add("/api/demo/book===get===[]");
+        // **匹配
+        paths.add("/api/mi/**===put===[role5]");
+        paths.add("/api/mo/**/day===get===[role6]");
+        // 普通优先级>*>**
+        paths.add("/api/v5/day/book===put===[role5]");
+        paths.add("/api/v5/**===put===[role6]");
+        paths.add("/api/demo/book/*/egg===get===[role1]");
+        paths.add("/api/demo/book/**/egg===get===[role2]");
+        paths.add("/**===get===[role9]");
         root.buildTree(paths);
-        Assert.assertEquals(12, root.getResourceNum());
+        Assert.assertEquals(19, root.getResourceNum());
     }
 
     @Test
