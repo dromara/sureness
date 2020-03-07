@@ -36,7 +36,7 @@ public class TirePathTree {
     /**
      * 根节点
      */
-    private Node root;
+    private volatile Node root;
 
     public TirePathTree() {
         this.root = new Node("root");
@@ -44,18 +44,37 @@ public class TirePathTree {
 
     /**
      * 新建字典匹配树
-     * @param paths 资路径
+     * @param paths 资源路径
      */
-    public void buildTree(Set<String> paths) {
+    public synchronized void buildTree(Set<String> paths) {
         if (logger.isDebugEnabled()) {
-            logger.debug("sureness - start buildTree");
+            logger.debug("sureness - start buildTree...");
         }
         clearTree();
         for (String path : paths) {
-            insertNode(path);
+            insertNode(path, this.root);
         }
         if (logger.isDebugEnabled()) {
             logger.debug("sureness - buildTree finish");
+        }
+    }
+
+    /**
+     * 重建字典匹配树，更新字典树数据
+     * 保证重建时不影响读，并发方式RCU -- read copy update
+     * @param paths paths 资源
+     */
+    public synchronized void rebuildTree(Set<String> paths) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("sureness - start rebuildTree..., try rcu current way");
+        }
+        Node buildRoot = new Node("root");
+        for (String path : paths) {
+            insertNode(path, buildRoot);
+        }
+        this.root = buildRoot;
+        if (logger.isDebugEnabled()) {
+            logger.debug("sureness - rebuildTree finish");
         }
     }
 
@@ -246,7 +265,7 @@ public class TirePathTree {
      * description 插入节点
      * @param path path = /api/v1/host/detail===GET===[role2,role3,role4]
      */
-    private void insertNode(String path) {
+    private void insertNode(String path, Node rootNode) {
         if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
             return;
         }
@@ -263,7 +282,7 @@ public class TirePathTree {
         String[] urlPac = tmp[0].split(URL_PATH_SPLIT);
         String method = tmp[1];
         String supportRoles = tmp[2];
-        Node current = root;
+        Node current = rootNode;
         // 开始插入URL节点
         for (String urlData : urlPac) {
             if (!current.getChildren().containsKey(urlData)) {
