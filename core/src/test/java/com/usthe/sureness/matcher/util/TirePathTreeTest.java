@@ -84,7 +84,7 @@ public class TirePathTreeTest {
         // **匹配
         Assert.assertEquals("[role5]", root.searchPathFilterRoles("/api/mi/tom/hello===put"));
         Assert.assertEquals("[role6]", root.searchPathFilterRoles("/api/mo/tom/hello/day/day===get"));
-        Assert.assertEquals("[role6]", root.searchPathFilterRoles("/api/day/day/day/day/book/day/mo===put"));
+        Assert.assertEquals("[role7]", root.searchPathFilterRoles("/api/day/day/day/day/book/day/mo===put"));
         // 普通优先级>*>**
         Assert.assertEquals("[role5]", root.searchPathFilterRoles("/api/v5/day/book===put"));
         Assert.assertEquals("[role1]", root.searchPathFilterRoles("/api/demo/book/tom/egg===get"));
