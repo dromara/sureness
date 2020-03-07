@@ -47,9 +47,15 @@ public class TirePathTree {
      * @param paths 资路径
      */
     public void buildTree(Set<String> paths) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("sureness - start buildTree");
+        }
         clearTree();
         for (String path : paths) {
             insertNode(path);
+        }
+        if (logger.isDebugEnabled()) {
+            logger.debug("sureness - buildTree finish");
         }
     }
 
@@ -57,6 +63,9 @@ public class TirePathTree {
      * 清空字典树
      */
     public void clearTree() {
+        if (logger.isDebugEnabled()) {
+            logger.debug("sureness - clearTree");
+        }
         root.getChildren().clear();
     }
 
@@ -78,6 +87,9 @@ public class TirePathTree {
                 resourceList.addAll(currentNode.getChildren().values());
             }
         }
+        if (logger.isDebugEnabled()) {
+            logger.debug("sureness - current PathTree resource num is: {}", resourceNum);
+        }
         return resourceNum;
     }
 
@@ -89,6 +101,9 @@ public class TirePathTree {
     public String searchPathFilterRoles(String path) {
         if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
             return null;
+        }
+        if (logger.isTraceEnabled()) {
+            logger.trace("sureness - searchPathFilterRoles, path is {}", path);
         }
         path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
         path = path.substring(1).toLowerCase();
@@ -115,8 +130,26 @@ public class TirePathTree {
             }
         }
         if (current.getChildren().containsKey(MATCH_ALL)) {
-            matchRole = searchPathRole(current.getChildren().get(MATCH_ALL), urlPac, 0, method);
-            return matchRole;
+            Node matchAllNode = current.getChildren().get(MATCH_ALL);
+            if (NODE_TYPE_MAY_PATH_END.equals(matchAllNode.getNodeType())) {
+                Node methodNode = matchAllNode.getChildren().get(method);
+                if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
+                    return methodNode.getChildren().keySet().iterator().next();
+                }
+            } else {
+                for (String key : matchAllNode.getChildren().keySet()) {
+                    int flow = 1;
+                    while (flow < urlPac.length) {
+                        if (key.equals(urlPac[flow])) {
+                            matchRole = searchPathRole(matchAllNode.getChildren().get(key), urlPac, flow, method);
+                            if (matchRole != null) {
+                                return matchRole;
+                            }
+                        }
+                        flow ++;
+                    }
+                }
+            }
         }
         return null;
     }
@@ -136,9 +169,12 @@ public class TirePathTree {
             return null;
         }
 
+        // fast fail
+        if (isNoMatchString(current.getData(), urlPac[currentFlow])) {
+            return null;
+        }
         if (currentFlow == urlPac.length - 1) {
-            if (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType())
-                    && isMatchString(current.getData(), urlPac[currentFlow])) {
+            if (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType())) {
                 Node methodNode = current.getChildren().get(method);
                 if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
                     return methodNode.getChildren().keySet().iterator().next();
@@ -150,50 +186,38 @@ public class TirePathTree {
             }
         }
 
-        if (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType())
-                && current.getChildren().size() == 1) {
-            Node methodNode = current.getChildren().get(method);
-            if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
-                return methodNode.getChildren().keySet().iterator().next();
-            } else {
-                return null;
-            }
-        }
-
         String matchRole;
         String nextUrlPac = urlPac[currentFlow + 1];
-        if (isMatchString(current.getData(), urlPac[currentFlow])) {
-            if (current.getChildren().containsKey(nextUrlPac)) {
-                matchRole = searchPathRole(current.getChildren().get(nextUrlPac), urlPac, currentFlow + 1, method);
-                if (matchRole != null) {
-                    return matchRole;
-                }
+        if (current.getChildren().containsKey(nextUrlPac)) {
+            matchRole = searchPathRole(current.getChildren().get(nextUrlPac), urlPac, currentFlow + 1, method);
+            if (matchRole != null) {
+                return matchRole;
             }
-            if (current.getChildren().containsKey(MATCH_ONE)) {
-                matchRole = searchPathRole(current.getChildren().get(MATCH_ONE), urlPac, currentFlow + 1, method);
-                if (matchRole != null) {
-                    return matchRole;
-                }
+        }
+        if (current.getChildren().containsKey(MATCH_ONE)) {
+            matchRole = searchPathRole(current.getChildren().get(MATCH_ONE), urlPac, currentFlow + 1, method);
+            if (matchRole != null) {
+                return matchRole;
             }
-            if (current.getChildren().containsKey(MATCH_ALL)) {
-                Node matchAllNode = current.getChildren().get(MATCH_ALL);
-                if (NODE_TYPE_MAY_PATH_END.equals(matchAllNode.getNodeType())) {
-                    Node methodNode = matchAllNode.getChildren().get(method);
-                    if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
-                        return methodNode.getChildren().keySet().iterator().next();
-                    }
-                } else {
-                    for (String key : matchAllNode.getChildren().keySet()) {
-                        int flow = currentFlow;
-                        while (flow < urlPac.length) {
-                            if (key.equals(urlPac[flow])) {
-                                matchRole = searchPathRole(matchAllNode.getChildren().get(key), urlPac, flow, method);
-                                if (matchRole != null) {
-                                    return matchRole;
-                                }
+        }
+        if (current.getChildren().containsKey(MATCH_ALL)) {
+            Node matchAllNode = current.getChildren().get(MATCH_ALL);
+            if (NODE_TYPE_MAY_PATH_END.equals(matchAllNode.getNodeType())) {
+                Node methodNode = matchAllNode.getChildren().get(method);
+                if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
+                    return methodNode.getChildren().keySet().iterator().next();
+                }
+            } else {
+                for (String key : matchAllNode.getChildren().keySet()) {
+                    int flow = currentFlow;
+                    while (flow < urlPac.length) {
+                        if (key.equals(urlPac[flow])) {
+                            matchRole = searchPathRole(matchAllNode.getChildren().get(key), urlPac, flow, method);
+                            if (matchRole != null) {
+                                return matchRole;
                             }
-                            flow ++;
                         }
+                        flow ++;
                     }
                 }
             }
@@ -202,20 +226,20 @@ public class TirePathTree {
     }
 
     /**
-     * 判断 pattern是否匹配pathNode
+     * 判断 pattern是否不匹配pathNode
      * @param pattern 匹配串 * **
      * @param pathNode 被匹配串
-     * @return 匹配成功 true 否则 false
+     * @return 匹配失败 true 成功 false
      */
-    private boolean isMatchString(String pattern, String pathNode) {
+    private boolean isNoMatchString(String pattern, String pathNode) {
         if (pattern == null && pathNode == null) {
-            return true;
-        }
-        if (pattern == null || pathNode == null) {
             return false;
         }
-        return pattern.equals(pathNode) || MATCH_ONE.equals(pattern)
-                || MATCH_ALL.equals(pattern);
+        if (pattern == null || pathNode == null) {
+            return true;
+        }
+        return !(pattern.equals(pathNode) || MATCH_ONE.equals(pattern)
+                || MATCH_ALL.equals(pattern));
     }
 
     /**
@@ -225,6 +249,9 @@ public class TirePathTree {
     private void insertNode(String path) {
         if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
             return;
+        }
+        if (logger.isTraceEnabled()) {
+            logger.trace("sureness - begin insertNode, path is {}", path);
         }
         path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
         // 去除第一个 /
@@ -262,7 +289,7 @@ public class TirePathTree {
     /**
      * 树节点类
      */
-    private class Node {
+    private static class Node {
 
         /** 当前节点的类型 **/
         private String nodeType;
@@ -285,11 +312,11 @@ public class TirePathTree {
         }
 
         private void insertChild(String data) {
-            this.children.put(data,new Node(data));
+            this.children.put(data, new Node(data));
         }
 
         private void insertChild(String data,String nodeType) {
-            this.children.put(data,new Node(data,nodeType));
+            this.children.put(data, new Node(data, nodeType));
         }
 
         private String getNodeType() {

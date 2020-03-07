@@ -52,6 +52,7 @@ public class TirePathTreeTest {
         // **匹配
         paths.add("/api/mi/**===put===[role5]");
         paths.add("/api/mo/**/day===get===[role6]");
+        paths.add("/api/day/**/day/mo===put===[role7]");
         // 普通优先级>*>**
         paths.add("/api/v5/day/book===put===[role5]");
         paths.add("/api/v5/**===put===[role6]");
@@ -59,7 +60,7 @@ public class TirePathTreeTest {
         paths.add("/api/demo/book/**/egg===get===[role2]");
         paths.add("/**===get===[role9]");
         root.buildTree(paths);
-        Assert.assertEquals(19, root.getResourceNum());
+        Assert.assertEquals(20, root.getResourceNum());
     }
 
     @Test
@@ -83,6 +84,7 @@ public class TirePathTreeTest {
         // **匹配
         Assert.assertEquals("[role5]", root.searchPathFilterRoles("/api/mi/tom/hello===put"));
         Assert.assertEquals("[role6]", root.searchPathFilterRoles("/api/mo/tom/hello/day/day===get"));
+        Assert.assertEquals("[role6]", root.searchPathFilterRoles("/api/day/day/day/day/book/day/mo===put"));
         // 普通优先级>*>**
         Assert.assertEquals("[role5]", root.searchPathFilterRoles("/api/v5/day/book===put"));
         Assert.assertEquals("[role1]", root.searchPathFilterRoles("/api/demo/book/tom/egg===get"));
