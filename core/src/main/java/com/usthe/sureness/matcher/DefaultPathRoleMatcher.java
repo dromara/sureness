@@ -28,8 +28,13 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
 
     private static final String NULL_ROLE = "[]";
 
+    private static final String EXCLUDE_ROLE = "exclude";
+
     /** path-role 匹配树存储点 **/
     private final TirePathTree root = new TirePathTree();
+
+    /** path-role 被排除的资源匹配树存储点 **/
+    private final TirePathTree excludeRoot = new TirePathTree();
 
     /** 排除资源名单 **/
     private final Set<String> excludedResource = new HashSet<>(16);
@@ -77,18 +82,24 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
 
     @Override
     public boolean isExcludedResource(Object request) {
+        checkComponentInit();
         String requestUri = ((HttpServletRequest) request).getRequestURI();
         String requestType = ((HttpServletRequest) request).getMethod();
         String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
-        return excludedResource.contains(targetUri);
+        String exclude = excludeRoot.searchPathFilterRoles(targetUri);
+        return exclude != null && exclude.equals(EXCLUDE_ROLE);
     }
 
     @Override
     public void loadExcludedResource() {
-        Set<String> provideResource = pathTreeProvider.provideExcludedResource();
-        if (provideResource != null) {
-            provideResource = provideResource.stream().map(String::toLowerCase).collect(Collectors.toSet());
-            excludedResource.addAll(provideResource);
+        Set<String> excludeResource = pathTreeProvider.provideExcludedResource();
+        if (excludeResource != null) {
+            excludeResource = excludeResource.stream()
+                    .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
+                    .collect(Collectors.toSet());
+            excludeRoot.buildTree(excludeResource);
+        } else {
+            logger.error("sureness - pathTreeProvider.provideExcludedResource is null, can not exclude resource");
         }
     }
 
