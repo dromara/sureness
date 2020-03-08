@@ -10,12 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -28,6 +25,7 @@ import java.util.UUID;
 @RestController()
 public class AccountController {
 
+    private static final String APP_ID = "appId";
     /**
      * 账户数据提供
      */
@@ -41,7 +39,7 @@ public class AccountController {
      */
     @PostMapping("/api/v1/account/auth")
     public ResponseEntity<Object> login(@RequestBody Map<String,String> requestBody) {
-        if (requestBody == null || !requestBody.containsKey("appId")
+        if (requestBody == null || !requestBody.containsKey(APP_ID)
                 || !requestBody.containsKey("password")) {
             return ResponseEntity.badRequest().build();
         }
