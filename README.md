@@ -16,9 +16,9 @@
 [English Documentation](README_EN.md)  
 
 ### 仓库的组成部分:  
-- [sureness的核心代码--sureness-core](core)
-- [使用sureness10分钟搭建权限项目--sample-bootstrap](sample-bootstrap)
-- [使用sureness30分钟搭建权限项目--sample-tom,开发中](sample-tom)
+- [sureness的核心代码--sureness-core](core)  
+- [使用sureness10分钟搭建权限项目--sample-bootstrap](sample-bootstrap)  
+- [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
 
 ### <font color="red">一些约定</font>  
 
@@ -37,13 +37,13 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.2.1</version>
 </dependency>
 ```
 
 `gradle`坐标  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.1'
 ```
 
 入口,一般放在拦截所有请求的`filter`:  
