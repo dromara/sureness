@@ -122,6 +122,10 @@ sugest look these interface before extending:
 
 Detail please refer to  [30 Minute Tutorial's Program--sample-tom](sample-tom)   
 
+### Why Is High Performance  
+
+![pathRoleMatcher](/img/PathRoleMatcher.svg)  
+
 ### Process flow  
 
 ![sureness-core](/img/sureness-core.svg)  

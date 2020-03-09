@@ -134,6 +134,10 @@ D(以上一次成功即成功并结束,失败即下一个钥匙锁尝试直到�
 
 具体扩展实践请参考 [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
 
+### 高性能匹配    
+
+![pathRoleMatcher](/img/PathRoleMatcher.svg)  
+
 ### 处理流程  
 
 ![sureness-core](/img/sureness-core.svg)  
