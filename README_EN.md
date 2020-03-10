@@ -42,7 +42,7 @@
 
 `gradle`  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.1'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.2'
 ```
 
 Portal, always is a filter intercepting all requests:  
