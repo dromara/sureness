@@ -11,6 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sureness-core</artifactId>
+    <packaging>jar</packaging>
     <name>sureness</name>
     <url>https://github.com/tomsun28/sureness</url>
     <description>
