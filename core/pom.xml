@@ -44,6 +44,7 @@
     </scm>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jjwt.version>0.9.0</jjwt.version>
         <yaml.version>1.17</yaml.version>
         <servlet.api.version>3.1.0</servlet.api.version>
