@@ -36,7 +36,7 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2.1</version>
+    <version>0.0.2.2</version>
 </dependency>
 ```
 
