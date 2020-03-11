@@ -10,7 +10,6 @@
 > `spring security`很强大,与`spring`深度集成,离开`spring`,比如`google`的精简`guice`,之前用过的`osgi`框架`karaf`就用不了了  
 > 它们都会在链式匹配这块，用请求的url和配置的链一个一个`ant`匹配(匹配过程中会有缓存等提高性能)，但匹配的链过多时还是比较耗性能  
 > 所以想写一个权限包吸取上面的优秀设计,加一些自己的想法   
-> (当然这个权限包(`low`)肯定不能跟以上提及的相比较)   
 
 ## <font color="green">`Introduction`</font>
 
