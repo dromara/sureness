@@ -10,7 +10,7 @@
 > Native supports  restful api, websocket's protection  
 > Native supports dynamic permissions  
 > Native supports JWT, Basic Auth... Can extend custom supported authentication methods  
-> High performance due dictionary matching tree  
+> [High performance due dictionary matching tree](#Why Is High Performance)  
 > Sorry about google english.   
 
 [Chinese Documentation](README.md)  
