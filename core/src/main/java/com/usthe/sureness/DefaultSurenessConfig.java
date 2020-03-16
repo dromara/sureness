@@ -7,7 +7,7 @@ import com.usthe.sureness.processor.Processor;
 import com.usthe.sureness.processor.support.JwtProcessor;
 import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
-import com.usthe.sureness.provider.DocumentResourceDefaultProvider;
+import com.usthe.sureness.provider.ducument.DocumentResourceDefaultProvider;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
 import com.usthe.sureness.subject.creater.JwtSubjectCreator;

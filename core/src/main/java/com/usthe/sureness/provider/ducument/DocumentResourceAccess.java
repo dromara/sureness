@@ -1,4 +1,4 @@
-package com.usthe.sureness.provider;
+package com.usthe.sureness.provider.ducument;
 
 import org.yaml.snakeyaml.Yaml;
 

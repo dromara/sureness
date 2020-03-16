@@ -1,6 +1,6 @@
 package com.usthe.sureness.sample.bootstrap.controller;
 
-import com.usthe.sureness.provider.DocumentResourceDefaultProvider;
+import com.usthe.sureness.provider.ducument.DocumentResourceDefaultProvider;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.util.JsonWebTokenUtil;

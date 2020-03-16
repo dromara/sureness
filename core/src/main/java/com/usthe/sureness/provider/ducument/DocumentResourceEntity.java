@@ -1,4 +1,4 @@
-package com.usthe.sureness.provider;
+package com.usthe.sureness.provider.ducument;
 
 import java.util.List;
 import java.util.Map;
