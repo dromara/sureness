@@ -1,6 +1,8 @@
 # `sureness`  
 
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)  
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)   
+
+[English Documentation](README_EN.md) 
 
 ## <font color="green">`Background`</font>  
 
@@ -20,9 +22,7 @@
 >  原生支持 `jwt`, `Basic Auth` ... 可扩展自定义支持的认证方式  
 >  [基于改进的字典匹配树大大提高性能](#高性能匹配 )  
 
->`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护  
-
-[English Documentation](README_EN.md)  
+>`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护   
 
 ### 仓库的组成部分:  
 - [sureness的核心代码--sureness-core](core)  

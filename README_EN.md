@@ -2,6 +2,8 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)  
 
+[中文文档](README.md)  
+
 ## <font color="green">`Introduction`</font>
 
 
@@ -12,8 +14,6 @@
 > Native supports JWT, Basic Auth... Can extend custom supported authentication methods  
 > [High performance due dictionary matching tree](#Why Is High Performance)  
 > Sorry about google english.   
-
-[Chinese Documentation](README.md)  
 
 ### Components of Repository:  
 - [sureness's kernel code--sureness-core](core)  
