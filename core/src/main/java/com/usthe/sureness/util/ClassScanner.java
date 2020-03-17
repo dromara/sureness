@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  * @email 292462859@qq.com
  * @date 2019/1/8.
  *
- * @author Yong(shrink & downgrade to Java7)
+ * @author Yong(shrink, downgrade to Java7)
  * @since 2.5.0
  *
  * @author tomsun28(fix code style)

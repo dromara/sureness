@@ -1,13 +1,11 @@
 package com.usthe.sureness.provider.annotation;
 
-import com.sun.deploy.util.StringUtils;
 import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.util.ClassScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -59,12 +57,21 @@ public class AnnotationLoader implements PathTreeProvider {
                 }
                 if (method.isAnnotationPresent(RequiresRoles.class)) {
                     RequiresRoles requiresRoles = method.getDeclaredAnnotation(RequiresRoles.class);
-                    String path = requiresRoles.mapping().toLowerCase()
-                            + "===" + requiresRoles.method().toLowerCase()
-                            + "===[" + StringUtils.join(Arrays.asList(requiresRoles.roles()), ",") + "]";
-                    resource.add(path);
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("sureness: annotationLoader load path {}.", path);
+
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < requiresRoles.roles().length; i++) {
+                        if (i < requiresRoles.roles().length) {
+                            builder.append(requiresRoles.roles()[i]).append(",");
+                        } else {
+                            builder.append(requiresRoles.roles()[i]);
+                        }
+                        String path = requiresRoles.mapping().toLowerCase()
+                                + "===" + requiresRoles.method().toLowerCase()
+                                + "===[" + builder.toString() + "]";
+                        resource.add(path);
+                        if (logger.isDebugEnabled()) {
+                            logger.debug("sureness: annotationLoader load path {}.", path);
+                        }
                     }
                 }
             }
