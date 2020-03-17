@@ -12,6 +12,23 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface authorizedRole {
-    String[] roles();
+public @interface RequiresRoles {
+
+    /**
+     * 所支持角色
+     * @return roles
+     */
+    String[] roles() default {};
+
+    /**
+     * 请求路径
+     * @return uri
+     */
+    String mapping();
+
+    /**
+     * 请求方式
+     * @return method - post,get,put,delete ...
+     */
+    String method();
 }
