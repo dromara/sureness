@@ -48,6 +48,9 @@ public enum ClassScanner {
         jar
     }
 
+    private static final Character STAR_CHAR = '*';
+    private static final String STAR_STR = "*";
+
     /**
      * Find all classes in packages 扫描一或多个包下的所有Class，包含接口类
      *
@@ -298,9 +301,9 @@ public enum ClassScanner {
         if (regex == null || regex.length() == 0 || name == null || name.length() == 0) {
             return false;
         }
-        if ('*' == (regex.charAt(0))) {
+        if (STAR_CHAR == (regex.charAt(0))) {
             return name.endsWith(regex.substring(1));
-        } else if (regex.endsWith("*")) {
+        } else if (regex.endsWith(STAR_STR)) {
             return name.startsWith(regex.substring(0, regex.length() - 1));
         } else {
             int starPos = regex.indexOf('*');
