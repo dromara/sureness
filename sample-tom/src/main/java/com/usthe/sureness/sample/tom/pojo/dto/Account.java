@@ -1,7 +1,9 @@
 package com.usthe.sureness.sample.tom.pojo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -13,6 +15,8 @@ import javax.validation.constraints.Pattern;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
 
     @NotBlank(message = "username can not null")
@@ -20,8 +24,7 @@ public class Account {
     private String username;
 
     @NotBlank(message = "password can not null")
-    @Length(min = 6, max = 12, message = "password length in 6-12")
-    @Pattern(regexp = "[a-zA-Z0-9]*", message = "password must has [a-zA-Z0-9]")
+    @Length(min = 3, max = 100, message = "password length in 3-100")
     private String password;
 
 }

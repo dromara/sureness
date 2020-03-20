@@ -1,7 +1,9 @@
 package com.usthe.sureness.sample.tom.pojo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *  前后端http api统一消息定义协议 Message
@@ -15,6 +17,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Message {
 
     /**
