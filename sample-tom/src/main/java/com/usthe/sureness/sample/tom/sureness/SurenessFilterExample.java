@@ -85,7 +85,7 @@ public class SurenessFilterExample implements Filter {
      * @param content 内容
      * @param response response
      */
-    private void responseWrite(ResponseEntity content, ServletResponse response) {
+    private void responseWrite(ResponseEntity<?> content, ServletResponse response) {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
         ((HttpServletResponse)response).setStatus(content.getStatusCodeValue());
