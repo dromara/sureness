@@ -7,8 +7,8 @@
 ## <font color="green">`Introduction`</font>
 
 
-> Sureness is a new, permission project which author learn from apache shiro and add some ideas to cretae it  
-> Authentication for restful api, based on RABC, Mainly focused on the protection of restful api  
+> Sureness is a new, permission project which author learn from apache shiro and add some ideas to create it  
+> Authentication for restful api, based on RBAC, Mainly focused on the protection of restful api  
 > Native supports  restful api, websocket's protection  
 > Native supports dynamic permissions  
 > Native supports JWT, Basic Auth... Can extend custom supported authentication methods  
@@ -22,7 +22,7 @@
 
 ### <font color="red">Some Conventions</font>  
 
-- Based RABC, but only has role-resource, no permission action    
+- Based RBAC, but only has role-resource, no permission action    
 - We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
   That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
   `eg: /api/v2/book===get`    
@@ -74,12 +74,12 @@ SurenessAuthenticationException     |  basic authenticated exception,Authenticat
 SurenessAuthorizationException       | basic authorized exception,Authorization related extend it
 ProcessorNotFoundException            | authenticated,not found process support this subject
 UnknownAccountException                | authenticated,unknown account
-UnSupportedSubjectException           | authenticated,unsupport request
+UnSupportedSubjectException           | authenticated,unSupport request
 DisabledAccountException                  | authenticated,account disable
 ExcessiveAttemptsException                | authenticated,excessive attempts
 IncorrectCredentialsException             | authenticated, incorrect credential
 ExpiredCredentialsException               | authenticated,expired credential
-UnauthorizedException                        | authorized,no premission access this resource
+UnauthorizedException                        | authorized,no permission access this resource
 
 custom exception should extend SurenessAuthenticationException or SurenessAuthorizationException  
 
@@ -91,15 +91,15 @@ Have Fun
 
 ### Advanced Use  
 
-if konw sureness [Process flow](#Process flow), maybe konw the extend point  
+if know sureness [Process flow](#Process flow), maybe know the extend point  
 
 sureness support custom subject, custom subjectCreator, custom processor and more.  
 
-sugest look these interface before extending:  
+suggest look these interface before extending:  
 
 - `Subject`:  Authenticated authorized  user's account interface, provide the account's username,password, request resources, roles, etc.  
 - `SubjectCreate`: create subject interface, provider create method   
-- `Processor`:  process subejct interface, where happen authentication and authorization 
+- `Processor`:  process subject interface, where happen authentication and authorization 
 - `PathTreeProvider`: resource data provider, it can load data from txt or database,etc
 - `SurenessAccountProvider`: account data provider, it can load data from txt or database,etc   
 
