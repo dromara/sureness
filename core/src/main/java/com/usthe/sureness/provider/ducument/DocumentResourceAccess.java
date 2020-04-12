@@ -2,13 +2,13 @@ package com.usthe.sureness.provider.ducument;
 
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -19,11 +19,12 @@ import java.nio.charset.StandardCharsets;
 public class DocumentResourceAccess {
 
     private static final String DEFAULT_FILE_NAME = "sureness.yml";
+
     /** 默认的资源文件名称位置 sureness.yml **/
-    private static String yamlFilePath;
+    private static String yamlFileName;
 
     static {
-        yamlFilePath = ClassLoader.getSystemResource(DEFAULT_FILE_NAME).getPath();
+        yamlFileName = DEFAULT_FILE_NAME;
     }
 
     /**
@@ -32,18 +33,13 @@ public class DocumentResourceAccess {
      * @throws IOException 文件不存在或者读取文件异常时
      */
     public static DocumentResourceEntity loadConfig() throws IOException {
-
         Yaml yaml = new Yaml();
-        File yamlFile = new File(yamlFilePath);
-        if (!yamlFile.exists()) {
-            throw new FileNotFoundException("sureness file: " + yamlFile + "not found, " +
+        InputStream inputStream = DocumentResourceAccess.class.getClassLoader().getResourceAsStream(yamlFileName);
+        if (inputStream == null) {
+            throw new FileNotFoundException("sureness file: " + DEFAULT_FILE_NAME + " not found, " +
                     "please create the file if you need config resource");
         }
-        try (FileInputStream inputStream = new FileInputStream(yamlFile)) {
-            return yaml.loadAs(inputStream, DocumentResourceEntity.class);
-        } catch (IOException e) {
-            throw new IOException(e);
-        }
+        return yaml.loadAs(inputStream, DocumentResourceEntity.class);
     }
 
     /**
@@ -53,19 +49,19 @@ public class DocumentResourceAccess {
      */
     public static void dumpConfig(DocumentResourceEntity entity) throws IOException {
         Yaml yaml = new Yaml();
-        File yamlFile = new File(yamlFilePath);
-        if (yamlFile.exists()) {
-            throw new FileNotFoundException("sureness file: " + yamlFilePath + "not found, " +
-                    "please create the file if you need config resource in one file");
+        URL url = DocumentResourceAccess.class.getClassLoader().getResource(yamlFileName);
+        if (url == null) {
+            throw new FileNotFoundException("sureness file: " + DEFAULT_FILE_NAME + " not found, " +
+                    "please create the file if you need config resource");
         }
-        try (Writer writer = new OutputStreamWriter(new FileOutputStream(yamlFile), StandardCharsets.UTF_8)) {
+        try (Writer writer = new OutputStreamWriter(new FileOutputStream(url.getPath()), StandardCharsets.UTF_8)) {
             yaml.dump(entity, writer);
         } catch (IOException e) {
             throw new IOException(e);
         }
     }
 
-    public static void setYamlFile(String yamlFile) {
-        yamlFilePath = yamlFile;
+    public static void setYamlName(String name) {
+        yamlFileName = name;
     }
 }
