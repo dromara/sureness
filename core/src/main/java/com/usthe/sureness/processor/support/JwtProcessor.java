@@ -77,9 +77,10 @@ public class JwtProcessor extends BaseProcessor {
     public void authorized(Subject var) throws SurenessAuthorizationException {
         List<String> ownRoles = (List<String>)var.getOwnRoles();
         List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles != null && supportRoles.stream().noneMatch(ownRoles::contains)) {
-            throw new UnauthorizedException("do not have the role access");
+        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
+            return;
         }
+        throw new UnauthorizedException("do not have the role to access resource");
     }
 
 }
