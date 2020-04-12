@@ -34,7 +34,11 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
     public Set<String> providePathData() {
         try {
             DocumentResourceEntity entity = DocumentResourceAccess.loadConfig();
-            return new HashSet<>(entity.getResourceRole());
+            List<String> resource = entity.getResourceRole();
+            if (resource != null) {
+                return new HashSet<>(entity.getResourceRole());
+            }
+            return new HashSet<>();
         } catch (IOException e) {
             logger.error("load config data from yaml file error: ", e);
             throw new SurenessLoadDataException(e.getMessage());
@@ -51,6 +55,7 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
             }
         } catch (IOException e) {
             logger.error("load config data from yaml file error: ", e);
+            throw new SurenessLoadDataException(e.getMessage());
         }
         return new HashSet<>();
     }
