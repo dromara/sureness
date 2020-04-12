@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,9 +34,6 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
 
     /** path-role 被排除的资源匹配树存储点 **/
     private final TirePathTree excludeRoot = new TirePathTree();
-
-    /** 排除资源名单 **/
-    private final Set<String> excludedResource = new HashSet<>(16);
 
     /** 匹配树数据内容提供者 **/
     private PathTreeProvider pathTreeProvider;
