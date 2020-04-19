@@ -30,6 +30,9 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
 
     private static final String ROLE = "role";
 
+    /** sureness配置信息内存缓存 **/
+    private DocumentResourceEntity entity;
+
     @Override
     public Set<String> providePathData() {
         try {
@@ -67,7 +70,9 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
             return null;
         }
         try {
-            DocumentResourceEntity entity = DocumentResourceAccess.loadConfig();
+            if (entity == null) {
+                entity = DocumentResourceAccess.loadConfig();
+            }
             Optional<Map<String, Object>> mapOptional = entity.getAccount().stream()
                     .filter(map -> appId.equals(map.get("appId")))
                     .findFirst();
