@@ -1,5 +1,6 @@
 package com.usthe.sureness.sample.tom.service;
 
+import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthRoleDO;
 import org.springframework.data.domain.Page;
 
@@ -53,4 +54,13 @@ public interface RoleService {
      * @return 角色的分页
      */
     Page<AuthRoleDO> getPageRole(Integer currentPage, Integer pageSize);
+
+    /**
+     * 获取角色所拥有API资源的分页
+     * @param roleId 角色ID
+     * @param currentPage 当前页码
+     * @param pageSize 页大小
+     * @return 角色的分页
+     */
+    Page<AuthResourceDO> getPageResourceOwnRole(Long roleId, Integer currentPage, Integer pageSize);
 }

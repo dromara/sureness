@@ -1,8 +1,11 @@
 package com.usthe.sureness.sample.tom.dao;
 
 import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 import java.util.Set;
@@ -35,4 +38,15 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
             "from AuthResourceDO resource where resource.status = 9 order by resource.id")
     Optional<Set<String>> getDisableResourcePathData();
 
+    /**
+     * 获取分页形式的当前角色拥有的可用API资源
+     * @param roleId 角色ID
+     * @param request page
+     * @return api resource list
+     */
+    @Query("select distinct resource from AuthResourceDO resource " +
+            "left join AuthRoleResourceBindDO bind on bind.resourceId = resource.id " +
+            "where bind.roleId = :roleId and resource.status = 1 " +
+            "order by resource.id asc")
+    Page<AuthResourceDO> findRoleOwnResource(@Param("roleId") Long roleId, PageRequest request);
 }

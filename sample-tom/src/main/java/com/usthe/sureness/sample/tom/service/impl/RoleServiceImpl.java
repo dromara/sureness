@@ -1,12 +1,15 @@
 package com.usthe.sureness.sample.tom.service.impl;
 
+import com.usthe.sureness.sample.tom.dao.AuthResourceDao;
 import com.usthe.sureness.sample.tom.dao.AuthRoleDao;
+import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthRoleDO;
 import com.usthe.sureness.sample.tom.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private AuthRoleDao authRoleDao;
+
+    @Autowired
+    private AuthResourceDao authResourceDao;
 
     @Override
     public boolean isRoleExist(AuthRoleDO authRole) {
@@ -71,5 +77,11 @@ public class RoleServiceImpl implements RoleService {
     public Page<AuthRoleDO> getPageRole(Integer currentPage, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(currentPage, pageSize);
         return authRoleDao.findAll(pageRequest);
+    }
+
+    @Override
+    public Page<AuthResourceDO> getPageResourceOwnRole(Long roleId, Integer currentPage, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(currentPage, pageSize, Sort.Direction.ASC, "id");
+        return authResourceDao.findRoleOwnResource(roleId, pageRequest);
     }
 }

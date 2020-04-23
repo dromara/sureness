@@ -1,6 +1,7 @@
 package com.usthe.sureness.sample.tom.controller;
 
 import com.usthe.sureness.sample.tom.pojo.dto.Message;
+import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthRoleDO;
 import com.usthe.sureness.sample.tom.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,20 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+
+
+    @GetMapping("/api/{roleId}/{currentPage}/{pageSize}")
+    public ResponseEntity<Message> getResourceOwnByRole(@PathVariable @NotBlank Long roleId, @PathVariable Integer currentPage, @PathVariable Integer pageSize) {
+        if (currentPage == null){
+            currentPage = 1;
+        }
+        if (pageSize == null) {
+            pageSize = 10;
+        }
+        Page<AuthResourceDO> resourcePage = roleService.getPageResourceOwnRole(roleId, currentPage, pageSize);
+        Message message = Message.builder().data(resourcePage).build();
+        return ResponseEntity.ok().body(message);
+    }
 
     @PostMapping
     public ResponseEntity<Message> addRole(@RequestBody @Validated AuthRoleDO authRole) {
