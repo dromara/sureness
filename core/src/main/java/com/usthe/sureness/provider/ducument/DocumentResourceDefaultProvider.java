@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
+ * provide resource and account data loading from yaml document
  * @author tomsun28
  * @date 22:40 2019-05-24
  */
@@ -36,7 +37,9 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
     @Override
     public Set<String> providePathData() {
         try {
-            DocumentResourceEntity entity = DocumentResourceAccess.loadConfig();
+            if (entity == null) {
+                entity = DocumentResourceAccess.loadConfig();
+            }
             List<String> resource = entity.getResourceRole();
             if (resource != null) {
                 return new HashSet<>(entity.getResourceRole());
@@ -51,7 +54,9 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
     @Override
     public Set<String> provideExcludedResource() {
         try {
-            DocumentResourceEntity entity = DocumentResourceAccess.loadConfig();
+            if (entity == null) {
+                entity = DocumentResourceAccess.loadConfig();
+            }
             List<String> resource = entity.getExcludedResource();
             if (resource != null) {
                 return new HashSet<>(resource);
