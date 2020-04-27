@@ -119,19 +119,6 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         return exclude != null && exclude.equals(EXCLUDE_ROLE);
     }
 
-    @Override
-    public void loadExcludedResource() {
-        Set<String> excludeResource = pathTreeProvider.provideExcludedResource();
-        if (excludeResource != null) {
-            excludeResource = excludeResource.stream()
-                    .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
-                    .collect(Collectors.toSet());
-            excludeRoot.buildTree(excludeResource);
-        } else {
-            logger.error("sureness - pathTreeProvider.provideExcludedResource is null, can not exclude resource");
-        }
-    }
-
     private void checkComponentInit() {
         if (pathTreeProvider == null) {
             throw new SurenessNoInitException("DefaultPathRoleMatcher init error : component init not complete");

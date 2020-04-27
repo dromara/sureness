@@ -38,11 +38,4 @@ public interface TreePathRoleMatcher {
      * @return 是排除资源true 否则false
      */
     boolean isExcludedResource(Object request);
-
-
-    /**
-     * 加载排除资源名单
-     */
-    @Deprecated
-    void loadExcludedResource();
 }
