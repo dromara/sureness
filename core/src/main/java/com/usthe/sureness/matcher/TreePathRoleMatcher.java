@@ -25,6 +25,13 @@ public interface TreePathRoleMatcher {
     void buildTree();
 
     /**
+     * 重建匹配树
+     * @throws SurenessNoInitException when matcher not init
+     * @throws SurenessLoadDataException when 数据源 not init
+     */
+    void rebuildTree();
+
+    /**
      * 通过拥有的排除资源名单判断这个请求所请求的资源是否在排除名单里
      * 资源: requestUri===method
      * @param request 请求内容
@@ -36,5 +43,6 @@ public interface TreePathRoleMatcher {
     /**
      * 加载排除资源名单
      */
+    @Deprecated
     void loadExcludedResource();
 }

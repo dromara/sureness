@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -49,6 +51,20 @@ public class RoleController {
         Page<AuthResourceDO> resourcePage = roleService.getPageResourceOwnRole(roleId, currentPage, pageSize);
         Message message = Message.builder().data(resourcePage).build();
         return ResponseEntity.ok().body(message);
+    }
+
+    @PostMapping("/authority/resource/{roleId}/{resourceId}")
+    public ResponseEntity<Message> authorityRoleResource(@PathVariable @NotBlank Long roleId,
+                                                         @PathVariable @NotBlank Long resourceId) {
+        roleService.authorityRoleResource(roleId,resourceId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/authority/resource/{roleId}/{resourceId}")
+    public ResponseEntity<Message> deleteAuthorityRoleResource(@PathVariable @NotBlank Long roleId,
+                                                         @PathVariable @NotBlank Long resourceId) {
+        roleService.deleteAuthorityRoleResource(roleId,resourceId);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PostMapping

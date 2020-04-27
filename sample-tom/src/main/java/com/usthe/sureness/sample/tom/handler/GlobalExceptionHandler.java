@@ -1,6 +1,7 @@
 package com.usthe.sureness.sample.tom.handler;
 
 import com.usthe.sureness.sample.tom.pojo.dto.Message;
+import com.usthe.sureness.sample.tom.service.impl.DataConflictException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,23 @@ public class GlobalExceptionHandler {
             errorMessage = exception.getMessage();
         }
         log.warn("[sample-tom]-[database error happen]-{}", errorMessage, exception);
+        Message message = Message.builder().errorMsg(errorMessage).build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+    }
+
+    /**
+     * 对于请求数据和系统数据状态不一致异常统一处理
+     * @param exception 数据状态不一致异常
+     * @return 统一错误信息体
+     */
+    @ExceptionHandler(DataConflictException.class)
+    @ResponseBody
+    ResponseEntity<Message> handleDataConflictException(DataConflictException exception) {
+        String errorMessage = "data status conflict warning";
+        if (exception != null && exception.getMessage() != null) {
+            errorMessage = exception.getMessage();
+        }
+        log.info("[sample-tom]-[data status conflict warning]-{}", errorMessage, exception);
         Message message = Message.builder().errorMsg(errorMessage).build();
         return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
     }

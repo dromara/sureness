@@ -44,7 +44,8 @@ CREATE TABLE auth_role_resource_bind
     resource_id bigint not null comment '资源ID',
     gmt_create   timestamp    default current_timestamp comment '创建时间',
     gmt_update   datetime     default current_timestamp on update current_timestamp comment '更新时间',
-    primary key (id)
+    primary key (id),
+    unique key unique_bind (role_id, resource_id)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -80,5 +81,6 @@ CREATE TABLE auth_user_role_bind
     role_id    bigint not null comment '角色ID',
     gmt_create   timestamp    default current_timestamp comment '创建时间',
     gmt_update   datetime     default current_timestamp on update current_timestamp comment '更新时间',
-    primary key (id)
+    primary key (id),
+    unique key unique_bind (user_id, role_id)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;

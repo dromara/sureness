@@ -1,9 +1,12 @@
 package com.usthe.sureness.sample.tom.service.impl;
 
+import com.usthe.sureness.matcher.TreePathRoleMatcher;
 import com.usthe.sureness.sample.tom.dao.AuthResourceDao;
 import com.usthe.sureness.sample.tom.dao.AuthRoleDao;
+import com.usthe.sureness.sample.tom.dao.AuthRoleResourceBindDao;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthRoleDO;
+import com.usthe.sureness.sample.tom.pojo.entity.AuthRoleResourceBindDO;
 import com.usthe.sureness.sample.tom.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -29,6 +32,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private AuthResourceDao authResourceDao;
+
+    @Autowired
+    private AuthRoleResourceBindDao roleResourceBindDao;
+
+    @Autowired
+    private TreePathRoleMatcher treePathRoleMatcher;
 
     @Override
     public boolean isRoleExist(AuthRoleDO authRole) {
@@ -83,5 +92,26 @@ public class RoleServiceImpl implements RoleService {
     public Page<AuthResourceDO> getPageResourceOwnRole(Long roleId, Integer currentPage, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(currentPage, pageSize, Sort.Direction.ASC, "id");
         return authResourceDao.findRoleOwnResource(roleId, pageRequest);
+    }
+
+    @Override
+    public void authorityRoleResource(Long roleId, Long resourceId) {
+        // 判断此资源和角色是否存在
+        if (!authRoleDao.existsById(roleId) || !authResourceDao.existsById(resourceId)) {
+            throw new DataConflictException("roleId or resourceId not exist");
+        }
+        // 直接保存关联关系，若存在数据库唯一索引会起作用
+        AuthRoleResourceBindDO bind = AuthRoleResourceBindDO
+                .builder().roleId(roleId).resourceId(resourceId).build();
+        roleResourceBindDao.saveAndFlush(bind);
+        // 刷新认证过滤链
+        treePathRoleMatcher.rebuildTree();
+    }
+
+    @Override
+    public void deleteAuthorityRoleResource(Long roleId, Long resourceId) {
+        roleResourceBindDao.deleteRoleResourceBind(roleId, resourceId);
+        // 刷新认证过滤链
+        treePathRoleMatcher.rebuildTree();
     }
 }

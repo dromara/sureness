@@ -39,7 +39,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     private PathTreeProvider pathTreeProvider;
 
     /** 是否匹配树数据加载完成 **/
-    private boolean isTreeInit;
+    private volatile boolean isTreeInit;
 
     @Override
     public void matchRole(Subject auToken) {
@@ -67,12 +67,45 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         checkComponentInit();
         clearTree();
         Set<String> resources = pathTreeProvider.providePathData();
+        Set<String> excludeResource = pathTreeProvider.provideExcludedResource();
+
         if (resources != null) {
             resources = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
             root.buildTree(resources);
-            isTreeInit = true;
         } else {
-            isTreeInit = false;
+            logger.error("sureness - pathTreeProvider.providePathData is null, can not load resource");
+        }
+
+        if (excludeResource != null) {
+            excludeResource = excludeResource.stream()
+                    .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
+                    .collect(Collectors.toSet());
+            excludeRoot.buildTree(excludeResource);
+        } else {
+            logger.error("sureness - pathTreeProvider.provideExcludedResource is null, can not exclude resource");
+        }
+        isTreeInit = true;
+    }
+
+    @Override
+    public void rebuildTree() {
+        checkComponentInit();
+        Set<String> resources = pathTreeProvider.providePathData();
+        Set<String> excludeResource = pathTreeProvider.provideExcludedResource();
+        if (resources != null) {
+            resources = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
+            root.rebuildTree(resources);
+        } else {
+            logger.error("sureness - pathTreeProvider.providePathData is null, can not load resource");
+        }
+
+        if (excludeResource != null) {
+            excludeResource = excludeResource.stream()
+                    .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
+                    .collect(Collectors.toSet());
+            excludeRoot.rebuildTree(excludeResource);
+        } else {
+            logger.error("sureness - pathTreeProvider.provideExcludedResource is null, can not exclude resource");
         }
     }
 

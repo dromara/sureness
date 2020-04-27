@@ -50,7 +50,6 @@ public class SurenessConfiguration {
         DefaultPathRoleMatcher pathRoleMatcher = new DefaultPathRoleMatcher();
         pathRoleMatcher.setPathTreeProvider(pathTreeProvider);
         pathRoleMatcher.buildTree();
-        pathRoleMatcher.loadExcludedResource();
         return pathRoleMatcher;
     }
 

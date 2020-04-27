@@ -63,4 +63,18 @@ public interface RoleService {
      * @return 角色的分页
      */
     Page<AuthResourceDO> getPageResourceOwnRole(Long roleId, Integer currentPage, Integer pageSize);
+
+    /**
+     * 将资源授权给角色
+     * @param roleId 角色ID
+     * @param resourceId 资源ID
+     */
+    void authorityRoleResource(Long roleId, Long resourceId);
+
+    /**
+     * 删除授权给角色此资源
+     * @param roleId 角色ID
+     * @param resourceId 资源ID
+     */
+    void deleteAuthorityRoleResource(Long roleId, Long resourceId);
 }

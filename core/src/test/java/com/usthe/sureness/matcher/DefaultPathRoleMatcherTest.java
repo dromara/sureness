@@ -102,7 +102,7 @@ public class DefaultPathRoleMatcherTest {
         expect(provider.provideExcludedResource()).andReturn(excludePaths);
         replay(provider);
         pathRoleMatcher.setPathTreeProvider(provider);
-        pathRoleMatcher.loadExcludedResource();
+        pathRoleMatcher.buildTree();
         verify(provider);
     }
 }
