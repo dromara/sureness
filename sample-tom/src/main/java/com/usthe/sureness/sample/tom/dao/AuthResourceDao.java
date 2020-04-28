@@ -2,7 +2,7 @@ package com.usthe.sureness.sample.tom.dao;
 
 import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -48,5 +48,5 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
             "left join AuthRoleResourceBindDO bind on bind.resourceId = resource.id " +
             "where bind.roleId = :roleId and resource.status = 1 " +
             "order by resource.id asc")
-    Page<AuthResourceDO> findRoleOwnResource(@Param("roleId") Long roleId, PageRequest request);
+    Page<AuthResourceDO> findRoleOwnResource(@Param("roleId") Long roleId, Pageable request);
 }
