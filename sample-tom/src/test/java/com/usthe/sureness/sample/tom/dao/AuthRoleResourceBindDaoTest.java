@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 00:10 2019-07-31
  */
 @DisplayName("数据库表RoleResourceBind操作测试")
-class AuthRoleResourceBindDaoTest extends TomApplicationTest {
+public class AuthRoleResourceBindDaoTest extends TomApplicationTest {
 
     @Autowired
     private AuthRoleResourceBindDao roleResourceBindDao;

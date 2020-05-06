@@ -3,9 +3,6 @@ package com.usthe.sureness.sample.bootstrap.controller;
 import org.junit.Test;
 
 
-import java.net.URI;
-
-
 /**
  * @author tomsun28
  * @date 23:01 2019-05-26

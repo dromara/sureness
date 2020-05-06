@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
             "LEFT JOIN auth_role role on role.id = bind.role_id " +
             "where res.status = 1 " +
             "group by res.id", nativeQuery = true)
-    Optional<Set<String>> getEnableResourcePathRoleData();
+    Optional<List<String>> getEnableResourcePathRoleData();
 
 
 
@@ -36,7 +37,7 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
      */
     @Query("select CONCAT(LOWER(resource.uri),'===', resource.method) " +
             "from AuthResourceDO resource where resource.status = 9 order by resource.id")
-    Optional<Set<String>> getDisableResourcePathData();
+    Optional<List<String>> getDisableResourcePathData();
 
     /**
      * 获取分页形式的当前角色拥有的可用API资源

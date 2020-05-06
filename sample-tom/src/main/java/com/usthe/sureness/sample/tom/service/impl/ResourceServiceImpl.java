@@ -80,13 +80,13 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public Set<String> getAllEnableResourcePath() {
-        Optional<Set<String>> optional = authResourceDao.getEnableResourcePathRoleData();
-        return optional.orElseGet(() -> new HashSet<>(0));
+        Optional<List<String>> optional = authResourceDao.getEnableResourcePathRoleData();
+        return optional.<Set<String>>map(HashSet::new).orElseGet(() -> new HashSet<>(0));
     }
 
     @Override
     public Set<String> getAllDisableResourcePath() {
-        Optional<Set<String>> optional = authResourceDao.getDisableResourcePathData();
-        return optional.orElseGet(() -> new HashSet<>(0));
+        Optional<List<String>> optional = authResourceDao.getDisableResourcePathData();
+        return optional.<Set<String>>map(HashSet::new).orElseGet(() -> new HashSet<>(0));
     }
 }

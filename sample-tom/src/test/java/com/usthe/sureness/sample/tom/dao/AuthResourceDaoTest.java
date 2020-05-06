@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ import java.util.Set;
  * @date 22:35 2019-07-27
  */
 @DisplayName("数据库表Resource操作测试")
-class AuthResourceDaoTest extends TomApplicationTest {
+public class AuthResourceDaoTest extends TomApplicationTest {
 
     @Autowired
     private AuthResourceDao authResourceDao;
@@ -73,7 +74,7 @@ class AuthResourceDaoTest extends TomApplicationTest {
     @Test
     @Transactional
     public void shouldReturnSuccessWhenGetEnableResourcePathRoleData() {
-        Optional<Set<String>> optional = authResourceDao.getEnableResourcePathRoleData();
+        Optional<List<String>> optional = authResourceDao.getEnableResourcePathRoleData();
         Assertions.assertThat(optional.isPresent()).isTrue();
     }
 
@@ -86,7 +87,7 @@ class AuthResourceDaoTest extends TomApplicationTest {
                 .uri("/index/role/book").status(9)
                 .method("post").build();
         authResourceDao.save(resource);
-        Optional<Set<String>> optional = authResourceDao.getDisableResourcePathData();
+        Optional<List<String>> optional = authResourceDao.getDisableResourcePathData();
         Assertions.assertThat(optional.isPresent()).isTrue();
     }
 
