@@ -36,13 +36,13 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2.5</version>
+    <version>0.0.2.6</version>
 </dependency>
 ```
 
 `gradle`  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.5'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.6'
 ```
 
 Portal, always is a filter intercepting all requests:  
