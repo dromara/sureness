@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 00:46 2019-07-31
  */
 @DisplayName("数据库表User操作测试")
-public class AuthUserDaoTest extends TomApplicationTest {
+class AuthUserDaoTest extends TomApplicationTest {
 
     @Autowired
     private AuthUserDao authUserDao;

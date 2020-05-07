@@ -9,5 +9,4 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @date 19:32 2019-07-29
  */
 @SpringBootTest
-public class TomApplicationTest {
-}
+public class TomApplicationTest {}

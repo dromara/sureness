@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 
 /**
@@ -19,7 +18,7 @@ import java.util.Set;
  * @date 22:35 2019-07-27
  */
 @DisplayName("数据库表Resource操作测试")
-public class AuthResourceDaoTest extends TomApplicationTest {
+class AuthResourceDaoTest extends TomApplicationTest {
 
     @Autowired
     private AuthResourceDao authResourceDao;
