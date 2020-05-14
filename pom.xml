@@ -38,7 +38,6 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-<!--                <version>2.1.4.RELEASE</version>-->
                 <version>2.2.6.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>

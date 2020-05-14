@@ -15,6 +15,7 @@ import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
 import com.usthe.sureness.subject.creater.BasicAuthPasswordSubjectCreator;
 import com.usthe.sureness.subject.creater.JwtSubjectCreator;
+import com.usthe.sureness.util.JsonWebTokenUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,6 +30,11 @@ import java.util.List;
  */
 @Configuration
 public class SurenessConfiguration {
+
+    /**
+     * jwt secret key
+     */
+    private static final String TOM_SECRET_KEY = "?::4s9ssf2sf4sed45pf):";
 
     @Bean
     ProcessorManager processorManager(SurenessAccountProvider accountProvider) {
@@ -70,6 +76,7 @@ public class SurenessConfiguration {
     @Bean
     SurenessSecurityManager securityManager(ProcessorManager processorManager,
                                             TreePathRoleMatcher pathRoleMatcher, SubjectFactory subjectFactory) {
+        JsonWebTokenUtil.setSecretKey(TOM_SECRET_KEY);
         // surenessSecurityManager init
         SurenessSecurityManager securityManager = SurenessSecurityManager.getInstance();
         securityManager.setPathRoleMatcher(pathRoleMatcher);
