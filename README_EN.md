@@ -124,11 +124,11 @@ Detail please refer to  [30 Minute Tutorial's Program--sample-tom](sample-tom)
 
 ### Why Is High Performance  
 
-![pathRoleMatcher](/img/PathRoleMatcher.svg)  
+![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
 ### Process flow  
 
-![sureness-core](/img/sureness-core.svg)  
+![sureness-core](docs/_images/sureness-core.svg)  
 
 ### License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)

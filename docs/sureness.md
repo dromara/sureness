@@ -1,37 +1,37 @@
-# `sureness`  
 
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)   
+## `sureness` - 面向`restful api`的权限认证  
 
-[English Documentation](README_EN.md) 
+[仓库地址](https://github.com/tomsun28/sureness)  
 
-## <font color="green">`Background`</font>  
+### `Background`  
 
 > 目前`java`主流的权限框架有`shiro，spring security`  
 > 下面对于它们的探讨都是个人浅薄之见，接受纠正  
-> `shiro`对于`restful api`原生支持不是太友好,需要改写一些代码,2年前一个项目就是改造`shiro`,使其在过滤链就能匹配不同的`rest`请求进行权限校验,项目传送门:[booshiro](https://gitee.com/tomsun28/bootshiro),之后给`shiro commit`几次`pr`,`fix`其在过滤链匹配时的危险漏洞,`PR`传送门:[SHIRO-682](https://github.com/apache/shiro/pull/127),总的来说`shiro`很强大但其起源并非面向`web`,对`restful`不是很友好      
+> `shiro`对于`restful api`原生支持不是太友好,需要改写一些代码,2年前一个项目就是改造`shiro`,使其在过滤链就能匹配不同的`rest`请求进行权限校验,项目传送门[booshiro](https://gitee.com/tomsun28/bootshiro),之后给`shiro commit`几次`pr`,`fix`其在过滤链匹配时的危险漏洞,`PR`传送门[SHIRO-682](https://github.com/apache/shiro/pull/127),总的来说`shiro`很强大但其起源并非面向`web`,对`restful`不是很友好    
 > `spring security`很强大,与`spring`深度集成,离开`spring`,比如`google`的精简`guice`,之前用过的`osgi`框架`karaf`就用不了了  
 > 它们都会在链式匹配这块，用请求的url和配置的链一个一个`ant`匹配(匹配过程中会有缓存等提高性能)，但匹配的链过多时还是比较耗性能  
-> 所以想写一个权限包吸取上面的优秀设计,加一些自己的想法   
+> 所以想写一个权限包吸取上面的优秀设计,加一些自己的想法  
 
-## <font color="green">`Introduction`</font>
+### <font color="green">`Introduction`</font>
 
 > `sureness` 是作者在使用`java`权限框架`shiro`之后,吸取其良好的设计加上一些自己想法实现的全新认证鉴权项目  
->  面对`restful api`的认证鉴权,基于`RBAC`主要关注于对`restful api`的保护  
+>  面对`restful api`的认证鉴权,基于`RABC`主要关注于对`restful api`的保护  
 >  原生支持 `restful api, websocket protection`  
 >  原生支持动态权限(权限配置的动态加载)  
 >  原生支持 `jwt`, `Basic Auth` ... 可扩展自定义支持的认证方式  
->  [基于改进的字典匹配树大大提高性能](#高性能匹配 )  
+>  基于改进的字典匹配树大大提高性能  
 
->`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护   
+>`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护  
+
 
 ### 仓库的组成部分:  
-- [sureness的核心代码--sureness-core](core)  
-- [使用sureness10分钟搭建权限项目--sample-bootstrap](sample-bootstrap)  
-- [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
+- [sureness的核心代码--sureness-core](https://github.com/tomsun28/sureness)  
+- [使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness)  
+- [使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness)  
 
 ### <font color="red">一些约定</font>  
 
-- 基于`RBAC`,但只有(角色-资源)的映射,没有(权限)动作
+- 基于`RABC`,但只有(角色-资源)的映射,没有(权限)动作
 - 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
   即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源  
   `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据     
@@ -46,13 +46,13 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2.6</version>
+    <version>0.0.2.2</version>
 </dependency>
 ```
 
 `gradle`坐标  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.6'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.2'
 ```
 
 入口,一般放在拦截所有请求的`filter`:  
@@ -94,9 +94,9 @@ UnauthorizedException                     | 鉴权异常,没有权限访问此�
 自定义异常需要继承`SurenessAuthenticationException`或`SurenessAuthorizationException`才能被最外层捕获  
 
 
-若权限配置数据来自文本,请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](sample-bootstrap)  
+若权限配置数据来自文本,请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness)  
 
-若权限配置数据来自数据库,请参考[使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
+若权限配置数据来自数据库,请参考[使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness)  
 
 HAVE FUN
 
@@ -141,15 +141,17 @@ D(以上一次成功即成功并结束,失败即下一个钥匙锁尝试直到�
 实现`Processor`接口,设置支持的`subject`,实现处理该`subject`的逻辑  
 
 
-具体扩展实践请参考 [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
+具体扩展实践请参考 [使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness)  
 
 ### 高性能匹配    
 
-![pathRoleMatcher](/docs/_images/PathRoleMatcher.svg)  
+![pathRoleMatcher](_images/PathRoleMatcher.svg)  
 
 ### 处理流程  
 
-![sureness-core](/docs/_images/sureness-core.svg)  
+![sureness-core](_images/sureness-core.svg)  
 
-### License  
-[`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)
+
+<br>
+<br>
+
