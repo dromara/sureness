@@ -1,5 +1,5 @@
 - 入门  
-  - [介绍](sureness.md "introduce")
+  - [介绍](README.md "introduce")
   - [快速开始](quickstart.md "quick start greatest")  
 
 - 进阶扩展
@@ -13,5 +13,6 @@
   - [30分钟项目集成](sample-tom.md)
 
 - 其它
+  - [设计文档](design.md)
   - [参与贡献](contributing.md)
-  - [change](https://github.com/tomsun28/sureness/commits/master ':ignore')
+  - [changelog](https://github.com/tomsun28/sureness/commits/master ':ignore')
