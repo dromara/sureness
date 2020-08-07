@@ -12,6 +12,6 @@
 
 [GitHub](https://github.com/tomsun28/sureness/)
 [Gitee](https://gitee.com/tomsun28/sureness/)
-[Get Started](/sureness)
+[Get Started](/README.md)
 
 ![color](#e23fa6)
