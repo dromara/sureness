@@ -1,94 +1,76 @@
-# 快速开始
 
-推荐全局安装 `docsify-cli` 工具，可以方便地创建及在本地预览生成的文档。
+## 仓库的组成部分:  
+- [sureness的核心代码--sureness-core](https://github.com/tomsun28/sureness)  
+- [使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness)  
+- [使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness)  
 
-```bash
-npm i docsify-cli -g
+## <font color="red">一些约定</font>  
+
+- 基于`RABC`,但只有(角色-资源)的映射,没有(权限)动作
+- 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
+  即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源  
+  `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据     
+- 用户所属角色--角色拥有资源--用户拥有资源(用户就能访问此`api`)   
+
+
+## 使用  
+
+`maven`坐标  
+```
+<!-- https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core -->
+<dependency>
+    <groupId>com.usthe.sureness</groupId>
+    <artifactId>sureness-core</artifactId>
+    <version>0.0.2.2</version>
+</dependency>
 ```
 
-## 初始化项目
-
-如果想在项目的 `./docs` 目录里写文档，直接通过 `init` 初始化项目。
-
-```bash
-docsify init ./docs
+`gradle`坐标  
+```
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.2'
 ```
 
-## 开始写文档
-
-初始化成功后，可以看到 `./docs` 目录下创建的几个文件
-
-- `index.html` 入口文件
-- `README.md` 会做为主页内容渲染
-- `.nojekyll` 用于阻止 GitHub Pages 忽略掉下划线开头的文件
-
-直接编辑 `docs/README.md` 就能更新文档内容，当然也可以[添加更多页面](zh-cn/more-pages.md)。
-
-## 本地预览
-
-通过运行 `docsify serve` 启动一个本地服务器，可以方便地实时预览效果。默认访问地址 http://localhost:3000 。
-
-```bash
-docsify serve docs
+入口,一般放在拦截所有请求的`filter`:  
+```
+SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
-?> 更多命令行工具用法，参考 [docsify-cli 文档](https://github.com/docsifyjs/docsify-cli)。
+认证鉴权成功直接通过,失败抛出特定异常,捕获异常: 
 
-## 手动初始化
-
-如果不喜欢 npm 或者觉得安装工具太麻烦，我们可以直接手动创建一个 `index.html` 文件。
-
-*index.html*
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css">
-</head>
-<body>
-  <div id="app"></div>
-  <script>
-    window.$docsify = {
-      //...
-    }
-  </script>
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-</body>
-</html>
+```
+        try {
+            SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
+        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
+            // 账户创建相关异常 
+        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
+            // 账户禁用相关异常
+        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
+            // 认证失败相关异常
+        } catch (UnauthorizedException e5) {
+            // 鉴权失败相关异常
+        } catch (RuntimeException e) {
+            // 其他自定义异常
+        }
 ```
 
-如果你的系统里安装了 Python 的话，也可以很容易地启动一个静态服务器去预览你的网站。
+sureness异常                              | 异常描述
+---                                       | ---
+SurenessAuthenticationException           | 基础认证异常,认证相关的子异常应该继承此异常 
+SurenessAuthorizationException            | 基础鉴权异常,鉴权相关的子异常应该继承此异常
+ProcessorNotFoundException                | 认证异常,未找到支持此subject的processor
+UnknownAccountException                   | 认证异常,不存在此账户
+UnSupportedSubjectException               | 认证异常,不支持的请求,未创建出subject
+DisabledAccountException                  | 认证异常,账户禁用
+ExcessiveAttemptsException                | 认证异常,账户尝试认证次数过多
+IncorrectCredentialsException             | 认证异常,密钥错误
+ExpiredCredentialsException               | 认证异常,密钥认证过期
+UnauthorizedException                     | 鉴权异常,没有权限访问此资源
 
-```bash
-cd docs && python -m SimpleHTTPServer 3000
-```
-
-## Loading 提示
-
-初始化时会显示 `Loading...` 内容，你可以自定义提示信息。
+自定义异常需要继承`SurenessAuthenticationException`或`SurenessAuthorizationException`才能被最外层捕获  
 
 
-```html
-  <!-- index.html -->
-  
-  <div id="app">加载中</div>
-```
+若权限配置数据来自文本,请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness)  
 
-如果更改了 `el` 的配置，需要将该元素加上 `data-app` 属性。
+若权限配置数据来自数据库,请参考[使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness)  
 
-```html
-  <!-- index.html -->
-  <div data-app id="main">加载中</div>
-
-  <script>
-    window.$docsify = {
-      el: '#main'
-    }
-  </script>
-```
-
-对比 [el 设置](configuration.md#el)。
+HAVE FUN

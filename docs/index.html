@@ -23,8 +23,17 @@
       mergeNavbar: true,
       maxLevel: 4,
       name: 'sureness',
-      search: 'auto',
-
+      search: {
+        noData: {
+          '/': '没有结果!',
+          '/en/': 'No results!'
+        },
+        paths: 'auto',
+        placeholder: {
+          '/': '搜索',
+          '/en': 'Search'
+        }
+      },
       <!-- 字数统计 -->
       count:{
         countable:true,
