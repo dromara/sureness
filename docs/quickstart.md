@@ -1,41 +1,52 @@
+## <font color="red">使用前一些约定</font>  
 
-## 仓库的组成部分:  
-- [sureness的核心代码--sureness-core](https://github.com/tomsun28/sureness)  
-- [使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness)  
-- [使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness)  
-
-## <font color="red">一些约定</font>  
-
-- 基于`RABC`,但只有(角色-资源)的映射,没有(权限)动作
+- `sureness`尽量简洁,基于`RABC`,但只有(角色-资源)的映射,没有(权限)动作映射
 - 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
   即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源  
   `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据     
-- 用户所属角色--角色拥有资源--用户拥有资源(用户就能访问此`api`)   
+- 角色资源映射: 用户所属角色--角色拥有资源--用户拥有资源(用户就能访问此`api`)   
 
 
-## 使用  
+## 快速开始  
 
-`maven`坐标  
+### 项目中加入sureness  
+
+1. 项目使用`maven`构建,加入`maven`坐标  
 ```
 <!-- https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core -->
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2.2</version>
+    <version>0.0.2.6</version>
 </dependency>
 ```
 
-`gradle`坐标  
+2. 项目使用`gradle`构建,`gradle`坐标  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.2'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.6'
 ```
 
+3. 项目为普通工程,加入`sureness-core.jar`依赖  
+
+```
+在 mvnrepository 下载jar  
+https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core
+```
+
+### 添加拦截所有请求的过滤器入口  
+
+入口拦截器器实现一般可以是 `filter or spring interceptor`  
+在拦截器加入sureness的安全过滤器，如下:  
 入口,一般放在拦截所有请求的`filter`:  
+  
 ```
 SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
-认证鉴权成功直接通过,失败抛出特定异常,捕获异常: 
+### 实现相关异常处理  
+
+`sureness`使用异常处理流程,我们需要对`checkIn`抛出的异常做自定义处理,  
+安全过滤器,认证鉴权成功直接通过,失败抛出特定异常,捕获异常,如下: 
 
 ```
         try {
@@ -53,7 +64,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
         }
 ```
 
-sureness异常                              | 异常描述
+`sureness`异常                              | 异常描述
 ---                                       | ---
 SurenessAuthenticationException           | 基础认证异常,认证相关的子异常应该继承此异常 
 SurenessAuthorizationException            | 基础鉴权异常,鉴权相关的子异常应该继承此异常
@@ -62,15 +73,66 @@ UnknownAccountException                   | 认证异常,不存在此账户
 UnSupportedSubjectException               | 认证异常,不支持的请求,未创建出subject
 DisabledAccountException                  | 认证异常,账户禁用
 ExcessiveAttemptsException                | 认证异常,账户尝试认证次数过多
-IncorrectCredentialsException             | 认证异常,密钥错误
+IncrrectCredentialsException             | 认证异常,密钥错误
 ExpiredCredentialsException               | 认证异常,密钥认证过期
 UnauthorizedException                     | 鉴权异常,没有权限访问此资源
 
 自定义异常需要继承`SurenessAuthenticationException`或`SurenessAuthorizationException`才能被最外层捕获  
 
+### 加载配置数据  
 
-若权限配置数据来自文本,请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness)  
+`sureness`认证鉴权当然也需要我们自己的配置数据:账户数据，角色权限数据等  
+这些配置数据可能来自文本，关系数据库，非关系数据库  
+我们提供了配置数据接口`SurenessAccountProvider`, `PathTreeProvider`, 用户可以实现此接口实现自定义配置数据源  
+当前我们也提供默认文本形式的配置数据实现 `DocumentResourceDefaultProvider`, 用户可以配置`sureness.yml`来配置数据  
+```
+## -- sureness.yml文本数据源 -- ##
 
+# 加载到匹配字典的资源,也就是需要被保护的,设置了所支持角色访问的资源
+# 没有配置的资源也默认被认证保护,但不鉴权
+# eg: /api/v2/host===post===[role2,role3,role4] 表示 /api/v2/host===post 这条资源支持 role2,role3,role4这三种角色访问
+# eg: /api/v1/getSource3===get===[] 表示 /api/v1/getSource3===get 这条资源支持所有角色或无角色访问
+resourceRole:
+  - /api/v2/host===post===[role2,role3,role4]
+  - /api/v2/host===get===[role2,role3,role4]
+  - /api/v2/host===delete===[role2,role3,role4]
+  - /api/v2/host===put===[role2,role3,role4]
+  - /api/mi/**===put===[role2,role3,role4]
+  - /api/v1/getSource1===get===[role1,role2]
+  - /api/v2/getSource2/*/*===get===[role2]
+  - /api/v1/source1===get===[role2]
+  - /api/v1/source1===post===[role1]
+  - /api/v1/source1===delete===[role3]
+  - /api/v1/source1===put===[role1,role2]
+  - /api/v1/source2===get===[]
+
+# 需要被过滤保护的资源,不认证鉴权直接访问
+excludedResource:
+  - /api/v3/host===get
+  - /api/v3/book===get
+  - /api/v1/account/auth===post
+
+# 用户账户信息
+# 下面有 admin root tom三个账户
+# eg: admin 拥有[role1,role2]角色,加盐密码为0192023A7BBD73250516F069DF18B500
+# eg: root 没有角色,密码为明文23456
+account:
+  - appId: admin
+    # 如果填写了加密盐--salt,则credential为MD5(password+salt)的32位结果
+    # 没有盐认为不加密,credential为明文
+    credential: 0192023A7BBD73250516F069DF18B500
+    salt: 123
+    role: [role1,role2]
+  - appId: root
+    credential: 23456
+    role: [role1]
+  - appId: tom
+    credential: 32113
+    role: [role2]
+
+```
+
+我们提供了使用`DEMO`，默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness)   
 若权限配置数据来自数据库,请参考[使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness)  
 
-HAVE FUN
+**HAVE FUN**  
