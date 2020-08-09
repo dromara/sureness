@@ -1,6 +1,6 @@
-### 进阶扩展  
+## 进阶扩展  
 
-如果了解 [处理流程](#处理流程),就大概知道`sureness`提供的扩展点    
+如果了解处理流程,就大概知道`sureness`提供的扩展点    
 `sureness`支持自定义`subject`，自定义`subjectCreator`注册，自定义`processor`处理器等  
 
 扩展之前需要了解以下接口:  

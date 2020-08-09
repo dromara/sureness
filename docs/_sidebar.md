@@ -15,4 +15,4 @@
 - 其它
   - [设计文档](design.md)
   - [参与贡献](contributing.md)
-  - [changelog](https://github.com/tomsun28/sureness/commits/master ':ignore')
+  - [changelog](https://github.com/tomsun28/sureness/releases ':ignore')
