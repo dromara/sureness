@@ -1,4 +1,6 @@
-## <font color="red">Some Conventions</font>  
+## Quick Start 
+
+### <font color="red">Some Conventions</font>  
 
 - Based RBAC, but only has role-resource, no permission action    
 - We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
@@ -6,9 +8,7 @@
   `eg: /api/v2/book===get`    
 - User belongs some Role -- Role owns Resource -- User can access the resource  
 
-## Quick Use  
-
-### add sureness in project  
+### Add sureness in project  
 
 1. when use maven build project, add maven coordinate  
 ```
@@ -29,7 +29,7 @@ download this jar at mvnrepository
 https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core
 ```
 
-### add an interceptor intercepting all requests  
+### Add an interceptor intercepting all requests  
 
 the interceptor can be a filter or a spring interceptor.  
 the interceptor intercepts all request to check them.  
@@ -38,7 +38,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
 
-### implement exception flow when exception throw  
+### Implement exception flow when exception throw  
 Authentication passed directly, failure throw exception, catch exception and do something:   
 
 ```
@@ -72,7 +72,7 @@ UnauthorizedException                        | authorized,no permission access t
 
 custom exception should extend SurenessAuthenticationException or SurenessAuthorizationException  
 
-### load config dataSource   
+### Load config dataSource   
 
 sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
 the dataSource can load from txt, dataBase or no dataBase etc.
