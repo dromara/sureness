@@ -1,5 +1,7 @@
 ## sample-tom  
 
+[English Documentation](README_EN.md) 
+
 sureness 30分钟例子项目  
 
 - 基于`springboot,jpa...`，[数据源sql](src/main/resources/db)  
