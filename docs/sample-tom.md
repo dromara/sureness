@@ -1,4 +1,4 @@
-## sample-tom  
+## Sample-tom  
 
 [sureness 30分钟例子项目](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 

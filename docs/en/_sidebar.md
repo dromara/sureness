@@ -3,10 +3,10 @@
   - [Quick Start](en/quickstart.md "quick start greatest")  
 
 - Advanced Extend
-  - [extend point](en/extend-point.md)
-  - [custom datasource](en/custom-datasource.md)
-  - [custom subject](en/custom-subject.md)
-  - [custom processor](en/custom-processor.md)
+  - [Extend Point](en/extend-point.md)
+  - [Custom Datasource](en/custom-datasource.md)
+  - [Custom Subject](en/custom-subject.md)
+  - [Custom Processor](en/custom-processor.md)
 
 - Integration Demo
   - [10 Minute Tutorial](en/sample-bootstrap.md)
@@ -14,5 +14,5 @@
 
 - Others
   - [Design](en/design.md)
-  - [Contribute to us](en/contributing.md)
-  - [changelog](https://github.com/tomsun28/sureness/releases ':ignore')
+  - [Contribute To Us](en/contributing.md)
+  - [Changelog](https://github.com/tomsun28/sureness/releases ':ignore')

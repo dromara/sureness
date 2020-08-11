@@ -1,4 +1,4 @@
-## sample-bootstrap  
+## Sample-bootstrap  
 
 [sureness 10分钟例子项目](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)  
 

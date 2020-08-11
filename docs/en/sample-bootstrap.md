@@ -1,11 +1,11 @@
-## sample-bootstrap  
+## Sample-bootstrap  
 
 [sureness 10 Minute Tutorial](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)  
 
-- based on `springboot`
-- load data from default dataSource - `sureness.yml`
-- use default sureness config
-- use default `jwt,basic auth` to authenticate and authorize
-- contain `restful api,websocket`  
-- project's protected entrance is `SurenessFilterExample`
-- suggest use postman to test, test case is in `sample-bootstrap-postman.json`, user can load it in postman  
+- Based on `springboot`
+- Load data from default dataSource - `sureness.yml`
+- Use default sureness config
+- Use default `jwt,basic auth` to authenticate and authorize
+- Contain `restful api,websocket`  
+- Project's protected entrance is `SurenessFilterExample`
+- Suggest use postman to test, test case is in `sample-bootstrap-postman.json`, user can load it in postman  
