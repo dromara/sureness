@@ -1,9 +1,7 @@
 ## Advanced Use  
 
-if know sureness Process flow, maybe know the extends point  
-
+if know sureness Process flow, maybe know the extends point.  
 sureness supports custom subject, custom subjectCreator, custom processor and more.  
-
 suggest look these interface before extending:  
 
 - `Subject`: Authenticated authorized  user's account interface, provide the account's username,password, request resources, roles, etc.  
