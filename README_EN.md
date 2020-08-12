@@ -2,6 +2,8 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)  
 
+**Please use the space when website cannot be accessed:** [http://tomsun28.gitee.io/sureness](http://tomsun28.gitee.io/sureness)  
+
 [中文文档](README.md)  
 
 ## <font color="green">`Introduction`</font>

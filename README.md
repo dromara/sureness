@@ -2,6 +2,8 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)   
 
+**如果网站地址访问不了，请使用备用:** [http://tomsun28.gitee.io/sureness](http://tomsun28.gitee.io/sureness)  
+
 [English Documentation](README_EN.md) 
 
 ## <font color="green">`Background`</font>  
