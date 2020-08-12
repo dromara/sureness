@@ -2,7 +2,6 @@ package com.usthe.sureness.subject;
 
 
 import com.usthe.sureness.subject.support.SurenessSubjectSum;
-import com.usthe.sureness.util.ThreadContext;
 
 import java.io.Serializable;
 import java.util.List;
@@ -68,14 +67,10 @@ public interface Subject extends Serializable {
         String principal = (String)getPrincipal();
         List<String> roles = (List<String>)getOwnRoles();
         String targetUri = (String)getTargetResource();
-        SubjectSum subject =  SurenessSubjectSum.builder()
+        return   SurenessSubjectSum.builder()
                 .setTargetResource(targetUri)
                 .setRoles(roles)
                 .setPrincipal(principal)
                 .build();
-        // 将subject 绑定到localThread变量中
-        ThreadContext.bind(subject);
-        // 如果是网关认证中心, 之后可以考虑把subject绑定到request请求中,供子系统使用
-        return subject;
     }
 }
