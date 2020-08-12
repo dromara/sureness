@@ -11,6 +11,7 @@ import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
 import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
 import com.usthe.sureness.subject.SubjectSum;
+import com.usthe.sureness.util.SurenessContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -45,8 +46,10 @@ public class SurenessFilterExample implements Filter {
         try {
             SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
             // 考虑将生成的subject信息塞入request 之后的流程就可以直接拿去使用
+            // 也可以考虑使用SurenessContextHolder放入threadLocal中绑定
             if (subject != null) {
                 servletRequest.setAttribute("subject", subject);
+                SurenessContextHolder.bindSubject(subject);
             }
         } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
             logger.debug("this request is illegal");
@@ -74,9 +77,12 @@ public class SurenessFilterExample implements Filter {
                     servletResponse);
             return;
         }
-        // if ok, doFilter and add subject in request
-
-        filterChain.doFilter(servletRequest, servletResponse);
+        try {
+            // if ok, doFilter and add subject in request
+            filterChain.doFilter(servletRequest, servletResponse);
+        } finally {
+            SurenessContextHolder.clear();
+        }
     }
 
     /**

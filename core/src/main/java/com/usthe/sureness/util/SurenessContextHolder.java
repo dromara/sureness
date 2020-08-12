@@ -26,6 +26,9 @@ public class SurenessContextHolder {
      * 线程结束前调用 清空内容 防止oom
      */
     public static void clear() {
+        if (RESOURCES.get() != null) {
+            RESOURCES.get().clear();
+        }
         RESOURCES.remove();
     }
 
