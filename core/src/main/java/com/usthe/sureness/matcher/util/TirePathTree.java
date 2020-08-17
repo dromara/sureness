@@ -135,42 +135,7 @@ public class TirePathTree {
 
         // 模式匹配   * **
         Node current = root;
-        String matchRole;
-        if (current.getChildren().containsKey(urlPac[0])) {
-            matchRole = searchPathRole(current.getChildren().get(urlPac[0]), urlPac, 0, method);
-            if (matchRole != null) {
-                return matchRole;
-            }
-        }
-        if (current.getChildren().containsKey(MATCH_ONE)) {
-            matchRole = searchPathRole(current.getChildren().get(MATCH_ONE), urlPac, 0, method);
-            if (matchRole != null) {
-                return matchRole;
-            }
-        }
-        if (current.getChildren().containsKey(MATCH_ALL)) {
-            Node matchAllNode = current.getChildren().get(MATCH_ALL);
-            if (NODE_TYPE_MAY_PATH_END.equals(matchAllNode.getNodeType())) {
-                Node methodNode = matchAllNode.getChildren().get(method);
-                if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
-                    return methodNode.getChildren().keySet().iterator().next();
-                }
-            } else {
-                for (String key : matchAllNode.getChildren().keySet()) {
-                    int flow = 1;
-                    while (flow < urlPac.length) {
-                        if (key.equals(urlPac[flow])) {
-                            matchRole = searchPathRole(matchAllNode.getChildren().get(key), urlPac, flow, method);
-                            if (matchRole != null) {
-                                return matchRole;
-                            }
-                        }
-                        flow ++;
-                    }
-                }
-            }
-        }
-        return null;
+        return searchPathRoleInChildren(current, urlPac, -1, method);
     }
 
 
@@ -192,20 +157,62 @@ public class TirePathTree {
         if (isNoMatchString(current.getData(), urlPac[currentFlow])) {
             return null;
         }
-        if (currentFlow == urlPac.length - 1) {
-            if (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType())) {
-                Node methodNode = current.getChildren().get(method);
-                if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
-                    return methodNode.getChildren().keySet().iterator().next();
-                } else {
-                    return null;
-                }
+        if (currentFlow == urlPac.length - 1 && NODE_TYPE_MAY_PATH_END.equals(current.getNodeType())) {
+            Node methodNode = current.getChildren().get(method);
+            if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
+                return methodNode.getChildren().keySet().iterator().next();
             } else {
                 return null;
             }
         }
 
-        String matchRole;
+        String matchRole = null;
+        if (current.getData().equals(urlPac[currentFlow])) {
+            matchRole = searchPathRoleInChildren(current, urlPac, currentFlow, method);
+            if (matchRole != null) {
+                return matchRole;
+            }
+        }
+        if (current.getData().equals(MATCH_ONE)) {
+            matchRole = searchPathRoleInChildren(current, urlPac, currentFlow - 1, method);
+            if (matchRole != null) {
+                return matchRole;
+            }
+            matchRole = searchPathRoleInChildren(current, urlPac, currentFlow, method);
+            if (matchRole != null) {
+                return matchRole;
+            }
+        }
+        if (current.getData().equals(MATCH_ALL)) {
+            matchRole = searchPathRoleInChildren(current, urlPac, currentFlow - 1, method);
+            if (matchRole != null) {
+                return matchRole;
+            }
+            matchRole = searchPathRoleInChildren(current, urlPac, currentFlow, method);
+            if (matchRole != null) {
+                return matchRole;
+            }
+            matchRole = searchPathRole(current, urlPac, currentFlow + 1, method);
+        }
+        return matchRole;
+    }
+
+
+    /**
+     * 从当前node匹配下一节点
+     * @param current 当前node
+     * @param urlPac urlPath字符串组
+     * @param currentFlow 当前第一个字符串
+     * @param method http请求方法
+     * @return 匹配到返回[role,role2] 匹配不到返回null
+     */
+    private String searchPathRoleInChildren(Node current, String[] urlPac, int currentFlow,  String method) {
+        if (current == null || urlPac == null || currentFlow >= urlPac.length - 1
+                || currentFlow < -1 || method == null || "".equals(method)) {
+            return null;
+        }
+
+        String matchRole = null;
         String nextUrlPac = urlPac[currentFlow + 1];
         if (current.getChildren().containsKey(nextUrlPac)) {
             matchRole = searchPathRole(current.getChildren().get(nextUrlPac), urlPac, currentFlow + 1, method);
@@ -214,34 +221,17 @@ public class TirePathTree {
             }
         }
         if (current.getChildren().containsKey(MATCH_ONE)) {
-            matchRole = searchPathRole(current.getChildren().get(MATCH_ONE), urlPac, currentFlow + 1, method);
+            Node matchOneNode = current.getChildren().get(MATCH_ONE);
+            matchRole = searchPathRole(matchOneNode, urlPac, currentFlow + 1, method);
             if (matchRole != null) {
                 return matchRole;
             }
         }
         if (current.getChildren().containsKey(MATCH_ALL)) {
             Node matchAllNode = current.getChildren().get(MATCH_ALL);
-            if (NODE_TYPE_MAY_PATH_END.equals(matchAllNode.getNodeType())) {
-                Node methodNode = matchAllNode.getChildren().get(method);
-                if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
-                    return methodNode.getChildren().keySet().iterator().next();
-                }
-            } else {
-                for (String key : matchAllNode.getChildren().keySet()) {
-                    int flow = currentFlow;
-                    while (flow < urlPac.length) {
-                        if (key.equals(urlPac[flow])) {
-                            matchRole = searchPathRole(matchAllNode.getChildren().get(key), urlPac, flow, method);
-                            if (matchRole != null) {
-                                return matchRole;
-                            }
-                        }
-                        flow ++;
-                    }
-                }
-            }
+            matchRole = searchPathRole(matchAllNode, urlPac, currentFlow + 1, method);
         }
-        return null;
+        return matchRole;
     }
 
     /**
