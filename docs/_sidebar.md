@@ -1,6 +1,9 @@
 - 入门  
   - [介绍](README.md "introduce")
   - [快速开始](quickstart.md "quick start greatest")  
+  - [url路径匹配](path-match.md)  
+  - [sureness异常](exception.md)  
+  - [默认数据源](default-datasource.md)  
 
 - 进阶扩展
   - [扩展点](extend-point.md)
