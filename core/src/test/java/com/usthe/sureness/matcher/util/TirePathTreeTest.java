@@ -60,8 +60,9 @@ public class TirePathTreeTest {
         paths.add("/api/demo/book/**/egg===get===[role2]");
         paths.add("/**===get===[role9]");
         paths.add("/er/**/swagger===get===[role10]");
+        paths.add("/swagger/**===get===[role11]");
         root.buildTree(paths);
-        Assert.assertEquals(21, root.getResourceNum());
+        Assert.assertEquals(22, root.getResourceNum());
     }
 
     @Test
@@ -95,6 +96,7 @@ public class TirePathTreeTest {
         Assert.assertEquals("[role9]", root.searchPathFilterRoles("/api/v5/mom/ha===get"));
         Assert.assertEquals("[role10]", root.searchPathFilterRoles("/er/swagger===get"));
         Assert.assertNull(root.searchPathFilterRoles("/api/v6/book/ha/good===put"));
+        Assert.assertEquals("[role11]", root.searchPathFilterRoles("/swagger===get"));
 
     }
 }

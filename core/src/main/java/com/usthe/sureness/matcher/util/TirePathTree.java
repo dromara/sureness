@@ -158,12 +158,23 @@ public class TirePathTree {
         if (isNoMatchString(current.getData(), urlPac[currentFlow])) {
             return null;
         }
-        if (currentFlow == urlPac.length - 1 && NODE_TYPE_MAY_PATH_END.equals(current.getNodeType())) {
+        if (currentFlow == urlPac.length - 1 && (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType()))) {
             Node methodNode = current.getChildren().get(method);
-            if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
-                return methodNode.getChildren().keySet().iterator().next();
+            if (methodNode != null) {
+                if (NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
+                    return methodNode.getChildren().keySet().iterator().next();
+                }
             } else {
-                return null;
+                Node nextNode = current.getChildren().get(MATCH_ONE);
+                if (nextNode == null) {
+                    nextNode = current.getChildren().get(MATCH_ALL);
+                }
+                if (nextNode != null && NODE_TYPE_MAY_PATH_END.equals(nextNode.getNodeType())) {
+                    methodNode = nextNode.getChildren().get(method);
+                    if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
+                        return methodNode.getChildren().keySet().iterator().next();
+                    }
+                }
             }
         }
 
@@ -274,12 +285,18 @@ public class TirePathTree {
         String method = tmp[1];
         String supportRoles = tmp[2];
         Node current = rootNode;
+        Node pre = current;
         // 开始插入URL节点
         for (String urlData : urlPac) {
             if (!current.getChildren().containsKey(urlData)) {
                 current.insertChild(urlData);
             }
+            pre = current;
             current = current.getChildren().get(urlData);
+        }
+        if (MATCH_ONE.equals(current.getData()) || MATCH_ALL.equals(current.getData())) {
+            // 当倒数第一个为 * 或者 ** 时，其有可能匹配空，此时其前一个也可能为 NODE_TYPE_MAY_PATH_END
+            pre.setNodeType(NODE_TYPE_MAY_PATH_END);
         }
         // 设置NODE_TYPE_MAY_PATH_END节点类型
         current.setNodeType(NODE_TYPE_MAY_PATH_END);
