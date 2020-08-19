@@ -13,7 +13,7 @@ jasypt:
 spring:
   profiles: dev
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ENC(vp7cbF0sE/lRsThrcwdiA/WoeG1mIXzy)
     url: jdbc:mysql://47.110.55.246:3306/tom?useUnicode=true&characterEncoding=utf-8&useSSL=false
@@ -31,7 +31,7 @@ spring:
 spring:
   profiles: prod
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ENC(vp7cbF0sE/lRsThrcwdiA/WoeG1mIXzy)
     url: jdbc:mysql://47.110.55.246:3306/tom?useUnicode=true&characterEncoding=utf-8&useSSL=false

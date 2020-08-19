@@ -16,12 +16,12 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2.6</version>
+    <version>0.0.2.7</version>
 </dependency>
 ```
 2. When use gradle build project, add gradle coordinate  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.6'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.7'
 ```
 3. When not java build project, add sureness-core.jar to classPath  
 ```
