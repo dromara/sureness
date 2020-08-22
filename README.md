@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)   
 
-**如果网站地址访问不了，请使用备用:** [http://tomsun28.gitee.io/sureness](http://tomsun28.gitee.io/sureness)  
+**如果网站[usthe.com/sureness](https://usthe.com/sureness) 访问不了，请使用备用: [su.usthe.com](https://su.usthe.com/)**  
 
 [English Documentation](README_EN.md)   
 
