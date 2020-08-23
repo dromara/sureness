@@ -175,14 +175,7 @@ account:
 
 `sureness`大致流程:  
 
-```mermaid
-graph TD
-A(用户请求体进来) --> B(s)
-B(subjectCreate根据请求头内容创建不同的钥匙subject,每把钥匙都可以尝试) --> C(s)
-C(不同的钥匙认证方式即不同的锁processor来处理进来的钥匙subject) --> D(s)
-D(以上一次成功即成功并结束,失败即下一个钥匙锁尝试直到所有尝试结束)
-
-```
+![flow](/docs/_images/flow-cn.png)  
 
 1. **自定义数据源**  
 
