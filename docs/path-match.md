@@ -1,8 +1,8 @@
-## url路径匹配  
+## URI路径匹配  
 
 我们配置的资源格式为：`requestUri===httpMethod`, 即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源   
 `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据  
-这里的`requestUri`支持url路径匹配:  `*`, `**`    
+这里的`requestUri`支持url路径匹配符匹配:  `*`, `**`    
 
  通配符                      | 描述              
  ---                        | ---               
@@ -17,3 +17,5 @@
  `/**/foo`                   | 可以匹配 `/api/user/book/foo` 等  
  
 匹配优先级: 原始字符串 > `*` > `**`  
+最长路径匹配原则：  
+eg: `requestUri` 为`/app/book/foo`，若存在两个路径匹配模式`/app/**`和`/app/book/*`，则会匹配到`/app/book/*`  

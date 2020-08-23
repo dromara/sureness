@@ -1,6 +1,6 @@
 ## Sample-bootstrap  
 
-[sureness 10分钟例子项目](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)  
+[sureness 10分钟例子项目仓库地址](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)  
 
 - 基于`springboot`
 - 从默认的配置文件`sureness.yml`加载账户信息,资源角色,过滤资源等信息  

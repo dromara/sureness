@@ -10,10 +10,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <!-- 样式主题vue网站样式-->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+  <!--support mermaid 图表-->
+  <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
 <body>
   <div id="app">冲鸭!...</div>
   <script>
+    var num = 0;
+    mermaid.initialize({ startOnLoad: false });
+
     window.$docsify = {
       auto2top: true,
       coverpage: ['/', '/en/'],
@@ -40,6 +46,19 @@
         fontsize:'0.9em',
         color:'rgba(240,240,240,0.06)',
         language:'chinese'
+      },
+      <!--support mermaid 图表-->
+      markdown: {
+        renderer: {
+          code: function(code, lang) {
+            if (lang === "mermaid") {
+              return (
+                      '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+              );
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
       }
     }
   </script>

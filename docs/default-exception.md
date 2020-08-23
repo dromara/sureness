@@ -1,4 +1,25 @@
-## sureness 异常  
+## sureness 默认异常  
+
+`sureness`使用异常处理流程,我们需要对`checkIn`的认证鉴权流程中发生的认证失败或无权限访问等抛出的相应异常做自定义处理,  
+若认证鉴权成功,则直接通过,失败抛出特定异常,捕获异常,流程如下: 
+
+```
+        try {
+            SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
+        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
+            // 账户创建相关异常 
+        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
+            // 账户禁用相关异常
+        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
+            // 认证失败相关异常
+        } catch (UnauthorizedException e5) {
+            // 鉴权失败相关异常
+        } catch (RuntimeException e) {
+            // 其他自定义异常
+        }
+```
+
+sureness 默认支持的异常处理流程中的异常如下:  
 
 `sureness`异常                              | 异常描述
 ---                                       | ---

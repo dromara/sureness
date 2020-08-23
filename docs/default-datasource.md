@@ -1,4 +1,4 @@
-# 默认数据源   
+## 默认数据源   
 
 `sureness`认证鉴权当然也需要我们自己的配置数据:账户数据，角色权限数据等  
 这些配置数据可能来自文本，关系数据库，非关系数据库  
@@ -54,4 +54,5 @@ account:
 
 ```
 
-我们提供了默认文本数据源使用`DEMO`，默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+我们提供了默认文本数据源使用`DEMO`，默认文本数据源具体实现，请参考 [使用sureness10分钟项目集成案例](sample-bootstrap.md)     
+当然数据源也可以来自数据库等存储,我们提供了接口让用户轻松的自定义数据源，详见[自定义数据源](custom-datasource.md)  

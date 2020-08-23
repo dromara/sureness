@@ -63,7 +63,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
             // 其他自定义异常
         }
 ```
-异常详见 [sureness 异常](exception.md)
+异常详见 [sureness 异常](default-exception.md)
 
 ### 加载配置数据  
 
@@ -74,7 +74,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
 
 默认文本数据源配置详见 [默认数据源](default-datasource.md)  
 
-我们提供了默认文本数据源使用`DEMO`，默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-若权限配置数据来自数据库,请参考[使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
+我们提供了默认文本数据源使用`DEMO`，默认文本数据源具体实现，请参考 [使用sureness10分钟项目集成案例](sample-bootstrap.md)     
+若权限配置数据来自数据库,请参考 [使用sureness30分钟项目集成案例](sample-tom.md)   
 
 **HAVE FUN**  
