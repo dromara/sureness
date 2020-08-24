@@ -36,7 +36,6 @@
 
 1. 项目使用`maven`构建,加入`maven`坐标  
 ```
-<!-- https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core -->
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
