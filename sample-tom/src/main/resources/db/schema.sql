@@ -1,3 +1,5 @@
+use tom;
+
 -- ----------------------------
 -- Table structure for auth_resource
 -- ----------------------------
