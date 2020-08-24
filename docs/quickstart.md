@@ -63,7 +63,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
             // 其他自定义异常
         }
 ```
-异常详见 [sureness 异常](default-exception.md)
+异常详见 [默认异常](default-exception.md)  
 
 ### 加载配置数据  
 
