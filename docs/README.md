@@ -1,7 +1,6 @@
 
 ## `sureness` - 面向`restful api`的权限认证  
 
-[仓库地址](https://github.com/tomsun28/sureness)  
 
 ### `Background`  
 
