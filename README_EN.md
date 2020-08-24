@@ -36,7 +36,6 @@
 
 1. When use maven build project, add maven coordinate  
 ```
-<!-- https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core -->
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
