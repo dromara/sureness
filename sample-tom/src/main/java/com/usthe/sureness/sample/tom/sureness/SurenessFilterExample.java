@@ -45,10 +45,8 @@ public class SurenessFilterExample implements Filter {
 
         try {
             SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
-            // 考虑将生成的subject信息塞入request 之后的流程就可以直接拿去使用
-            // 也可以考虑使用SurenessContextHolder放入threadLocal中绑定
+            // 可以考虑使用SurenessContextHolder放入threadLocal中绑定
             if (subject != null) {
-                servletRequest.setAttribute("subject", subject);
                 SurenessContextHolder.bindSubject(subject);
             }
         } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
