@@ -6,5 +6,5 @@
   - [:cn: Chinese](/)  
 
 - Other  
-  - [About Me](https://usthe.com)  
+  - [About Us](https://usthe.com)  
   - [HOME](/en/)  

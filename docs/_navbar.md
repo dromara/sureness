@@ -6,5 +6,5 @@
   - [:us: English](/en/)  
 
 - 其它  
-  - [About Me](https://usthe.com)  
+  - [About Us](https://usthe.com)  
   - [回到主页](/)  
