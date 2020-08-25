@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
   <!--support mermaid 图表-->
   <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <!--edit document-->
+  <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
 </head>
 <body>
   <div id="app">冲鸭!...</div>
@@ -59,7 +61,16 @@
             return this.origin.code.apply(this, arguments);
           }
         }
-      }
+      },
+      plugin: [
+        EditOnGithubPlugin.create(
+                'https://github.com/tomsun28/sureness/tree/master/docs',
+                null,
+                function(file) {
+                  return 'edit document';
+                }
+        )
+      ]
     }
   </script>
   <!-- docsify -->
