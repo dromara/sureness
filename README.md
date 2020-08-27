@@ -9,11 +9,12 @@
 ## <font color="green">`Introduction`</font>
 
 > `sureness` 是我们在使用`java`权限框架`shiro`之后,吸取其良好的设计加上一些自己想法实现的全新认证鉴权项目  
->  面对`restful api`的认证鉴权,基于`RBAC`主要关注于对`restful api`的保护  
+>  面对`restful api`的认证鉴权,基于`rbac`主要关注于对`restful api`的保护  
 >  原生支持 `restful api, websocket protection`  
 >  原生支持动态权限(权限配置的动态加载)  
->  原生支持 `jwt`, `Basic Auth` ... 可扩展自定义支持的认证方式  
->  [基于改进的字典匹配树大大提高性能](#高性能匹配 )  
+>  原生支持 `jwt`, `basic auth` ... 可扩展自定义支持的认证方式  
+>  [基于改进的字典匹配树拥有的高性能](#高性能匹配 )  
+>  良好的扩展接口, demo和文档  
 
 >`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护   
 
@@ -26,7 +27,7 @@
 
 ### <font color="red">使用前一些约定</font>  
 
-- `sureness`尽量简洁,基于`RBAC`,但只有(角色-资源)的映射,没有(权限)动作映射
+- `sureness`尽量简洁,基于`rbac`,但只有(角色-资源)的映射,没有(权限)动作映射
 - 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
   即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源  
   `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据     

@@ -14,4 +14,4 @@
 [Gitee](https://gitee.com/tomsun28/sureness/)
 [Get Started](/README.md)
 
-![color](#e23fa6)
+![color](#e3f1ec)

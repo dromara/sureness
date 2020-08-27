@@ -2,7 +2,7 @@
 
 ### <font color="red">使用前一些约定</font>  
 
-- `sureness`尽量简洁,基于`RBAC`,但只有(角色-资源)的映射,没有(权限)动作映射
+- `sureness`尽量简洁,基于`rbac`,但只有(角色-资源)的映射,没有(权限)动作映射
 - 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
   即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源  
   `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据     
