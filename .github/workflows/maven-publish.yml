@@ -4,7 +4,7 @@ name: Maven Package
 
 on:
   release:
-    types: [created, published, edited, released]
+    types: [published, edited]
 
 jobs:
   build:
@@ -22,11 +22,11 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Release Maven package
-      uses: samuelmeuli/action-maven-publish@v1
+      uses: samuelmeuli/action-maven-publish@v1.4.0
       with:
         gpg_private_key: ${{ secrets.gpg_private_key }}
         gpg_passphrase: ${{ secrets.gpg_passphrase }}
         nexus_username: ${{ secrets.nexus_username }}
         nexus_password: ${{ secrets.nexus_password }}
-        directory: "core/"
-        server_id: "tom"
+        directory: core/
+        server_id: tom
