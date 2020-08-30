@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2.7</version>
+    <version>0.0.2.8</version>
     <packaging>jar</packaging>
 
     <name>sureness</name>
