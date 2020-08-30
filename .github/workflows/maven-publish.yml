@@ -7,7 +7,7 @@ on:
   push:
     branches: [ master ]
   release:
-    types: [created]
+    types: [ created ]
 
 jobs:
   build:
