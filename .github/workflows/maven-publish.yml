@@ -1,10 +1,10 @@
 # deploy it to maven central
 
-name: Maven Package
+name: Maven Package Published
 
 on:
   release:
-    types: [published, edited]
+    types: [ published ]
 
 jobs:
   build:
