@@ -1,10 +1,15 @@
 # `sureness`  
 
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)   
+> A simple and efficient open-source security framework that focus on the protection of restful api.
 
-**如果网站[usthe.com/sureness](https://usthe.com/sureness) 访问不了，请使用备用: [su.usthe.com](https://su.usthe.com/)**  
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
+![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/tomsun28/sureness/8?label=pull%20checks) 
+[![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness) 
+![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red) 
 
-[English Documentation](README_EN.md)   
+**若主页[usthe.com/sureness](https://usthe.com/sureness) 访问不了，请使用备用网站: [su.usthe.com](https://su.usthe.com/)**  
+
+[英文文档 -> English Documentation](README_EN.md)   
 
 ## <font color="green">`Introduction`</font>
 
