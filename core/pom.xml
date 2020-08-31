@@ -114,6 +114,11 @@
     <profiles>
         <profile>
             <id>deploy</id>
+            <activation>
+                <property>
+                    <name>gpg.passphrase</name>
+                </property>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
