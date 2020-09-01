@@ -204,13 +204,6 @@ account:
 
 具体扩展实践请参考 [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
 
-## 高性能匹配    
-
-![pathRoleMatcher](/docs/_images/PathRoleMatcher.svg)  
-
-## 处理流程  
-
-![sureness-core](/docs/_images/sureness-core.svg)  
 
 ## 参与贡献  
 非常欢迎参与项目贡献，帮助sureness走得更好更远。对项目代码有疑问或者建议请直接联系 @tomsun28
@@ -219,6 +212,14 @@ account:
 - [sureness的核心代码--sureness-core](core)  
 - [使用sureness10分钟搭建权限项目--sample-bootstrap](sample-bootstrap)  
 - [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
+
+##### 高性能匹配      
+
+![pathRoleMatcher](/docs/_images/PathRoleMatcher.svg)  
+
+##### 处理流程  
+
+![sureness-core](/docs/_images/sureness-core.svg)  
 
 ## License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)
