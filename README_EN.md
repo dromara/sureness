@@ -9,7 +9,7 @@
 
 **Please use the space [su.usthe.com](https://su.usthe.com/) when [usthe.com/sureness](https://usthe.com/sureness) cannot accessed.**  
 
-[中文文档](README.md)  
+[Chinese Documentation -> 中文文档](README.md)  
 
 ## <font color="green">`Introduction`</font>
 

@@ -1,6 +1,6 @@
 ## 快速开始  
 
-### <font color="red">使用前一些约定</font>  
+##### <font color="red">使用前一些约定</font>  
 
 - `sureness`尽量简洁,基于`rbac`,但只有(角色-资源)的映射,没有(权限)动作映射
 - 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
@@ -10,7 +10,7 @@
 
 资源路径匹配详见 [url路径匹配](path-match.md)  
 
-### 项目中加入sureness  
+##### 项目中加入sureness  
 
 1. 项目使用`maven`构建,加入`maven`坐标  
 ```
@@ -27,13 +27,12 @@ compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.7'
 ```
 
 3. 项目为普通工程,加入`sureness-core.jar`依赖  
-
 ```
 在 mvnrepository 下载jar  
 https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core
 ```
 
-### 添加拦截所有请求的过滤器入口  
+##### 添加拦截所有请求的过滤器入口  
 
 入口拦截器器实现一般可以是 `filter or spring interceptor`  
 在拦截器加入sureness的安全过滤器，如下:  
@@ -43,7 +42,7 @@ https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core
 SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
-### 实现相关异常处理  
+##### 实现相关异常处理  
 
 `sureness`使用异常处理流程,我们需要对`checkIn`抛出的异常做自定义处理,  
 安全过滤器,认证鉴权成功直接通过,失败抛出特定异常,捕获异常,如下: 
@@ -65,7 +64,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 异常详见 [默认异常](default-exception.md)  
 
-### 加载配置数据  
+##### 加载配置数据  
 
 `sureness`认证鉴权当然也需要我们自己的配置数据:账户数据，角色权限数据等  
 这些配置数据可能来自文本，关系数据库，非关系数据库  
