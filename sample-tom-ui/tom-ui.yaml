@@ -1,0 +1,40 @@
+# ----------------------tom-ui kubernetes --------------------- #
+
+# ------tom-ui deployment------ #
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+ name: tom-ui-deployment
+ labels:
+  app: tom-ui
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   app: tom-ui
+ template:
+  metadata:
+   labels:
+    app: tom-ui
+  spec:
+   containers:
+   - name: nginx
+     image: registry.cn-hangzhou.aliyuncs.com/tomsun28/tom-ui:latest
+     ports:
+     - containerPort: 80
+
+---
+
+# -------tom-ui-service--------- #
+apiVersion: v1
+kind: Service
+metadata:
+ name: tom-ui-service
+spec:
+#type: NodePort
+ ports:
+ - name: web
+   port: 80
+   targetPort: 80
+ selector:
+  app: tom-ui
