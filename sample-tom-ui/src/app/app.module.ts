@@ -7,6 +7,7 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {ShareModule} from './common/share.module';
+import {HttpInterceptorProviders} from './interceptor/http-interceptor-providers';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {ShareModule} from './common/share.module';
     NzMenuModule,
     ShareModule
   ],
-  providers: [],
+  providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,15 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-
 import {ResponseVO} from '../pojo/ResponseVO';
 import {environment} from '../../environments/environment';
-import {Observable, of} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 
 @Injectable()
 export class HttpUtil {
 
-  private baseUrl: string;
+  private readonly baseUrl: string;
 
   constructor( private http: HttpClient) {
     this.baseUrl = environment.apiBaseUrl;
@@ -69,6 +68,6 @@ export class HttpUtil {
       console.error( `出错状态码: ${error.status}, ` +
         `出错: ${error.error}`);
     }
-    return of('请检查网络');
+    return throwError('请检查网络');
   }
 }

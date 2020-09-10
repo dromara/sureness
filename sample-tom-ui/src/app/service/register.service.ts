@@ -2,19 +2,22 @@ import { Injectable } from '@angular/core';
 import {HttpUtil} from '../util/http-util';
 import {HttpParams} from '@angular/common/http';
 import * as CryptoJS from 'crypto-js';
+import {Observable} from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RegisterService {
 
   constructor(private httpUtil: HttpUtil) { }
 
-  getTokenKey() {
+  getTokenKey(): Observable<any> {
     const url = 'account/login?tokenKey=get';
     // 先向后台申请加密tokenKey tokenKey=get
     return this.httpUtil.get(url);
   }
 
-  register(uid: string, username: string, password: string, tokenKey: string, userKey: string) {
+  register(uid: string, username: string, password: string, tokenKey: string, userKey: string): Observable<any> {
     const url = 'account/register';
     tokenKey = CryptoJS.enc.Utf8.parse(tokenKey);
     password = CryptoJS.enc.Utf8.parse(password);

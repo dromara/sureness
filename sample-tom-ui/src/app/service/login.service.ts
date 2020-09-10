@@ -3,21 +3,24 @@ import {HttpUtil} from '../util/http-util';
 import * as CryptoJS from 'crypto-js';
 import {HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {ResponseVO} from '../pojo/ResponseVO';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LoginService {
 
 
   constructor(private httpUtil: HttpUtil) {
   }
 
-  getTokenKey(): Observable<any> {
+  getTokenKey(): Observable<ResponseVO> {
     const url = 'account/login?tokenKey=get';
     // 先向后台申请加密tokenKey tokenKey=get
     return this.httpUtil.get(url);
   }
 
-  login(appId: string, password: string, tokenKey: string, userKey: string): Observable<any> {
+  login(appId: string, password: string, tokenKey: string, userKey: string): Observable<ResponseVO> {
     const url = 'account/login';
     tokenKey = CryptoJS.enc.Utf8.parse(tokenKey);
     password = CryptoJS.enc.Utf8.parse(password);

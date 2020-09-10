@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpUtil} from '../util/http-util';
 import {HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {ResponseVO} from '../pojo/ResponseVO';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ResourceService {
 
   constructor(private httpUtil: HttpUtil) { }
@@ -27,7 +31,7 @@ export class ResourceService {
     return this.httpUtil.put(url, menu);
   }
 
-  public deleteMenuByMenuId(menuId: number) {
+  public deleteMenuByMenuId(menuId: number): Observable <ResponseVO> {
     const url = 'resource/menu' + '/' + menuId;
     return this.httpUtil.delete(url);
   }
@@ -47,7 +51,7 @@ export class ResourceService {
     return this.httpUtil.put(url, api);
   }
 
-  public deleteRestApi(apiId: number) {
+  public deleteRestApi(apiId: number): Observable <ResponseVO> {
     const url = 'resource/api' + '/' + apiId;
     return this.httpUtil.delete(url);
   }

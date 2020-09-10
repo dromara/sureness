@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 
-import {Observable} from 'rxjs/Observable';
+import {Observable, throwError} from 'rxjs';
 import {AuthService} from '../service/auth.service';
 import {catchError, mergeMap, repeat} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 
-import {of} from 'rxjs/observable/of';
+import {of} from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -21,8 +20,8 @@ export class AuthInterceptor implements HttpInterceptor {
     if (authToken != null && uid != null) {
       authReq = req.clone({
         setHeaders: {
-          'authorization': authToken,
-          'appId': uid
+          authorization: authToken,
+          appId: uid
         }
       });
     } else {
@@ -44,8 +43,8 @@ export class AuthInterceptor implements HttpInterceptor {
               // retry(1);
               authReq = req.clone({
                 setHeaders: {
-                  'authorization': jwt,
-                  'appId': uid
+                  authorization: jwt,
+                  appId: uid
                 }
               });
               return next.handle(authReq);
@@ -77,7 +76,7 @@ export class AuthInterceptor implements HttpInterceptor {
     );
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Observable<HttpEvent<any>> {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
@@ -86,7 +85,7 @@ export class AuthInterceptor implements HttpInterceptor {
         `body was: ${error.error}`);
     }
     repeat(1);
-    return new ErrorObservable('亲请检查网络');
+    return throwError('亲请检查网络');
 
   }
 }
