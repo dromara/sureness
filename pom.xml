@@ -12,6 +12,7 @@
         <module>core</module>
         <module>sample-bootstrap</module>
         <module>sample-tom</module>
+        <module>samples</module>
     </modules>
 
     <properties>
