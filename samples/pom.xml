@@ -12,7 +12,7 @@
     <artifactId>samples</artifactId>
     <packaging>pom</packaging>
     <modules>
-
+        <module>ktor-sureness</module>
     </modules>
 
 
