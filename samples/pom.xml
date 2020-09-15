@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>ktor-sureness</module>
+        <module>javalin-sureness</module>
     </modules>
-
-
 </project>
