@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.usthe.sureness.demo</groupId>
+    <parent>
+        <artifactId>samples</artifactId>
+        <groupId>com.usthe.sureness</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
     <artifactId>ktor-sureness</artifactId>
-    <version>0.0.1</version>
     <name>ktor-sureness</name>
     <description>ktor-sureness</description>
     <properties>
@@ -14,7 +17,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <main.class>io.ktor.server.netty.EngineMain</main.class>
-        <sureness-core.version>0.0.2.7</sureness-core.version>
     </properties>
     <repositories>
         <repository>
@@ -34,7 +36,6 @@
         <dependency>
             <groupId>com.usthe.sureness</groupId>
             <artifactId>sureness-core</artifactId>
-            <version>${sureness-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
