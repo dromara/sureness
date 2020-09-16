@@ -1,6 +1,6 @@
 # `sureness`  
 
-> A simple and efficient open-source security framework that focus on the protection of restful api.
+> A simple and efficient open-source jvm security framework that focus on the protection of restful api.
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 ![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/tomsun28/sureness/8?label=pull%20checks) 

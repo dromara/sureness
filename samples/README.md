@@ -1,6 +1,6 @@
 ### 各个框架通过集成sureness来实现权限控制样例  
 
-这里实现了我们除了spring外常用的其他java框架集成sureness的样例，方便参考    
+这里实现了我们除了spring外常用的其他jvm框架集成sureness的样例，方便参考    
 
 > only support servlet like tomcat jetty and more  
 
