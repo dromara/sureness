@@ -4,6 +4,7 @@ import com.usthe.sureness.processor.BaseProcessor;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
+import com.usthe.sureness.processor.exception.UnknownAccountException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.support.NoneSubject;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ public class NoneProcessor extends BaseProcessor {
 
     @Override
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
-        return var;
+        throw new UnknownAccountException("the request do not have the auth detail, please input your auth");
     }
 
     @SuppressWarnings("unchecked")
@@ -43,7 +44,7 @@ public class NoneProcessor extends BaseProcessor {
             if (logger.isDebugEnabled()) {
                 logger.debug("NoneProcessor authorized fail, due {} need role access", var.getTargetResource());
             }
-            throw new UnauthorizedException("do not have the role access");
+            throw new UnauthorizedException("authorized forbidden, the request do not have the role access");
         }
     }
 }

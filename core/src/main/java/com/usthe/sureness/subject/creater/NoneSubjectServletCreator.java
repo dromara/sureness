@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 无认证信息的subject creator
  * 所有请求都能创建出一个NoneSubject
+ * only support HttpServletRequest
  * @author tomsun28
  * @date 15:55 2020-02-28
  */
-public class NoneSubjectCreator implements SubjectCreate {
+public class NoneSubjectServletCreator implements SubjectCreate {
     @Override
     public boolean canSupportSubject(Object context) {
-        return true;
+        return context instanceof HttpServletRequest;
     }
 
     @Override

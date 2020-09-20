@@ -6,18 +6,19 @@ import com.usthe.sureness.subject.support.PasswordSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.container.ContainerRequestContext;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
  * 支持通过basic auth 创建PasswordSubject 的创建者
+ * only support JAX-RS
  * @author tomsun28
- * @date 23:53 2020-02-27
+ * @date 23:53 2020-09-20
  */
-public class BasicAuthPasswordSubjectCreator implements SubjectCreate {
+public class BasicSubjectJaxRsCreator implements SubjectCreate {
 
-    private static final Logger logger = LoggerFactory.getLogger(BasicAuthPasswordSubjectCreator.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicSubjectJaxRsCreator.class);
 
     private static final String AUTHORIZATION = "Authorization";
     private static final String BASIC = "Basic";
@@ -27,8 +28,8 @@ public class BasicAuthPasswordSubjectCreator implements SubjectCreate {
     public boolean canSupportSubject(Object context) {
         // basic auth判断
         // ("Authorization", "Basic YWRtaW46YWRtaW4=")        --- basic auth
-        if (context instanceof HttpServletRequest) {
-            String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
+        if (context instanceof ContainerRequestContext) {
+            String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);
             return authorization != null && authorization.startsWith(BASIC);
         } else {
             return false;
@@ -37,7 +38,7 @@ public class BasicAuthPasswordSubjectCreator implements SubjectCreate {
 
     @Override
     public Subject createSubject(Object context) {
-        String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
+        String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);
         //basic auth
         String basicAuth = authorization.replace(BASIC, "").trim();
         basicAuth = new String(Base64.getDecoder().decode(basicAuth), StandardCharsets.UTF_8);
@@ -56,12 +57,10 @@ public class BasicAuthPasswordSubjectCreator implements SubjectCreate {
             return null;
         }
         String password = auth[1];
-        String remoteHost = ((HttpServletRequest) context).getRemoteHost();
-        String requestUri = ((HttpServletRequest) context).getRequestURI();
-        String requestType = ((HttpServletRequest) context).getMethod();
+        String requestUri = ((ContainerRequestContext) context).getUriInfo().getPath();
+        String requestType = ((ContainerRequestContext) context).getMethod();
         String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
         return PasswordSubject.builder(username, password)
-                .setRemoteHost(remoteHost)
                 .setTargetResource(targetUri)
                 .build();
     }

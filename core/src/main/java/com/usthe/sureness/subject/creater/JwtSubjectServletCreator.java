@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * JwtSubject creator
+ * only support HttpServletRequest
  * @author tomsun28
  * @date 23:58 2020-02-27
  */
-public class JwtSubjectCreator implements SubjectCreate {
+public class JwtSubjectServletCreator implements SubjectCreate {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtSubjectCreator.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtSubjectServletCreator.class);
 
     private static final String BEARER = "Bearer";
     private static final String AUTHORIZATION = "Authorization";
