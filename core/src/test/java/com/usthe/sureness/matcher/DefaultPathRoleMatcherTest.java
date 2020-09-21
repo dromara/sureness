@@ -2,6 +2,9 @@ package com.usthe.sureness.matcher;
 
 import com.usthe.sureness.matcher.util.TirePathTree;
 import com.usthe.sureness.subject.Subject;
+import com.usthe.sureness.subject.SubjectCreate;
+import com.usthe.sureness.subject.SubjectFactory;
+import com.usthe.sureness.subject.support.NoneSubject;
 import com.usthe.sureness.subject.support.PasswordSubject;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -85,14 +88,18 @@ public class DefaultPathRoleMatcherTest {
         expect(request.getRequestURI()).andReturn("/api/v2/detail");
         expect(request.getMethod()).andReturn("put");
         replay(request);
-        assertTrue(pathRoleMatcher.isExcludedResource(request));
+        Subject subject = NoneSubject.builder().setTargetUri(request.getRequestURI().concat("===")
+                .concat(request.getMethod()).toLowerCase()).build();
+        assertTrue(pathRoleMatcher.isExcludedResource(subject));
         verify(request);
 
         request = createNiceMock(HttpServletRequest.class);
         expect(request.getRequestURI()).andReturn("/book/v2/detail");
         expect(request.getMethod()).andReturn("put");
         replay(request);
-        assertFalse(pathRoleMatcher.isExcludedResource(request));
+        subject = NoneSubject.builder().setTargetUri(request.getRequestURI().concat("===")
+                .concat(request.getMethod()).toLowerCase()).build();
+        assertFalse(pathRoleMatcher.isExcludedResource(subject));
         verify(request);
     }
 

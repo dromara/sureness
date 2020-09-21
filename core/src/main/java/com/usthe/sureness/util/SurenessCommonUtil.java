@@ -2,6 +2,7 @@ package com.usthe.sureness.util;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.container.ContainerRequestContext;
 import java.util.Random;
 
 /**
@@ -23,6 +24,15 @@ public class SurenessCommonUtil {
 
     public static String findUserAgent(HttpServletRequest request) {
         String userAgent = request.getHeader(USER_AGENT);
+        return findUserAgent(userAgent);
+    }
+
+    public static String findUserAgent(ContainerRequestContext request) {
+        String userAgent = request.getHeaderString(USER_AGENT);
+        return findUserAgent(userAgent);
+    }
+
+    public static String findUserAgent(String userAgent) {
         if (userAgent == null || "".equals(userAgent)) {
             userAgent = UNKNOWN;
         } else if (userAgent.contains(ANDROID)) {

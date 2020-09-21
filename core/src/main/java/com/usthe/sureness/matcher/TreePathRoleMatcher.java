@@ -37,5 +37,5 @@ public interface TreePathRoleMatcher {
      * @param request 请求内容
      * @return 是排除资源true 否则false
      */
-    boolean isExcludedResource(Object request);
+    boolean isExcludedResource(Subject request);
 }

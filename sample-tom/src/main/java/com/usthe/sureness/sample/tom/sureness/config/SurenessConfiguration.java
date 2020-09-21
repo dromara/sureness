@@ -13,8 +13,8 @@ import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.sample.tom.sureness.creator.CustomSubjectCreator;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
-import com.usthe.sureness.subject.creater.BasicAuthPasswordSubjectCreator;
-import com.usthe.sureness.subject.creater.JwtSubjectCreator;
+import com.usthe.sureness.subject.creater.BasicSubjectServletCreator;
+import com.usthe.sureness.subject.creater.JwtSubjectServletCreator;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,9 +65,9 @@ public class SurenessConfiguration {
         SubjectFactory subjectFactory = new SurenessSubjectFactory();
         subjectFactory.registerSubjectCreator(Arrays.asList(
                 // use default basic auth subject creator
-                new BasicAuthPasswordSubjectCreator(),
+                new BasicSubjectServletCreator(),
                 // use default jwt subject creator
-                new JwtSubjectCreator(),
+                new JwtSubjectServletCreator(),
                 // use custom creator
                 new CustomSubjectCreator()));
         return subjectFactory;

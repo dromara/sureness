@@ -6,7 +6,6 @@ import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
@@ -110,12 +109,9 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     }
 
     @Override
-    public boolean isExcludedResource(Object request) {
+    public boolean isExcludedResource(Subject request) {
         checkComponentInit();
-        String requestUri = ((HttpServletRequest) request).getRequestURI();
-        String requestType = ((HttpServletRequest) request).getMethod();
-        String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
-        String exclude = excludeRoot.searchPathFilterRoles(targetUri);
+        String exclude = excludeRoot.searchPathFilterRoles((String) request.getTargetResource());
         return exclude != null && exclude.equals(EXCLUDE_ROLE);
     }
 
