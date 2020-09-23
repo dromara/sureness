@@ -1,4 +1,4 @@
-# sureness - 面向restful api的权限认证  
+# sureness - 面向restful api的认证鉴权  
 
 > A simple and efficient open-source jvm security framework that focus on the protection of restful api.
 
@@ -12,25 +12,37 @@
 [英文文档 -> English Documentation](README_EN.md)   
 
 ## Background  
-现在很多网站都进行了前后端分离，后端提供rest api，前端调用接口获取数据渲染。这种架构下如何保护好后端所提供的rest api使得更加重视。保护即：
-认证-校验前端请求携带的认证信息是否通过，鉴权-用户拥有指定api的访问权限，校验其是否能访问此api。  
+现在很多网站都进行了前后端分离，后端提供rest api，前端调用接口获取数据渲染。这种架构下如何保护好后端所提供的rest api使得更加重视。  
+api的保护可以认为：认证-请求携带的认证信息是否校验通过，鉴权-认证通过的用户拥有指定api的权限才能访问此api。然而不仅于此，什么样的认证策略, jwt, basic,digest,oauth还是多支持, 权限配置是写死代码还是动态配置，我想动态赋权怎么办，云原生越来越火用的框架是quarkus等新秀不是spring生态咋弄，http实现不是servlet而是jax-rs规范咋整， to be or not to be, this is a question
+
 > 目前`java`主流的权限框架有`shiro，spring security`, 下面对于它们的探讨都是个人之见，接受纠正   
 > `shiro`对于`restful api`原生支持不太友好,需要改写一些代码,2年前一个项目 [booshiro](https://gitee.com/tomsun28/bootshiro) 就是改造`shiro`,使其在过滤链就能匹配不同的`rest`请求进行权限校验,之后给`shiro commit`几次`pr`,`fix`其在过滤链匹配时的危险漏洞,总的来说`shiro`很强大但其起源并非面向`web`,对`restful`不是很友好    
-> `spring security`很强大,与`spring`深度集成,离开`spring`,比如`google`的精简`guice`,之前用过的`osgi`框架`karaf`就用不了了  
-> 它们都会在链式匹配这块，用请求的url和配置的链一个一个`ant`匹配(匹配过程中会有缓存等提高性能)，但匹配的链过多时还是比较耗性能(根据算法时间复杂度判断，暂未测试验证)    
-> sureness希望能解决这些，提供一个针对restful api，无框架依赖，可以动态修改权限，更快速度，易用的认证鉴权框架    
+> `spring security`很强大,与`spring`深度集成,离开`spring`,比如`javalin`和之前用过的`osgi`框架`karaf`就用不了了  
+> 如果不用注解配置，它们都会在链式匹配这块，用请求的url和配置的链一个一个`ant`匹配(匹配过程中会有缓存等提高性能)，但匹配的链过多时还是比较耗性能(根据算法时间复杂度判断，暂未测试验证)    
+> 我们希望能解决这些，提供一个**针对restful api**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用**的认证鉴权框架    
 
 ## <font color="green">Introduction</font>
 
 > `sureness` 是我们在使用 `java` 权限框架 `shiro` 之后,吸取其良好设计加上一些想法实现的全新认证鉴权项目  
->  面对 `restful api` 的认证鉴权,基于 `rbac` (用户-角色-资源)主要关注于对 `restful api` 的保护  
->  原生支持 `jwt, basic auth` ... 可扩展自定义支持的认证方式 
->  原生支持 `restful api, websocket protection`  
->  原生支持动态权限(权限配置的动态修改配置)    
+>  面对 `restful api` 的认证鉴权,基于 `rbac` (用户-角色-资源)主要关注于对 `restful api` 的安全保护  
+>  无特定框架依赖(本质就是过滤器处拦截判断,已有springboot,quarkus,javalin,ktor等demo)  
+>  支持动态修改权限配置(动态修改哪些api需要被认证，可以被谁访问)    
+>  支持主流http容器  servlet 和 jax-rs  
+>  支持多种认证策略, `jwt, basic auth` ... 可扩展自定义支持的认证方式   
 >  [基于改进的字典匹配树拥有的高性能](#高性能匹配 )  
 >  良好的扩展接口, demo和文档  
 
 >`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护   
+
+##### Framework Sample Support  
+
+- [x] spring [sample-bootstrap](sample-bootstrap)   
+- [x] springboot [sample-tom](sample-tom)  
+- [x] quarkus [sample-quarkus](samples/quarkus-sureness)  
+- [x] javalin [sample-javalin](samples/javalin-sureness)    
+- [x] ktor [sample-ktor](samples/ktor-sureness)    
+- [x] more samples todo   
+
 
 ## 快速开始  
 
@@ -51,13 +63,13 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2.7</version>
+    <version>0.0.2.8</version>
 </dependency>
 ```
 
 2. 项目使用`gradle`构建,`gradle`坐标  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.7'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.8'
 ```
 
 3. 项目为普通工程,加入`sureness-core.jar`依赖  
@@ -101,14 +113,15 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
 
 ##### 加载配置数据  
 
-`sureness`认证鉴权当然也需要我们自己的配置数据:账户数据，角色权限数据等  
+`sureness`认证鉴权，当然也需要我们配置自己的配置数据 - 账户数据，角色权限数据等  
 这些配置数据可能来自文本，关系数据库，非关系数据库  
 我们提供了配置数据接口`SurenessAccountProvider`, `PathTreeProvider`, 用户可以实现此接口实现自定义配置数据源  
 当前我们也提供默认文本形式的配置数据实现 `DocumentResourceDefaultProvider`, 用户可以配置`sureness.yml`来配置数据  
-默认文本数据源`sureness.yml`配置详见 [默认数据源](docs/default-datasource.md)  
+默认文本数据源`sureness.yml`配置详见文档 [默认数据源](docs/default-datasource.md)  
 
-我们提供了使用`DEMO`，默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-若权限配置数据来自数据库,请参考[使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
+我们提供了使用代码`DEMO`：  
+默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+若权限配置数据来自数据库，请参考[使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 
 **HAVE FUN**  
 
@@ -156,6 +169,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
 - [sureness的核心代码--sureness-core](core)  
 - [使用sureness10分钟搭建权限项目--sample-bootstrap](sample-bootstrap)  
 - [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
+- [各个框架使用sureness的样例项目(javalin,ktor,quarkus)--samples](samples)  
 
 ##### 高性能匹配      
 

@@ -15,6 +15,9 @@
 - 集成案例
   - [10分钟项目集成](sample-bootstrap.md)
   - [30分钟项目集成](sample-tom.md)
+  - [quarkus项目集成](quarkus-sureness.md) 
+  - [javalin项目集成](javalin-sureness.md)  
+  - [ktor项目集成](ktor-sureness.md)     
 
 - 其它
   - [设计文档](design.md)
