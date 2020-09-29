@@ -15,5 +15,6 @@
         <module>ktor-sureness</module>
         <module>javalin-sureness</module>
         <module>quarkus-sureness</module>
+        <module>spring-webflux-support</module>
     </modules>
 </project>

@@ -1,0 +1,10 @@
+server:
+  port: 8098
+
+spring:
+  profiles:
+    active: dev
+
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
