@@ -14,42 +14,52 @@
 ## <font color="green">`Introduction`</font>
 
 
-> Sureness is a new, permission project which author learn from apache shiro and add some ideas to create it  
+> Sureness is a new, permission project which we learn from apache shiro and add some ideas to create it  
 > Authentication for restful api, based on RBAC, Mainly focused on the protection of restful api  
-> Native supports  restful api, websocket's protection  
-> Native supports dynamic permissions  
-> Native supports JWT, Basic Auth... Can extend custom supported authentication methods  
+> No specific framework dependency(support springboot, quarkus, javalin, ktor and more)  
+> Support dynamic modification of permissions
+> Support mainstream http container(servlet and jax-rs)    
+> Supports JWT, Basic Auth... Can extend custom supported authentication methods  
 > [High performance due dictionary matching tree](#Why Is High Performance)  
-> Sorry about google english.   
+> Good extension interface, demo and document.   
 
-### Components of Repository:  
-- [sureness's kernel code--sureness-core](core)  
-- [10 Minute Tutorial's Program--sample-bootstrap](sample-bootstrap)  
-- [30 Minute Tutorial's Program--sample-tom](sample-tom)  
+> The low configuration of sureness, easy to expand, and not coupled with other frameworks, enables developers to quickly and safely protect their projects in multiple scenarios.   
+
+##### Framework Sample Support  
+
+- [x] spring [sample-bootstrap](sample-bootstrap)   
+- [x] springboot [sample-tom](sample-tom)  
+- [x] quarkus [sample-quarkus](samples/quarkus-sureness)  
+- [x] javalin [sample-javalin](samples/javalin-sureness)    
+- [x] ktor [sample-ktor](samples/ktor-sureness)   
+- [x] spring webflux [sample-spring-webflux](samples/spring-webflux-sureness)   
+- [x] more samples todo  
 
 ## Quick Start 
 
-### <font color="red">Some Conventions</font>  
+##### <font color="red">Some Conventions</font>  
 
-- Based RBAC, but only has role-resource, no permission action    
+- Based RBAC, only has role-resource, no permission action    
 - We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
   That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
   `eg: /api/v2/book===get`    
 - User belongs some Role -- Role owns Resource -- User can access the resource  
 
-### Add sureness In Project  
+Resource path matching see: [Uri Match](docs/en/path-match.md)  
+
+##### Add sureness In Project  
 
 1. When use maven build project, add maven coordinate  
 ```
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2.7</version>
+    <version>0.0.2.8</version>
 </dependency>
 ```
 2. When use gradle build project, add gradle coordinate  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.7'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.8'
 ```
 3. When not java build project, add sureness-core.jar to classPath  
 ```
@@ -57,7 +67,7 @@ download this jar at mvnrepository
 https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core
 ```
 
-### Add an Interceptor Intercepting All Requests  
+##### Add an Interceptor Intercepting All Requests  
 
 The interceptor can be a filter or a spring interceptor.  
 The interceptor intercepts all request to check them.  
@@ -65,8 +75,7 @@ The interceptor intercepts all request to check them.
 SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
-
-### Implement Exception Flow When Exception Throw  
+##### Implement Exception Flow When Exception Throw  
 Authentication passed directly, failure throw exception, catch exception and do something:   
 
 ```
@@ -85,20 +94,7 @@ Authentication passed directly, failure throw exception, catch exception and do 
         }
 ```
 
-sureness exception                              | exception note
----                                                             | ---
-SurenessAuthenticationException     |  basic authenticated exception,Authentication related extend it
-SurenessAuthorizationException       | basic authorized exception,Authorization related extend it
-ProcessorNotFoundException            | authenticated,not found process support this subject
-UnknownAccountException                | authenticated,unknown account
-UnSupportedSubjectException           | authenticated,unSupport request
-DisabledAccountException                  | authenticated,account disable
-ExcessiveAttemptsException                | authenticated,excessive attempts
-IncorrectCredentialsException             | authenticated, incorrect credential
-ExpiredCredentialsException               | authenticated,expired credential
-UnauthorizedException                        | authorized,no permission access this resource
-
-Custom exception should extend SurenessAuthenticationException or SurenessAuthorizationException  
+Detail sureness exception see: [Default Sureness Exception](docs/en/default-exception.md)  
 
 ### Load Config DataSource   
 
@@ -106,53 +102,8 @@ Sureness need dataSource to authenticate and authorize, eg: role data, user data
 The dataSource can load from txt, dataBase or no dataBase etc.
 We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.
 Also, we provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml. 
-eg:  
-```
-## -- sureness.yml txt dataSource-- ##
 
-# load api resource which need be protected.
-# eg: /api/v2/host===post===[role2,role3,role4] means /api/v2/host===post is be role2,role3,role4 supported access
-# eg: /api/v1/getSource3===get===[] means /api/v1/getSource3===get is be all role or no role supported access
-resourceRole:
-  - /api/v2/host===post===[role2,role3,role4]
-  - /api/v2/host===get===[role2,role3,role4]
-  - /api/v2/host===delete===[role2,role3,role4]
-  - /api/v2/host===put===[role2,role3,role4]
-  - /api/mi/**===put===[role2,role3,role4]
-  - /api/v1/getSource1===get===[role1,role2]
-  - /api/v2/getSource2/*/*===get===[role2]
-  - /api/v1/source1===get===[role2]
-  - /api/v1/source1===post===[role1]
-  - /api/v1/source1===delete===[role3]
-  - /api/v1/source1===put===[role1,role2]
-  - /api/v1/source2===get===[]
-
-# load api resource wich do not need be proetcted, means them need be filtering.
-# these api resource can be access by everyone
-excludedResource:
-  - /api/v3/host===get
-  - /api/v3/book===get
-  - /api/v1/account/auth===post
-
-# account info
-# there are three account: admin root tom
-# eg: admin has [role1,role2] ROLE, encrypted password is 0192023A7BBD73250516F069DF18B500
-# eg: root has no ROLE, no encrypted password is 23456
-account:
-  - appId: admin
-    # if add salt, the password is encrypted password - the result MD5(password+salt)
-    # if no salt, the password is no encrypted password
-    credential: 0192023A7BBD73250516F069DF18B500
-    salt: 123
-    role: [role1,role2]
-  - appId: root
-    credential: 23456
-    role: [role1]
-  - appId: tom
-    credential: 32113
-    role: [role2]
-
-```
+Default Document DataSource Config - sureness.yml, see: [Default DataSource](docs/en/default-datasource.md)  
 
 If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
 If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
@@ -161,7 +112,7 @@ If the configuration resource data comes from dataBase, please refer to  [30 Min
 
 ## Advanced Use  
 
-If know sureness [Process flow](#Process Flow), maybe know the extend point  
+If know sureness Process flow, maybe know the extend point  
 
 Sureness supports custom subject, custom subjectCreator, custom processor and more.  
 
@@ -173,6 +124,9 @@ Suggest look these interface before extending:
 - `PathTreeProvider`: resource data provider, it can load data from txt or database,etc
 - `SurenessAccountProvider`: account data provider, it can load data from txt or database,etc   
 
+Sureness Process Flow: 
+
+![flow](/docs/_images/flow-en.png)  
 
 1. **Custom Datasource**  
 
@@ -192,13 +146,21 @@ Suggest look these interface before extending:
 
 Detail please refer to  [30 Minute Tutorial's Program--sample-tom](sample-tom)   
 
-### Why Is High Performance  
+## Contributing  
+
+Very welcome to Contribute this project, help sureness go further and better. If you have any questions or suggestions about the project code, please contact @tomsun28 directly.
+
+Components of Repository:  
+- [sureness's kernel code--sureness-core](core)  
+- [10 Minute Tutorial's Program--sample-bootstrap](sample-bootstrap)  
+- [30 Minute Tutorial's Program--sample-tom](sample-tom)  
+- [Sample projects using sureness in each framework(javalin,ktor,quarkus)--samples](samples)  
+
+
+##### Why Is High Performance  
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
-
-### Process Flow  
-
-![sureness-core](docs/_images/sureness-core.svg)  
+ 
 
 ### License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)

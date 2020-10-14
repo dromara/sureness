@@ -8,7 +8,7 @@
   
 - 进阶扩展
   - [扩展点](extend-point.md)
-  - [自定义Subject-Creator](custom-subject-creator.md)
+  - [自定义Subject Creator](custom-subject-creator.md)
   - [自定义Subject](custom-subject.md)
   - [自定义数据源](custom-datasource.md)
   - [自定义Processor](custom-processor.md)

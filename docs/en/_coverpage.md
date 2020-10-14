@@ -2,13 +2,13 @@
 
 # sureness
 
-> A simple and efficient open-source security framework that focus on protection for restful api.
+> A Simple and Efficient Open-source Jvm Security Framework that Focus on Protection of Restful Api.  
 
 - Authentication for restful api, based on RBAC, Mainly focused on the protection of restful api 
-- Native supports  restful api, websocket's protection  
-- Native supports dynamic permissions  
-- Native supports JWT, Basic Auth... Can extend custom supported authentication method  
-- High performance due dictionary matching tree  
+- No specific framework dependency(support springboot, quarkus, javalin, ktor and more)
+- Supports JWT, Basic Auth... Can extend custom supported authentication methods  
+- Support mainstream http container(servlet and jax-rs)     
+- Support dynamic modification of permissions  
 
 [GitHub](https://github.com/tomsun28/sureness/)
 [Gitee](https://gitee.com/tomsun28/sureness/)
