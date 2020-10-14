@@ -38,5 +38,5 @@ api的保护可以认为：认证-请求携带的认证信息是否校验通过�
 - [x] quarkus [sample-quarkus](sample-quarkus.md)  
 - [x] javalin [sample-javalin](sample-javalin.md)    
 - [x] ktor [sample-ktor](sample-ktor.md)    
-- [x] spring webflux [spring-webflux-sureness](samples/spring-webflux-sureness)  
+- [x] spring webflux [spring-webflux-sureness](sample-spring-webflux.md)    
 - [x] more samples todo   

@@ -14,7 +14,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eNocjEEOwiAQRe8y65IwC
 ```  
 
 we can use it in postman: add jwt in Bearer Token.  
-![jwtPostmanUse](_images/jwtPostmanUse.png)  
+![jwtPostmanUse](../_images/jwtPostmanUse.png)  
 
 #### `basic auth`  
 `basic auth` - `Basic access authentication`, is a classic `http` basic authentication method.  
@@ -28,11 +28,11 @@ Authorization: Basic dG9tOjMyMTEz
 ```  
 
 we can use it in postman: add username password in `Basic Auth` type's `Authorization`, postman would encrypt it automatically.  
-![basicAuthPostmanUse](_images/basicAuthPostmanUse.png)  
+![basicAuthPostmanUse](../_images/basicAuthPostmanUse.png)  
 
 #### other auth type   
 Sureness currently supports these two types for the time being, and will continue to expand other basic authentication methods in the future.
-Of course, you can easily customize the authentication method，detail[Custom Subject](en/custom-subject.md)    
+Of course, you can easily customize the authentication method, detail [Custom Subject](en/custom-subject.md)    
 
 We provide the demo to use default authentication method, detail please refer to  [10 Minute Tutorial's Program--sample-bootstrap](en/sample-bootstrap.md)     
 Also we provide the demo to custom authentication method, detail please refer to  [30 Minute Tutorial's Program--sample-tom](en/sample-tom.md)     

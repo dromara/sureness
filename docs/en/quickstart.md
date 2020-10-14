@@ -68,7 +68,7 @@ Also, we provide default dataSource implement which load dataSource from txt(sur
 
 Default Document DataSource Config - sureness.yml, see: [Default DataSource](en/default-datasource.md)  
 
-If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
+If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](en/sample-bootstrap.md)       
+If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](en/sample-tom.md)     
 
 **Have Fun**          

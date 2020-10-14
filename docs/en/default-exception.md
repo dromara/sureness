@@ -1,7 +1,6 @@
 ## Default Sureness Exception    
 `sureness` uses the exception handling process, we need to customize the corresponding exceptions thrown by the authentication failure or unauthorized access in the authentication process of `checkIn`.  
 
-`sureness`使用异常处理流程,我们需要对`checkIn`的认证鉴权流程中发生的认证失败或无权限访问等抛出的相应异常做自定义处理,  
 If the authentication is successful, it will pass directly, if it fails, a specific exception will be thrown, and the exception will be caught, eg:  
 ```
         try {
