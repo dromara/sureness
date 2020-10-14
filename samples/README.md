@@ -2,7 +2,7 @@
 
 这里实现了我们除了spring外常用的其他jvm框架集成sureness的样例，方便参考    
 
-> support servlet(javax.servlet) and jax-rs(javax.ws.rs)   
+> support servlet(javax.servlet), jax-rs(javax.ws.rs) and more  
 
 1. javalin - https://javalin.io/  
   
