@@ -45,7 +45,7 @@
   `eg: /api/v2/book===get`    
 - User belongs some Role -- Role owns Resource -- User can access the resource  
 
-Resource path matching see: [Uri Match](docs/en/path-match.md)  
+Resource path matching see: [Uri Match](docs/path-match.md)  
 
 ##### Add sureness In Project  
 
@@ -94,7 +94,7 @@ Authentication passed directly, failure throw exception, catch exception and do 
         }
 ```
 
-Detail sureness exception see: [Default Sureness Exception](docs/en/default-exception.md)  
+Detail sureness exception see: [Default Sureness Exception](docs/default-exception.md)  
 
 ### Load Config DataSource   
 
@@ -103,7 +103,7 @@ The dataSource can load from txt, dataBase or no dataBase etc.
 We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.
 Also, we provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml. 
 
-Default Document DataSource Config - sureness.yml, see: [Default DataSource](docs/en/default-datasource.md)  
+Default Document DataSource Config - sureness.yml, see: [Default DataSource](docs/default-datasource.md)  
 
 If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
 If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   

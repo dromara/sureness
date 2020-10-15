@@ -1,10 +1,10 @@
-- 仓库  
-  - [GITHUB](https://github.com/tomsun28/sureness ':ignore')    
-  - [GITEE](https://gitee.com/tomsun28/sureness ':ignore')    
+- Repository  
+  - [GITHUB](https://github.com/tomsun28/sureness ':ignore')  
+  - [GITEE](https://gitee.com/tomsun28/sureness ':ignore')  
 
-- :cn: 中文Chinese  
-  - [:us: English](/en/)  
+- :us: English  
+  - [:cn: 中文](/cn/)  
 
-- 其它  
+- Other  
   - [About Us](https://usthe.com)  
-  - [回到主页](/)  
+  - [HOME](/)  

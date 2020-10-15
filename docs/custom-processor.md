@@ -1,8 +1,8 @@
-## 自定义processor    
+## Custom Processor  
 
-自定义前需要了解sureness提供的扩展接口,详见 [进阶扩展](extend-point.md)  
+Suggest take a look at the interface sureness provided, detail [Advanced Use](extend-point.md)  
 
-一个`subject`当然也可以被不同的`processor`处理,所以可以单独自定义`processor`   
-实现`Processor`接口,设置支持的`subject`,实现处理该`subject`的逻辑  
+`A subject also can support by different processor, so we can custom processor to support custom subject`
+`implment Processor, define which subject can support and implment processing details`  
 
-具体扩展实践请参考 [使用sureness30分钟项目集成案例](sample-tom.md)    
+Detail please refer to  [30 Minute Tutorial's Program--sample-tom](sample-tom.md)        

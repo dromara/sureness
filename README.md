@@ -55,7 +55,7 @@ api的保护可以认为：认证-请求携带的认证信息是否校验通过�
   `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据     
 - 角色资源映射: 用户所属角色--角色拥有资源--用户拥有资源(用户就能访问此`api`)   
 
-资源路径匹配详见 [url路径匹配](docs/path-match.md)  
+资源路径匹配详见 [url路径匹配](docs/cn/path-match.md)  
 
 ##### 项目中加入sureness  
 
@@ -110,7 +110,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
         }
 ```
 
-异常详见 [默认异常](docs/default-exception.md)  
+异常详见 [默认异常](docs/cn/default-exception.md)  
 
 ##### 加载配置数据  
 
@@ -118,7 +118,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
 这些配置数据可能来自文本，关系数据库，非关系数据库  
 我们提供了配置数据接口`SurenessAccountProvider`, `PathTreeProvider`, 用户可以实现此接口实现自定义配置数据源  
 当前我们也提供默认文本形式的配置数据实现 `DocumentResourceDefaultProvider`, 用户可以配置`sureness.yml`来配置数据  
-默认文本数据源`sureness.yml`配置详见文档 [默认数据源](docs/default-datasource.md)  
+默认文本数据源`sureness.yml`配置详见文档 [默认数据源](docs/cn/default-datasource.md)  
 
 我们提供了使用代码`DEMO`：  
 默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   

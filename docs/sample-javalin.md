@@ -1,11 +1,11 @@
 ## Sample-javalin-sureness  
 
-[javalin-sureness例子项目仓库地址](https://github.com/tomsun28/sureness/tree/master/samples/javalin-sureness)    
+[javalin-sureness sample repository](https://github.com/tomsun28/sureness/tree/master/samples/javalin-sureness)    
 
-- 基于`javalin, servlet`
-- 从默认的配置文件`sureness.yml`加载账户信息,资源角色,过滤资源等信息  
-- 使用默认的`sureness-config`  
-- 使用默认的`jwt,basic auth`方式认证鉴权
-- 例子中包含`restful api`  
-- 保护入口: `Application`  
-- 推荐使用`postman`测试
+- Based on `javalin, servlet`
+- Load data from default dataSource - `sureness.yml`
+- Use default sureness config
+- Use default `jwt,basic auth` to authenticate and authorize
+- Contain `restful api`  
+- Project's protected entrance is `Application`  
+- Suggest use postman to test

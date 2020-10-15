@@ -1,22 +1,21 @@
-## 进阶扩展  
+## Advanced Use  
 
-如果了解处理流程,就大概知道`sureness`提供的扩展点    
-`sureness`支持自定义`subject`，自定义`subjectCreator`注册，自定义`processor`处理器等  
+If know sureness Process flow, maybe know the extends point.  
+Sureness supports custom subject, custom subjectCreator, custom processor and more.  
+Suggest look these interface before extending:  
 
-扩展之前需要了解以下接口:  
+- `Subject`: Authenticated authorized  user's account interface, provide the account's username,password, request resources, roles, etc.  
+- `SubjectCreate`: Create subject interface, provider create method.    
+- `Processor`: Process subject interface, where happen authentication and authorization.   
+- `PathTreeProvider`: Resource data provider, it can load data from txt or database,etc.  
+- `SurenessAccountProvider`: Account data provider, it can load data from txt or database,etc.     
 
-- `Subject`: 认证鉴权对象接口,提供访问对象的账户密钥,请求资源,角色等信息  
-- `SubjectCreate`: 创建`Subject`接口,根据请求内容创建不同类型的`Subject`对象    
-- `Processor`: `Subject`处理接口,根据Subject信息,进行认证鉴权  
-- `PathTreeProvider`: 资源的数据源接口,实现从数据库,文本等加载数据  
-- `SurenessAccountProvider`: 用户的账户密钥信息接口,实现从数据库,文本等加载数据  
-
-`sureness`大致流程:  
+Sureness process flow:    
 
 ```mermaid
 graph TD
-A(用户请求体进来) --> B(s)
-B(subjectCreate根据请求头内容创建不同的钥匙subject,每把钥匙都可以尝试) --> C(s)
-C(不同的钥匙认证方式即不同的锁processor来处理进来的钥匙subject) --> D(s)
-D(以上一次成功即成功并结束,失败即下一个钥匙锁尝试直到所有尝试结束)
+A(request in) --> B(s)
+B(subjectCreate creates different key - subjects based on the request header content,every key can be tried once) --> C(s)
+C(Different key authentication methods<differnet lock - processors> to process incoming key - subjects) --> D(s)
+D(Once successful is successful and ends, failure means the next key lock attempt until the end of all attempts)
 ```

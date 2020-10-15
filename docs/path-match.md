@@ -1,21 +1,22 @@
-## URI路径匹配  
+## URI Path Match    
+We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
+That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
+`eg: /api/v2/book===get`    
+The `requestUri` here support url path match: `*`, `**`     
 
-我们配置的资源格式为：`requestUri===httpMethod`, 即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源   
-`eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据  
-这里的`requestUri`支持url路径匹配符匹配:  `*`, `**`    
-
- 通配符                      | 描述              
+ Wildcard                   | Describe              
  ---                        | ---               
- `*`                          | 匹配0个或1个目录   
- `**`                         | 匹配0个或多个目录  
+ `*`                          | Match 0 or 1 directories   
+ `**`                         | Match 0 or more directories    
 
 
- 样例                      | 说明  
+ Sample                      | Note  
  ---                       | ---
- `/api/*/book`               | 可以匹配 `/api/user/book` 或 `/api/book` 等  
- `/**`                       | 可以匹配任何路径  
- `/**/foo`                   | 可以匹配 `/api/user/book/foo` 等  
+ `/api/*/book`               | can match `/api/user/book` or `/api/book` etc  
+ `/**`                       | can match any path  
+ `/**/foo`                   | can match `/api/user/book/foo` etc    
  
-匹配优先级: 原始字符串 > `*` > `**`  
-最长路径匹配原则：  
-eg: `requestUri` 为`/app/book/foo`，若存在两个路径匹配模式`/app/**`和`/app/book/*`，则会匹配到`/app/book/*`  
+
+Match priority: Raw string > `*` > `**`  
+Longest path matching principle：  
+eg: when `requestUri` is `/app/book/foo`，If there are two matching patterns - `/app/**` and `/app/book/*`，will match`/app/book/*`  

@@ -1,79 +1,74 @@
-## 快速开始  
+## Quick Start 
 
-##### <font color="red">使用前一些约定</font>  
+##### <font color="red">Some Conventions</font>  
 
-- `sureness`尽量简洁,基于`rbac`,但只有(角色-资源)的映射,没有(权限)动作映射
-- 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
-  即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源  
-  `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据     
-- 角色资源映射: 用户所属角色--角色拥有资源--用户拥有资源(用户就能访问此`api`)   
+- Based RBAC, only has role-resource, no permission action    
+- We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
+  That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
+  `eg: /api/v2/book===get`    
+- User belongs some Role -- Role owns Resource -- User can access the resource  
 
-资源路径匹配详见 [url路径匹配](path-match.md)  
+Resource path matching see: [Uri Match](path-match.md)  
 
-##### 项目中加入sureness  
+##### Add sureness In Project  
 
-1. 项目使用`maven`构建,加入`maven`坐标  
+1. When use maven build project, add maven coordinate  
 ```
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.0.2.7</version>
+    <version>0.0.2.8</version>
 </dependency>
 ```
-
-2. 项目使用`gradle`构建,`gradle`坐标  
+2. When use gradle build project, add gradle coordinate  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.7'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.0.2.8'
 ```
-
-3. 项目为普通工程,加入`sureness-core.jar`依赖  
+3. When not java build project, add sureness-core.jar to classPath  
 ```
-在 mvnrepository 下载jar  
+download this jar at mvnrepository  
 https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core
 ```
 
-##### 添加拦截所有请求的过滤器入口  
+##### Add an Interceptor Intercepting All Requests  
 
-入口拦截器器实现一般可以是 `filter or spring interceptor`  
-在拦截器加入sureness的安全过滤器，如下:  
-入口,一般放在拦截所有请求的`filter`:  
-  
+The interceptor can be a filter or a spring interceptor.  
+The interceptor intercepts all request to check them.  
 ```
 SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
-##### 实现相关异常处理  
-
-`sureness`使用异常处理流程,我们需要对`checkIn`抛出的异常做自定义处理,  
-安全过滤器,认证鉴权成功直接通过,失败抛出特定异常,捕获异常,如下: 
+##### Implement Exception Flow When Exception Throw  
+Authentication passed directly, failure throw exception, catch exception and do something:   
 
 ```
         try {
             SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
         } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
-            // 账户创建相关异常 
+            // Create subject error related execption 
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            // 账户禁用相关异常
+            // Account disable related exception
         } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
-            // 认证失败相关异常
+            // Authentication failure related exception
         } catch (UnauthorizedException e5) {
-            // 鉴权失败相关异常
+            // Authorization failure related exception
         } catch (RuntimeException e) {
-            // 其他自定义异常
+            // other sureness exception
         }
 ```
-异常详见 [默认异常](default-exception.md)  
 
-##### 加载配置数据  
+Detail sureness exception see: [Default Sureness Exception](default-exception.md)  
 
-`sureness`认证鉴权当然也需要我们自己的配置数据:账户数据，角色权限数据等  
-这些配置数据可能来自文本，关系数据库，非关系数据库  
-我们提供了配置数据接口`SurenessAccountProvider`, `PathTreeProvider`, 用户可以实现此接口实现自定义配置数据源  
-当前我们也提供默认文本形式的配置数据实现 `DocumentResourceDefaultProvider`, 用户可以配置`sureness.yml`来配置数据  
+### Load Config DataSource   
 
-默认文本数据源配置详见 [默认数据源](default-datasource.md)  
+Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
+The dataSource can load from txt, dataBase or no dataBase etc.
+We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.
+Also, we provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml. 
 
-我们提供了默认文本数据源使用`DEMO`，默认文本数据源具体实现，请参考 [使用sureness10分钟项目集成案例](sample-bootstrap.md)     
-若权限配置数据来自数据库,请参考 [使用sureness30分钟项目集成案例](sample-tom.md)   
+Default Document DataSource Config - sureness.yml, see: [Default DataSource](default-datasource.md)  
 
-**HAVE FUN**  
+If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](sample-bootstrap.md)       
+If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](sample-tom.md)     
+
+**Have Fun**          
