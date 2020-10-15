@@ -1,4 +1,4 @@
-![logo](../_media/favicon.ico)
+![logo](../_media/hat-128.svg)
 
 # sureness <small>0.0.2.8 for jvm</small>  
 
