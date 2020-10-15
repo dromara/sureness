@@ -1,4 +1,10 @@
-# `sureness`  
+<p align="center">
+  <a href="https://su.usthe.com">
+    <img alt="sureness" src="_media/hat-128.svg">
+  </a>
+</p>
+
+# <font size="14p">sureness</font>
 
 > A simple and efficient open-source jvm security framework that focus on the protection of restful api.
 
