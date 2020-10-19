@@ -8,7 +8,8 @@ eg:
 ```
 ## -- sureness.yml txt dataSource-- ##
 
-# load api resource which need be protected.
+# load api resource which need be protected, config role who can access these resource.
+# resources that are not configured are also authenticated and protected by default, but not authorized
 # eg: /api/v2/host===post===[role2,role3,role4] means /api/v2/host===post is be role2,role3,role4 supported access
 # eg: /api/v1/getSource3===get===[] means /api/v1/getSource3===get is be all role or no role supported access
 resourceRole:
@@ -25,7 +26,7 @@ resourceRole:
   - /api/v1/source1===put===[role1,role2]
   - /api/v1/source2===get===[]
 
-# load api resource wich do not need be proetcted, means them need be filtering.
+# load api resource which do not need be protected, means them need be excluded.
 # these api resource can be access by everyone
 excludedResource:
   - /api/v3/host===get
@@ -33,13 +34,13 @@ excludedResource:
   - /api/v1/account/auth===post
 
 # account info
-# there are three account: admin root tom
-# eg: admin has [role1,role2] ROLE, encrypted password is 0192023A7BBD73250516F069DF18B500
-# eg: root has no ROLE, no encrypted password is 23456
+# there are three account: admin, root, tom
+# eg: admin has [role1,role2] ROLE, unencrypted password is admin, encrypted password is 0192023A7BBD73250516F069DF18B500
+# eg: root has no ROLE, unencrypted password is 23456
 account:
   - appId: admin
-    # if add salt, the password is encrypted password - the result MD5(password+salt)
-    # if no salt, the password is no encrypted password
+    # if add salt, the password is encrypted password - the result: MD5(password+salt)
+    # if no salt, the password is unencrypted password
     credential: 0192023A7BBD73250516F069DF18B500
     salt: 123
     role: [role1,role2]

@@ -1,9 +1,9 @@
-## -- sureness文本数据源 -- ##
+## -- sureness.yml txt dataSource-- ##
 
-# 加载到匹配字典的资源,也就是需要被保护的,设置了所支持角色访问的资源
-# 没有配置的资源也默认被认证保护,但不鉴权
-# eg: /api/v2/host===post===[role2,role3,role4] 表示 /api/v2/host===post 这条资源支持 role2,role3,role4这三种角色访问
-# eg: /api/v1/getSource3===get===[] 表示 /api/v1/getSource3===get 这条资源支持所有角色或无角色访问
+# load api resource which need be protected, config role who can access these resource.
+# resources that are not configured are also authenticated and protected by default, but not authorized
+# eg: /api/v2/host===post===[role2,role3,role4] means /api/v2/host===post is be role2,role3,role4 supported access
+# eg: /api/v1/getSource3===get===[] means /api/v1/getSource3===get is be all role or no role supported access
 resourceRole:
   - /api/v2/host===post===[role2,role3,role4]
   - /api/v2/host===get===[role2,role3,role4]
@@ -18,21 +18,21 @@ resourceRole:
   - /api/v1/source1===put===[role1,role2]
   - /api/v1/source2===get===[]
 
-# 需要被过滤保护的资源,不认证鉴权直接访问
+# load api resource which do not need be protected, means them need be excluded.
+# these api resource can be access by everyone
 excludedResource:
   - /api/v3/host===get
   - /api/v3/book===get
   - /api/v1/account/auth===post
-  - /hello===get
 
-# 用户账户信息
-# 下面有 admin root tom三个账户
-# eg: admin/admin 拥有[role1,role2]角色,加盐密码为0192023A7BBD73250516F069DF18B500
-# eg: root 没有角色,密码为明文23456
+# account info
+# there are three account: admin, root, tom
+# eg: admin has [role1,role2] ROLE, unencrypted password is admin, encrypted password is 0192023A7BBD73250516F069DF18B500
+# eg: root has no ROLE, unencrypted password is 23456
 account:
   - appId: admin
-    # 如果填写了加密盐--salt,则credential为MD5(password+salt)的32位结果
-    # 没有盐认为不加密,credential为明文
+    # if add salt, the password is encrypted password - the result: MD5(password+salt)
+    # if no salt, the password is unencrypted password
     credential: 0192023A7BBD73250516F069DF18B500
     salt: 123
     role: [role1,role2]
