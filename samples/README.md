@@ -1,24 +1,26 @@
-### 各个框架通过集成sureness来实现权限控制样例  
+### Examples of various frameworks to achieve permission control by integrating sureness   
 
-这里实现了我们除了spring外常用的其他jvm框架集成sureness的样例，方便参考    
+[中文文档](README_CN.md)    
+
+Here is a sample of the sureness integration of other jvm frameworks we commonly use in addition to spring, for easy reference     
 
 > support servlet(javax.servlet), jax-rs(javax.ws.rs) and more  
 
 1. javalin - https://javalin.io/  
   
-> DEMO详见 [javalin-sureness](javalin-sureness)  
+> DEMO Detail [javalin-sureness](javalin-sureness)  
 
 2. Ktor - https://ktor.kotlincn.net/quickstart/index.html   
 
-> DEMO详见 [ktor-sureness](ktor-sureness)    
+> DEMO Detail [ktor-sureness](ktor-sureness)    
  
 3. quarkus - https://quarkus.io/get-started/    
 
-> DEMO详见 [quarkus-sureness](quarkus-sureness)     
+> DEMO Detail [quarkus-sureness](quarkus-sureness)     
 
 4. spring webflux - https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/web-reactive.html  
 
-> DEMO详见 [spring-webflux-sureness](spring-webflux-sureness)   
+> DEMO Detail [spring-webflux-sureness](spring-webflux-sureness)   
 
 **TODO**    
 
