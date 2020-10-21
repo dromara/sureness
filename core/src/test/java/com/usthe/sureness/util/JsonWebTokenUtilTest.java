@@ -1,6 +1,5 @@
 package com.usthe.sureness.util;
 
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,7 +17,7 @@ public class JsonWebTokenUtilTest {
     public void issueJwt() {
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), "tom",
                 "token-server", 36000L, Arrays.asList("role2", "rol3"),
-                null, Boolean.FALSE, SignatureAlgorithm.HS512);
+                null, Boolean.FALSE);
         assertNotNull(jwt);
     }
 
@@ -26,7 +25,7 @@ public class JsonWebTokenUtilTest {
     public void isNotJsonWebToken() {
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), "tom",
                 "token-server", 36000L, Arrays.asList("role2", "rol3"),
-                null, Boolean.FALSE, SignatureAlgorithm.HS512);
+                null, Boolean.FALSE);
         boolean flag = JsonWebTokenUtil.isNotJsonWebToken(jwt);
         assertFalse(flag);
         flag = JsonWebTokenUtil.isNotJsonWebToken("gsgdsghdbhegxhsgdjsdj");
@@ -37,7 +36,7 @@ public class JsonWebTokenUtilTest {
     public void parseJwt() {
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), "tom",
                 "token-server", 36000L, Arrays.asList("role2", "rol3"),
-                null, Boolean.FALSE, SignatureAlgorithm.HS512);
+                null, Boolean.FALSE);
         assertNotNull(JsonWebTokenUtil.parseJwt(jwt));
     }
 }

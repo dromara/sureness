@@ -2,7 +2,6 @@ package com.usthe.sureness.subject.creater;
 
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.util.JsonWebTokenUtil;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +34,7 @@ public class JwtSubjectServletCreatorTest {
     public void canSupportSubject() {
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), "tom",
                 "token-server", 36000L, Arrays.asList("role2", "rol3"),
-                null, Boolean.FALSE, SignatureAlgorithm.HS512);
+                null, Boolean.FALSE);
         HttpServletRequest request = createNiceMock(HttpServletRequest.class);
         expect(request.getHeader(AUTHORIZATION)).andReturn(BEARER + " " + jwt);
         replay(request);
@@ -47,7 +46,7 @@ public class JwtSubjectServletCreatorTest {
     public void createSubject() {
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), "tom",
                 "token-server", 36000L, Arrays.asList("role2", "rol3"),
-                null, Boolean.FALSE, SignatureAlgorithm.HS512);
+                null, Boolean.FALSE);
         HttpServletRequest request = createNiceMock(HttpServletRequest.class);
         expect(request.getHeader(AUTHORIZATION)).andReturn(BEARER + " " + jwt);
         expect(request.getRequestURI()).andReturn("/api/v1/book");

@@ -5,7 +5,6 @@ import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import com.usthe.sureness.util.Md5Util;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,7 +62,7 @@ public class AccountController {
         long refreshPeriodTime = 36000L;
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), appId,
                 "token-server", refreshPeriodTime >> 1, roles,
-                null, Boolean.FALSE, SignatureAlgorithm.HS512);
+                null, Boolean.FALSE);
         Map<String, String> body = Collections.singletonMap("token", jwt);
         return ResponseEntity.ok().body(body);
     }
