@@ -4,7 +4,6 @@ import com.usthe.sureness.sample.tom.pojo.dto.Account;
 import com.usthe.sureness.sample.tom.pojo.dto.Message;
 import com.usthe.sureness.sample.tom.service.AccountService;
 import com.usthe.sureness.util.JsonWebTokenUtil;
-import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,7 +46,7 @@ public class AccountController {
         long refreshPeriodTime = 36000L;
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), account.getUsername(),
                 "tom-auth-server", refreshPeriodTime >> 1, ownRole,
-                null, false, SignatureAlgorithm.HS512);
+                null, false);
         Map<String, String> responseData = Collections.singletonMap("token", jwt);
         Message message = Message.builder().data(responseData).build();
         if (log.isDebugEnabled()) {

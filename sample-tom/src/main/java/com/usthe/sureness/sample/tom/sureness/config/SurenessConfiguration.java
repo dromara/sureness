@@ -34,7 +34,10 @@ public class SurenessConfiguration {
     /**
      * jwt secret key
      */
-    private static final String TOM_SECRET_KEY = "?::4s9ssf2sf4sed45pf):";
+    private static final String TOM_SECRET_KEY = "?::4s9ssf2sf4sed45pf):" +
+            "RnLN7XNn4wARoQXizIv6MHUsIV+EFfiMw/x7R0ntu4aWr/CWuApcFaj" +
+            "CyaFv0bwq2Eik0jdrKUtsA6bx3sDJeFV643R+YYzGMRIqcBIp6AKA98" +
+            "GM2RIqcBIp6-?::4390fsf4sdl6opf)4ZI:tdQMtcQQ14pkOAQdQ546";
 
     @Bean
     ProcessorManager processorManager(SurenessAccountProvider accountProvider) {
@@ -76,7 +79,7 @@ public class SurenessConfiguration {
     @Bean
     SurenessSecurityManager securityManager(ProcessorManager processorManager,
                                             TreePathRoleMatcher pathRoleMatcher, SubjectFactory subjectFactory) {
-        JsonWebTokenUtil.setSecretKey(TOM_SECRET_KEY);
+        JsonWebTokenUtil.setDefaultSecretKey(TOM_SECRET_KEY);
         // surenessSecurityManager init
         SurenessSecurityManager securityManager = SurenessSecurityManager.getInstance();
         securityManager.setPathRoleMatcher(pathRoleMatcher);
