@@ -4,6 +4,7 @@ import com.usthe.sureness.matcher.DefaultPathRoleMatcher;
 import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.processor.DefaultProcessorManager;
 import com.usthe.sureness.processor.Processor;
+import com.usthe.sureness.processor.support.DigestProcessor;
 import com.usthe.sureness.processor.support.JwtProcessor;
 import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
@@ -11,12 +12,7 @@ import com.usthe.sureness.provider.ducument.DocumentResourceDefaultProvider;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
-import com.usthe.sureness.subject.creater.BasicSubjectJaxRsCreator;
-import com.usthe.sureness.subject.creater.JwtSubjectJaxRsCreator;
-import com.usthe.sureness.subject.creater.JwtSubjectServletCreator;
-import com.usthe.sureness.subject.creater.BasicSubjectServletCreator;
-import com.usthe.sureness.subject.creater.NoneSubjectJaxRsCreator;
-import com.usthe.sureness.subject.creater.NoneSubjectServletCreator;
+import com.usthe.sureness.subject.creater.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,6 +56,9 @@ public class DefaultSurenessConfig {
         PasswordProcessor passwordProcessor = new PasswordProcessor();
         passwordProcessor.setAccountProvider(resourceProvider);
         processorList.add(passwordProcessor);
+        DigestProcessor digestProcessor = new DigestProcessor();
+        digestProcessor.setAccountProvider(resourceProvider);
+        processorList.add(digestProcessor);
         DefaultProcessorManager processorManager = new DefaultProcessorManager(processorList);
         if (logger.isDebugEnabled()) {
             logger.debug("DefaultProcessorManager init");
@@ -85,7 +84,8 @@ public class DefaultSurenessConfig {
             subjectCreates = Arrays.asList(
                     new NoneSubjectServletCreator(),
                     new BasicSubjectServletCreator(),
-                    new JwtSubjectServletCreator());
+                    new JwtSubjectServletCreator(),
+                    new DigestSubjectServletCreator());
         }
         subjectFactory.registerSubjectCreator(subjectCreates);
         if (logger.isDebugEnabled()) {
