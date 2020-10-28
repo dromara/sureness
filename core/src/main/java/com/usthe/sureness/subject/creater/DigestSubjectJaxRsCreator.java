@@ -6,7 +6,7 @@ import com.usthe.sureness.subject.support.DigestSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.container.ContainerRequestContext;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,9 +16,9 @@ import java.util.Map;
  * @author tomsun28
  * @date 2020-10-28 20:44
  */
-public class DigestSubjectServletCreator implements SubjectCreate {
+public class DigestSubjectJaxRsCreator implements SubjectCreate {
 
-    private static final Logger logger = LoggerFactory.getLogger(DigestSubjectServletCreator.class);
+    private static final Logger logger = LoggerFactory.getLogger(DigestSubjectJaxRsCreator.class);
 
     private static final String AUTHORIZATION = "Authorization";
     private static final String DIGEST = "Digest ";
@@ -35,12 +35,12 @@ public class DigestSubjectServletCreator implements SubjectCreate {
 
     @Override
     public boolean canSupportSubject(Object context) {
-        return context instanceof HttpServletRequest;
+        return context instanceof ContainerRequestContext;
     }
 
     @Override
     public Subject createSubject(Object context) {
-        String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
+        String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);
         if (authorization == null || !authorization.startsWith(DIGEST)) {
             return new DigestSubject();
         } else {
@@ -71,14 +71,15 @@ public class DigestSubjectServletCreator implements SubjectCreate {
                     logger.debug("can not create digest subject due some need field is null");
                     return null;
                 }
-                String remoteHost = ((HttpServletRequest) context).getRemoteHost();
-                String requestUri = ((HttpServletRequest) context).getRequestURI();
-                String requestType = ((HttpServletRequest) context).getMethod();
+
+                String requestUri = ((ContainerRequestContext) context).getUriInfo().getPath();
+                String requestType = ((ContainerRequestContext) context).getMethod();
                 String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
                 return DigestSubject.builder(username, response)
                         .setRealm(realm).setUri(uri).setNonce(nonce)
-                        .setNc(nc).setCnonce(cNonce).setQop(qop).setHttpMethod(requestType.toUpperCase())
-                        .setRemoteHost(remoteHost).setTargetUri(targetUri)
+                        .setNc(nc).setCnonce(cNonce).setQop(qop)
+                        .setHttpMethod(requestType.toUpperCase())
+                        .setTargetUri(targetUri)
                         .build();
             } catch (Exception e) {
                 logger.info(e.getMessage(), e);

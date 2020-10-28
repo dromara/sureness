@@ -79,7 +79,8 @@ public class DefaultSurenessConfig {
             subjectCreates = Arrays.asList(
                     new NoneSubjectJaxRsCreator(),
                     new BasicSubjectJaxRsCreator(),
-                    new JwtSubjectJaxRsCreator());
+                    new JwtSubjectJaxRsCreator(),
+                    new DigestSubjectJaxRsCreator());
         } else {
             subjectCreates = Arrays.asList(
                     new NoneSubjectServletCreator(),
