@@ -1,14 +1,7 @@
 package com.usthe.sureness.sample.bootstrap;
 
 import com.usthe.sureness.mgt.SurenessSecurityManager;
-import com.usthe.sureness.processor.exception.DisabledAccountException;
-import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
-import com.usthe.sureness.processor.exception.ExpiredCredentialsException;
-import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
-import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
-import com.usthe.sureness.processor.exception.UnauthorizedException;
-import com.usthe.sureness.processor.exception.UnknownAccountException;
-import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
+import com.usthe.sureness.processor.exception.*;
 import com.usthe.sureness.sample.bootstrap.util.CommonUtil;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.util.SurenessContextHolder;
@@ -67,17 +60,22 @@ public class SurenessFilterExample implements Filter {
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
             logger.debug("the account is disabled");
             CommonUtil.responseWrite(ResponseEntity
-                    .status(HttpStatus.FORBIDDEN).body(e2.getMessage()), servletResponse);
+                    .status(HttpStatus.UNAUTHORIZED).body(e2.getMessage()), servletResponse);
             return;
         } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
             logger.debug("this account credential is incorrect or expired");
             CommonUtil.responseWrite(ResponseEntity
-                    .status(HttpStatus.FORBIDDEN).body(e3.getMessage()), servletResponse);
+                    .status(HttpStatus.UNAUTHORIZED).body(e3.getMessage()), servletResponse);
             return;
-        } catch (UnauthorizedException e5) {
+        } catch (NeedDigestInfoException e5) {
+            logger.debug("you should try once again with digest auth information");
+            CommonUtil.responseWrite(ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .header("WWW-Authenticate", e5.getAuthenticate()).build(), servletResponse);
+        } catch (UnauthorizedException e6) {
             logger.debug("this account can not access this resource");
             CommonUtil.responseWrite(ResponseEntity
-                    .status(HttpStatus.FORBIDDEN).body(e5.getMessage()), servletResponse);
+                    .status(HttpStatus.FORBIDDEN).body(e6.getMessage()), servletResponse);
             return;
         } catch (RuntimeException e) {
             logger.error("other exception happen: ", e);

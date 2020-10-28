@@ -32,6 +32,7 @@ excludedResource:
 account:
   - appId: admin
     # if add salt, the password is encrypted password - the result: MD5(password+salt)
+    # digest auth not support encrypted password
     # if no salt, the password is unencrypted password
     credential: 0192023A7BBD73250516F069DF18B500
     salt: 123
