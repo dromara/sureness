@@ -25,7 +25,7 @@
 > No specific framework dependency(support springboot, quarkus, javalin, ktor and more)  
 > Support dynamic modification of permissions
 > Support mainstream http container(servlet and jax-rs)    
-> Supports JWT, Basic Auth... Can extend custom supported authentication methods  
+> Supports JWT, Basic Auth, Digest Auth... Can extend custom supported authentication methods  
 > [High performance due dictionary matching tree](#Why Is High Performance)  
 > Good extension interface, demo and document.   
 

@@ -1,6 +1,6 @@
 ## 默认支持的认证方式  
 
-`sureness`目前默认支持的认证方式有`bearer jwt`,`basic auth`, 当然用户可以通过扩展`Processor`,`Subject`和`SubjectCreate`接口实现自定义的认证方式  
+`sureness`目前默认支持的认证方式有`bearer jwt`,`basic auth`, `digest auth`, 当然用户可以通过扩展`Processor`,`Subject`和`SubjectCreate`接口实现自定义的认证方式  
 
 #### `bearer jwt`  
 `jwt`即`json web token`,是目前很流行的跨域,无状态,安全认证解决方案,介绍详见[网络](http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html)  
@@ -30,8 +30,17 @@ Authorization: Basic dG9tOjMyMTEz
 我们可以在`postman`如下使用它: 在`Basic Auth`类型的`Authorization`中输入账户密码即可,`postman`会自动对其`base64`加密.  
 ![basicAuthPostmanUse](../_images/basicAuthPostmanUse.png)  
 
+#### `digest auth`  
+`digest auth`即`Digest access authentication`,经典的`http`摘要认证方式,用于保护传输的密码，介绍详见[网络](https://www.cnblogs.com/xiaoxiaotank/p/11078571.html)       
+下面是`digest auth`的认证流程(图片来源于[网络](https://www.cnblogs.com/xiaoxiaotank/p/11078571.html)):  
+![digestFlow](../_images/digestFlow.png)  
+
+我们可以在chrome浏览器直接使用它: 访问url，在弹出的对话框中输入账户密码即可,chrome浏览器会自动进行认证流程.    
+![digestAuthChromeUse](../_images/digestAuthChromeUse.png)    
+
+
 #### 其他认证方式  
-目前sureness暂支持这两种，之后会陆续扩展其他基本认证方式，当然你也可以很轻松的自定义认证方式，详见[自定义Subject](cn/custom-subject.md)  
+目前sureness默认支持这三种主流的认证方式，满足绝大部分需求，当然你也可以很轻松的自定义认证方式，详见[自定义Subject](cn/custom-subject.md)  
 
 我们提供了默认认证方式的使用`DEMO`，请参考 [使用sureness10分钟项目集成案例](cn/sample-bootstrap.md)   
 当然我们也提供了自定义认证方式的扩展`DEMO`，请参考 [使用sureness30分钟项目集成案例](cn/sample-tom.md)     

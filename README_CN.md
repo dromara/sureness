@@ -34,7 +34,7 @@ api的保护可以认为：认证-请求携带的认证信息是否校验通过�
 >  无特定框架依赖(本质就是过滤器处拦截判断,已有springboot,quarkus,javalin,ktor等demo)  
 >  支持动态修改权限配置(动态修改哪些api需要被认证，可以被谁访问)    
 >  支持主流http容器  servlet 和 jax-rs  
->  支持多种认证策略, `jwt, basic auth` ... 可扩展自定义支持的认证方式   
+>  支持多种认证策略, `jwt, basic auth, digest auth` ... 可扩展自定义支持的认证方式   
 >  [基于改进的字典匹配树拥有的高性能](#高性能匹配 )  
 >  良好的扩展接口, demo和文档  
 
