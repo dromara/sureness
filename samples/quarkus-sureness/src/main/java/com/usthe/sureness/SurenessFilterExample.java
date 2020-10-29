@@ -1,14 +1,7 @@
 package com.usthe.sureness;
 
 import com.usthe.sureness.mgt.SurenessSecurityManager;
-import com.usthe.sureness.processor.exception.DisabledAccountException;
-import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
-import com.usthe.sureness.processor.exception.ExpiredCredentialsException;
-import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
-import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
-import com.usthe.sureness.processor.exception.UnauthorizedException;
-import com.usthe.sureness.processor.exception.UnknownAccountException;
-import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
+import com.usthe.sureness.processor.exception.*;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.util.SurenessContextHolder;
 import org.slf4j.Logger;
@@ -53,6 +46,10 @@ public class SurenessFilterExample implements ContainerRequestFilter, ContainerR
         } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
             logger.debug("this account credential is incorrect or expired");
             requestContext.abortWith(Response.status(401).entity(e3.getMessage()).build());
+
+        } catch (NeedDigestInfoException e4) {
+            logger.debug("you should try once again with digest auth information");
+            requestContext.abortWith(Response.status(401).header("WWW-Authenticate", e4.getAuthenticate()).build());
 
         } catch (UnauthorizedException e5) {
             logger.debug("this account can not access this resource");

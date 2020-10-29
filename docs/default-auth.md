@@ -1,6 +1,6 @@
 ## Default support auth type    
 
-Now sureness supports JWT, Basic Auth... also can extend custom supported authentication methods(by extend interface `Processor`,`Subject`,`SubjectCreate`).   
+Now sureness supports JWT, Basic Auth, Digest Auth... also can extend custom supported authentication methods(by extend interface `Processor`,`Subject`,`SubjectCreate`).   
 
 #### `bearer jwt`  
 `jwt` - `json web token`, is a very popular cross-domain, stateless, security authentication solution. 
@@ -30,9 +30,19 @@ Authorization: Basic dG9tOjMyMTEz
 we can use it in postman: add username password in `Basic Auth` type's `Authorization`, postman would encrypt it automatically.  
 ![basicAuthPostmanUse](_images/basicAuthPostmanUse.png)  
 
+#### `digest auth`  
+`digest auth` - `Digest access authentication`, is a classic `http` digest authentication method. It is used to protect the transmitted password.   
+The following is the authentication process flow of `digest auth`, which come from [internet](https://www.cnblogs.com/xiaoxiaotank/p/11078571.html)    
+![digestFlow](_images/digestFlow.png)  
+
+We can use it directly in the chrome browser: visit the url, enter the account password in the pop-up dialog box, 
+and the chrome browser will automatically perform the authentication process.     
+![digestAuthChromeUse](_images/digestAuthUse.png)    
+
+
 #### other auth type   
-Sureness currently supports these two types for the time being, and will continue to expand other basic authentication methods in the future.
-Of course, you can easily customize the authentication method, detail [Custom Subject](custom-subject.md)    
+Sureness currently supports these three mainly auth types for the time being, and will continue to expand other basic authentication methods in the future.
+Of course, you can easily customize the authentication method, detail: [Custom Subject](custom-subject.md)    
 
 We provide the demo to use default authentication method, detail please refer to  [10 Minute Tutorial's Program--sample-bootstrap](sample-bootstrap.md)     
 Also we provide the demo to custom authentication method, detail please refer to  [30 Minute Tutorial's Program--sample-tom](sample-tom.md)     

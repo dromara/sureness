@@ -36,7 +36,7 @@ Authorization: Basic dG9tOjMyMTEz
 ![digestFlow](../_images/digestFlow.png)  
 
 我们可以在chrome浏览器直接使用它: 访问url，在弹出的对话框中输入账户密码即可,chrome浏览器会自动进行认证流程.    
-![digestAuthChromeUse](../_images/digestAuthChromeUse.png)    
+![digestAuthChromeUse](../_images/digestAuthUse.png)    
 
 
 #### 其他认证方式  

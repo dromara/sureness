@@ -9,6 +9,9 @@ import io.ktor.application.ApplicationCallPipeline
 import io.ktor.application.call
 import io.ktor.application.log
 import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
+import io.ktor.response.header
+import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.*
 import io.ktor.server.engine.EngineAPI
@@ -70,6 +73,13 @@ fun Application.main() {
         } catch (e3: ExpiredCredentialsException) {
             log.debug("this account credential is incorrect or expired")
             call.respondText(e3.localizedMessage)
+            return@intercept finish()
+
+        } catch (e4: NeedDigestInfoException) {
+            log.debug("you should try once again with digest auth information")
+            call.response.header("WWW-Authenticate", e4.authenticate)
+            call.response.status(HttpStatusCode.Unauthorized)
+            call.respondText(e4.localizedMessage)
             return@intercept finish()
 
         } catch (e5: UnauthorizedException) {

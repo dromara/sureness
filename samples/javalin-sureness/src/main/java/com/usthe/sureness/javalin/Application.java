@@ -56,6 +56,9 @@ public class Application {
         }).exception(ExpiredCredentialsException.class, (e, ctx) -> {
             log.debug("this account credential is incorrect or expired");
             ctx.status(401).result(e.getMessage());
+        }).exception(NeedDigestInfoException.class, (e, ctx) -> {
+            log.debug("you should try once again with digest auth information");
+            ctx.status(401).header("WWW-Authenticate", e.getAuthenticate());
         }).exception(UnauthorizedException.class, (e, ctx) -> {
             log.debug("this account can not access this resource");
             ctx.status(403).result(e.getMessage());
