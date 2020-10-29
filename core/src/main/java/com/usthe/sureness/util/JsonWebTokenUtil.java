@@ -1,19 +1,14 @@
 package com.usthe.sureness.util;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.CompressionCodecs;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.*;
+import io.jsonwebtoken.security.SignatureException;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * json web token相关工具类
@@ -35,6 +30,10 @@ public class JsonWebTokenUtil {
 
     /** JWT格式3个点 **/
     private static final int COUNT_3 = 3;
+
+    /** 判断是否是base64串 **/
+    private static final Pattern BASE64_PATTERN =
+            Pattern.compile("^([A-Za-z0-9+/_-]+)(=*)$");
 
     /** 加密解密签名 **/
     private static Key secretKey;
@@ -100,7 +99,16 @@ public class JsonWebTokenUtil {
      */
     public static boolean isNotJsonWebToken(String jwt) {
         // base64url_encode(Header) + '.' + base64url_encode(Claims) + '.' + base64url_encode(Signature)
-        return jwt.split("\\.").length != COUNT_3;
+        String[] jwtArr = jwt.split("\\.");
+        if (jwtArr.length != COUNT_3) {
+            return true;
+        }
+        for (String jwtTmp : jwtArr) {
+            if (!BASE64_PATTERN.matcher(jwtTmp).matches()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -113,7 +121,8 @@ public class JsonWebTokenUtil {
      * @throws SignatureException 签名异常
      * @throws IllegalArgumentException 非法参数
      */
-    public static Claims parseJwt(String jwt) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException {
+    public static Claims parseJwt(String jwt) throws ExpiredJwtException, UnsupportedJwtException,
+            MalformedJwtException, SignatureException, IllegalArgumentException {
 
         return Jwts.parserBuilder().setSigningKey(secretKey).build()
                 .parseClaimsJws(jwt).getBody();

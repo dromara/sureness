@@ -8,6 +8,7 @@ import com.usthe.sureness.processor.DefaultProcessorManager;
 import com.usthe.sureness.processor.Processor;
 import com.usthe.sureness.processor.ProcessorManager;
 import com.usthe.sureness.processor.support.JwtProcessor;
+import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.sample.tom.sureness.creator.CustomSubjectCreator;
@@ -44,6 +45,9 @@ public class SurenessConfiguration {
     ProcessorManager processorManager(SurenessAccountProvider accountProvider) {
         // process init
         List<Processor> processorList = new LinkedList<>();
+        // use default none processor
+        NoneProcessor noneProcessor = new NoneProcessor();
+        processorList.add(noneProcessor);
         // use default jwt processor
         JwtProcessor jwtProcessor = new JwtProcessor();
         processorList.add(jwtProcessor);
