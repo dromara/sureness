@@ -5,7 +5,7 @@
 - Based on `javalin, servlet`
 - Load data from default dataSource - `sureness.yml`
 - Use default sureness config
-- Use default `jwt,basic auth` to authenticate and authorize
+- Use default `jwt,basic auth,digest auth` to authenticate and authorize
 - Contain `restful api`  
 - Project's protected entrance is `Application`  
 - Suggest use postman to test

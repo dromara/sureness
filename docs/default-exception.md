@@ -18,17 +18,18 @@ If the authentication is successful, it will pass directly, if it fails, a speci
         }
 ```
 
-sureness exception                              | exception note
----                                                             | ---
-SurenessAuthenticationException     |  basic authenticated exception,Authentication related extend it
-SurenessAuthorizationException       | basic authorized exception,Authorization related extend it
-ProcessorNotFoundException            | authenticated,not found process support this subject
+sureness exception                     | exception note
+---                                    | ---
+SurenessAuthenticationException        |  basic authenticated exception,Authentication related extend it
+SurenessAuthorizationException         | basic authorized exception,Authorization related extend it
+ProcessorNotFoundException             | authenticated,not found process support this subject
 UnknownAccountException                | authenticated,unknown account
-UnSupportedSubjectException           | authenticated,unSupport request
-DisabledAccountException                  | authenticated,account disable
-ExcessiveAttemptsException                | authenticated,excessive attempts
-IncorrectCredentialsException             | authenticated, incorrect credential
-ExpiredCredentialsException               | authenticated,expired credential
-UnauthorizedException                        | authorized,no permission access this resource
+UnSupportedSubjectException            | authenticated,unSupport request
+DisabledAccountException               | authenticated,account disable
+ExcessiveAttemptsException             | authenticated,excessive attempts
+IncorrectCredentialsException          | authenticated, incorrect credential
+ExpiredCredentialsException            | authenticated,expired credential
+NeedDigestInfoException                | authenticated, getAuthenticate() return digest information to client
+UnauthorizedException                  | authorized,no permission access this resource
 
 Custom exception should extend SurenessAuthenticationException or SurenessAuthorizationException  
