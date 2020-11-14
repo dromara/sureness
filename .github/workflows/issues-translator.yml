@@ -1,0 +1,8 @@
+name: 'issue-comment-translator'
+on: [issues, issue_comment]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tomsun28/issues-translate-action@v2.0
