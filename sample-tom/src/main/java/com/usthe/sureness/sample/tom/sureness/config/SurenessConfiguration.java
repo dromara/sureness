@@ -11,7 +11,9 @@ import com.usthe.sureness.processor.support.JwtProcessor;
 import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
 import com.usthe.sureness.provider.SurenessAccountProvider;
-import com.usthe.sureness.sample.tom.sureness.creator.CustomSubjectCreator;
+import com.usthe.sureness.sample.tom.sureness.processor.CustomTokenProcessor;
+import com.usthe.sureness.sample.tom.sureness.subject.CustomPasswdSubjectCreator;
+import com.usthe.sureness.sample.tom.sureness.subject.CustomTokenSubjectCreator;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
 import com.usthe.sureness.subject.creater.BasicSubjectServletCreator;
@@ -55,6 +57,11 @@ public class SurenessConfiguration {
         PasswordProcessor passwordProcessor = new PasswordProcessor();
         passwordProcessor.setAccountProvider(accountProvider);
         processorList.add(passwordProcessor);
+
+        // use custom token processor
+        CustomTokenProcessor customTokenProcessor = new CustomTokenProcessor();
+        customTokenProcessor.setAccountProvider(accountProvider);
+        processorList.add(customTokenProcessor);
         return new DefaultProcessorManager(processorList);
     }
 
@@ -78,8 +85,10 @@ public class SurenessConfiguration {
                 new BasicSubjectServletCreator(),
                 // use default jwt subject creator
                 new JwtSubjectServletCreator(),
-                // use custom creator
-                new CustomSubjectCreator()));
+                // use custom password creator
+                new CustomPasswdSubjectCreator(),
+                // use custom token creator
+                new CustomTokenSubjectCreator()));
         return subjectFactory;
     }
 

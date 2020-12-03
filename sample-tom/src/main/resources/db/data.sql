@@ -12,6 +12,7 @@ insert into auth_resource (id, name, code, uri, type, method, status, descriptio
 insert into auth_resource (id, name, code, uri, type, method, status, description) values (108, '更新角色', 'UPDATE_ROLE', '/role', 'role', 'PUT', 1, null);
 insert into auth_resource (id, name, code, uri, type, method, status, description) values (109, '删除角色', 'DELETE_ROLE', '/role/*', 'role', 'DELETE', 1, null);
 insert into auth_resource (id, name, code, uri, type, method, status, description) values (110, '获取角色', 'GET_ROLES', '/role/*/*', 'role', 'GET', 1, null);
+insert into auth_resource (id, name, code, uri, type, method, status, description) values (111, '用户获取custom token', 'ACCOUNT_CUSTOM_TOKEN', '/auth/custom/token', 'account', 'POST', 9, null);
 
 -- ----------------------------
 -- Records of auth_role
