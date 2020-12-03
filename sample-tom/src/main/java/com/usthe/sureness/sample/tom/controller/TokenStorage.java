@@ -13,8 +13,10 @@ public class TokenStorage {
 
     private static final String TOKEN_SPLIT = "--";
     private static final int TOKEN_SPLIT_SIZE = 4;
+    private static final int START_TIME_INDEX = 1;
+    private static final int PERIOD_TIME_INDEX = 2;
 
-    private static final Map<String, String> tokenMap = new ConcurrentHashMap<>();
+    private static final Map<String, String> TOKEN_MAP = new ConcurrentHashMap<>();
 
     /**
      * match token
@@ -27,13 +29,14 @@ public class TokenStorage {
                 || currentToken.split(TOKEN_SPLIT).length != TOKEN_SPLIT_SIZE) {
             return false;
         }
-        String originToken  = tokenMap.get(key);
+        String originToken  = TOKEN_MAP.get(key);
         if (originToken == null || !originToken.equals(currentToken)) {
             removeToken(key);
             return false;
         }
         String[] tokenArr = currentToken.split(TOKEN_SPLIT);
-        if (Long.parseLong(tokenArr[1]) + Long.parseLong(tokenArr[2]) <= System.currentTimeMillis()) {
+        if (Long.parseLong(tokenArr[START_TIME_INDEX]) + Long.parseLong(tokenArr[PERIOD_TIME_INDEX])
+                <= System.currentTimeMillis()) {
             // token expired, remove it
             removeToken(key);
             return false;
@@ -45,7 +48,7 @@ public class TokenStorage {
         if (key == null || "".equals(key)) {
             return;
         }
-        tokenMap.remove(key);
+        TOKEN_MAP.remove(key);
     }
 
     public static void addToken(String key, String token) {
@@ -53,6 +56,6 @@ public class TokenStorage {
                 || token.split(TOKEN_SPLIT).length != TOKEN_SPLIT_SIZE) {
             return;
         }
-        tokenMap.put(key, token);
+        TOKEN_MAP.put(key, token);
     }
 }

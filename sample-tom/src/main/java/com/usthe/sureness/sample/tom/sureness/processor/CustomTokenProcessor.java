@@ -23,6 +23,9 @@ public class CustomTokenProcessor extends BaseProcessor {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomTokenProcessor.class);
     private static final String TOKEN_SPLIT = "--";
+    private static final int START_TIME_INDEX = 1;
+    private static final int PERIOD_TIME_INDEX = 2;
+    private static final int DOUBLE_TIME = 2;
 
     private SurenessAccountProvider accountProvider;
 
@@ -52,14 +55,16 @@ public class CustomTokenProcessor extends BaseProcessor {
         } else {
             // token expired or not exist, if token can refresh, refresh it
             // if expired time is not longer than refreshPeriodTime/2 , it can refresh
-            if (Long.parseLong(tokenArr[1]) + (Long.parseLong(tokenArr[2]) * 2) >= System.currentTimeMillis()) {
+            if (Long.parseLong(tokenArr[START_TIME_INDEX]) + (Long.parseLong(tokenArr[PERIOD_TIME_INDEX]) * DOUBLE_TIME)
+                    >= System.currentTimeMillis()) {
                 long refreshPeriodTime = 36000L;
                 String refreshToken = tokenArr[0] + TOKEN_SPLIT + System.currentTimeMillis()
                         + TOKEN_SPLIT + refreshPeriodTime
                         + TOKEN_SPLIT + UUID.randomUUID().toString().replace("-", "");
                 TokenStorage.addToken(tokenArr[0], refreshToken);
                 throw new RefreshExpiredTokenException(refreshToken);
-            } else if (Long.parseLong(tokenArr[1]) + Long.parseLong(tokenArr[2]) <= System.currentTimeMillis()) {
+            } else if (Long.parseLong(tokenArr[START_TIME_INDEX]) + Long.parseLong(tokenArr[PERIOD_TIME_INDEX])
+                    <= System.currentTimeMillis()) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("CustomTokenProcessor authenticated expired");
                 }
