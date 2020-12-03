@@ -57,7 +57,7 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.CREATED).body(message);
     }
 
-    @PostMapping("/customToken")
+    @PostMapping("/custom/token")
     public ResponseEntity<Message> issueCustomToken(@RequestBody @Validated Account account) {
         boolean authenticatedFlag = accountService.authenticateAccount(account);
         if (!authenticatedFlag) {

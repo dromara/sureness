@@ -33,7 +33,7 @@ public class TokenStorage {
             return false;
         }
         String[] tokenArr = currentToken.split(TOKEN_SPLIT);
-        if (Long.parseLong(tokenArr[1]) + Long.parseLong(tokenArr[2]) >= System.currentTimeMillis()) {
+        if (Long.parseLong(tokenArr[1]) + Long.parseLong(tokenArr[2]) <= System.currentTimeMillis()) {
             // token expired, remove it
             removeToken(key);
             return false;

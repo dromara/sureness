@@ -2,8 +2,6 @@ package com.usthe.sureness.sample.tom.sureness.subject;
 
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
-import com.usthe.sureness.subject.support.JwtSubject;
-import com.usthe.sureness.util.SurenessCommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,11 +39,9 @@ public class CustomTokenSubjectCreator implements SubjectCreate {
         String requestUri = ((HttpServletRequest) context).getRequestURI();
         String requestType = ((HttpServletRequest) context).getMethod();
         String targetUri = requestUri.concat("===").concat(requestType.toLowerCase());
-        String userAgent = SurenessCommonUtil.findUserAgent((HttpServletRequest) context);
-        return JwtSubject.builder(authorization)
+        return CustomTokenSubject.builder(authorization)
                 .setRemoteHost(remoteHost)
                 .setTargetResource(targetUri)
-                .setUserAgent(userAgent)
                 .build();
     }
 }

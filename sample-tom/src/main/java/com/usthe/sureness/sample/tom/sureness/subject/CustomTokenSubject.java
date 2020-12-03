@@ -1,7 +1,6 @@
 package com.usthe.sureness.sample.tom.sureness.subject;
 
 import com.usthe.sureness.subject.Subject;
-import com.usthe.sureness.subject.support.JwtSubject;
 
 import java.util.List;
 
@@ -84,12 +83,12 @@ public class CustomTokenSubject implements Subject {
         return userAgent;
     }
 
-    public static JwtSubject.Builder builder(String jwt) {
-        return new JwtSubject.Builder(jwt);
+    public static Builder builder(String token) {
+        return new Builder(token);
     }
 
-    public static JwtSubject.Builder builder(Subject auToken) {
-        return new JwtSubject.Builder(auToken);
+    public static Builder builder(Subject auToken) {
+        return new Builder(auToken);
     }
 
     public static class Builder {

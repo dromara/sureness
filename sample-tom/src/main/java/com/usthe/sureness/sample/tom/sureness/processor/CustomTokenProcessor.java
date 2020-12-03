@@ -52,13 +52,18 @@ public class CustomTokenProcessor extends BaseProcessor {
         } else {
             // token expired or not exist, if token can refresh, refresh it
             // if expired time is not longer than refreshPeriodTime/2 , it can refresh
-            if (Long.parseLong(tokenArr[1]) + Long.parseLong(tokenArr[2]) / 2 >= System.currentTimeMillis()) {
+            if (Long.parseLong(tokenArr[1]) + (Long.parseLong(tokenArr[2]) * 2) >= System.currentTimeMillis()) {
                 long refreshPeriodTime = 36000L;
                 String refreshToken = tokenArr[0] + TOKEN_SPLIT + System.currentTimeMillis()
                         + TOKEN_SPLIT + refreshPeriodTime
                         + TOKEN_SPLIT + UUID.randomUUID().toString().replace("-", "");
                 TokenStorage.addToken(tokenArr[0], refreshToken);
                 throw new RefreshExpiredTokenException(refreshToken);
+            } else if (Long.parseLong(tokenArr[1]) + Long.parseLong(tokenArr[2]) <= System.currentTimeMillis()) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("CustomTokenProcessor authenticated expired");
+                }
+                throw new IncorrectCredentialsException("the token authenticated expired, please get new one");
             } else {
                 if (logger.isDebugEnabled()) {
                     logger.debug("CustomTokenProcessor authenticated fail");
