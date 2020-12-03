@@ -31,8 +31,10 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    private static final String TOKEN_SPLIT = "--";
+
     @PostMapping("/token")
-    public ResponseEntity<Message> issueToken(@RequestBody @Validated Account account) {
+    public ResponseEntity<Message> issueJwtToken(@RequestBody @Validated Account account) {
         boolean authenticatedFlag = accountService.authenticateAccount(account);
         if (!authenticatedFlag) {
             Message message = Message.builder()
@@ -51,6 +53,30 @@ public class AccountController {
         Message message = Message.builder().data(responseData).build();
         if (log.isDebugEnabled()) {
             log.debug("issue token success, account: {} -- token: {}", account, jwt);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(message);
+    }
+
+    @PostMapping("/customToken")
+    public ResponseEntity<Message> issueCustomToken(@RequestBody @Validated Account account) {
+        boolean authenticatedFlag = accountService.authenticateAccount(account);
+        if (!authenticatedFlag) {
+            Message message = Message.builder()
+                    .errorMsg("username or password not incorrect").build();
+            if (log.isDebugEnabled()) {
+                log.debug("account: {} authenticated fail", account);
+            }
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(message);
+        }
+        long refreshPeriodTime = 36000L;
+        String token = account.getUsername() + TOKEN_SPLIT + System.currentTimeMillis()
+                + TOKEN_SPLIT + refreshPeriodTime
+                + TOKEN_SPLIT + UUID.randomUUID().toString().replace("-", "");
+        TokenStorage.addToken(account.getUsername(), token);
+        Map<String, String> responseData = Collections.singletonMap("customToken", token);
+        Message message = Message.builder().data(responseData).build();
+        if (log.isDebugEnabled()) {
+            log.debug("issue token success, account: {} -- token: {}", account, token);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(message);
     }

@@ -10,6 +10,7 @@ import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
 import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
+import com.usthe.sureness.sample.tom.sureness.processor.RefreshExpiredTokenException;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.util.SurenessContextHolder;
 import org.slf4j.Logger;
@@ -27,6 +28,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * filter拦截请求 经sureness保护
@@ -63,6 +66,12 @@ public class SurenessFilterExample implements Filter {
             logger.debug("this account credential is incorrect or expired");
             responseWrite(ResponseEntity
                     .status(HttpStatus.FORBIDDEN).body(e3.getMessage()), servletResponse);
+            return;
+        } catch (RefreshExpiredTokenException e4) {
+            logger.debug("this account credential token is expired, return refresh value");
+            Map<String, String> refreshTokenMap = Collections.singletonMap("refresh-token", e4.getMessage());
+            responseWrite(ResponseEntity
+                    .status(HttpStatus.FORBIDDEN).body(refreshTokenMap), servletResponse);
             return;
         } catch (UnauthorizedException e5) {
             logger.debug("this account can not access this resource");

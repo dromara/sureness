@@ -1,4 +1,4 @@
-package com.usthe.sureness.sample.tom.sureness.creator;
+package com.usthe.sureness.sample.tom.sureness.subject;
 
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author tomsun28
  * @date 22:59 2020-03-02
  */
-public class CustomSubjectCreator implements SubjectCreate {
+public class CustomPasswdSubjectCreator implements SubjectCreate {
 
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
@@ -28,7 +28,6 @@ public class CustomSubjectCreator implements SubjectCreate {
     public boolean canSupportSubject(Object context) {
         // 定义什么样的请求信息才能被CustomSubjectCreator创建subject
         if (context instanceof HttpServletRequest) {
-
             String username = ((HttpServletRequest)context).getHeader(USERNAME);
             String password = ((HttpServletRequest)context).getHeader(PASSWORD);
             return username != null && password != null;
