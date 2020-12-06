@@ -19,8 +19,9 @@ public class SurenessCommonUtilTest {
         HttpServletRequest request = createNiceMock(HttpServletRequest.class);
         expect(request.getHeader(USER_AGENT)).andReturn(LINUX).anyTimes();
         replay(request);
-        assertEquals(LINUX, SurenessCommonUtil.findUserAgent(request));
-        assertNotNull(SurenessCommonUtil.findUserAgent(request));
+        String userAgent = request.getHeader(USER_AGENT);
+        assertNotNull(userAgent);
+        assertEquals(LINUX, SurenessCommonUtil.findUserAgent(userAgent));
         verify(request);
     }
 

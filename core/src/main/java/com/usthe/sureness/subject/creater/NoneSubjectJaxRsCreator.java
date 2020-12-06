@@ -3,7 +3,6 @@ package com.usthe.sureness.subject.creater;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.NoneSubject;
-import com.usthe.sureness.util.SurenessCommonUtil;
 
 import javax.ws.rs.container.ContainerRequestContext;
 
@@ -25,9 +24,8 @@ public class NoneSubjectJaxRsCreator implements SubjectCreate {
         String requestUri = ((ContainerRequestContext) context).getUriInfo().getPath();
         String requestType = ((ContainerRequestContext) context).getMethod();
         String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
-        String userAgent = SurenessCommonUtil.findUserAgent((ContainerRequestContext) context);
         return NoneSubject.builder()
                 .setTargetUri(targetUri)
-                .setUserAgent(userAgent).build();
+                .build();
     }
 }
