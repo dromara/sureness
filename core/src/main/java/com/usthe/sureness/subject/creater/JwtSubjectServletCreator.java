@@ -4,7 +4,6 @@ import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.JwtSubject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
-import com.usthe.sureness.util.SurenessCommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,11 +52,9 @@ public class JwtSubjectServletCreator implements SubjectCreate {
             String requestUri = ((HttpServletRequest) context).getRequestURI();
             String requestType = ((HttpServletRequest) context).getMethod();
             String targetUri = requestUri.concat("===").concat(requestType.toLowerCase());
-            String userAgent = SurenessCommonUtil.findUserAgent((HttpServletRequest) context);
             return JwtSubject.builder(jwtValue)
                     .setRemoteHost(remoteHost)
                     .setTargetResource(targetUri)
-                    .setUserAgent(userAgent)
                     .build();
         }
         return null;

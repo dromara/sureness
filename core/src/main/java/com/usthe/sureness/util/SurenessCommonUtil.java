@@ -22,16 +22,33 @@ public class SurenessCommonUtil {
 
     private static final String RANDOM_CHAR = "abcdefghijklmnopqrstuvwxyz0123456789";
 
+    /**
+     * Deprecated, suggest use findUserAgent(String userAgent)
+     * @param request HttpServletRequest
+     * @return userAgent
+     */
+    @Deprecated
     public static String findUserAgent(HttpServletRequest request) {
         String userAgent = request.getHeader(USER_AGENT);
         return findUserAgent(userAgent);
     }
 
+    /**
+     * Deprecated, suggest use findUserAgent(String userAgent)
+     * @param request ContainerRequestContext
+     * @return userAgent
+     */
+    @Deprecated
     public static String findUserAgent(ContainerRequestContext request) {
         String userAgent = request.getHeaderString(USER_AGENT);
         return findUserAgent(userAgent);
     }
 
+    /**
+     * match the userAgent
+     * @param userAgent string from request
+     * @return userAgent
+     */
     public static String findUserAgent(String userAgent) {
         if (userAgent == null || "".equals(userAgent)) {
             userAgent = UNKNOWN;

@@ -4,7 +4,6 @@ import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.JwtSubject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
-import com.usthe.sureness.util.SurenessCommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,10 +52,8 @@ public class JwtSubjectJaxRsCreator implements SubjectCreate {
             String requestUri = ((ContainerRequestContext) context).getUriInfo().getPath();
             String requestType = ((ContainerRequestContext) context).getMethod();
             String targetUri = requestUri.concat("===").concat(requestType.toLowerCase());
-            String userAgent = SurenessCommonUtil.findUserAgent((ContainerRequestContext) context);
             return JwtSubject.builder(jwtValue)
                     .setTargetResource(targetUri)
-                    .setUserAgent(userAgent)
                     .build();
         }
         return null;
