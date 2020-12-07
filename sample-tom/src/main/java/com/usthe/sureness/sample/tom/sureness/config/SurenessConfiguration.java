@@ -11,6 +11,7 @@ import com.usthe.sureness.processor.support.JwtProcessor;
 import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
 import com.usthe.sureness.provider.SurenessAccountProvider;
+import com.usthe.sureness.provider.annotation.AnnotationLoader;
 import com.usthe.sureness.sample.tom.sureness.processor.CustomTokenProcessor;
 import com.usthe.sureness.sample.tom.sureness.subject.CustomPasswdSubjectCreator;
 import com.usthe.sureness.sample.tom.sureness.subject.CustomTokenSubjectCreator;
@@ -69,7 +70,9 @@ public class SurenessConfiguration {
     TreePathRoleMatcher pathRoleMatcher(PathTreeProvider pathTreeProvider) {
         // pathRoleMatcher init
         DefaultPathRoleMatcher pathRoleMatcher = new DefaultPathRoleMatcher();
-        pathRoleMatcher.setPathTreeProvider(pathTreeProvider);
+        AnnotationLoader annotationLoaderProvider = new AnnotationLoader();
+        annotationLoaderProvider.setScanPackages(Arrays.asList("com.usthe.sureness.sample.tom.controller"));
+        pathRoleMatcher.setPathTreeProvider(annotationLoaderProvider);
         pathRoleMatcher.buildTree();
         return pathRoleMatcher;
     }

@@ -1,5 +1,7 @@
 package com.usthe.sureness.sample.tom.controller;
 
+import com.usthe.sureness.provider.annotation.RequiresRoles;
+import com.usthe.sureness.provider.annotation.WithoutAuth;
 import com.usthe.sureness.sample.tom.pojo.dto.Message;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
 import com.usthe.sureness.sample.tom.service.ResourceService;
@@ -37,6 +39,7 @@ public class ResourceController {
     private ResourceService resourceService;
 
     @PostMapping
+    @RequiresRoles(roles = {"role1", "role2"}, mapping = "/resource", method = "post")
     public ResponseEntity<Message> addResource(@RequestBody @Validated AuthResourceDO authResource) {
         if (resourceService.addResource(authResource)) {
             if (log.isDebugEnabled()) {
@@ -50,6 +53,7 @@ public class ResourceController {
     }
 
     @PutMapping
+    @WithoutAuth(mapping = "/resource", method = "put")
     public ResponseEntity<Message> updateResource(@RequestBody @Validated AuthResourceDO authResource) {
         if (resourceService.updateResource(authResource)) {
             if (log.isDebugEnabled()) {
@@ -63,6 +67,7 @@ public class ResourceController {
     }
 
     @DeleteMapping("/{resourceId}")
+    @RequiresRoles(roles = {"role1"}, mapping = "/resource/*", method = "delete")
     public ResponseEntity<Message> deleteResource(@PathVariable @NotBlank Long resourceId ) {
         if (resourceService.deleteResource(resourceId)) {
             if (log.isDebugEnabled()) {
@@ -77,6 +82,7 @@ public class ResourceController {
     }
 
     @GetMapping("/{currentPage}/{pageSize}")
+    @RequiresRoles(roles = {"role1"}, mapping = "/resource/*/*", method = "get")
     public ResponseEntity<Message> getResource(@PathVariable Integer currentPage, @PathVariable Integer pageSize ) {
         if (Objects.isNull(currentPage) || Objects.isNull(pageSize)) {
             // 不分页,查询总
