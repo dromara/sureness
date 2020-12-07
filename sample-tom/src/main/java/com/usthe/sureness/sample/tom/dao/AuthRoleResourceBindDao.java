@@ -17,8 +17,9 @@ public interface AuthRoleResourceBindDao extends JpaRepository<AuthRoleResourceB
 
     /**
      * 查询当前角色拥有的资源
-     * @param roleId 角色ID
-     * @return 资源list
+     * Query the resources owned by the current role
+     * @param roleId roleId
+     * @return resource list
      */
     @Query("select rs from AuthResourceDO rs, AuthRoleResourceBindDO bind " +
             "where rs.id = bind.resourceId and bind.roleId = :roleId")

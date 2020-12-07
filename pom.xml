@@ -94,7 +94,6 @@
                     </execution>
                 </executions>
                 <dependencies>
-                    <!-- 需要使用阿里的一些xml文件，因此需要这里增加p3c的依赖 -->
                     <dependency>
                         <groupId>com.alibaba.p3c</groupId>
                         <artifactId>p3c-pmd</artifactId>
@@ -102,7 +101,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- compile setting 配置编译时的jdk version -->
+            <!-- compile setting jdk version -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

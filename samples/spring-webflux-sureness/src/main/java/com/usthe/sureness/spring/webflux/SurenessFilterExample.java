@@ -34,7 +34,8 @@ public class SurenessFilterExample implements WebFilter {
         String errorMsg = null;
         try {
             SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(request);
-            // 可以考虑使用SurenessContextHolder放入threadLocal中绑定,如果绑定 请在请求线程结束时remove
+            // You can consider using SurenessContextHolder to bind subject in threadLocal
+            // if bind, please remove it when end
             if (subject != null) {
                 SurenessContextHolder.bindSubject(subject);
             }

@@ -16,7 +16,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 /**
- * 程序的http request请求入口过滤类示例  所有request请求都需经过此类
+ * An example of the program's http request request entry filtering class.
+ * All request requests must go through this class
  * @author tomsun28
  * @date 17:22 2019-05-12
  */
@@ -24,14 +25,15 @@ import javax.ws.rs.ext.Provider;
 @PreMatching
 public class SurenessFilterExample implements ContainerRequestFilter, ContainerResponseFilter  {
 
-    /** 日志操作 **/
+    /** logger **/
     private static final Logger logger = LoggerFactory.getLogger(SurenessFilterExample.class);
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
         try {
             SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(requestContext);
-            // 可以考虑使用SurenessContextHolder放入threadLocal中绑定
+            // You can consider using SurenessContextHolder to bind subject in threadLocal
+            // if bind, please remove it when end
             if (subject != null) {
                 SurenessContextHolder.bindSubject(subject);
             }

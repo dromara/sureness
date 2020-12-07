@@ -9,7 +9,6 @@ jasypt:
     password: e!swhdg&d763jo
 
 ---
-# 开发环境配置(配置项只包括环境不同项)
 spring:
   profiles: dev
   datasource:
@@ -21,13 +20,14 @@ spring:
     schema: classpath:db/schema.sql
     data: classpath:db/data.sql
     # 每次重启都会根据data.sql schema.sql重建表数据, 设置 NEVER 就不启动重建
+    # Each restart will rebuild the table data according to data.sql schema.sql
+    # setting NEVER will not start the reconstruction
     initialization-mode: always
   jpa:
     database: mysql
     show-sql: true
 
 ---
-# 开发环境配置(配置项只包括环境不同项)
 spring:
   profiles: prod
   datasource:

@@ -18,7 +18,8 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
 
     /**
      * 获取uri资源与其对应角色关系链 eg: /api/v2/host===post===[role2,role3,role4]
-     * @return 资源角色链set
+     * Get uri resource and resource-role relationship chain, eg: /api/v2/host===post===[role2,role3,role4]
+     * @return resource-role chain set
      */
     @Query(value = "SELECT  CONCAT(LOWER(res.uri),\"===\",LOWER(res.method),\"===[\",IFNULL(GROUP_CONCAT(DISTINCT role.code),\"\"),\"]\") " +
             "FROM auth_resource res " +
@@ -32,7 +33,8 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
 
     /**
      * 获取禁用的uri资源 eg: /api/v2/host===post
-     * @return 资源链set
+     * Get disabled uri resources eg: /api/v2/host===post
+     * @return resouce set
      */
     @Query("select CONCAT(LOWER(resource.uri),'===', resource.method) " +
             "from AuthResourceDO resource where resource.status = 9 order by resource.id")
@@ -40,7 +42,8 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
 
     /**
      * 获取分页形式的当前角色拥有的可用API资源
-     * @param roleId 角色ID
+     * Get the available API resources owned by the current role in the form of paging
+     * @param roleId roleId
      * @param request page
      * @return api resource list
      */

@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- *  前后端http api统一消息定义协议 Message
- *
+ * Unified message structure definition for front and back ends
+ * 前后端http api统一消息定义协议 Message
  * {
  *   data:{....},
  *   errorMsg: message
@@ -22,12 +22,12 @@ import lombok.NoArgsConstructor;
 public class Message {
 
     /**
-     * 消息内容  存储对象数据
+     * message body data
      */
     private Object data;
 
     /**
-     * 发生异常时信息
+     * exception message when error happen
      */
     private String errorMsg;
 

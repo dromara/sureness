@@ -2,7 +2,6 @@ package com.usthe.sureness.spring.webflux.controller;
 
 
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 模拟资源controller,供测试调用
+ * simulate resource controller, for testing
  * @author tomsun28
  * @date 17:35 2019-05-12
  */
@@ -190,9 +189,9 @@ public class SimulateController {
     }
 
     /**
-     * 获取MOCK固定的返回数据MAP
-     * @param exchange http 请求
-     * @return 返回数据
+     * get map data from exchange request
+     * @param exchange http request
+     * @return map data
      */
     private Map<String, String> getResponseMap(ServerWebExchange exchange) {
         ServerHttpRequest httpRequest = exchange.getRequest();
