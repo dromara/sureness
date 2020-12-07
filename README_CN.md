@@ -70,13 +70,13 @@ api的保护可以认为：认证-请求携带的认证信息是否校验通过�
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
 </dependency>
 ```
 
 2. 项目使用`gradle`构建,`gradle`坐标  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.2'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.3'
 ```
 
 3. 项目为普通工程,加入`sureness-core.jar`依赖  
