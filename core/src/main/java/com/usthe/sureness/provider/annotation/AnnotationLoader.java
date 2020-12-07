@@ -38,8 +38,8 @@ public class AnnotationLoader implements PathTreeProvider {
         if (scanPackages == null) {
             scanPackages = Collections.singletonList(" ");
         }
-        scanClasses = ClassScanner.scanPackages(scanPackages);
         isInit = true;
+        scanClasses = ClassScanner.scanPackages(scanPackages);
         logger.info("sureness: annotationLoader success init, load {} classes total.", scanClasses.size());
     }
 
@@ -57,21 +57,20 @@ public class AnnotationLoader implements PathTreeProvider {
                 }
                 if (method.isAnnotationPresent(RequiresRoles.class)) {
                     RequiresRoles requiresRoles = method.getDeclaredAnnotation(RequiresRoles.class);
-
                     StringBuilder builder = new StringBuilder();
                     for (int i = 0; i < requiresRoles.roles().length; i++) {
-                        if (i < requiresRoles.roles().length) {
+                        if (i < requiresRoles.roles().length - 1) {
                             builder.append(requiresRoles.roles()[i]).append(",");
                         } else {
                             builder.append(requiresRoles.roles()[i]);
                         }
-                        String path = requiresRoles.mapping().toLowerCase()
-                                + "===" + requiresRoles.method().toLowerCase()
-                                + "===[" + builder.toString() + "]";
-                        resource.add(path);
-                        if (logger.isDebugEnabled()) {
-                            logger.debug("sureness: annotationLoader load path {}.", path);
-                        }
+                    }
+                    String path = requiresRoles.mapping().toLowerCase()
+                            + "===" + requiresRoles.method().toLowerCase()
+                            + "===[" + builder.toString() + "]";
+                    resource.add(path);
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("sureness: annotationLoader load path {}.", path);
                     }
                 }
             }
