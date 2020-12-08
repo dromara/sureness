@@ -6,7 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 接口权限修饰注解，被修饰的接口支持roles内角色访问
+ * sureness annotation
+ * The modified resource with @RequiresRoles can be accessed when user role in [roles]
  * @author tomsun28
  * @date 23:22 2020-03-16
  */
@@ -15,19 +16,19 @@ import java.lang.annotation.Target;
 public @interface RequiresRoles {
 
     /**
-     * 所支持角色
+     * support roles
      * @return roles
      */
     String[] roles() default {};
 
     /**
-     * 请求路径
+     * request uri
      * @return uri
      */
     String mapping();
 
     /**
-     * 请求方式
+     * request method
      * @return method - post,get,put,delete ...
      */
     String method();

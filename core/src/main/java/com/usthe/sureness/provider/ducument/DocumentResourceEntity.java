@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 从yaml文件加载的资源实体 默认文件 sureness.yaml
+ * sureness config information entity
  * @author tomsun28
  * @date 21:34 2019-05-24
  */

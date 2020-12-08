@@ -22,7 +22,7 @@ import java.util.Set;
  */
 public class DocumentResourceDefaultProvider implements PathTreeProvider, SurenessAccountProvider {
 
-    /** 日志操作 **/
+    /** logger **/
     private static final Logger logger = LoggerFactory.getLogger(DocumentResourceDefaultProvider.class);
 
     private static final String CREDENTIAL = "credential";
@@ -31,7 +31,7 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
 
     private static final String ROLE = "role";
 
-    /** sureness配置信息内存缓存 **/
+    /** sureness config memory cache **/
     private DocumentResourceEntity entity;
 
     @Override

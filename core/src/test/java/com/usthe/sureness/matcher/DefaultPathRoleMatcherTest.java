@@ -1,9 +1,6 @@
 package com.usthe.sureness.matcher;
 
-import com.usthe.sureness.matcher.util.TirePathTree;
 import com.usthe.sureness.subject.Subject;
-import com.usthe.sureness.subject.SubjectCreate;
-import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.support.NoneSubject;
 import com.usthe.sureness.subject.support.PasswordSubject;
 import org.junit.AfterClass;

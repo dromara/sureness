@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * JwtSubject creator
+ * the subject creator support creating JwtSubject
  * only support HttpServletRequest
  * @author tomsun28
  * @date 23:58 2020-02-27

@@ -4,44 +4,42 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * Subject 简单概要 包含一些基本信息内容
+ * Subject summary, contains some basic information content
  * @author tomsun28
  * @date 22:59 2019-01-09
  */
 public interface SubjectSum extends Serializable {
 
     /**
-     * description 获取认证对象的账户
+     * Get the account of the authentication object
      * @return java.lang.Object
      */
     Object getPrincipal();
 
     /**
-     * description 是否有特定角色
+     * Determine whether it has role - var1
      *
-     * @param var1 1
-     * @return boolean
+     * @param var1 role
+     * @return boolean has-true, no have - false
      */
     boolean hasRole(String var1);
 
     /**
-     * description 是否有对应全部角色
-     *
-     * @param var1 1
-     * @return boolean
+     * Determine whether it has all roles - var1
+     * @param var1 role list
+     * @return boolean has-true, no have - false
      */
     boolean hasAllRoles(Collection<String> var1);
 
     /**
-     * description 获取拥有的角色
+     * get the roles owned by it
      *
      * @return java.lang.Object
      */
     Object getRoles();
 
     /**
-     * description 获取这次想访问目标资源
-     *
+     * get the target resource uri which it want access
      * @return java.lang.Object
      */
     Object getTargetResource();

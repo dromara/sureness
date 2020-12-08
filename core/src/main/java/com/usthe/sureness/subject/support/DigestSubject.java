@@ -13,43 +13,43 @@ public class DigestSubject implements Subject {
 
     private static final long serialVersionUID = 1L;
 
-    /** 用户标识 **/
+    /** appId, account identifier **/
     private String appId;
 
-    /** 安全域 **/
+    /** account realm **/
     private String realm;
 
     /** uri **/
     private String uri;
 
-    /** 保护质量，包含auth（默认的）和 auth-int **/
+    /** qop，include auth(default) and auth-int **/
     private String qop;
 
-    /** 服务端向客户端发送质询时附带的一个随机数 **/
+    /** A random number attached when the server sends a challenge to the client **/
     private String nonce;
 
-    /** nonce计数器，是一个16进制的数值 **/
+    /** nonce counter, is a hexadecimal value **/
     private String nc;
 
-    /** 客户端随机数 **/
+    /** Client random number **/
     private String cnonce;
 
-    /** 加密后的口令 **/
+    /** Encrypted password **/
     private String response;
 
-    /** 请求的http method **/
+    /** http method **/
     private String httpMethod;
 
-    /** 访问用户的IP **/
+    /** remote IP **/
     private String remoteHost;
 
-    /** 所拥有的角色 在解析完jwt之后把用户角色放到这里 **/
+    /** the roles which this user owned **/
     private List<String> ownRoles;
 
-    /** 所访问资源地址 **/
+    /** the uri resource which this user want access **/
     private String targetUri;
 
-    /** 所访问资源他支持的角色 **/
+    /** the Roles which can access this resource above-targetUri **/
     private List<String> supportRoles;
 
     public DigestSubject() {}

@@ -6,7 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 接口认证修饰注解，被修饰的接口不需要认证保护即可访问
+ * sureness annotation
+ * The modified resource with @WithoutAuth can be accessed without authentication protection
  * @author tomsun28
  * @date 23:38 2020-03-16
  */
@@ -15,13 +16,13 @@ import java.lang.annotation.Target;
 public @interface WithoutAuth {
 
     /**
-     * 请求路径
+     * request uri mapping
      * @return uri
      */
     String mapping();
 
     /**
-     * 请求方式
+     * request method
      * @return method - post,get,put,delete ...
      */
     String method();

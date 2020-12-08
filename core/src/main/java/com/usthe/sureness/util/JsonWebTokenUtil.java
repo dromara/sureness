@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * json web token相关工具类
+ * json web token util
  * use hmac algorithm, can change the secretKey by setDefaultSecretKey
  * @author tomsun28
  * @date 16:29 2018/3/8
  */
 public class JsonWebTokenUtil {
 
-    /** 默认SUBJECT加密解密签名KEY **/
+    /** default SUBJECT KEY **/
     private static final String DEFAULT_SECRET_KEY =
             "MIIEowIBAl+f/dKhaX0csgOCTlCxq20yhmUea6H6JIpST3ST1SE2Rwp" +
             "LnfKefTjsIfJLBa2YkhEqE/GtcHDTNe4CU6+9y/S5z50Kik70LsP43r" +
@@ -28,14 +28,14 @@ public class JsonWebTokenUtil {
             "CyaFv0bwq2Eik0jdrKUtsA6bx3sDJeFV643R+YYzGMRIqcBIp6AKA98" +
             "GM2RIqcBIp6-?::4390fsf4sdl6opf)4ZI:tdQMtcQQ14pkOAQdQ546";
 
-    /** JWT格式3个点 **/
+    /** JWT format has 3 point **/
     private static final int COUNT_3 = 3;
 
-    /** 判断是否是base64串 **/
+    /** Determine whether it is a base64 string **/
     private static final Pattern BASE64_PATTERN =
             Pattern.compile("^([A-Za-z0-9+/_-]+)(=*)$");
 
-    /** 加密解密签名 **/
+    /** Encryption and decryption signature **/
     private static Key secretKey;
 
     static {
@@ -45,20 +45,19 @@ public class JsonWebTokenUtil {
 
 
     /**
-     *   json web token 签发
-     * @param id 令牌ID
-     * @param subject 用户ID
-     * @param issuer 签发人
-     * @param period 有效时间(毫秒)
-     * @param roles 访问主张-角色
-     * @param permissions 访问主张-权限
-     * @param isRefresh 是否是刷新token
+     * issue json web token
+     * @param id token ID
+     * @param subject user ID
+     * @param issuer issuer
+     * @param period period time(ms)
+     * @param roles Access claim-roles
+     * @param permissions Access claim-permissions
+     * @param isRefresh is a refresh token
      * @return java.lang.String jwt
      */
     public static String issueJwt(String id, String subject, String issuer, Long period,
                                   List<String> roles, List<String> permissions,
                                   Boolean isRefresh) {
-        // 当前时间戳
         long currentTimeMillis = System.currentTimeMillis();
         JwtBuilder jwtBuilder = Jwts.builder();
         if (id != null) {
@@ -70,9 +69,9 @@ public class JsonWebTokenUtil {
         if (issuer != null) {
             jwtBuilder.setIssuer(issuer);
         }
-        // 设置签发时间
+        // set issue create time
         jwtBuilder.setIssuedAt(new Date(currentTimeMillis));
-        // 设置到期时间
+        // set expired time
         if (null != period) {
             jwtBuilder.setExpiration(new Date(currentTimeMillis + period * 1000));
         }
@@ -85,17 +84,18 @@ public class JsonWebTokenUtil {
         if (isRefresh != null) {
             jwtBuilder.claim("isRefresh", isRefresh);
         }
-        // 压缩，可选GZIP
+        // compress，optional GZIP
         jwtBuilder.compressWith(CompressionCodecs.DEFLATE);
-        // 加密设置
+        // set secret key
         jwtBuilder.signWith(secretKey);
         return jwtBuilder.compact();
     }
 
     /**
-     * 判断其是否是JWT，这里主要用格式来判断，不校验
+     * To determine whether it is not a JWT
+     * Use format to judge, no verification
      * @param jwt JWT TOKEN
-     * @return 为JWT返回false 否则 true
+     * @return is a JWT return false, else true
      */
     public static boolean isNotJsonWebToken(String jwt) {
         // base64url_encode(Header) + '.' + base64url_encode(Claims) + '.' + base64url_encode(Signature)
@@ -114,12 +114,12 @@ public class JsonWebTokenUtil {
     /**
      *
      * @param jwt json web token
-     * @return 解签实体
-     * @throws ExpiredJwtException token过期
-     * @throws UnsupportedJwtException 不支持的TOKEN
-     * @throws MalformedJwtException 参数格式形变等异常
-     * @throws SignatureException 签名异常
-     * @throws IllegalArgumentException 非法参数
+     * @return parse content body
+     * @throws ExpiredJwtException token expired
+     * @throws UnsupportedJwtException unSupport TOKEN
+     * @throws MalformedJwtException Parameter format exception
+     * @throws SignatureException signature exception
+     * @throws IllegalArgumentException illegal argument
      */
     public static Claims parseJwt(String jwt) throws ExpiredJwtException, UnsupportedJwtException,
             MalformedJwtException, SignatureException, IllegalArgumentException {
@@ -127,18 +127,17 @@ public class JsonWebTokenUtil {
         return Jwts.parserBuilder().setSigningKey(secretKey).build()
                 .parseClaimsJws(jwt).getBody();
 
-        // 令牌ID -- claims.getId()
-        // 客户标识 -- claims.getSubject()
-        // 客户标识
-        // 签发者 -- claims.getIssuer()
-        // 签发时间 -- claims.getIssuedAt()
-        // 接收方 -- claims.getAudience()
-        // 访问主张-角色 -- claims.get("roles", String.class)
-        // 访问主张-权限 -- claims.get("perms", String.class)
+        // token ID -- claims.getId()
+        // user ID -- claims.getSubject()
+        // issuer -- claims.getIssuer()
+        // issue time -- claims.getIssuedAt()
+        // audience -- claims.getAudience()
+        // Access claim-roles -- claims.get("roles", String.class)
+        // Access claim-permissions -- claims.get("perms", String.class)
     }
 
     /**
-     * 设置新的JWT加密解密签名
+     * set the jwt secret key
      * @param secretNowKeyValue key value
      */
     public static void setDefaultSecretKey(String secretNowKeyValue) {

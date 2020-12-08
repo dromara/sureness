@@ -12,7 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * digest subject creator
+ * the subject creator support creating DigestSubject
+ * only support HttpServletRequest
  * @author tomsun28
  * @date 2020-10-28 20:44
  */

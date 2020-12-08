@@ -3,28 +3,28 @@ package com.usthe.sureness.provider;
 import java.util.List;
 
 /**
- * 账户实现
+ * account default
  * @author tomsun28
  * @date 16:20 2019-05-19
  */
 public class DefaultAccount implements SurenessAccount {
 
-    /** 账户标识 **/
+    /** appId **/
     private String appId;
 
-    /** 密码 **/
+    /** password **/
     private String password;
 
-    /** 盐值 **/
+    /** salt **/
     private String salt;
 
-    /** 所拥有的角色 **/
+    /** the roles owned by this account **/
     private List<String> ownRoles;
 
-    /** 是否禁用账户 **/
+    /** if is a disable account **/
     private boolean disabledAccount;
 
-    /** 是否一定时间内认证次数过多暂时禁用账户认证 **/
+    /** if is excessive attempt **/
     private boolean excessiveAttempts;
 
     private DefaultAccount(Builder builder) {

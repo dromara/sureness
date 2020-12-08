@@ -5,7 +5,7 @@ import com.usthe.sureness.subject.Subject;
 import java.util.List;
 
 /**
- * 无认证信息的subject
+ * Subject without authentication information
  * @author tomsun28
  * @date 21:03 2019-05-26
  */
@@ -13,16 +13,16 @@ public class NoneSubject implements Subject {
 
     private static final long serialVersionUID = 1L;
 
-    /** 访问用户的IP **/
+    /** remote ip **/
     private String remoteHost;
 
-    /** 访问用户的设备信息 **/
+    /** remote device **/
     private String userAgent;
 
-    /** 所访问资源地址 **/
+    /** the uri resource which this user want access **/
     private String targetUri;
 
-    /** 所访问资源他支持的角色 **/
+    /** the Roles which can access this resource above-targetUri **/
     private List<String> supportRoles;
 
     private NoneSubject(Builder builder) {
@@ -77,16 +77,12 @@ public class NoneSubject implements Subject {
 
     public static class Builder {
 
-        /** 访问用户的IP **/
         private String remoteHost;
 
-        /** 访问用户的设备信息 **/
         private String userAgent;
 
-        /** 所访问资源地址 **/
         private String targetUri;
 
-        /** 所访问资源他支持的角色 **/
         private List<String> supportRoles;
 
         public Builder setRemoteHost(String remoteHost) {
