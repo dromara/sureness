@@ -32,7 +32,7 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
- * filter拦截请求 经sureness保护
+ * sureness filter class example, filter all http request
  * @author tomsun28
  * @date 23:22 2020-03-02
  */
@@ -40,7 +40,7 @@ import java.util.Map;
 @WebFilter(filterName = "SurenessFilterExample", urlPatterns = "/*", asyncSupported = true)
 public class SurenessFilterExample implements Filter {
 
-    /** 日志操作 **/
+    /** logger **/
     private static final Logger logger = LoggerFactory.getLogger(SurenessFilterExample.class);
 
     @Override
@@ -48,7 +48,8 @@ public class SurenessFilterExample implements Filter {
 
         try {
             SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
-            // 可以考虑使用SurenessContextHolder放入threadLocal中绑定
+            // You can consider using SurenessContextHolder to bind subject in threadLocal
+            // if bind, please remove it when end
             if (subject != null) {
                 SurenessContextHolder.bindSubject(subject);
             }
@@ -93,9 +94,8 @@ public class SurenessFilterExample implements Filter {
     }
 
     /**
-     * description 封装response  统一json返回
-     *
-     * @param content 内容
+     * write response json data
+     * @param content content
      * @param response response
      */
     private void responseWrite(ResponseEntity<?> content, ServletResponse response) {

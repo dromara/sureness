@@ -23,8 +23,7 @@ public interface AuthUserDao extends JpaRepository<AuthUserDO, Long> {
     Optional<AuthUserDO> findAuthUserByUsername(@Param("username") String username);
 
     /**
-     * 查询当前用户所拥有的角色
-     * Query the role of the current user
+     * Query the role owned by the current user
      * @param username username
      * @return role list
      */

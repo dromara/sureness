@@ -21,7 +21,7 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
- * 程序的http request请求入口过滤类示例  所有request请求都需经过此类
+ * sureness filter class example, filter all http request
  * @author tomsun28
  * @date 17:22 2019-05-12
  */
@@ -29,7 +29,7 @@ import java.io.IOException;
 @WebFilter(filterName = "SurenessFilterExample", urlPatterns = "/*", asyncSupported = true)
 public class SurenessFilterExample implements Filter {
 
-    /** 日志操作 **/
+    /** logger **/
     private static final Logger logger = LoggerFactory.getLogger(SurenessFilterExample.class);
 
     @Override
@@ -48,7 +48,8 @@ public class SurenessFilterExample implements Filter {
 
         try {
             SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
-            // 可以考虑使用SurenessContextHolder放入threadLocal中绑定
+            // You can consider using SurenessContextHolder to bind subject in threadLocal
+            // if bind, please remove it when end
             if (subject != null) {
                 SurenessContextHolder.bindSubject(subject);
             }

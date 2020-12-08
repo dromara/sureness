@@ -17,7 +17,6 @@ import java.util.Optional;
 public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
 
     /**
-     * 获取uri资源与其对应角色关系链 eg: /api/v2/host===post===[role2,role3,role4]
      * Get uri resource and resource-role relationship chain, eg: /api/v2/host===post===[role2,role3,role4]
      * @return resource-role chain set
      */
@@ -32,7 +31,6 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
 
 
     /**
-     * 获取禁用的uri资源 eg: /api/v2/host===post
      * Get disabled uri resources eg: /api/v2/host===post
      * @return resouce set
      */
@@ -41,7 +39,6 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
     Optional<List<String>> getDisableResourcePathData();
 
     /**
-     * 获取分页形式的当前角色拥有的可用API资源
      * Get the available API resources owned by the current role in the form of paging
      * @param roleId roleId
      * @param request page

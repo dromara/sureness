@@ -16,7 +16,6 @@ import java.util.List;
 public interface AuthRoleResourceBindDao extends JpaRepository<AuthRoleResourceBindDO, Long> {
 
     /**
-     * 查询当前角色拥有的资源
      * Query the resources owned by the current role
      * @param roleId roleId
      * @return resource list

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * Unified message structure definition for front and back ends
- * 前后端http api统一消息定义协议 Message
+ *
  * {
  *   data:{....},
  *   errorMsg: message

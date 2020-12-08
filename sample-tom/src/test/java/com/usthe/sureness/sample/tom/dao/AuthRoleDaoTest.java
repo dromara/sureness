@@ -13,29 +13,29 @@ import org.springframework.transaction.annotation.Transactional;
  * @author tomsun28
  * @date 23:59 2019-07-30
  */
-@DisplayName("数据库表Role操作测试")
+@DisplayName("database table Role test")
 class AuthRoleDaoTest extends TomApplicationTest {
 
     @Autowired
     private AuthRoleDao authRoleDao;
 
-    @DisplayName("插入数据Role应成功")
+    @DisplayName("insert date in role should success")
     @Test
     @Transactional
     public void shouldSuccessWhenInsertRole() {
         AuthRoleDO authRole = AuthRoleDO.builder()
-                .name("管理员").code("role_admin")
+                .name("admin").code("role_admin")
                 .status(1).build();
         authRole = authRoleDao.save(authRole);
         Assertions.assertThat(authRole).isNotNull();
     }
 
-    @DisplayName("删除数据Role应成功")
+    @DisplayName("delete data in role should success")
     @Test
     @Transactional
     public void shouldSuccessWhenDeleteRole() {
         AuthRoleDO authRole = AuthRoleDO.builder()
-                .name("管理员").code("role_admin")
+                .name("admin").code("role_admin")
                 .status(1).build();
         authRole = authRoleDao.save(authRole);
         authRoleDao.delete(authRole);

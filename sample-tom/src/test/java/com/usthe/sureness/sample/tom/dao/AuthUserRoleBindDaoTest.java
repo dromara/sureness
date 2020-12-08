@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author tomsun28
  * @date 00:52 2019-07-31
  */
-@DisplayName("数据库表UserRoleBind操作测试")
+@DisplayName("database table UserRoleBind test")
 class AuthUserRoleBindDaoTest extends TomApplicationTest {
 
     @Autowired
@@ -27,7 +27,7 @@ class AuthUserRoleBindDaoTest extends TomApplicationTest {
     @Autowired
     private AuthRoleDao roleDao;
 
-    @DisplayName("插入数据Bind应成功")
+    @DisplayName("insert data in UserRoleBind should success")
     @Test
     @Transactional
     public void shouldSuccessWhenInsertBind() {
@@ -37,7 +37,7 @@ class AuthUserRoleBindDaoTest extends TomApplicationTest {
         Assertions.assertThat(userRoleBind).isNotNull();
     }
 
-    @DisplayName("删除数据Bind应成功")
+    @DisplayName("delete data in UserRoleBind shoudl success")
     @Test
     @Transactional
     public void shouldSuccessWhenDeleteBind() {
@@ -48,16 +48,16 @@ class AuthUserRoleBindDaoTest extends TomApplicationTest {
         Assertions.assertThat(userRoleBindDao.findById(userRoleBind.getId()).isPresent()).isFalse();
     }
 
-    @DisplayName("通过Bind关联能查询用户拥有的角色")
+    @DisplayName("select roles which the user has with using UserRoleBind should success")
     @Test
     @Transactional
     public void shouldFindRoleWhenUseUserBind() {
         AuthRoleDO authRole1 = AuthRoleDO.builder()
-                .name("管理员").code("role_admin")
+                .name("admin").code("role_admin")
                 .status(1).build();
         roleDao.save(authRole1);
         AuthRoleDO authRole2 = AuthRoleDO.builder()
-                .name("操作员").code("role_access")
+                .name("controller").code("role_access")
                 .status(1).build();
         roleDao.save(authRole2);
         AuthUserDO authUser = AuthUserDO.builder()

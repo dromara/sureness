@@ -13,25 +13,25 @@ public class CustomTokenSubject implements Subject {
 
     private static final long serialVersionUID = 1L;
 
-    /** 用户的标识 **/
+    /** user identifier **/
     private String appId;
 
     /** token : admin--issueTime--refreshPeriodTime--uuid **/
     private String token;
 
-    /** 访问用户的IP **/
+    /** remote ip **/
     private String remoteHost;
 
-    /** 访问用户的设备信息 **/
+    /** remote device **/
     private String userAgent;
 
-    /** 所拥有的角色 在解析完jwt之后把用户角色放到这里 **/
+    /** the roles which this user owned **/
     private List<String> ownRoles;
 
-    /** 所访问资源地址 **/
+    /** the uri resource which this user want access **/
     private String targetUri;
 
-    /** 所访问资源他支持的角色 **/
+    /** the Roles which can access this resource above-targetUri **/
     private List<String> supportRoles;
 
     private CustomTokenSubject(Builder builder) {

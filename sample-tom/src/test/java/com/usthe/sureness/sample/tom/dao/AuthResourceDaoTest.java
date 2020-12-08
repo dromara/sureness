@@ -17,18 +17,18 @@ import java.util.Optional;
  * @author tomsun28
  * @date 22:35 2019-07-27
  */
-@DisplayName("数据库表Resource操作测试")
+@DisplayName("database table Resource test")
 class AuthResourceDaoTest extends TomApplicationTest {
 
     @Autowired
     private AuthResourceDao authResourceDao;
 
-    @DisplayName("插入数据Resource应正确")
+    @DisplayName("insert data in resource should success")
     @Test
     @Transactional
     public void shouldSuccessWhenInsertResource() {
         AuthResourceDO resource = AuthResourceDO.builder()
-                .name("角色管理").code("ROLE_MANAGE")
+                .name("role_manager").code("ROLE_MANAGE")
                 .uri("/index/role").status(1)
                 .method("post").build();
         resource = authResourceDao.save(resource);
@@ -36,19 +36,19 @@ class AuthResourceDaoTest extends TomApplicationTest {
     }
 
     /**
-     * todo 这里加事务有点问题  resourceUpdate在数据库改变后,resource也会被改变 why?
+     * todo something error happen, resource would change when resourceUpdate update in @Transactional, why?
      */
-    @DisplayName("更新数据Resource应正确")
+    @DisplayName("update resource data should success")
     @Test
     public void shouldSuccessWhenUpdateResource() {
         AuthResourceDO resource = AuthResourceDO.builder()
-                .name("角色管理").code("ROLE_MANAGE")
+                .name("role_manager").code("ROLE_MANAGE")
                 .uri("/index/role").status(1)
                 .method("post").build();
         resource  = authResourceDao.saveAndFlush(resource);
         AuthResourceDO resourceUpdate = AuthResourceDO.builder()
                 .id(resource.getId())
-                .name("角色管理2").code("ROLE_MANAGE2")
+                .name("role_manager2").code("ROLE_MANAGE2")
                 .uri("/index/role2").status(2)
                 .method("get").build();
         resourceUpdate = authResourceDao.saveAndFlush(resourceUpdate);
@@ -56,12 +56,12 @@ class AuthResourceDaoTest extends TomApplicationTest {
         Assertions.assertThat(resourceUpdate).isNotNull().isNotEqualTo(resource);
     }
 
-    @DisplayName("删除数据Resource应正确")
+    @DisplayName("delete resource data should success")
     @Test
     @Transactional
     public void shouldSuccessWhenDeleteResource() {
         AuthResourceDO resource = AuthResourceDO.builder()
-                .name("角色管理").code("ROLE_MANAGE")
+                .name("role_manager").code("ROLE_MANAGE")
                 .uri("/index/role").status(1)
                 .method("post").build();
         resource = authResourceDao.save(resource);
@@ -69,7 +69,7 @@ class AuthResourceDaoTest extends TomApplicationTest {
         Assertions.assertThat(authResourceDao.findById(resource.getId()).isPresent()).isFalse();
     }
 
-    @DisplayName("查询数据Resource===Method===Role应正确")
+    @DisplayName("select data:Resource===Method===Role should success")
     @Test
     @Transactional
     public void shouldReturnSuccessWhenGetEnableResourcePathRoleData() {
@@ -77,12 +77,12 @@ class AuthResourceDaoTest extends TomApplicationTest {
         Assertions.assertThat(optional.isPresent()).isTrue();
     }
 
-    @DisplayName("查询disable数据Resource===Method应正确")
+    @DisplayName("select data:Resource===Method should success")
     @Test
     @Transactional
     public void shouldSuccessWhenGetDisableResourcePathData() {
         AuthResourceDO resource = AuthResourceDO.builder()
-                .name("角色管理").code("ROLE_MANAGE")
+                .name("role_manager").code("ROLE_MANAGE")
                 .uri("/index/role/book").status(9)
                 .method("post").build();
         authResourceDao.save(resource);

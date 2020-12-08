@@ -18,6 +18,7 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
 /**
+ * sureness filter class example, filter all http request
  * @author tomsun28
  * @date 2020-09-29 22:02
  */

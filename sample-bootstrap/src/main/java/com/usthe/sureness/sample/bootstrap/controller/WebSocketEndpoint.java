@@ -12,7 +12,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 /**
- * webSocket资源模拟示例,供websocket测试
+ * websocket simulate api, for testing websocket
  * @author tomsun28
  * @date 22:21 2019-05-26
  */

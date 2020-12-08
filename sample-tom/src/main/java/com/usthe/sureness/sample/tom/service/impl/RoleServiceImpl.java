@@ -96,22 +96,22 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void authorityRoleResource(Long roleId, Long resourceId) {
-        // 判断此资源和角色是否存在
+        // Determine whether this resource and role exist
         if (!authRoleDao.existsById(roleId) || !authResourceDao.existsById(resourceId)) {
             throw new DataConflictException("roleId or resourceId not exist");
         }
-        // 直接保存关联关系，若存在数据库唯一索引会起作用
+        // insert it in database, if existed the unique index will work
         AuthRoleResourceBindDO bind = AuthRoleResourceBindDO
                 .builder().roleId(roleId).resourceId(resourceId).build();
         roleResourceBindDao.saveAndFlush(bind);
-        // 刷新认证过滤链
+        // refresh resource path data tree
         treePathRoleMatcher.rebuildTree();
     }
 
     @Override
     public void deleteAuthorityRoleResource(Long roleId, Long resourceId) {
         roleResourceBindDao.deleteRoleResourceBind(roleId, resourceId);
-        // 刷新认证过滤链
+        // refresh resource path data tree
         treePathRoleMatcher.rebuildTree();
     }
 }
