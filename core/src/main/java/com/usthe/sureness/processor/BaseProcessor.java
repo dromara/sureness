@@ -6,25 +6,25 @@ import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
 
 /**
+ * abstract processor
  * @author tomsun28
  * @date 12:28 2019-03-13
  */
 public abstract class BaseProcessor implements Processor{
 
     /**
-     * description 判断此Processor是否支持对应的AuTokenClass
-     * 支持才能让此Processor处理对应的AuTokenClass
+     * Determine whether this Processor supports the corresponding SubjectClass
      *
-     * @param var 1
-     * @return boolean
+     * @param var subjectClass
+     * @return support true, else false
      */
     @Override
     public abstract boolean canSupportSubjectClass(Class<?> var);
 
     /**
-     * description 获取此Processor能支持的AuTokenClass
+     * Get the AuTokenClass supported by this processor
      *
-     * @return java.lang.Class?
+     * @return java.lang.Class? subjectClass
      */
     @Override
     public abstract Class<?> getSupportSubjectClass();
@@ -35,17 +35,17 @@ public abstract class BaseProcessor implements Processor{
         return var.generateSubjectSummary();
     }
     /**
-     * description 认证会调用的接口，在这里面完成认证
-     * @param var 1
-     * @return SubjectAuToken auToken
-     * @throws SurenessAuthenticationException when发生认证相关异常
+     * The interface that the authentication will call to complete the authentication
+     * @param var subject
+     * @return Subject subject
+     * @throws SurenessAuthenticationException when authenticate error
      */
     public abstract Subject authenticated (Subject var) throws SurenessAuthenticationException;
 
     /**
-     * description 鉴权会调用的接口，在这里面完成鉴权
-     * @param var 1
-     * @throws SurenessAuthorizationException when发生鉴权相关异常
+     * The interface that the authorization will call, where the authorization is completed
+     * @param var subject
+     * @throws SurenessAuthorizationException when authorize error
      */
     public abstract void authorized(Subject var) throws SurenessAuthorizationException;
 }

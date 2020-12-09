@@ -1,7 +1,8 @@
 package com.usthe.sureness.processor.exception;
 
 /**
- * 扩展Sureness异常 此类异常与其子异常同 sureness 内部配置或组件本身异常相关
+ * Extended Sureness exception.
+ * Related to the internal configuration of sureness or the component itself.
  * @author tomsun28
  * @date 16:30 2020-02-28
  */

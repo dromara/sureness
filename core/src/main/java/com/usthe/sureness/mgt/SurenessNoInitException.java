@@ -4,7 +4,7 @@ package com.usthe.sureness.mgt;
 import com.usthe.sureness.processor.exception.ExtSurenessException;
 
 /**
- * not init 异常
+ * sureness not init exception
  * @author tomsun28
  * @date 18:00 2019-03-10
  */

@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * 支持 username password 类型token的处理器实例
+ * the processor support username password - PasswordSubject
  * @author tomsun28
  * @date 12:38 2019-03-13
  */
@@ -36,7 +36,7 @@ public class PasswordProcessor extends BaseProcessor {
 
     @Override
     public Class<?> getSupportSubjectClass() {
-        // 这里只支持passwordToken  -- username/appId/email/phoneNum + password
+        // only support passwordToken  -- username/appId/email/phoneNum + password
         return PasswordSubject.class;
     }
 

@@ -8,7 +8,7 @@ import com.usthe.sureness.processor.exception.BaseSurenessException;
 import java.util.List;
 
 /**
- * 认证鉴权总方法调用入口接口
+ * Authentication authorization entrance interface
  * @author tomsun28
  * @date 22:33 2019-01-23
  */
@@ -16,31 +16,27 @@ public interface SecurityManager {
 
 
     /**
-     * description 通过不同类型的token进去到认证授权流程中
-     * 认证鉴权总入口,  不仅仅是login 还有鉴权
-     * @param token token
+     * auth entrance, put the subject in authentication and authorization process
+     * @param subject subject
      * @return com.usthe.sureness.subject.Subject
-     * @throws BaseSurenessException 抛出不同的异常
+     * @throws BaseSurenessException sureness exception
      */
-    SubjectSum checkIn(Subject token) throws BaseSurenessException;
+    SubjectSum checkIn(Subject subject) throws BaseSurenessException;
 
     /**
-     * description checkin 进入认证鉴权入口
-     *
-     * @param var1 请求内容对象
+     * auth entrance, put the request in authentication and authorization process
+     * @param var1 request
      * @return com.usthe.sureness.subject.Subject
      * return null when the request uri===method is in excluded resource
-     * @throws BaseSurenessException 抛出不同的认证鉴权异常
+     * @throws BaseSurenessException sureness exception
      */
     SubjectSum checkIn(Object var1) throws BaseSurenessException;
 
     /**
-     * description 传入请求信息,信息里有对应的请求认证消息，请求资源路径等 eg: httpRequest
-     * 根据请求信息获取建立对应类型的token
-     *
-     * @param var1 内容对象
-     * @return com.usthe.sureness.subject.SubjectAuToken
-     * @throws UnsupportedSubjectException 不支持的TOKEN时抛出异常
+     * Create the corresponding type of subject according to the request information
+     * @param var1 request eg: httpRequest
+     * @return com.usthe.sureness.subject.Subject
+     * @throws UnsupportedSubjectException unSupport this request
      */
      List<Subject> createSubject(Object var1) throws UnsupportedSubjectException;
 

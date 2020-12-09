@@ -1,7 +1,7 @@
 package com.usthe.sureness.processor.exception;
 
 /**
- * 认证异常：认证鉴权中没有找到对应token支持的Processor
+ * Authentication exception: there is no processor support this subject
  * @author tomsun28
  * @date 12:50 2019-03-12
  */

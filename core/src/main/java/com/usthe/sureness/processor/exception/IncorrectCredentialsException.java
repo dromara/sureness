@@ -1,7 +1,7 @@
 package com.usthe.sureness.processor.exception;
 
 /**
- * 认证异常：错误的凭证
+ * Authentication exception: Bad credentials
  * @author tomsun28
  * @date 19:21 2019-03-11
  */

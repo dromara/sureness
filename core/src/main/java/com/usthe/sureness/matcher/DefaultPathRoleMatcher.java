@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * 默认的path - role 匹配 matcher实现
+ * default path - role matcher
  * @author tomsun28
  * @date 20:23 2019-03-10
  */
@@ -28,16 +28,16 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
 
     private static final String EXCLUDE_ROLE = "exclude";
 
-    /** path-role 匹配树存储点 **/
+    /** path-role, match tree storage **/
     private final TirePathTree root = new TirePathTree();
 
-    /** path-role 被排除的资源匹配树存储点 **/
+    /** exclude path-role, match tree storage **/
     private final TirePathTree excludeRoot = new TirePathTree();
 
-    /** 匹配树数据内容提供者 **/
+    /** Match tree data content provider **/
     private PathTreeProvider pathTreeProvider;
 
-    /** 是否匹配树数据加载完成 **/
+    /** Whether the matching tree data has been loaded **/
     private volatile boolean isTreeInit;
 
     @Override
