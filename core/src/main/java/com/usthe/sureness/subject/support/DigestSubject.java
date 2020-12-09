@@ -137,8 +137,8 @@ public class DigestSubject implements Subject {
         return new DigestSubject.Builder(username, response);
     }
 
-    public static DigestSubject.Builder builder(Subject auToken) {
-        return new DigestSubject.Builder(auToken);
+    public static DigestSubject.Builder builder(Subject subject) {
+        return new DigestSubject.Builder(subject);
     }
 
     public static class Builder {
@@ -163,12 +163,12 @@ public class DigestSubject implements Subject {
         }
 
         @SuppressWarnings("unchecked")
-        public Builder(Subject auToken) {
-            this.appId = String.valueOf(auToken.getPrincipal());
-            this.response = String.valueOf(auToken.getCredentials());
-            this.ownRoles = (List<String>) auToken.getOwnRoles();
-            this.targetUri = String.valueOf(auToken.getTargetResource());
-            this.supportRoles = (List<String>) auToken.getSupportRoles();
+        public Builder(Subject subject) {
+            this.appId = String.valueOf(subject.getPrincipal());
+            this.response = String.valueOf(subject.getCredentials());
+            this.ownRoles = (List<String>) subject.getOwnRoles();
+            this.targetUri = String.valueOf(subject.getTargetResource());
+            this.supportRoles = (List<String>) subject.getSupportRoles();
         }
 
         public DigestSubject.Builder setAppId(String appId) {

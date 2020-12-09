@@ -87,8 +87,8 @@ public class JwtSubject implements Subject {
         return new Builder(jwt);
     }
 
-    public static Builder builder(Subject auToken) {
-        return new Builder(auToken);
+    public static Builder builder(Subject subject) {
+        return new Builder(subject);
     }
 
     public static class Builder {
@@ -106,12 +106,12 @@ public class JwtSubject implements Subject {
         }
 
         @SuppressWarnings("unchecked")
-        public Builder(Subject auToken) {
-            this.appId = String.valueOf(auToken.getPrincipal());
-            this.jwt = String.valueOf(auToken.getCredentials());
-            this.ownRoles = (List<String>) auToken.getOwnRoles();
-            this.targetUri = String.valueOf(auToken.getTargetResource());
-            this.supportRoles = (List<String>) auToken.getSupportRoles();
+        public Builder(Subject subject) {
+            this.appId = String.valueOf(subject.getPrincipal());
+            this.jwt = String.valueOf(subject.getCredentials());
+            this.ownRoles = (List<String>) subject.getOwnRoles();
+            this.targetUri = String.valueOf(subject.getTargetResource());
+            this.supportRoles = (List<String>) subject.getSupportRoles();
         }
 
         public Builder setPrincipal(String appId) {

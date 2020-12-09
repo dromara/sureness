@@ -41,21 +41,21 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     private volatile boolean isTreeInit;
 
     @Override
-    public void matchRole(Subject auToken) {
+    public void matchRole(Subject subject) {
         if (!isTreeInit) {
             logger.error("DefaultPathRoleMatcher -> root tree is not init");
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> root tree is not init");
         }
-        String targetResource = (String) auToken.getTargetResource();
+        String targetResource = (String) subject.getTargetResource();
         //[role1,role2,role3], [role1], [], null
         String matchRoleString = root.searchPathFilterRoles(targetResource);
         if (matchRoleString != null && matchRoleString.startsWith(LEFT_CON)
                 && matchRoleString.endsWith(RIGHT_CON)) {
             if (NULL_ROLE.equals(matchRoleString)) {
-                auToken.setSupportRoles(new ArrayList<>(0));
+                subject.setSupportRoles(new ArrayList<>(0));
             } else {
                 String[] roles = matchRoleString.substring(1, matchRoleString.length()-1).split(",");
-                auToken.setSupportRoles(Arrays.asList(roles));
+                subject.setSupportRoles(Arrays.asList(roles));
             }
         }
     }

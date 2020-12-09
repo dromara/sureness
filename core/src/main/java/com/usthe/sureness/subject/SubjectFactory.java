@@ -13,7 +13,7 @@ public interface SubjectFactory {
     /**
      * Create the subject supported by the loaded creators
      * @param var1 request body
-     * @return com.usthe.sureness.subject.SubjectAuToken return 0 list when can not create subject from var1
+     * @return com.usthe.sureness.subject.Subject return 0 list when can not create subject from var1
      */
     List<Subject> createSubjects(final Object var1);
 

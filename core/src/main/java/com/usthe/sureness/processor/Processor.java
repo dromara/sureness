@@ -23,7 +23,7 @@ public interface Processor {
 
 
     /**
-     * Get the AuTokenClass supported by this processor
+     * Get the subjectClass supported by this processor
      *
      * @return java.lang.Class? subjectClass
      */
