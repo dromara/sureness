@@ -1,5 +1,8 @@
 package com.usthe.sureness.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -48,6 +51,7 @@ public enum ClassScanner {
         jar
     }
 
+    private static final Logger log = LoggerFactory.getLogger(ClassScanner.class);
     private static final Character STAR_CHAR = '*';
     private static final String STAR_STR = "*";
 
@@ -71,7 +75,7 @@ public enum ClassScanner {
     }
 
     /**
-     * Find all classes in packages 扫描一或多个包下的所有Class，包含接口类
+     * Find all classes in packages
      *
      * @param scanBasePackages package
      * @return classes
@@ -90,7 +94,7 @@ public enum ClassScanner {
     }
 
     /**
-     * Find all classes with given annotation in packages 扫描某个包下带有注解的Class
+     * Find all classes with given annotation in packages
      *
      * @param annotation annotation
      * @param scanBasePackages package
@@ -109,9 +113,9 @@ public enum ClassScanner {
     }
 
     /**
-     * Find all classes with given name patten 扫描某个包下所有类名匹配通配符的Class
+     * Find all classes with given name patten
      *
-     * @param nameSimpleReg name patten, only 1 * allow, 类名简化版通配符，只允许一个星号出现
+     * @param nameSimpleReg name patten, only 1 * allow
      * @param scanBasePackages scan package
      * @return classes
      */
@@ -127,7 +131,7 @@ public enum ClassScanner {
     }
 
     /**
-     * find all classes in one package 扫描某个包下所有Class类
+     * find all classes in one package
      *
      * @param pkg package
      * @return Class
@@ -135,21 +139,18 @@ public enum ClassScanner {
     private static List<Class<?>> scanOnePackage(String pkg) {
         List<Class<?>> classList = new LinkedList<>();
         try {
-            // 包名转化为路径名
             String pathName = package2Path(pkg);
-            // 获取路径下URL
             Enumeration<URL> urls = Thread.currentThread().getContextClassLoader().getResources(pathName);
-            // 循环扫描路径
             classList = scanUrls(pkg, urls);
         } catch (IOException e) {
-            System.err.println("Warning: Can not scan package：" + pkg);
+            log.error("Warning: Can not scan package：{}", pkg);
         }
 
         return classList;
     }
 
     /**
-     * find all classes in urls 扫描多个Url路径，找出符合包名的Class类
+     * find all classes in urls
      *
      * @param pkg package
      * @param urls urls
@@ -160,16 +161,13 @@ public enum ClassScanner {
         List<Class<?>> classList = new LinkedList<>();
         while (urls.hasMoreElements()) {
             URL url = urls.nextElement();
-            // 获取协议
             String protocol = url.getProtocol();
 
             if (ProtocolTypes.file.name().equals(protocol)) {
-                // 文件
                 String path = URLDecoder.decode(url.getFile(), "UTF-8");
                 classList.addAll(recursiveScan4Path(pkg, path));
 
             } else if (ProtocolTypes.jar.name().equals(protocol)) {
-                // jar包
                 String jarPath = getJarPathFormUrl(url);
                 classList.addAll(recursiveScan4Jar(pkg, jarPath));
             }
@@ -178,11 +176,8 @@ public enum ClassScanner {
     }
 
     /**
-     * get real path from url 从url中获取jar真实路径
-     * <p>
-     * jar文件url示例如下：
-     * <p>
-     * jar:file:/Users/cent/.gradle/caches/modules-2/files-2.1/org/lombok/1.18.4/7103ab51/lombok-1.18.4.jar!/org
+     * get real path from url
+     * eg: jar:file:/Users/cent/.gradle/caches/modules-2/files-2.1/org/lombok/1.18.4/7103ab51/lombok-1.18.4.jar!/org
      *
      * @param url url
      * @return file
@@ -193,11 +188,11 @@ public enum ClassScanner {
     }
 
     /**
-     * recursive scan for path 递归扫描指定文件路径下的Class文件
+     * recursive scan for path
      *
      * @param pkg package
      * @param filePath path
-     * @return Class列表
+     * @return Class list
      */
     private static List<Class<?>> recursiveScan4Path(String pkg, String filePath) {
         List<Class<?>> classList = new LinkedList<>();
@@ -207,7 +202,6 @@ public enum ClassScanner {
             return classList;
         }
 
-        // 处理类文件
         File[] classes = file.listFiles(child -> isClass(child.getName()));
         if (classes != null) {
             for (File child : classes) {
@@ -218,13 +212,12 @@ public enum ClassScanner {
                     Class<?> clz = Thread.currentThread().getContextClassLoader().loadClass(className);
                     classList.add(clz);
                 } catch (ClassNotFoundException | LinkageError e) {
-                    System.err.println("Warning: Can not load class:" + className);
+                    log.error("Warning: Can not load class: {}", className);
                 }
 
             }
         }
 
-        // 处理目录
         File[] dirs = file.listFiles(File::isDirectory);
         if (dirs != null) {
             for (File child : dirs) {
@@ -237,11 +230,11 @@ public enum ClassScanner {
     }
 
     /**
-     * Recursive scan 4 jar 递归扫描Jar文件内的Class类
+     * Recursive scan 4 jar
      *
      * @param pkg package
      * @param jarPath jar path
-     * @return Class列表
+     * @return Class list
      * @throws IOException when io error
      */
     private static List<Class<?>> recursiveScan4Jar(String pkg, String jarPath) throws IOException {
@@ -258,7 +251,6 @@ public enum ClassScanner {
             }
             if (isClass(name)) {
                 if (isAnonymousInnerClass(name)) {
-                    // 是匿名内部类，跳过不作处理
                     continue;
                 }
 
@@ -267,7 +259,7 @@ public enum ClassScanner {
                     Class<?> clz = Thread.currentThread().getContextClassLoader().loadClass(className);
                     classList.add(clz);
                 } catch (ClassNotFoundException | LinkageError e) {
-                    System.err.println("Warning: Can not load class:" + className);
+                    log.error("Warning: Can not load class: {}", className);
                 }
             }
         }
