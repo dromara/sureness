@@ -4,17 +4,17 @@ import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
 
 /**
- * 处理器管理
+ * processor manager
  * @author tomsun28
  * @date 17:53 2019-03-10
  */
 public interface ProcessorManager {
 
     /**
-     * description 处理器处理token入口
+     * The entry which processor handles subject
      *
-     * @param auToken 1
+     * @param subject subject
      * @return com.usthe.sureness.subject.Subject
      */
-    SubjectSum process(Subject auToken);
+    SubjectSum process(Subject subject);
 }

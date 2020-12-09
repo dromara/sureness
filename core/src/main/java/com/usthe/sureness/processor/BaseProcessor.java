@@ -19,7 +19,7 @@ public abstract class BaseProcessor implements Processor{
      * @return boolean
      */
     @Override
-    public abstract boolean canSupportAuTokenClass(Class<?> var);
+    public abstract boolean canSupportSubjectClass(Class<?> var);
 
     /**
      * description 获取此Processor能支持的AuTokenClass
@@ -27,7 +27,7 @@ public abstract class BaseProcessor implements Processor{
      * @return java.lang.Class?
      */
     @Override
-    public abstract Class<?> getSupportAuTokenClass();
+    public abstract Class<?> getSupportSubjectClass();
 
     @Override
     public SubjectSum process(Subject var) throws SurenessAuthenticationException, SurenessAuthorizationException {

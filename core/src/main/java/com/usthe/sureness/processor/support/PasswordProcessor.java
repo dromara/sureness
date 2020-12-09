@@ -30,12 +30,12 @@ public class PasswordProcessor extends BaseProcessor {
     private SurenessAccountProvider accountProvider;
 
     @Override
-    public boolean canSupportAuTokenClass(Class<?> var) {
+    public boolean canSupportSubjectClass(Class<?> var) {
         return var == PasswordSubject.class;
     }
 
     @Override
-    public Class<?> getSupportAuTokenClass() {
+    public Class<?> getSupportSubjectClass() {
         // 这里只支持passwordToken  -- username/appId/email/phoneNum + password
         return PasswordSubject.class;
     }

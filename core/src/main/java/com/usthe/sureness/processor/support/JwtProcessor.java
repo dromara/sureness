@@ -29,12 +29,12 @@ public class JwtProcessor extends BaseProcessor {
     private static final Logger logger = LoggerFactory.getLogger(JwtProcessor.class);
 
     @Override
-    public boolean canSupportAuTokenClass(Class<?> var) {
+    public boolean canSupportSubjectClass(Class<?> var) {
         return var == JwtSubject.class;
     }
 
     @Override
-    public Class<?> getSupportAuTokenClass() {
+    public Class<?> getSupportSubjectClass() {
         return JwtSubject.class;
     }
 

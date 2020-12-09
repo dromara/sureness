@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
+ * sureness default process manager
  * @author tomsun28
  * @date 22:21 2019-03-10
  */
@@ -26,35 +27,35 @@ public class DefaultProcessorManager implements ProcessorManager {
     }
 
     @Override
-    public SubjectSum process(Subject auToken) throws SurenessAuthenticationException, SurenessAuthorizationException {
+    public SubjectSum process(Subject subject) throws SurenessAuthenticationException, SurenessAuthorizationException {
         checkComponentInit();
         SurenessAuthenticationException lastAuthenticationException = null;
         SurenessAuthorizationException lastAuthorizationException = null;
         SubjectSum subjectResult = null;
-        Class<? extends Subject> auTokenClazz = auToken.getClass();
+        Class<? extends Subject> subjectClazz = subject.getClass();
 
-        // 对process链  一个process成功即可
+        // Process chain cyclic processing, one process can be successful
         for (Processor processor : getProcessorList()) {
-            if (processor.canSupportAuTokenClass(auTokenClazz)) {
+            if (processor.canSupportSubjectClass(subjectClazz)) {
                 try {
-                    subjectResult = processor.process(auToken);
+                    subjectResult = processor.process(subject);
                 } catch (SurenessAuthenticationException var1) {
                     lastAuthenticationException = var1;
                 } catch (SurenessAuthorizationException var2) {
                     lastAuthorizationException = var2;
                 }
             }
-            // 如果此次process 认证鉴权成功返回结果
+            // if process auth success, return
             if (subjectResult != null) {
                 return subjectResult;
             }
         }
-        // 如果最终异常都为空 ,说明没有processor匹配到token
+        // if last exception is null, means that no processor matches the subject
         if (lastAuthenticationException == null && lastAuthorizationException == null) {
             if (logger.isDebugEnabled()) {
-                logger.debug("not found token : {} -- target processor", auToken.getClass() );
+                logger.debug("not found token : {} -- target processor", subject.getClass() );
             }
-            throw new ProcessorNotFoundException("not found token : " + auToken.getClass()
+            throw new ProcessorNotFoundException("not found token : " + subject.getClass()
                     + " --target processor");
         }
         throw lastAuthenticationException == null ? lastAuthorizationException : lastAuthenticationException;

@@ -42,12 +42,12 @@ public class DigestProcessor extends BaseProcessor {
     }
 
     @Override
-    public boolean canSupportAuTokenClass(Class<?> var) {
+    public boolean canSupportSubjectClass(Class<?> var) {
         return var == DigestSubject.class;
     }
 
     @Override
-    public Class<?> getSupportAuTokenClass() {
+    public Class<?> getSupportSubjectClass() {
         return DigestSubject.class;
     }
 
