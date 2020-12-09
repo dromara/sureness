@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * 支持 appId + jwt 的token的处理器实例
+ * the processor support jwt - JwtSubject
  * @author tomsun28
  * @date 12:36 2019-03-13
  */
@@ -29,12 +29,12 @@ public class JwtProcessor extends BaseProcessor {
     private static final Logger logger = LoggerFactory.getLogger(JwtProcessor.class);
 
     @Override
-    public boolean canSupportAuTokenClass(Class<?> var) {
+    public boolean canSupportSubjectClass(Class<?> var) {
         return var == JwtSubject.class;
     }
 
     @Override
-    public Class<?> getSupportAuTokenClass() {
+    public Class<?> getSupportSubjectClass() {
         return JwtSubject.class;
     }
 
@@ -49,14 +49,14 @@ public class JwtProcessor extends BaseProcessor {
         try {
             claims = JsonWebTokenUtil.parseJwt(jwt);
         } catch (SignatureException | UnsupportedJwtException | MalformedJwtException | IllegalArgumentException e) {
-            // JWT令牌错误
+            // JWT error
             if (logger.isDebugEnabled()) {
                 logger.debug("jwtProcessor authenticated fail, user: {}, jwt: {}",
                         var.getPrincipal(), jwt);
             }
             throw new IncorrectCredentialsException("this jwt error:" + e.getMessage());
         } catch (ExpiredJwtException e) {
-            // JWT 令牌过期
+            // JWT expired
             if (logger.isDebugEnabled()) {
                 logger.debug("jwtProcessor authenticated expired, user: {}, jwt: {}",
                         var.getPrincipal(), jwt);

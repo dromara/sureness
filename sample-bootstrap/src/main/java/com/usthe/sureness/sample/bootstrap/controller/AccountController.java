@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * 用户登录认证controller
+ * user auth controller
  * @author tomsun28
  * @date 13:11 2019-05-26
  */
@@ -26,14 +26,14 @@ public class AccountController {
 
     private static final String APP_ID = "appId";
     /**
-     * 账户数据提供
+     * account data provider
      */
     private SurenessAccountProvider accountProvider = new DocumentResourceDefaultProvider();
 
     /**
-     * 登录，此提供一个用户登录获取jwt接口.方便用jwt测试其他接口
-     * @param requestBody 请求体
-     * @return 响应信息
+     * login, this provider a get jwt api, convenient to test other api with jwt
+     * @param requestBody request
+     * @return response
      *
      */
     @PostMapping("/api/v1/account/auth")
@@ -56,10 +56,10 @@ public class AccountController {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
         }
-        // issue jwt
-        // 获取其对应所拥有的角色(这里设计为角色对应资源，没有权限对应资源)
+        // Get the roles the user has - rbac
         List<String> roles = account.getOwnRoles();
         long refreshPeriodTime = 36000L;
+        // issue jwt
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), appId,
                 "token-server", refreshPeriodTime >> 1, roles,
                 null, Boolean.FALSE);

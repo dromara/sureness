@@ -7,8 +7,8 @@ import com.usthe.sureness.subject.support.NoneSubject;
 import javax.ws.rs.container.ContainerRequestContext;
 
 /**
- * 无认证信息的subject creator
- * 所有请求都能创建出一个NoneSubject
+ * the subject creator support creating NoneSubject
+ * all request content can create a NoneSubject
  * only support JAX-RS
  * @author tomsun28
  * @date 15:55 2020-02-28

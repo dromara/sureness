@@ -12,22 +12,23 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-/** the processor support nonToken 处理非账户访问
+/**
+ * the processor support nonToken
  * @author tomsun28
  * @date 21:12 2019-05-26
  */
 public class NoneProcessor extends BaseProcessor {
 
-    /** 日志操作 **/
+    /** logger **/
     private static final Logger logger = LoggerFactory.getLogger(NoneProcessor.class);
 
     @Override
-    public boolean canSupportAuTokenClass(Class<?> var) {
+    public boolean canSupportSubjectClass(Class<?> var) {
         return var == NoneSubject.class;
     }
 
     @Override
-    public Class<?> getSupportAuTokenClass() {
+    public Class<?> getSupportSubjectClass() {
         return NoneSubject.class;
     }
 

@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * 支持通过basic auth 创建PasswordSubject 的创建者
+ * the subject creator support creating PasswordSubject
  * only support JAX-RS
  * @author tomsun28
  * @date 23:53 2020-09-20
@@ -26,7 +26,6 @@ public class BasicSubjectJaxRsCreator implements SubjectCreate {
 
     @Override
     public boolean canSupportSubject(Object context) {
-        // basic auth判断
         // ("Authorization", "Basic YWRtaW46YWRtaW4=")        --- basic auth
         if (context instanceof ContainerRequestContext) {
             String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);

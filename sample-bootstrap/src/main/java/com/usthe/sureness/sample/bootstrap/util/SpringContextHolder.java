@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * Spring的ApplicationContext的持有者,可以用静态方法的方式获取spring容器中的bean
+ * spring context holder, can get bean from here
  * @author tomsun28
  * @date 21:07 2018/4/18
  */
@@ -42,7 +42,7 @@ public class SpringContextHolder implements ApplicationContextAware {
 
     private static void assertApplicationContext() {
         if (null == SpringContextHolder.applicationContext) {
-            throw new RuntimeException("applicationContext为空,请检查是否注入springContextHolder");
+            throw new RuntimeException("applicationContext is null, please check if injected springContextHolder");
         }
     }
 }

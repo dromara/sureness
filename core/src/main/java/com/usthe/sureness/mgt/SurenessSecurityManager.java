@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /**
- * 认证鉴权总方法调用默认入口类
+ * Authentication authorization entrance
  * @author tomsun28
  * @date 15:30 2019-03-03
  */
@@ -23,17 +23,18 @@ public class SurenessSecurityManager implements SecurityManager {
     private static final Logger logger = LoggerFactory.getLogger(SurenessSecurityManager.class);
 
     /**
-     *  subject 工厂
+     *  subject factory
      */
     private SubjectFactory subjectFactory;
 
     /**
-     *  path - role 在树中的对应关系匹配接口
+     *  path-role match
+     *  match role in pathRoleTree
      */
     private TreePathRoleMatcher pathRoleMatcher;
 
     /**
-     *  处理器管理者
+     * process manager
      */
     private ProcessorManager processorManager;
 
@@ -42,23 +43,24 @@ public class SurenessSecurityManager implements SecurityManager {
     }
 
     /**
-     * description 判断SecurityManager是否初始化完成并且组件加载成功
+     * Determine whether the SecurityManager is initialized
+     * and the component is loaded successfully
      *
-     * @throws SurenessNoInitException check结果false 抛出异常
+     * @throws SurenessNoInitException check false not init
      */
     private void checkComponentInit() {
         if (subjectFactory == null || pathRoleMatcher == null ||
                 processorManager == null) {
             logger.error("SecurityManager init error : SurenessSecurityManager not init fill component");
-            // 组件自己的相关异常或者配置行异常不往上抛出
+            // The component's own related exceptions or configuration line exceptions are not thrown up
             throw new SurenessNoInitException("SurenessSecurityManager not init fill component");
         }
     }
 
     @Override
     public SubjectSum checkIn(Subject token) throws BaseSurenessException {
-        // 判断请求资源是否是配置的排除过滤资源
-        // 若是直接通行,返回NULL不抛异常
+        // Determine whether the requested resource is a filtered resource
+        // if yes, pass directly
         if (pathRoleMatcher.isExcludedResource(token)) {
             return null;
         }
@@ -70,13 +72,13 @@ public class SurenessSecurityManager implements SecurityManager {
     public SubjectSum checkIn(Object var1) throws BaseSurenessException {
         checkComponentInit();
 
-        // 创建subject list去一次一次认证鉴权尝试
+        // Create a subject list to try auth one by one
         List<Subject> subjectList = createSubject(var1);
         RuntimeException lastException = new UnsupportedSubjectException("this request can not " +
                 "create subject by creators");
 
-        // 对于创建的几个门面钥匙 一把一把试错
-        // 若钥匙都不对 抛异常在最后一把 即最后一把试错的结果为展示的错误信息
+        // for the subject keys, try one by one
+        // if one success, pass and return directly
         for (Subject thisSubject : subjectList) {
             try {
                 return checkIn(thisSubject);
@@ -84,7 +86,7 @@ public class SurenessSecurityManager implements SecurityManager {
                 lastException = e;
             }
         }
-        // 尝试所有subject都失败 抛出最后一个异常
+        // if no one success, the throw exception is the lastException
         throw lastException;
     }
 
@@ -118,7 +120,7 @@ public class SurenessSecurityManager implements SecurityManager {
     }
 
     /**
-     * 单例静态内部类
+     * singleton
      * @author tomsun28
      * @date 15:30 2019-03-10
      */

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * use annotation load sureness pathTree config data
  * @author tomsun28
  * @date 23:57 2020-03-16
  */
@@ -20,17 +21,17 @@ public class AnnotationLoader implements PathTreeProvider {
     private static final Logger logger = LoggerFactory.getLogger(AnnotationLoader.class);
 
     /**
-     * 注解的指定扫描包
+     * Specified scan package
      */
     private List<String> scanPackages;
 
     /**
-     * 扫描出来的class
+     * Scanned class
      */
     private List<Class<?>> scanClasses;
 
     /**
-     * 是否初始化
+     * if is init
      */
     private volatile boolean isInit = false;
 

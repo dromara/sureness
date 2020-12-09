@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
  * @author tomsun28
  * @date 00:46 2019-07-31
  */
-@DisplayName("数据库表User操作测试")
+@DisplayName("database table User test")
 class AuthUserDaoTest extends TomApplicationTest {
 
     @Autowired
     private AuthUserDao authUserDao;
 
-    @DisplayName("插入数据User应成功")
+    @DisplayName("insert data in User should success")
     @Test
     @Transactional
     public void shouldSuccessWhenInsertUser() {
@@ -30,7 +30,7 @@ class AuthUserDaoTest extends TomApplicationTest {
         Assertions.assertThat(authUser).isNotNull();
     }
 
-    @DisplayName("删除数据User应成功")
+    @DisplayName("delete data in User should success")
     @Test
     @Transactional
     public void shouldSuccessWhenDeleteUser() {

@@ -7,15 +7,15 @@ import com.usthe.sureness.subject.support.PasswordSubject;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 自定义的subject creator
- * 这里演示一个自定义的creator
- * 我们平时账户密码认证除了basic auth方式之外
- * 可能会自定义从其他地方获取我们的账户密码来认证 eg: header的username字段作为账号,password字段作为密码
- * 即 header {
+ * custom subject creator
+ * A custom creator is demonstrated here
+ * In addition to the basic auth method, we may obtain our account password from other places for authentication.
+ * eg: username and password in header
+ * header {
  *     "username": "userTom",
  *     "password": "123456"
  * }
- * 我们自定义一个creator 从header上面取出信息创建PasswordSubject
+ * Here we define a creator to create PasswordSubject from this request header like above.
  * @author tomsun28
  * @date 22:59 2020-03-02
  */
@@ -26,7 +26,7 @@ public class CustomPasswdSubjectCreator implements SubjectCreate {
 
     @Override
     public boolean canSupportSubject(Object context) {
-        // 定义什么样的请求信息才能被CustomSubjectCreator创建subject
+        // define which request can be access
         if (context instanceof HttpServletRequest) {
             String username = ((HttpServletRequest)context).getHeader(USERNAME);
             String password = ((HttpServletRequest)context).getHeader(PASSWORD);
@@ -38,7 +38,7 @@ public class CustomPasswdSubjectCreator implements SubjectCreate {
 
     @Override
     public Subject createSubject(Object context) {
-        // 创建PasswordSubject
+        // create PasswordSubject from request
         String username = ((HttpServletRequest)context).getHeader(USERNAME);
         String password = ((HttpServletRequest)context).getHeader(PASSWORD);
 

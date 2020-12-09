@@ -4,38 +4,38 @@ import com.usthe.sureness.mgt.SurenessNoInitException;
 import com.usthe.sureness.subject.Subject;
 
 /**
- * path - role 匹配 matcher
+ * path-role  matcher interface
  * @author tomsun28
  * @date 17:42 2019-03-10
  */
 public interface TreePathRoleMatcher {
 
     /**
-     * description : 通过auToken中的 targetUri 在树种匹配出所支持的roles 填充到token中
-     * @param auToken 根据接入对象所创建的TOKEN,成功后会将其所需角色塞入TOKEN
+     * Use the targetUri in the subject to match the supported roles in the tree and fill in the subject
+     * @param subject After success, the required role will be inserted into the subject
      * @throws SurenessNoInitException when matcher not init
      */
-    void matchRole(Subject auToken);
+    void matchRole(Subject subject);
 
     /**
-     * 建立起匹配树
+     * build the pathRole match tree
      * @throws SurenessNoInitException when matcher not init
-     * @throws SurenessLoadDataException when 数据源 not init
+     * @throws SurenessLoadDataException when datasource not init
      */
     void buildTree();
 
     /**
-     * 重建匹配树
+     * rebuild the pathRole match tree
      * @throws SurenessNoInitException when matcher not init
-     * @throws SurenessLoadDataException when 数据源 not init
+     * @throws SurenessLoadDataException when datasource not init
      */
     void rebuildTree();
 
     /**
-     * 通过拥有的排除资源名单判断这个请求所请求的资源是否在排除名单里
-     * 资源: requestUri===method
-     * @param request 请求内容
-     * @return 是排除资源true 否则false
+     * Determine whether the resource requested by this request is in the exclusion list
+     * resource: requestUri===method
+     * @param request request
+     * @return in the exclusion list return true, else false
      */
     boolean isExcludedResource(Subject request);
 }

@@ -39,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
             return false;
         }
         if (Objects.nonNull(authUser.getSalt())) {
-            // 用盐加密
+            // md5 with salt
             password = Md5Util.md5(password + authUser.getSalt());
 
         }

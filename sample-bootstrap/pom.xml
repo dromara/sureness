@@ -38,7 +38,7 @@
             <artifactId>sureness-core</artifactId>
         </dependency>
 
-        <!-- lombok表达式 -->
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -46,7 +46,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- java版本升级少包-->
+        <!-- java api-->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -107,7 +107,6 @@
                     </execution>
                 </executions>
                 <dependencies>
-                    <!-- 需要使用阿里的一些xml文件，因此需要这里增加p3c的依赖 -->
                     <dependency>
                         <groupId>com.alibaba.p3c</groupId>
                         <artifactId>p3c-pmd</artifactId>
@@ -115,7 +114,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- java doc 生成 -->
+            <!-- java doc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>

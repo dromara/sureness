@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * sureness 配置
+ * sureness config
  * @author tomsun28
  * @date 23:38 2019-09-29
  */

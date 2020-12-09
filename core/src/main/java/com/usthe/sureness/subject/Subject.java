@@ -7,58 +7,57 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * AuthenticationToken AuthorizationToken 认证鉴权对象
+ * AuthenticationToken AuthorizationToken subject
  * @author tomsun28
  * @date 21:58 2019-01-22
  */
 public interface Subject extends Serializable {
 
     /**
-     * description 账户名  string
+     * account appId, eg:username
      *
-     * @return 账户标识
+     * @return identifier appId
      */
     Object getPrincipal();
 
     /**
-     * description 认证证书
+     * account credential, eg:password
      *
-     * @return 对应账户的认证证书或秘钥
+     * @return credential
      */
     Object getCredentials();
 
     /**
-     * description 对应账户所拥有的角色
+     * get the roles owned by this account
      *
-     * @return 角色信息
+     * @return roles
      */
     Object getOwnRoles();
 
     /**
-     * description 需要访问的资源
+     * get the target resource uri which this account want access
      *
-     * @return 资源信息
+     * @return resource uri
      */
     Object getTargetResource();
 
     /**
-     * description 获取token 在url-role树中匹配出来的roles
-     * null表示没有匹配出url，数据集合为0表示匹配出来需要的role为空，即支持所有role
-     * 访问 getTargetResource() 所支持的 roles
+     * get the Roles which can access this resource above-targetUri
      *
-     * @return 访问此资源所需的角色信息
+     * @return roles
      */
     Object getSupportRoles();
 
     /**
-     * description 设置所匹配出的role
+     * set the Roles which can access this resource above-targetUri
      *
-     * @param var1 所支持角色
+     * @param var1 support roles
      */
     void setSupportRoles(Object var1);
 
     /**
-     * description 通过 自身subject内容创建对应精简内容的subjectSum
+     *
+     * Simplify content subject to create subjectSummary
      *
      * @return com.usthe.sureness.subject.Subject
      */

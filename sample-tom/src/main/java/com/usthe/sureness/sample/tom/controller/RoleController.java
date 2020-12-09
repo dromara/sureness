@@ -111,7 +111,7 @@ public class RoleController {
     @GetMapping("/{currentPage}/{pageSize}")
     public ResponseEntity<Message> getRole(@PathVariable Integer currentPage, @PathVariable Integer pageSize ) {
         if (Objects.isNull(currentPage) || Objects.isNull(pageSize)) {
-            // 不分页,查询总
+            // no pageable
             Optional<List<AuthRoleDO>> roleListOptional = roleService.getAllRole();
             if (roleListOptional.isPresent()) {
                 Message message = Message.builder().data(roleListOptional.get()).build();
@@ -121,7 +121,7 @@ public class RoleController {
                 return ResponseEntity.ok().body(message);
             }
         } else {
-            // 分页查询
+            // pageable
             Page<AuthRoleDO> rolePage = roleService.getPageRole(currentPage, pageSize);
             Message message = Message.builder().data(rolePage).build();
             return ResponseEntity.ok().body(message);

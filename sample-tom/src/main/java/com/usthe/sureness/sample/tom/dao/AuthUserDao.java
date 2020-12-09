@@ -15,17 +15,17 @@ import java.util.Optional;
 public interface AuthUserDao extends JpaRepository<AuthUserDO, Long> {
 
     /**
-     * 通过username获取对应user
-     * @param username 账户名称
+     * Get user by username
+     * @param username username
      * @return user
      */
     @Query("select au from AuthUserDO au where au.username = :username")
     Optional<AuthUserDO> findAuthUserByUsername(@Param("username") String username);
 
     /**
-     * 查询当前用户所拥有的角色
-     * @param username 账户名称
-     * @return 角色list
+     * Query the role owned by the current user
+     * @param username username
+     * @return role list
      */
     @Query("select ar.code from AuthRoleDO ar, AuthUserDO au, AuthUserRoleBindDO bind " +
             "where ar.id = bind.roleId and au.id = bind.userId and au.username = :username")

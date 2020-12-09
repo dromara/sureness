@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *   learn from ThreadContext
+ * learn from shiro ThreadContext
  * @author from shiro
  * @date 23:01 2019-01-09
  */
@@ -23,7 +23,7 @@ public class SurenessContextHolder {
             .withInitial(() -> new HashMap<>(8));
 
     /**
-     * 线程结束前调用 清空内容 防止oom
+     * Called before the thread ends
      */
     public static void clear() {
         if (RESOURCES.get() != null) {

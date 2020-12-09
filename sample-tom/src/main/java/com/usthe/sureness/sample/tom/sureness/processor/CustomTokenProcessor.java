@@ -30,12 +30,12 @@ public class CustomTokenProcessor extends BaseProcessor {
     private SurenessAccountProvider accountProvider;
 
     @Override
-    public boolean canSupportAuTokenClass(Class<?> var) {
+    public boolean canSupportSubjectClass(Class<?> var) {
         return var == CustomTokenSubject.class;
     }
 
     @Override
-    public Class<?> getSupportAuTokenClass() {
+    public Class<?> getSupportSubjectClass() {
         return CustomTokenSubject.class;
     }
 

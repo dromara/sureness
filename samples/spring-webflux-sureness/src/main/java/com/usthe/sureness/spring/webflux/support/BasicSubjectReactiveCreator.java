@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * 支持通过basic auth 创建PasswordSubject 的创建者
+ * the creator to create PasswordSubject(basic auth)
  * only support reactive server-side HTTP request
  * org.springframework.http.server.reactive.ServerHttpRequest
  * @author tomsun28
@@ -29,7 +29,6 @@ public class BasicSubjectReactiveCreator implements SubjectCreate {
 
     @Override
     public boolean canSupportSubject(Object context) {
-        // basic auth判断
         // ("Authorization", "Basic YWRtaW46YWRtaW4=")        --- basic auth
         if (context instanceof ServerHttpRequest) {
             String authorization = ((ServerHttpRequest)context).getHeaders().getFirst(AUTHORIZATION);

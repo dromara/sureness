@@ -5,7 +5,7 @@ import com.usthe.sureness.subject.Subject;
 import java.util.List;
 
 /**
- * 支持JWT AUTH 的TOKEN
+ * the subject support jwt auth
  * @author tomsun28
  * @date 12:28 2019-03-14
  */
@@ -13,25 +13,25 @@ public class JwtSubject implements Subject {
 
     private static final long serialVersionUID = 1L;
 
-    /** 用户的标识 **/
+    /** appId **/
     private String appId;
 
-    /** json web token值 **/
+    /** json web token **/
     private String jwt;
 
-    /** 访问用户的IP **/
+    /** remote ip **/
     private String remoteHost;
 
-    /** 访问用户的设备信息 **/
+    /** remote device **/
     private String userAgent;
 
-    /** 所拥有的角色 在解析完jwt之后把用户角色放到这里 **/
+    /** the roles which this user owned **/
     private List<String> ownRoles;
 
-    /** 所访问资源地址 **/
+    /** the uri resource which this user want access **/
     private String targetUri;
 
-    /** 所访问资源他支持的角色 **/
+    /** the Roles which can access this resource above-targetUri **/
     private List<String> supportRoles;
 
     private JwtSubject(Builder builder) {
@@ -87,8 +87,8 @@ public class JwtSubject implements Subject {
         return new Builder(jwt);
     }
 
-    public static Builder builder(Subject auToken) {
-        return new Builder(auToken);
+    public static Builder builder(Subject subject) {
+        return new Builder(subject);
     }
 
     public static class Builder {
@@ -106,12 +106,12 @@ public class JwtSubject implements Subject {
         }
 
         @SuppressWarnings("unchecked")
-        public Builder(Subject auToken) {
-            this.appId = String.valueOf(auToken.getPrincipal());
-            this.jwt = String.valueOf(auToken.getCredentials());
-            this.ownRoles = (List<String>) auToken.getOwnRoles();
-            this.targetUri = String.valueOf(auToken.getTargetResource());
-            this.supportRoles = (List<String>) auToken.getSupportRoles();
+        public Builder(Subject subject) {
+            this.appId = String.valueOf(subject.getPrincipal());
+            this.jwt = String.valueOf(subject.getCredentials());
+            this.ownRoles = (List<String>) subject.getOwnRoles();
+            this.targetUri = String.valueOf(subject.getTargetResource());
+            this.supportRoles = (List<String>) subject.getSupportRoles();
         }
 
         public Builder setPrincipal(String appId) {

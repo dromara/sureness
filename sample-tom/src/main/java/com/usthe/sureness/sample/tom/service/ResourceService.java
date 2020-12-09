@@ -14,56 +14,56 @@ import java.util.Set;
 public interface ResourceService {
 
     /**
-     * 增加uri资源
-     * @param authResource 资源
-     * @return 增加成功true 失败false
+     * add uri resource
+     * @param authResource resource
+     * @return success-true failed-false
      */
     boolean addResource(AuthResourceDO authResource);
 
     /**
-     * 判断此资源是否已经存在
-     * @param authResource 资源
-     * @return 已经存在true 不存在false
+     * Determine whether the resource already exists
+     * @param authResource resource
+     * @return existed-true no-false
      */
     boolean isResourceExist(AuthResourceDO authResource);
 
     /**
-     * 更新uri资源
-     * @param authResource 资源
-     * @return 更新成功true 失败false
+     * update uri resource
+     * @param authResource resource
+     * @return success-true failed-false
      */
     boolean updateResource(AuthResourceDO authResource);
 
     /**
-     * 删除指定uri资源
-     * @param resourceId 资源ID
-     * @return 删除成功true 不存在false
+     * delete uri resource
+     * @param resourceId resource ID
+     * @return success-true no existed-false
      */
     boolean deleteResource(Long resourceId);
 
     /**
-     * 获取所有资源
-     * @return 资源list
+     * get all resources
+     * @return resource list
      */
     Optional<List<AuthResourceDO>> getAllResource();
 
     /**
-     * 获取分页的资源页
-     * @param currentPage 当前页
-     * @param pageSize 页大小
-     * @return 资源的分页
+     * get resource by page
+     * @param currentPage current page
+     * @param pageSize page size
+     * @return Page of resource
      */
     Page<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize);
 
     /**
-     * 获取有效的资源路径角色
-     * @return 资源路径角色
+     * get enabled resource-path-role eg: /api/v2/host===post===[role2,role3,role4]
+     * @return resource-path-role
      */
     Set<String> getAllEnableResourcePath();
 
     /**
-     * 获取无效的资源路径
-     * @return 资源路径
+     * get disable resource-path-role eg: /api/v2/host===post===[role2,role3,role4]
+     * @return resource-path-role
      */
     Set<String> getAllDisableResourcePath();
 }

@@ -14,9 +14,9 @@ import java.util.List;
 public interface AuthRoleDao extends JpaRepository<AuthRoleDO, Long> {
 
     /**
-     * 查询当前用户所拥有的角色
-     * @param username 账户名称
-     * @return 角色list
+     * Query the role owned by the current user
+     * @param username username
+     * @return role list
      */
     @Query("select ar.name from AuthRoleDO ar, AuthUserDO au, AuthUserRoleBindDO bind " +
             "where ar.id = bind.roleId and au.id = bind.userId and au.username = :username")

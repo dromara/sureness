@@ -6,7 +6,7 @@ import javax.ws.rs.container.ContainerRequestContext;
 import java.util.Random;
 
 /**
- * 一些公共处理工具类
+ * common util
  * @author tomsun28
  * @date 19:07 2019-03-09
  */
@@ -70,13 +70,13 @@ public class SurenessCommonUtil {
 
 
     /**
-     *  获取指定位数的随机字符串
+     *  get random string
      *
-     * @param length 长度
-     * @return 随机字符串
+     * @param length string length
+     * @return random string
      */
     public static String getRandomString(int length) {
-        // 默认6位
+        // default length is 6
         if (length < 1) {
             length = 6;
         }

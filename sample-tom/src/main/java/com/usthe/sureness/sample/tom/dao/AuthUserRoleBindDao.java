@@ -15,9 +15,9 @@ import java.util.List;
 public interface AuthUserRoleBindDao extends JpaRepository<AuthUserRoleBindDO, Long> {
 
     /**
-     * 查询当前用户所拥有的角色
-     * @param userId 用户ID
-     * @return 角色list
+     * Query the role owned by the current user
+     * @param userId userId
+     * @return role list
      */
     @Query("select ar from AuthRoleDO ar, AuthUserRoleBindDO bind " +
             "where ar.id = bind.roleId and bind.userId = :userId")

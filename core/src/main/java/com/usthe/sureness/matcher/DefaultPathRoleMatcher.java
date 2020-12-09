@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * 默认的path - role 匹配 matcher实现
+ * default path - role matcher
  * @author tomsun28
  * @date 20:23 2019-03-10
  */
@@ -28,34 +28,34 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
 
     private static final String EXCLUDE_ROLE = "exclude";
 
-    /** path-role 匹配树存储点 **/
+    /** path-role, match tree storage **/
     private final TirePathTree root = new TirePathTree();
 
-    /** path-role 被排除的资源匹配树存储点 **/
+    /** exclude path-role, match tree storage **/
     private final TirePathTree excludeRoot = new TirePathTree();
 
-    /** 匹配树数据内容提供者 **/
+    /** Match tree data content provider **/
     private PathTreeProvider pathTreeProvider;
 
-    /** 是否匹配树数据加载完成 **/
+    /** Whether the matching tree data has been loaded **/
     private volatile boolean isTreeInit;
 
     @Override
-    public void matchRole(Subject auToken) {
+    public void matchRole(Subject subject) {
         if (!isTreeInit) {
             logger.error("DefaultPathRoleMatcher -> root tree is not init");
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> root tree is not init");
         }
-        String targetResource = (String) auToken.getTargetResource();
+        String targetResource = (String) subject.getTargetResource();
         //[role1,role2,role3], [role1], [], null
         String matchRoleString = root.searchPathFilterRoles(targetResource);
         if (matchRoleString != null && matchRoleString.startsWith(LEFT_CON)
                 && matchRoleString.endsWith(RIGHT_CON)) {
             if (NULL_ROLE.equals(matchRoleString)) {
-                auToken.setSupportRoles(new ArrayList<>(0));
+                subject.setSupportRoles(new ArrayList<>(0));
             } else {
                 String[] roles = matchRoleString.substring(1, matchRoleString.length()-1).split(",");
-                auToken.setSupportRoles(Arrays.asList(roles));
+                subject.setSupportRoles(Arrays.asList(roles));
             }
         }
     }

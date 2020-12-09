@@ -6,34 +6,34 @@ import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
 
 /**
- * 处理器，处理传进来的认证对象,对其进行认证账号与权限
+ * processor
+ * Process the incoming authentication object, and verify the account and authority of it
  * @author tomsun28
  * @date 21:54 2019-03-06
  */
 public interface Processor {
 
     /**
-     * description 判断此Processor是否支持对应的AuTokenClass
-     * 支持才能让此Processor处理对应的AuTokenClass
+     * Determine whether this Processor supports the corresponding SubjectClass
      *
-     * @param var 1
-     * @return boolean
+     * @param var subjectClass
+     * @return support true, else false
      */
-    boolean canSupportAuTokenClass(Class<?> var);
+    boolean canSupportSubjectClass(Class<?> var);
 
 
     /**
-     * description 获取此Processor能支持的AuTokenClass
+     * Get the subjectClass supported by this processor
      *
-     * @return java.lang.Class?
+     * @return java.lang.Class? subjectClass
      */
-    Class<?> getSupportAuTokenClass();
+    Class<?> getSupportSubjectClass();
 
     /**
-     * description 进入处理
-     * @param var 1
-     * @throws SurenessAuthenticationException when
-     * @throws SurenessAuthorizationException when
+     * process the subject
+     * @param var subject
+     * @throws SurenessAuthenticationException when Authentication error
+     * @throws SurenessAuthorizationException when Authorization error
      * @return com.usthe.sureness.subject.Subject
      */
     SubjectSum process(Subject var) throws SurenessAuthenticationException, SurenessAuthorizationException;

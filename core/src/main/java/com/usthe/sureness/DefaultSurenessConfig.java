@@ -20,7 +20,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-/** 对用文件做持久层权限资源方式的默认配置
+/**
+ * default sureness config, using file - sureness.yml as persistent layer permissions resources
  * support servlet or jax-rs, default servlet
  * @author tomsun28
  * @date 11:26 2019-05-26

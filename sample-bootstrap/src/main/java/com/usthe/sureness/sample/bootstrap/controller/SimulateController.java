@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 模拟资源controller,供测试调用
+ * simulate api controller, for testing
  * @author tomsun28
  * @date 17:35 2019-05-12
  */
@@ -191,9 +191,9 @@ public class SimulateController {
     }
 
     /**
-     * 获取MOCK固定的返回数据MAP
-     * @param request http 请求
-     * @return 返回数据
+     * get the response map data from request
+     * @param request http request
+     * @return map data
      */
     private Map<String, String> getResponseMap(HttpServletRequest request) {
         StringBuilder builder = new StringBuilder();

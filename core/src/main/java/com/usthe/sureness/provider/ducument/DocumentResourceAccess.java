@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * 资源文件里内容的操作类
+ * Operation content in resource document file - sureness.yml
  * @author tomsun28
  * @date 21:41 2019-05-24
  */
@@ -17,7 +17,7 @@ public class DocumentResourceAccess {
 
     private static final String DEFAULT_FILE_NAME = "sureness.yml";
 
-    /** 默认的资源文件名称位置 sureness.yml **/
+    /** default resource document file name - sureness.yml **/
     private static String yamlFileName;
 
     static {
@@ -25,9 +25,9 @@ public class DocumentResourceAccess {
     }
 
     /**
-     * 从配置文件里读取resource配置信息
-     * @return 配置实体对象
-     * @throws IOException 文件不存在或者读取文件异常时
+     * load config information form document
+     * @return config object
+     * @throws IOException When the file does not exist or the file is read abnormally
      */
     public static DocumentResourceEntity loadConfig() throws IOException {
         Yaml yaml = new Yaml();
@@ -51,7 +51,7 @@ public class DocumentResourceAccess {
 
     /**
      * config file path name
-     * @param fileName 文件路径名称
+     * @param fileName file path name
      */
     public static void setYamlName(String fileName) {
         yamlFileName = fileName;

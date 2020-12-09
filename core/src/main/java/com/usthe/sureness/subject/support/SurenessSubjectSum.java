@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * subject summary
  * @author tomsun28
  * @date 22:03 2019-01-22
  */
@@ -16,11 +17,11 @@ public class SurenessSubjectSum implements SubjectSum {
      */
     private String principal;
     /**
-     * 当前账户所拥有的角色
+     * the roles which this user owned
      */
     private List<String> roles;
     /**
-     * 当前账户这次请求他所请求的资源(即url===method)
+     * the uri resource which this user want access(url===method)
      */
     private String targetResource;
 

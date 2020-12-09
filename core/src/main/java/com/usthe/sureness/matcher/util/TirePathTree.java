@@ -12,10 +12,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * 字典匹配树  支持 * **
- * * 匹配零个或者1个目录
- * ** 匹配零个或者多个目录
- * 匹配优先级: 原始字符串 大于 * 大于 **
+ * Improved dictionary matching tree
+ * support regular * **
+ * the * can match zero or one directory
+ * the ** can match zero or more directories
+ * Match priority: Raw string > * > **
  * @author tomsun28
  * @date 19:25 2019-01-18
  */
@@ -35,7 +36,7 @@ public class TirePathTree {
     private static final Pattern PATH_SPLIT_PATTERN = Pattern.compile("/+");
 
     /**
-     * 根节点
+     * root node
      */
     private volatile Node root;
 
@@ -44,8 +45,8 @@ public class TirePathTree {
     }
 
     /**
-     * 新建字典匹配树
-     * @param paths 资源路径
+     * build dictionary matching tree
+     * @param paths resource path set
      */
     public synchronized void buildTree(Set<String> paths) {
         if (logger.isDebugEnabled()) {
@@ -61,9 +62,10 @@ public class TirePathTree {
     }
 
     /**
-     * 重建字典匹配树，更新字典树数据
-     * 保证重建时不影响读，并发方式RCU -- read copy update
-     * @param paths paths 资源
+     * rebuild and update dictionary matching tree
+     * Concurrency type:RCU -- read copy update
+     * Ensure that reading is not affected during reconstruction
+     * @param paths resources paths set
      */
     public synchronized void rebuildTree(Set<String> paths) {
         if (logger.isDebugEnabled()) {
@@ -80,7 +82,7 @@ public class TirePathTree {
     }
 
     /**
-     * 清空字典树
+     * clear dictionary matching tree
      */
     public void clearTree() {
         if (logger.isDebugEnabled()) {
@@ -90,12 +92,12 @@ public class TirePathTree {
     }
 
     /**
-     * 获取当前匹配树存在的匹配资源(URL+METHOD)数量
-     * @return int 资源数量
+     * Get the number of resources (URL+METHOD) in the current matching tree
+     * @return int resource number
      */
     public int getResourceNum() {
         int resourceNum = 0;
-        // 广度层级遍历
+        // Breadth First Search - bfs
         Queue<Node> resourceList = new LinkedList<>();
         resourceList.add(root);
         while (!resourceList.isEmpty()) {
@@ -114,9 +116,9 @@ public class TirePathTree {
     }
 
     /**
-     * 根据path从树里匹配该路径需要的 [role2,role3,role4]
+     * Use the resource path to match supported roles in tree
      * @param path   /api/v2/host/detail===get
-     * @return java.lang.String [role1,role2]
+     * @return java.lang.String roles eg: [role1,role2]
      */
     public String searchPathFilterRoles(String path) {
         if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
@@ -134,19 +136,19 @@ public class TirePathTree {
         String[] urlPac = tmp[0].split("/");
         String method = tmp[1];
 
-        // 模式匹配   * **
+        // Pattern matching   * **
         Node current = root;
         return searchPathRoleInChildren(current, urlPac, -1, method);
     }
 
 
     /**
-     * 从当前node匹配查找对应分支的叶子节点
-     * @param current 当前node
-     * @param urlPac urlPath字符串组
-     * @param currentFlow 当前第一个字符串
-     * @param method http请求方法
-     * @return 匹配到返回[role,role2] 匹配不到返回null
+     * Find the leaf node of the corresponding branch from the current node
+     * @param current current node
+     * @param urlPac urlPath arr
+     * @param currentFlow current Flow
+     * @param method http method: post get delete put...
+     * @return match return roles eg:[role,role2], else return null
      */
     private String searchPathRole(Node current, String[] urlPac, int currentFlow, String method) {
         if (current == null || urlPac == null || currentFlow >= urlPac.length
@@ -211,12 +213,12 @@ public class TirePathTree {
 
 
     /**
-     * 从当前node匹配下一节点
-     * @param current 当前node
-     * @param urlPac urlPath字符串组
-     * @param currentFlow 当前第一个字符串
-     * @param method http请求方法
-     * @return 匹配到返回[role,role2] 匹配不到返回null
+     * Match the next node from the current node
+     * @param current current node
+     * @param urlPac urlPath arr
+     * @param currentFlow current flow
+     * @param method http method
+     * @return match return roles eg:[role,role2], else return null
      */
     private String searchPathRoleInChildren(Node current, String[] urlPac, int currentFlow,  String method) {
         if (current == null || urlPac == null || currentFlow >= urlPac.length - 1
@@ -247,10 +249,10 @@ public class TirePathTree {
     }
 
     /**
-     * 判断 pattern是否不匹配pathNode
-     * @param pattern 匹配串 * **
-     * @param pathNode 被匹配串
-     * @return 匹配失败 true 成功 false
+     * Determine whether the pattern does not match pathNode
+     * @param pattern pattern eg: * **
+     * @param pathNode pathNode
+     * @return match return true, else false
      */
     private boolean isNoMatchString(String pattern, String pathNode) {
         if (pattern == null && pathNode == null) {
@@ -264,7 +266,7 @@ public class TirePathTree {
     }
 
     /**
-     * description 插入节点
+     * insert pathNode
      * @param path path = /api/v1/host/detail===GET===[role2,role3,role4]
      */
     private void insertNode(String path, Node rootNode) {
@@ -275,7 +277,7 @@ public class TirePathTree {
             logger.trace("sureness - begin insertNode, path is {}", path);
         }
         path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
-        // 去除第一个 /
+        // remove the first /
         path = path.substring(1).toLowerCase();
         String[] tmp = path.split("===");
         if (tmp.length != PATH_NODE_NUM_3) {
@@ -286,7 +288,7 @@ public class TirePathTree {
         String supportRoles = tmp[2];
         Node current = rootNode;
         Node pre = current;
-        // 开始插入URL节点
+        // start inserting URL node
         for (String urlData : urlPac) {
             if (!current.getChildren().containsKey(urlData)) {
                 current.insertChild(urlData);
@@ -295,36 +297,37 @@ public class TirePathTree {
             current = current.getChildren().get(urlData);
         }
         if (MATCH_ONE.equals(current.getData()) || MATCH_ALL.equals(current.getData())) {
-            // 当倒数第一个为 * 或者 ** 时，其有可能匹配空，此时其前一个也可能为 NODE_TYPE_MAY_PATH_END
+            // When the last one is * or **, it may match empty,
+            // and the previous one may also be NODE_TYPE_MAY_PATH_END type
             pre.setNodeType(NODE_TYPE_MAY_PATH_END);
         }
-        // 设置NODE_TYPE_MAY_PATH_END节点类型
+        // set node type is NODE_TYPE_MAY_PATH_END
         current.setNodeType(NODE_TYPE_MAY_PATH_END);
-        // 开始插入httpMethod节点,如果已经存在，则不覆盖修改原来配置
+        // start insert httpMethod method, if existed, not overwrite and modify the original configuration
         if (!current.getChildren().containsKey(method)) {
             current.insertChild(method, NODE_TYPE_METHOD);
         }
         current = current.getChildren().get(method);
-        // 开始插入叶子节点 supportRoles
-        // 每条资源只能对应一 supportRoles ,httpMethod下最多一个孩子节点
-        // 如果已经存在，则不覆盖修改原来配置
+        // Start inserting leaf nodes - supportRoles
+        // each resource only mapping a left node, that is, at most one child node under supportRoles--httpMethod
+        // if existed, not overwrite and modify the original configuration
         if (current.getChildren().isEmpty()) {
             current.insertChild(supportRoles, NODE_TYPE_FILTER_ROLES);
         }
     }
 
     /**
-     * 树节点类
+     * Dictionary matching tree node
      */
     private static class Node {
 
-        /** 当前节点的类型 **/
+        /** current node type **/
         private String nodeType;
 
-        /** 节点对应的数据 **/
+        /** current node data **/
         private String data;
 
-        /** 孩子节点 **/
+        /** children nodes **/
         private Map<String, Node> children;
 
         private Node(String data, String nodeType) {

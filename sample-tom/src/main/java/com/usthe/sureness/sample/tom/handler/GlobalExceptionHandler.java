@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 全局controller异常捕获
+ * controller exception handler
  * @author tomsun28
  * @date 22:45 2019-08-01
  */
@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     /**
-     * 对于所有接口入参数据校验抛出的异常统一处理
-     * @param exception 入参数据校验异常
-     * @return 统一错误信息体
+     * handler the exception thrown for data input verify
+     * @param exception data input verify exception
+     * @return response
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
@@ -41,9 +41,9 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 对于所有数据库dao操作的异常统一处理
-     * @param exception 数据库异常
-     * @return 统一错误信息体
+     * handler the exception thrown for datastore error
+     * @param exception datastore exception
+     * @return response
      */
     @ExceptionHandler(DataAccessException.class)
     @ResponseBody
@@ -58,9 +58,9 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 对于请求数据和系统数据状态不一致异常统一处理
-     * @param exception 数据状态不一致异常
-     * @return 统一错误信息体
+     * handler the exception thrown for data conflict
+     * @param exception data conflict
+     * @return response
      */
     @ExceptionHandler(DataConflictException.class)
     @ResponseBody
@@ -75,9 +75,9 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 对所以未捕获未知异常统一处理
+     * handler the exception thrown for unCatch and unKnown
      * @param exception UnknownException
-     * @return 统一错误信息体
+     * @return response
      */
     @ExceptionHandler(Exception.class)
     @ResponseBody

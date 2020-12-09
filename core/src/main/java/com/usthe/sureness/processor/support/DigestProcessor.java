@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
- * process digest auth
+ * process digest auth - DigestSubject
  * @author tomsun28
  * @date 2020-10-28 23:17
  */
@@ -42,12 +42,12 @@ public class DigestProcessor extends BaseProcessor {
     }
 
     @Override
-    public boolean canSupportAuTokenClass(Class<?> var) {
+    public boolean canSupportSubjectClass(Class<?> var) {
         return var == DigestSubject.class;
     }
 
     @Override
-    public Class<?> getSupportAuTokenClass() {
+    public Class<?> getSupportSubjectClass() {
         return DigestSubject.class;
     }
 

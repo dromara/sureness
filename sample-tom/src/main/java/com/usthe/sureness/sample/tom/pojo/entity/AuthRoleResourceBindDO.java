@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
- * 资源与角色映射实体
+ * resource-role mapping entity
  * @author tomsun28
  * @date 00:28 2019-07-27
  */

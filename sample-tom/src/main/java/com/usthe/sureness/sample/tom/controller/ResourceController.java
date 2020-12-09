@@ -79,7 +79,7 @@ public class ResourceController {
     @GetMapping("/{currentPage}/{pageSize}")
     public ResponseEntity<Message> getResource(@PathVariable Integer currentPage, @PathVariable Integer pageSize ) {
         if (Objects.isNull(currentPage) || Objects.isNull(pageSize)) {
-            // 不分页,查询总
+            // no pageable
             Optional<List<AuthResourceDO>> resourceListOptional = resourceService.getAllResource();
             if (resourceListOptional.isPresent()) {
                 Message message = Message.builder().data(resourceListOptional.get()).build();
@@ -89,7 +89,7 @@ public class ResourceController {
                 return ResponseEntity.ok().body(message);
             }
         } else {
-            // 分页查询
+            // pageable
             Page<AuthResourceDO> resourcePage = resourceService.getPageResource(currentPage, pageSize);
             Message message = Message.builder().data(resourcePage.get()).build();
             return ResponseEntity.ok().body(message);

@@ -1,7 +1,7 @@
 package com.usthe.sureness.processor.exception;
 
 /**
- * 认证异常：过期的凭证
+ * Authentication exception: Expired certificate
  * @author tomsun28
  * @date 19:22 2019-03-11
  */

@@ -1,8 +1,8 @@
 package com.usthe.sureness.processor.exception;
 
 /**
- * 认证异常：不支持的TOKEN类型
- * 出现此错误说明加载的 subjectCreator list都无法根据请求创建对应的subject
+ * Authentication exception: Can not support this request
+ * SubjectCreator list unable to create the corresponding subject according to the request
  * @author tomsun28
  * @date 19:23 2019-03-11
  */

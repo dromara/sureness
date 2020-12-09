@@ -8,8 +8,8 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import java.net.InetSocketAddress;
 
 /**
- * 无认证信息的subject creator
- * 所有请求都能创建出一个NoneSubject
+ * the creator to create NoneSubject - no auth info
+ * all request can be created a NoneSubject by NoneSubjectReactiveCreator
  * only support ServerHttpRequest
  * @author tomsun28
  * @date 22:55 2020-09-29
