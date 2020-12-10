@@ -73,6 +73,7 @@ public class SurenessFilterExample implements Filter {
             CommonUtil.responseWrite(ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED)
                     .header("WWW-Authenticate", e5.getAuthenticate()).build(), servletResponse);
+            return;
         } catch (UnauthorizedException e6) {
             logger.debug("this account can not access this resource");
             CommonUtil.responseWrite(ResponseEntity
