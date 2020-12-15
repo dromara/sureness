@@ -1,6 +1,7 @@
 package com.usthe.sureness.matcher;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * path tree resource data provider
@@ -15,7 +16,7 @@ public interface PathTreeProvider {
      * eg: springboot context path is: server.servlet.context-path = v2
      *     tomcat context path is: <context path="v2">
      */
-    static String contextPath = null;
+    AtomicReference<String> contextPathRef = new AtomicReference<String>();
 
     /**
      * set context path
@@ -23,7 +24,7 @@ public interface PathTreeProvider {
      * @param contextPath context path
      */
     default void setContextPath(String contextPath) {
-        contextPath = contextPath;
+        contextPathRef.set(contextPath);
     }
 
     /**

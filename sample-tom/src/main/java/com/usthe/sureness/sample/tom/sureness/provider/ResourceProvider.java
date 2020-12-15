@@ -22,13 +22,13 @@ public class ResourceProvider implements PathTreeProvider {
 
     @Override
     public Set<String> providePathData() {
-        return SurenessCommonUtil.attachContextPath(contextPath, resourceService.getAllEnableResourcePath());
+        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceService.getAllEnableResourcePath());
 
     }
 
     @Override
     public Set<String> provideExcludedResource() {
-        return SurenessCommonUtil.attachContextPath(contextPath, resourceService.getAllDisableResourcePath());
+        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceService.getAllDisableResourcePath());
     }
 
 }

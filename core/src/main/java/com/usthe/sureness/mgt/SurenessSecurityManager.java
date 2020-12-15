@@ -58,14 +58,14 @@ public class SurenessSecurityManager implements SecurityManager {
     }
 
     @Override
-    public SubjectSum checkIn(Subject token) throws BaseSurenessException {
+    public SubjectSum checkIn(Subject subject) throws BaseSurenessException {
         // Determine whether the requested resource is a filtered resource
         // if yes, pass directly
-        if (pathRoleMatcher.isExcludedResource(token)) {
+        if (pathRoleMatcher.isExcludedResource(subject)) {
             return null;
         }
-        pathRoleMatcher.matchRole(token);
-        return processorManager.process(token);
+        pathRoleMatcher.matchRole(subject);
+        return processorManager.process(subject);
     }
 
     @Override

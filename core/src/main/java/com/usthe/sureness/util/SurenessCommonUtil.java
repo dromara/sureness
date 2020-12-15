@@ -78,8 +78,11 @@ public class SurenessCommonUtil {
             return uriResource;
         }
         // format context path
-        contextPath = contextPath.toUpperCase().trim();
+        contextPath = contextPath.toLowerCase().trim();
         contextPath = contextPath.replace("//", "/");
+        if (!contextPath.startsWith(PATH_SPLIT)) {
+            contextPath = PATH_SPLIT.concat(contextPath);
+        }
         if (contextPath.endsWith(PATH_SPLIT)) {
             contextPath = contextPath.substring(0, contextPath.length() - 1);
         }

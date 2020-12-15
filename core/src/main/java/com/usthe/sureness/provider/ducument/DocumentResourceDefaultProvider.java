@@ -48,7 +48,7 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
             } else {
                 resourceSet = new HashSet<>();
             }
-            return SurenessCommonUtil.attachContextPath(contextPath, resourceSet);
+            return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceSet);
         } catch (IOException e) {
             logger.error("load config data from yaml file error: ", e);
             throw new SurenessLoadDataException(e.getMessage());
@@ -68,7 +68,7 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
             } else {
                 resourceSet = new HashSet<>();
             }
-            return SurenessCommonUtil.attachContextPath(contextPath, resourceSet);
+            return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceSet);
         } catch (IOException e) {
             logger.error("load config data from yaml file error: ", e);
             throw new SurenessLoadDataException(e.getMessage());

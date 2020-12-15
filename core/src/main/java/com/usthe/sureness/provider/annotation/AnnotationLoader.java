@@ -77,7 +77,7 @@ public class AnnotationLoader implements PathTreeProvider {
                 }
             }
         }
-        return SurenessCommonUtil.attachContextPath(contextPath, resource);
+        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resource);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class AnnotationLoader implements PathTreeProvider {
                 }
             }
         }
-        return SurenessCommonUtil.attachContextPath(contextPath, resource);
+        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resource);
     }
 
     public List<String> getScanPackages() {
