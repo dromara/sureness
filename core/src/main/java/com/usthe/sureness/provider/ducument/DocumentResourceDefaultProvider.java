@@ -5,6 +5,7 @@ import com.usthe.sureness.matcher.SurenessLoadDataException;
 import com.usthe.sureness.provider.DefaultAccount;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
+import com.usthe.sureness.util.SurenessCommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,10 +42,13 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
                 entity = DocumentResourceAccess.loadConfig();
             }
             List<String> resource = entity.getResourceRole();
+            Set<String> resourceSet;
             if (resource != null) {
-                return new HashSet<>(entity.getResourceRole());
+                resourceSet = new HashSet<>(resource);
+            } else {
+                resourceSet = new HashSet<>();
             }
-            return new HashSet<>();
+            return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceSet);
         } catch (IOException e) {
             logger.error("load config data from yaml file error: ", e);
             throw new SurenessLoadDataException(e.getMessage());
@@ -58,14 +62,17 @@ public class DocumentResourceDefaultProvider implements PathTreeProvider, Surene
                 entity = DocumentResourceAccess.loadConfig();
             }
             List<String> resource = entity.getExcludedResource();
+            Set<String> resourceSet;
             if (resource != null) {
-                return new HashSet<>(resource);
+                resourceSet = new HashSet<>(resource);
+            } else {
+                resourceSet = new HashSet<>();
             }
+            return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceSet);
         } catch (IOException e) {
             logger.error("load config data from yaml file error: ", e);
             throw new SurenessLoadDataException(e.getMessage());
         }
-        return new HashSet<>();
     }
 
     @Override

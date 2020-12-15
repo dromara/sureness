@@ -2,6 +2,7 @@ package com.usthe.sureness.sample.tom.sureness.provider;
 
 import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.sample.tom.service.ResourceService;
+import com.usthe.sureness.util.SurenessCommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +22,13 @@ public class ResourceProvider implements PathTreeProvider {
 
     @Override
     public Set<String> providePathData() {
-        return resourceService.getAllEnableResourcePath();
+        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceService.getAllEnableResourcePath());
 
     }
 
     @Override
     public Set<String> provideExcludedResource() {
-        return resourceService.getAllDisableResourcePath();
+        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceService.getAllDisableResourcePath());
     }
 
 }

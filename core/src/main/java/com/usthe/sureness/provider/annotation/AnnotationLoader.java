@@ -2,6 +2,7 @@ package com.usthe.sureness.provider.annotation;
 
 import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.util.ClassScanner;
+import com.usthe.sureness.util.SurenessCommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,7 +77,7 @@ public class AnnotationLoader implements PathTreeProvider {
                 }
             }
         }
-        return resource;
+        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resource);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class AnnotationLoader implements PathTreeProvider {
                 }
             }
         }
-        return resource;
+        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resource);
     }
 
     public List<String> getScanPackages() {
