@@ -63,18 +63,30 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         isTreeInit = false;
         checkComponentInit();
         clearTree();
-        final Set<String> resources = new HashSet<>();
-        pathTreeProviderList.forEach(provider -> resources.addAll(provider.providePathData()));
-        final Set<String> excludeResources = new HashSet<>();
-        pathTreeProviderList.forEach(provider -> excludeResources.addAll(provider.provideExcludedResource()));
+        Set<String> resources = new HashSet<>();
+        Set<String> excludeResources = new HashSet<>();
+        for (PathTreeProvider provider : pathTreeProviderList) {
+            Set<String> resourceTmp = provider.providePathData();
+            Set<String> excludeResourceTmp = provider.provideExcludedResource();
+            if (resourceTmp != null) {
+                resources.addAll(resourceTmp);
+            } else {
+                logger.warn("sureness - pathTreeProvider: {} providePathData is null", provider);
+            }
+            if (excludeResourceTmp != null) {
+                excludeResources.addAll(excludeResourceTmp);
+            } else {
+                logger.warn("sureness - pathTreeProvider: {} provideExcludedResource is null", provider);
+            }
+        }
 
-        Set<String> resourceSet = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
-        root.buildTree(resourceSet);
+        resources = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
+        root.buildTree(resources);
 
-        Set<String> excludeResourceSet = excludeResources.stream()
+        excludeResources = excludeResources.stream()
                 .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
                 .collect(Collectors.toSet());
-        excludeRoot.buildTree(excludeResourceSet);
+        excludeRoot.buildTree(excludeResources);
         isTreeInit = true;
     }
 
@@ -82,18 +94,30 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     public void rebuildTree() {
         checkComponentInit();
         clearTree();
-        final Set<String> resources = new HashSet<>();
-        pathTreeProviderList.forEach(provider -> resources.addAll(provider.providePathData()));
-        final Set<String> excludeResources = new HashSet<>();
-        pathTreeProviderList.forEach(provider -> excludeResources.addAll(provider.provideExcludedResource()));
+        Set<String> resources = new HashSet<>();
+        Set<String> excludeResources = new HashSet<>();
+        for (PathTreeProvider provider : pathTreeProviderList) {
+            Set<String> resourceTmp = provider.providePathData();
+            Set<String> excludeResourceTmp = provider.provideExcludedResource();
+            if (resourceTmp != null) {
+                resources.addAll(resourceTmp);
+            } else {
+                logger.warn("sureness - pathTreeProvider: {} providePathData is null", provider);
+            }
+            if (excludeResourceTmp != null) {
+                excludeResources.addAll(excludeResourceTmp);
+            } else {
+                logger.warn("sureness - pathTreeProvider: {} provideExcludedResource is null", provider);
+            }
+        }
 
-        Set<String> resourceSet = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
-        root.rebuildTree(resourceSet);
+        resources = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
+        root.rebuildTree(resources);
 
-        Set<String> excludeResourceSet = excludeResources.stream()
+        excludeResources = excludeResources.stream()
                 .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
                 .collect(Collectors.toSet());
-        excludeRoot.rebuildTree(excludeResourceSet);
+        excludeRoot.rebuildTree(excludeResources);
     }
 
     @Override
