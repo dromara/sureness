@@ -6,9 +6,7 @@ import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -34,8 +32,8 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     /** exclude path-role, match tree storage **/
     private final TirePathTree excludeRoot = new TirePathTree();
 
-    /** Match tree data content provider **/
-    private PathTreeProvider pathTreeProvider;
+    /** Match tree data content provider list **/
+    private List<PathTreeProvider> pathTreeProviderList;
 
     /** Whether the matching tree data has been loaded **/
     private volatile boolean isTreeInit;
@@ -65,47 +63,37 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         isTreeInit = false;
         checkComponentInit();
         clearTree();
-        Set<String> resources = pathTreeProvider.providePathData();
-        Set<String> excludeResource = pathTreeProvider.provideExcludedResource();
+        final Set<String> resources = new HashSet<>();
+        pathTreeProviderList.forEach(provider -> resources.addAll(provider.providePathData()));
+        final Set<String> excludeResources = new HashSet<>();
+        pathTreeProviderList.forEach(provider -> excludeResources.addAll(provider.provideExcludedResource()));
 
-        if (resources != null) {
-            resources = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
-            root.buildTree(resources);
-        } else {
-            logger.error("sureness - pathTreeProvider.providePathData is null, can not load resource");
-        }
+        Set<String> resourceSet = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
+        root.buildTree(resourceSet);
 
-        if (excludeResource != null) {
-            excludeResource = excludeResource.stream()
-                    .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
-                    .collect(Collectors.toSet());
-            excludeRoot.buildTree(excludeResource);
-        } else {
-            logger.error("sureness - pathTreeProvider.provideExcludedResource is null, can not exclude resource");
-        }
+        Set<String> excludeResourceSet = excludeResources.stream()
+                .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
+                .collect(Collectors.toSet());
+        excludeRoot.buildTree(excludeResourceSet);
         isTreeInit = true;
     }
 
     @Override
     public void rebuildTree() {
         checkComponentInit();
-        Set<String> resources = pathTreeProvider.providePathData();
-        Set<String> excludeResource = pathTreeProvider.provideExcludedResource();
-        if (resources != null) {
-            resources = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
-            root.rebuildTree(resources);
-        } else {
-            logger.error("sureness - pathTreeProvider.providePathData is null, can not load resource");
-        }
+        clearTree();
+        final Set<String> resources = new HashSet<>();
+        pathTreeProviderList.forEach(provider -> resources.addAll(provider.providePathData()));
+        final Set<String> excludeResources = new HashSet<>();
+        pathTreeProviderList.forEach(provider -> excludeResources.addAll(provider.provideExcludedResource()));
 
-        if (excludeResource != null) {
-            excludeResource = excludeResource.stream()
-                    .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
-                    .collect(Collectors.toSet());
-            excludeRoot.rebuildTree(excludeResource);
-        } else {
-            logger.error("sureness - pathTreeProvider.provideExcludedResource is null, can not exclude resource");
-        }
+        Set<String> resourceSet = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
+        root.rebuildTree(resourceSet);
+
+        Set<String> excludeResourceSet = excludeResources.stream()
+                .map(resource -> resource.concat("===").concat(EXCLUDE_ROLE).toLowerCase())
+                .collect(Collectors.toSet());
+        excludeRoot.rebuildTree(excludeResourceSet);
     }
 
     @Override
@@ -116,16 +104,32 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     }
 
     private void checkComponentInit() {
-        if (pathTreeProvider == null) {
+        if (pathTreeProviderList == null) {
             throw new SurenessNoInitException("DefaultPathRoleMatcher init error : component init not complete");
         }
     }
 
     private void clearTree() {
         root.clearTree();
+        excludeRoot.clearTree();
     }
 
     public void setPathTreeProvider(PathTreeProvider pathTreeProvider) {
-        this.pathTreeProvider = pathTreeProvider;
+        if (pathTreeProviderList == null) {
+            pathTreeProviderList = new LinkedList<>();
+        }
+        pathTreeProviderList.add(pathTreeProvider);
+    }
+
+    public void setPathTreeProviderList(List<PathTreeProvider> providerList) {
+        pathTreeProviderList = providerList;
+    }
+
+    public DefaultPathRoleMatcher addPathTreeProvider(PathTreeProvider pathTreeProvider) {
+        if (pathTreeProviderList == null) {
+            pathTreeProviderList = new LinkedList<>();
+        }
+        pathTreeProviderList.add(pathTreeProvider);
+        return this;
     }
 }
