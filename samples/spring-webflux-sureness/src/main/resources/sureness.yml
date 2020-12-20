@@ -24,6 +24,9 @@ excludedResource:
   - /api/v3/host===get
   - /api/v3/book===get
   - /api/v1/account/auth===post
+  - /**/*.html===get
+  - /**/*.js===get
+  - /**/*.css===get
 
 # account info
 # there are three account: admin, root, tom
