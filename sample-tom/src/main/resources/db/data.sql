@@ -13,6 +13,9 @@ insert into auth_resource (id, name, code, uri, type, method, status, descriptio
 insert into auth_resource (id, name, code, uri, type, method, status, description) values (109, 'Delete role', 'DELETE_ROLE', '/role/*', 'role', 'DELETE', 1, null);
 insert into auth_resource (id, name, code, uri, type, method, status, description) values (110, 'Get role', 'GET_ROLES', '/role/*/*', 'role', 'GET', 1, null);
 insert into auth_resource (id, name, code, uri, type, method, status, description) values (111, 'User get custom token', 'ACCOUNT_CUSTOM_TOKEN', '/auth/custom/token', 'account', 'POST', 9, null);
+insert into auth_resource (id, name, code, uri, type, method, status, description) values (112, 'Static Resource', 'Static Resource', '/**/*.html', 'static', 'GET', 9, null);
+insert into auth_resource (id, name, code, uri, type, method, status, description) values (113, 'Static Resource', 'Static Resource', '/**/*.js', 'static', 'GET', 9, null);
+insert into auth_resource (id, name, code, uri, type, method, status, description) values (114, 'Static Resource', 'Static Resource', '/**/*.css', 'static', 'GET', 9, null);
 
 -- ----------------------------
 -- Records of auth_role
