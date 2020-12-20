@@ -60,12 +60,12 @@ Resource path matching see: [Uri Match](docs/path-match.md)
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.3</version>
+    <version>0.4</version>
 </dependency>
 ```
 2. When use gradle build project, add gradle coordinate  
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.3'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4'
 ```
 3. When not java build project, add sureness-core.jar to classPath  
 ```
