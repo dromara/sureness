@@ -122,11 +122,14 @@ public class TirePathTree {
      * @return java.lang.String roles eg: [role1,role2]
      */
     public String searchPathFilterRoles(String path) {
-        if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
+        if (path == null || "".equals(path)) {
             return null;
         }
         if (logger.isTraceEnabled()) {
             logger.trace("sureness - searchPathFilterRoles, path is {}", path);
+        }
+        if (!path.startsWith(URL_PATH_SPLIT)) {
+            path = URL_PATH_SPLIT.concat(path);
         }
         path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
         path = path.substring(1).toLowerCase();
@@ -320,11 +323,14 @@ public class TirePathTree {
      * @param path path = /api/v1/host/detail===GET===[role2,role3,role4]
      */
     private void insertNode(String path, Node rootNode) {
-        if (path == null || "".equals(path) || !path.startsWith(URL_PATH_SPLIT)) {
+        if (path == null || "".equals(path)) {
             return;
         }
         if (logger.isTraceEnabled()) {
             logger.trace("sureness - begin insertNode, path is {}", path);
+        }
+        if (!path.startsWith(URL_PATH_SPLIT)) {
+            path = URL_PATH_SPLIT.concat(path);
         }
         path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
         // remove the first /
