@@ -9,10 +9,11 @@ import java.util.regex.Pattern;
 
 /**
  * Improved dictionary matching tree
- * support regular * **
+ * support regular *str * **
+ * the * in *str can match zero or more character eg: *.html -> content.html
  * the * can match zero or one directory
  * the ** can match zero or more directories
- * Match priority: Raw string > * > **
+ * Match priority: Raw string > *str > * > **
  * @author tomsun28
  * @date 19:25 2019-01-18
  */
