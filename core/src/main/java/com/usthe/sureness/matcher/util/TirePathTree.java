@@ -4,11 +4,7 @@ package com.usthe.sureness.matcher.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -34,6 +30,10 @@ public class TirePathTree {
     private static final int PATH_NODE_NUM_3 = 3;
     private static final int PATH_NODE_NUM_2 = 2;
     private static final Pattern PATH_SPLIT_PATTERN = Pattern.compile("/+");
+    /**
+     * str - Pattern.compile(str)
+     */
+    private static final Map<String, Pattern> PATTERN_MAP = new HashMap<>(8);
 
     /**
      * root node
@@ -156,8 +156,9 @@ public class TirePathTree {
             return null;
         }
 
+        String currentNodeData = current.getData();
         // fast fail
-        if (isNoMatchString(current.getData(), urlPac[currentFlow])) {
+        if (isNoMatchString(currentNodeData, urlPac[currentFlow])) {
             return null;
         }
         if (currentFlow == urlPac.length - 1 && (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType()))) {
@@ -181,13 +182,13 @@ public class TirePathTree {
         }
 
         String matchRole = null;
-        if (current.getData().equals(urlPac[currentFlow])) {
+        if (currentNodeData.equals(urlPac[currentFlow]) || isPatternStr(currentNodeData)) {
             matchRole = searchPathRoleInChildren(current, urlPac, currentFlow, method);
             if (matchRole != null) {
                 return matchRole;
             }
         }
-        if (current.getData().equals(MATCH_ONE)) {
+        if (currentNodeData.equals(MATCH_ONE)) {
             matchRole = searchPathRoleInChildren(current, urlPac, currentFlow - 1, method);
             if (matchRole != null) {
                 return matchRole;
@@ -197,7 +198,7 @@ public class TirePathTree {
                 return matchRole;
             }
         }
-        if (current.getData().equals(MATCH_ALL)) {
+        if (currentNodeData.equals(MATCH_ALL)) {
             matchRole = searchPathRoleInChildren(current, urlPac, currentFlow - 1, method);
             if (matchRole != null) {
                 return matchRole;
@@ -234,6 +235,15 @@ public class TirePathTree {
                 return matchRole;
             }
         }
+        if (current.getPatternChildren() != null) {
+            for (String patternChild : current.getPatternChildren()) {
+                Node matchPatternNode = current.getChildren().get(patternChild);
+                matchRole = searchPathRole(matchPatternNode, urlPac, currentFlow + 1, method);
+                if (matchRole != null) {
+                    return matchRole;
+                }
+            }
+        }
         if (current.getChildren().containsKey(MATCH_ONE)) {
             Node matchOneNode = current.getChildren().get(MATCH_ONE);
             matchRole = searchPathRole(matchOneNode, urlPac, currentFlow + 1, method);
@@ -250,9 +260,9 @@ public class TirePathTree {
 
     /**
      * Determine whether the pattern does not match pathNode
-     * @param pattern pattern eg: * **
+     * @param pattern pattern eg: raw str, *html, *, **
      * @param pathNode pathNode
-     * @return match return true, else false
+     * @return not match return true, else false
      */
     private boolean isNoMatchString(String pattern, String pathNode) {
         if (pattern == null && pathNode == null) {
@@ -261,8 +271,47 @@ public class TirePathTree {
         if (pattern == null || pathNode == null) {
             return true;
         }
-        return !(pattern.equals(pathNode) || MATCH_ONE.equals(pattern)
-                || MATCH_ALL.equals(pattern));
+        if (pattern.equals(pathNode) || MATCH_ONE.equals(pattern)
+                || MATCH_ALL.equals(pattern)) {
+            return false;
+        }
+        if (!isPatternStr(pattern)) {
+            return true;
+        }
+        Pattern matcher = PATTERN_MAP.get(pattern);
+        if (matcher == null) {
+            String patternStr = makeJavaPatternStr(pattern);
+            matcher = Pattern.compile(patternStr);
+            PATTERN_MAP.put(pattern, matcher);
+        }
+        return !matcher.matcher(pathNode).matches();
+    }
+
+    /**
+     * if is a pattern string eg: *html , *.js
+     * @param str string
+     * @return yes return true else false
+     */
+    private boolean isPatternStr(String str) {
+        return str != null
+                && str.contains(MATCH_ONE)
+                && !MATCH_ONE.equals(str)
+                && !MATCH_ALL.equals(str);
+    }
+
+    /**
+     * make the java pattern str for sureness rule
+     * @param pattern pattern
+     * @return java pattern
+     */
+    private String makeJavaPatternStr(String pattern) {
+        return pattern
+                .replace("*", "\\S*")
+                .replace(".", "\\.")
+                .replace("?","\\?")
+                .replace("+", "\\+")
+                .replace("$", "\\$")
+                .replace("^","\\^");
     }
 
     /**
@@ -292,6 +341,16 @@ public class TirePathTree {
         for (String urlData : urlPac) {
             if (!current.getChildren().containsKey(urlData)) {
                 current.insertChild(urlData);
+                // if urlData is match *xxx, insert patternChildren eg: *html
+                if (isPatternStr(urlData)) {
+                    Pattern pattern = PATTERN_MAP.get(urlData);
+                    if (pattern == null) {
+                        String patternStr = makeJavaPatternStr(urlData);
+                        pattern = Pattern.compile(patternStr);
+                        PATTERN_MAP.put(urlData, pattern);
+                    }
+                    current.insertPatternChild(urlData);
+                }
             }
             pre = current;
             current = current.getChildren().get(urlData);
@@ -330,6 +389,9 @@ public class TirePathTree {
         /** children nodes **/
         private Map<String, Node> children;
 
+        /** pattern children list **/
+        private List<String> patternChildren;
+
         private Node(String data, String nodeType) {
             this.data = data;
             this.nodeType = nodeType;
@@ -345,8 +407,15 @@ public class TirePathTree {
             this.children.put(data, new Node(data));
         }
 
-        private void insertChild(String data,String nodeType) {
+        private void insertChild(String data, String nodeType) {
             this.children.put(data, new Node(data, nodeType));
+        }
+
+        private void insertPatternChild(String data) {
+            if (patternChildren == null) {
+                patternChildren = new LinkedList<>();
+            }
+            this.patternChildren.add(data);
         }
 
         private String getNodeType() {
@@ -373,5 +442,8 @@ public class TirePathTree {
             this.children = children;
         }
 
+        public List<String> getPatternChildren() {
+            return patternChildren;
+        }
     }
 }
