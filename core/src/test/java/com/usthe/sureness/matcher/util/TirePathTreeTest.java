@@ -68,8 +68,13 @@ public class TirePathTreeTest {
         paths.add("/**===get===[role9]");
         paths.add("/er/**/swagger===get===[role10]");
         paths.add("/swagger/**===get===[role11]");
+        // ignore resource
+        paths.add("/**/*.html===post===[role8]");
+        paths.add("/**/*.css===post===[role8]");
+        paths.add("/**/*.js===post===[role8]");
+
         root.buildTree(paths);
-        Assert.assertEquals(27, root.getResourceNum());
+        Assert.assertEquals(30, root.getResourceNum());
     }
 
     @Test
@@ -111,6 +116,10 @@ public class TirePathTreeTest {
         Assert.assertEquals("[role10]", root.searchPathFilterRoles("/er/swagger===get"));
         Assert.assertNull(root.searchPathFilterRoles("/api/v6/book/ha/good===put"));
         Assert.assertEquals("[role11]", root.searchPathFilterRoles("/swagger===get"));
+        // ignore resource
+        Assert.assertEquals("[role8]", root.searchPathFilterRoles("/content-ui.html===post"));
+        Assert.assertEquals("[role8]", root.searchPathFilterRoles("/api/user/ui.js===post"));
+        Assert.assertEquals("[role8]", root.searchPathFilterRoles("/node/v2/demo.css===post"));
 
     }
 }
