@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# <font size="14p">sureness - 面向restful api的认证鉴权</font>
+# <font size="14p">sureness - 面向restful api的认证鉴权框架</font>
 
 > A simple and efficient open-source jvm security framework that focus on the protection of restful api.
 
@@ -53,7 +53,7 @@ api的保护可以认为：认证-请求携带的认证信息是否校验通过�
 
 ## 快速开始  
 
-##### <font color="red">使用前一些约定</font>  
+#### <font color="red">使用前一些约定</font>  
 
 - `sureness`尽量简洁,基于`rbac`,只有(角色-资源)的映射,没有(权限)动作映射，即 用户-角色-资源  
 - 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
@@ -63,9 +63,9 @@ api的保护可以认为：认证-请求携带的认证信息是否校验通过�
 
 资源路径匹配详见 [url路径匹配](docs/cn/path-match.md)  
 
-##### 项目中加入sureness  
+#### 项目中加入sureness  
 
-1. 项目使用`maven`构建,加入`maven`坐标  
+项目使用`maven`或`gradle`构建,加入坐标    
 ```
 <dependency>
     <groupId>com.usthe.sureness</groupId>
@@ -73,58 +73,66 @@ api的保护可以认为：认证-请求携带的认证信息是否校验通过�
     <version>0.4</version>
 </dependency>
 ```
-
-2. 项目使用`gradle`构建,`gradle`坐标  
 ```
 compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4'
 ```
 
-3. 项目为普通工程,加入`sureness-core.jar`依赖  
+#### 使用默认配置来配置sureness    
+默认配置使用了文件数据源sureness.yml作为账户权限数据源  
+默认配置支持了jwt, basic auth, digest auth认证  
 ```
-在 mvnrepository 下载jar  
-https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core
+@Bean
+public DefaultSurenessConfig surenessConfig() {
+    return new DefaultSurenessConfig();
+}
 ```
 
-##### 添加拦截所有请求的过滤器入口  
+#### 添加过滤器拦截所有请求    
 
+`sureness`的本质就拦截所有rest请求对其认证鉴权判断。  
 入口拦截器器实现一般可以是 `filter or spring interceptor`  
-在拦截器加入sureness的安全过滤器，如下:  
-入口,一般放在拦截所有请求的`filter`:  
+在拦截器中加入`sureness`的安全过滤器，如下:  
 
 ```
-SurenessSecurityManager.getInstance().checkIn(servletRequest)
+SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
-##### 实现相关异常处理  
+#### 实现认证鉴权相关异常处理流程      
 
-`sureness`使用异常处理流程,我们需要对`checkIn`抛出的异常做自定义处理,  
-安全过滤器,认证鉴权成功直接通过,失败抛出特定异常,捕获异常,如下: 
+`sureness`使用异常处理流程：  
+1. 若认证鉴权成功,`checkIn`会返回包含用户信息的`SubjectSum`对象  
+2. 若中间认证鉴权失败，`checkIn`会抛出不同类型的认证鉴权异常,用户需根据这些异常来继续后面的流程(返回相应的请求相应)
+
+这里我们就需要对`checkIn`抛出的异常做自定义处理,认证鉴权成功直接通过,失败抛出特定异常进行处理,如下:  
 
 ```
-        try {
-            SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
-        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
-            // 账户创建相关异常 
-        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            // 账户禁用相关异常
-        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
-            // 认证失败相关异常
-        } catch (UnauthorizedException e5) {
-            // 鉴权失败相关异常
-        } catch (RuntimeException e) {
-            // 其他自定义异常
-        }
+try {
+    SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
+} catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
+    // 账户创建相关异常 
+} catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
+    // 账户禁用相关异常
+} catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
+    // 认证失败相关异常
+} catch (UnauthorizedException e5) {
+    // 鉴权失败相关异常
+} catch (SurenessAuthenticationException | SurenessAuthorizationException e) {
+    // 其他自定义异常
+}
 ```
 
-异常详见 [默认异常](docs/cn/default-exception.md)  
+异常详见 [默认异常类型](docs/cn/default-exception.md)  
 
-##### 加载配置数据  
+#### 配置权限账户数据源      
 
-`sureness`认证鉴权，当然也需要我们配置自己的配置数据 - 账户数据，角色权限数据等  
-这些配置数据可能来自文本，关系数据库，非关系数据库  
-我们提供了配置数据接口`SurenessAccountProvider`, `PathTreeProvider`, 用户可以实现此接口实现自定义配置数据源  
-当前我们也提供默认文本形式的配置数据实现 `DocumentResourceDefaultProvider`, 用户可以配置`sureness.yml`来配置数据  
-默认文本数据源`sureness.yml`配置详见文档 [默认数据源](docs/cn/default-datasource.md)  
+`sureness`认证鉴权，当然也需要我们提供自己的账户数据，角色权限数据等，这些数据可能来自文本，关系数据库，非关系数据库，注解等。  
+我们提供了数据源接口：`SurenessAccountProvider` - 账户数据接口, `PathTreeProvider` - 资源权限数据接口，用户可以实现此接口实现自定义数据源。  
+
+当前我们也提供文本形式的数据源实现 `DocumentResourceDefaultProvider` 和 注解形式的资源权限数据源实现 `AnnotationLoader`。  
+如果是使用了[默认sureness配置-DefaultSurenessConfig](#使用默认配置来配置sureness),其配置的是文本数据源，用户可以直接通过修改`sureness.yml`文件来配置数据。    
+
+文本数据源`sureness.yml`配置使用方式详见文档 [默认文本数据源](docs/cn/default-datasource.md)   
+注解形式的资源权限数据源配置使用方式详见文档 [注解资源权限数据源](docs/cn/annotation-datasource.md)    
 
 我们提供了使用代码`DEMO`：  
 默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
@@ -134,7 +142,7 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
 
 ## 进阶扩展  
 
-如果了解 [处理流程](#处理流程),就大概知道`sureness`提供的扩展点    
+如果了解 [处理流程](docs/cn/design.md),就大概知道`sureness`提供的扩展点    
 `sureness`支持自定义`subject`，自定义`subjectCreator`注册，自定义`processor`处理器等  
 
 扩展之前需要了解以下接口:  
@@ -165,12 +173,11 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
 一个`subject`当然也可以被不同的`processor`处理,所以可以单独自定义`processor`   
 实现`Processor`接口,设置支持的`subject`,实现处理该`subject`的逻辑  
 
-
 具体扩展实践请参考 [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
 
 
 ## 参与贡献  
-非常欢迎参与项目贡献，帮助sureness走得更远更好。对项目代码有疑问或者建议请直接联系 @tomsun28  
+非常欢迎参与项目贡献，跟sureness一起走得更远更好。对项目代码有疑问或者建议请直接联系 @tomsun28  
 
 仓库的组成部分:  
 - [sureness的核心代码--sureness-core](core)  
@@ -178,13 +185,9 @@ SurenessSecurityManager.getInstance().checkIn(servletRequest)
 - [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
 - [各个框架使用sureness的样例项目(javalin,ktor,quarkus)--samples](samples)  
 
-##### 高性能匹配      
+#### 高性能匹配      
 
 ![pathRoleMatcher](/docs/_images/PathRoleMatcher.svg)  
-
-##### 处理流程   
-
-![sureness-core](/docs/_images/sureness-core.svg)  
 
 ## License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)

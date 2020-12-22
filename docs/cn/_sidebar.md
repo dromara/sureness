@@ -2,9 +2,10 @@
   - [介绍](cn/README.md "introduce")
   - [快速开始](cn/quickstart.md "quick start greatest")  
   - [URI路径匹配](cn/path-match.md)  
-  - [默认数据源](cn/default-datasource.md)  
+  - [默认文本数据源](cn/default-datasource.md)  
+  - [注解权限数据源](cn/annotation-datasource.md)    
   - [默认认证方式](cn/default-auth.md)
-  - [默认异常](cn/default-exception.md)  
+  - [默认异常类型](cn/default-exception.md)  
   
 - 进阶扩展
   - [扩展点](cn/extend-point.md)
@@ -12,7 +13,6 @@
   - [自定义Subject](cn/custom-subject.md)
   - [自定义数据源](cn/custom-datasource.md)
   - [自定义Processor](cn/custom-processor.md)
-
 - 集成案例
   - [10分钟项目集成](cn/sample-bootstrap.md)
   - [30分钟项目集成](cn/sample-tom.md)
