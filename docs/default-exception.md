@@ -1,7 +1,12 @@
-## Default Sureness Exception    
-`sureness` uses the exception handling process, we need to customize the corresponding exceptions thrown by the authentication failure or unauthorized access in the authentication process of `checkIn`.  
+## Default Sureness Auth Exception    
+`sureness` uses exception handling process:  
+1. If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.  
+2. If auth failure, method - `checkIn` will throw different types of auth exceptions, 
+and users need to continue the subsequent process based on these exceptions.(like return the request response)  
 
-If the authentication is successful, it will pass directly, if it fails, a specific exception will be thrown, and the exception will be caught, eg:  
+Here we need to customize the exceptions thrown by `checkIn`, 
+passed directly when auth success, catch exception when auth failure and do something:   
+
 ```
         try {
             SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);

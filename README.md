@@ -114,7 +114,7 @@ try {
 
 Detail sureness auth exception see: [Default Sureness Auth Exception](docs/default-exception.md)   
 
-### Load Auth Config DataSource   
+#### Load Auth Config DataSource   
 
 Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
 The dataSource can load from txt, dataBase, no dataBase or annotation etc.  

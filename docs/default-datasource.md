@@ -1,4 +1,4 @@
-## Default Config DataSource     
+## Default Document Config DataSource     
 
 Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
 The dataSource can load from txt, dataBase or no dataBase etc.
