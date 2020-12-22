@@ -101,7 +101,7 @@ SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletReques
 
 `sureness`使用异常处理流程：  
 1. 若认证鉴权成功,`checkIn`会返回包含用户信息的`SubjectSum`对象  
-2. 若中间认证鉴权失败，`checkIn`会抛出不同类型的认证鉴权异常,用户需根据这些异常来继续后面的流程(返回相应的请求相应)
+2. 若中间认证鉴权失败，`checkIn`会抛出不同类型的认证鉴权异常,用户需根据这些异常来继续后面的流程(返回相应的请求响应)
 
 这里我们就需要对`checkIn`抛出的异常做自定义处理,认证鉴权成功直接通过,失败抛出特定异常进行处理,如下:  
 

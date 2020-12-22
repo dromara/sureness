@@ -2,9 +2,10 @@
   - [Introduce](README.md "introduce")
   - [Quick Start](quickstart.md "quick start greatest")  
   - [URI Match](path-match.md)  
-  - [Default Datasource](default-datasource.md)  
-  - [Default Auth](default-auth.md)
-  - [Default Exception](default-exception.md)  
+  - [Default Document Datasource](default-datasource.md)  
+  - [Annotation Datasource](annotation-datasource.md)  
+  - [Default Auth Types](default-auth.md)  
+  - [Default Auth Exception](default-exception.md)  
   
 - Advanced Extend
   - [Extend Point](extend-point.md)
