@@ -1,6 +1,6 @@
 ## Quick Start 
 
-##### <font color="red">Some Conventions</font>  
+#### <font color="red">Some Conventions</font>  
 
 - Based RBAC, only has role-resource, no permission action    
 - We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
@@ -10,9 +10,9 @@
 
 Resource path matching see: [Uri Match](path-match.md)  
 
-##### Add sureness In Project  
+#### Add sureness In Your Project  
 
-1. When use maven build project, add maven coordinate  
+When use maven or gradle build project, add coordinate  
 ```
 <dependency>
     <groupId>com.usthe.sureness</groupId>
@@ -20,55 +20,74 @@ Resource path matching see: [Uri Match](path-match.md)
     <version>0.4</version>
 </dependency>
 ```
-2. When use gradle build project, add gradle coordinate  
 ```
 compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4'
 ```
-3. When not java build project, add sureness-core.jar to classPath  
-```
-download this jar at mvnrepository  
-https://mvnrepository.com/artifact/com.usthe.sureness/sureness-core
-```
 
-##### Add an Interceptor Intercepting All Requests  
+#### Use the default configuration to configure sureness  
 
-The interceptor can be a filter or a spring interceptor.  
-The interceptor intercepts all request to check them.  
+The default configuration -`DefaultSurenessConfig` uses the document datasource sureness.yml as the auth datasource.  
+It supports jwt, basic auth, digest auth authentication.  
 ```
-SurenessSecurityManager.getInstance().checkIn(servletRequest)
+@Bean
+public DefaultSurenessConfig surenessConfig() {
+    return new DefaultSurenessConfig();
+}
 ```
 
-##### Implement Exception Flow When Exception Throw  
-Authentication passed directly, failure throw exception, catch exception and do something:   
-
-```
-        try {
-            SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
-        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
-            // Create subject error related execption 
-        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            // Account disable related exception
-        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
-            // Authentication failure related exception
-        } catch (UnauthorizedException e5) {
-            // Authorization failure related exception
-        } catch (RuntimeException e) {
-            // other sureness exception
-        }
-```
-
-Detail sureness exception see: [Default Sureness Exception](default-exception.md)  
-
-### Load Config DataSource   
+#### Load Auth Config DataSource   
 
 Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
-The dataSource can load from txt, dataBase or no dataBase etc.
-We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.
-Also, we provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml. 
+The dataSource can load from txt, dataBase, no dataBase or annotation etc.  
+We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.  
+`SurenessAccountProvider` - Account datasource provider interface  
+`PathTreeProvider` - Resource uri-role datasource provider interface   
 
-Default Document DataSource Config - sureness.yml, see: [Default DataSource](default-datasource.md)  
+We provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml.   
+We also provider dataSource implement which load dataSource form annotation - `AnnotationLoader`.   
 
-If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](sample-bootstrap.md)       
-If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](sample-tom.md)     
+Default Document DataSource Config - sureness.yml, see: [Default Document DataSource](default-datasource.md)   
+Annotation DataSource Config Detail, see: [Annotation DataSource](annotation-datasource.md)  
 
-**Have Fun**          
+If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
+
+
+#### Add an Interceptor Intercepting All Requests  
+
+The essence of `sureness` is to intercept all rest requests for authenticating and Authorizing.     
+The interceptor can be a filter or a spring interceptor, it intercepts all request to check them.  
+```
+SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
+```
+
+#### Implement Auth Exception Handling Process    
+
+`sureness` uses exception handling process:  
+1. If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.  
+2. If auth failure, method - `checkIn` will throw different types of auth exceptions, 
+and users need to continue the subsequent process based on these exceptions.(like return the request response)  
+
+Here we need to customize the exceptions thrown by `checkIn`, 
+passed directly when auth success, catch exception when auth failure and do something:    
+
+```
+try {
+    SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
+} catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
+    // Create subject error related execption 
+} catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
+    // Account disable related exception
+} catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
+    // Authentication failure related exception
+} catch (UnauthorizedException e5) {
+    // Authorization failure related exception
+} catch (SurenessAuthenticationException | SurenessAuthorizationException e) {
+    // other sureness exception
+}
+```
+
+Detail sureness auth exception see: [Default Sureness Auth Exception](default-exception.md)   
+
+**Have Fun**      
+ 

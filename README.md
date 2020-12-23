@@ -78,6 +78,24 @@ public DefaultSurenessConfig surenessConfig() {
 }
 ```
 
+#### Load Auth Config DataSource   
+
+Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
+The dataSource can load from txt, dataBase, no dataBase or annotation etc.  
+We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.  
+`SurenessAccountProvider` - Account datasource provider interface  
+`PathTreeProvider` - Resource uri-role datasource provider interface   
+
+We provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml.   
+We also provider dataSource implement which load dataSource form annotation - `AnnotationLoader`.   
+
+Default Document DataSource Config - sureness.yml, see: [Default Document DataSource](docs/default-datasource.md)   
+Annotation DataSource Config Detail, see: [Annotation DataSource](docs/annotation-datasource.md)  
+
+If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
+
+
 #### Add an Interceptor Intercepting All Requests  
 
 The essence of `sureness` is to intercept all rest requests for authenticating and Authorizing.     
@@ -113,23 +131,6 @@ try {
 ```
 
 Detail sureness auth exception see: [Default Sureness Auth Exception](docs/default-exception.md)   
-
-#### Load Auth Config DataSource   
-
-Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
-The dataSource can load from txt, dataBase, no dataBase or annotation etc.  
-We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.  
-`SurenessAccountProvider` - Account datasource provider interface  
-`PathTreeProvider` - Resource uri-role datasource provider interface   
-
-We provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml.   
-We also provider dataSource implement which load dataSource form annotation - `AnnotationLoader`.   
-
-Default Document DataSource Config - sureness.yml, see: [Default Document DataSource](docs/default-datasource.md)   
-Annotation DataSource Config Detail, see: [Annotation DataSource](docs/annotation-datasource.md)  
-
-If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
 
 **Have Fun**      
 
