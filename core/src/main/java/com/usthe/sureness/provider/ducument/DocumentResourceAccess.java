@@ -33,6 +33,9 @@ public class DocumentResourceAccess {
         Yaml yaml = new Yaml();
         InputStream inputStream = DocumentResourceAccess.class.getClassLoader().getResourceAsStream(yamlFileName);
         if (inputStream == null) {
+            inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(yamlFileName);
+        }
+        if (inputStream == null) {
             File yamlFile = new File(yamlFileName);
             if (yamlFile.exists()) {
                 try (FileInputStream fileInputStream = new FileInputStream(yamlFile)) {
