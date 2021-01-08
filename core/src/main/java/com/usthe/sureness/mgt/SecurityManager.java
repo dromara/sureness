@@ -14,15 +14,6 @@ import java.util.List;
  */
 public interface SecurityManager {
 
-
-    /**
-     * auth entrance, put the subject in authentication and authorization process
-     * @param subject subject
-     * @return com.usthe.sureness.subject.Subject
-     * @throws BaseSurenessException sureness exception
-     */
-    SubjectSum checkIn(Subject subject) throws BaseSurenessException;
-
     /**
      * auth entrance, put the request in authentication and authorization process
      * @param var1 request

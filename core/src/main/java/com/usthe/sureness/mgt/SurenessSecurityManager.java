@@ -58,30 +58,33 @@ public class SurenessSecurityManager implements SecurityManager {
     }
 
     @Override
-    public SubjectSum checkIn(Subject subject) throws BaseSurenessException {
-        // Determine whether the requested resource is a filtered resource
-        // if yes, pass directly
-        if (pathRoleMatcher.isExcludedResource(subject)) {
-            return null;
-        }
-        pathRoleMatcher.matchRole(subject);
-        return processorManager.process(subject);
-    }
-
-    @Override
     public SubjectSum checkIn(Object var1) throws BaseSurenessException {
         checkComponentInit();
 
         // Create a subject list to try auth one by one
         List<Subject> subjectList = createSubject(var1);
         RuntimeException lastException = new UnsupportedSubjectException("this request can not " +
-                "create subject by creators");
+                "create subject by creators,please config no subject creator by default");
 
         // for the subject keys, try one by one
         // if one success, pass and return directly
+        boolean noTryExcluded = true;
+        Subject preSubject = null;
         for (Subject thisSubject : subjectList) {
             try {
-                return checkIn(thisSubject);
+                // Determine whether the requested resource is a filtered resource
+                // if yes, pass directly
+                if (noTryExcluded && pathRoleMatcher.isExcludedResource(thisSubject)) {
+                    return null;
+                }
+                noTryExcluded = false;
+                if (preSubject == null) {
+                    pathRoleMatcher.matchRole(thisSubject);
+                    preSubject = thisSubject;
+                } else {
+                    thisSubject.setSupportRoles(preSubject.getSupportRoles());
+                }
+                return processorManager.process(thisSubject);
             } catch (BaseSurenessException e) {
                 lastException = e;
             }
