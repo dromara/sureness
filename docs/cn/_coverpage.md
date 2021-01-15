@@ -1,6 +1,6 @@
 ![logo](../_media/hat-128.svg)
 
-# sureness <small>0.4 for jvm</small>  
+# sureness <small>0.4.2 for jvm</small>  
 
 > A Simple and Efficient Open-source Jvm Security Framework that Focus on Protection of Restful Api.  
 

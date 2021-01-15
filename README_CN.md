@@ -70,11 +70,11 @@ api的保护可以认为：认证-请求携带的认证信息是否校验通过�
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4</version>
+    <version>0.4.2</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.2'
 ```
 
 #### 使用默认配置来配置sureness    
