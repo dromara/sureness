@@ -31,8 +31,9 @@ public abstract class BaseProcessor implements Processor{
 
     @Override
     public SubjectSum process(Subject var) throws SurenessAuthenticationException, SurenessAuthorizationException {
-        authorized(authenticated(var));
-        return var.generateSubjectSummary();
+        Subject subject = authenticated(var);
+        authorized(subject);
+        return subject.generateSubjectSummary();
     }
     /**
      * The interface that the authentication will call to complete the authentication
