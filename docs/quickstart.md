@@ -2,13 +2,13 @@
 
 #### <font color="red">Some Conventions</font>  
 
-- Based RBAC, only has role-resource, no permission action    
+- Based RBAC, only has role-resource, no permission action.    
 - We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
   That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
   `eg: /api/v2/book===get`    
-- User belongs some Role -- Role owns Resource -- User can access the resource  
+- User belongs some Role -- Role owns Resource -- User can access the resource.  
 
-Resource path matching see: [Uri Match](path-match.md)  
+Resource path matching see: [URI Match](path-match.md)    
 
 #### Add sureness In Your Project  
 
@@ -40,8 +40,8 @@ public DefaultSurenessConfig surenessConfig() {
 Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
 The dataSource can load from txt, dataBase, no dataBase or annotation etc.  
 We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.  
-`SurenessAccountProvider` - Account datasource provider interface  
-`PathTreeProvider` - Resource uri-role datasource provider interface   
+`SurenessAccountProvider` - Account datasource provider interface.  
+`PathTreeProvider` - Resource uri-role datasource provider interface.   
 
 We provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml.   
 We also provider dataSource implement which load dataSource form annotation - `AnnotationLoader`.   
@@ -64,9 +64,9 @@ SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletReques
 #### Implement Auth Exception Handling Process    
 
 `sureness` uses exception handling process:  
-1. If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.  
-2. If auth failure, method - `checkIn` will throw different types of auth exceptions, 
-and users need to continue the subsequent process based on these exceptions.(like return the request response)  
+1. If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.    
+2. If auth failure, method - `checkIn` will throw different types of auth exceptions.   
+Users need to continue the subsequent process based on these exceptions.(like return the request response)  
 
 Here we need to customize the exceptions thrown by `checkIn`, 
 passed directly when auth success, catch exception when auth failure and do something:    

@@ -20,14 +20,14 @@
 ## <font color="green">`Introduction`</font>
 
 
-> Sureness is a new, permission project which we learn from apache shiro and add some ideas to create it  
-> Authentication for restful api, based on RBAC, Mainly focused on the protection of restful api  
-> No specific framework dependency(support springboot, quarkus, javalin, ktor and more)  
-> Support dynamic modification of permissions
-> Support mainstream http container(servlet and jax-rs)    
-> Supports JWT, Basic Auth, Digest Auth... Can extend custom supported authentication methods  
-> [High performance due dictionary matching tree](#Why Is High Performance)  
-> Good extension interface, demo and document.   
+> Sureness is a new, permission project which we learn from apache shiro and add some ideas to create it.  
+> Authentication for restful api, based on RBAC, mainly focused on the protection of restful api.  
+> No specific framework dependency(support springboot, quarkus, javalin, ktor and more).    
+> Support dynamic modification of permissions.   
+> Support mainstream http container(servlet and jax-rs).    
+> Supports JWT, Basic Auth, Digest Auth... Can extend custom supported authentication methods.    
+> [High performance due dictionary matching tree](#Why Is High Performance ).      
+> Good extension interface, demo and document.    
 
 > The low configuration of sureness, easy to expand, and not coupled with other frameworks, enables developers to quickly and safely protect their projects in multiple scenarios.   
 
@@ -45,13 +45,13 @@
 
 #### <font color="red">Some Conventions</font>  
 
-- Based RBAC, only has role-resource, no permission action    
+- Based RBAC, only has role-resource, no permission action.    
 - We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
   That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
   `eg: /api/v2/book===get`    
-- User belongs some Role -- Role owns Resource -- User can access the resource  
+- User belongs some Role -- Role owns Resource -- User can access the resource.  
 
-Resource path matching see: [Uri Match](docs/path-match.md)  
+Resource path matching see: [URI Match](docs/path-match.md)  
 
 #### Add sureness In Your Project  
 
@@ -83,8 +83,8 @@ public DefaultSurenessConfig surenessConfig() {
 Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
 The dataSource can load from txt, dataBase, no dataBase or annotation etc.  
 We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.  
-`SurenessAccountProvider` - Account datasource provider interface  
-`PathTreeProvider` - Resource uri-role datasource provider interface   
+`SurenessAccountProvider` - Account datasource provider interface.    
+`PathTreeProvider` - Resource uri-role datasource provider interface.     
 
 We provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml.   
 We also provider dataSource implement which load dataSource form annotation - `AnnotationLoader`.   
@@ -107,9 +107,9 @@ SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletReques
 #### Implement Auth Exception Handling Process    
 
 `sureness` uses exception handling process:  
-1. If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.  
-2. If auth failure, method - `checkIn` will throw different types of auth exceptions, 
-and users need to continue the subsequent process based on these exceptions.(like return the request response)  
+1. If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.    
+2. If auth failure, method - `checkIn` will throw different types of auth exceptions.   
+Users need to continue the subsequent process based on these exceptions.(like return the request response)  
 
 Here we need to customize the exceptions thrown by `checkIn`, 
 passed directly when auth success, catch exception when auth failure and do something:    
@@ -136,17 +136,17 @@ Detail sureness auth exception see: [Default Sureness Auth Exception](docs/defau
 
 ## Advanced Use  
 
-If know sureness Process flow, maybe know these extend points    
+If know sureness Process flow, maybe know these extend points.      
 
 Sureness supports custom subject, custom subjectCreator, custom processor and more.  
 
 Suggest look these interface before extending:  
 
 - `Subject`:  Authenticated authorized  user's account interface, provide the account's username,password, request resources, roles, etc.  
-- `SubjectCreate`: create subject interface, provider create method   
-- `Processor`:  process subject interface, where happen authentication and authorization 
-- `PathTreeProvider`: resource data provider, it can load data from txt or database,etc
-- `SurenessAccountProvider`: account data provider, it can load data from txt or database,etc   
+- `SubjectCreate`: create subject interface, provider create method.   
+- `Processor`:  process subject interface, where happen authentication and authorization. 
+- `PathTreeProvider`: resource data provider, it can load data from txt or database,etc.
+- `SurenessAccountProvider`: account data provider, it can load data from txt or database,etc.   
 
 Sureness Process Flow: 
 

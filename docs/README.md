@@ -16,14 +16,14 @@
 ## <font color="green">`Introduction`</font>
 
 
-> Sureness is a new, permission project which we learn from apache shiro and add some ideas to create it  
-> Authentication for restful api, based on RBAC, Mainly focused on the protection of restful api  
-> No specific framework dependency(support springboot, quarkus, javalin, ktor and more)  
-> Support dynamic modification of permissions
-> Support mainstream http container(servlet and jax-rs)    
-> Supports JWT, Basic Auth, Digest Auth... Can extend custom supported authentication methods  
-> High performance due dictionary matching tree  
-> Good extension interface, demo and document.   
+> Sureness is a new, permission project which we learn from apache shiro and add some ideas to create it.  
+> Authentication for restful api, based on RBAC, mainly focused on the protection of restful api.  
+> No specific framework dependency(support springboot, quarkus, javalin, ktor and more).    
+> Support dynamic modification of permissions.   
+> Support mainstream http container(servlet and jax-rs).    
+> Supports JWT, Basic Auth, Digest Auth... Can extend custom supported authentication methods.    
+> High performance due dictionary matching tree.      
+> Good extension interface, demo and document.    
 
 > The low configuration of sureness, easy to expand, and not coupled with other frameworks, enables developers to quickly and safely protect their projects in multiple scenarios.   
 
