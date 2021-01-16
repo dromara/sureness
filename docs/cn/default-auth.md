@@ -35,12 +35,12 @@ Authorization: Basic dG9tOjMyMTEz
 下面是`digest auth`的认证流程(图片来源于[网络](https://www.cnblogs.com/xiaoxiaotank/p/11078571.html)):  
 ![digestFlow](../_images/digestFlow.png)  
 
-我们可以在chrome浏览器直接使用它: 访问url，在弹出的对话框中输入账户密码即可,chrome浏览器会自动进行认证流程.    
+我们可以在`chrome`浏览器直接使用它: 访问`url`，在弹出的对话框中输入账户密码即可,`chrome`浏览器会自动进行认证流程.    
 ![digestAuthChromeUse](../_images/digestAuthUse.png)    
 
 
 #### 其他认证方式  
-目前sureness默认支持这三种主流的认证方式，满足绝大部分需求，当然你也可以很轻松的自定义认证方式，详见[自定义Subject](cn/custom-subject.md)  
+目前`sureness`默认支持这三种主流的认证方式，满足绝大部分需求，当然你也可以很轻松的自定义认证方式，详见[自定义Subject](cn/custom-subject.md)  
 
 我们提供了默认认证方式的使用`DEMO`，请参考 [使用sureness10分钟项目集成案例](cn/sample-bootstrap.md)   
 当然我们也提供了自定义认证方式的扩展`DEMO`，请参考 [使用sureness30分钟项目集成案例](cn/sample-tom.md)     

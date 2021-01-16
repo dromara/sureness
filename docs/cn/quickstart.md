@@ -25,8 +25,8 @@ compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.2'
 ```
 
 #### 使用默认配置来配置sureness    
-默认配置使用了文件数据源sureness.yml作为账户权限数据源  
-默认配置支持了jwt, basic auth, digest auth认证  
+默认配置使用了文件数据源`sureness.yml`作为账户权限数据源  
+默认配置支持了`jwt, basic auth, digest auth`认证  
 ```
 @Bean
 public DefaultSurenessConfig surenessConfig() {
