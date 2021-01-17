@@ -100,7 +100,7 @@ public enum ClassScanner {
      * @param scanBasePackages package
      * @return classes
      */
-    public static List<Class<?>> scanByAnno(Class<? extends Annotation> annotation, String... scanBasePackages) {
+    public static List<Class<?>> scanByAnnotation(Class<? extends Annotation> annotation, String... scanBasePackages) {
         List<Class<?>> classList = scanPackages(scanBasePackages);
         List<Class<?>> result = new ArrayList<>();
         for (Class<?> clz : classList) {
