@@ -1,10 +1,12 @@
 package com.usthe.sureness.util;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import javax.servlet.http.HttpServletRequest;
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * @author tomsun28
  * @date 16:29 2020-03-08

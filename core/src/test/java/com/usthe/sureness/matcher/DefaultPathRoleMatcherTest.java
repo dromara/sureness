@@ -3,16 +3,16 @@ package com.usthe.sureness.matcher;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.support.NoneSubject;
 import com.usthe.sureness.subject.support.PasswordSubject;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.easymock.EasyMock.*;
 
 
@@ -26,7 +26,7 @@ public class DefaultPathRoleMatcherTest {
     private static Set<String> paths;
     private static Set<String> excludePaths;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         pathRoleMatcher = new DefaultPathRoleMatcher();
         paths = new HashSet<>();
@@ -53,7 +53,7 @@ public class DefaultPathRoleMatcherTest {
         excludePaths.add("/api/day/**/day/mo===put");
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown() {
         pathRoleMatcher = null;
     }

@@ -2,15 +2,15 @@ package com.usthe.sureness.subject.creater;
 
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.util.JsonWebTokenUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.UUID;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -24,7 +24,7 @@ public class JwtSubjectServletCreatorTest {
 
     private SubjectCreate creator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         creator = new JwtSubjectServletCreator();
     }

@@ -1,10 +1,11 @@
 package com.usthe.sureness.util;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**

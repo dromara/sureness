@@ -1,14 +1,14 @@
 package com.usthe.sureness.subject.creater;
 
 import com.usthe.sureness.subject.SubjectCreate;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.easymock.EasyMock.*;
 
 
@@ -23,7 +23,7 @@ public class BasicSubjectServletCreatorTest {
 
     private SubjectCreate creator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         creator = new BasicSubjectServletCreator();
     }
