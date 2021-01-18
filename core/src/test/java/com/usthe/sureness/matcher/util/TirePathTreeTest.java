@@ -1,13 +1,13 @@
 package com.usthe.sureness.matcher.util;
 
-
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**  path tree util test
  * @author tomsun28
@@ -17,12 +17,12 @@ public class TirePathTreeTest {
 
     private static TirePathTree root;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         root = new TirePathTree();
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown() {
         root.clearTree();
         root= null;
@@ -74,52 +74,52 @@ public class TirePathTreeTest {
         paths.add("/**/*.js===post===[role8]");
 
         root.buildTree(paths);
-        Assert.assertEquals(30, root.getResourceNum());
+        assertEquals(30, root.getResourceNum());
     }
 
     @Test
     public void searchPathFilterRoles() {
         buildTree();
         // multi path '/'
-        Assert.assertEquals("[]", root.searchPathFilterRoles("/api/v2/book/node//===get"));
+        assertEquals("[]", root.searchPathFilterRoles("/api/v2/book/node//===get"));
         // The configuration will not be overwritten or superimposed
-        Assert.assertEquals("[role2]", root.searchPathFilterRoles("/api/v2/host===get"));
+        assertEquals("[role2]", root.searchPathFilterRoles("/api/v2/host===get"));
         // multi request method
-        Assert.assertEquals("[role1]", root.searchPathFilterRoles("/api/v2/host===post"));
-        Assert.assertEquals("[role2,role3]", root.searchPathFilterRoles("/api/v2/host===delete"));
-        Assert.assertEquals("[role3,role4]", root.searchPathFilterRoles("/api/v2/host===put"));
-        Assert.assertEquals("[role2,role3,role4]", root.searchPathFilterRoles("/api/v1/host===put"));
-        Assert.assertEquals("[role2,role3,role4]", root.searchPathFilterRoles("/api/v3/host===put"));
+        assertEquals("[role1]", root.searchPathFilterRoles("/api/v2/host===post"));
+        assertEquals("[role2,role3]", root.searchPathFilterRoles("/api/v2/host===delete"));
+        assertEquals("[role3,role4]", root.searchPathFilterRoles("/api/v2/host===put"));
+        assertEquals("[role2,role3,role4]", root.searchPathFilterRoles("/api/v1/host===put"));
+        assertEquals("[role2,role3,role4]", root.searchPathFilterRoles("/api/v3/host===put"));
         // match *xxx eg: *.html
-        Assert.assertEquals("[role1]", root.searchPathFilterRoles("/api/v6/host/content.html===get"));
+        assertEquals("[role1]", root.searchPathFilterRoles("/api/v6/host/content.html===get"));
         // priority: equals normal path > match *xxx
-        Assert.assertEquals("[role3,role4]", root.searchPathFilterRoles("/api/v6/book/content.js===get"));
-        Assert.assertEquals("[role2]", root.searchPathFilterRoles("/api/v6/book/other.js===get"));
+        assertEquals("[role3,role4]", root.searchPathFilterRoles("/api/v6/book/content.js===get"));
+        assertEquals("[role2]", root.searchPathFilterRoles("/api/v6/book/other.js===get"));
         // match *
-        Assert.assertEquals("[role2,role4]", root.searchPathFilterRoles("/api/v2/ha/host===put"));
+        assertEquals("[role2,role4]", root.searchPathFilterRoles("/api/v2/ha/host===put"));
         // priority: equals normal path > match *xxx > match *
-        Assert.assertEquals("[role3,role4]", root.searchPathFilterRoles("/api/v4/mom/ha===put"));
-        Assert.assertEquals("[role4]", root.searchPathFilterRoles("/api/v4html/mom/ha===put"));
-        Assert.assertEquals("[role2,role4]", root.searchPathFilterRoles("/api/v6/mom/ha===put"));
+        assertEquals("[role3,role4]", root.searchPathFilterRoles("/api/v4/mom/ha===put"));
+        assertEquals("[role4]", root.searchPathFilterRoles("/api/v4html/mom/ha===put"));
+        assertEquals("[role2,role4]", root.searchPathFilterRoles("/api/v6/mom/ha===put"));
         // match **
-        Assert.assertEquals("[role5]", root.searchPathFilterRoles("/api/mi/tom/hello===put"));
-        Assert.assertEquals("[role6]", root.searchPathFilterRoles("/api/mo/tom/hello/day/day===get"));
-        Assert.assertEquals("[role7]", root.searchPathFilterRoles("/api/day/day/day/day/book/day/mo===put"));
+        assertEquals("[role5]", root.searchPathFilterRoles("/api/mi/tom/hello===put"));
+        assertEquals("[role6]", root.searchPathFilterRoles("/api/mo/tom/hello/day/day===get"));
+        assertEquals("[role7]", root.searchPathFilterRoles("/api/day/day/day/day/book/day/mo===put"));
         // priority: equals normal path > match *xxx > match * > match **
-        Assert.assertEquals("[role5]", root.searchPathFilterRoles("/api/v5/day/book===put"));
-        Assert.assertEquals("[role3]", root.searchPathFilterRoles("/api/demo/book/tom-app/egg===get"));
-        Assert.assertEquals("[role1]", root.searchPathFilterRoles("/api/demo/book/tom/egg===get"));
-        Assert.assertEquals("[role2]", root.searchPathFilterRoles("/api/demo/book/tom/good/egg===get"));
-        Assert.assertEquals("[role6]", root.searchPathFilterRoles("/api/v5/mom/ha===put"));
-        Assert.assertEquals("[role9]", root.searchPathFilterRoles("/api/v5/mom/ha/good===get"));
-        Assert.assertEquals("[role9]", root.searchPathFilterRoles("/api/v5/mom/ha===get"));
-        Assert.assertEquals("[role10]", root.searchPathFilterRoles("/er/swagger===get"));
-        Assert.assertNull(root.searchPathFilterRoles("/api/v6/book/ha/good===put"));
-        Assert.assertEquals("[role11]", root.searchPathFilterRoles("/swagger===get"));
+        assertEquals("[role5]", root.searchPathFilterRoles("/api/v5/day/book===put"));
+        assertEquals("[role3]", root.searchPathFilterRoles("/api/demo/book/tom-app/egg===get"));
+        assertEquals("[role1]", root.searchPathFilterRoles("/api/demo/book/tom/egg===get"));
+        assertEquals("[role2]", root.searchPathFilterRoles("/api/demo/book/tom/good/egg===get"));
+        assertEquals("[role6]", root.searchPathFilterRoles("/api/v5/mom/ha===put"));
+        assertEquals("[role9]", root.searchPathFilterRoles("/api/v5/mom/ha/good===get"));
+        assertEquals("[role9]", root.searchPathFilterRoles("/api/v5/mom/ha===get"));
+        assertEquals("[role10]", root.searchPathFilterRoles("/er/swagger===get"));
+        assertNull(root.searchPathFilterRoles("/api/v6/book/ha/good===put"));
+        assertEquals("[role11]", root.searchPathFilterRoles("/swagger===get"));
         // ignore resource
-        Assert.assertEquals("[role8]", root.searchPathFilterRoles("/content-ui.html===post"));
-        Assert.assertEquals("[role8]", root.searchPathFilterRoles("/api/user/ui.js===post"));
-        Assert.assertEquals("[role8]", root.searchPathFilterRoles("/node/v2/demo.css===post"));
+        assertEquals("[role8]", root.searchPathFilterRoles("/content-ui.html===post"));
+        assertEquals("[role8]", root.searchPathFilterRoles("/api/user/ui.js===post"));
+        assertEquals("[role8]", root.searchPathFilterRoles("/node/v2/demo.css===post"));
 
     }
 }
