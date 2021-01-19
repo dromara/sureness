@@ -15,7 +15,7 @@ import java.util.Set;
  * @date 16:00 2019-08-04
  */
 @Component
-public class ResourceProvider implements PathTreeProvider {
+public class DatabasePathTreeProvider implements PathTreeProvider {
 
     @Autowired
     private ResourceService resourceService;

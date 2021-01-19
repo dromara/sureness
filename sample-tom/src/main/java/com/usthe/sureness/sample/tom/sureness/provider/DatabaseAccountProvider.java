@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @date 22:44 2020-03-02
  */
 @Component
-public class AccountProvider implements SurenessAccountProvider {
+public class DatabaseAccountProvider implements SurenessAccountProvider {
 
     @Autowired
     AccountService accountService;
