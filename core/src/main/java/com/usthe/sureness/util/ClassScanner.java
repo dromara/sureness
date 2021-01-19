@@ -240,30 +240,30 @@ public enum ClassScanner {
     private static List<Class<?>> recursiveScan4Jar(String pkg, String jarPath) throws IOException {
         List<Class<?>> classList = new LinkedList<>();
 
-        JarInputStream jin = new JarInputStream(new FileInputStream(jarPath));
-        JarEntry entry = jin.getNextJarEntry();
-        while (entry != null) {
-            String name = entry.getName();
-            entry = jin.getNextJarEntry();
+        try (JarInputStream jin = new JarInputStream(new FileInputStream(jarPath))) {
+            JarEntry entry = jin.getNextJarEntry();
+            while (entry != null) {
+                String name = entry.getName();
+                entry = jin.getNextJarEntry();
 
-            if (!name.contains(package2Path(pkg))) {
-                continue;
-            }
-            if (isClass(name)) {
-                if (isAnonymousInnerClass(name)) {
+                if (!name.contains(package2Path(pkg))) {
                     continue;
                 }
+                if (isClass(name)) {
+                    if (isAnonymousInnerClass(name)) {
+                        continue;
+                    }
 
-                String className = classFile2SimpleClass(path2Package(name));
-                try {
-                    Class<?> clz = Thread.currentThread().getContextClassLoader().loadClass(className);
-                    classList.add(clz);
-                } catch (ClassNotFoundException | LinkageError e) {
-                    log.error("Warning: Can not load class: {}", className);
+                    String className = classFile2SimpleClass(path2Package(name));
+                    try {
+                        Class<?> clz = Thread.currentThread().getContextClassLoader().loadClass(className);
+                        classList.add(clz);
+                    } catch (ClassNotFoundException | LinkageError e) {
+                        log.error("Warning: Can not load class: {}", className);
+                    }
                 }
             }
         }
-
         return classList;
     }
 

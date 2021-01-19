@@ -21,6 +21,7 @@ public class SurenessCommonUtil {
     private static final String PATH_SPLIT = "/";
 
     private static final String RANDOM_CHAR = "abcdefghijklmnopqrstuvwxyz0123456789";
+    private static final Random RANDOM = new Random();
 
     /**
      * match the userAgent
@@ -58,10 +59,9 @@ public class SurenessCommonUtil {
         if (length < 1) {
             length = 6;
         }
-        Random random = new Random();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            int number = random.nextInt(RANDOM_CHAR.length());
+            int number = RANDOM.nextInt(RANDOM_CHAR.length());
             sb.append(RANDOM_CHAR.charAt(number));
         }
         return sb.toString();
