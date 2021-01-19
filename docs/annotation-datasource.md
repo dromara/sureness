@@ -22,12 +22,12 @@ TreePathRoleMatcher pathRoleMatcher() {
     DefaultPathRoleMatcher pathRoleMatcher = new DefaultPathRoleMatcher();
     // Instantiate the resource permission data loader - `AnnotationLoader`, 
     // which implements the PathTreeProvider interface.    
-    AnnotationLoader annotationLoaderProvider = new AnnotationLoader();
+    AnnotationPathTreeProvider pathTreeProvider = new AnnotationPathTreeProvider();
     // Set the package path to be scanned by AnnotationLoader, which will scan the 
     // @RequiresRoles, @WithoutAuth annotations on all class methods under the package path to obtain data.
-    annotationLoaderProvider.setScanPackages(Arrays.asList("com.usthe.sureness.sample.tom.controller"));
+    pathTreeProvider.setScanPackages(Arrays.asList("com.usthe.sureness.sample.tom.controller"));
     // Set the AnnotationLoader dataSource as the sureness auth dataSource. 
-    pathRoleMatcher.addPathTreeProvider(annotationLoaderProvider);
+    pathRoleMatcher.addPathTreeProvider(pathTreeProvider);
     pathRoleMatcher.buildTree();
     return pathRoleMatcher;
 }

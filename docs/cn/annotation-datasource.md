@@ -14,11 +14,11 @@ TreePathRoleMatcher pathRoleMatcher() {
     // 实例化资源权限路径匹配者,其会根据请求的路径和已有的资源权限数据匹配出所需的角色信息
     DefaultPathRoleMatcher pathRoleMatcher = new DefaultPathRoleMatcher();
     // 实例化注解形式的资源权限数据加载者AnnotationLoader，其实现了PathTreeProvider接口
-    AnnotationLoader annotationLoaderProvider = new AnnotationLoader();
+    AnnotationPathTreeProvider pathTreeProvider = new AnnotationPathTreeProvider();
     // 设置AnnotationLoader要扫描的包路径，其会扫描包路径下所有类方法上的@RequiresRoles, @WithoutAuth 注解获取数据
-    annotationLoaderProvider.setScanPackages(Arrays.asList("com.usthe.sureness.sample.tom.controller"));
+    pathTreeProvider.setScanPackages(Arrays.asList("com.usthe.sureness.sample.tom.controller"));
     // 将AnnotationLoader数据源设置为sureness的权限资源数据源
-    pathRoleMatcher.addPathTreeProvider(annotationLoaderProvider);
+    pathRoleMatcher.addPathTreeProvider(pathTreeProvider);
     pathRoleMatcher.buildTree();
     return pathRoleMatcher;
 }
