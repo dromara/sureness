@@ -30,6 +30,16 @@ public class DocumentResourceAccess {
      * @throws IOException When the file does not exist or the file is read abnormally
      */
     public static DocumentResourceEntity loadConfig() throws IOException {
+        return loadConfig(yamlFileName);
+    }
+
+    /**
+     * load config information form document
+     * @param yamlFileName yml file name
+     * @return config object
+     * @throws IOException When the file does not exist or the file is read abnormally
+     */
+    public static DocumentResourceEntity loadConfig(String yamlFileName) throws IOException {
         Yaml yaml = new Yaml();
         InputStream inputStream = DocumentResourceAccess.class.getClassLoader().getResourceAsStream(yamlFileName);
         if (inputStream == null) {
