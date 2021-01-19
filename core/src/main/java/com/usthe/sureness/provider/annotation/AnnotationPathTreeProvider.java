@@ -17,9 +17,9 @@ import java.util.Set;
  * @author tomsun28
  * @date 23:57 2020-03-16
  */
-public class AnnotationLoader implements PathTreeProvider {
+public class AnnotationPathTreeProvider implements PathTreeProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(AnnotationLoader.class);
+    private static final Logger logger = LoggerFactory.getLogger(AnnotationPathTreeProvider.class);
 
     /**
      * Specified scan package

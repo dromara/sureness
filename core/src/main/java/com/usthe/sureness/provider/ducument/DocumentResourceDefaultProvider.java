@@ -18,9 +18,11 @@ import java.util.Set;
 
 /**
  * provide resource and account data loading from yaml document
+ * Deprecated please use DocumentAccountProvider and DocumentPathTreeProvider
  * @author tomsun28
  * @date 22:40 2019-05-24
  */
+@Deprecated
 public class DocumentResourceDefaultProvider implements PathTreeProvider, SurenessAccountProvider {
 
     /** logger **/
