@@ -1,6 +1,6 @@
 package com.usthe.sureness.sample.bootstrap.controller;
 
-import com.usthe.sureness.provider.ducument.DocumentResourceDefaultProvider;
+import com.usthe.sureness.provider.ducument.DocumentAccountProvider;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.util.JsonWebTokenUtil;
@@ -28,7 +28,7 @@ public class AccountController {
     /**
      * account data provider
      */
-    private SurenessAccountProvider accountProvider = new DocumentResourceDefaultProvider();
+    private SurenessAccountProvider accountProvider = new DocumentAccountProvider();
 
     /**
      * login, this provider a get jwt api, convenient to test other api with jwt

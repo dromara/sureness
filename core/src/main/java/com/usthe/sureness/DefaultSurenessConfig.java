@@ -1,6 +1,7 @@
 package com.usthe.sureness;
 
 import com.usthe.sureness.matcher.DefaultPathRoleMatcher;
+import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.processor.DefaultProcessorManager;
 import com.usthe.sureness.processor.Processor;
@@ -8,7 +9,9 @@ import com.usthe.sureness.processor.support.DigestProcessor;
 import com.usthe.sureness.processor.support.JwtProcessor;
 import com.usthe.sureness.processor.support.NoneProcessor;
 import com.usthe.sureness.processor.support.PasswordProcessor;
-import com.usthe.sureness.provider.ducument.DocumentResourceDefaultProvider;
+import com.usthe.sureness.provider.SurenessAccountProvider;
+import com.usthe.sureness.provider.ducument.DocumentAccountProvider;
+import com.usthe.sureness.provider.ducument.DocumentPathTreeProvider;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
@@ -42,23 +45,21 @@ public class DefaultSurenessConfig {
     }
 
     private void init(String supportContainer) {
-        // resource init
-        DocumentResourceDefaultProvider resourceProvider = new DocumentResourceDefaultProvider();
-        if (logger.isDebugEnabled()) {
-            logger.debug("DocumentResourceDefaultProvider init");
-        }
 
         // process init
+        // account provider
+        SurenessAccountProvider accountProvider = new DocumentAccountProvider();
+
         List<Processor> processorList = new LinkedList<>();
         NoneProcessor noneProcessor = new NoneProcessor();
         processorList.add(noneProcessor);
         JwtProcessor jwtProcessor = new JwtProcessor();
         processorList.add(jwtProcessor);
         PasswordProcessor passwordProcessor = new PasswordProcessor();
-        passwordProcessor.setAccountProvider(resourceProvider);
+        passwordProcessor.setAccountProvider(accountProvider);
         processorList.add(passwordProcessor);
         DigestProcessor digestProcessor = new DigestProcessor();
-        digestProcessor.setAccountProvider(resourceProvider);
+        digestProcessor.setAccountProvider(accountProvider);
         processorList.add(digestProcessor);
         DefaultProcessorManager processorManager = new DefaultProcessorManager(processorList);
         if (logger.isDebugEnabled()) {
@@ -66,8 +67,10 @@ public class DefaultSurenessConfig {
         }
 
         // pathRoleMatcher init
+        // pathTree resource provider
+        PathTreeProvider pathTreeProvider = new DocumentPathTreeProvider();
         DefaultPathRoleMatcher pathRoleMatcher = new DefaultPathRoleMatcher();
-        pathRoleMatcher.setPathTreeProvider(resourceProvider);
+        pathRoleMatcher.setPathTreeProvider(pathTreeProvider);
         pathRoleMatcher.buildTree();
         if (logger.isDebugEnabled()) {
             logger.debug("DefaultPathRoleMatcher init");
