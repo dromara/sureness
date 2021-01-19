@@ -41,25 +41,32 @@ public class DocumentResourceAccess {
      */
     public static DocumentResourceEntity loadConfig(String yamlFileName) throws IOException {
         Yaml yaml = new Yaml();
-        InputStream inputStream = DocumentResourceAccess.class.getClassLoader().getResourceAsStream(yamlFileName);
-        if (inputStream == null) {
-            inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(yamlFileName);
-        }
-        if (inputStream == null) {
-            File yamlFile = new File(yamlFileName);
-            if (yamlFile.exists()) {
-                try (FileInputStream fileInputStream = new FileInputStream(yamlFile)) {
-                    return yaml.loadAs(fileInputStream, DocumentResourceEntity.class);
-                } catch (IOException e) {
-                    throw new IOException(e);
+        InputStream inputStream = null;
+        try {
+            inputStream = DocumentResourceAccess.class.getClassLoader().getResourceAsStream(yamlFileName);
+            if (inputStream == null) {
+                inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(yamlFileName);
+            }
+            if (inputStream == null) {
+                File yamlFile = new File(yamlFileName);
+                if (yamlFile.exists()) {
+                    try (FileInputStream fileInputStream = new FileInputStream(yamlFile)) {
+                        return yaml.loadAs(fileInputStream, DocumentResourceEntity.class);
+                    } catch (IOException e) {
+                        throw new IOException(e);
+                    }
                 }
             }
+            if (inputStream == null) {
+                throw new FileNotFoundException("sureness file: " + DEFAULT_FILE_NAME + " not found, " +
+                        "please create the file if you need config resource");
+            }
+            return yaml.loadAs(inputStream, DocumentResourceEntity.class);
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
         }
-        if (inputStream == null) {
-            throw new FileNotFoundException("sureness file: " + DEFAULT_FILE_NAME + " not found, " +
-                    "please create the file if you need config resource");
-        }
-        return yaml.loadAs(inputStream, DocumentResourceEntity.class);
     }
 
     /**
