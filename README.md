@@ -31,6 +31,18 @@
 
 > The low configuration of sureness, easy to expand, and not coupled with other frameworks, enables developers to quickly and safely protect their projects in multiple scenarios.   
 
+##### Compare     
+
+| ~         | sureness | shiro | spring security |
+| ---       | ---      | ---   | --- |
+| **multi framework support**  | support      | support need modify   | not support |
+| **restful api** | support | support need modify   | support |
+| **path match**  | dictionary matching tree | ant match | ant match |
+| **annotation support**    | support      | support      | support |
+| **servlet**    | support      | support      | support |
+| **jax-rs**     | support      | not support    | not support |
+| **dynamic modification of permissions** | support | support need modify | support need modify |
+
 ##### Framework Sample Support  
 
 - [x] spring [sample-bootstrap](sample-bootstrap)   
@@ -184,7 +196,7 @@ Components of Repository:
 #### Why Is High Performance  
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
- 
+
 
 ## License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)
