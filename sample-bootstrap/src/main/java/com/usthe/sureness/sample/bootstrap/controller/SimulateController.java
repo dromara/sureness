@@ -1,6 +1,5 @@
 package com.usthe.sureness.sample.bootstrap.controller;
 
-import com.usthe.sureness.sample.bootstrap.util.CommonUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +23,9 @@ import java.util.Objects;
  */
 @RestController
 public class SimulateController {
+
+    /** access success message **/
+    public static final String SUCCESS_ACCESS_RESOURCE = "access this resource: %s success";
 
     @GetMapping("/api/v1/source1")
     public ResponseEntity<Map<String, String>> api1Mock1(HttpServletRequest request) {
@@ -203,6 +205,6 @@ public class SimulateController {
         String requestType = request.getMethod();
         builder.append(requestType);
         builder.append("--");
-        return Collections.singletonMap("result", String.format(CommonUtil.SUCCESS_ACCESS_RESOURCE, builder.toString()));
+        return Collections.singletonMap("result", String.format(SUCCESS_ACCESS_RESOURCE, builder.toString()));
     }
 }
