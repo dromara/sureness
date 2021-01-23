@@ -1,4 +1,4 @@
-## -- sureness.yml txt dataSource-- ##
+## -- sureness.yml document dataSource-- ##
 
 # load api resource which need be protected, config role who can access these resource.
 # resources that are not configured are also authenticated and protected by default, but not authorized
