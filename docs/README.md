@@ -22,7 +22,7 @@
 > Support dynamic modification of permissions.   
 > Support mainstream http container(servlet and jax-rs).    
 > Supports JWT, Basic Auth, Digest Auth... Can extend custom supported authentication methods.    
-> [High performance due dictionary matching tree](#Why Is High Performance ).      
+> High performance due dictionary matching tree.      
 > Good extension interface, demo and document.    
 
 > The low configuration of sureness, easy to expand, and not coupled with other frameworks, enables developers to quickly and safely protect their projects in multiple scenarios.   

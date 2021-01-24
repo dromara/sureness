@@ -6,7 +6,7 @@ We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user imp
 Also, we provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml. 
 eg:  
 ```
-## -- sureness.yml txt dataSource-- ##
+## -- sureness.yml document dataSource-- ##
 
 # load api resource which need be protected, config role who can access these resource.
 # resources that are not configured are also authenticated and protected by default, but not authorized
@@ -32,14 +32,20 @@ excludedResource:
   - /api/v3/host===get
   - /api/v3/book===get
   - /api/v1/account/auth===post
+  - /**/*.html===get
+  - /**/*.js===get
+  - /**/*.css===get
+  - /**/*.ico===get
 
 # account info
 # there are three account: admin, root, tom
 # eg: admin has [role1,role2] ROLE, unencrypted password is admin, encrypted password is 0192023A7BBD73250516F069DF18B500
-# eg: root has no ROLE, unencrypted password is 23456
+# eg: root has role1, unencrypted password is 23456
+# eg: tom has role3, unencrypted password is 32113
 account:
   - appId: admin
     # if add salt, the password is encrypted password - the result: MD5(password+salt)
+    # digest auth not support encrypted password
     # if no salt, the password is unencrypted password
     credential: 0192023A7BBD73250516F069DF18B500
     salt: 123
@@ -49,7 +55,7 @@ account:
     role: [role1]
   - appId: tom
     credential: 32113
-    role: [role2]
+    role: [role3]
 
 ```
 

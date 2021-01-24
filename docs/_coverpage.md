@@ -8,6 +8,7 @@
 - Dynamic modification of permissions  
 - No framework dependency  
 
+[中文](/cn/)
 [GitHub](https://github.com/tomsun28/sureness/)
 [Get Started](README.md)
 

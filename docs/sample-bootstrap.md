@@ -6,6 +6,5 @@
 - Load data from default dataSource - `sureness.yml`
 - Use default sureness config
 - Use default `jwt,basic auth,digest auth` to authenticate and authorize
-- Contain `restful api,websocket`  
 - Project's protected entrance is `SurenessFilterExample`
 - Suggest use postman to test, test case is in `sample-bootstrap-postman.json`, user can load it in postman  

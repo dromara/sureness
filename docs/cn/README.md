@@ -16,9 +16,9 @@
 
 ## Background  
 现在很多网站都进行了前后端分离，后端提供rest api，前端调用接口获取数据渲染。这种架构下如何保护好后端所提供的rest api使得更加重视。  
-认证-请求携带的认证信息是否校验通过，鉴权-认证通过的用户拥有指定api的权限才能访问此api。然而不仅于此，什么样的认证策略, jwt, basic,digest,oauth还是多支持, 权限配置是写死代码还是动态配置，我想动态赋权怎么办，云原生越来越火用的框架是quarkus等新秀不是spring生态咋弄，http实现不是servlet而是jax-rs规范咋整。   
+认证-请求携带的认证信息是否校验通过，鉴权-认证通过的用户拥有指定api的权限才能访问此api。然而不仅于此，什么样的认证策略, jwt, basic,digest,oauth还是多支持, 权限配置是写死代码还是动态配置赋权，云原生越来越火用的框架是quarkus而不是spring生态，http实现不是servlet而是jax-rs规范咋办。   
 
-我们希望能解决这些，提供一个面向**`restful api`**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架    
+我们希望能解决这些，提供一个面向**restful api**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架    
 
 ## <font color="green">Introduction</font>
 
@@ -28,7 +28,7 @@
 >  支持动态修改权限配置(动态修改哪些`api`需要被认证，可以被谁访问)    
 >  支持主流`http`容器  `servlet` 和 `jax-rs`  
 >  支持多种认证策略, `jwt, basic auth, digest auth` ... 可扩展自定义支持的认证方式   
->  [基于改进的字典匹配树拥有的高性能](#高性能匹配 )    
+>  基于改进的字典匹配树拥有的高性能    
 >  良好的扩展接口, demo和文档  
 
 >`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护   
@@ -47,10 +47,10 @@
 
 ##### Framework Sample Support  
 
-- [x] spring [sample-bootstrap](sample-bootstrap)   
-- [x] springboot [sample-tom](sample-tom)  
-- [x] quarkus [sample-quarkus](samples/quarkus-sureness)  
-- [x] javalin [sample-javalin](samples/javalin-sureness)    
-- [x] ktor [sample-ktor](samples/ktor-sureness)   
-- [x] spring webflux [sample-spring-webflux](samples/spring-webflux-sureness)   
+- [x] spring [sample-bootstrap](cn/sample-bootstrap.md)   
+- [x] springboot [sample-tom](cn/sample-tom.md)  
+- [x] quarkus [sample-quarkus](cn/sample-quarkus.md)  
+- [x] javalin [sample-javalin](cn/sample-javalin.md)    
+- [x] ktor [sample-ktor](cn/sample-ktor.md)    
+- [x] spring webflux [spring-webflux-sureness](cn/sample-spring-webflux.md)    
 - [x] more samples todo   
