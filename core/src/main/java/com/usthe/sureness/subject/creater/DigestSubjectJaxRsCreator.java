@@ -36,13 +36,18 @@ public class DigestSubjectJaxRsCreator implements SubjectCreate {
 
     @Override
     public boolean canSupportSubject(Object context) {
-        return context instanceof ContainerRequestContext;
+        if (context instanceof ContainerRequestContext) {
+            String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);
+            return authorization == null || authorization.startsWith(DIGEST);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public Subject createSubject(Object context) {
         String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);
-        if (authorization == null || !authorization.startsWith(DIGEST)) {
+        if (authorization == null) {
             return new DigestSubject();
         } else {
             // digest auth
@@ -83,7 +88,7 @@ public class DigestSubjectJaxRsCreator implements SubjectCreate {
                         .setTargetUri(targetUri)
                         .build();
             } catch (Exception e) {
-                logger.info(e.getMessage(), e);
+                logger.info("create digest subject error happen, due {}", e.getMessage(), e);
                 return null;
             }
 

@@ -36,13 +36,18 @@ public class DigestSubjectServletCreator implements SubjectCreate {
 
     @Override
     public boolean canSupportSubject(Object context) {
-        return context instanceof HttpServletRequest;
+        if (context instanceof HttpServletRequest) {
+            String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
+            return authorization == null || authorization.startsWith(DIGEST);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public Subject createSubject(Object context) {
         String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
-        if (authorization == null || !authorization.startsWith(DIGEST)) {
+        if (authorization == null) {
             return new DigestSubject();
         } else {
             // digest auth
@@ -82,7 +87,7 @@ public class DigestSubjectServletCreator implements SubjectCreate {
                         .setRemoteHost(remoteHost).setTargetUri(targetUri)
                         .build();
             } catch (Exception e) {
-                logger.info(e.getMessage(), e);
+                logger.info("create digest subject error happen, due {}", e.getMessage(), e);
                 return null;
             }
 
