@@ -40,7 +40,14 @@ public class BasicSubjectServletCreator implements SubjectCreate {
         String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
         //basic auth
         String basicAuth = authorization.replace(BASIC, "").trim();
-        basicAuth = new String(Base64.getDecoder().decode(basicAuth), StandardCharsets.UTF_8);
+        try {
+            basicAuth = new String(Base64.getDecoder().decode(basicAuth), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            if (logger.isInfoEnabled()) {
+                logger.info("can not create basic auth PasswordSubject, due {}", e.getMessage());
+            }
+            return null;
+        }
         String[] auth = basicAuth.split(":");
         if (auth.length != COUNT_2) {
             if (logger.isInfoEnabled()) {
@@ -55,7 +62,8 @@ public class BasicSubjectServletCreator implements SubjectCreate {
             }
             return null;
         }
-        String password = auth[1];
+        username = username.trim();
+        String password = auth[1] == null ? null : auth[1].trim();
         String remoteHost = ((HttpServletRequest) context).getRemoteHost();
         String requestUri = ((HttpServletRequest) context).getRequestURI();
         String requestType = ((HttpServletRequest) context).getMethod();
