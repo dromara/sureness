@@ -21,6 +21,9 @@
 [restful api 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
 [restful api 权限设计 - 快速搭建权限项目](https://segmentfault.com/a/1190000039075245)   
 
+相关视频：  
+[bilibili-10分钟搭建一个完整认证鉴权项目，原谅第一次的川普和英语](https://www.bilibili.com/video/bv1EU4y1s7Sz)    
+
 ## Background  
 现在很多网站都进行了前后端分离，后端提供rest api，前端调用接口获取数据渲染。这种架构下如何保护好后端所提供的rest api使得更加重视。  
 认证-请求携带的认证信息是否校验通过，鉴权-认证通过的用户拥有指定api的权限才能访问此api。然而不仅于此，什么样的认证策略, jwt, basic,digest,oauth还是多支持, 权限配置是写死代码还是动态配置赋权，云原生越来越火用的框架是quarkus而不是spring生态，http实现不是servlet而是jax-rs规范咋办。   
@@ -38,7 +41,7 @@
 >  [基于改进的字典匹配树拥有的高性能](#高性能匹配 )    
 >  良好的扩展接口, demo和文档  
 
->`sureness`的低配置，易扩展，不耦合其他框架，能使开发者对自己的项目多场景快速安全的进行保护   
+>`sureness`的低配置，易扩展，不耦合其他框架，希望能帮助开发者对自己的项目多场景快速安全的进行保护   
 
 ##### Compare     
 
