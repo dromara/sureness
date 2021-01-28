@@ -24,6 +24,9 @@
 相关视频：  
 [bilibili-10分钟搭建一个完整认证鉴权项目，原谅第一次的川普和英语](https://www.bilibili.com/video/bv1EU4y1s7Sz)    
 
+QQ交流群：390083213    
+微信公众号：sureness    
+
 ## Background  
 现在很多网站都进行了前后端分离，后端提供rest api，前端调用接口获取数据渲染。这种架构下如何保护好后端所提供的rest api使得更加重视。  
 认证-请求携带的认证信息是否校验通过，鉴权-认证通过的用户拥有指定api的权限才能访问此api。然而不仅于此，什么样的认证策略, jwt, basic,digest,oauth还是多支持, 权限配置是写死代码还是动态配置赋权，云原生越来越火用的框架是quarkus而不是spring生态，http实现不是servlet而是jax-rs规范咋办。   
