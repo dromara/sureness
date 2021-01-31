@@ -17,10 +17,13 @@ resourceRole:
   - /api/v1/source1===delete===[role3]
   - /api/v1/source1===put===[role1,role2]
   - /api/v1/source2===get===[]
+  - /api/v1/source2/*/*===get===[role2]
+  - /api/v2/source3/*===get===[role2]
 
 # load api resource which do not need be protected, means them need be excluded.
 # these api resource can be access by everyone
 excludedResource:
+  - /api/v1/source3===get
   - /api/v3/host===get
   - /api/v3/book===get
   - /api/v1/account/auth===post

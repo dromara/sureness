@@ -75,18 +75,8 @@ public class SimulateController {
         return ResponseEntity.ok(resultMap);
     }
 
-    @DeleteMapping("/api/v1/source2/{var2}")
-    public ResponseEntity<Map<String, String>> api1Mock8(HttpServletRequest request, @PathVariable Integer var2 ) {
-        Map<String, String> resultMap = new HashMap<>(2);
-        resultMap.putAll(getResponseMap(request));
-        if (Objects.nonNull(var2)) {
-            resultMap.put("var2", String.valueOf(var2));
-        }
-        return ResponseEntity.ok(resultMap);
-    }
-
-    @PutMapping("/api/v1/source2")
-    public ResponseEntity<Map<String, String>> api1Mock9(HttpServletRequest request) {
+    @GetMapping("/api/v1/source2")
+    public ResponseEntity<Map<String, String>> api1Mock8(HttpServletRequest request) {
         return ResponseEntity.ok(getResponseMap(request));
     }
 
@@ -115,8 +105,8 @@ public class SimulateController {
         return ResponseEntity.ok(getResponseMap(request));
     }
 
-    @PatchMapping("/api/v1/source3")
-    public ResponseEntity<Map<String, String>> api1Mock15(HttpServletRequest request) {
+    @GetMapping("/api/v2/source3/{var1}")
+    public ResponseEntity<Map<String, String>> api1Mock15(HttpServletRequest request, @PathVariable String var1) {
         return ResponseEntity.ok(getResponseMap(request));
     }
 
