@@ -57,7 +57,14 @@ QQ交流群：390083213
 | **servlet**    | 支持      | 支持      | 支持|
 | **jax-rs**     | 支持      | 不支持    | 不支持|
 | **权限动态修改** | 支持 | 需改动支持 | 需改动支持|
+| **性能速度** | 极快 | 较快 | 较慢|
 
+##### Benchmark  
+
+![benchmark](docs/_images/benchmark_cn.png)  
+
+**基准测试显示sureness和无权限框架应用相比基本不消耗性能，且性能(TPS)是shiro的2倍，spring security的170倍**  
+详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
 ##### Framework Sample Support  
 
@@ -174,7 +181,7 @@ try {
 
 `sureness`大致流程:  
 
-![flow](/docs/_images/flow-cn.png)  
+![flow](docs/_images/flow-cn.png)  
 
 1. **自定义数据源**  
 
@@ -206,7 +213,7 @@ try {
 
 #### 高性能匹配      
 
-![pathRoleMatcher](/docs/_images/PathRoleMatcher.svg)  
+![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
 ## License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)

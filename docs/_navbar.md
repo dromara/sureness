@@ -1,3 +1,7 @@
+- [High Performance](https://github.com/tomsun28/sureness-shiro-spring-security ':ignore')    
+
+- [Community](https://github.com/tomsun28/sureness/discussions ':ignore')
+
 - Repository  
   - [GITHUB](https://github.com/tomsun28/sureness ':ignore')  
   - [GITEE](https://gitee.com/tomsun28/sureness ':ignore')  
