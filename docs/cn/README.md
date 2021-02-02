@@ -44,6 +44,15 @@
 | **servlet**    | 支持      | 支持      | 支持|
 | **jax-rs**     | 支持      | 不支持    | 不支持|
 | **权限动态修改** | 支持 | 需改动支持 | 需改动支持|  
+| **性能速度** | 极快 | 较快 | 较慢|
+
+##### Benchmark  
+
+![benchmark](../_images/benchmark_cn.png)  
+
+**基准测试显示sureness和无权限框架应用相比基本不消耗性能，且性能(TPS)是shiro的2倍，spring security的170倍**  
+详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
+
 
 ##### Framework Sample Support  
 

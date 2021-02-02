@@ -38,6 +38,16 @@
 | **servlet**    | support      | support      | support |
 | **jax-rs**     | support      | not support    | not support |
 | **dynamic modification of permissions** | support | support need modify | support need modify |
+| **Performance** | Extremely fast | Faster | Slower|
+
+##### Benchmark  
+
+![benchmark](_images/benchmark_en.png)  
+
+**Benchmark tests show that sureness basically does not consume performance compared with frameless applications, 
+and the performance (TPS) is twice that of shiro and 170 times that of spring security.**    
+
+Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
 ##### Framework Sample Support  
 
