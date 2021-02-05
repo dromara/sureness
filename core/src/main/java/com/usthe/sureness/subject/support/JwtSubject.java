@@ -50,7 +50,7 @@ public class JwtSubject implements Subject {
     }
 
     @Override
-    public Object getCredentials() {
+    public Object getCredential() {
         return this.jwt;
     }
 
@@ -108,7 +108,7 @@ public class JwtSubject implements Subject {
         @SuppressWarnings("unchecked")
         public Builder(Subject subject) {
             this.appId = String.valueOf(subject.getPrincipal());
-            this.jwt = String.valueOf(subject.getCredentials());
+            this.jwt = String.valueOf(subject.getCredential());
             this.ownRoles = (List<String>) subject.getOwnRoles();
             this.targetUri = String.valueOf(subject.getTargetResource());
             this.supportRoles = (List<String>) subject.getSupportRoles();

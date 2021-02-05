@@ -53,7 +53,7 @@ public class DigestProcessor extends BaseProcessor {
 
     @Override
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
-        if (var.getPrincipal() == null || var.getCredentials() == null) {
+        if (var.getPrincipal() == null || var.getCredential() == null) {
             String authenticate = getAuthenticate();
             throw new NeedDigestInfoException("you should try once with digest auth information", authenticate);
         }
@@ -74,7 +74,7 @@ public class DigestProcessor extends BaseProcessor {
         //response = MD5("A1:nonce:nc:cNonce:qop:A2");
         String oriResponse = calcDigest(a1, digestSubject.getNonce(), digestSubject.getNc(), digestSubject.getCnonce(),
                 digestSubject.getQop(), a2);
-        if (!oriResponse.equals(digestSubject.getCredentials())) {
+        if (!oriResponse.equals(digestSubject.getCredential())) {
             throw new IncorrectCredentialsException("incorrect password");
         }
         if (account.isDisabledAccount()) {

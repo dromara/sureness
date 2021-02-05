@@ -47,7 +47,7 @@ public class PasswordSubject implements Subject {
     }
 
     @Override
-    public Object getCredentials() {
+    public Object getCredential() {
         return this.password;
     }
 
@@ -97,7 +97,7 @@ public class PasswordSubject implements Subject {
         @SuppressWarnings("unchecked")
         public Builder(Subject subject) {
             this.appId = String.valueOf(subject.getPrincipal());
-            this.password = String.valueOf(subject.getCredentials());
+            this.password = String.valueOf(subject.getCredential());
             this.ownRoles = (List<String>) subject.getOwnRoles();
             this.targetUri = String.valueOf(subject.getTargetResource());
             this.supportRoles = (List<String>) subject.getSupportRoles();

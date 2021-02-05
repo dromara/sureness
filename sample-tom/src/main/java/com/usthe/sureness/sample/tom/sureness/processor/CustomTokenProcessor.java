@@ -42,7 +42,7 @@ public class CustomTokenProcessor extends BaseProcessor {
     @Override
     @SuppressWarnings("unchecked")
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
-        String token = (String) var.getCredentials();
+        String token = (String) var.getCredential();
         String[] tokenArr = token.split(TOKEN_SPLIT);
         if (TokenStorage.matchToken(tokenArr[0], token)) {
             // auth passed

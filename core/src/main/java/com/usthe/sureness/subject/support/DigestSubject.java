@@ -76,7 +76,7 @@ public class DigestSubject implements Subject {
     }
 
     @Override
-    public Object getCredentials() {
+    public Object getCredential() {
         return response;
     }
 
@@ -165,7 +165,7 @@ public class DigestSubject implements Subject {
         @SuppressWarnings("unchecked")
         public Builder(Subject subject) {
             this.appId = String.valueOf(subject.getPrincipal());
-            this.response = String.valueOf(subject.getCredentials());
+            this.response = String.valueOf(subject.getCredential());
             this.ownRoles = (List<String>) subject.getOwnRoles();
             this.targetUri = String.valueOf(subject.getTargetResource());
             this.supportRoles = (List<String>) subject.getSupportRoles();

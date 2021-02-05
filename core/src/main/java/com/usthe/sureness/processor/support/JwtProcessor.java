@@ -41,7 +41,7 @@ public class JwtProcessor extends BaseProcessor {
     @Override
     @SuppressWarnings("unchecked")
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
-        String jwt = (String) var.getCredentials();
+        String jwt = (String) var.getCredential();
         if (JsonWebTokenUtil.isNotJsonWebToken(jwt)) {
             throw new  IncorrectCredentialsException("this jwt credential is illegal");
         }

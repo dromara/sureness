@@ -38,7 +38,7 @@ public class NoneSubject implements Subject {
     }
 
     @Override
-    public Object getCredentials() {
+    public Object getCredential() {
         return null;
     }
 
