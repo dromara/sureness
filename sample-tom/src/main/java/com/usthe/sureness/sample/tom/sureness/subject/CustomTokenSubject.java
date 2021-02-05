@@ -1,5 +1,6 @@
 package com.usthe.sureness.sample.tom.sureness.subject;
 
+import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.Subject;
 
 import java.util.List;
@@ -47,6 +48,11 @@ public class CustomTokenSubject implements Subject {
     @Override
     public Object getPrincipal() {
         return this.appId;
+    }
+
+    @Override
+    public PrincipalMap getPrincipalMap() {
+        return null;
     }
 
     @Override

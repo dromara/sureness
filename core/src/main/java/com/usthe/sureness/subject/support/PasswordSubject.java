@@ -1,5 +1,6 @@
 package com.usthe.sureness.subject.support;
 
+import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.Subject;
 
 import java.util.List;
@@ -44,6 +45,11 @@ public class PasswordSubject implements Subject {
     @Override
     public Object getPrincipal() {
         return this.appId;
+    }
+
+    @Override
+    public PrincipalMap getPrincipalMap() {
+        return null;
     }
 
     @Override

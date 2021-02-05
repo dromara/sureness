@@ -21,6 +21,13 @@ public interface Subject extends Serializable {
     Object getPrincipal();
 
     /**
+     * map for principals, key-value
+     * eg: id-idValue, customName-value, issuer-value
+     * @return principal map info
+     */
+    PrincipalMap getPrincipalMap();
+
+    /**
      * account credential, eg:password
      *
      * @return credential
@@ -64,12 +71,14 @@ public interface Subject extends Serializable {
     @SuppressWarnings("unchecked")
     default SubjectSum generateSubjectSummary() {
         String principal = (String)getPrincipal();
+        PrincipalMap principalMap = getPrincipalMap();
         List<String> roles = (List<String>)getOwnRoles();
         String targetUri = (String)getTargetResource();
         return   SurenessSubjectSum.builder()
                 .setTargetResource(targetUri)
                 .setRoles(roles)
                 .setPrincipal(principal)
+                .setPrincipalMap(principalMap)
                 .build();
     }
 }
