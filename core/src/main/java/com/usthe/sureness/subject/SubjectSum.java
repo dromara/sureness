@@ -17,6 +17,13 @@ public interface SubjectSum extends Serializable {
     Object getPrincipal();
 
     /**
+     * map for principals, key-value
+     * eg: id-idValue, customName-value, issuer-value
+     * @return principal map info
+     */
+    PrincipalMap getPrincipalMap();
+
+    /**
      * Determine whether it has role - var1
      *
      * @param var1 role

@@ -1,5 +1,6 @@
 package com.usthe.sureness.subject.support;
 
+import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.Subject;
 
 import java.util.List;
@@ -34,6 +35,11 @@ public class NoneSubject implements Subject {
 
     @Override
     public Object getPrincipal() {
+        return null;
+    }
+
+    @Override
+    public PrincipalMap getPrincipalMap() {
         return null;
     }
 

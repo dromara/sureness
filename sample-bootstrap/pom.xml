@@ -32,7 +32,16 @@
             <groupId>com.usthe.sureness</groupId>
             <artifactId>sureness-core</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
+        </dependency>
         <!--test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

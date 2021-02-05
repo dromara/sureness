@@ -1,5 +1,6 @@
 package com.usthe.sureness.subject.support;
 
+import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.SubjectSum;
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +18,10 @@ public class SurenessSubjectSum implements SubjectSum {
      */
     private String principal;
     /**
+     * map for principals, key-value
+     */
+    private PrincipalMap principalMap;
+    /**
      * the roles which this user owned
      */
     private List<String> roles;
@@ -28,6 +33,7 @@ public class SurenessSubjectSum implements SubjectSum {
 
     private SurenessSubjectSum(Builder builder) {
         this.principal = builder.principal;
+        this.principalMap = builder.principalMap;
         this.roles = builder.roles;
         this.targetResource = builder.targetResource;
     }
@@ -35,6 +41,11 @@ public class SurenessSubjectSum implements SubjectSum {
     @Override
     public Object getPrincipal() {
         return principal;
+    }
+
+    @Override
+    public PrincipalMap getPrincipalMap() {
+        return principalMap;
     }
 
     @Override
@@ -63,11 +74,17 @@ public class SurenessSubjectSum implements SubjectSum {
 
     public static class Builder {
         private String principal;
+        private PrincipalMap principalMap;
         private List<String> roles;
         private String targetResource;
 
         public Builder setPrincipal(String principal) {
             this.principal = principal;
+            return this;
+        }
+
+        public Builder setPrincipalMap(PrincipalMap principalMap) {
+            this.principalMap = principalMap;
             return this;
         }
 
