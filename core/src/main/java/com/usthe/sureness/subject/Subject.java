@@ -25,7 +25,7 @@ public interface Subject extends Serializable {
      *
      * @return credential
      */
-    Object getCredentials();
+    Object getCredential();
 
     /**
      * get the roles owned by this account
