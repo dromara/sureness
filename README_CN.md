@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# <font size="14p">sureness |</font> <font size="10p">[English Documentation](README.md)</font>
+# <font size="14p">sureness</font> <font size="5p">  | [English Documentation](README.md)</font>
 
 > 面向`restful api`的认证鉴权框架
 
@@ -13,8 +13,8 @@
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness) 
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red) 
 
-**主页[usthe.com/sureness](https://usthe.com/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
-  
+**主页: [usthe.com/sureness](https://usthe.com/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
+
 
 ## Background  
 

@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# <font size="14p">sureness |</font> <font size="10p">[中文文档](README_CN.md)</font>
+# <font size="14p">sureness</font> <font size="5p">  | [中文文档](README_CN.md)</font>
 
 > A simple and efficient open-source jvm security framework that focus on the protection of restful api.
 
@@ -13,7 +13,7 @@
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness) 
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red) 
 
-**Please use the space [su.usthe.com](https://su.usthe.com/) when [usthe.com/sureness](https://usthe.com/sureness) cannot accessed.**  
+**Home Page: [usthe.com/sureness](https://usthe.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
 
 
 ## <font color="green">`Introduction`</font>
