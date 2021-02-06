@@ -46,8 +46,8 @@ public DefaultSurenessConfig surenessConfig() {
 注解形式的资源权限数据源配置使用方式详见文档 [注解资源权限数据源](cn/annotation-datasource.md)    
 
 我们提供了使用代码`DEMO`：  
-默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-若权限配置数据来自数据库，请参考[使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
+默认文本数据源具体实现，请参考[sureness集成springboot样例(配置文件方案)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+若权限配置数据来自数据库，请参考[sureness集成springboot样例(数据库方案)--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 
 #### 添加过滤器拦截所有请求    
 

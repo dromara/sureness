@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# <font size="14p">sureness</font>
+# <font size="14p">sureness |</font> <font size="10p">[中文文档](README_CN.md)</font>
 
 > A simple and efficient open-source jvm security framework that focus on the protection of restful api.
 
@@ -15,7 +15,6 @@
 
 **Please use the space [su.usthe.com](https://su.usthe.com/) when [usthe.com/sureness](https://usthe.com/sureness) cannot accessed.**  
 
-[Chinese Documentation -> 中文文档](README_CN.md)  
 
 ## <font color="green">`Introduction`</font>
 
@@ -42,7 +41,8 @@
 | **servlet**    | support      | support      | support |
 | **jax-rs**     | support      | not support    | not support |
 | **dynamic modification of permissions** | support | support need modify | support need modify |
-| **Performance** | Extremely fast | Faster | Slower|
+| **Performance** | extremely fast | faster | slower|
+| **Learning curve** | simple | simple | steep|
 
 ##### Benchmark  
 
@@ -55,12 +55,12 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 
 ##### Framework Sample Support  
 
-- [x] spring [sample-bootstrap](sample-bootstrap)   
-- [x] springboot [sample-tom](sample-tom)  
-- [x] quarkus [sample-quarkus](samples/quarkus-sureness)  
-- [x] javalin [sample-javalin](samples/javalin-sureness)    
-- [x] ktor [sample-ktor](samples/ktor-sureness)   
-- [x] spring webflux [sample-spring-webflux](samples/spring-webflux-sureness)   
+- [x] sureness integration springboot sample(configuration file scheme) [sample-bootstrap](sample-bootstrap)   
+- [x] sureness integration springboot sample(database scheme) [sample-tom](sample-tom)  
+- [x] sureness integration quarkus sample [sample-quarkus](samples/quarkus-sureness)  
+- [x] sureness integration javalin sample [sample-javalin](samples/javalin-sureness)    
+- [x] sureness integration ktor sample [sample-ktor](samples/ktor-sureness)   
+- [x] sureness integration spring webflux sample [sample-spring-webflux](samples/spring-webflux-sureness)   
 - [x] more samples todo  
 
 ## Quick Start 
@@ -114,8 +114,8 @@ We also provider dataSource implement which load dataSource form annotation - `A
 Default Document DataSource Config - sureness.yml, see: [Default Document DataSource](docs/default-datasource.md)   
 Annotation DataSource Config Detail, see: [Annotation DataSource](docs/annotation-datasource.md)  
 
-If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
+If the configuration resource data comes from text, please refer to  [sureness integration springboot sample(configuration file scheme)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+If the configuration resource data comes from dataBase, please refer to  [sureness integration springboot sample(database scheme)-sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
 
 
 #### Add an Interceptor Intercepting All Requests  
@@ -190,7 +190,7 @@ Sureness Process Flow:
 `A subject also can support by different processor, so we can custom processor to support custom subject`
 `Implment Processor, set which subject can support and implment processing details`  
 
-Detail please refer to  [30 Minute Tutorial's Program--sample-tom](sample-tom)   
+Detail please refer to  [sureness integration springboot sample(database scheme)-sample-tom](sample-tom)   
 
 ## Contributing  
 
@@ -198,8 +198,8 @@ Very welcome to Contribute this project, go further and better with sureness. If
 
 Components of Repository:  
 - [sureness's kernel code--sureness-core](core)  
-- [10 Minute Tutorial's Program--sample-bootstrap](sample-bootstrap)  
-- [30 Minute Tutorial's Program--sample-tom](sample-tom)  
+- [sureness integration springboot sample(configuration file scheme)--sample-bootstrap](sample-bootstrap)  
+- [sureness integration springboot sample(database scheme)-sample-tom](sample-tom)  
 - [Sample projects using sureness in each framework(javalin,ktor,quarkus)--samples](samples)  
 
 

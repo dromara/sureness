@@ -38,7 +38,8 @@
 | **servlet**    | support      | support      | support |
 | **jax-rs**     | support      | not support    | not support |
 | **dynamic modification of permissions** | support | support need modify | support need modify |
-| **Performance** | Extremely fast | Faster | Slower|
+| **Performance** | extremely fast | faster | slower|
+| **Learning curve** | simple | simple | steep|
 
 ##### Benchmark  
 
@@ -51,10 +52,10 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 
 ##### Framework Sample Support  
 
-- [x] spring [sample-bootstrap](sample-bootstrap.md)   
-- [x] springboot [sample-tom](sample-tom.md)  
-- [x] quarkus [sample-quarkus](sample-quarkus.md)  
-- [x] javalin [sample-javalin](sample-javalin.md)    
-- [x] ktor [sample-ktor](sample-ktor.md)    
-- [x] spring webflux [spring-webflux-sureness](sample-spring-webflux.md)    
+- [x] sureness integration springboot sample(configuration file scheme) [sample-bootstrap](sample-bootstrap.md)   
+- [x] sureness integration springboot sample(database scheme) [sample-tom](sample-tom.md)  
+- [x] sureness integration quarkus sample [sample-quarkus](sample-quarkus.md)  
+- [x] sureness integration javalin sample [sample-javalin](sample-javalin.md)    
+- [x] sureness integration ktor sample [sample-ktor](sample-ktor.md)    
+- [x] sureness integration spring webflux sample [spring-webflux-sureness](sample-spring-webflux.md)    
 - [x] more samples todo   

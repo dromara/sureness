@@ -49,8 +49,8 @@ We also provider dataSource implement which load dataSource form annotation - `A
 Default Document DataSource Config - sureness.yml, see: [Default Document DataSource](default-datasource.md)   
 Annotation DataSource Config Detail, see: [Annotation DataSource](annotation-datasource.md)  
 
-If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
+If the configuration resource data comes from text, please refer to  [sureness integration springboot sample(configuration file scheme)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+If the configuration resource data comes from dataBase, please refer to  [sureness integration springboot sample(database scheme)-sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
 
 
 #### Add an Interceptor Intercepting All Requests  

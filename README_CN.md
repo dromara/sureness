@@ -4,45 +4,34 @@
   </a>
 </p>
 
-# <font size="14p">sureness - 面向restful api的认证鉴权框架</font>
+# <font size="14p">sureness |</font> <font size="10p">[English Documentation](README.md)</font>
 
-> A simple and efficient open-source jvm security framework that focus on the protection of restful api.
+> 面向`restful api`的认证鉴权框架
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 ![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/tomsun28/sureness/8?label=pull%20checks) 
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness) 
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red) 
 
-**若主页[usthe.com/sureness](https://usthe.com/sureness) 访问不了，请使用备用网站: [su.usthe.com](https://su.usthe.com/)**  
-
-[英文文档 -> English Documentation](README.md)   
-
-相关文章：  
-[restful api 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
-[restful api 权限设计 - 快速搭建权限项目](https://segmentfault.com/a/1190000039075245)   
-
-相关视频：  
-[bilibili-10分钟搭建一个完整认证鉴权项目，原谅第一次的川普和英语](https://www.bilibili.com/video/bv1EU4y1s7Sz)    
-
-QQ交流群：390083213    
-微信公众号：sureness    
+**主页[usthe.com/sureness](https://usthe.com/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
+  
 
 ## Background  
-现在很多网站都进行了前后端分离，后端提供rest api，前端调用接口获取数据渲染。这种架构下如何保护好后端所提供的rest api使得更加重视。  
-认证-请求携带的认证信息是否校验通过，鉴权-认证通过的用户拥有指定api的权限才能访问此api。然而不仅于此，什么样的认证策略, jwt, basic,digest,oauth还是多支持, 权限配置是写死代码还是动态配置赋权，云原生越来越火用的框架是quarkus而不是spring生态，http实现不是servlet而是jax-rs规范咋办。   
 
-我们希望能解决这些，提供一个面向**restful api**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架    
+在主流的前后端分离架构中，如何通过有效快速的认证鉴权来保护后端提供的`restful api`变得尤为重要。对现存框架，不原生支持`rest`的`apache shiro`，
+还是深度绑定`spring`，较慢性能，学习曲线陡峭的`spring security`，或多或少都不是我们的理想型。   
+于是乎`sureness`诞生了，我们希望能解决这些，提供一个面向**restful api**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。      
 
 ## <font color="green">Introduction</font>
 
-> `sureness` 是我们在使用 `java` 权限框架 `shiro` 之后,吸取其良好设计加上一些想法实现的全新认证鉴权项目  
->  面对 `restful api` 的认证鉴权,基于 `rbac` (用户-角色-资源)主要关注于对 `restful api` 的安全保护  
->  无特定框架依赖(本质就是过滤器处拦截判断,已有`springboot,quarkus,javalin,ktor`等demo)  
->  支持动态修改权限配置(动态修改哪些`api`需要被认证，可以被谁访问)    
+> `sureness` 是我们在深度使用权限框架 `apache shiro` 之后,吸取其一些优点全新设计开发的一个认证鉴权框架  
+>  面向 `restful api` 的认证鉴权,基于 `rbac` (用户-角色-资源)主要关注于对 `restful api` 的安全保护  
+>  无特定框架依赖(本质就是过滤器处拦截判断,已有`springboot,quarkus,javalin,ktor`等集成样例)  
+>  支持动态修改权限配置(动态修改配置每个`rest api`谁有权访问)    
 >  支持主流`http`容器  `servlet` 和 `jax-rs`  
 >  支持多种认证策略, `jwt, basic auth, digest auth` ... 可扩展自定义支持的认证方式   
 >  [基于改进的字典匹配树拥有的高性能](#高性能匹配 )    
->  良好的扩展接口, demo和文档  
+>  良好的扩展接口, 样例和文档  
 
 >`sureness`的低配置，易扩展，不耦合其他框架，希望能帮助开发者对自己的项目多场景快速安全的进行保护   
 
@@ -58,22 +47,24 @@ QQ交流群：390083213
 | **jax-rs**     | 支持      | 不支持    | 不支持|
 | **权限动态修改** | 支持 | 需改动支持 | 需改动支持|
 | **性能速度** | 极快 | 较快 | 较慢|
+| **学习曲线** | 简单 | 简单 | 陡峭|  
 
 ##### Benchmark  
 
 ![benchmark](docs/_images/benchmark_cn.png)  
 
-**基准测试显示sureness和无权限框架应用相比基本不消耗性能，且性能(TPS)是shiro的2倍，spring security的170倍**  
+**基准测试显示sureness和无权限框架应用相比基本不消耗性能，且性能(TPS)是shiro的2倍，spring security的170倍**   
+**性能差距会随着api匹配链的增加而进一步拉大**    
 详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
 ##### Framework Sample Support  
 
-- [x] spring [sample-bootstrap](sample-bootstrap)   
-- [x] springboot [sample-tom](sample-tom)  
-- [x] quarkus [sample-quarkus](samples/quarkus-sureness)  
-- [x] javalin [sample-javalin](samples/javalin-sureness)    
-- [x] ktor [sample-ktor](samples/ktor-sureness)   
-- [x] spring webflux [sample-spring-webflux](samples/spring-webflux-sureness)   
+- [x] sureness集成springboot样例(配置文件方案) [sample-bootstrap](sample-bootstrap)   
+- [x] sureness集成springboot样例(数据库方案) [sample-tom](sample-tom)  
+- [x] sureness集成quarkus样例 [sample-quarkus](samples/quarkus-sureness)  
+- [x] sureness集成javalin样例 [sample-javalin](samples/javalin-sureness)    
+- [x] sureness集成ktor样例 [sample-ktor](samples/ktor-sureness)   
+- [x] sureness集成spring webflux样例 [sample-spring-webflux](samples/spring-webflux-sureness)   
 - [x] more samples todo   
 
 
@@ -125,8 +116,8 @@ public DefaultSurenessConfig surenessConfig() {
 注解形式的资源权限数据源配置使用方式详见文档 [注解资源权限数据源](docs/cn/annotation-datasource.md)    
 
 我们提供了使用代码`DEMO`：  
-默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-若权限配置数据来自数据库，请参考[使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
+默认文本数据源具体实现，请参考[sureness集成springboot样例(配置文件方案)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+若权限配置数据来自数据库，请参考[sureness集成springboot样例(数据库方案)--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 
 #### 添加过滤器拦截所有请求    
 
@@ -199,7 +190,7 @@ try {
 一个`subject`当然也可以被不同的`processor`处理,所以可以单独自定义`processor`   
 实现`Processor`接口,设置支持的`subject`,实现处理该`subject`的逻辑  
 
-具体扩展实践请参考 [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
+具体扩展实践请参考 [sureness集成springboot样例(数据库方案)--sample-tom](sample-tom)  
 
 
 ## 参与贡献  
@@ -207,13 +198,25 @@ try {
 
 仓库的组成部分:  
 - [sureness的核心代码--sureness-core](core)  
-- [使用sureness10分钟搭建权限项目--sample-bootstrap](sample-bootstrap)  
-- [使用sureness30分钟搭建权限项目--sample-tom](sample-tom)  
+- [使用sureness集成springboot搭建权限项目(配置文件方案)--sample-bootstrap](sample-bootstrap)  
+- [使用sureness集成springboot搭建权限项目(数据库方案)--sample-tom](sample-tom)  
 - [各个框架使用sureness的样例项目(javalin,ktor,quarkus)--samples](samples)  
 
 #### 高性能匹配      
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
+
+## 更多相关     
+
+相关文章：  
+[restful api 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
+[restful api 权限设计 - 快速搭建权限项目](https://segmentfault.com/a/1190000039075245)   
+
+相关视频：  
+[bilibili-10分钟搭建一个完整认证鉴权项目，原谅第一次的川普和英语](https://www.bilibili.com/video/bv1EU4y1s7Sz)    
+
+QQ交流群：390083213    
+微信公众号：sureness   
 
 ## License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)
