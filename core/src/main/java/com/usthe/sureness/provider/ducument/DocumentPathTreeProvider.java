@@ -35,7 +35,7 @@ public class DocumentPathTreeProvider implements PathTreeProvider {
             } else {
                 resourceSet = new HashSet<>();
             }
-            return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceSet);
+            return SurenessCommonUtil.attachContextPath(getContextPath(), resourceSet);
         } catch (IOException e) {
             logger.error("load config data from yaml file error: ", e);
             throw new SurenessLoadDataException(e.getMessage());
@@ -55,7 +55,7 @@ public class DocumentPathTreeProvider implements PathTreeProvider {
             } else {
                 resourceSet = new HashSet<>();
             }
-            return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceSet);
+            return SurenessCommonUtil.attachContextPath(getContextPath(), resourceSet);
         } catch (IOException e) {
             logger.error("load config data from yaml file error: ", e);
             throw new SurenessLoadDataException(e.getMessage());

@@ -22,13 +22,13 @@ public class DatabasePathTreeProvider implements PathTreeProvider {
 
     @Override
     public Set<String> providePathData() {
-        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceService.getAllEnableResourcePath());
+        return SurenessCommonUtil.attachContextPath(getContextPath(), resourceService.getAllEnableResourcePath());
 
     }
 
     @Override
     public Set<String> provideExcludedResource() {
-        return SurenessCommonUtil.attachContextPath(contextPathRef.get(), resourceService.getAllDisableResourcePath());
+        return SurenessCommonUtil.attachContextPath(getContextPath(), resourceService.getAllDisableResourcePath());
     }
 
 }
