@@ -53,8 +53,9 @@
 
 ![benchmark](docs/_images/benchmark_cn.png)  
 
-**基准测试显示sureness和无权限框架应用相比基本不消耗性能，且性能(TPS)是shiro的2倍，spring security的170倍**   
-**性能差距会随着api匹配链的增加而进一步拉大**    
+**基准测试显示sureness对比无权限框架应用损耗0.026ms性能，shiro损耗0.088ms,spring security损耗44.813ms，
+相比之下sureness基本不消耗性能，且性能(TPS损耗)是shiro的3倍，spring security的1700倍**     
+**性能差距会随着api匹配链的增加而进一步拉大**     
 详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
 ##### Framework Sample Support  
@@ -87,11 +88,11 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4.3</version>
+    <version>0.4.4</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.3'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.4'
 ```
 
 #### 使用默认配置来配置sureness    
@@ -210,7 +211,8 @@ try {
 
 相关文章：  
 [restful api 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
-[restful api 权限设计 - 快速搭建权限项目](https://segmentfault.com/a/1190000039075245)   
+[restful api 权限设计 - 快速搭建权限项目](https://segmentfault.com/a/1190000039075245)    
+[restful api 权限设计 - sureness集成springboot样例-数据库方案](https://segmentfault.com/a/1190000039191172)     
 
 相关视频：  
 [bilibili-10分钟搭建一个完整认证鉴权项目，原谅第一次的川普和英语](https://www.bilibili.com/video/bv1EU4y1s7Sz)    

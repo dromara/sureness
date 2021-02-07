@@ -15,14 +15,15 @@
   - [Custom Processor](custom-processor.md)
 
 - Integration Demo
-  - [10 Minute Tutorial](sample-bootstrap.md)
-  - [30 Minute Tutorial](sample-tom.md)
-  - [Quarkus-Sureness Sample ](sample-quarkus.md) 
+  - [Quarkus-Sureness Sample(file scheme)](sample-bootstrap.md)
+  - [Quarkus-Sureness Sample(database scheme)](sample-tom.md)
+  - [Quarkus-Sureness Sample](sample-quarkus.md) 
   - [Spring-Webflux-Sureness Sample](sample-spring-webflux.md)  
   - [Javalin-Sureness Sample](sample-javalin.md)  
   - [Ktor-Sureness Sample](sample-ktor.md)  
 
 - Others
   - [Design](design.md)
-  - [Contribute To Us](contributing.md)
+  - [Contribute To Us](contributing.md) 
+  - [Sponsor](sponsor.md)  
   - [Changelog](https://github.com/tomsun28/sureness/releases ':ignore')

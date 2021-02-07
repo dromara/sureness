@@ -48,8 +48,9 @@
 
 ![benchmark](docs/_images/benchmark_en.png)  
 
-**Benchmark tests show that sureness basically does not consume performance compared with frameless applications, 
-and the performance (TPS) is twice that of shiro and 170 times that of spring security.**    
+**Benchmark test shows sureness to lose 0.026ms performance compared to frameless application, shiro lose 0.088ms, spring security lose 44.813ms.**    
+**In contrast, sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of shiro and 1700 times that of spring security.**      
+**The performance gap will be further widened as the api matching chain increases.**      
 
 Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
@@ -82,11 +83,11 @@ When use maven or gradle build project, add coordinate
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4.3</version>
+    <version>0.4.4</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.3'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.4'
 ```
 
 #### Use the default configuration to configure sureness  
@@ -200,7 +201,7 @@ Components of Repository:
 - [sureness's kernel code--sureness-core](core)  
 - [sureness integration springboot sample(configuration file scheme)--sample-bootstrap](sample-bootstrap)  
 - [sureness integration springboot sample(database scheme)-sample-tom](sample-tom)  
-- [Sample projects using sureness in each framework(javalin,ktor,quarkus)--samples](samples)  
+- [sample projects using sureness in each framework(javalin,ktor,quarkus)--samples](samples)  
 
 
 #### Why Is High Performance  

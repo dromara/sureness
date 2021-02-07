@@ -51,8 +51,9 @@
 
 ![benchmark](../_images/benchmark_cn.png)  
 
-**基准测试显示sureness和无权限框架应用相比基本不消耗性能，且性能(TPS)是shiro的2倍，spring security的170倍**   
-**性能差距会随着api匹配链的增加而进一步拉大**   
+**基准测试显示sureness对比无权限框架应用损耗0.026ms性能，shiro损耗0.088ms,spring security损耗44.813ms，
+相比之下sureness基本不消耗性能，且性能(TPS损耗)是shiro的3倍，spring security的1700倍**     
+**性能差距会随着api匹配链的增加而进一步拉大**     
 详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
 

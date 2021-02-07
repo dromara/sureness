@@ -14,9 +14,9 @@
   - [自定义数据源](cn/custom-datasource.md)
   - [自定义Processor](cn/custom-processor.md)
 - 集成案例
-  - [10分钟项目集成](cn/sample-bootstrap.md)
-  - [30分钟项目集成](cn/sample-tom.md)
-  - [Quarkus项目集成](cn/sample-quarkus.md) 
+  - [Springboot项目集成-配置文件方案](cn/sample-bootstrap.md)  
+  - [Springboot项目集成-数据库方案](cn/sample-tom.md)  
+  - [Quarkus项目集成](cn/sample-quarkus.md)   
   - [Spring-Webflux项目集成](cn/sample-spring-webflux.md)  
   - [Javalin项目集成](cn/sample-javalin.md)  
   - [Ktor项目集成](cn/sample-ktor.md)     
@@ -24,4 +24,5 @@
 - 其它
   - [设计文档](cn/design.md)
   - [参与贡献](cn/contributing.md)
+  - [赞助](cn/sponsor.md)   
   - [Changelog](https://github.com/tomsun28/sureness/releases ':ignore')
