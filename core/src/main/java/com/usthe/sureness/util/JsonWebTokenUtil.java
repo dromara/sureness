@@ -78,7 +78,7 @@ public class JsonWebTokenUtil {
      * @param notBefore Not Before(ms)
      * @param headerMap header
      * @param customClaimMap custom claim param
-     * @return
+     * @return json web token
      */
     public static String issueJwtAll(String id, String subject, String issuer, Long period,
                                      String audience, String payload, Long notBefore,
