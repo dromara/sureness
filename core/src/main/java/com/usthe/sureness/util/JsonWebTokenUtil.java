@@ -7,7 +7,9 @@ import io.jsonwebtoken.security.SignatureException;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -58,6 +60,29 @@ public class JsonWebTokenUtil {
     public static String issueJwt(String id, String subject, String issuer, Long period,
                                   List<String> roles, List<String> permissions,
                                   Boolean isRefresh) {
+        Map<String, Object> customClaimMap = new HashMap<>(4);
+        customClaimMap.put("roles", roles);
+        customClaimMap.put("perms", permissions);
+        customClaimMap.put("isRefresh", isRefresh);
+        return issueJwtAll(id, subject, issuer, period, null, null, null, null, customClaimMap);
+    }
+
+    /**
+     * issue all jwt params
+     * @param id token ID
+     * @param subject user ID
+     * @param issuer issuer
+     * @param period period time(ms)
+     * @param audience audience
+     * @param payload payload
+     * @param notBefore Not Before(ms)
+     * @param headerMap header
+     * @param customClaimMap custom claim param
+     * @return
+     */
+    public static String issueJwtAll(String id, String subject, String issuer, Long period,
+                                     String audience, String payload, Long notBefore,
+                                     Map<String, Object> headerMap, Map<String, Object> customClaimMap){
         long currentTimeMillis = System.currentTimeMillis();
         JwtBuilder jwtBuilder = Jwts.builder();
         if (id != null) {
@@ -75,14 +100,21 @@ public class JsonWebTokenUtil {
         if (null != period) {
             jwtBuilder.setExpiration(new Date(currentTimeMillis + period * 1000));
         }
-        if (roles != null) {
-            jwtBuilder.claim("roles", roles);
+        if (null != audience) {
+            jwtBuilder.setAudience(audience);
         }
-        if (permissions != null) {
-            jwtBuilder.claim("perms", permissions);
+        if (null != payload) {
+            jwtBuilder.setPayload(payload);
         }
-        if (isRefresh != null) {
-            jwtBuilder.claim("isRefresh", isRefresh);
+        if (null != notBefore){
+            jwtBuilder.setNotBefore(new Date(notBefore * 1000));
+        }
+        if(null != headerMap) {
+            jwtBuilder.setHeader(headerMap);
+        }
+        //claim param, eg: roles, perms, isRefresh
+        if (null != customClaimMap) {
+            customClaimMap.forEach(jwtBuilder::claim);
         }
         // compress，optional GZIP
         jwtBuilder.compressWith(CompressionCodecs.DEFLATE);
