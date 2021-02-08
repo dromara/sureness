@@ -33,6 +33,7 @@ excludedResource:
   - /**/*.ico===get
   - /**/*.ttf===get
   - /**/*.png===get
+  - /**/*.gif===get
   - /swagger-resources/**===get
   - /v2/api-docs===get
 

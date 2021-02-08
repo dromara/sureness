@@ -28,7 +28,6 @@ excludedResource:
   - /**/*.js===get
   - /**/*.css===get
   - /**/*.ico===get
-  - /**/*.gif===get
 
 # account info
 # there are three account: admin, root, tom
