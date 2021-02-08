@@ -158,6 +158,8 @@ try {
 
 **HAVE FUN**  
 
+> 如果这个[快速开始]对您不是很友好，可以参考这篇[一步一步搭建](docs/cn/step-by-step.md)，里面一步一步详细介绍了使用sureness搭建一个完整功能认证鉴权项目的步骤。  
+
 ## 进阶扩展  
 
 如果了解 [处理流程](docs/cn/design.md),就大概知道`sureness`提供的扩展点    
