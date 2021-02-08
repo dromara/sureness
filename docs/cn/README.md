@@ -6,7 +6,7 @@
 
 # <font size="14p">sureness</font>
 
-> 面向`restful api`的认证鉴权框架  
+> 面向`restful api`的高性能认证鉴权框架  
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 ![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/tomsun28/sureness/8?label=pull%20checks) 
@@ -14,13 +14,13 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red) 
 
 
-## Background  
+## 背景  
 
 在主流的前后端分离架构中，如何通过有效快速的认证鉴权来保护后端提供的`restful api`变得尤为重要。对现存框架，不原生支持`rest`的`apache shiro`，
 还是深度绑定`spring`，较慢性能，学习曲线陡峭的`spring security`，或多或少都不是我们的理想型。   
 于是乎`sureness`诞生了，我们希望能解决这些，提供一个面向**restful api**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。      
 
-## <font color="green">Introduction</font>
+## <font color="green">介绍</font>
 
 > `sureness` 是我们在深度使用权限框架 `apache shiro` 之后,吸取其一些优点全新设计开发的一个认证鉴权框架  
 >  面向 `restful api` 的认证鉴权,基于 `rbac` (用户-角色-资源)主要关注于对 `restful api` 的安全保护  
@@ -33,7 +33,7 @@
 
 >`sureness`的低配置，易扩展，不耦合其他框架，希望能帮助开发者对自己的项目多场景快速安全的进行保护   
 
-##### Compare     
+##### 框架对比     
 
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | ---  |
@@ -47,7 +47,7 @@
 | **性能速度** | 极快 | 较快 | 较慢|
 | **学习曲线** | 简单 | 简单 | 陡峭|  
 
-##### Benchmark  
+##### 基准性能测试    
 
 ![benchmark](../_images/benchmark_cn.png)  
 
@@ -57,7 +57,7 @@
 详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
 
-##### Framework Sample Support  
+##### 框架支持样例  
 
 - [x] sureness集成springboot样例(配置文件方案) [sample-bootstrap](cn/sample-bootstrap.md)   
 - [x] sureness集成springboot样例(数据库方案) [sample-tom](cn/sample-tom.md)  

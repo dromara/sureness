@@ -1,6 +1,7 @@
 - 入门  
   - [介绍](cn/README.md "introduce")
   - [快速开始](cn/quickstart.md "quick start greatest")  
+  - [一步一步搭建](cn/step-by-step.md)    
   - [URI路径匹配](cn/path-match.md)  
   - [默认文本数据源](cn/default-datasource.md)  
   - [注解权限数据源](cn/annotation-datasource.md)    

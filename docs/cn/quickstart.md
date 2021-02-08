@@ -86,3 +86,5 @@ try {
 异常详见 [默认异常类型](cn/default-exception.md)  
 
 **HAVE FUN**  
+
+> 如果这个[快速开始]对您不是很友好，可以参考下面一篇[一步一步搭建](step-by-step.md)，里面一步一步详细介绍了使用sureness搭建一个完整功能认证鉴权项目的步骤。   
