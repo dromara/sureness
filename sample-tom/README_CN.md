@@ -2,7 +2,7 @@
 
 [English Documentation](README.md) 
 
-sureness 30分钟例子项目  
+sureness + springboot项目集成-数据库方案代码  
 
 - 基于`springboot,jpa...`，[数据源sql](src/main/resources/db)  
 - 自定义数据源,使用从数据库加载账户信息,资源角色,过滤资源等信息,这样便于动态调整(见`AccountProvider ResourceProvider`)        

@@ -42,6 +42,6 @@ Authorization: Basic dG9tOjMyMTEz
 #### 其他认证方式  
 目前`sureness`默认支持这三种主流的认证方式，满足绝大部分需求，当然你也可以很轻松的自定义认证方式，详见[自定义Subject](cn/custom-subject.md)  
 
-我们提供了默认认证方式的使用`DEMO`，请参考 [使用sureness10分钟项目集成案例](cn/sample-bootstrap.md)   
-当然我们也提供了自定义认证方式的扩展`DEMO`，请参考 [使用sureness30分钟项目集成案例](cn/sample-tom.md)     
+我们提供了默认认证方式的使用`DEMO`，请参考 [一步一步搭建认证鉴权系统](cn/step-by-step.md)       
+当然我们也提供了自定义认证方式的扩展`DEMO`，请参考 [Springboot项目集成-数据库方案](cn/sample-tom.md)      
 

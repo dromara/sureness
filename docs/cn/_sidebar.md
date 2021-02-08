@@ -10,10 +10,10 @@
   
 - 进阶扩展
   - [扩展点](cn/extend-point.md)
+  - [自定义Subject](cn/custom-subject.md)   
   - [自定义Subject Creator](cn/custom-subject-creator.md)
-  - [自定义Subject](cn/custom-subject.md)
-  - [自定义数据源](cn/custom-datasource.md)
   - [自定义Processor](cn/custom-processor.md)
+  - [自定义数据源](cn/custom-datasource.md)  
 - 集成案例
   - [Springboot项目集成-配置文件方案](cn/sample-bootstrap.md)  
   - [Springboot项目集成-数据库方案](cn/sample-tom.md)  

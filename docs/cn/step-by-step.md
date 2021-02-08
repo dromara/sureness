@@ -1,4 +1,4 @@
-## 一步一步搭建  
+## 一步一步搭建    
 
 下面我们来一步一步基于springboot,sureness搭建一个如下功能的认证鉴权系统。  
 
@@ -84,7 +84,7 @@ public class SimulateController {
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4.3</version>
+    <version>0.4.4</version>
 </dependency>
 ```
 如下：  
