@@ -79,8 +79,6 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
                 logger.warn("sureness - pathTreeProvider: {} provideExcludedResource is null", provider);
             }
         }
-
-//        resources = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
         root.buildTree(resources);
 
         excludeResources = excludeResources.stream()
@@ -110,8 +108,6 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
                 logger.warn("sureness - pathTreeProvider: {} provideExcludedResource is null", provider);
             }
         }
-
-//        resources = resources.stream().map(String::toLowerCase).collect(Collectors.toSet());
         root.rebuildTree(resources);
 
         excludeResources = excludeResources.stream()
