@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4.4</version>
+    <version>0.4.5</version>
     <packaging>jar</packaging>
 
     <name>sureness</name>
@@ -40,7 +40,7 @@
             scm:git:https://github.com/tomsun28/sureness.git
         </developerConnection>
         <url>https://github.com/tomsun28/sureness</url>
-        <tag>0.4.4</tag>
+        <tag>0.4.5</tag>
     </scm>
 
     <properties>
