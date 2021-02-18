@@ -35,6 +35,9 @@ public class JwtSubject implements Subject {
     /** the Roles which can access this resource above-targetUri **/
     private List<String> supportRoles;
 
+    /** the map for principal, add your custom principal **/
+    private PrincipalMap principalMap;
+
     private JwtSubject(Builder builder) {
         this.appId = builder.appId;
         this.jwt = builder.jwt;
@@ -43,6 +46,7 @@ public class JwtSubject implements Subject {
         this.ownRoles = builder.ownRoles;
         this.supportRoles = builder.supportRoles;
         this.targetUri = builder.targetUri;
+        this.principalMap = builder.principalMap;
     }
 
     @Override
@@ -52,7 +56,7 @@ public class JwtSubject implements Subject {
 
     @Override
     public PrincipalMap getPrincipalMap() {
-        return null;
+        return this.principalMap;
     }
 
     @Override
@@ -106,6 +110,7 @@ public class JwtSubject implements Subject {
         private List<String> ownRoles;
         private String targetUri;
         private List<String> supportRoles;
+        private PrincipalMap principalMap;
 
         public Builder(String jwt) {
             this.jwt = jwt;
@@ -118,10 +123,16 @@ public class JwtSubject implements Subject {
             this.ownRoles = (List<String>) subject.getOwnRoles();
             this.targetUri = String.valueOf(subject.getTargetResource());
             this.supportRoles = (List<String>) subject.getSupportRoles();
+            this.principalMap = subject.getPrincipalMap();
         }
 
         public Builder setPrincipal(String appId) {
             this.appId = appId;
+            return this;
+        }
+
+        public Builder setPrincipalMap(PrincipalMap principalMap) {
+            this.principalMap = principalMap;
             return this;
         }
 

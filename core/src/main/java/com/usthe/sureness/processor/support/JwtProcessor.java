@@ -6,8 +6,10 @@ import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
+import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.support.JwtSubject;
+import com.usthe.sureness.subject.support.SinglePrincipalMap;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -18,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * the processor support jwt - JwtSubject
@@ -69,6 +72,11 @@ public class JwtProcessor extends BaseProcessor {
         if (ownRoles != null) {
             builder.setOwnRoles(ownRoles);
         }
+        PrincipalMap principalMap = new SinglePrincipalMap();
+        for (Map.Entry<String, Object> claimEntry : claims.entrySet()) {
+            principalMap.setPrincipal(claimEntry.getKey(), claimEntry.getValue());
+        }
+        builder.setPrincipalMap(principalMap);
         return builder.build();
     }
 
