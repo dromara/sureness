@@ -1,6 +1,6 @@
 ## Custom Datasource  
 
-Before customization, it is recommended to understand the `sureness` process and the extended interface provided, see [Advanced Extension](extend-point.md) for details.  
+Before customization, it is recommended to understand the sureness's processor and the extended interface provided, see [Advanced Extension](extend-point.md) for details.  
 
 First, let's get to know the two user information and resource permission information interfaces provided by Sureness. Users can customize these interfaces to provide data to Sureness from different data sources.  
 
