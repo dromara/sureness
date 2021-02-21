@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 /**
  * process digest auth - DigestSubject
@@ -86,17 +85,6 @@ public class DigestProcessor extends BaseProcessor {
         return DigestSubject.builder(var)
                 .setOwnRoles(account.getOwnRoles())
                 .build();
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void authorized(Subject var) throws SurenessAuthorizationException {
-        List<String> ownRoles = (List<String>)var.getOwnRoles();
-        List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
-            return;
-        }
-        throw new UnauthorizedException("do not have the role to access resource");
     }
 
     private String getAuthenticate(){

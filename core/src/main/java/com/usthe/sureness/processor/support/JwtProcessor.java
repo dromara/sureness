@@ -4,8 +4,6 @@ import com.usthe.sureness.processor.BaseProcessor;
 import com.usthe.sureness.processor.exception.ExpiredCredentialsException;
 import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
-import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
-import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.support.JwtSubject;
@@ -78,17 +76,6 @@ public class JwtProcessor extends BaseProcessor {
         }
         builder.setPrincipalMap(principalMap);
         return builder.build();
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void authorized(Subject var) throws SurenessAuthorizationException {
-        List<String> ownRoles = (List<String>)var.getOwnRoles();
-        List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
-            return;
-        }
-        throw new UnauthorizedException("do not have the role to access resource");
     }
 
 }
