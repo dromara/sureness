@@ -38,8 +38,8 @@
 | **servlet**    | support      | support      | support |
 | **jax-rs**     | support      | not support    | not support |
 | **dynamic modification of permissions** | support | support need modify | support need modify |
-| **Performance** | extremely fast | faster | slower|
-| **Learning curve** | simple | simple | steep|
+| **performance** | extremely fast | faster | slower|
+| **learning curve** | simple | simple | steep|
 
 ##### Benchmark  
 

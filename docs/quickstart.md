@@ -37,39 +37,36 @@ public DefaultSurenessConfig surenessConfig() {
 
 #### Load Auth Config DataSource   
 
-Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
-The dataSource can load from txt, dataBase, no dataBase or annotation etc.  
-We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.  
-`SurenessAccountProvider` - Account datasource provider interface.  
-`PathTreeProvider` - Resource uri-role datasource provider interface.   
+Sureness authentication requires us to provide our own account data, role permission data, etc. These data may come from text, relational databases, non-relational databases, annotations, etc.   
+We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.
 
-We provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml.   
-We also provider dataSource implement which load dataSource form annotation - `AnnotationLoader`.   
+- `SurenessAccountProvider` - Account datasource provider interface.
+- `PathTreeProvider` - Resource uri-role datasource provider interface.
 
-Default Document DataSource Config - sureness.yml, see: [Default Document DataSource](default-datasource.md)   
-Annotation DataSource Config Detail, see: [Annotation DataSource](annotation-datasource.md)  
+Default Document DataSource Config - `sureness.yml`, see: [Default Document DataSource](default-datasource.md)   
+Annotation DataSource Config Detail - `AnnotationLoader`, see: [Annotation DataSource](annotation-datasource.md)
 
-If the configuration resource data comes from text, please refer to  [sureness integration springboot sample(configuration file scheme)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-If the configuration resource data comes from dataBase, please refer to  [sureness integration springboot sample(database scheme)-sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
-
+If the configuration resource data comes from text, please refer to  [Sureness integration springboot sample(configuration file scheme)](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+If the configuration resource data comes from dataBase, please refer to  [Sureness integration springboot sample(database scheme)](https://github.com/tomsun28/sureness/tree/master/sample-tom)
 
 #### Add an Interceptor Intercepting All Requests  
 
-The essence of `sureness` is to intercept all rest requests for authenticating and Authorizing.     
-The interceptor can be a filter or a spring interceptor, it intercepts all request to check them.  
+The essence of sureness is to intercept all rest requests for authenticating and Authorizing.     
+The interceptor can be a filter or a spring interceptor, it intercepts all request to check them.
 ```
 SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
 #### Implement Auth Exception Handling Process    
 
-`sureness` uses exception handling process:  
-1. If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.    
-2. If auth failure, method - `checkIn` will throw different types of auth exceptions.   
-Users need to continue the subsequent process based on these exceptions.(like return the request response)  
+Sureness uses exception handling process:
 
-Here we need to customize the exceptions thrown by `checkIn`, 
-passed directly when auth success, catch exception when auth failure and do something:    
+- If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.
+- If auth failure, method - `checkIn` will throw different types of auth exceptions.
+
+Users need to continue the subsequent process based on these exceptions.(eg: return the request response)
+
+Here we need to customize the exceptions thrown by `checkIn`, passed directly when auth success, catch exception when auth failure and do something:
 
 ```
 try {

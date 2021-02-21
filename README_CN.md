@@ -108,15 +108,17 @@ public DefaultSurenessConfig surenessConfig() {
 #### 配置权限账户数据源      
 
 `sureness`认证鉴权，当然也需要我们提供自己的账户数据，角色权限数据等，这些数据可能来自文本，关系数据库，非关系数据库，注解等。  
-我们提供了数据源接口：`SurenessAccountProvider` - 账户数据接口, `PathTreeProvider` - 资源权限数据接口，用户可以实现此接口实现自定义数据源。  
+我们提供了数据源接口：`SurenessAccountProvider`, `PathTreeProvider`，用户可以实现此接口实现自定义数据源。  
 
-当前我们也提供文本形式的数据源实现 `DocumentResourceDefaultProvider` 和 注解形式的资源权限数据源实现 `AnnotationLoader`。  
-如果是使用了[默认sureness配置-DefaultSurenessConfig](#使用默认配置来配置sureness),其配置的是文本数据源，用户可以直接通过修改`sureness.yml`文件来配置数据。    
+- `PathTreeProvider`: 资源的数据源接口,实现从数据库,文本等加载数据,加载到对应的资源权限匹配器`DefaultPathRoleMatcher`中
+- `SurenessAccountProvider`: 用户的账户密钥信息接口,实现从数据库,文本等加载数据，加载到需要账户数据的`processor`中  
 
-文本数据源`sureness.yml`配置使用方式详见文档 [默认文本数据源](docs/cn/default-datasource.md)   
-注解形式的资源权限数据源配置使用方式详见文档 [注解资源权限数据源](docs/cn/annotation-datasource.md)    
+当使用的是上方默认配置`DefaultSurenessConfig`时，则默认使用文本数据源和注解数据源作为数据提供者。  
 
-我们提供了使用代码`DEMO`：  
+- 文本数据源使用`sureness.yml`配置数据，使用方式详见文档 [默认文本数据源](docs/cn/default-datasource.md)   
+- 注解数据源的注解`@RequiresRoles,@WithoutAuth`使用方式详见文档 [注解资源权限数据源](docs/cn/annotation-datasource.md)    
+
+我们提供了代码工程样例：  
 默认文本数据源具体实现，请参考[sureness集成springboot样例(配置文件方案)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
 若权限配置数据来自数据库，请参考[sureness集成springboot样例(数据库方案)--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 
