@@ -86,7 +86,7 @@ public class CustomTokenProcessor extends BaseProcessor {
         if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
             return;
         }
-        throw new UnauthorizedException("do not have the role to access resource");
+        throw new UnauthorizedException("custom authorized: do not have the role to access resource");
     }
 
     public void setAccountProvider(SurenessAccountProvider accountProvider) {
