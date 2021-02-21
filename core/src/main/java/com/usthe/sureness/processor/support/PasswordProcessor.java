@@ -75,16 +75,16 @@ public class PasswordProcessor extends BaseProcessor {
                 .build();
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public void authorized(Subject var) throws SurenessAuthorizationException {
-        List<String> ownRoles = (List<String>)var.getOwnRoles();
-        List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
-            return;
-        }
-        throw new UnauthorizedException("do not have the role to access resource");
-    }
+//    @SuppressWarnings("unchecked")
+//    @Override
+//    public void authorized(Subject var) throws SurenessAuthorizationException {
+//        List<String> ownRoles = (List<String>)var.getOwnRoles();
+//        List<String> supportRoles = (List<String>)var.getSupportRoles();
+//        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
+//            return;
+//        }
+//        throw new UnauthorizedException("do not have the role to access resource");
+//    }
 
     public void setAccountProvider(SurenessAccountProvider provider) {
         this.accountProvider = provider;

@@ -2,8 +2,11 @@ package com.usthe.sureness.processor;
 
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
 import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
+import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.subject.Subject;
+
+import java.util.List;
 
 /**
  * abstract processor
@@ -48,5 +51,12 @@ public abstract class BaseProcessor implements Processor{
      * @param var subject
      * @throws SurenessAuthorizationException when authorize error
      */
-    public abstract void authorized(Subject var) throws SurenessAuthorizationException;
+    public void authorized(Subject var) throws SurenessAuthorizationException{
+        List<String> ownRoles = (List<String>)var.getOwnRoles();
+        List<String> supportRoles = (List<String>)var.getSupportRoles();
+        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
+            return;
+        }
+        throw new UnauthorizedException("do not have the role to access resource");
+    }
 }
