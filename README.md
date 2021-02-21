@@ -41,8 +41,8 @@
 | **servlet**    | support      | support      | support |
 | **jax-rs**     | support      | not support    | not support |
 | **dynamic modification of permissions** | support | support need modify | support need modify |
-| **Performance** | extremely fast | faster | slower|
-| **Learning curve** | simple | simple | steep|
+| **performance** | extremely fast | faster | slower|
+| **learning curve** | simple | simple | steep|
 
 ##### Benchmark  
 
@@ -76,7 +76,7 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 
 Resource path matching see: [URI Match](docs/path-match.md)  
 
-#### Add sureness In Your Project  
+#### Add Sureness In Your Project  
 
 When use maven or gradle build project, add coordinate  
 ```
@@ -90,9 +90,9 @@ When use maven or gradle build project, add coordinate
 compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.4'
 ```
 
-#### Use the default configuration to configure sureness  
+#### Use the Default Configuration to Configure Sureness  
 
-The default configuration -`DefaultSurenessConfig` uses the document datasource sureness.yml as the auth datasource.  
+The default configuration -`DefaultSurenessConfig` uses the document datasource `sureness.yml` as the auth datasource.  
 It supports jwt, basic auth, digest auth authentication.  
 ```
 @Bean
@@ -103,25 +103,22 @@ public DefaultSurenessConfig surenessConfig() {
 
 #### Load Auth Config DataSource   
 
-Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
-The dataSource can load from txt, dataBase, no dataBase or annotation etc.  
+Sureness authentication requires us to provide our own account data, role permission data, etc. These data may come from text, relational databases, non-relational databases, annotations, etc.   
 We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.  
-`SurenessAccountProvider` - Account datasource provider interface.    
-`PathTreeProvider` - Resource uri-role datasource provider interface.     
 
-We provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml.   
-We also provider dataSource implement which load dataSource form annotation - `AnnotationLoader`.   
+- `SurenessAccountProvider` - Account datasource provider interface.    
+- `PathTreeProvider` - Resource uri-role datasource provider interface.     
 
-Default Document DataSource Config - sureness.yml, see: [Default Document DataSource](docs/default-datasource.md)   
-Annotation DataSource Config Detail, see: [Annotation DataSource](docs/annotation-datasource.md)  
+Default Document DataSource Config - `sureness.yml`, see: [Default Document DataSource](docs/default-datasource.md)   
+Annotation DataSource Config Detail - `AnnotationLoader`, see: [Annotation DataSource](docs/annotation-datasource.md)  
 
-If the configuration resource data comes from text, please refer to  [sureness integration springboot sample(configuration file scheme)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-If the configuration resource data comes from dataBase, please refer to  [sureness integration springboot sample(database scheme)-sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
+If the configuration resource data comes from text, please refer to  [Sureness integration springboot sample(configuration file scheme)](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+If the configuration resource data comes from dataBase, please refer to  [Sureness integration springboot sample(database scheme)](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
 
 
 #### Add an Interceptor Intercepting All Requests  
 
-The essence of `sureness` is to intercept all rest requests for authenticating and Authorizing.     
+The essence of sureness is to intercept all rest requests for authenticating and Authorizing.     
 The interceptor can be a filter or a spring interceptor, it intercepts all request to check them.  
 ```
 SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
@@ -129,13 +126,14 @@ SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletReques
 
 #### Implement Auth Exception Handling Process    
 
-`sureness` uses exception handling process:  
-1. If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.    
-2. If auth failure, method - `checkIn` will throw different types of auth exceptions.   
-Users need to continue the subsequent process based on these exceptions.(like return the request response)  
+Sureness uses exception handling process:  
 
-Here we need to customize the exceptions thrown by `checkIn`, 
-passed directly when auth success, catch exception when auth failure and do something:    
+- If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.    
+- If auth failure, method - `checkIn` will throw different types of auth exceptions.   
+
+Users need to continue the subsequent process based on these exceptions.(eg: return the request response)  
+
+Here we need to customize the exceptions thrown by `checkIn`, passed directly when auth success, catch exception when auth failure and do something:    
 
 ```
 try {
@@ -157,13 +155,17 @@ Detail sureness auth exception see: [Default Sureness Auth Exception](docs/defau
 
 **Have Fun**      
 
-## Advanced Use  
-
-If know sureness Process flow, maybe know these extend points.      
+## Advanced Use
 
 Sureness supports custom subject, custom subjectCreator, custom processor and more.  
 
-Suggest look these interface before extending:  
+Before advanced custom extension, let's first understand the general process of sureness:  
+
+![flow](/docs/_images/flow-en.png)  
+
+As in the above process, Subject is created by SubjectCreate according to the request body, and different authentication processors process the supported Subjects.  
+
+Sureness provides the following common interfaces as extension points:  
 
 - `Subject`:  Authenticated authorized  user's account interface, provide the account's username,password, request resources, roles, etc.  
 - `SubjectCreate`: create subject interface, provider create method.   
@@ -171,27 +173,37 @@ Suggest look these interface before extending:
 - `PathTreeProvider`: resource data provider, it can load data from txt or database,etc.
 - `SurenessAccountProvider`: account data provider, it can load data from txt or database,etc.   
 
-Sureness Process Flow: 
+Refer to [Extension Point](docs/extend-point.md) for the extended documentation.   
 
-![flow](/docs/_images/flow-en.png)  
+1. **Custom Subject**
 
-1. **Custom Datasource**  
+`Implment Subject, add custom subject content`  
+`Implment SubjectCreate to create custom subject`  
+`Implment Processor to support custom subject`
+
+See [Custom Subject](docs/custom-subject.md)  
+
+2. **Custom SubjectCreator**
+
+`Implment SubjectCreate to create your custom subject`   
+
+See [Custom SubjectCreator](docs/custom-subject-creator.md)  
+
+3. **Custom Processor**
+
+`A subject also can support by different processor, so we can custom processor to support custom subject`
+`Implment Processor, set which subject can support and implment processing details`
+
+See [Custom Processor](docs/custom-processor.md)  
+
+4. **Custom Datasource**  
 
 `Implment PathTreeProvider, load in DefaultPathRoleMatcher`   
 `Implment SurenessAccountProvide, load in processor`  
 
-2. **Custom Subject**  
+See [Custom Datasource](docs/custom-datasource.md)  
 
-`Implment Subject, add custom subject content`  
-`Implment SubjectCreate to create custom subject`  
-`Implment Processor to support custom subject`    
-
-3. **Custom Processor**  
-
-`A subject also can support by different processor, so we can custom processor to support custom subject`
-`Implment Processor, set which subject can support and implment processing details`  
-
-Detail please refer to  [sureness integration springboot sample(database scheme)-sample-tom](sample-tom)   
+Detail please refer to  [Sureness integration springboot sample(database scheme)](sample-tom)   
 
 ## Contributing  
 

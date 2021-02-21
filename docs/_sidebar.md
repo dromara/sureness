@@ -15,8 +15,8 @@
   - [Custom Processor](custom-processor.md)
 
 - Integration Demo
-  - [Quarkus-Sureness Sample(file scheme)](sample-bootstrap.md)
-  - [Quarkus-Sureness Sample(database scheme)](sample-tom.md)
+  - [SpringBoot-Sureness Sample(file scheme)](sample-bootstrap.md)
+  - [SpringBoot-Sureness Sample(database scheme)](sample-tom.md)
   - [Quarkus-Sureness Sample](sample-quarkus.md) 
   - [Spring-Webflux-Sureness Sample](sample-spring-webflux.md)  
   - [Javalin-Sureness Sample](sample-javalin.md)  
