@@ -15,6 +15,11 @@
 
 **Home Page: [usthe.com/sureness](https://usthe.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
 
+## Background   
+
+In the mainstream web architecture, how to protect the restful api provided by the back-end through effective and fast authentication has become particularly important.     
+For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring, the slower performance and steep learning curve of spring security are not our ideal framework.   
+Ever since sureness was born, we hope to solve these, provide a **restful api**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.        
 
 ## <font color="green">`Introduction`</font>
 
@@ -52,7 +57,7 @@
 **In contrast, sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of shiro and 1700 times that of spring security.**      
 **The performance gap will be further widened as the api matching chain increases.**      
 
-Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security)    
+Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark)       
 
 ##### Framework Sample Support  
 
@@ -173,7 +178,7 @@ Sureness provides the following common interfaces as extension points:
 - `PathTreeProvider`: Resource data provider, it can load data from txt or database,etc.
 - `SurenessAccountProvider`: Account data provider, it can load data from txt or database,etc.   
 
-Refer to [Extension Point](docs/extend-point.md) for the extended documentation.   
+Refer to [Extension Point](https://usthe.com/sureness/#/extend-point) for the extended documentation.   
 
 1. **Custom Subject**
 
