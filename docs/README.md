@@ -38,15 +38,15 @@
 | **servlet**    | support      | support      | support |
 | **jax-rs**     | support      | not support    | not support |
 | **dynamic modification of permissions** | support | support need modify | support need modify |
-| **performance** | extremely fast | faster | slower|
+| **performance** | fast | slower | slower|
 | **learning curve** | simple | simple | steep|
 
 ##### Benchmark  
 
 ![benchmark](_images/benchmark_en.png)  
 
-**Benchmark test shows sureness to lose 0.026ms performance compared to frameless application, shiro lose 0.088ms, spring security lose 44.813ms.**    
-**In contrast, sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of shiro and 1700 times that of spring security.**      
+**Benchmark test shows sureness to lose 0.026ms performance compared to frameless application, shiro lose 0.088ms, spring security lose 0.116ms.**    
+**In contrast, sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of shiro and 4 times that of spring security.**      
 **The performance gap will be further widened as the api matching chain increases.**      
 
 Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security)    

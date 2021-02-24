@@ -46,15 +46,15 @@
 | **servlet**    | 支持      | 支持      | 支持|
 | **jax-rs**     | 支持      | 不支持    | 不支持|
 | **权限动态修改** | 支持 | 需改动支持 | 需改动支持|
-| **性能速度** | 极快 | 较快 | 较慢|
+| **性能速度** | 较快 | 较慢 | 较慢|
 | **学习曲线** | 简单 | 简单 | 陡峭|  
 
 ##### 基准性能测试  
 
 ![benchmark](docs/_images/benchmark_cn.png)  
 
-**基准测试显示sureness对比无权限框架应用损耗0.026ms性能，shiro损耗0.088ms,spring security损耗44.813ms，
-相比之下sureness基本不消耗性能，且性能(参考TPS损耗)是shiro的3倍，spring security的1700倍**     
+**基准测试显示sureness对比无权限框架应用损耗0.026ms性能，shiro损耗0.088ms,spring security损耗0.116ms，
+相比之下sureness基本不消耗性能，且性能(参考TPS损耗)是shiro的3倍，spring security的4倍**     
 **性能差距会随着api匹配链的增加而进一步拉大**     
 详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
