@@ -16,13 +16,13 @@
 **主页: [usthe.com/sureness](https://usthe.com/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
 
 
-## 背景         
+## 📫 背景         
 
 在主流的前后端分离架构中，如何通过有效快速的认证鉴权来保护后端提供的`restful api`变得尤为重要。对现存框架，不原生支持`rest`的`apache shiro`，
 还是深度绑定`spring`，较慢性能，学习曲线陡峭的`spring security`，或多或少都不是我们的理想型。   
 于是乎`sureness`诞生了，我们希望能解决这些，提供一个面向**restful api**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。      
 
-## <font color="green">介绍</font>
+## 🎡 <font color="green">介绍</font>
 
 > `sureness` 是我们在深度使用权限框架 `apache shiro` 之后,吸取其一些优点全新设计开发的一个认证鉴权框架  
 >  面向 `restful api` 的认证鉴权,基于 `rbac` (用户-角色-资源)主要关注于对 `restful api` 的安全保护  
@@ -35,7 +35,7 @@
 
 >`sureness`的低配置，易扩展，不耦合其他框架，希望能帮助开发者对自己的项目多场景快速安全的进行保护   
 
-##### 框架对比     
+##### 🔍 框架对比     
 
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | ---  |
@@ -49,7 +49,7 @@
 | **性能速度** | 较快 | 较慢 | 较慢|
 | **学习曲线** | 简单 | 简单 | 陡峭|  
 
-##### 基准性能测试  
+##### 📈 基准性能测试  
 
 ![benchmark](docs/_images/benchmark_cn.png)  
 
@@ -58,7 +58,7 @@
 **性能差距会随着api匹配链的增加而进一步拉大**     
 详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
-##### 框架支持样例    
+##### ✌ 框架支持样例    
 
 - [x] sureness集成springboot样例(配置文件方案) [sample-bootstrap](sample-bootstrap)   
 - [x] sureness集成springboot样例(数据库方案) [sample-tom](sample-tom)  
@@ -69,9 +69,9 @@
 - [x] more samples todo   
 
 
-## 快速开始  
+## 🔨 快速开始  
 
-#### <font color="red">使用前一些约定</font>  
+#### 🐕 <font color="red">使用前一些约定</font>  
 
 - `sureness`尽量简洁,基于`rbac`,只有(角色-资源)的映射,没有(权限)动作映射，即 用户-角色-资源  
 - 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
@@ -81,21 +81,21 @@
 
 资源路径匹配详见 [URI路径匹配](docs/cn/path-match.md)  
 
-#### 项目中加入sureness  
+#### 🐖 项目中加入sureness  
 
 项目使用`maven`或`gradle`构建,加入坐标    
 ```
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4.4</version>
+    <version>0.4.6</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.4'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.6'
 ```
 
-#### 使用默认配置来配置sureness    
+#### 🐵 使用默认配置来配置sureness    
 默认配置使用了文件数据源`sureness.yml`作为账户权限数据源  
 默认配置支持了`jwt, basic auth, digest auth`认证  
 ```
@@ -105,7 +105,7 @@ public DefaultSurenessConfig surenessConfig() {
 }
 ```
 
-#### 配置权限账户数据源      
+#### 🐮 配置权限账户数据源      
 
 `sureness`认证鉴权，当然也需要我们提供自己的账户数据，角色权限数据等，这些数据可能来自文本，关系数据库，非关系数据库，注解等。  
 我们提供了数据源接口：`SurenessAccountProvider`, `PathTreeProvider`，用户可以实现此接口实现自定义数据源。  
@@ -122,7 +122,7 @@ public DefaultSurenessConfig surenessConfig() {
 默认文本数据源具体实现，请参考[sureness集成springboot样例(配置文件方案)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
 若权限配置数据来自数据库，请参考[sureness集成springboot样例(数据库方案)--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 
-#### 添加过滤器拦截所有请求    
+#### 🐐 添加过滤器拦截所有请求    
 
 `sureness`的本质就拦截所有`rest`请求对其认证鉴权判断。  
 入口拦截器器实现一般可以是 `filter or spring interceptor`  
@@ -132,7 +132,7 @@ public DefaultSurenessConfig surenessConfig() {
 SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
-#### 实现认证鉴权相关异常处理流程      
+#### 🐰 实现认证鉴权相关异常处理流程      
 
 `sureness`使用异常处理流程：  
 1. 若认证鉴权成功,`checkIn`会返回包含用户信息的`SubjectSum`对象  
@@ -162,7 +162,7 @@ try {
 
 > 如果这个[快速开始]对您不是很友好，可以参考这篇[一步一步搭建](docs/cn/step-by-step.md)，里面一步一步详细介绍了使用sureness搭建一个完整功能认证鉴权项目的步骤。  
 
-## 进阶扩展  
+## 🥐 进阶扩展  
 
 `sureness`支持自定义`subject`，自定义`subjectCreator`注册，自定义`processor`处理器等   
 
@@ -182,24 +182,24 @@ sureness提供了下面这些常用接口作为扩展点:
 
 扩展文档详见 [扩展点](docs/cn/extend-point.md)  
 
-1. **自定义subject**  
+1. 🥊 **自定义subject**  
 
 实现`Subject`接口,添加自定义的`subject`内容  
 实现`SubjectCreate`接口方法,自定义subjectCreator创建出自定义的`subject`  
 实现`BaseProcessor`接口,自定义processor支持处理自定义的`subject`    
 详见 [自定义Subject](docs/cn/custom-subject.md)   
 
-2. **自定义subjectCreator**   
+2. 🔫 **自定义subjectCreator**   
 
 实现`SubjectCreate`接口方法,根据request请求的内容创建出对应需要的的`subject`  
 详见 [自定义SubjectCreate](docs/cn/custom-subject-creator.md)   
 
-3. **自定义processor**  
+3. 🪓 **自定义processor**  
 
 实现`BaseProcessor`接口,设置支持的`subject`,实现处理该`subject`的认证鉴权逻辑   
 详见 [自定义Processor](docs/cn/custom-processor.md)   
 
-4. **自定义数据源**  
+4. 🏹 **自定义数据源**  
 
 实现 `PathTreeProvider`的接口, 加载到对应的资源权限匹配器`DefaultPathRoleMatcher`中   
 实现 `SurenessAccountProvider`的接口,加载到需要账户数据的`processor`中     
@@ -208,7 +208,7 @@ sureness提供了下面这些常用接口作为扩展点:
 具体扩展实践请参考 [sureness集成springboot样例(数据库方案)--sample-tom](sample-tom)  
 
 
-## 参与贡献  
+## 🙋 参与贡献  
 非常欢迎参与项目贡献。对项目代码有疑问或者建议请直接联系 @tomsun28  
 
 仓库的组成部分:  
@@ -217,11 +217,11 @@ sureness提供了下面这些常用接口作为扩展点:
 - [使用sureness集成springboot搭建权限项目(数据库方案)--sample-tom](sample-tom)  
 - [各个框架使用sureness的样例项目(javalin,ktor,quarkus)--samples](samples)  
 
-#### 高性能匹配      
+#### 💪 高性能匹配      
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
-## 更多相关     
+## 💡 更多相关     
 
 相关文章：  
 [restful api 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
@@ -234,5 +234,5 @@ sureness提供了下面这些常用接口作为扩展点:
 QQ交流群：390083213    
 微信公众号：sureness   
 
-## License  
+## 🛡️ License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)

@@ -13,8 +13,13 @@
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness) 
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red) 
 
-## <font color="green">`Introduction`</font>
+## 📫 Background  
 
+In the mainstream web architecture, how to protect the restful api provided by the back-end through effective and fast authentication has become particularly important.     
+For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring, the slower performance and steep learning curve of spring security are not our ideal framework.   
+Ever since sureness was born, we hope to solve these, provide a **restful api**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.
+
+## 🎡 <font color="green">Introduction</font>  
 
 > Sureness is a new, permission project which we learn from apache shiro and add some ideas to create it.  
 > Authentication for restful api, based on RBAC, mainly focused on the protection of restful api.  
@@ -27,7 +32,7 @@
 
 > The low configuration of sureness, easy to expand, and not coupled with other frameworks, enables developers to quickly and safely protect their projects in multiple scenarios.   
 
-##### Compare     
+##### 🔍 Compare     
 
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | --- |
@@ -41,7 +46,7 @@
 | **performance** | fast | slower | slower|
 | **learning curve** | simple | simple | steep|
 
-##### Benchmark  
+##### 📈 Benchmark  
 
 ![benchmark](_images/benchmark_en.png)  
 
@@ -51,7 +56,7 @@
 
 Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
-##### Framework Sample Support  
+##### ✌ Framework Sample Support  
 
 - [x] sureness integration springboot sample(configuration file scheme) [sample-bootstrap](sample-bootstrap.md)   
 - [x] sureness integration springboot sample(database scheme) [sample-tom](sample-tom.md)  
