@@ -130,6 +130,9 @@ public class JsonWebTokenUtil {
      * @return is a JWT return false, else true
      */
     public static boolean isNotJsonWebToken(String jwt) {
+        if (jwt == null || "".equals(jwt)) {
+            return true;
+        }
         // base64url_encode(Header) + '.' + base64url_encode(Claims) + '.' + base64url_encode(Signature)
         String[] jwtArr = jwt.split("\\.");
         if (jwtArr.length != COUNT_3) {
