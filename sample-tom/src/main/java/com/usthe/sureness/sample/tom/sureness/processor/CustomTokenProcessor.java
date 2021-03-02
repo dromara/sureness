@@ -83,8 +83,9 @@ public class CustomTokenProcessor extends BaseProcessor {
     public void authorized(Subject var) throws SurenessAuthorizationException {
         List<String> ownRoles = (List<String>)var.getOwnRoles();
         List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles == null || supportRoles.isEmpty()
-                || (ownRoles != null && supportRoles.stream().anyMatch(ownRoles::contains))) {
+        if (supportRoles == null || supportRoles.isEmpty()) {
+            return;
+        } else if (ownRoles != null && supportRoles.stream().anyMatch(ownRoles::contains)) {
             return;
         }
         throw new UnauthorizedException("custom authorized: do not have the role to access resource");
