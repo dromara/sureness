@@ -34,6 +34,10 @@ public class SurenessFilterExample implements Filter {
     /** logger **/
     private static final Logger logger = LoggerFactory.getLogger(SurenessFilterExample.class);
 
+    private static final String UPGRADE = "Upgrade";
+
+    private static final String WEBSOCKET = "websocket";
+
     @Override
     public void init(FilterConfig filterConfig) {
         logger.info("surenessFilter initialized");
@@ -91,7 +95,11 @@ public class SurenessFilterExample implements Filter {
             // if ok, doFilter and add subject in request
             filterChain.doFilter(servletRequest, servletResponse);
         } finally {
-            SurenessContextHolder.clear();
+            int statusCode = ((HttpServletResponse) servletResponse).getStatus();
+            String upgrade = ((HttpServletResponse) servletResponse).getHeader(UPGRADE);
+            if (statusCode != HttpStatus.SWITCHING_PROTOCOLS.value() || !WEBSOCKET.equals(upgrade)) {
+                SurenessContextHolder.clear();
+            }
         }
     }
 
@@ -102,7 +110,6 @@ public class SurenessFilterExample implements Filter {
      */
     private static void responseWrite(ResponseEntity content, ServletResponse response) {
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json;charset=utf-8");
         ((HttpServletResponse)response).setStatus(content.getStatusCodeValue());
         content.getHeaders().forEach((key, value) ->
                 ((HttpServletResponse) response).addHeader(key, value.get(0)));

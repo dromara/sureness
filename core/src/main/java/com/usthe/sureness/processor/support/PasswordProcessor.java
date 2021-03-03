@@ -5,8 +5,6 @@ import com.usthe.sureness.processor.exception.DisabledAccountException;
 import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
 import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
-import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
-import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
@@ -16,7 +14,6 @@ import com.usthe.sureness.util.Md5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 
 /**
  * the processor support username password - PasswordSubject
@@ -51,8 +48,8 @@ public class PasswordProcessor extends BaseProcessor {
             }
             throw new  UnknownAccountException("do not exist the account: " + appId);
         }
-        if (var.getCredentials() != null && account.getPassword() != null) {
-            String password = String.valueOf(var.getCredentials());
+        if (var.getCredential() != null && account.getPassword() != null) {
+            String password = String.valueOf(var.getCredential());
             if (account.getSalt() != null && !"".equals(account.getSalt())) {
                 password = Md5Util.md5( password + account.getSalt());
             }
@@ -74,17 +71,6 @@ public class PasswordProcessor extends BaseProcessor {
                 .setOwnRoles(account.getOwnRoles())
                 .build();
     }
-
-//    @SuppressWarnings("unchecked")
-//    @Override
-//    public void authorized(Subject var) throws SurenessAuthorizationException {
-//        List<String> ownRoles = (List<String>)var.getOwnRoles();
-//        List<String> supportRoles = (List<String>)var.getSupportRoles();
-//        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
-//            return;
-//        }
-//        throw new UnauthorizedException("do not have the role to access resource");
-//    }
 
     public void setAccountProvider(SurenessAccountProvider provider) {
         this.accountProvider = provider;

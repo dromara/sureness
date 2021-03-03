@@ -1,6 +1,7 @@
 - 入门  
   - [介绍](cn/README.md "introduce")
   - [快速开始](cn/quickstart.md "quick start greatest")  
+  - [一步一步搭建](cn/step-by-step.md)    
   - [URI路径匹配](cn/path-match.md)  
   - [默认文本数据源](cn/default-datasource.md)  
   - [注解权限数据源](cn/annotation-datasource.md)    
@@ -9,14 +10,14 @@
   
 - 进阶扩展
   - [扩展点](cn/extend-point.md)
+  - [自定义Subject](cn/custom-subject.md)   
   - [自定义Subject Creator](cn/custom-subject-creator.md)
-  - [自定义Subject](cn/custom-subject.md)
-  - [自定义数据源](cn/custom-datasource.md)
   - [自定义Processor](cn/custom-processor.md)
+  - [自定义数据源](cn/custom-datasource.md)  
 - 集成案例
-  - [10分钟项目集成](cn/sample-bootstrap.md)
-  - [30分钟项目集成](cn/sample-tom.md)
-  - [Quarkus项目集成](cn/sample-quarkus.md) 
+  - [Springboot项目集成-配置文件方案](cn/sample-bootstrap.md)  
+  - [Springboot项目集成-数据库方案](cn/sample-tom.md)  
+  - [Quarkus项目集成](cn/sample-quarkus.md)   
   - [Spring-Webflux项目集成](cn/sample-spring-webflux.md)  
   - [Javalin项目集成](cn/sample-javalin.md)  
   - [Ktor项目集成](cn/sample-ktor.md)     
@@ -24,4 +25,5 @@
 - 其它
   - [设计文档](cn/design.md)
   - [参与贡献](cn/contributing.md)
+  - [赞助](cn/sponsor.md)   
   - [Changelog](https://github.com/tomsun28/sureness/releases ':ignore')

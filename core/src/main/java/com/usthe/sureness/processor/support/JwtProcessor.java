@@ -4,10 +4,10 @@ import com.usthe.sureness.processor.BaseProcessor;
 import com.usthe.sureness.processor.exception.ExpiredCredentialsException;
 import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
-import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
-import com.usthe.sureness.processor.exception.UnauthorizedException;
+import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.support.JwtSubject;
+import com.usthe.sureness.subject.support.SinglePrincipalMap;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * the processor support jwt - JwtSubject
@@ -41,7 +42,7 @@ public class JwtProcessor extends BaseProcessor {
     @Override
     @SuppressWarnings("unchecked")
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
-        String jwt = (String) var.getCredentials();
+        String jwt = (String) var.getCredential();
         if (JsonWebTokenUtil.isNotJsonWebToken(jwt)) {
             throw new  IncorrectCredentialsException("this jwt credential is illegal");
         }
@@ -69,18 +70,12 @@ public class JwtProcessor extends BaseProcessor {
         if (ownRoles != null) {
             builder.setOwnRoles(ownRoles);
         }
+        PrincipalMap principalMap = new SinglePrincipalMap();
+        for (Map.Entry<String, Object> claimEntry : claims.entrySet()) {
+            principalMap.setPrincipal(claimEntry.getKey(), claimEntry.getValue());
+        }
+        builder.setPrincipalMap(principalMap);
         return builder.build();
     }
-
-//    @SuppressWarnings("unchecked")
-//    @Override
-//    public void authorized(Subject var) throws SurenessAuthorizationException {
-//        List<String> ownRoles = (List<String>)var.getOwnRoles();
-//        List<String> supportRoles = (List<String>)var.getSupportRoles();
-//        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
-//            return;
-//        }
-//        throw new UnauthorizedException("do not have the role to access resource");
-//    }
 
 }

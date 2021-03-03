@@ -54,5 +54,5 @@ account:
 
 ```
 
-我们提供了默认文本数据源使用`DEMO`，默认文本数据源具体实现，请参考 [使用sureness10分钟项目集成案例](cn/sample-bootstrap.md)     
+我们提供了默认文本数据源使用`DEMO`，默认文本数据源具体实现，请参考 [一步一步搭建认证鉴权系统](cn/step-by-step.md)     
 当然数据源也可以来自数据库等存储,我们提供了接口让用户轻松的自定义数据源，详见[自定义数据源](cn/custom-datasource.md)  

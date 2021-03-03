@@ -19,6 +19,7 @@ resourceRole:
   - /api/v1/source2===get===[]
   - /api/v1/source2/*/*===get===[role2]
   - /api/v2/source3/*===get===[role2]
+  - /webSocket/demo===get===[role1]
 
 # load api resource which do not need be protected, means them need be excluded.
 # these api resource can be access by everyone
@@ -31,6 +32,11 @@ excludedResource:
   - /**/*.js===get
   - /**/*.css===get
   - /**/*.ico===get
+  - /**/*.ttf===get
+  - /**/*.png===get
+  - /**/*.gif===get
+  - /swagger-resources/**===get
+  - /v2/api-docs===get
 
 # account info
 # there are three account: admin, root, tom

@@ -72,9 +72,11 @@ public class TirePathTreeTest {
         paths.add("/**/*.html===post===[role8]");
         paths.add("/**/*.css===post===[role8]");
         paths.add("/**/*.js===post===[role8]");
+        // lower upper roles
+        paths.add("/api/role/book===get===[ROLE10]");
 
         root.buildTree(paths);
-        assertEquals(30, root.getResourceNum());
+        assertEquals(31, root.getResourceNum());
     }
 
     @Test
@@ -120,6 +122,7 @@ public class TirePathTreeTest {
         assertEquals("[role8]", root.searchPathFilterRoles("/content-ui.html===post"));
         assertEquals("[role8]", root.searchPathFilterRoles("/api/user/ui.js===post"));
         assertEquals("[role8]", root.searchPathFilterRoles("/node/v2/demo.css===post"));
-
+        // lower upper roles
+        assertEquals("[ROLE10]", root.searchPathFilterRoles("/api/role/book===get"));
     }
 }

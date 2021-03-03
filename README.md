@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# <font size="14p">sureness</font>
+# <font size="14p">sureness</font> <font size="5p">  | [中文文档](README_CN.md)</font>
 
 > A simple and efficient open-source jvm security framework that focus on the protection of restful api.
 
@@ -13,11 +13,15 @@
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness) 
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red) 
 
-**Please use the space [su.usthe.com](https://su.usthe.com/) when [usthe.com/sureness](https://usthe.com/sureness) cannot accessed.**  
+**Home Page: [usthe.com/sureness](https://usthe.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
 
-[Chinese Documentation -> 中文文档](README_CN.md)  
+## 📫 Background   
 
-## <font color="green">`Introduction`</font>
+In the mainstream web architecture, how to protect the restful api provided by the back-end through effective and fast authentication has become particularly important.     
+For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring, the slower performance and steep learning curve of spring security are not our ideal framework.   
+Ever since sureness was born, we hope to solve these, provide a **restful api**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.        
+
+## 🎡 <font color="green">Introduction</font>
 
 
 > Sureness is a new, permission project which we learn from apache shiro and add some ideas to create it.  
@@ -26,12 +30,12 @@
 > Support dynamic modification of permissions.   
 > Support mainstream http container(servlet and jax-rs).    
 > Supports JWT, Basic Auth, Digest Auth... Can extend custom supported authentication methods.    
-> [High performance due dictionary matching tree](#Why Is High Performance ).      
+> High performance due dictionary matching tree.      
 > Good extension interface, demo and document.    
 
 > The low configuration of sureness, easy to expand, and not coupled with other frameworks, enables developers to quickly and safely protect their projects in multiple scenarios.   
 
-##### Compare     
+##### 🔍 Compare     
 
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | --- |
@@ -43,30 +47,32 @@
 | **servlet**    | support      | support      | support |
 | **jax-rs**     | support      | not support    | not support |
 | **dynamic modification of permissions** | support | support need modify | support need modify |
-| **Performance** | Extremely fast | Faster | Slower|
+| **performance** | fast | slower | slower|
+| **learning curve** | simple | simple | steep|
 
-##### Benchmark  
+##### 📈 Benchmark  
 
 ![benchmark](docs/_images/benchmark_en.png)  
 
-**Benchmark tests show that sureness basically does not consume performance compared with frameless applications, 
-and the performance (TPS) is twice that of shiro and 170 times that of spring security.**    
+**Benchmark test shows sureness to lose 0.026ms performance compared to frameless application, shiro lose 0.088ms, spring security lose 0.116ms.**    
+**In contrast, sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of shiro and 4 times that of spring security.**      
+**The performance gap will be further widened as the api matching chain increases.**      
 
-Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security)    
+Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark)       
 
-##### Framework Sample Support  
+##### ✌ Framework Sample Support  
 
-- [x] spring [sample-bootstrap](sample-bootstrap)   
-- [x] springboot [sample-tom](sample-tom)  
-- [x] quarkus [sample-quarkus](samples/quarkus-sureness)  
-- [x] javalin [sample-javalin](samples/javalin-sureness)    
-- [x] ktor [sample-ktor](samples/ktor-sureness)   
-- [x] spring webflux [sample-spring-webflux](samples/spring-webflux-sureness)   
+- [x] sureness integration springboot sample(configuration file scheme) [sample-bootstrap](sample-bootstrap)   
+- [x] sureness integration springboot sample(database scheme) [sample-tom](sample-tom)  
+- [x] sureness integration quarkus sample [sample-quarkus](samples/quarkus-sureness)  
+- [x] sureness integration javalin sample [sample-javalin](samples/javalin-sureness)    
+- [x] sureness integration ktor sample [sample-ktor](samples/ktor-sureness)   
+- [x] sureness integration spring webflux sample [sample-spring-webflux](samples/spring-webflux-sureness)   
 - [x] more samples todo  
 
-## Quick Start 
+## 🔨 Quick Start 
 
-#### <font color="red">Some Conventions</font>  
+#### 🐕 <font color="red">Some Conventions</font>  
 
 - Based RBAC, only has role-resource, no permission action.    
 - We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
@@ -76,23 +82,23 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 
 Resource path matching see: [URI Match](docs/path-match.md)  
 
-#### Add sureness In Your Project  
+#### 🐖 Add Sureness In Your Project  
 
 When use maven or gradle build project, add coordinate  
 ```
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4.3</version>
+    <version>0.4.6</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.3'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.6'
 ```
 
-#### Use the default configuration to configure sureness  
+#### 🐵 Use the Default Configuration to Configure Sureness  
 
-The default configuration -`DefaultSurenessConfig` uses the document datasource sureness.yml as the auth datasource.  
+The default configuration -`DefaultSurenessConfig` uses the document datasource `sureness.yml` as the auth datasource.  
 It supports jwt, basic auth, digest auth authentication.  
 ```
 @Bean
@@ -101,41 +107,39 @@ public DefaultSurenessConfig surenessConfig() {
 }
 ```
 
-#### Load Auth Config DataSource   
+#### 🐮 Load Auth Config DataSource   
 
-Sureness need dataSource to authenticate and authorize, eg: role data, user data etc.  
-The dataSource can load from txt, dataBase, no dataBase or annotation etc.  
+Sureness authentication requires us to provide our own account data, role permission data, etc. These data may come from text, relational databases, non-relational databases, annotations, etc.   
 We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.  
-`SurenessAccountProvider` - Account datasource provider interface.    
-`PathTreeProvider` - Resource uri-role datasource provider interface.     
 
-We provide default dataSource implement which load dataSource from txt(sureness.yml), user can defined their data in sureness.yml.   
-We also provider dataSource implement which load dataSource form annotation - `AnnotationLoader`.   
+- `SurenessAccountProvider` - Account datasource provider interface.    
+- `PathTreeProvider` - Resource uri-role datasource provider interface.     
 
-Default Document DataSource Config - sureness.yml, see: [Default Document DataSource](docs/default-datasource.md)   
-Annotation DataSource Config Detail, see: [Annotation DataSource](docs/annotation-datasource.md)  
+Default Document DataSource Config - `sureness.yml`, see: [Default Document DataSource](docs/default-datasource.md)   
+Annotation DataSource Config Detail - `AnnotationLoader`, see: [Annotation DataSource](docs/annotation-datasource.md)  
 
-If the configuration resource data comes from text, please refer to  [10 Minute Tutorial's Program--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-If the configuration resource data comes from dataBase, please refer to  [30 Minute Tutorial's Program--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
+If the configuration resource data comes from text, please refer to  [Sureness integration springboot sample(configuration file scheme)](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+If the configuration resource data comes from dataBase, please refer to  [Sureness integration springboot sample(database scheme)](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
 
 
-#### Add an Interceptor Intercepting All Requests  
+#### 🐐 Add an Interceptor Intercepting All Requests  
 
-The essence of `sureness` is to intercept all rest requests for authenticating and Authorizing.     
+The essence of sureness is to intercept all rest requests for authenticating and Authorizing.     
 The interceptor can be a filter or a spring interceptor, it intercepts all request to check them.  
 ```
 SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
-#### Implement Auth Exception Handling Process    
+#### 🐰 Implement Auth Exception Handling Process    
 
-`sureness` uses exception handling process:  
-1. If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.    
-2. If auth failure, method - `checkIn` will throw different types of auth exceptions.   
-Users need to continue the subsequent process based on these exceptions.(like return the request response)  
+Sureness uses exception handling process:  
 
-Here we need to customize the exceptions thrown by `checkIn`, 
-passed directly when auth success, catch exception when auth failure and do something:    
+- If auth success, method - `checkIn` will return a `SubjectSum` object containing user information.    
+- If auth failure, method - `checkIn` will throw different types of auth exceptions.   
+
+Users need to continue the subsequent process based on these exceptions.(eg: return the request response)  
+
+Here we need to customize the exceptions thrown by `checkIn`, passed directly when auth success, catch exception when auth failure and do something:    
 
 ```
 try {
@@ -157,57 +161,71 @@ Detail sureness auth exception see: [Default Sureness Auth Exception](docs/defau
 
 **Have Fun**      
 
-## Advanced Use  
-
-If know sureness Process flow, maybe know these extend points.      
+## 🥐 Advanced Use
 
 Sureness supports custom subject, custom subjectCreator, custom processor and more.  
 
-Suggest look these interface before extending:  
-
-- `Subject`:  Authenticated authorized  user's account interface, provide the account's username,password, request resources, roles, etc.  
-- `SubjectCreate`: create subject interface, provider create method.   
-- `Processor`:  process subject interface, where happen authentication and authorization. 
-- `PathTreeProvider`: resource data provider, it can load data from txt or database,etc.
-- `SurenessAccountProvider`: account data provider, it can load data from txt or database,etc.   
-
-Sureness Process Flow: 
+Before advanced custom extension, let's first understand the general process of sureness:  
 
 ![flow](/docs/_images/flow-en.png)  
 
-1. **Custom Datasource**  
+As in the above process, Subject is created by SubjectCreate according to the request body, and different authentication processors process the supported Subjects.  
+
+Sureness provides the following common interfaces as extension points:  
+
+- `Subject`:  Authenticated authorized  user's account interface, provide the account's username,password, request resources, roles, etc.  
+- `SubjectCreate`: Create subject interface, provider create method.   
+- `Processor`:  Process subject interface, where happen authentication and authorization. 
+- `PathTreeProvider`: Resource data provider, it can load data from txt or database,etc.
+- `SurenessAccountProvider`: Account data provider, it can load data from txt or database,etc.   
+
+Refer to [Extension Point](https://usthe.com/sureness/#/extend-point) for the extended documentation.   
+
+1. 🥊 **Custom Subject**
+
+`Implment Subject, add custom subject content`  
+`Implment SubjectCreate to create custom subject`  
+`Implment Processor to support custom subject`
+
+See [Custom Subject](docs/custom-subject.md)  
+
+2. 🔫 **Custom SubjectCreator**
+
+`Implment SubjectCreate to create your custom subject`   
+
+See [Custom SubjectCreator](docs/custom-subject-creator.md)  
+
+3. 🪓 **Custom Processor**
+
+`A subject also can support by different processor, so we can custom processor to support custom subject`
+`Implment Processor, set which subject can support and implment processing details`
+
+See [Custom Processor](docs/custom-processor.md)  
+
+4. 🏹 **Custom Datasource**  
 
 `Implment PathTreeProvider, load in DefaultPathRoleMatcher`   
 `Implment SurenessAccountProvide, load in processor`  
 
-2. **Custom Subject**  
+See [Custom Datasource](docs/custom-datasource.md)  
 
-`Implment Subject, add custom subject content`  
-`Implment SubjectCreate to create custom subject`  
-`Implment Processor to support custom subject`    
+Detail please refer to  [Sureness integration springboot sample(database scheme)](sample-tom)   
 
-3. **Custom Processor**  
-
-`A subject also can support by different processor, so we can custom processor to support custom subject`
-`Implment Processor, set which subject can support and implment processing details`  
-
-Detail please refer to  [30 Minute Tutorial's Program--sample-tom](sample-tom)   
-
-## Contributing  
+## 🙋 Contributing  
 
 Very welcome to Contribute this project, go further and better with sureness. If you have any questions or suggestions about the project code, please contact @tomsun28 directly.  
 
 Components of Repository:  
 - [sureness's kernel code--sureness-core](core)  
-- [10 Minute Tutorial's Program--sample-bootstrap](sample-bootstrap)  
-- [30 Minute Tutorial's Program--sample-tom](sample-tom)  
-- [Sample projects using sureness in each framework(javalin,ktor,quarkus)--samples](samples)  
+- [sureness integration springboot sample(configuration file scheme)--sample-bootstrap](sample-bootstrap)  
+- [sureness integration springboot sample(database scheme)-sample-tom](sample-tom)  
+- [sample projects using sureness in each framework(javalin,ktor,quarkus)--samples](samples)  
 
 
-#### Why Is High Performance  
+#### 💪 Why Is High Performance  
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
 
-## License  
+## 🛡️ License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)

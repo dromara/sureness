@@ -1,5 +1,6 @@
 package com.usthe.sureness.subject.support;
 
+import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.Subject;
 
 import java.util.List;
@@ -52,6 +53,9 @@ public class DigestSubject implements Subject {
     /** the Roles which can access this resource above-targetUri **/
     private List<String> supportRoles;
 
+    /** the map for principal, add your custom principal **/
+    private PrincipalMap principalMap;
+
     public DigestSubject() {}
 
     private DigestSubject(Builder builder) {
@@ -68,6 +72,7 @@ public class DigestSubject implements Subject {
         this.ownRoles = builder.ownRoles;
         this.targetUri = builder.targetUri;
         this.supportRoles = builder.supportRoles;
+        this.principalMap = builder.principalMap;
     }
 
     @Override
@@ -76,7 +81,12 @@ public class DigestSubject implements Subject {
     }
 
     @Override
-    public Object getCredentials() {
+    public PrincipalMap getPrincipalMap() {
+        return principalMap;
+    }
+
+    @Override
+    public Object getCredential() {
         return response;
     }
 
@@ -156,6 +166,7 @@ public class DigestSubject implements Subject {
         private List<String> ownRoles;
         private String targetUri;
         private List<String> supportRoles;
+        private PrincipalMap principalMap;
 
         public Builder(String username, String response) {
             this.appId = username;
@@ -165,10 +176,11 @@ public class DigestSubject implements Subject {
         @SuppressWarnings("unchecked")
         public Builder(Subject subject) {
             this.appId = String.valueOf(subject.getPrincipal());
-            this.response = String.valueOf(subject.getCredentials());
+            this.response = String.valueOf(subject.getCredential());
             this.ownRoles = (List<String>) subject.getOwnRoles();
             this.targetUri = String.valueOf(subject.getTargetResource());
             this.supportRoles = (List<String>) subject.getSupportRoles();
+            this.principalMap = subject.getPrincipalMap();
         }
 
         public DigestSubject.Builder setAppId(String appId) {
@@ -233,6 +245,11 @@ public class DigestSubject implements Subject {
 
         public DigestSubject.Builder setSupportRoles(List<String> supportRoles) {
             this.supportRoles = supportRoles;
+            return this;
+        }
+
+        public DigestSubject.Builder setPrincipalMap(PrincipalMap principalMap) {
+            this.principalMap = principalMap;
             return this;
         }
 

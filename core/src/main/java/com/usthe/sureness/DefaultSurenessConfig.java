@@ -84,13 +84,15 @@ public class DefaultSurenessConfig {
                     new NoneSubjectJaxRsCreator(),
                     new DigestSubjectJaxRsCreator(),
                     new BasicSubjectJaxRsCreator(),
-                    new JwtSubjectJaxRsCreator());
+                    new JwtSubjectJaxRsCreator(),
+                    new JwtSubjectWsJaxRsCreator());
         } else {
             subjectCreates = Arrays.asList(
                     new NoneSubjectServletCreator(),
                     new DigestSubjectServletCreator(),
                     new BasicSubjectServletCreator(),
-                    new JwtSubjectServletCreator());
+                    new JwtSubjectServletCreator(),
+                    new JwtSubjectWsServletCreator());
         }
         subjectFactory.registerSubjectCreator(subjectCreates);
         if (logger.isDebugEnabled()) {

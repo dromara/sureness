@@ -13,8 +13,13 @@
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness) 
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red) 
 
-## <font color="green">`Introduction`</font>
+## 📫 Background  
 
+In the mainstream web architecture, how to protect the restful api provided by the back-end through effective and fast authentication has become particularly important.     
+For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring, the slower performance and steep learning curve of spring security are not our ideal framework.   
+Ever since sureness was born, we hope to solve these, provide a **restful api**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.
+
+## 🎡 <font color="green">Introduction</font>  
 
 > Sureness is a new, permission project which we learn from apache shiro and add some ideas to create it.  
 > Authentication for restful api, based on RBAC, mainly focused on the protection of restful api.  
@@ -27,7 +32,7 @@
 
 > The low configuration of sureness, easy to expand, and not coupled with other frameworks, enables developers to quickly and safely protect their projects in multiple scenarios.   
 
-##### Compare     
+##### 🔍 Compare     
 
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | --- |
@@ -39,23 +44,25 @@
 | **servlet**    | support      | support      | support |
 | **jax-rs**     | support      | not support    | not support |
 | **dynamic modification of permissions** | support | support need modify | support need modify |
-| **Performance** | Extremely fast | Faster | Slower|
+| **performance** | fast | slower | slower|
+| **learning curve** | simple | simple | steep|
 
-##### Benchmark  
+##### 📈 Benchmark  
 
 ![benchmark](_images/benchmark_en.png)  
 
-**Benchmark tests show that sureness basically does not consume performance compared with frameless applications, 
-and the performance (TPS) is twice that of shiro and 170 times that of spring security.**    
+**Benchmark test shows sureness to lose 0.026ms performance compared to frameless application, shiro lose 0.088ms, spring security lose 0.116ms.**    
+**In contrast, sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of shiro and 4 times that of spring security.**      
+**The performance gap will be further widened as the api matching chain increases.**      
 
 Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
-##### Framework Sample Support  
+##### ✌ Framework Sample Support  
 
-- [x] spring [sample-bootstrap](sample-bootstrap.md)   
-- [x] springboot [sample-tom](sample-tom.md)  
-- [x] quarkus [sample-quarkus](sample-quarkus.md)  
-- [x] javalin [sample-javalin](sample-javalin.md)    
-- [x] ktor [sample-ktor](sample-ktor.md)    
-- [x] spring webflux [spring-webflux-sureness](sample-spring-webflux.md)    
+- [x] sureness integration springboot sample(configuration file scheme) [sample-bootstrap](sample-bootstrap.md)   
+- [x] sureness integration springboot sample(database scheme) [sample-tom](sample-tom.md)  
+- [x] sureness integration quarkus sample [sample-quarkus](sample-quarkus.md)  
+- [x] sureness integration javalin sample [sample-javalin](sample-javalin.md)    
+- [x] sureness integration ktor sample [sample-ktor](sample-ktor.md)    
+- [x] sureness integration spring webflux sample [spring-webflux-sureness](sample-spring-webflux.md)    
 - [x] more samples todo   

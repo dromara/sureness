@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 /**
  * process digest auth - DigestSubject
@@ -53,7 +52,7 @@ public class DigestProcessor extends BaseProcessor {
 
     @Override
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
-        if (var.getPrincipal() == null || var.getCredentials() == null) {
+        if (var.getPrincipal() == null || var.getCredential() == null) {
             String authenticate = getAuthenticate();
             throw new NeedDigestInfoException("you should try once with digest auth information", authenticate);
         }
@@ -74,7 +73,7 @@ public class DigestProcessor extends BaseProcessor {
         //response = MD5("A1:nonce:nc:cNonce:qop:A2");
         String oriResponse = calcDigest(a1, digestSubject.getNonce(), digestSubject.getNc(), digestSubject.getCnonce(),
                 digestSubject.getQop(), a2);
-        if (!oriResponse.equals(digestSubject.getCredentials())) {
+        if (!oriResponse.equals(digestSubject.getCredential())) {
             throw new IncorrectCredentialsException("incorrect password");
         }
         if (account.isDisabledAccount()) {
@@ -87,17 +86,6 @@ public class DigestProcessor extends BaseProcessor {
                 .setOwnRoles(account.getOwnRoles())
                 .build();
     }
-
-//    @SuppressWarnings("unchecked")
-//    @Override
-//    public void authorized(Subject var) throws SurenessAuthorizationException {
-//        List<String> ownRoles = (List<String>)var.getOwnRoles();
-//        List<String> supportRoles = (List<String>)var.getSupportRoles();
-//        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
-//            return;
-//        }
-//        throw new UnauthorizedException("do not have the role to access resource");
-//    }
 
     private String getAuthenticate(){
         String nonce = calcDigest(String.valueOf(System.currentTimeMillis()));

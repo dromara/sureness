@@ -17,11 +17,11 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4.3</version>
+    <version>0.4.6</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.3'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.6'
 ```
 
 #### 使用默认配置来配置sureness    
@@ -46,8 +46,8 @@ public DefaultSurenessConfig surenessConfig() {
 注解形式的资源权限数据源配置使用方式详见文档 [注解资源权限数据源](cn/annotation-datasource.md)    
 
 我们提供了使用代码`DEMO`：  
-默认文本数据源具体实现，请参考[使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-若权限配置数据来自数据库，请参考[使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
+默认文本数据源具体实现，请参考[sureness集成springboot样例(配置文件方案)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+若权限配置数据来自数据库，请参考[sureness集成springboot样例(数据库方案)--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 
 #### 添加过滤器拦截所有请求    
 
@@ -86,3 +86,5 @@ try {
 异常详见 [默认异常类型](cn/default-exception.md)  
 
 **HAVE FUN**  
+
+> 如果这个[快速开始]对您不是很友好，可以参考下面一篇[一步一步搭建](cn/step-by-step.md)，里面一步一步详细介绍了使用sureness搭建一个完整功能认证鉴权项目的步骤。   

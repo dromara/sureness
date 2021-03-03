@@ -42,7 +42,7 @@ public class CustomTokenProcessor extends BaseProcessor {
     @Override
     @SuppressWarnings("unchecked")
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
-        String token = (String) var.getCredentials();
+        String token = (String) var.getCredential();
         String[] tokenArr = token.split(TOKEN_SPLIT);
         if (TokenStorage.matchToken(tokenArr[0], token)) {
             // auth passed
@@ -83,10 +83,12 @@ public class CustomTokenProcessor extends BaseProcessor {
     public void authorized(Subject var) throws SurenessAuthorizationException {
         List<String> ownRoles = (List<String>)var.getOwnRoles();
         List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
+        if (supportRoles == null || supportRoles.isEmpty()) {
+            return;
+        } else if (ownRoles != null && supportRoles.stream().anyMatch(ownRoles::contains)) {
             return;
         }
-        throw new UnauthorizedException("do not have the role to access resource");
+        throw new UnauthorizedException("custom authorized: do not have the role to access resource");
     }
 
     public void setAccountProvider(SurenessAccountProvider accountProvider) {

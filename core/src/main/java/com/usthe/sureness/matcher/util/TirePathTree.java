@@ -334,13 +334,14 @@ public class TirePathTree {
         }
         path = PATH_SPLIT_PATTERN.matcher(path).replaceAll("/");
         // remove the first /
-        path = path.substring(1).toLowerCase();
+        path = path.substring(1);
         String[] tmp = path.split("===");
         if (tmp.length != PATH_NODE_NUM_3) {
             return;
         }
+        tmp[0] = tmp[0].toLowerCase();
         String[] urlPac = tmp[0].split(URL_PATH_SPLIT);
-        String method = tmp[1];
+        String method = tmp[1].toLowerCase();
         String supportRoles = tmp[2];
         Node current = rootNode;
         Node pre = current;

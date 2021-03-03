@@ -1,5 +1,6 @@
 package com.usthe.sureness.subject.support;
 
+import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.Subject;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public class PasswordSubject implements Subject {
     /** the Roles which can access this resource above-targetUri **/
     private List<String> supportRoles;
 
+    /** the map for principal, add your custom principal **/
+    private PrincipalMap principalMap;
 
     private PasswordSubject(Builder builder) {
         this.appId = builder.appId;
@@ -39,6 +42,7 @@ public class PasswordSubject implements Subject {
         this.ownRoles = builder.ownRoles;
         this.targetUri = builder.targetUri;
         this.supportRoles = builder.supportRoles;
+        this.principalMap = builder.principalMap;
     }
 
     @Override
@@ -47,7 +51,12 @@ public class PasswordSubject implements Subject {
     }
 
     @Override
-    public Object getCredentials() {
+    public PrincipalMap getPrincipalMap() {
+        return this.principalMap;
+    }
+
+    @Override
+    public Object getCredential() {
         return this.password;
     }
 
@@ -88,6 +97,7 @@ public class PasswordSubject implements Subject {
         private List<String> ownRoles;
         private String targetUri;
         private List<String> supportRoles;
+        private PrincipalMap principalMap;
 
         public Builder(String appId, String password) {
             this.appId = appId;
@@ -97,14 +107,20 @@ public class PasswordSubject implements Subject {
         @SuppressWarnings("unchecked")
         public Builder(Subject subject) {
             this.appId = String.valueOf(subject.getPrincipal());
-            this.password = String.valueOf(subject.getCredentials());
+            this.password = String.valueOf(subject.getCredential());
             this.ownRoles = (List<String>) subject.getOwnRoles();
             this.targetUri = String.valueOf(subject.getTargetResource());
             this.supportRoles = (List<String>) subject.getSupportRoles();
+            this.principalMap = subject.getPrincipalMap();
         }
 
         public Builder setPrincipal(String appId) {
             this.appId = appId;
+            return this;
+        }
+
+        public Builder setPrincipalMap(PrincipalMap principalMap) {
+            this.principalMap = principalMap;
             return this;
         }
 

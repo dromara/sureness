@@ -51,10 +51,13 @@ public abstract class BaseProcessor implements Processor{
      * @param var subject
      * @throws SurenessAuthorizationException when authorize error
      */
-    public void authorized(Subject var) throws SurenessAuthorizationException{
+    @SuppressWarnings("unchecked")
+    public void authorized(Subject var) throws SurenessAuthorizationException {
         List<String> ownRoles = (List<String>)var.getOwnRoles();
         List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles == null || supportRoles.isEmpty() || supportRoles.stream().anyMatch(ownRoles::contains)) {
+        if (supportRoles == null || supportRoles.isEmpty()) {
+            return;
+        } else if (ownRoles != null && supportRoles.stream().anyMatch(ownRoles::contains)) {
             return;
         }
         throw new UnauthorizedException("do not have the role to access resource");
