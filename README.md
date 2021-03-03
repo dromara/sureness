@@ -37,6 +37,7 @@
 | ---       | ---      | ---   | --- |
 | **multi framework support**  | support      | support need modify   | not support |
 | **restful api** | support | support need modify   | support |
+| **websocket** | support | not support   | not support |
 | **path match**  | dictionary matching tree | ant match | ant match |
 | **annotation support**    | support      | support      | support |
 | **servlet**    | support      | support      | support |
