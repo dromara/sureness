@@ -115,6 +115,13 @@ public class SinglePrincipalMap implements PrincipalMap {
         return singleMap == null ? Collections.emptySet() : singleMap.entrySet();
     }
 
+    @Override
+    public String toString() {
+        return "SinglePrincipalMap{" +
+                "singleMap=" + singleMap +
+                '}';
+    }
+
     private Map<String, Object> ensureSingleMap() {
         if (this.singleMap == null) {
             this.singleMap = new HashMap<>(8);

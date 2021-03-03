@@ -68,6 +68,16 @@ public class SurenessSubjectSum implements SubjectSum {
         return targetResource;
     }
 
+    @Override
+    public String toString() {
+        return "SurenessSubjectSum{" +
+                "principal='" + principal + '\'' +
+                ", principalMap=" + principalMap +
+                ", roles=" + roles +
+                ", targetResource='" + targetResource + '\'' +
+                '}';
+    }
+
     public static Builder builder() {
         return new Builder();
     }
