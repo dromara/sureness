@@ -4,8 +4,9 @@
 
 > Focusing on Protection of Restful Api.  
 
-- Based on RBAC, Multiple certification  
-- Dynamic modification of permissions  
+- Based on RBAC, Multiple certification
+- Support websocket, servlet and jax-rs  
+- Dynamic modification of permissions
 - No framework dependency  
 
 [中文](/cn/)

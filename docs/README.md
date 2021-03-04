@@ -25,7 +25,7 @@ Ever since sureness was born, we hope to solve these, provide a **restful api**,
 > Authentication for restful api, based on RBAC, mainly focused on the protection of restful api.  
 > No specific framework dependency(support springboot, quarkus, javalin, ktor and more).    
 > Support dynamic modification of permissions.   
-> Support mainstream http container(servlet and jax-rs).    
+> Support websocket, mainstream http container(servlet and jax-rs).    
 > Supports JWT, Basic Auth, Digest Auth... Can extend custom supported authentication methods.    
 > High performance due dictionary matching tree.      
 > Good extension interface, demo and document.    

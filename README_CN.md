@@ -28,7 +28,7 @@
 >  面向 `restful api` 的认证鉴权,基于 `rbac` (用户-角色-资源)主要关注于对 `restful api` 的安全保护  
 >  无特定框架依赖(本质就是过滤器处拦截判断,已有`springboot,quarkus,javalin,ktor`等集成样例)  
 >  支持动态修改权限配置(动态修改配置每个`rest api`谁有权访问)    
->  支持主流`http`容器  `servlet` 和 `jax-rs`  
+>  支持 `websocket` ,主流`http`容器  `servlet` 和 `jax-rs`  
 >  支持多种认证策略, `jwt, basic auth, digest auth` ... 可扩展自定义支持的认证方式   
 >  [基于改进的字典匹配树拥有的高性能](#高性能匹配 )    
 >  良好的扩展接口, 样例和文档  

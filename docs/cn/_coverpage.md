@@ -6,7 +6,7 @@
 
 - 基于 `rbac` 主要关注于对 `restful api` 的安全保护    
 - 无特定框架依赖，极快的性能速度    
-- 支持主流`http`容器 `servlet` 和 `jax-rs`  
+- 支持 `websocket` ,主流`http`容器 `servlet` 和 `jax-rs`  
 - 支持动态权限配置，多种认证策略    
 
 [GitHub](https://github.com/tomsun28/sureness/)
