@@ -89,11 +89,11 @@ When use maven or gradle build project, add coordinate
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4.6</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '0.4.6'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.0'
 ```
 
 #### 🐵 Use the Default Configuration to Configure Sureness  

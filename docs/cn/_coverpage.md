@@ -1,6 +1,6 @@
 ![logo](../_media/hat-128.svg)
 
-# sureness <small>0.4.6 for jvm</small>  
+# sureness <small>1.0.0 for jvm</small>  
 
 > 面向`restful api`的高性能认证鉴权框架   
 
