@@ -24,6 +24,7 @@
 
 - 其它
   - [设计文档](cn/design.md)
+  - [基准性能测试](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark ':ignore')  
   - [参与贡献](cn/contributing.md)
   - [赞助](cn/sponsor.md)   
   - [Changelog](https://github.com/tomsun28/sureness/releases ':ignore')

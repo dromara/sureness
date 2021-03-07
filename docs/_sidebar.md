@@ -24,6 +24,7 @@
 
 - Others
   - [Design](design.md)
+  - [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark ':ignore')    
   - [Contribute To Us](contributing.md) 
   - [Sponsor](sponsor.md)  
   - [Changelog](https://github.com/tomsun28/sureness/releases ':ignore')
