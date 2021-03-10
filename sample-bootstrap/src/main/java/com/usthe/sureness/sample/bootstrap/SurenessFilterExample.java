@@ -3,7 +3,6 @@ package com.usthe.sureness.sample.bootstrap;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.processor.exception.*;
-import com.usthe.sureness.security.XssSqlServletRequestWrapper;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.util.SurenessContextHolder;
 import org.slf4j.Logger;
@@ -19,7 +18,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,10 +52,8 @@ public class SurenessFilterExample implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
 
-        XssSqlServletRequestWrapper requestWrapper = new XssSqlServletRequestWrapper((HttpServletRequest) servletRequest);
-
         try {
-            SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(requestWrapper);
+            SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest);
             // You can consider using SurenessContextHolder to bind subject in threadLocal
             // if bind, please remove it when end
             if (subject != null) {
@@ -97,7 +93,7 @@ public class SurenessFilterExample implements Filter {
         }
         try {
             // if ok, doFilter and add subject in request
-            filterChain.doFilter(requestWrapper, servletResponse);
+            filterChain.doFilter(servletRequest, servletResponse);
         } finally {
             int statusCode = ((HttpServletResponse) servletResponse).getStatus();
             String upgrade = ((HttpServletResponse) servletResponse).getHeader(UPGRADE);
