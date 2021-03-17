@@ -46,7 +46,19 @@ public interface AuthResourceDao extends JpaRepository<AuthResourceDO, Long> {
      */
     @Query("select distinct resource from AuthResourceDO resource " +
             "left join AuthRoleResourceBindDO bind on bind.resourceId = resource.id " +
-            "where bind.roleId = :roleId and resource.status = 1 " +
+            "where bind.roleId = :roleId " +
             "order by resource.id asc")
     Page<AuthResourceDO> findRoleOwnResource(@Param("roleId") Long roleId, Pageable request);
+
+    /**
+     * Get the available API resources owned by the current role in the form of paging
+     * @param roleId roleId
+     * @param request page
+     * @return api resource list
+     */
+    @Query("select distinct resource from AuthResourceDO resource " +
+            " where resource.id not in " +
+            "(select distinct bind.resourceId from AuthRoleResourceBindDO bind where bind.roleId = :roleId) " +
+            "order by resource.id asc ")
+    Page<AuthResourceDO> findRoleNotOwnResource(@Param("roleId") Long roleId, Pageable request);
 }

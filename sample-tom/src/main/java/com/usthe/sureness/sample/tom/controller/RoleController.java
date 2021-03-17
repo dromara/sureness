@@ -38,7 +38,7 @@ public class RoleController {
     private RoleService roleService;
 
 
-    @GetMapping("/api/{roleId}/{currentPage}/{pageSize}")
+    @GetMapping("/resource/{roleId}/{currentPage}/{pageSize}")
     public ResponseEntity<Message> getResourceOwnByRole(@PathVariable @NotBlank Long roleId, @PathVariable Integer currentPage, @PathVariable Integer pageSize) {
         if (currentPage == null){
             currentPage = 1;
@@ -47,6 +47,19 @@ public class RoleController {
             pageSize = 10;
         }
         Page<AuthResourceDO> resourcePage = roleService.getPageResourceOwnRole(roleId, currentPage, pageSize);
+        Message message = Message.builder().data(resourcePage).build();
+        return ResponseEntity.ok().body(message);
+    }
+
+    @GetMapping("/resource/-/{roleId}/{currentPage}/{pageSize}")
+    public ResponseEntity<Message> getResourceNotOwnByRole(@PathVariable @NotBlank Long roleId, @PathVariable Integer currentPage, @PathVariable Integer pageSize) {
+        if (currentPage == null){
+            currentPage = 1;
+        }
+        if (pageSize == null) {
+            pageSize = 10;
+        }
+        Page<AuthResourceDO> resourcePage = roleService.getPageResourceNotOwnRole(roleId, currentPage, pageSize);
         Message message = Message.builder().data(resourcePage).build();
         return ResponseEntity.ok().body(message);
     }
