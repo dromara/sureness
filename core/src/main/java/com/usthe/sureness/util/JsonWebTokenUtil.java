@@ -6,10 +6,7 @@ import io.jsonwebtoken.security.SignatureException;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -57,6 +54,7 @@ public class JsonWebTokenUtil {
      * @param isRefresh is a refresh token
      * @return java.lang.String jwt
      */
+    @Deprecated
     public static String issueJwt(String id, String subject, String issuer, Long period,
                                   List<String> roles, List<String> permissions,
                                   Boolean isRefresh) {
@@ -64,7 +62,23 @@ public class JsonWebTokenUtil {
         customClaimMap.put("roles", roles);
         customClaimMap.put("perms", permissions);
         customClaimMap.put("isRefresh", isRefresh);
-        return issueJwtAll(id, subject, issuer, period, null, null, null, null, customClaimMap);
+        return issueJwtAll(id, subject, issuer, period, null, null,
+                null, null, customClaimMap);
+    }
+
+    /**
+     * issue json web token
+     * @param id token ID
+     * @param subject user ID
+     * @param issuer issuer
+     * @param period period time(s)
+     * @param roles Access claim-roles
+     * @return java.lang.String jwt
+     */
+    public static String issueJwt(String id, String subject, String issuer, Long period, List<String> roles) {
+        Map<String, Object> customClaimMap = Collections.singletonMap("roles", roles);
+        return issueJwtAll(id, subject, issuer, period, null, null,
+                null, null, customClaimMap);
     }
 
     /**
@@ -73,7 +87,53 @@ public class JsonWebTokenUtil {
      * @param subject user ID
      * @param issuer issuer
      * @param period period time(s)
-     * @param audience audience
+     * @param audience this ID Token is intended for, client id info
+     * @param payload payload
+     * @param notBefore Not Before(s)
+     * @param roles roles the user has
+     * @param headerMap header
+     * @param customClaimMap custom claim param
+     * @return json web token
+     */
+    public static String issueJwt(String id, String subject, String issuer, Long period,
+                                  String audience, String payload, Long notBefore, List<String> roles,
+                                  Map<String, Object> headerMap, Map<String, Object> customClaimMap){
+        if (customClaimMap == null) {
+            customClaimMap = Collections.singletonMap("roles", roles);
+        } else {
+            customClaimMap.put("roles", roles);
+        }
+        return issueJwtAll(id, subject, issuer, period, audience, payload, notBefore, headerMap, customClaimMap);
+    }
+
+    /**
+     * issue all jwt params
+     * @param id token ID
+     * @param subject user ID
+     * @param issuer issuer
+     * @param period period time(s)
+     * @param roles roles the user has
+     * @param customClaimMap custom claim param
+     * @return json web token
+     */
+    public static String issueJwt(String id, String subject, String issuer, Long period,
+                                  List<String> roles, Map<String, Object> customClaimMap){
+        if (customClaimMap == null) {
+            customClaimMap = Collections.singletonMap("roles", roles);
+        } else {
+            customClaimMap.put("roles", roles);
+        }
+        return issueJwtAll(id, subject, issuer, period, null, null,
+                null, null, customClaimMap);
+    }
+
+    /**
+     * issue all jwt params
+     * @param id token ID
+     * @param subject user ID
+     * @param issuer issuer
+     * @param period period time(s)
+     * @param audience this ID Token is intended for, client id info
      * @param payload payload
      * @param notBefore Not Before(s)
      * @param headerMap header
