@@ -65,6 +65,15 @@ public interface RoleService {
     Page<AuthResourceDO> getPageResourceOwnRole(Long roleId, Integer currentPage, Integer pageSize);
 
     /**
+     * get pageable resources which this role not owned
+     * @param roleId role ID
+     * @param currentPage current page
+     * @param pageSize page size
+     * @return Page of resources
+     */
+    Page<AuthResourceDO> getPageResourceNotOwnRole(Long roleId, Integer currentPage, Integer pageSize);
+
+    /**
      * authority this resource to this role
      * @param roleId role ID
      * @param resourceId resource ID
@@ -77,4 +86,5 @@ public interface RoleService {
      * @param resourceId resource ID
      */
     void deleteAuthorityRoleResource(Long roleId, Long resourceId);
+
 }

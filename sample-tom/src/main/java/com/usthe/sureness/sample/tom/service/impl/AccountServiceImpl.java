@@ -3,8 +3,10 @@ package com.usthe.sureness.sample.tom.service.impl;
 import com.usthe.sureness.provider.DefaultAccount;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.sample.tom.dao.AuthUserDao;
+import com.usthe.sureness.sample.tom.dao.AuthUserRoleBindDao;
 import com.usthe.sureness.sample.tom.pojo.dto.Account;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthUserDO;
+import com.usthe.sureness.sample.tom.pojo.entity.AuthUserRoleBindDO;
 import com.usthe.sureness.sample.tom.service.AccountService;
 import com.usthe.sureness.util.Md5Util;
 import com.usthe.sureness.util.SurenessCommonUtil;
@@ -26,6 +28,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AuthUserDao authUserDao;
+
+    private AuthUserRoleBindDao userRoleBindDao;
 
     @Override
     public boolean authenticateAccount(Account account) {
@@ -89,4 +93,29 @@ public class AccountServiceImpl implements AccountService {
             return null;
         }
     }
+
+    @Override
+    public boolean authorityUserRole(String appId, Long roleId) {
+        Optional<AuthUserDO> optional = authUserDao.findAuthUserByUsername(appId);
+        if (!optional.isPresent()) {
+            return false;
+        }
+        Long userId = optional.get().getId();
+        AuthUserRoleBindDO userRoleBindDO = AuthUserRoleBindDO.builder().userId(userId).roleId(roleId).build();
+
+        userRoleBindDao.save(userRoleBindDO);
+        return true;
+    }
+
+    @Override
+    public boolean deleteAuthorityUserRole(String appId, Long roleId) {
+        Optional<AuthUserDO> optional = authUserDao.findAuthUserByUsername(appId);
+        if (!optional.isPresent()) {
+            return false;
+        }
+        Long userId = optional.get().getId();
+        userRoleBindDao.deleteRoleResourceBind(roleId, userId);
+        return true;
+    }
+
 }

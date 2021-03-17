@@ -22,4 +22,13 @@ public interface AuthUserRoleBindDao extends JpaRepository<AuthUserRoleBindDO, L
     @Query("select ar from AuthRoleDO ar, AuthUserRoleBindDO bind " +
             "where ar.id = bind.roleId and bind.userId = :userId")
     List<AuthRoleDO> findUserBindRoleList(@Param("userId") Long userId);
+
+    /**
+     * delete record which roleId and userId equals this
+     * @param roleId roleID
+     * @param userId userId
+     */
+    @Query("delete from AuthUserRoleBindDO bind " +
+            "where bind.roleId = :roleId and bind.userId = :userId")
+    void deleteRoleResourceBind(@Param("roleId") Long roleId,@Param("userId") Long userId);
 }

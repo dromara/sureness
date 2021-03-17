@@ -95,6 +95,12 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public Page<AuthResourceDO> getPageResourceNotOwnRole(Long roleId, Integer currentPage, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(currentPage, pageSize, Sort.Direction.ASC, "id");
+        return authResourceDao.findRoleNotOwnResource(roleId, pageRequest);
+    }
+
+    @Override
     public void authorityRoleResource(Long roleId, Long resourceId) {
         // Determine whether this resource and role exist
         if (!authRoleDao.existsById(roleId) || !authResourceDao.existsById(resourceId)) {

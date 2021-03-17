@@ -44,4 +44,20 @@ public interface AccountService {
      * @return account
      */
     SurenessAccount loadAccount(String username);
+
+    /**
+     * authority User Role by username and roleId
+     * @param appId account username
+     * @param roleId roleId
+     * @return success-true failed-false
+     */
+    boolean authorityUserRole(String appId, Long roleId);
+
+    /**
+     * delete authority User Role by username and roleId
+     * @param appId account username
+     * @param roleId roleId
+     * @return success-true failed-false
+     */
+    boolean deleteAuthorityUserRole(String appId, Long roleId);
 }
