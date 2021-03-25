@@ -12,16 +12,17 @@
 [![Maven](https://img.shields.io/badge/Maven%20Central-1.0.0-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core) 
 ![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/tomsun28/sureness/8?label=pull%20checks) 
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness) 
-![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red) 
-
-<a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>  
+![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red)
+[![star](https://gitee.com/tomsun28/sureness/badge/star.svg?theme=gray)](https://gitee.com/tomsun28/sureness/stargazers)
+[![star](https://img.shields.io/github/stars/usthe/sureness?style=social)](https://github.com/usthe/sureness)
+<a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt" width="120" height="23" /></a>
 
 **Home Page: [usthe.com/sureness](https://usthe.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
 
 ## 📫 Background   
 
 In the mainstream web architecture, how to protect the restful api provided by the back-end through effective and fast authentication has become particularly important.     
-For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring, the slower performance and steep learning curve of spring security are not our ideal framework.   
+For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring and steep learning curve of spring security are not our ideal framework.   
 Ever since sureness was born, we hope to solve these, provide a **restful api**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.        
 
 ## 🎡 <font color="green">Introduction</font>

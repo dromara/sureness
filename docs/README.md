@@ -17,7 +17,7 @@
 ## 📫 Background  
 
 In the mainstream web architecture, how to protect the restful api provided by the back-end through effective and fast authentication has become particularly important.     
-For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring, the slower performance and steep learning curve of spring security are not our ideal framework.   
+For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring and steep learning curve of spring security are not our ideal framework.   
 Ever since sureness was born, we hope to solve these, provide a **restful api**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.
 
 ## 🎡 <font color="green">Introduction</font>  
