@@ -1,7 +1,7 @@
 ## URI Path Match    
 We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
-That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
-`eg: /api/v2/book===get`    
+That is the request uri + request method(`post,get,put,delete...or *, * match all request method`) is considered as a resource as a whole.  
+`eg: /api/v2/book===get, /api/v3/book===*`    
 The `requestUri` here support url path match: `str*str`, `*`, `**`     
 
 | Wildcard                   | Describe   |           
