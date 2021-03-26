@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +31,7 @@ public class TirePathTreeTest {
 
     @Test
     public void buildTree() {
-        Set<String> paths = new HashSet<>();
+        Set<String> paths = new LinkedHashSet<>();
         // '/' path
         paths.add("/api///v2////book///node//===get===[]");
         // The configuration will not be overwritten or superimposed
@@ -74,9 +75,12 @@ public class TirePathTreeTest {
         paths.add("/**/*.js===post===[role8]");
         // lower upper roles
         paths.add("/api/role/book===get===[ROLE10]");
+        // support ignore http method
+        paths.add("/api/school/book===*===[role8]");
+        paths.add("/api2/school/*===*===[role18]");
 
         root.buildTree(paths);
-        assertEquals(31, root.getResourceNum());
+        assertEquals(33, root.getResourceNum());
     }
 
     @Test
@@ -124,5 +128,15 @@ public class TirePathTreeTest {
         assertEquals("[role8]", root.searchPathFilterRoles("/node/v2/demo.css===post"));
         // lower upper roles
         assertEquals("[ROLE10]", root.searchPathFilterRoles("/api/role/book===get"));
+        // support ignore http method
+        assertEquals("[role8]", root.searchPathFilterRoles("/api/school/book===get"));
+        assertEquals("[role8]", root.searchPathFilterRoles("/api/school/book===post"));
+        assertEquals("[role8]", root.searchPathFilterRoles("/api/school/book===delete"));
+        assertEquals("[role8]", root.searchPathFilterRoles("/api/school/book===put"));
+        assertEquals("[role18]", root.searchPathFilterRoles("/api2/school/book===get"));
+        assertEquals("[role18]", root.searchPathFilterRoles("/api2/school/book===post"));
+        assertEquals("[role18]", root.searchPathFilterRoles("/api2/school/student===get"));
+        assertEquals("[role18]", root.searchPathFilterRoles("/api2/school===delete"));
+
     }
 }

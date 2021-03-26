@@ -173,11 +173,15 @@ public class TirePathTree {
                 }
             } else {
                 Node nextNode = current.getChildren().get(MATCH_ONE);
+                if (nextNode != null && NODE_TYPE_METHOD.equals(nextNode.getNodeType())) {
+                    return nextNode.getChildren().keySet().iterator().next();
+                }
                 if (nextNode == null) {
                     nextNode = current.getChildren().get(MATCH_ALL);
                 }
                 if (nextNode != null && NODE_TYPE_MAY_PATH_END.equals(nextNode.getNodeType())) {
                     methodNode = nextNode.getChildren().get(method);
+                    methodNode = methodNode == null ? nextNode.getChildren().get(MATCH_ONE) : methodNode;
                     if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
                         return methodNode.getChildren().keySet().iterator().next();
                     }
@@ -371,8 +375,11 @@ public class TirePathTree {
         // set node type is NODE_TYPE_MAY_PATH_END
         current.setNodeType(NODE_TYPE_MAY_PATH_END);
         // start insert httpMethod method, if existed, not overwrite and modify the original configuration
-        if (!current.getChildren().containsKey(method)) {
+        if (!current.getChildren().containsKey(method) && !current.getChildren().containsKey(MATCH_ONE)) {
             current.insertChild(method, NODE_TYPE_METHOD);
+        } else {
+            logger.warn("[sureness]-The path resource: {} has match same method or *, ignore it.", path);
+            return;
         }
         current = current.getChildren().get(method);
         // Start inserting leaf nodes - supportRoles
@@ -380,6 +387,8 @@ public class TirePathTree {
         // if existed, not overwrite and modify the original configuration
         if (current.getChildren().isEmpty()) {
             current.insertChild(supportRoles, NODE_TYPE_FILTER_ROLES);
+        } else {
+            logger.warn("[sureness]-The path resource: {} already has supportRoles, ignore it.", path);
         }
     }
 
