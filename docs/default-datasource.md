@@ -25,6 +25,7 @@ resourceRole:
   - /api/v1/source1===delete===[role3]
   - /api/v1/source1===put===[role1,role2]
   - /api/v1/source2===get===[]
+  - /api/v3/source===*===[role2]
 
 # load api resource which do not need be protected, means them need be excluded.
 # these api resource can be access by everyone
@@ -36,6 +37,7 @@ excludedResource:
   - /**/*.js===get
   - /**/*.css===get
   - /**/*.ico===get
+  - /**/*.png===*
 
 # account info
 # there are three account: admin, root, tom

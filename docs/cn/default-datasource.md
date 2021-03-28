@@ -21,6 +21,7 @@ resourceRole:
   - /api/v1/source2===get===[]
   - /api/v1/source2/*/*===get===[role2]
   - /api/v2/source3/*===get===[role2]
+  - /api/v3/source===*===[role2]
 
 # 需要被过滤保护的资源,不认证鉴权直接访问
 # /api/v1/source3===get 表示 /api/v1/source3===get 可以被任何人访问 无需登录认证鉴权
@@ -31,7 +32,8 @@ excludedResource:
   - /**/*.js===get
   - /**/*.css===get
   - /**/*.ico===get
-
+  - /**/*.png===*
+  
 # 用户账户信息
 # 下面有 admin root tom三个账户
 # eg: admin 拥有[role1,role2]角色,明文密码为admin,加盐密码为0192023A7BBD73250516F069DF18B500
