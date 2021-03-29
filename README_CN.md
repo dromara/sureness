@@ -78,11 +78,10 @@
 
 #### 🐕 <font color="red">使用前一些约定</font>  
 
-- `sureness`尽量简洁,基于`rbac`,只有(角色-资源)的映射,没有(权限)动作映射，即 用户-角色-资源  
+- `sureness`基于`rbac`,即用户-角色-资源:用户所属角色--角色拥有资源(api)--用户拥有资源(api)  
 - 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
-  即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源  
-  `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据     
-- 角色资源映射: 用户所属角色--角色拥有资源--用户拥有资源(用户就能访问此`api`)   
+  即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源来赋权配置  
+  `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据
 
 资源路径匹配详见 [URI路径匹配](docs/cn/path-match.md)  
 
@@ -93,11 +92,11 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.0'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.1'
 ```
 
 #### 🐵 使用默认配置来配置sureness    

@@ -1,6 +1,6 @@
 ![logo](_media/hat-128.svg)
 
-# sureness <small>1.0.0 for jvm</small>  
+# sureness <small>1.0.1 for jvm</small>  
 
 > Focusing on Protection of Restful Api.  
 
