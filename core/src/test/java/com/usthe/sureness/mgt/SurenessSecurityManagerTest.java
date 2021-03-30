@@ -47,7 +47,7 @@ class SurenessSecurityManagerTest {
 
         expect(request.getHeader(AUTHORIZATION)).andStubReturn(BASIC + " "
                 + new String(Base64.getEncoder().encode("admin:admin".getBytes(StandardCharsets.UTF_8))));
-        expect(request.getRequestURI()).andStubReturn("/api/v1/book");
+        expect(request.getRequestURI()).andStubReturn("/api/v2/host");
         expect(request.getMethod()).andStubReturn("put");
         expect(request.getRemoteHost()).andStubReturn("192.167.2.1");
         replay(request);
@@ -56,7 +56,7 @@ class SurenessSecurityManagerTest {
         assertNotNull(subjectSum.get());
         assertEquals("admin", subjectSum.get().getPrincipal());
         assertTrue(subjectSum.get().hasAllRoles(Arrays.asList("role1","role2")));
-        assertEquals("/api/v1/book===put", subjectSum.get().getTargetResource());
+        assertEquals("/api/v2/host===put", subjectSum.get().getTargetResource());
         verify(request);
 
         reset(request);
@@ -77,7 +77,7 @@ class SurenessSecurityManagerTest {
                 null, Boolean.FALSE);
         HttpServletRequest request = createNiceMock(HttpServletRequest.class);
         expect(request.getHeader(AUTHORIZATION)).andStubReturn(BEARER + " " + jwt);
-        expect(request.getRequestURI()).andStubReturn("/api/v2/book");
+        expect(request.getRequestURI()).andStubReturn("/api/v1/source1");
         expect(request.getMethod()).andStubReturn("get");
         expect(request.getRemoteHost()).andStubReturn("192.167.2.1");
         replay(request);
@@ -86,7 +86,7 @@ class SurenessSecurityManagerTest {
         assertNotNull(subjectSum.get());
         assertEquals("tom", subjectSum.get().getPrincipal());
         assertTrue(subjectSum.get().hasAllRoles(Arrays.asList("role2","role3")));
-        assertEquals("/api/v2/book===get", subjectSum.get().getTargetResource());
+        assertEquals("/api/v1/source1===get", subjectSum.get().getTargetResource());
         verify(request);
     }
 }

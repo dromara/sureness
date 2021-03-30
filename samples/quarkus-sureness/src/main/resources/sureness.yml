@@ -2,8 +2,8 @@
 
 # load api resource which need be protected, config role who can access these resource.
 # resources that are not configured are also authenticated and protected by default, but not authorized
-# eg: /api/v2/host===post===[role2,role3,role4] means /api/v2/host===post is be role2,role3,role4 supported access
-# eg: /api/v1/getSource3===get===[] means /api/v1/getSource3===get is be all role or no role supported access
+# eg: /api/v2/host===post===[role2,role3,role4] means /api/v2/host===post can be access by role2,role3,role4
+# eg: /api/v1/getSource3===get===[] means /api/v1/getSource3===get can not be access by any role
 resourceRole:
   - /api/v2/host===post===[role2,role3,role4]
   - /api/v2/host===get===[role2,role3,role4]
