@@ -2,15 +2,12 @@ package com.usthe.sureness.processor.support;
 
 import com.usthe.sureness.processor.BaseProcessor;
 import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
-import com.usthe.sureness.processor.exception.SurenessAuthorizationException;
-import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.support.NoneSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 
 /**
  * the processor support nonToken
@@ -35,17 +32,5 @@ public class NoneProcessor extends BaseProcessor {
     @Override
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
         throw new UnknownAccountException("the request do not have the auth detail, please input your auth");
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void authorized(Subject var) throws SurenessAuthorizationException {
-        List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles != null && !supportRoles.isEmpty()) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("NoneProcessor authorized fail, due {} need role access", var.getTargetResource());
-            }
-            throw new UnauthorizedException("authorized forbidden, the request do not have the role access");
-        }
     }
 }
