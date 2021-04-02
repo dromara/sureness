@@ -16,6 +16,7 @@ import java.util.UUID;
 /**
  * custom token processor, support CustomTokenSubject
  * when token Expired and can refresh, return refresh token value
+ *
  * @author tomsun28
  * @date 2020-12-03 20:37
  */
@@ -81,10 +82,10 @@ public class CustomTokenProcessor extends BaseProcessor {
     @SuppressWarnings("unchecked")
     @Override
     public void authorized(Subject var) throws SurenessAuthorizationException {
-        List<String> ownRoles = (List<String>)var.getOwnRoles();
-        List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles != null && !supportRoles.isEmpty() && ownRoles != null
-                && supportRoles.stream().anyMatch(ownRoles::contains)) {
+        List<String> ownRoles = (List<String>) var.getOwnRoles();
+        List<String> supportRoles = (List<String>) var.getSupportRoles();
+        if (supportRoles == null || supportRoles.isEmpty() || (ownRoles != null
+                && supportRoles.stream().anyMatch(ownRoles::contains))) {
             return;
         }
         throw new UnauthorizedException("custom authorized: do not have the role to access resource");
