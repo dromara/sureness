@@ -17,7 +17,7 @@ public class XssSqlUtil {
     private static final String STR_JS = "javascript:";
     private static final String STR_VB = "vbscript:";
     private static final String STR_ON = "onload(.*?)=";
-    private static final String SQL = "('.+--)|(--)|(%7C)";
+    private static final String SQL = "('.+--)|(%7C)";
 
     private static final Pattern SCRIPT1_PATTERN = Pattern.compile(STR_SCRIPT1, Pattern.CASE_INSENSITIVE);
     private static final Pattern SCRIPT2_PATTERN = Pattern.compile(STR_SCRIPT2, Pattern.CASE_INSENSITIVE);
