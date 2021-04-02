@@ -15,7 +15,8 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red)
 [![star](https://gitee.com/tomsun28/sureness/badge/star.svg?theme=gray)](https://gitee.com/tomsun28/sureness/stargazers)
 [![star](https://img.shields.io/github/stars/usthe/sureness?style=social)](https://github.com/usthe/sureness)
-<a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt" width="120" height="23" /></a>
+
+<a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt"/></a>
 
 **主页: [usthe.com/sureness](https://usthe.com/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
 
@@ -78,9 +79,9 @@
 
 #### 🐕 <font color="red">使用前一些约定</font>  
 
-- `sureness`基于`rbac`,即用户-角色-资源:用户所属角色--角色拥有资源(api)--用户拥有资源(api)  
+- `sureness`基于`rbac`,即用户-角色-资源: 用户所属角色--角色拥有资源(api)--用户就能访问资源(api)  
 - 我们将`restful api`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
-  即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作一个资源来赋权配置  
+  即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作资源来赋权配置  
   `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据
 
 资源路径匹配详见 [URI路径匹配](docs/cn/path-match.md)  
@@ -213,7 +214,7 @@ sureness提供了下面这些常用接口作为扩展点:
 
 
 ## 🙋 参与贡献  
-非常欢迎参与项目贡献。对项目代码有疑问或者建议请直接联系 @tomsun28  
+非常欢迎参与项目贡献，我们致力于维护一个互相帮助的快乐社区。对项目代码有疑问或者建议请直接联系。    
 
 仓库的组成部分:  
 - [sureness的核心代码--sureness-core](core)  

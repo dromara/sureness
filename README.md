@@ -15,7 +15,8 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red)
 [![star](https://gitee.com/tomsun28/sureness/badge/star.svg?theme=gray)](https://gitee.com/tomsun28/sureness/stargazers)
 [![star](https://img.shields.io/github/stars/usthe/sureness?style=social)](https://github.com/usthe/sureness)
-<a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt" width="120" height="23" /></a>
+
+<a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt"/></a>
 
 **Home Page: [usthe.com/sureness](https://usthe.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
 

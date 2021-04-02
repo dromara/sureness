@@ -1,13 +1,23 @@
 参与贡献  
 =======================================
 
-非常欢迎参与项目贡献。对项目代码有疑问或者建议请直接联系 @tomsun28  
+非常欢迎参与项目贡献，我们致力于维护一个互相帮助的快乐社区。对项目代码有疑问或者建议请直接联系。
 
 仓库的组成部分:  
 - [sureness的核心代码--sureness-core](https://github.com/tomsun28/sureness/tree/master/core)  
 - [使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)  
 - [使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 
+相关文章：  
+[restful api 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
+[restful api 权限设计 - 快速搭建权限项目-配置文件方案](https://segmentfault.com/a/1190000039075245)    
+[restful api 权限设计 - sureness集成springboot样例-数据库方案](https://segmentfault.com/a/1190000039191172)
+
+相关视频：  
+[bilibili-10分钟搭建一个完整认证鉴权项目，原谅第一次的川普和英语](https://www.bilibili.com/video/bv1EU4y1s7Sz)
+
+QQ交流群：390083213    
+微信公众号：sureness
 
 Contributing to sureness
 =======================================
