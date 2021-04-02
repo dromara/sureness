@@ -10,10 +10,11 @@ import java.util.List;
 
 /**
  * abstract processor
+ *
  * @author tomsun28
  * @date 12:28 2019-03-13
  */
-public abstract class BaseProcessor implements Processor{
+public abstract class BaseProcessor implements Processor {
 
     /**
      * Determine whether this Processor supports the corresponding SubjectClass
@@ -38,24 +39,27 @@ public abstract class BaseProcessor implements Processor{
         authorized(subject);
         return subject.generateSubjectSummary();
     }
+
     /**
      * The interface that the authentication will call to complete the authentication
+     *
      * @param var subject
      * @return Subject subject
      * @throws SurenessAuthenticationException when authenticate error
      */
-    public abstract Subject authenticated (Subject var) throws SurenessAuthenticationException;
+    public abstract Subject authenticated(Subject var) throws SurenessAuthenticationException;
 
     /**
      * The interface that the authorization will call, where the authorization is completed
+     *
      * @param var subject
      * @throws SurenessAuthorizationException when authorize error
      */
     @SuppressWarnings("unchecked")
     public void authorized(Subject var) throws SurenessAuthorizationException {
-        List<String> ownRoles = (List<String>)var.getOwnRoles();
-        List<String> supportRoles = (List<String>)var.getSupportRoles();
-        if (supportRoles == null || supportRoles.isEmpty() || (ownRoles != null
+        List<String> ownRoles = (List<String>) var.getOwnRoles();
+        List<String> supportRoles = (List<String>) var.getSupportRoles();
+        if (supportRoles == null || (ownRoles != null
                 && supportRoles.stream().anyMatch(ownRoles::contains))) {
             return;
         }
