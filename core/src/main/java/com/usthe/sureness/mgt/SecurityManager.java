@@ -16,12 +16,12 @@ public interface SecurityManager {
 
     /**
      * auth entrance, put the request in authentication and authorization process
-     * @param var1 request
+     * @param request request
      * @return com.usthe.sureness.subject.Subject
      * return null when the request uri===method is in excluded resource
      * @throws BaseSurenessException sureness exception
      */
-    SubjectSum checkIn(Object var1) throws BaseSurenessException;
+    SubjectSum checkIn(Object request) throws BaseSurenessException;
 
     /**
      * Create the corresponding type of subject according to the request information
