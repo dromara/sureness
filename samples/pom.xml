@@ -16,5 +16,6 @@
         <module>javalin-sureness</module>
         <module>quarkus-sureness</module>
         <module>spring-webflux-sureness</module>
+        <module>sureness-session</module>
     </modules>
 </project>
