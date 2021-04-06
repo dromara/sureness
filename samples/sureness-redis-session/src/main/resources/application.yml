@@ -1,0 +1,13 @@
+server:
+  port: 8088
+
+spring:
+  profiles:
+    active: dev
+  redis:
+    host: 47.110.55.246
+    port: 6368
+
+logging:
+  level:
+    root: info
