@@ -17,5 +17,6 @@
         <module>quarkus-sureness</module>
         <module>spring-webflux-sureness</module>
         <module>sureness-session</module>
+        <module>sureness-redis-session</module>
     </modules>
 </project>
