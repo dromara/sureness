@@ -1,5 +1,6 @@
 package com.usthe.sureness.mgt;
 
+import com.usthe.sureness.handler.HandlerManager;
 import com.usthe.sureness.matcher.TreePathRoleMatcher;
 import com.usthe.sureness.processor.ProcessorManager;
 import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
@@ -38,6 +39,11 @@ public class SurenessSecurityManager implements SecurityManager {
      */
     private ProcessorManager processorManager;
 
+    /**
+     * handler manager
+     */
+    private HandlerManager handlerManager;
+
     private SurenessSecurityManager() {
 
     }
@@ -58,11 +64,11 @@ public class SurenessSecurityManager implements SecurityManager {
     }
 
     @Override
-    public SubjectSum checkIn(Object var1) throws BaseSurenessException {
+    public SubjectSum checkIn(Object request) throws BaseSurenessException {
         checkComponentInit();
 
         // Create a subject list to try auth one by one
-        List<Subject> subjectList = createSubject(var1);
+        List<Subject> subjectList = createSubject(request);
         RuntimeException lastException = new UnsupportedSubjectException("this request can not " +
                 "create subject by creators,please config no subject creator by default");
 
@@ -84,13 +90,21 @@ public class SurenessSecurityManager implements SecurityManager {
                 } else {
                     thisSubject.setSupportRoles(preSubject.getSupportRoles());
                 }
-                return processorManager.process(thisSubject);
+                SubjectSum subjectSum = processorManager.process(thisSubject);
+                handSuccess(subjectSum, request);
+                return subjectSum;
             } catch (BaseSurenessException e) {
                 lastException = e;
             }
         }
         // if no one success, the throw exception is the lastException
         throw lastException;
+    }
+
+    private void handSuccess(SubjectSum subjectSum, Object request) {
+        if (handlerManager != null) {
+            handlerManager.hand(subjectSum, request);
+        }
     }
 
     @Override
@@ -110,6 +124,10 @@ public class SurenessSecurityManager implements SecurityManager {
         this.processorManager = processorManager;
     }
 
+    public void setHandlerManager(HandlerManager handlerManager) {
+        this.handlerManager = handlerManager;
+    }
+
     public SubjectFactory getSubjectFactory() {
         return subjectFactory;
     }
@@ -120,6 +138,10 @@ public class SurenessSecurityManager implements SecurityManager {
 
     public ProcessorManager getProcessorManager() {
         return processorManager;
+    }
+
+    public HandlerManager getHandlerManager() {
+        return handlerManager;
     }
 
     /**
