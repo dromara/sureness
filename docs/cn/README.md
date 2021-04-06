@@ -9,7 +9,7 @@
 > 面向`restful api`的高性能认证鉴权框架  
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Maven](https://img.shields.io/badge/Maven%20Central-1.0.0-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core)
+[![Maven](https://img.shields.io/badge/Maven%20Central-1.0.2-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core)
 ![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/tomsun28/sureness/8?label=pull%20checks)
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness)
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red)
@@ -67,4 +67,6 @@
 - [x] sureness集成javalin样例 [sample-javalin](cn/sample-javalin.md)    
 - [x] sureness集成ktor样例 [sample-ktor](cn/sample-ktor.md)    
 - [x] sureness集成spring webflux样例 [spring-webflux-sureness](cn/sample-spring-webflux.md)    
+- [x] sureness使用session样例 [sureness-session](https://github.com/usthe/sureness/tree/master/samples/sureness-session)
+- [x] sureness分布式缓存session样例 [sureness-redis-session](https://github.com/usthe/sureness/tree/master/samples/sureness-redis-session)
 - [x] more samples todo   
