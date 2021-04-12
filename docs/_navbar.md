@@ -9,6 +9,11 @@
 - :us: English  
   - [:cn: 中文](/cn/)  
 
+- Friend Link
+  - [JustAuth](https://www.justauth.cn/ ':ignore')
+  - [MaxKey](https://maxkey.top/ ':ignore')
+  - [PhalApi](https://www.phalapi.net/ ':ignore')
+
 - Other  
   - [About Us](https://usthe.com)  
   - [HOME](/)  

@@ -9,6 +9,11 @@
 - :cn: 中文Chinese  
   - [:us: English](/)  
 
+- 友链
+  - [JustAuth](https://www.justauth.cn/ ':ignore')  
+  - [MaxKey](https://maxkey.top/ ':ignore')   
+  - [PhalApi](https://www.phalapi.net/ ':ignore')   
+
 - 其它  
   - [About Us](https://usthe.com)  
   - [回到主页](/cn/)  
