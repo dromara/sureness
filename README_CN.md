@@ -241,5 +241,12 @@ sureness提供了下面这些常用接口作为扩展点:
 QQ交流群：390083213    
 微信公众号：sureness   
 
+## 🌞 开源推荐   
+
+* **```JustAuth```** 小而全而美的第三方登录开源组件: [Gitee](https://gitee.com/yadong.zhang/JustAuth)  
+* **```MaxKey```** 业界领先的企业级开源IAM身份管理和身份认证产品: [Gitee](https://gitee.com/dromara/MaxKey)    
+* **```PhalApi```** 一个轻量级PHP开源接口框架: [官网](https://www.phalapi.net/)    
+
+
 ## 🛡️ License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)

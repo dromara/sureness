@@ -233,6 +233,12 @@ Components of Repository:
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
+## 🌞 Friend's Links   
+
+* **```JustAuth```** A Java library of third-party authorized login: [Github](https://github.com/justauth/JustAuth)    
+* **```MaxKey```** Leading-Edge Enterprise-Class open source IAM Identity and Access management product: [Github](https://github.com/dromara/MaxKey)   
+* **```PhalApi```** PHP Api Framework: [Website](https://www.phalapi.net/)    
+
 
 ## 🛡️ License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)
