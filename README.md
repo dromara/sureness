@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://su.usthe.com">
-    <img alt="sureness" src="./docs/_media/hat-128.svg">
+    <img alt="sureness" src="./docs/_media/brand128.svg">
   </a>
 </p>
 
