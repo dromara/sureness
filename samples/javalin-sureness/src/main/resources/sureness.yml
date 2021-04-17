@@ -23,7 +23,6 @@ resourceRole:
 excludedResource:
   - /api/v3/host===get
   - /api/v3/book===get
-  - /api/v1/account/auth===post
   - /**/*.html===get
   - /**/*.js===get
   - /**/*.css===get
@@ -44,7 +43,7 @@ account:
     role: [role1,role2]
   - appId: root
     credential: 23456
-    role: [role1]
+    role: [role1,role2]
   - appId: tom
     credential: 32113
     role: [role3]

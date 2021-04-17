@@ -1,8 +1,6 @@
-# Using Sureness to protect the security of Javalin REST API
+# Using Sureness to protect the security of Javalin REST API  
 
-[javalin-sureness sample repository](https://github.com/tomsun28/sureness/tree/master/samples/javalin-sureness)
-
-Using Sureness to secure Javalin REST API by providing authentication(jwt,bsaic,digest) and authorization(rbac)
+Using Sureness to secure Javalin REST API by providing authentication(jwt,bsaic,digest) and authorization(rbac)  
 
 
 ## What You Will Learn
@@ -233,43 +231,43 @@ Use postman basic auth, as shown below:
 
 * success - input username: admin, password: admin
 
-![success](_images/javalin/test1.PNG)
+![success](../../docs/_images/javalin/test1.PNG)
 
 
 * fail - input username: admin, password: 12345
 
-![fail](_images/javalin/test2.PNG)
+![fail](../../docs/_images/javalin/test2.PNG)
 
 ####  2. Digest Auth Test
 
 Note: If password has been encrypted,  digest auth not support.(So the account admin not support digest auth).  
 Use chrome to digest auth, as shown below:
 
-![success](_images/javalin/test3.PNG)
+![success](../../docs/_images/javalin/test3.PNG)
 
-![success](_images/javalin/test4.PNG)
+![success](../../docs/_images/javalin/test4.PNG)
 
 ####  3. Jwt Auth Test
 
 First, we should access [GET /auth/token] api to get a jwt to use, as shown below:
 
-![success](_images/javalin/test5.PNG)
+![success](../../docs/_images/javalin/test5.PNG)
 
 Then, use the jwt as Bearer Token to access rest api, as shown below:
 
-![success](_images/javalin/test6.PNG)
+![success](../../docs/_images/javalin/test6.PNG)
 
 
 ### Test authorization
 
 * success - user **tom** has role **role3**, the api **[DELETE - /api/v2/host]** support **role3** access, so **tom** can access api **[DELETE - /api/v2/host]** success, as shown below:
 
-![success](_images/javalin/test7.PNG)
+![success](../../docs/_images/javalin/test7.PNG)
 
 
 * fail - user **tom** only has role **role3**, the api **[GET - /api/v1/source1]** only support **role2** access, not support **role3**,  so **tom** can not access api **[GET - /api/v1/source1]**, as shown below:
 
-![fail](_images/javalin/test8.PNG)
+![fail](../../docs/_images/javalin/test8.PNG)
 
 
 ## Conclusion
