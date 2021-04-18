@@ -59,7 +59,7 @@ public class JsonWebTokenUtil {
                                   List<String> roles, List<String> permissions,
                                   Boolean isRefresh) {
         Map<String, Object> customClaimMap = new HashMap<>(4);
-        customClaimMap.put("roles", roles);
+        customClaimMap.put(SurenessConstant.ROLES, roles);
         customClaimMap.put("perms", permissions);
         customClaimMap.put("isRefresh", isRefresh);
         return issueJwtAll(id, subject, issuer, period, null, null,
@@ -76,7 +76,7 @@ public class JsonWebTokenUtil {
      * @return java.lang.String jwt
      */
     public static String issueJwt(String id, String subject, String issuer, Long period, List<String> roles) {
-        Map<String, Object> customClaimMap = Collections.singletonMap("roles", roles);
+        Map<String, Object> customClaimMap = Collections.singletonMap(SurenessConstant.ROLES, roles);
         return issueJwtAll(id, subject, issuer, period, null, null,
                 null, null, customClaimMap);
     }
@@ -99,9 +99,9 @@ public class JsonWebTokenUtil {
                                   String audience, String payload, Long notBefore, List<String> roles,
                                   Map<String, Object> headerMap, Map<String, Object> customClaimMap){
         if (customClaimMap == null) {
-            customClaimMap = Collections.singletonMap("roles", roles);
+            customClaimMap = Collections.singletonMap(SurenessConstant.ROLES, roles);
         } else {
-            customClaimMap.put("roles", roles);
+            customClaimMap.put(SurenessConstant.ROLES, roles);
         }
         return issueJwtAll(id, subject, issuer, period, audience, payload, notBefore, headerMap, customClaimMap);
     }
@@ -119,9 +119,9 @@ public class JsonWebTokenUtil {
     public static String issueJwt(String id, String subject, String issuer, Long period,
                                   List<String> roles, Map<String, Object> customClaimMap){
         if (customClaimMap == null) {
-            customClaimMap = Collections.singletonMap("roles", roles);
+            customClaimMap = Collections.singletonMap(SurenessConstant.ROLES, roles);
         } else {
-            customClaimMap.put("roles", roles);
+            customClaimMap.put(SurenessConstant.ROLES, roles);
         }
         return issueJwtAll(id, subject, issuer, period, null, null,
                 null, null, customClaimMap);

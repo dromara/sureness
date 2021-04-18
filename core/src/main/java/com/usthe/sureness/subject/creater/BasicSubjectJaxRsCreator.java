@@ -3,6 +3,7 @@ package com.usthe.sureness.subject.creater;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.PasswordSubject;
+import com.usthe.sureness.util.SurenessConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,16 +21,14 @@ public class BasicSubjectJaxRsCreator implements SubjectCreate {
 
     private static final Logger logger = LoggerFactory.getLogger(BasicSubjectJaxRsCreator.class);
 
-    private static final String AUTHORIZATION = "Authorization";
-    private static final String BASIC = "Basic";
     private static final int COUNT_2 = 2;
 
     @Override
     public boolean canSupportSubject(Object context) {
         // ("Authorization", "Basic YWRtaW46YWRtaW4=")        --- basic auth
         if (context instanceof ContainerRequestContext) {
-            String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);
-            return authorization != null && authorization.startsWith(BASIC);
+            String authorization = ((ContainerRequestContext)context).getHeaderString(SurenessConstant.AUTHORIZATION);
+            return authorization != null && authorization.startsWith(SurenessConstant.BASIC);
         } else {
             return false;
         }
@@ -37,9 +36,9 @@ public class BasicSubjectJaxRsCreator implements SubjectCreate {
 
     @Override
     public Subject createSubject(Object context) {
-        String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);
+        String authorization = ((ContainerRequestContext)context).getHeaderString(SurenessConstant.AUTHORIZATION);
         //basic auth
-        String basicAuth = authorization.replace(BASIC, "").trim();
+        String basicAuth = authorization.replace(SurenessConstant.BASIC, "").trim();
         try {
             basicAuth = new String(Base64.getDecoder().decode(basicAuth), StandardCharsets.UTF_8);
         } catch (Exception e) {
