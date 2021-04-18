@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.UUID;
 
+import static io.javalin.apibuilder.ApiBuilder.*;
+
 /**
  * @author tomsun28
  * @date 2020-09-15 23:59
@@ -76,20 +78,29 @@ public class Application {
             }
         });
 
-
         // simple rest api
-        app.get("/api/v3/host", ctx -> ctx.result("get /api/v3/host success"));
-        app.get("/api/v2/host", ctx -> ctx.result("get /api/v2/host success"));
-        app.post("/api/v2/host", ctx -> ctx.result("post /api/v2/host success"));
-        app.put("/api/v2/host", ctx -> ctx.result("put /api/v2/host success"));
-        app.delete("/api/v2/host", ctx -> ctx.result("delete /api/v2/host success"));
-        app.put("/api/mi/tom", ctx -> ctx.result("put /api/mi/tom success"));
-        app.get("/api/v1/getSource1", ctx -> ctx.result("get /api/v1/getSource1 success"));
-        app.get("/api/v2/getSource2/book", ctx -> ctx.result("get /api/v2/getSource2/book success"));
-        app.get("/api/v1/source1", ctx -> ctx.result("get /api/v1/source1 success"));
-        app.post("/api/v1/source1", ctx -> ctx.result("post /api/v1/source1 success"));
-        app.put("/api/v1/source1", ctx -> ctx.result("put /api/v1/source1 success"));
-        app.delete("/api/v1/source1", ctx -> ctx.result("delete /api/v1/source1 success"));
+        app.routes(() ->
+            path("api", () -> {
+                path("v3", () -> {
+                    get("host", ctx -> ctx.result("get /api/v3/host success"));
+                    put("book", ctx -> ctx.result("put /api/v3/book success"));
+                });
+                path("v2", () -> {
+                    path("host", () -> {
+                        get(ctx -> ctx.result("get /api/v2/host success"));
+                        post(ctx -> ctx.result("post /api/v2/host success"));
+                        put(ctx -> ctx.result("put /api/v2/host success"));
+                        delete(ctx -> ctx.result("delete /api/v2/host success"));
+                    });
+                });
+                path("v1", () -> {
+                    path("source1", () -> {
+                        get(ctx -> ctx.result("get /api/v1/source1 success"));
+                        post(ctx -> ctx.result("post /api/v1/source1 success"));
+                        put(ctx -> ctx.result("put /api/v1/source1 success"));
+                        delete(ctx -> ctx.result("delete /api/v1/source1 success"));
+                    });
+                });
+            }));
     }
-
 }

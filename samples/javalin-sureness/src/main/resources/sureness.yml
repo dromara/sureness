@@ -2,27 +2,24 @@
 
 # load api resource which need be protected, config role who can access these resource.
 # resources that are not configured are also authenticated and protected by default, but not authorized
-# eg: /api/v2/host===post===[role2,role3,role4] means /api/v2/host===post can be access by role2,role3,role4
-# eg: /api/v1/getSource3===get===[] means /api/v1/getSource3===get can not be access by any role
+# eg: /api/v2/host===post===[role2,role3] means /api/v2/host===post can be access by role2,role3
+# eg: /api/v1/source2===get===[] means /api/v1/source2===get can not be access by any role
 resourceRole:
-  - /api/v2/host===post===[role2,role3,role4]
-  - /api/v2/host===get===[role2,role3,role4]
-  - /api/v2/host===delete===[role2,role3,role4]
-  - /api/v2/host===put===[role2,role3,role4]
-  - /api/mi/**===put===[role2,role3,role4]
-  - /api/v1/getSource1===get===[role1,role2]
-  - /api/v2/getSource2/*/*===get===[role2]
   - /api/v1/source1===get===[role2]
   - /api/v1/source1===post===[role1]
   - /api/v1/source1===delete===[role3]
   - /api/v1/source1===put===[role1,role2]
   - /api/v1/source2===get===[]
+  - /api/v2/host===post===[role2,role3]
+  - /api/v2/host===get===[role2,role3]
+  - /api/v2/host===delete===[role2,role3]
+  - /api/v2/host===put===[role2,role3]
+  - /api/v3/*===*===[role1,role2,role3]
 
 # load api resource which do not need be protected, means them need be excluded.
 # these api resource can be access by everyone
 excludedResource:
   - /api/v3/host===get
-  - /api/v3/book===get
   - /**/*.html===get
   - /**/*.js===get
   - /**/*.css===get

@@ -2,30 +2,30 @@
 
 [javalin-sureness sample repository](https://github.com/tomsun28/sureness/tree/master/samples/javalin-sureness)
 
-Using Sureness to secure Javalin REST API by providing authentication(jwt,bsaic,digest) and authorization(rbac)
+Using Sureness to secure Javalin REST API by providing authentication(JWT,Basic,Digest) and authorization(RBAC)
 
 
 ## What You Will Learn
 
 * Creating a simple REST API using Javalin
 * Learn how to integrate Sureness into a Javalin application
-* Learn how to issue a jwt
-* Test API authentication - use jwt auth, basic auth, digest auth to test the security of the REST API
+* Learn how to issue a JWT
+* Test API authentication - use JWT Auth, Basic Auth, Digest Auth to test the security of the REST API
 * Test API authorization - use different users to verify that they can access the REST API
 
 
-The tutorial assumes that you know what jwt, basic auth, digest auth, rbac are. If you
+The tutorial assumes that you know what  JWT, Basic Auth, Digest Auth, RBAC are. If you
 do not, then you can check [jwt](https://jwt.io/introduction/), [basic auth](https://docs.oracle.com/cd/E50612_01/doc.11122/user_guide/content/authn_http_basic.html) , [digest auth](https://docs.oracle.com/cd/E50612_01/doc.11122/user_guide/content/authn_http_digest.html), [rbac](https://en.wikipedia.org/wiki/Role-based_access_control) for an introduction.
 
 ## Setting Up Dependencies
 
-First, you will need to create a maven project and add javalin, sureness dependencies coordinate
+First, you will need to create a maven project and add Javalin, Sureness dependencies coordinate
 
 ````
         <dependency>
             <groupId>io.javalin</groupId>
             <artifactId>javalin</artifactId>
-            <version>3.10.1</version>
+            <version>{{site.javalinversion}}</version>
         </dependency>
         <dependency>
             <groupId>com.usthe.sureness</groupId>
@@ -40,7 +40,7 @@ First, you will need to create a maven project and add javalin, sureness depende
 ````
 
 
-## Setting Up Javalin and create REST API
+## Setting Up Javalin and Create REST API
 
 We need to create a simple Javalin app and provide some  REST API for test.
 
@@ -51,18 +51,30 @@ We need to create a simple Javalin app and provide some  REST API for test.
 
 ```
         // create simple rest api
-        app.get("/api/v3/host", ctx -> ctx.result("get /api/v3/host success"));
-        app.get("/api/v2/host", ctx -> ctx.result("get /api/v2/host success"));
-        app.post("/api/v2/host", ctx -> ctx.result("post /api/v2/host success"));
-        app.put("/api/v2/host", ctx -> ctx.result("put /api/v2/host success"));
-        app.delete("/api/v2/host", ctx -> ctx.result("delete /api/v2/host success"));
-        app.put("/api/mi/tom", ctx -> ctx.result("put /api/mi/tom success"));
-        app.get("/api/v1/getSource1", ctx -> ctx.result("get /api/v1/getSource1 success"));
-        app.get("/api/v2/getSource2/book", ctx -> ctx.result("get /api/v2/getSource2/book success"));
-        app.get("/api/v1/source1", ctx -> ctx.result("get /api/v1/source1 success"));
-        app.post("/api/v1/source1", ctx -> ctx.result("post /api/v1/source1 success"));
-        app.put("/api/v1/source1", ctx -> ctx.result("put /api/v1/source1 success"));
-        app.delete("/api/v1/source1", ctx -> ctx.result("delete /api/v1/source1 success"));
+        // simple rest api
+        app.routes(() ->
+            path("api", () -> {
+                path("v3", () -> {
+                    get("host", ctx -> ctx.result("get /api/v3/host success"));
+                    put("book", ctx -> ctx.result("put /api/v3/book success"));
+                });
+                path("v2", () -> {
+                    path("host", () -> {
+                        get(ctx -> ctx.result("get /api/v2/host success"));
+                        post(ctx -> ctx.result("post /api/v2/host success"));
+                        put(ctx -> ctx.result("put /api/v2/host success"));
+                        delete(ctx -> ctx.result("delete /api/v2/host success"));
+                    });
+                });
+                path("v1", () -> {
+                    path("source1", () -> {
+                        get(ctx -> ctx.result("get /api/v1/source1 success"));
+                        post(ctx -> ctx.result("post /api/v1/source1 success"));
+                        put(ctx -> ctx.result("put /api/v1/source1 success"));
+                        delete(ctx -> ctx.result("delete /api/v1/source1 success"));
+                    });
+                });
+            }));
 ```
 
 
@@ -71,7 +83,7 @@ We need to create a simple Javalin app and provide some  REST API for test.
 #### 1. Use the Default Configuration to Configure Sureness
 
 The default configuration -`DefaultSurenessConfig` uses the document datasource `sureness.yml` as the auth datasource.  
-It supports jwt, basic auth, digest auth authentication.
+It supports JWT, Basic Auth, Digest Auth authentication.
 ```
     public static void main(String[] args) {
         // init sureness default config
@@ -79,7 +91,7 @@ It supports jwt, basic auth, digest auth authentication.
     }
 ```
 
-####  2. Config document datasource - `sureness.yml`
+####  2. Config Document Datasource - `sureness.yml`
 
 Sureness authentication requires us to provide our own account data, role permission data. These data may come from document, databases,, annotations, etc. When we use sureness default configuration above, the datasource is document - `sureness.yml`.
 
@@ -90,27 +102,24 @@ Create a file named `sureness.yml` in the `resource` directory. Configure accoun
 
 # load api resource which need be protected, config role who can access these resource.
 # resources that are not configured are also authenticated and protected by default, but not authorized
-# eg: /api/v2/host===post===[role2,role3,role4] means /api/v2/host===post can be access by role2,role3,role4
-# eg: /api/v1/getSource3===get===[] means /api/v1/getSource3===get can not be access by any role
+# eg: /api/v2/host===post===[role2,role3] means /api/v2/host===post can be access by role2,role3
+# eg: /api/v1/source2===get===[] means /api/v1/source2===get can not be access by any role
 resourceRole:
-  - /api/v2/host===post===[role2,role3,role4]
-  - /api/v2/host===get===[role2,role3,role4]
-  - /api/v2/host===delete===[role2,role3,role4]
-  - /api/v2/host===put===[role2,role3,role4]
-  - /api/mi/**===put===[role2,role3,role4]
-  - /api/v1/getSource1===get===[role1,role2]
-  - /api/v2/getSource2/*/*===get===[role2]
   - /api/v1/source1===get===[role2]
   - /api/v1/source1===post===[role1]
   - /api/v1/source1===delete===[role3]
   - /api/v1/source1===put===[role1,role2]
   - /api/v1/source2===get===[]
+  - /api/v2/host===post===[role2,role3]
+  - /api/v2/host===get===[role2,role3]
+  - /api/v2/host===delete===[role2,role3]
+  - /api/v2/host===put===[role2,role3]
+  - /api/v3/*===*===[role1,role2,role3]
 
 # load api resource which do not need be protected, means them need be excluded.
 # these api resource can be access by everyone
 excludedResource:
   - /api/v3/host===get
-  - /api/v3/book===get
   - /**/*.html===get
   - /**/*.js===get
   - /**/*.css===get
@@ -158,7 +167,7 @@ The essence of sureness is to intercept all rest requests for authenticating and
 
 ```
 
-#### 4. Last, implement Auth Exception Handling Process
+#### 4. Last, Implement Auth Exception Handling Process
 
 Sureness uses exception handling process:
 
@@ -194,9 +203,9 @@ Here we need to customize the exceptions thrown by `checkIn`, passed directly wh
 ````
 
 
-## Provide a issue jwt api
+## Provide an Issue JWT Api
 
-Now we provide a rest api to issue jwt. We can use this jwt to test jwt auth.
+Now we provide a REST API to issue JWT. We can use this JWT to test JWT auth.
 
 ````
        // issue jwt rest api
@@ -215,21 +224,20 @@ Now we provide a rest api to issue jwt. We can use this jwt to test jwt auth.
         });
 ````
 
-
 **All done, we can test now!**
 
 ## Test
 
 Through the above steps, a complete auth function project is completed. Someone maybe think that with only these few steps, where is its complete function and what can it support?   
-This built project is based on the rbac permission model and supports baisc authentication, digest authentication and jwt authentication. It can fine-grained control the user's access to the restful api provided by the Javalin. That is to control which users can access which api.
+This built project is based on the RBAC permission model and supports Baisc authentication, Digest authentication and JWT authentication. It can fine-grained control the user's access to the restful api provided by the Javalin. That is to control which users can access which api.
 
 Let's test it. (we use postman and chrome to test.)
 
-### Test authentication
+### Test Authentication
 
 ####  1. Basic Auth Test
 
-Use postman basic auth, as shown below:
+Use postman Basic auth, as shown below:
 
 * success - input username: admin, password: admin
 
@@ -242,25 +250,25 @@ Use postman basic auth, as shown below:
 
 ####  2. Digest Auth Test
 
-Note: If password has been encrypted,  digest auth not support.(So the account admin not support digest auth).  
-Use chrome to digest auth, as shown below:
+Note: If password has been encrypted,  Digest auth not support.(So the account admin not support Digest auth).  
+Use chrome to Digest auth, as shown below:
 
 ![success](_images/javalin/test3.PNG)
 
 ![success](_images/javalin/test4.PNG)
 
-####  3. Jwt Auth Test
+####  3. JWT Auth Test
 
-First, we should access [GET /auth/token] api to get a jwt to use, as shown below:
+First, we should access **[GET /auth/token]** api to get a JWT to use, as shown below:
 
 ![success](_images/javalin/test5.PNG)
 
-Then, use the jwt as Bearer Token to access rest api, as shown below:
+Then, use the JWT as Bearer Token to access REST API, as shown below:
 
 ![success](_images/javalin/test6.PNG)
 
 
-### Test authorization
+### Test Authorization
 
 * success - user **tom** has role **role3**, the api **[DELETE - /api/v2/host]** support **role3** access, so **tom** can access api **[DELETE - /api/v2/host]** success, as shown below:
 
@@ -278,4 +286,4 @@ Javalin is a framework dedicated to simplicity and ease of use, and so is Surene
 We hope you enjoy this tutorial. Of course, the tutorial only introduces a simple introduction. Our account data, role permission data can not only be written in `sureness.yml`, but also loaded and obtained from the database and annotations. We can also customize the authentication method, data source, etc.   
 Finally, thank you again for reading.
 
-[DEMO SOURCE CODE ON GITHUB](https://github.com/usthe/sureness/tree/master/samples/javalin-sureness)     
+[DEMO SOURCE CODE ON GITHUB](https://github.com/usthe/sureness/tree/master/samples/javalin-sureness)
