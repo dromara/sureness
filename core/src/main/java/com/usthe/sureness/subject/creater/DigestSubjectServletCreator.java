@@ -3,6 +3,7 @@ package com.usthe.sureness.subject.creater;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.DigestSubject;
+import com.usthe.sureness.util.SurenessConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +22,6 @@ public class DigestSubjectServletCreator implements SubjectCreate {
 
     private static final Logger logger = LoggerFactory.getLogger(DigestSubjectServletCreator.class);
 
-    private static final String AUTHORIZATION = "Authorization";
-    private static final String DIGEST = "Digest ";
     private static final String USERNAME = "username";
     private static final String NONCE = "nonce";
     private static final String QOP = "qop";
@@ -37,8 +36,8 @@ public class DigestSubjectServletCreator implements SubjectCreate {
     @Override
     public boolean canSupportSubject(Object context) {
         if (context instanceof HttpServletRequest) {
-            String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
-            return authorization == null || authorization.startsWith(DIGEST);
+            String authorization = ((HttpServletRequest)context).getHeader(SurenessConstant.AUTHORIZATION);
+            return authorization == null || authorization.startsWith(SurenessConstant.DIGEST);
         } else {
             return false;
         }
@@ -46,12 +45,12 @@ public class DigestSubjectServletCreator implements SubjectCreate {
 
     @Override
     public Subject createSubject(Object context) {
-        String authorization = ((HttpServletRequest)context).getHeader(AUTHORIZATION);
+        String authorization = ((HttpServletRequest)context).getHeader(SurenessConstant.AUTHORIZATION);
         if (authorization == null) {
             return new DigestSubject();
         } else {
             // digest auth
-            String digestAuth = authorization.replace(DIGEST, "").trim();
+            String digestAuth = authorization.replace(SurenessConstant.DIGEST, "").trim();
             try {
                 final Map<String, String> digestMap = new HashMap<>(8);
                 Arrays.stream(digestAuth.split(",")).forEach(auth -> {

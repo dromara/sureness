@@ -4,6 +4,7 @@ import com.usthe.sureness.subject.PrincipalMap;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.SessionSubject;
+import com.usthe.sureness.util.SurenessConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,15 +17,11 @@ import java.util.List;
  */
 public class SessionSubjectServletCreator implements SubjectCreate {
 
-    private static final String PRINCIPAL = "principal";
-    private static final String PRINCIPALS = "principals";
-    private static final String ROLES = "roles";
-
     @Override
     public boolean canSupportSubject(Object context) {
         if (context instanceof HttpServletRequest) {
             HttpSession httpSession = ((HttpServletRequest) context).getSession(false);
-            return httpSession != null && httpSession.getAttribute(PRINCIPAL) != null;
+            return httpSession != null && httpSession.getAttribute(SurenessConstant.PRINCIPAL) != null;
         } else {
             return false;
         }
@@ -35,13 +32,13 @@ public class SessionSubjectServletCreator implements SubjectCreate {
     public Subject createSubject(Object context) {
         HttpServletRequest servletRequest = (HttpServletRequest) context;
         HttpSession httpSession = servletRequest.getSession(false);
-        String principal = (String) httpSession.getAttribute(PRINCIPAL);
+        String principal = (String) httpSession.getAttribute(SurenessConstant.PRINCIPAL);
         if (principal == null || "".equals(principal.trim())) {
             return null;
         }
-        Object principalMapTmp = httpSession.getAttribute(PRINCIPALS);
+        Object principalMapTmp = httpSession.getAttribute(SurenessConstant.PRINCIPALS);
         PrincipalMap principalMap = principalMapTmp == null ? null : (PrincipalMap) principalMapTmp;
-        Object rolesTmp = httpSession.getAttribute(ROLES);
+        Object rolesTmp = httpSession.getAttribute(SurenessConstant.ROLES);
         List<String> roles = rolesTmp == null ? null : (List<String>) rolesTmp;
         String remoteHost = ((HttpServletRequest) context).getRemoteHost();
         String requestUri = ((HttpServletRequest) context).getRequestURI();

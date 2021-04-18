@@ -4,6 +4,7 @@ import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.JwtSubject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
+import com.usthe.sureness.util.SurenessConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -16,14 +17,12 @@ import javax.ws.rs.container.ContainerRequestContext;
  */
 public class JwtSubjectWsJaxRsCreator implements SubjectCreate {
 
-    private static final String TOKEN = "token";
-
     @Override
     public boolean canSupportSubject(Object context) {
         // support token jwt
         // requestUri?token=jwt0-eyJhbGciOiJIUzUxMi --- jwt auth
         if (context instanceof ContainerRequestContext) {
-            Object token = ((ContainerRequestContext)context).getProperty(TOKEN);
+            Object token = ((ContainerRequestContext)context).getProperty(SurenessConstant.TOKEN);
             return token instanceof String && !JsonWebTokenUtil.isNotJsonWebToken((String) token);
         }
         return false;
@@ -33,7 +32,7 @@ public class JwtSubjectWsJaxRsCreator implements SubjectCreate {
     public Subject createSubject(Object context) {
         // support token jwt
         // requestUri?token=jwt0-eyJhbGciOiJIUzUxMi --- jwt auth
-        Object token = ((ContainerRequestContext)context).getProperty(TOKEN);
+        Object token = ((ContainerRequestContext)context).getProperty(SurenessConstant.TOKEN);
         if (token instanceof String) {
             String jwtToken = ((String)token).trim();
             String remoteHost = ((HttpServletRequest) context).getRemoteHost();

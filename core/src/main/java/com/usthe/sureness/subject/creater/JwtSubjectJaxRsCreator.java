@@ -4,6 +4,7 @@ import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.JwtSubject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
+import com.usthe.sureness.util.SurenessConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,17 +21,14 @@ public class JwtSubjectJaxRsCreator implements SubjectCreate {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtSubjectJaxRsCreator.class);
 
-    private static final String BEARER = "Bearer";
-    private static final String AUTHORIZATION = "Authorization";
-
     @Override
     public boolean canSupportSubject(Object context) {
         // support bearer jwt
         // ("Authorization", "Bearer eyJhbGciOiJIUzUxMi...")  --- jwt auth
         if (context instanceof ContainerRequestContext) {
-            String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);
-            if (authorization != null && authorization.startsWith(BEARER)) {
-                String jwtValue = authorization.replace(BEARER, "").trim();
+            String authorization = ((ContainerRequestContext)context).getHeaderString(SurenessConstant.AUTHORIZATION);
+            if (authorization != null && authorization.startsWith(SurenessConstant.BEARER)) {
+                String jwtValue = authorization.replace(SurenessConstant.BEARER, "").trim();
                 return !JsonWebTokenUtil.isNotJsonWebToken(jwtValue);
             }
         }
@@ -39,10 +37,10 @@ public class JwtSubjectJaxRsCreator implements SubjectCreate {
 
     @Override
     public Subject createSubject(Object context) {
-        String authorization = ((ContainerRequestContext)context).getHeaderString(AUTHORIZATION);
-        if (authorization != null && authorization.startsWith(BEARER)) {
+        String authorization = ((ContainerRequestContext)context).getHeaderString(SurenessConstant.AUTHORIZATION);
+        if (authorization != null && authorization.startsWith(SurenessConstant.BEARER)) {
             // jwt token
-            String jwtValue = authorization.replace(BEARER, "").trim();
+            String jwtValue = authorization.replace(SurenessConstant.BEARER, "").trim();
             if (JsonWebTokenUtil.isNotJsonWebToken(jwtValue)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("can not create JwtSubject by this request message, is not jwt");
