@@ -6,7 +6,7 @@
 
 # <font size="14p">sureness</font> <font size="5p">  | [中文文档](README_CN.md)</font>
 
-> A simple and efficient open-source jvm security framework that focus on the protection of restful api.
+> A simple and efficient open-source jvm security framework that focus on the protection of REST API.
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 [![Maven](https://img.shields.io/badge/Maven%20Central-1.0.2-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core) 
@@ -22,13 +22,13 @@
 
 ## 📫 Background   
 
-In the mainstream web architecture, how to protect the restful api provided by the back-end through effective and fast authentication has become particularly important.     
+In the mainstream web architecture, how to protect the REST API provided by the back-end through effective and fast authentication has become particularly important.     
 For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring and steep learning curve of spring security are not our ideal framework.   
-Ever since sureness was born, we hope to solve these, provide a **restful api**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.        
+Ever since sureness was born, we hope to solve these, provide a **REST API**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.        
 
 ## 🎡 <font color="green">Introduction</font>
 
-> [Sureness](https://github.com/usthe/sureness) is a simple and efficient open-source security framework that focus on the protection of restful APIs.  
+> [Sureness](https://github.com/usthe/sureness) is a simple and efficient open-source security framework that focus on the protection of REST API.  
 > Provide authentication and authorization, based on RBAC.   
 > No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, and more).    
 > Supports dynamic modification of permissions.   
@@ -44,7 +44,7 @@ Ever since sureness was born, we hope to solve these, provide a **restful api**,
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | --- |
 | **multi framework support**  | support      | support need modify   | not support |
-| **restful api** | support | support need modify   | support |
+| **REST API** | support | support need modify   | support |
 | **websocket** | support | not support   | not support |
 | **path match**  | dictionary matching tree | ant match | ant match |
 | **annotation support**    | support      | support      | support |
@@ -80,8 +80,8 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 
 #### 🐕 <font color="red">Some Conventions</font>  
 
-- Based RBAC, only has role-resource, no permission action.    
-- We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
+- Based RBAC, User-Role-Resource.    
+- We treat API requests as a resource, resource format like `requestUri===httpMethod`.   
   That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
   `eg: /api/v2/book===get`    
 - User belongs some Role -- Role owns Resource -- User can access the resource.  
@@ -105,7 +105,7 @@ compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.2'
 #### 🐵 Use the Default Configuration to Configure Sureness  
 
 The default configuration -`DefaultSurenessConfig` uses the document datasource `sureness.yml` as the auth datasource.  
-It supports jwt, basic auth, digest auth authentication.  
+It supports JWT auth, Basic auth, Digest authentication.  
 ```
 @Bean
 public DefaultSurenessConfig surenessConfig() {

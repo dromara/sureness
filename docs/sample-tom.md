@@ -4,7 +4,7 @@
 
 - based on `springboot`    
 - load data from mysql dataBase dataSource, then user can modify their access control data dynamically(see `AccountProvider ResourceProvider`)   
-- apart from having default `jwt,basic auth`, it adds custom `subject subjectCreator processor` to define new auth type(custom `subject subjectCreator processor...`).
+- apart from having default `JWT, Basic Auth`, it adds custom `subject subjectCreator processor` to define new auth type(custom `subject subjectCreator processor...`).
 - project's protected entrance is `SurenessFilterExample`
 - suggest use postman to test, test case is in `sample-tom-postman.json`, user can load it in postman  
 

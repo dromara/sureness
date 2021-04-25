@@ -9,9 +9,9 @@
 - [使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 
 相关文章：  
-[restful api 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
-[restful api 权限设计 - 快速搭建权限项目-配置文件方案](https://segmentfault.com/a/1190000039075245)    
-[restful api 权限设计 - sureness集成springboot样例-数据库方案](https://segmentfault.com/a/1190000039191172)
+[REST API 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
+[REST API 权限设计 - 快速搭建权限项目-配置文件方案](https://segmentfault.com/a/1190000039075245)    
+[REST API 权限设计 - sureness集成springboot样例-数据库方案](https://segmentfault.com/a/1190000039191172)
 
 相关视频：  
 [bilibili-10分钟搭建一个完整认证鉴权项目，原谅第一次的川普和英语](https://www.bilibili.com/video/bv1EU4y1s7Sz)

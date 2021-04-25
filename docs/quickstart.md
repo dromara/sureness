@@ -1,12 +1,12 @@
 ## Quick Start 
 
-#### <font color="red">Some Conventions</font>  
+#### 🐕 <font color="red">Some Conventions</font>
 
-- Based RBAC, only has role-resource, no permission action.    
-- We treat restful requests as a resource, resource format like `requestUri===httpMethod`.   
+- Based RBAC, User-Role-Resource.
+- We treat API requests as a resource, resource format like `requestUri===httpMethod`.   
   That is the request uri + request method(`post,get,put,delete...`) is considered as a resource as a whole.  
-  `eg: /api/v2/book===get`    
-- User belongs some Role -- Role owns Resource -- User can access the resource.  
+  `eg: /api/v2/book===get`
+- User belongs some Role -- Role owns Resource -- User can access the resource.
 
 Resource path matching see: [URI Match](path-match.md)    
 
@@ -24,10 +24,10 @@ When use maven or gradle build project, add coordinate
 compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.2'
 ```
 
-#### Use the default configuration to configure sureness  
+#### 🐵 Use the Default Configuration to Configure Sureness
 
-The default configuration -`DefaultSurenessConfig` uses the document datasource sureness.yml as the auth datasource.  
-It supports jwt, basic auth, digest auth authentication.  
+The default configuration -`DefaultSurenessConfig` uses the document datasource `sureness.yml` as the auth datasource.  
+It supports JWT auth, Basic auth, Digest authentication.
 ```
 @Bean
 public DefaultSurenessConfig surenessConfig() {

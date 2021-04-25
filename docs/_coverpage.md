@@ -2,12 +2,12 @@
 
 # sureness <small>1.0.2 for jvm</small>  
 
-> Focusing on Protection of Restful Api.  
+> Focusing on Protection of REST API.  
 
-- Based on RBAC, Multiple certification
-- Support websocket, servlet and jax-rs  
-- Dynamic modification of permissions
-- No framework dependency  
+- Based on RBAC, Support JWT, Basic, Digest Auth
+- Support Websocket, Servlet and JAX-RS  
+- Dynamic Modification of Permissions
+- No Framework Dependency, High Performance  
 
 [中文](/cn/)
 [GitHub](https://github.com/tomsun28/sureness/)

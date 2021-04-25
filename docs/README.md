@@ -14,15 +14,15 @@
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness)
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red)
 
-## 📫 Background  
+## 📫 Background
 
-In the mainstream web architecture, how to protect the restful api provided by the back-end through effective and fast authentication has become particularly important.     
+In the mainstream web architecture, how to protect the REST API provided by the back-end through effective and fast authentication has become particularly important.     
 For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring and steep learning curve of spring security are not our ideal framework.   
-Ever since sureness was born, we hope to solve these, provide a **restful api**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.
+Ever since sureness was born, we hope to solve these, provide a **REST API**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.
 
-## 🎡 <font color="green">Introduction</font>  
+## 🎡 <font color="green">Introduction</font>
 
-> [Sureness](https://github.com/usthe/sureness) is a simple and efficient open-source security framework that focus on the protection of restful APIs.  
+> [Sureness](https://github.com/usthe/sureness) is a simple and efficient open-source security framework that focus on the protection of REST API.  
 > Provide authentication and authorization, based on RBAC.   
 > No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, and more).    
 > Supports dynamic modification of permissions.   
@@ -33,12 +33,12 @@ Ever since sureness was born, we hope to solve these, provide a **restful api**,
 
 > Sureness has a sensible default configuration, is easy to customize, and is not couple to any one framework, which enables developers to quickly and safely protect their projects in multiple scenarios.
 
-##### 🔍 Compare     
+##### 🔍 Compare
 
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | --- |
 | **multi framework support**  | support      | support need modify   | not support |
-| **restful api** | support | support need modify   | support |
+| **REST API** | support | support need modify   | support |
 | **websocket** | support | not support   | not support |
 | **path match**  | dictionary matching tree | ant match | ant match |
 | **annotation support**    | support      | support      | support |

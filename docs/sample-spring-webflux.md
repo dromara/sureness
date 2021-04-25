@@ -5,7 +5,7 @@
 - Based on `spring-webflux`
 - Custom subject creator (BasicSubjectReactiveCreator, JwtSubjectReactiveCreator, NoneSubjectReactiveCreator) adapt to ServerHttpRequest request body
 - Load data from default dataSource - `sureness.yml`
-- Use default `jwt,basic auth` to authenticate and authorize
-- Contain `restful api`  
+- Use default `JWT, Basic Auth, Digest auth` to authenticate and authorize
+- Contain `REST API`  
 - Project's protected entrance is `SurenessFilterExample`  
 - Suggest use postman to test

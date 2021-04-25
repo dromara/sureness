@@ -5,8 +5,8 @@
 - Based on `ktor, servlet`  
 - Load data from default dataSource - `sureness.yml`
 - Use default sureness config
-- Use default `jwt,basic auth,digest auth` to authenticate and authorize
-- Contain `restful api`  
+- Use default `JWT, Basic Auth, Digest auth` to authenticate and authorize
+- Contain `REST API`  
 - Project's protected entrance is `Application.kt`  
 - Suggest use postman to test
 
