@@ -18,5 +18,6 @@
         <module>spring-webflux-sureness</module>
         <module>sureness-session</module>
         <module>sureness-redis-session</module>
+        <module>micronaut-sureness</module>
     </modules>
 </project>

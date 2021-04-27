@@ -15,6 +15,12 @@
         <module>samples</module>
     </modules>
 
+    <parent>
+        <groupId>io.micronaut</groupId>
+        <artifactId>micronaut-parent</artifactId>
+        <version>2.4.3</version>
+    </parent>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sureness-core.version>1.0.2</sureness-core.version>
