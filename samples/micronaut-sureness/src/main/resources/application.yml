@@ -1,3 +1,10 @@
 micronaut:
   application:
     name: micronautSureness
+  tenantresolver:
+    cookie:
+      enabled: true
+    tenantwriter:
+      httpheader:
+        enabled: true
+

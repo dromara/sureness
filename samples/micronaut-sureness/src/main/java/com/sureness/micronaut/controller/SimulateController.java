@@ -4,13 +4,8 @@ package com.sureness.micronaut.controller;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Delete;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Patch;
-import io.micronaut.http.annotation.PathVariable;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Put;
+import io.micronaut.http.MediaType;
+import io.micronaut.http.annotation.*;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,10 +14,12 @@ import java.util.Objects;
 
 
 @Controller
+@Produces(MediaType.APPLICATION_JSON)
 public class SimulateController {
 
     /** access success message **/
     public static final String SUCCESS_ACCESS_RESOURCE = "access this resource: %s success";
+    public static final String ERROR_ACCESS_RESOURCE = "access this resource: %s error";
 
     @Get("/api/v1/source1")
     public HttpResponse<Map<String, String>> api1Mock1(HttpRequest request) {
@@ -180,6 +177,12 @@ public class SimulateController {
         return HttpResponse.ok(getResponseMap(request));
     }
 
+    @Patch("/auth/error")
+    public HttpResponse<String> authError() {
+        return HttpResponse.unauthorized();
+    }
+
+
     /**
      * get the response map data from request
      * @param request http request
@@ -193,6 +196,11 @@ public class SimulateController {
         String requestType = request.getMethod().toString();
         builder.append(requestType);
         builder.append("--");
-        return Collections.singletonMap("result", String.format(SUCCESS_ACCESS_RESOURCE, builder.toString()));
+        if (!StringUtils.isEmpty(request.getHeaders().get("errorMsg"))){
+            builder.append(request.getHeaders().get("errorMsg"));
+            builder.append(request.getHeaders().get("statusCode"));
+            return Collections.singletonMap("error", String.format(ERROR_ACCESS_RESOURCE, builder));
+        }
+        return Collections.singletonMap("result", String.format(SUCCESS_ACCESS_RESOURCE, builder));
     }
 }

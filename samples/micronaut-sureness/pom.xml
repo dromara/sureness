@@ -14,17 +14,9 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-<!--    <parent>-->
-<!--        <groupId>io.micronaut</groupId>-->
-<!--        <artifactId>micronaut-parent</artifactId>-->
-<!--        <version>2.4.3</version>-->
-<!--    </parent>-->
-
     <properties>
         <packaging>jar</packaging>
         <jdk.version>1.8</jdk.version>
-        <!-- If you are building with JDK 9 or higher, you can uncomment the lines below to set the release version -->
-        <!-- <release.version>8</release.version> -->
         <micronaut.version>2.4.3</micronaut.version>
         <exec.mainClass>com.sureness.micronaut.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
@@ -52,6 +44,16 @@
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-validation</artifactId>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-bom</artifactId>
+            <version>2.1.2</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -100,9 +102,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <!-- Uncomment to enable incremental compilation -->
-                    <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
-
                     <annotationProcessorPaths combine.children="append">
                     </annotationProcessorPaths>
                     <compilerArgs>
