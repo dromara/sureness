@@ -1,4 +1,4 @@
-package com.sureness.micronaut.support;
+package com.usthe.sureness.micronaut.support;
 
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
@@ -11,7 +11,9 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-
+/**
+ * @author tom
+ */
 public class BasicSubjectReactiveCreator implements SubjectCreate {
 
     private static final Logger logger = LoggerFactory.getLogger(BasicSubjectReactiveCreator.class);
@@ -25,7 +27,7 @@ public class BasicSubjectReactiveCreator implements SubjectCreate {
         // ("Authorization", "Basic YWRtaW46YWRtaW4=")        --- basic auth
         if (context instanceof HttpRequest) {
             String authorization = ((HttpRequest)context)
-                    .getHeaders().getFirst(AUTHORIZATION).get();
+                    .getHeaders().getFirst(AUTHORIZATION).orElse(null);
             return authorization != null && authorization.startsWith(BASIC);
         } else {
             return false;
@@ -35,7 +37,7 @@ public class BasicSubjectReactiveCreator implements SubjectCreate {
     @Override
     public Subject createSubject(Object context) {
         String authorization = ((HttpRequest)context).
-                getHeaders().getFirst(AUTHORIZATION).get();
+                getHeaders().getFirst(AUTHORIZATION).orElse(null);
         if (authorization == null) {
             return null;
         }
@@ -58,7 +60,7 @@ public class BasicSubjectReactiveCreator implements SubjectCreate {
         }
         String password = auth[1];
         InetSocketAddress remoteAddress = ((HttpRequest) context).getRemoteAddress();
-        String remoteHost = remoteAddress == null ? "" : remoteAddress.getHostString();
+        String remoteHost = remoteAddress.getHostString();
         String requestUri = ((HttpRequest) context).getPath();
         String requestType = ((HttpRequest) context).getMethodName();
         String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();

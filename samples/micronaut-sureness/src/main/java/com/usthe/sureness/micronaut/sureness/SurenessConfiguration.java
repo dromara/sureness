@@ -1,9 +1,9 @@
 
-package com.sureness.micronaut.sureness;
+package com.usthe.sureness.micronaut.sureness;
 
 
-import com.sureness.micronaut.support.BasicSubjectReactiveCreator;
-import com.sureness.micronaut.support.NoneSubjectReactiveCreator;
+import com.usthe.sureness.micronaut.support.BasicSubjectReactiveCreator;
+import com.usthe.sureness.micronaut.support.NoneSubjectReactiveCreator;
 import com.usthe.sureness.matcher.DefaultPathRoleMatcher;
 import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.mgt.SurenessSecurityManager;
@@ -25,7 +25,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-
+/**
+ * @author tom
+ */
 @Singleton
 public class SurenessConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(SurenessConfiguration.class);

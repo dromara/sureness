@@ -1,4 +1,4 @@
-package com.sureness.micronaut.sureness;
+package com.usthe.sureness.micronaut.sureness;
 
 
 import com.usthe.sureness.mgt.SurenessSecurityManager;
@@ -20,14 +20,18 @@ import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-
+/**
+ * @author tom
+ */
 @Filter("/**")
-public class MicronautSurenessFilterExample  implements HttpServerFilter {
+public class MicronautSurenessFilterExample implements HttpServerFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(MicronautSurenessFilterExample.class);
 
     @Inject
     private SurenessSecurityManager securityManager ;
+
+
 
 
     @Override
@@ -79,9 +83,6 @@ public class MicronautSurenessFilterExample  implements HttpServerFilter {
         }
         return chain.proceed(request);
     }
-
-
-
 
     @Override
     public int getOrder() {

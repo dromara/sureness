@@ -166,8 +166,6 @@ public class MicronautSurenessFilterExample  implements HttpServerFilter {
             logger.error("other exception happen: ", e);
             statusCode = HttpStatus.FORBIDDEN.getCode();
             errorMsg = e.getMessage();
-        }finally {
-            SurenessContextHolder.unbindSubject();
         }
         if (statusCode != null && errorMsg != null) {
             String finalErrorMsg = errorMsg;

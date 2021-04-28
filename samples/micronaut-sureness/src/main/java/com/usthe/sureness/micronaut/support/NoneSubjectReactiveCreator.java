@@ -1,4 +1,4 @@
-package com.sureness.micronaut.support;
+package com.usthe.sureness.micronaut.support;
 
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
@@ -7,7 +7,9 @@ import io.micronaut.http.HttpRequest;
 
 import java.net.InetSocketAddress;
 
-
+/**
+ * @author tom
+ */
 public class NoneSubjectReactiveCreator implements SubjectCreate {
     @Override
     public boolean canSupportSubject(Object context) {
@@ -17,7 +19,7 @@ public class NoneSubjectReactiveCreator implements SubjectCreate {
     @Override
     public Subject createSubject(Object context) {
         InetSocketAddress remoteAddress = ((HttpRequest) context).getRemoteAddress();
-        String remoteHost = remoteAddress == null ? "" : remoteAddress.getHostString();
+        String remoteHost = remoteAddress.getHostString();
         String requestUri = ((HttpRequest) context).getPath();
         String requestType = ((HttpRequest) context).getMethodName();
         String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();

@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.sureness</groupId>
-    <artifactId>micronaut-sureness</artifactId>
-    <version>0.1</version>
-    <packaging>${packaging}</packaging>
-
     <parent>
-        <artifactId>sureness</artifactId>
+        <artifactId>samples</artifactId>
         <groupId>com.usthe.sureness</groupId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>micronaut-sureness</artifactId>
+    <packaging>${packaging}</packaging>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>1.8</jdk.version>
         <micronaut.version>2.4.3</micronaut.version>
-        <exec.mainClass>com.sureness.micronaut.Application</exec.mainClass>
+        <micronaut-maven-plugin.version>1.1.8</micronaut-maven-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <exec.mainClass>com.usthe.sureness.micronaut.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-    </repositories>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.micronaut</groupId>
+                <artifactId>micronaut-parent</artifactId>
+                <version>${micronaut.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
-
         <dependency>
             <groupId>com.usthe.sureness</groupId>
             <artifactId>sureness-core</artifactId>
@@ -44,16 +46,6 @@
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-validation</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-core</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-bom</artifactId>
-            <version>2.1.2</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -97,15 +89,17 @@
             <plugin>
                 <groupId>io.micronaut.build</groupId>
                 <artifactId>micronaut-maven-plugin</artifactId>
+                <version>${micronaut-maven-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <annotationProcessorPaths combine.children="append">
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Amicronaut.processing.group=com.sureness</arg>
+                        <arg>-Amicronaut.processing.group=com.usthe.sureness</arg>
                         <arg>-Amicronaut.processing.module=micronaut-sureness</arg>
                     </compilerArgs>
                 </configuration>

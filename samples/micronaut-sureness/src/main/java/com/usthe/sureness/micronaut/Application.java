@@ -1,11 +1,13 @@
-package com.sureness.micronaut;
+package com.usthe.sureness.micronaut;
 
 
 
 
 import io.micronaut.runtime.Micronaut;
 
-
+/**
+ * @author tom
+ */
 public class Application{
 
     public static void main(String[] args) {
