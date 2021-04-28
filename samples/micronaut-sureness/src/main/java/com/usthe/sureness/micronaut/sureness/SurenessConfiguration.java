@@ -33,7 +33,7 @@ import java.util.List;
 public class SurenessConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(SurenessConfiguration.class);
 
-    @Factory
+    @Singleton
     public SurenessSecurityManager init() {
         SurenessAccountProvider accountProvider = new DocumentAccountProvider();
         List<Processor> processorList = new LinkedList<>();
