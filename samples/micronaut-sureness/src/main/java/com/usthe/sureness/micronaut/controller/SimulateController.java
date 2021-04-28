@@ -1,6 +1,5 @@
 package com.usthe.sureness.micronaut.controller;
 
-
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
@@ -12,7 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-
+/**
+ * @author tom
+ */
 @Controller
 @Produces(MediaType.APPLICATION_JSON)
 public class SimulateController {
@@ -20,7 +21,6 @@ public class SimulateController {
     /** access success message **/
     public static final String SUCCESS_ACCESS_RESOURCE = "access this resource: %s success";
     public static final String ERROR_ACCESS_RESOURCE = "access this resource: %s error";
-
     private static final String ERROR_MSG = "errorMsg";
 
     @Get("/api/v1/source1")

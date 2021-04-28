@@ -1,6 +1,4 @@
-
 package com.usthe.sureness.micronaut.sureness;
-
 
 import com.usthe.sureness.micronaut.support.BasicSubjectReactiveCreator;
 import com.usthe.sureness.micronaut.support.NoneSubjectReactiveCreator;

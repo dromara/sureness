@@ -31,9 +31,6 @@ public class MicronautSurenessFilterExample implements HttpServerFilter {
     @Inject
     private SurenessSecurityManager securityManager ;
 
-
-
-
     @Override
     public Publisher<MutableHttpResponse<?>> doFilter(HttpRequest<?> request,
                                                              ServerFilterChain chain) {
