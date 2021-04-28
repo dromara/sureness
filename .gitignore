@@ -1,5 +1,14 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
+Thumbs.db
+.DS_Store
+.gradle
+build/
+out/
+micronaut-cli.yml
+.mvn/
+mvnw
+mvnw.bat
 
 ### STS ###
 .apt_generated
