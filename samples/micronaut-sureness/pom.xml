@@ -11,6 +11,9 @@
     <packaging>${packaging}</packaging>
 
     <properties>
+        <release.version>8</release.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <packaging>jar</packaging>
         <jdk.version>1.8</jdk.version>
         <micronaut.version>2.4.3</micronaut.version>
@@ -24,7 +27,7 @@
         <dependencies>
             <dependency>
                 <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-parent</artifactId>
+                <artifactId>micronaut-bom</artifactId>
                 <version>${micronaut.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -85,6 +88,7 @@
     </dependencies>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>io.micronaut.build</groupId>
@@ -97,6 +101,16 @@
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <annotationProcessorPaths combine.children="append">
+                        <path>
+                            <groupId>io.micronaut</groupId>
+                            <artifactId>micronaut-inject-java</artifactId>
+                            <version>${micronaut.version}</version>
+                        </path>
+                        <path>
+                            <groupId>io.micronaut</groupId>
+                            <artifactId>micronaut-validation</artifactId>
+                            <version>${micronaut.version}</version>
+                        </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
                         <arg>-Amicronaut.processing.group=com.usthe.sureness</arg>

@@ -17,6 +17,7 @@ import com.usthe.sureness.provider.ducument.DocumentPathTreeProvider;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
+import io.micronaut.context.annotation.Factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,11 +29,11 @@ import java.util.List;
 /**
  * @author tom
  */
-@Singleton
+@Factory
 public class SurenessConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(SurenessConfiguration.class);
 
-    @Singleton
+    @Factory
     public SurenessSecurityManager init() {
         SurenessAccountProvider accountProvider = new DocumentAccountProvider();
         List<Processor> processorList = new LinkedList<>();

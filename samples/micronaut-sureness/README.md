@@ -195,12 +195,15 @@ public class MicronautSurenessFilterExample  implements HttpServerFilter {
 }
 ```
 SurenessSecurityManager configuration
+
 ```java
-@Singleton
+import io.micronaut.context.annotation.Factory;
+
+@Factory
 public class SurenessConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(SurenessConfiguration.class);
 
-    @Singleton
+    @Factory
     public SurenessSecurityManager init() {
         SurenessAccountProvider accountProvider = new DocumentAccountProvider();
         List<Processor> processorList = new LinkedList<>();
