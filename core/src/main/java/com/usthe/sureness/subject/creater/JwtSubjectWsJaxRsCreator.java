@@ -6,7 +6,6 @@ import com.usthe.sureness.subject.support.JwtSubject;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import com.usthe.sureness.util.SurenessConstant;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
 
 /**
@@ -35,12 +34,10 @@ public class JwtSubjectWsJaxRsCreator implements SubjectCreate {
         Object token = ((ContainerRequestContext)context).getProperty(SurenessConstant.TOKEN);
         if (token instanceof String) {
             String jwtToken = ((String)token).trim();
-            String remoteHost = ((HttpServletRequest) context).getRemoteHost();
-            String requestUri = ((HttpServletRequest) context).getRequestURI();
-            String requestType = ((HttpServletRequest) context).getMethod();
+            String requestUri = ((ContainerRequestContext) context).getUriInfo().getPath();
+            String requestType = ((ContainerRequestContext) context).getMethod();
             String targetUri = requestUri.concat("===").concat(requestType.toLowerCase());
             return JwtSubject.builder(jwtToken)
-                    .setRemoteHost(remoteHost)
                     .setTargetResource(targetUri)
                     .build();
         }

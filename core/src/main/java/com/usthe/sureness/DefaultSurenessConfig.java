@@ -35,6 +35,7 @@ public class DefaultSurenessConfig {
 
     public static final String SUPPORT_SERVLET = "servlet";
     public static final String SUPPORT_JAX_RS = "jax-rs";
+    public static final String SUPPORT_SPRING_REACTIVE = "spring-reactive";
 
     public DefaultSurenessConfig() {
         this.init(SUPPORT_SERVLET);
@@ -86,6 +87,13 @@ public class DefaultSurenessConfig {
                     new BasicSubjectJaxRsCreator(),
                     new JwtSubjectJaxRsCreator(),
                     new JwtSubjectWsJaxRsCreator());
+        } else if (SUPPORT_SPRING_REACTIVE.equals(supportContainer)) {
+            subjectCreates = Arrays.asList(
+                    new NoneSubjectSpringReactiveCreator(),
+                    new DigestSubjectSpringReactiveCreator(),
+                    new BasicSubjectSpringReactiveCreator(),
+                    new JwtSubjectSpringReactiveCreator(),
+                    new JwtSubjectWsSpringReactiveCreator());
         } else {
             subjectCreates = Arrays.asList(
                     new NoneSubjectServletCreator(),
