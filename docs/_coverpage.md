@@ -1,6 +1,6 @@
 ![logo](_media/icon128.svg)
 
-# sureness <small>1.0.2 for jvm</small>  
+# sureness <small>1.0.3 for jvm</small>  
 
 > Focusing on Protection of REST API.  
 

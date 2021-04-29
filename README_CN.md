@@ -31,7 +31,7 @@
 
 > `sureness` 是我们在深度使用权限框架 `apache shiro` 之后,吸取其优点全新设计开发的一个认证鉴权框架  
 >  面向 `REST API` 的认证鉴权,基于 `RBAC` (用户-角色-资源)主要关注于对 `API` 的安全保护  
->  无特定框架依赖(本质就是过滤器处拦截判断,已有 `Springboot,Quarkus,Javalin,Ktor` 等集成样例)  
+>  无特定框架依赖(本质就是过滤器处拦截判断,已有 `Springboot,Quarkus,Javalin,Ktor,Micronaut` 等集成样例)  
 >  支持动态修改权限配置(动态修改配置每个 `API` 谁有权访问)
 >  支持 `Websocket` ,主流 `HTTP` 容器 `Servlet` 和 `JAX-RS`  
 >  支持多种认证策略, `JWT, Basic auth, Digest auth` ... 可扩展自定义支持的认证方式   
@@ -72,6 +72,7 @@
 - [x] sureness集成javalin样例 [sample-javalin](samples/javalin-sureness)    
 - [x] sureness集成ktor样例 [sample-ktor](samples/ktor-sureness)   
 - [x] sureness集成spring webflux样例 [sample-spring-webflux](samples/spring-webflux-sureness)
+- [x] sureness集成micronaut样例 [sample-micronaut](samples/micronaut-sureness)  
 - [x] sureness使用session样例 [sureness-session](samples/sureness-session)  
 - [x] sureness分布式缓存session样例 [sureness-redis-session](samples/sureness-redis-session)  
 - [x] more samples todo   
@@ -95,11 +96,11 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.2'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.3'
 ```
 
 #### 🐵 使用默认配置来配置sureness    

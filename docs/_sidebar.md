@@ -21,6 +21,7 @@
   - [Spring-Webflux-Sureness Sample](sample-spring-webflux.md)  
   - [Javalin-Sureness Sample](sample-javalin.md)  
   - [Ktor-Sureness Sample](sample-ktor.md)  
+  - [Micronaut-Sureness Sample](sample-micronaut.md)  
 
 - Others
   - [Design](design.md)

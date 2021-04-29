@@ -30,7 +30,7 @@ Ever since sureness was born, we hope to solve these, provide a **REST API**, **
 
 > [Sureness](https://github.com/usthe/sureness) is a simple and efficient open-source security framework that focus on the protection of REST API.  
 > Provide authentication and authorization, based on RBAC.   
-> No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, and more).    
+> No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, Micronaut and more).    
 > Supports dynamic modification of permissions.   
 > Supports WebSockets and mainstream HTTP containers (Servlet and JAX-RS).    
 > Supports JWT, Basic Auth, Digest Auth, and can be extended to support custom authentication methods.    
@@ -71,7 +71,8 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 - [x] sureness integration quarkus sample [sample-quarkus](samples/quarkus-sureness)  
 - [x] sureness integration javalin sample [sample-javalin](samples/javalin-sureness)    
 - [x] sureness integration ktor sample [sample-ktor](samples/ktor-sureness)   
-- [x] sureness integration spring webflux sample [sample-spring-webflux](samples/spring-webflux-sureness)   
+- [x] sureness integration spring webflux sample [sample-spring-webflux](samples/spring-webflux-sureness)
+- [x] sureness integration micronaut sample [sample-micronaut](samples/micronaut-sureness)
 - [x] sureness integration session sample [sureness-session](samples/sureness-session)
 - [x] sureness integration redis cache session sample [sureness-redis-session](samples/sureness-redis-session)
 - [x] more samples todo  
@@ -95,11 +96,11 @@ When use maven or gradle build project, add coordinate
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.2'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.3'
 ```
 
 #### 🐵 Use the Default Configuration to Configure Sureness  
