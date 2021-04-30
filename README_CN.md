@@ -72,7 +72,8 @@
 - [x] sureness集成javalin样例 [sample-javalin](samples/javalin-sureness)    
 - [x] sureness集成ktor样例 [sample-ktor](samples/ktor-sureness)   
 - [x] sureness集成spring webflux样例 [sample-spring-webflux](samples/spring-webflux-sureness)
-- [x] sureness集成micronaut样例 [sample-micronaut](samples/micronaut-sureness)  
+- [x] sureness集成micronaut样例 [sample-micronaut](samples/micronaut-sureness)
+- [x] sureness集成jfinal样例 [sample-jfinal](samples/jfinal-sureness)
 - [x] sureness使用session样例 [sureness-session](samples/sureness-session)  
 - [x] sureness分布式缓存session样例 [sureness-redis-session](samples/sureness-redis-session)  
 - [x] more samples todo   
