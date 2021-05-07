@@ -20,5 +20,6 @@
         <module>sureness-redis-session</module>
         <module>micronaut-sureness</module>
         <module>jfinal-sureness</module>
+        <module>solon-sureness</module>
     </modules>
 </project>
