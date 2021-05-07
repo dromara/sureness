@@ -17,24 +17,25 @@ import java.util.UUID;
  */
 public class Application {
 
-    public static void main(String[] args){
-        SolonApp app = Solon.start(Application.class, args);
+    public static void main(String[] args) {
+        Solon.start(Application.class, args, app -> {
+            // issue jwt rest api
+            app.get("/auth/token", ctx -> {
+                SubjectSum subjectSum = SurenessContextHolder.getBindSubject();
 
-        // issue jwt rest api
-        app.get("/auth/token", ctx -> {
-            SubjectSum subjectSum = SurenessContextHolder.getBindSubject();
-            if (subjectSum == null) {
-                RenderManager.global.render("Please auth!", ctx);
-            } else {
-                String principal = (String) subjectSum.getPrincipal();
-                List<String> roles = (List<String>) subjectSum.getRoles();
-                // issue jwt
-                String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), principal,
-                        "token-server", 3600L, roles);
-                RenderManager.global.render(jwt, ctx);
-            }
+                if (subjectSum == null) {
+                    RenderManager.global.render("Please auth!", ctx);
+                } else {
+                    String principal = (String) subjectSum.getPrincipal();
+                    List<String> roles = (List<String>) subjectSum.getRoles();
+                    // issue jwt
+                    String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), principal,
+                            "token-server", 3600L, roles);
+                    RenderManager.global.render(jwt, ctx);
+                }
+            });
+
+            app.after("/**", context -> SurenessContextHolder.unbindSubject());
         });
-
-        app.after("/**", context -> SurenessContextHolder.unbindSubject());
     }
 }

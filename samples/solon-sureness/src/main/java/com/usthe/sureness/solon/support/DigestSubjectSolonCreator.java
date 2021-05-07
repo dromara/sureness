@@ -51,8 +51,10 @@ public class DigestSubjectSolonCreator implements SubjectCreate {
         } else {
             // digest auth
             String digestAuth = authorization.replace(SurenessConstant.DIGEST, "").trim();
+
             try {
                 final Map<String, String> digestMap = new HashMap<>(8);
+
                 Arrays.stream(digestAuth.split(",")).forEach(auth -> {
                     String[] tmpArr = auth.trim().split("=");
                     if (tmpArr.length == FILED_SIZE) {
@@ -63,6 +65,7 @@ public class DigestSubjectSolonCreator implements SubjectCreate {
                         digestMap.put(tmpArr[0].trim(), authValue);
                     }
                 });
+
                 String username = digestMap.get(USERNAME);
                 String response = digestMap.get(RESPONSE);
                 String realm = digestMap.get(REALM);
@@ -71,11 +74,13 @@ public class DigestSubjectSolonCreator implements SubjectCreate {
                 String nc = digestMap.get(NC);
                 String cNonce = digestMap.get(CNONCE);
                 String qop =  digestMap.get(QOP);
+
                 if (username == null || response == null || realm == null || uri == null
                         || nonce == null || nc == null || cNonce == null) {
                     logger.debug("can not create digest subject due some need field is null");
                     return null;
                 }
+
                 String remoteHost = ((Context) context).ip();
                 String requestUri = ((Context) context).path();
                 String requestType = ((Context) context).method();
@@ -89,7 +94,6 @@ public class DigestSubjectSolonCreator implements SubjectCreate {
                 logger.info("create digest subject error happen, due {}", e.getMessage(), e);
                 return null;
             }
-
         }
     }
 }

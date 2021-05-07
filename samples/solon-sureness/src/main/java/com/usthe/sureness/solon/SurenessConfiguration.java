@@ -59,7 +59,9 @@ public class SurenessConfiguration {
         DigestProcessor digestProcessor = new DigestProcessor();
         digestProcessor.setAccountProvider(accountProvider);
         processorList.add(digestProcessor);
+
         DefaultProcessorManager processorManager = new DefaultProcessorManager(processorList);
+
         if (logger.isDebugEnabled()) {
             logger.debug("DefaultProcessorManager init");
         }
@@ -95,6 +97,4 @@ public class SurenessConfiguration {
             logger.debug("SurenessSecurityManager init");
         }
     }
-
-
 }

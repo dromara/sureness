@@ -14,24 +14,14 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <solon.ver>1.3.33</solon.ver>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.noear</groupId>
-                <artifactId>solon-parent</artifactId>
-                <version>1.3.33</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon-web</artifactId>
+            <artifactId>solon</artifactId>
+            <version>${solon.ver}</version>
         </dependency>
         <dependency>
             <groupId>com.usthe.sureness</groupId>

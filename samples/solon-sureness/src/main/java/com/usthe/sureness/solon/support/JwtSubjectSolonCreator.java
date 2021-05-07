@@ -39,6 +39,7 @@ public class JwtSubjectSolonCreator implements SubjectCreate {
     @Override
     public Subject createSubject(Object context) {
         String authorization = ((Context)context).header(AUTHORIZATION);
+
         if (authorization != null && authorization.startsWith(BEARER)) {
             // jwt token
             String jwtValue = authorization.replace(BEARER, "").trim();
@@ -48,15 +49,18 @@ public class JwtSubjectSolonCreator implements SubjectCreate {
                 }
                 return null;
             }
+
             String remoteHost = ((Context) context).ip();
             String requestUri = ((Context) context).path();
             String requestType = ((Context) context).method();
             String targetUri = requestUri.concat("===").concat(requestType.toLowerCase());
+
             return JwtSubject.builder(jwtValue)
                     .setRemoteHost(remoteHost)
                     .setTargetResource(targetUri)
                     .build();
         }
+
         return null;
     }
 }

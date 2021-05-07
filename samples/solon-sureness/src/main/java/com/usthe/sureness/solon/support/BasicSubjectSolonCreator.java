@@ -41,6 +41,7 @@ public class BasicSubjectSolonCreator implements SubjectCreate {
         if (authorization == null) {
             return null;
         }
+
         //basic auth
         String basicAuth = authorization.replace(BASIC, "").trim();
         basicAuth = new String(Base64.getDecoder().decode(basicAuth), StandardCharsets.UTF_8);
@@ -51,6 +52,7 @@ public class BasicSubjectSolonCreator implements SubjectCreate {
             }
             return null;
         }
+
         String username = auth[0];
         if (username == null || "".equals(username)) {
             if (logger.isInfoEnabled()) {
@@ -58,11 +60,13 @@ public class BasicSubjectSolonCreator implements SubjectCreate {
             }
             return null;
         }
+
         String password = auth[1];
         String remoteHost = ((Context) context).ip();
         String requestUri = ((Context) context).path();
         String requestType = ((Context) context).method();
         String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
+
         return PasswordSubject.builder(username, password)
                 .setRemoteHost(remoteHost)
                 .setTargetResource(targetUri)

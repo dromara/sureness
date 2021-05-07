@@ -24,6 +24,7 @@ public class NoneSubjectSolonCreator implements SubjectCreate {
         String requestUri = ((Context) context).path();
         String requestType = ((Context) context).method();
         String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
+
         return NoneSubject.builder().setRemoteHost(remoteHost)
                 .setTargetUri(targetUri).build();
     }

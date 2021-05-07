@@ -40,7 +40,7 @@ public class SurenessFilterExample implements Filter {
             logger.debug("this request is illegal");
             responseWrite(ctx, 401, e1.getMessage(), null);
             return;
-        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
+        } catch (DisabledAccountException | ExcessiveAttemptsException e2) {
             logger.debug("the account is disabled");
             responseWrite(ctx, 401, e2.getMessage(), null);
             return;
@@ -64,17 +64,18 @@ public class SurenessFilterExample implements Filter {
 
     /**
      * write response data
-     * @param context context
+     *
+     * @param ctx        ctx
      * @param statusCode statusCode
-     * @param message message
+     * @param message    message
      */
-    private void responseWrite(Context context, int statusCode,
-                                     String message, Map<String,String> headers) throws Throwable {
-        context.statusSet(statusCode);
+    private void responseWrite(Context ctx, int statusCode,
+                               String message, Map<String, String> headers) throws Throwable {
+        ctx.statusSet(statusCode);
         if (headers != null) {
-            headers.forEach(context::headerAdd);
+            headers.forEach(ctx::headerAdd);
         }
-        RenderManager.global.render(Collections.singletonMap("message", message), context);
-    }
 
+        ctx.render(Collections.singletonMap("message", message));
+    }
 }
