@@ -20,12 +20,6 @@
 
 **Home Page: [usthe.com/sureness](https://usthe.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
 
-## 📫 Background   
-
-In the mainstream web architecture, how to protect the REST API provided by the back-end through effective and fast authentication has become particularly important.     
-For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring and steep learning curve of spring security are not our ideal framework.   
-Ever since sureness was born, we hope to solve these, provide a **REST API**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.        
-
 ## 🎡 <font color="green">Introduction</font>
 
 > [Sureness](https://github.com/usthe/sureness) is a simple and efficient open-source security framework that focus on the protection of REST API.  
@@ -43,16 +37,16 @@ Ever since sureness was born, we hope to solve these, provide a **REST API**, **
 
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | --- |
-| **multi framework support**  | support      | support need modify   | not support |
+| **Multi Framework Support**  | support      | support need modify   | not support |
 | **REST API** | support | support need modify   | support |
-| **websocket** | support | not support   | not support |
-| **path match**  | dictionary matching tree | ant match | ant match |
-| **annotation support**    | support      | support      | support |
-| **servlet**    | support      | support      | support |
-| **jax-rs**     | support      | not support    | not support |
-| **dynamic modification of permissions** | support | support need modify | support need modify |
-| **performance** | fast | slower | slower|
-| **learning curve** | simple | simple | steep|
+| **Websocket** | support | not support   | not support |
+| **Path Match**  | dictionary matching tree | ant match | ant match |
+| **Annotation Support**    | support      | support      | support |
+| **Servlet**    | support      | support      | support |
+| **JAX-RS**     | support      | not support    | not support |
+| **Dynamic Modification of Permissions** | support | support need modify | support need modify |
+| **Performance** | fast | slower | slower|
+| **Learning Curve** | simple | simple | steep|
 
 ##### 📈 Benchmark  
 
@@ -73,7 +67,8 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 - [x] sureness integration ktor sample [sample-ktor](samples/ktor-sureness)   
 - [x] sureness integration spring webflux sample [sample-spring-webflux](samples/spring-webflux-sureness)
 - [x] sureness integration micronaut sample [sample-micronaut](samples/micronaut-sureness)
-- [x] sureness integration micronaut sample [sample-jfinal](samples/jfinal-sureness)  
+- [x] sureness integration micronaut sample [sample-jfinal](samples/jfinal-sureness)
+- [x] sureness integration solon sample [sample-solon](samples/solon-sureness)
 - [x] sureness integration session sample [sureness-session](samples/sureness-session)
 - [x] sureness integration redis cache session sample [sureness-redis-session](samples/sureness-redis-session)
 - [x] more samples todo  

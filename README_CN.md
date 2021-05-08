@@ -24,7 +24,7 @@
 ## 📫 背景         
 
 在主流的前后端分离架构中，如何通过有效快速的认证鉴权来保护后端提供的`REST API`变得尤为重要。对现存框架，不原生支持`rest`的`apache shiro`，
-还是深度绑定`spring`，学习曲线陡峭的`spring security`，或多或少都不是我们的理想型。   
+还是深度绑定`spring`的`spring security`，或多或少都不是我们的理想型。   
 于是乎`sureness`诞生了，我们希望能解决这些，提供一个面向**REST API**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。      
 
 ## 🎡 <font color="green">介绍</font>
@@ -40,7 +40,7 @@
 
 >`sureness`的低配置，易扩展，不耦合其他框架，希望能帮助开发者对自己的项目多场景快速安全的进行保护   
 
-##### 🔍 框架对比     
+##### 🔍 对比     
 
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | ---  |
@@ -74,6 +74,7 @@
 - [x] sureness集成spring webflux样例 [sample-spring-webflux](samples/spring-webflux-sureness)
 - [x] sureness集成micronaut样例 [sample-micronaut](samples/micronaut-sureness)
 - [x] sureness集成jfinal样例 [sample-jfinal](samples/jfinal-sureness)
+- [x] sureness集成solon样例 [sample-solon](samples/solon-sureness)
 - [x] sureness使用session样例 [sureness-session](samples/sureness-session)  
 - [x] sureness分布式缓存session样例 [sureness-redis-session](samples/sureness-redis-session)  
 - [x] more samples todo   
