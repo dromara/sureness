@@ -3,7 +3,6 @@ package com.usthe.sureness.solon.controller;
 import org.noear.solon.annotation.*;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ContextUtil;
-import org.noear.solon.core.handle.MethodType;
 
 /**
  * @author tomsun28
