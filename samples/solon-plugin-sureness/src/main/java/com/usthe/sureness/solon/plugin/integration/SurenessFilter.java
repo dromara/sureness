@@ -1,4 +1,4 @@
-package com.usthe.sureness.solon;
+package com.usthe.sureness.solon.plugin.integration;
 
 
 import com.usthe.sureness.mgt.SurenessSecurityManager;
@@ -6,7 +6,9 @@ import com.usthe.sureness.processor.exception.*;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.util.SurenessContextHolder;
 import org.noear.solon.annotation.Component;
-import org.noear.solon.core.handle.*;
+import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.Filter;
+import org.noear.solon.core.handle.FilterChain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +21,9 @@ import java.util.Map;
  * @date 2020-09-29 22:02
  */
 @Component
-public class SurenessFilterExample implements Filter {
+public class SurenessFilter implements Filter {
 
-    private static final Logger logger = LoggerFactory.getLogger(SurenessFilterExample.class);
+    private static final Logger logger = LoggerFactory.getLogger(SurenessFilter.class);
 
     @Override
     public void doFilter(Context ctx, FilterChain chain) throws Throwable {
@@ -73,6 +75,6 @@ public class SurenessFilterExample implements Filter {
             headers.forEach(ctx::headerAdd);
         }
 
-        ctx.render(Result.failure(message));
+        ctx.render(Collections.singletonMap("message", message));
     }
 }

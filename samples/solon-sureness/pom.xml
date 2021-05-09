@@ -20,12 +20,24 @@
     <dependencies>
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon</artifactId>
+            <artifactId>solon-web</artifactId>
             <version>${solon.ver}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.extend.properties.yaml</artifactId>
+            <version>${solon.ver}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.usthe.sureness</groupId>
             <artifactId>sureness-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.30</version>
         </dependency>
     </dependencies>
 

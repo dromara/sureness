@@ -21,5 +21,6 @@
         <module>micronaut-sureness</module>
         <module>jfinal-sureness</module>
         <module>solon-sureness</module>
+        <module>solon-plugin-sureness</module>
     </modules>
 </project>
