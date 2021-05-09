@@ -1,12 +1,12 @@
 <p align="center">
-  <a href="https://su.usthe.com">
+  <a href="https://github.com/usthe/sureness">
     <img alt="sureness" src="./docs/_media/brand128.svg">
   </a>
 </p>
 
 # <font size="14p">sureness</font> <font size="5p">  | [中文文档](README_CN.md)</font>
 
-> A simple and efficient open-source jvm security framework that focus on the protection of REST API.
+> A simple and efficient jvm security framework that focus on the protection of REST API.
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 [![Maven](https://img.shields.io/badge/Maven%20Central-1.0.2-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core) 
@@ -216,7 +216,7 @@ Detail please refer to  [Sureness integration springboot sample(database scheme)
 
 ## 🙋 Contributing  
 
-Very welcome to Contribute this project, go further and better with sureness. If you have any questions or suggestions about the project code, please contact @tomsun28 directly.  
+Very welcome to Contribute this project, go further and better with sureness. 
 
 Components of Repository:  
 - [sureness's kernel code--sureness-core](core)  

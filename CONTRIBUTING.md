@@ -1,13 +1,12 @@
 参与贡献  
 =======================================
 
-非常欢迎参与项目贡献，帮助sureness走得更远更好。对项目代码有疑问或者建议请直接联系 @tomsun28  
+非常欢迎参与项目贡献，我们致力于维护一个互相帮助的快乐社区。   
 
 仓库的组成部分:  
 - [sureness的核心代码--sureness-core](https://github.com/tomsun28/sureness/tree/master/core)  
 - [使用sureness10分钟搭建权限项目--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)  
-- [使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
-
+- [使用sureness30分钟搭建权限项目--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)
 
 Contributing to sureness
 =======================================

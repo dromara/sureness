@@ -1,24 +1,18 @@
 <p align="center">
-  <a href="https://su.usthe.com">
+  <a href="https://github.com/usthe/sureness">
     <img alt="sureness" src="_media/icon128.svg">
   </a>
 </p>
 
 # <font size="14p">sureness</font>
 
-> A simple and efficient open-source jvm security framework that focus on the protection of restful api.
+> A simple and efficient jvm security framework that focus on the protection of REST API.
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Maven](https://img.shields.io/badge/Maven%20Central-1.0.3-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core)
 ![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/tomsun28/sureness/8?label=pull%20checks)
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness)
 ![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red)
-
-## 📫 Background
-
-In the mainstream web architecture, how to protect the REST API provided by the back-end through effective and fast authentication has become particularly important.     
-For existing frameworks, whether it is apache shiro which does not natively support rest, or deeply bound spring and steep learning curve of spring security are not our ideal framework.   
-Ever since sureness was born, we hope to solve these, provide a **REST API**, **no framework dependency**, can **dynamically modify permissions**, **multiple authentication policies**, **faster**, **easy to use and extend** security framework.
 
 ## 🎡 <font color="green">Introduction</font>
 
@@ -35,18 +29,20 @@ Ever since sureness was born, we hope to solve these, provide a **REST API**, **
 
 ##### 🔍 Compare
 
+##### 🔍 Compare
+
 | ~         | sureness | shiro | spring security |
 | ---       | ---      | ---   | --- |
-| **multi framework support**  | support      | support need modify   | not support |
+| **Multi Framework Support**  | support      | support need modify   | not support |
 | **REST API** | support | support need modify   | support |
-| **websocket** | support | not support   | not support |
-| **path match**  | dictionary matching tree | ant match | ant match |
-| **annotation support**    | support      | support      | support |
-| **servlet**    | support      | support      | support |
-| **jax-rs**     | support      | not support    | not support |
-| **dynamic modification of permissions** | support | support need modify | support need modify |
-| **performance** | fast | slower | slower|
-| **learning curve** | simple | simple | steep|
+| **Websocket** | support | not support   | not support |
+| **Path Match**  | dictionary matching tree | ant match | ant match |
+| **Annotation Support**    | support      | support      | support |
+| **Servlet**    | support      | support      | support |
+| **JAX-RS**     | support      | not support    | not support |
+| **Dynamic Modification of Permissions** | support | support need modify | support need modify |
+| **Performance** | fast | slower | slower|
+| **Learning Curve** | simple | simple | steep|
 
 ##### 📈 Benchmark  
 
