@@ -15,7 +15,7 @@ import java.util.UUID;
  * @author noear
  * @author tomsun28
  */
-public class XPluginImp implements Plugin {
+public class SurenessPluginImp implements Plugin {
     @Override
     public void start(SolonApp app) {
         app.beanScan(SurenessConfiguration.class);
