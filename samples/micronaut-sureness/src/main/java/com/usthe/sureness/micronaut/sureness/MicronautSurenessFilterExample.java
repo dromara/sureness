@@ -41,25 +41,21 @@ public class MicronautSurenessFilterExample implements HttpServerFilter {
             if (subject != null) {
                 SurenessContextHolder.bindSubject(subject);
             }
-        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
+        } catch (IncorrectCredentialsException | UnknownAccountException | ExpiredCredentialsException e1) {
             logger.debug("this request is illegal");
-            statusCode = HttpStatus.BAD_REQUEST.getCode();
-            errorMsg = e4.getMessage();
+            statusCode = HttpStatus.UNAUTHORIZED.getCode();
+            errorMsg = e1.getMessage();
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
             logger.debug("the account is disabled");
-            statusCode = HttpStatus.FORBIDDEN.getCode();
+            statusCode = HttpStatus.UNAUTHORIZED.getCode();
             errorMsg = e2.getMessage();
-        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
-            logger.debug("this account credential is incorrect or expired");
-            statusCode = HttpStatus.FORBIDDEN.getCode();
-            errorMsg = e3.getMessage();
         } catch (UnauthorizedException e5) {
             logger.debug("this account can not access this resource");
             statusCode = HttpStatus.FORBIDDEN.getCode();
             errorMsg = e5.getMessage();
         } catch (RuntimeException e) {
             logger.error("other exception happen: ", e);
-            statusCode = HttpStatus.FORBIDDEN.getCode();
+            statusCode = HttpStatus.CONFLICT.getCode();
             errorMsg = e.getMessage();
         }
         if (statusCode != null && errorMsg != null) {

@@ -84,7 +84,7 @@ public class SimulateController {
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>0.4.4</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 如下：  

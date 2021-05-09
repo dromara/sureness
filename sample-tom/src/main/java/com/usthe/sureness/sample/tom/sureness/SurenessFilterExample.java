@@ -6,10 +6,8 @@ import com.usthe.sureness.processor.exception.DisabledAccountException;
 import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
 import com.usthe.sureness.processor.exception.ExpiredCredentialsException;
 import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
-import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
-import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
 import com.usthe.sureness.sample.tom.sureness.processor.RefreshExpiredTokenException;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.util.SurenessContextHolder;
@@ -53,26 +51,21 @@ public class SurenessFilterExample implements Filter {
             if (subject != null) {
                 SurenessContextHolder.bindSubject(subject);
             }
-        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
-            logger.debug("this request is illegal");
+        } catch (IncorrectCredentialsException | UnknownAccountException | ExpiredCredentialsException e1) {
+            logger.debug("this request account info is illegal");
             responseWrite(ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST).body("bad request, can not Auth"), servletResponse);
+                    .status(HttpStatus.UNAUTHORIZED).body("bad request, can not Auth"), servletResponse);
             return;
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
             logger.debug("the account is disabled");
             responseWrite(ResponseEntity
-                    .status(HttpStatus.FORBIDDEN).body(e2.getMessage()), servletResponse);
-            return;
-        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
-            logger.debug("this account credential is incorrect or expired");
-            responseWrite(ResponseEntity
-                    .status(HttpStatus.FORBIDDEN).body(e3.getMessage()), servletResponse);
+                    .status(HttpStatus.UNAUTHORIZED).body(e2.getMessage()), servletResponse);
             return;
         } catch (RefreshExpiredTokenException e4) {
             logger.debug("this account credential token is expired, return refresh value");
             Map<String, String> refreshTokenMap = Collections.singletonMap("refresh-token", e4.getMessage());
             responseWrite(ResponseEntity
-                    .status(HttpStatus.FORBIDDEN).body(refreshTokenMap), servletResponse);
+                    .status(HttpStatus.UNAUTHORIZED).body(refreshTokenMap), servletResponse);
             return;
         } catch (UnauthorizedException e5) {
             logger.debug("this account can not access this resource");

@@ -40,25 +40,21 @@ public class SurenessFilterExample implements WebFilter {
             if (subject != null) {
                 SurenessContextHolder.bindSubject(subject);
             }
-        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
-            logger.debug("this request is illegal");
-            statusCode = HttpStatus.BAD_REQUEST.value();
-            errorMsg = e4.getMessage();
+        } catch (IncorrectCredentialsException | UnknownAccountException | ExpiredCredentialsException e1) {
+            logger.debug("this request account info is illegal");
+            statusCode = HttpStatus.UNAUTHORIZED.value();
+            errorMsg = e1.getMessage();
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
             logger.debug("the account is disabled");
-            statusCode = HttpStatus.FORBIDDEN.value();
+            statusCode = HttpStatus.UNAUTHORIZED.value();
             errorMsg = e2.getMessage();
-        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
-            logger.debug("this account credential is incorrect or expired");
-            statusCode = HttpStatus.FORBIDDEN.value();
-            errorMsg = e3.getMessage();
         } catch (UnauthorizedException e5) {
             logger.debug("this account can not access this resource");
             statusCode = HttpStatus.FORBIDDEN.value();
             errorMsg = e5.getMessage();
         } catch (RuntimeException e) {
             logger.error("other exception happen: ", e);
-            statusCode = HttpStatus.FORBIDDEN.value();
+            statusCode = HttpStatus.CONFLICT.value();
             errorMsg = e.getMessage();
         }
 

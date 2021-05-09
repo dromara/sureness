@@ -37,7 +37,7 @@ public class AccountController {
      *
      */
     @PostMapping("/api/v1/account/auth")
-    public ResponseEntity<Object> login(@RequestBody Map<String,String> requestBody) {
+    public ResponseEntity<Object> authGetToken(@RequestBody Map<String,String> requestBody) {
         if (requestBody == null || !requestBody.containsKey(APP_ID)
                 || !requestBody.containsKey("password")) {
             return ResponseEntity.badRequest().build();
@@ -58,11 +58,10 @@ public class AccountController {
         }
         // Get the roles the user has - rbac
         List<String> roles = account.getOwnRoles();
-        long refreshPeriodTime = 36000L;
+        long periodTime = 3600L;
         // issue jwt
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), appId,
-                "token-server", refreshPeriodTime >> 1, roles,
-                null, Boolean.FALSE);
+                "token-server", periodTime, roles);
         Map<String, String> body = Collections.singletonMap("token", jwt);
         return ResponseEntity.ok().body(body);
     }

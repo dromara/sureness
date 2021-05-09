@@ -11,7 +11,6 @@ import io.ktor.application.log
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.header
-import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.*
 import io.ktor.server.engine.EngineAPI
@@ -40,17 +39,7 @@ fun Application.main() {
                 SurenessContextHolder.bindSubject(subject)
                 log.debug("auth success!")
             }
-        } catch (e4: ProcessorNotFoundException) {
-            log.debug("this request is illegal")
-            call.respondText(e4.localizedMessage)
-            return@intercept finish()
-
         } catch (e4: UnknownAccountException) {
-            log.debug("this request is illegal")
-            call.respondText(e4.localizedMessage)
-            return@intercept finish()
-
-        } catch (e4: UnsupportedSubjectException) {
             log.debug("this request is illegal")
             call.respondText(e4.localizedMessage)
             return@intercept finish()

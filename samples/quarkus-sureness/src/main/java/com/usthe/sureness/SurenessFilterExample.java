@@ -37,17 +37,13 @@ public class SurenessFilterExample implements ContainerRequestFilter, ContainerR
             if (subject != null) {
                 SurenessContextHolder.bindSubject(subject);
             }
-        } catch (ProcessorNotFoundException | UnknownAccountException | UnsupportedSubjectException e4) {
-            logger.debug("this request is illegal");
-            requestContext.abortWith(Response.status(401).entity(e4.getMessage()).build());
+        } catch (IncorrectCredentialsException | UnknownAccountException | ExpiredCredentialsException e1) {
+            logger.debug("this request account info is illegal");
+            requestContext.abortWith(Response.status(401).entity(e1.getMessage()).build());
 
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
             logger.debug("the account is disabled");
             requestContext.abortWith(Response.status(401).entity(e2.getMessage()).build());
-
-        } catch (IncorrectCredentialsException | ExpiredCredentialsException e3) {
-            logger.debug("this account credential is incorrect or expired");
-            requestContext.abortWith(Response.status(401).entity(e3.getMessage()).build());
 
         } catch (NeedDigestInfoException e4) {
             logger.debug("you should try once again with digest auth information");

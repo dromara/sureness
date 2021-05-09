@@ -36,7 +36,7 @@ public class SurenessFilter implements Filter {
                 SurenessContextHolder.bindSubject(subject);
             }
         } catch (IncorrectCredentialsException | UnknownAccountException | ExpiredCredentialsException e1) {
-            logger.debug("this request is illegal");
+            logger.debug("this request account info is illegal");
             responseWrite(ctx, 401, e1.getMessage(), null);
             return;
         } catch (DisabledAccountException | ExcessiveAttemptsException e2) {
