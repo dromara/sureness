@@ -59,11 +59,6 @@ public class SurenessFilterExample implements Filter {
             responseWrite(ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED).body(e1.getMessage()), servletResponse);
             return;
-        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            logger.debug("the account is disabled");
-            responseWrite(ResponseEntity
-                    .status(HttpStatus.UNAUTHORIZED).body(e2.getMessage()), servletResponse);
-            return;
         } catch (NeedDigestInfoException e5) {
             logger.debug("you should try once again with digest auth information");
             responseWrite(ResponseEntity
