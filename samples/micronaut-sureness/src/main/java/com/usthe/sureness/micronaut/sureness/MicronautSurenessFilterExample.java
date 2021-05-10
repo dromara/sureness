@@ -45,10 +45,6 @@ public class MicronautSurenessFilterExample implements HttpServerFilter {
             logger.debug("this request is illegal");
             statusCode = HttpStatus.UNAUTHORIZED.getCode();
             errorMsg = e1.getMessage();
-        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            logger.debug("the account is disabled");
-            statusCode = HttpStatus.UNAUTHORIZED.getCode();
-            errorMsg = e2.getMessage();
         } catch (UnauthorizedException e5) {
             logger.debug("this account can not access this resource");
             statusCode = HttpStatus.FORBIDDEN.getCode();

@@ -44,10 +44,6 @@ public class SurenessFilterExample implements WebFilter {
             logger.debug("this request account info is illegal");
             statusCode = HttpStatus.UNAUTHORIZED.value();
             errorMsg = e1.getMessage();
-        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            logger.debug("the account is disabled");
-            statusCode = HttpStatus.UNAUTHORIZED.value();
-            errorMsg = e2.getMessage();
         } catch (UnauthorizedException e5) {
             logger.debug("this account can not access this resource");
             statusCode = HttpStatus.FORBIDDEN.value();

@@ -37,10 +37,6 @@ public class SurenessFilterExample implements Filter {
             logger.debug("this request account info is illegal");
             responseWrite(ctx, 401, e1.getMessage(), null);
             return;
-        } catch (DisabledAccountException | ExcessiveAttemptsException e2) {
-            logger.debug("the account is disabled");
-            responseWrite(ctx, 401, e2.getMessage(), null);
-            return;
         } catch (NeedDigestInfoException e5) {
             logger.debug("you should try once again with digest auth information");
             responseWrite(ctx, 401,

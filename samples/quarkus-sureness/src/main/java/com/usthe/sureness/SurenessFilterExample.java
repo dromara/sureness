@@ -41,10 +41,6 @@ public class SurenessFilterExample implements ContainerRequestFilter, ContainerR
             logger.debug("this request account info is illegal");
             requestContext.abortWith(Response.status(401).entity(e1.getMessage()).build());
 
-        } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            logger.debug("the account is disabled");
-            requestContext.abortWith(Response.status(401).entity(e2.getMessage()).build());
-
         } catch (NeedDigestInfoException e4) {
             logger.debug("you should try once again with digest auth information");
             requestContext.abortWith(Response.status(401).header("WWW-Authenticate", e4.getAuthenticate()).build());
