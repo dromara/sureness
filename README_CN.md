@@ -227,6 +227,8 @@ sureness提供了下面这些常用接口作为扩展点:
 - [使用sureness集成springboot搭建权限项目(数据库方案)--sample-tom](sample-tom)  
 - [各个框架使用sureness的样例项目(javalin,ktor,quarkus)--samples](samples)  
 
+详见[CONTRIBUTING](CONTRIBUTING.md)   
+
 #### 💪 高性能匹配      
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  

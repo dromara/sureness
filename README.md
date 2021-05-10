@@ -224,6 +224,7 @@ Components of Repository:
 - [sureness integration springboot sample(database scheme)-sample-tom](sample-tom)  
 - [sample projects using sureness in each framework(javalin,ktor,quarkus)--samples](samples)  
 
+See [CONTRIBUTING](CONTRIBUTING.md)    
 
 #### 💪 Why Is High Performance  
 
