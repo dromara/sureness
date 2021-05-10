@@ -45,10 +45,8 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(message);
         }
         List<String> ownRole = accountService.loadAccountRoles(account.getUsername());
-        long refreshPeriodTime = 36000L;
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), account.getUsername(),
-                "tom-auth-server", refreshPeriodTime >> 1, ownRole,
-                null, false);
+                "tom-auth-server", 3600L, ownRole);
         Map<String, String> responseData = Collections.singletonMap("token", jwt);
         Message message = Message.builder().data(responseData).build();
         if (log.isDebugEnabled()) {
