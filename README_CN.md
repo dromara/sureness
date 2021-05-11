@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# <font size="14p">sureness</font> <font size="5p">  | [English Documentation](README.md)</font>
+# <font size="14p">Sureness</font> <font size="5p">  | [English Documentation](README.md)</font>
 
 > 面向`REST API`的高性能认证鉴权框架   
 
@@ -23,26 +23,26 @@
 
 ## 📫 背景         
 
-在主流的前后端分离架构中，如何通过有效快速的认证鉴权来保护后端提供的`REST API`变得尤为重要。对现存框架，不原生支持`RESTful`的`apache shiro`，
-还是深度绑定`spring`的`spring security`，或多或少都不是我们的理想型。   
-于是乎`sureness`诞生了，我们希望能解决这些，提供一个面向**REST API**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。      
+在主流的前后端分离架构中，如何通过有效快速的认证鉴权来保护后端提供的`REST API`变得尤为重要。对现存框架，不原生支持`RESTful`的`Apache Shiro`，
+还是深度绑定`Spring`的`Spring Security`，或多或少都不是我们的理想型。   
+于是乎`Sureness`诞生了，我们希望能解决这些，提供一个面向**REST API**，**无框架依赖**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。      
 
 ## 🎡 <font color="green">介绍</font>
 
-> `sureness` 是我们在深度使用 `apache shiro` 之后,吸取其优点全新设计开发的一个认证鉴权框架  
->  面向 `REST API` 的认证鉴权,基于 `RBAC` (用户-角色-资源)主要关注于对 `API` 的安全保护  
->  无特定框架依赖(本质就是过滤器处拦截判断,已有 `Springboot,Quarkus,Javalin,Ktor,Micronaut` 等集成样例)  
->  支持动态修改权限配置(动态修改配置每个 `API` 谁有权访问)
->  支持 `Websocket` ,主流 `HTTP` 容器 `Servlet` 和 `JAX-RS`  
->  支持多种认证策略, `JWT, Basic auth, Digest auth` ... 可扩展自定义支持的认证方式   
->  [基于改进的字典匹配树拥有的高性能](#高性能匹配 )    
->  良好的扩展接口, 样例和文档助急速理解扩展
+> [Sureness](https://github.com/dromara/sureness) 是我们在深度使用 `Apache Shiro` 之后,吸取其优点全新设计开发的一个认证鉴权框架     
+> 面向 `REST API` 的认证鉴权,基于 `RBAC` (用户-角色-资源)主要关注于对 `API` 的安全保护     
+> 无特定Web框架依赖(已有 `Spring Boot,Quarkus,Javalin,Ktor,Micronaut,Jfinal,Solon` 等集成样例)     
+> 支持动态修改权限配置(动态修改配置每个 `API` 谁有权访问)   
+> 支持 `Websocket` ,主流 `HTTP` 容器 `Servlet` 和 `JAX-RS`       
+> 支持多种认证策略, `JWT, Basic Auth, Digest Auth` ... 可扩展自定义认证方式      
+> [基于改进的字典匹配树拥有的高性能](#高性能匹配 )       
+> 良好的扩展接口, 样例和文档助急速理解扩展使用   
 
->`sureness`的低配置，易扩展，不耦合其他框架，希望能帮助开发者对自己的项目多场景快速安全的进行保护   
+> `Sureness`的低配置，易扩展，不耦合其他框架，希望能对系统多场景快速安全的保护      
 
 ##### 🔍 对比     
 
-| ~         | sureness | shiro | spring security |
+| ~         | Sureness | Shiro | Spring Security |
 | ---       | ---      | ---   | ---  |
 | **多框架支持**  | 支持      | 需改动支持   | 不支持 |
 | **REST API** | 支持 | 需改动支持   | 支持 |
@@ -59,39 +59,41 @@
 
 ![benchmark](docs/_images/benchmark_cn.png)  
 
-**基准测试显示sureness对比无权限框架应用损耗0.026ms性能，shiro损耗0.088ms,spring security损耗0.116ms，
-相比之下sureness基本不消耗性能，且性能(参考TPS损耗)是shiro的3倍，spring security的4倍**     
+**基准测试显示Sureness对比无权限框架应用损耗0.026ms性能，Shiro损耗0.088ms,Spring Security损耗0.116ms，
+相比之下Sureness性能(参考TPS损耗)是Shiro的3倍，Spring Security的4倍**     
 **性能差距会随着api匹配链的增加而进一步拉大**     
 详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
 
 ##### ✌ 框架支持样例    
 
-- [x] sureness集成springboot样例(配置文件方案) [sample-bootstrap](sample-bootstrap)   
-- [x] sureness集成springboot样例(数据库方案) [sample-tom](sample-tom)  
-- [x] sureness集成quarkus样例 [sample-quarkus](samples/quarkus-sureness)  
-- [x] sureness集成javalin样例 [sample-javalin](samples/javalin-sureness)    
-- [x] sureness集成ktor样例 [sample-ktor](samples/ktor-sureness)   
-- [x] sureness集成spring webflux样例 [sample-spring-webflux](samples/spring-webflux-sureness)
-- [x] sureness集成micronaut样例 [sample-micronaut](samples/micronaut-sureness)
-- [x] sureness集成jfinal样例 [sample-jfinal](samples/jfinal-sureness)
-- [x] sureness集成solon样例 [sample-solon](samples/solon-sureness)
-- [x] sureness使用session样例 [sureness-session](samples/sureness-session)  
-- [x] sureness分布式缓存session样例 [sureness-redis-session](samples/sureness-redis-session)  
-- [x] more samples todo   
+- [x] Sureness集成**Spring Boot**样例(配置文件方案) [sample-bootstrap](sample-bootstrap)   
+- [x] Sureness集成**Spring Boot**样例(数据库方案) [sample-tom](sample-tom)  
+- [x] Sureness集成**Quarkus**样例 [sample-quarkus](samples/quarkus-sureness)  
+- [x] Sureness集成**Javalin**样例 [sample-javalin](samples/javalin-sureness)    
+- [x] Sureness集成**Ktor**样例 [sample-ktor](samples/ktor-sureness)   
+- [x] Sureness集成**Spring Webflux**样例 [sample-spring-webflux](samples/spring-webflux-sureness)
+- [x] Sureness集成**Micronaut**样例 [sample-micronaut](samples/micronaut-sureness)
+- [x] Sureness集成**Jfinal**样例 [sample-jfinal](samples/jfinal-sureness)
+- [x] Sureness集成**Solon**样例 [sample-solon](samples/solon-sureness)
+- [x] Sureness集成**Spring Gateway**样例 [sample-spring-gateway](samples/spring-gateway-sureness)
+- [x] Sureness集成**Zuul**样例 [sample-zuul](samples/zuul-sureness)
+- [x] Sureness使用Session样例 [sureness-session](samples/sureness-session)  
+- [x] Sureness分布式缓存Session样例 [sureness-redis-session](samples/sureness-redis-session)  
+- [x] More samples todo   
 
 
 ## 🔨 快速开始  
 
 #### 🐕 <font color="red">使用前一些约定</font>  
 
-- `sureness`基于`RBAC`,即用户-角色-资源: 用户所属角色--角色拥有资源(api)--用户就能访问资源(api)  
+- `Sureness`基于`RBAC`,即用户-角色-资源: 用户所属角色--角色拥有资源(API)--用户就能访问资源(API)  
 - 我们将`REST API`请求视作一个资源,资源格式为: `requestUri===httpMethod`  
   即请求的路径加上其请求方式(`post,get,put,delete...`)作为一个整体被视作资源来赋权配置  
   `eg: /api/v2/book===get` `get`方式请求`/api/v2/book`接口数据
 
 资源路径匹配详见 [URI路径匹配](docs/cn/path-match.md)  
 
-#### 🐖 项目中加入sureness  
+#### 🐖 项目中加入Sureness  
 
 项目使用`maven`或`gradle`构建,加入坐标    
 ```
@@ -105,7 +107,7 @@
 compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.3'
 ```
 
-#### 🐵 使用默认配置来配置sureness    
+#### 🐵 使用默认配置来配置Sureness    
 默认配置使用了文件数据源`sureness.yml`作为账户权限数据源  
 默认配置支持了`JWT, Basic auth, Digest auth`认证  
 ```
@@ -117,7 +119,7 @@ public DefaultSurenessConfig surenessConfig() {
 
 #### 🐮 配置权限账户数据源      
 
-`sureness`认证鉴权，当然也需要我们提供自己的账户数据，角色权限数据等，这些数据可能来自文本，关系数据库，非关系数据库，注解等。  
+`Sureness`认证鉴权，当然也需要我们提供自己的账户数据，角色权限数据等，这些数据可能来自文本，关系数据库，非关系数据库，注解等。  
 我们提供了数据源接口：`SurenessAccountProvider`, `PathTreeProvider`，用户可以实现此接口实现自定义数据源。  
 
 - `PathTreeProvider`: 资源的数据源接口,实现从数据库,文本等加载数据,加载到对应的资源权限匹配器`DefaultPathRoleMatcher`中
@@ -129,14 +131,14 @@ public DefaultSurenessConfig surenessConfig() {
 - 注解数据源的注解`@RequiresRoles,@WithoutAuth`使用方式详见文档 [注解资源权限数据源](docs/cn/annotation-datasource.md)    
 
 我们提供了代码工程样例：  
-默认文本数据源具体实现，请参考[sureness集成springboot样例(配置文件方案)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-若权限配置数据来自数据库，请参考[sureness集成springboot样例(数据库方案)--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
+默认文本数据源具体实现，请参考[Sureness集成Spring Boot样例(配置文件方案)--sample-bootstrap](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+若权限配置数据来自数据库，请参考[Sureness集成Spring Boot样例(数据库方案)--sample-tom](https://github.com/tomsun28/sureness/tree/master/sample-tom)  
 
 #### 🐐 添加过滤器拦截所有请求    
 
-`sureness`的本质就拦截所有`API`请求对其认证鉴权判断。  
+`Sureness`的本质就拦截所有`API`请求对其认证鉴权判断。  
 入口拦截器器实现一般可以是 `filter or spring interceptor`  
-在拦截器中加入`sureness`的安全过滤器，如下:  
+在拦截器中加入`Sureness`的安全过滤器，如下:  
 
 ```
 SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
@@ -144,7 +146,7 @@ SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletReques
 
 #### 🐰 实现认证鉴权相关异常处理流程      
 
-`sureness`使用异常处理流程：  
+`Sureness`使用异常处理流程：  
 1. 若认证鉴权成功,`checkIn`会返回包含用户信息的`SubjectSum`对象  
 2. 若中间认证鉴权失败，`checkIn`会抛出不同类型的认证鉴权异常,用户需根据这些异常来继续后面的流程(返回相应的请求响应)
 
@@ -170,19 +172,19 @@ try {
 
 **HAVE FUN**  
 
-> 如果这个[快速开始]对您不是很友好，可以参考这篇[一步一步搭建](docs/cn/step-by-step.md)，里面一步一步详细介绍了使用sureness搭建一个完整功能认证鉴权项目的步骤。  
+> 如果这个[快速开始]对您不是很友好，可以参考这篇[一步一步搭建](docs/cn/step-by-step.md)，里面一步一步详细介绍了使用Sureness搭建一个完整功能认证鉴权项目的步骤。  
 
 ## 🥐 进阶扩展  
 
-`sureness`支持自定义`subject`，自定义`subjectCreator`注册，自定义`processor`处理器等   
+`Sureness`支持自定义`subject`，自定义`subjectCreator`注册，自定义`processor`处理器等   
 
-进阶自定义扩展之前我们先来了解下sureness的大致流程：  
+进阶自定义扩展之前我们先来了解下Sureness的大致流程：  
 
 ![flow](docs/_images/flow-cn.png)   
 
 如上面流程，Subject被SubjectCreate根据request请求体所创造，不同的认证鉴权处理器Processor来处理所支持的Subject。  
 
-sureness提供了下面这些常用接口作为扩展点:  
+Sureness提供了下面这些常用接口作为扩展点:  
 
 - `Subject`: 认证鉴权对象接口,提供访问对象的账户密钥,请求资源,角色等信息  
 - `SubjectCreate`: 创建`Subject`接口,根据请求内容创建不同类型的`Subject`对象    
@@ -215,19 +217,19 @@ sureness提供了下面这些常用接口作为扩展点:
 实现 `SurenessAccountProvider`的接口,加载到需要账户数据的`processor`中     
 详见 [自定义数据源](docs/cn/custom-datasource.md)   
 
-具体扩展实践请参考 [sureness集成springboot样例(数据库方案)--sample-tom](sample-tom)  
+具体扩展实践请参考 [Sureness集成Spring Boot样例(数据库方案)--sample-tom](sample-tom)  
 
 
 ## 🙋 参与贡献  
 非常欢迎参与项目贡献，我们致力于维护一个互相帮助的快乐社区。    
 
 仓库的组成部分:  
-- [sureness的核心代码--sureness-core](core)  
-- [使用sureness集成springboot搭建权限项目(配置文件方案)--sample-bootstrap](sample-bootstrap)  
-- [使用sureness集成springboot搭建权限项目(数据库方案)--sample-tom](sample-tom)  
-- [各个框架使用sureness的样例项目(javalin,ktor,quarkus)--samples](samples)  
+- [Sureness的核心代码--sureness-core](core)  
+- [使用Sureness集成Spring Boot搭建权限项目(配置文件方案)--sample-bootstrap](sample-bootstrap)  
+- [使用Sureness集成Spring Boot搭建权限项目(数据库方案)--sample-tom](sample-tom)  
+- [各个框架使用Sureness的样例项目(Javalin,Ktor,Quarkus)--samples](samples)  
 
-详见[CONTRIBUTING](CONTRIBUTING.md)   
+详见 [CONTRIBUTING](CONTRIBUTING.md)   
 
 #### 💪 高性能匹配      
 
@@ -238,11 +240,11 @@ sureness提供了下面这些常用接口作为扩展点:
 相关文章：  
 [REST API 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
 [REST API 权限设计 - 快速搭建权限项目-配置文件方案](https://segmentfault.com/a/1190000039075245)    
-[REST API 权限设计 - sureness集成springboot样例-数据库方案](https://segmentfault.com/a/1190000039191172)   
+[REST API 权限设计 - Sureness集成Spring Boot样例-数据库方案](https://segmentfault.com/a/1190000039191172)   
 
-QQ交流群：390083213       
-Dromara社区微信公众号: gh_7eeb0b1b7476      
-Sureness微信公众号：sureness    
+QQ 交流群：390083213       
+Dromara 社区微信公众号: gh_7eeb0b1b7476      
+Sureness 微信公众号：sureness    
 [Github Discussion](https://github.com/usthe/sureness/discussions)           
 [Gitter Channel](https://gitter.im/usthe/sureness)      
 

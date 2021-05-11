@@ -46,13 +46,13 @@ We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user imp
 Default Document DataSource Config - `sureness.yml`, see: [Default Document DataSource](default-datasource.md)   
 Annotation DataSource Config Detail - `AnnotationLoader`, see: [Annotation DataSource](annotation-datasource.md)
 
-If the configuration resource data comes from text, please refer to  [Sureness integration springboot sample(configuration file scheme)](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-If the configuration resource data comes from dataBase, please refer to  [Sureness integration springboot sample(database scheme)](https://github.com/tomsun28/sureness/tree/master/sample-tom)
+If the configuration resource data comes from text, please refer to  [Sureness integration Spring Boot sample(configuration file scheme)](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+If the configuration resource data comes from dataBase, please refer to  [Sureness integration Spring Boot sample(database scheme)](https://github.com/tomsun28/sureness/tree/master/sample-tom)
 
 #### Add an Interceptor Intercepting All Requests  
 
-The essence of sureness is to intercept all rest requests for authenticating and Authorizing.     
-The interceptor can be a filter or a spring interceptor, it intercepts all request to check them.
+The essence of Sureness is to intercept all rest requests for authenticating and authorizing.        
+The interceptor can be a filter or a Spring interceptor, it intercepts all request to check them.
 ```
 SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
@@ -84,7 +84,7 @@ try {
 }
 ```
 
-Detail sureness auth exception see: [Default Sureness Auth Exception](default-exception.md)   
+Detail see: [Default Sureness Auth Exception](default-exception.md)   
 
 **Have Fun**      
  

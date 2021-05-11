@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# <font size="14p">sureness</font> <font size="5p">  | [中文文档](README_CN.md)</font>
+# <font size="14p">Sureness</font> <font size="5p">  | [中文文档](README_CN.md)</font>
 
 > A simple and efficient jvm security framework that focus on the protection of REST API.
 
@@ -26,16 +26,16 @@
 > Provide authentication and authorization, based on RBAC.   
 > No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, Micronaut and more).    
 > Supports dynamic modification of permissions.   
-> Supports WebSockets and mainstream HTTP containers (Servlet and JAX-RS).    
-> Supports JWT, Basic Auth, Digest Auth, and can be extended to support custom authentication methods.    
-> High performance due to dictionary matching tree.      
+> Supports WebSockets and HTTP containers (Servlet and JAX-RS).    
+> Supports JWT, Basic Auth, Digest Auth, and can custom auth methods.    
+> High performance with Dictionary Matching Tree.      
 > Good extension interface, demos and documentation.
 
 > Sureness has a sensible default configuration, is easy to customize, and is not couple to any one framework, which enables developers to quickly and safely protect their projects in multiple scenarios.
 
 ##### 🔍 Compare     
 
-| ~         | sureness | shiro | spring security |
+| ~         | Sureness | Shiro | Spring Security |
 | ---       | ---      | ---   | --- |
 | **Multi Framework Support**  | support      | support need modify   | not support |
 | **REST API** | support | support need modify   | support |
@@ -44,7 +44,7 @@
 | **Annotation Support**    | support      | support      | support |
 | **Servlet**    | support      | support      | support |
 | **JAX-RS**     | support      | not support    | not support |
-| **Dynamic Modification of Permissions** | support | support need modify | support need modify |
+| **Dynamic Permissions** | support | support need modify | support need modify |
 | **Performance** | fast | slower | slower|
 | **Learning Curve** | simple | simple | steep|
 
@@ -52,26 +52,28 @@
 
 ![benchmark](docs/_images/benchmark_en.png)  
 
-**Benchmark test shows sureness to lose 0.026ms performance compared to frameless application, shiro lose 0.088ms, spring security lose 0.116ms.**    
-**In contrast, sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of shiro and 4 times that of spring security.**      
+**Benchmark test shows Sureness to lose 0.026ms performance compared to frameless application, Shiro lose 0.088ms, Spring Security lose 0.116ms.**    
+**In contrast, Sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of Shiro and 4 times that of Spring Security.**      
 **The performance gap will be further widened as the api matching chain increases.**      
 
 Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark)       
 
 ##### ✌ Framework Sample Support  
 
-- [x] sureness integration springboot sample(configuration file scheme) [sample-bootstrap](sample-bootstrap)   
-- [x] sureness integration springboot sample(database scheme) [sample-tom](sample-tom)  
-- [x] sureness integration quarkus sample [sample-quarkus](samples/quarkus-sureness)  
-- [x] sureness integration javalin sample [sample-javalin](samples/javalin-sureness)    
-- [x] sureness integration ktor sample [sample-ktor](samples/ktor-sureness)   
-- [x] sureness integration spring webflux sample [sample-spring-webflux](samples/spring-webflux-sureness)
-- [x] sureness integration micronaut sample [sample-micronaut](samples/micronaut-sureness)
-- [x] sureness integration micronaut sample [sample-jfinal](samples/jfinal-sureness)
-- [x] sureness integration solon sample [sample-solon](samples/solon-sureness)
-- [x] sureness integration session sample [sureness-session](samples/sureness-session)
-- [x] sureness integration redis cache session sample [sureness-redis-session](samples/sureness-redis-session)
-- [x] more samples todo  
+- [x] Sureness integration **Spring Boot** sample(configuration file scheme) [sample-bootstrap](sample-bootstrap)   
+- [x] Sureness integration **Spring Boot** sample(database scheme) [sample-tom](sample-tom)  
+- [x] Sureness integration **Quarkus** sample [sample-quarkus](samples/quarkus-sureness)  
+- [x] Sureness integration **Javalin** sample [sample-javalin](samples/javalin-sureness)    
+- [x] Sureness integration **Ktor** sample [sample-ktor](samples/ktor-sureness)   
+- [x] Sureness integration **Spring Webflux** sample [sample-spring-webflux](samples/spring-webflux-sureness)
+- [x] Sureness integration **Micronaut** sample [sample-micronaut](samples/micronaut-sureness)
+- [x] Sureness integration **Jfinal** sample [sample-jfinal](samples/jfinal-sureness)
+- [x] Sureness integration **Solon** sample [sample-solon](samples/solon-sureness)
+- [x] Sureness integration **Spring Gateway** sample [sample-spring-gateway](samples/spring-gateway-sureness)  
+- [x] Sureness integration **Zuul** sample [sample-zuul](samples/zuul-sureness)    
+- [x] Sureness integration Session sample [sureness-session](samples/sureness-session)    
+- [x] Sureness integration Redis Session cache sample [sureness-redis-session](samples/sureness-redis-session)  
+- [x] More samples todo  
 
 ## 🔨 Quick Start 
 
@@ -121,14 +123,14 @@ We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user imp
 Default Document DataSource Config - `sureness.yml`, see: [Default Document DataSource](docs/default-datasource.md)   
 Annotation DataSource Config Detail - `AnnotationLoader`, see: [Annotation DataSource](docs/annotation-datasource.md)  
 
-If the configuration resource data comes from text, please refer to  [Sureness integration springboot sample(configuration file scheme)](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
-If the configuration resource data comes from dataBase, please refer to  [Sureness integration springboot sample(database scheme)](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
+If the configuration resource data comes from text, please refer to  [Sureness integration Spring Boot sample(configuration file scheme)](https://github.com/tomsun28/sureness/tree/master/sample-bootstrap)   
+If the configuration resource data comes from dataBase, please refer to  [Sureness integration Spring Boot sample(database scheme)](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
 
 
 #### 🐐 Add an Interceptor Intercepting All Requests  
 
-The essence of sureness is to intercept all rest requests for authenticating and Authorizing.     
-The interceptor can be a filter or a spring interceptor, it intercepts all request to check them.  
+The essence of Sureness is to intercept all rest requests for authenticating and authorizing.        
+The interceptor can be a filter or a Spring interceptor, it intercepts all request to check them.  
 ```
 SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
@@ -160,7 +162,7 @@ try {
 }
 ```
 
-Detail sureness auth exception see: [Default Sureness Auth Exception](docs/default-exception.md)   
+Detail see: [Default Sureness Auth Exception](docs/default-exception.md)   
 
 **Have Fun**      
 
@@ -168,7 +170,7 @@ Detail sureness auth exception see: [Default Sureness Auth Exception](docs/defau
 
 Sureness supports custom subject, custom subjectCreator, custom processor and more.  
 
-Before advanced custom extension, let's first understand the general process of sureness:  
+Before advanced custom extension, let's first understand the general process of Sureness:  
 
 ![flow](/docs/_images/flow-en.png)  
 
@@ -212,17 +214,17 @@ See [Custom Processor](docs/custom-processor.md)
 
 See [Custom Datasource](docs/custom-datasource.md)  
 
-Detail please refer to  [Sureness integration springboot sample(database scheme)](sample-tom)   
+Detail please refer to  [Sureness integration Spring Boot sample(database scheme)](sample-tom)   
 
 ## 🙋 Contributing  
 
-Very welcome to Contribute this project, go further and better with sureness. 
+Very welcome to Contribute this project, go further and better with Sureness. 
 
 Components of Repository:  
-- [sureness's kernel code--sureness-core](core)  
-- [sureness integration springboot sample(configuration file scheme)--sample-bootstrap](sample-bootstrap)  
-- [sureness integration springboot sample(database scheme)-sample-tom](sample-tom)  
-- [sample projects using sureness in each framework(javalin,ktor,quarkus)--samples](samples)  
+- [Sureness's kernel code--Sureness-core](core)  
+- [Sureness integration Spring Boot sample(configuration file scheme)--sample-bootstrap](sample-bootstrap)  
+- [Sureness integration Spring Boot sample(database scheme)-sample-tom](sample-tom)  
+- [Sample projects using Sureness in each framework(Javalin,Ktor,Quarkus)--samples](samples)  
 
 See [CONTRIBUTING](CONTRIBUTING.md)    
 
@@ -236,13 +238,13 @@ See [CONTRIBUTING](CONTRIBUTING.md)
 * **```MaxKey```** Leading-Edge Enterprise-Class open source IAM Identity and Access management product: [Github](https://github.com/dromara/MaxKey)   
 * **```PhalApi```** PHP Api Framework: [Website](https://www.phalapi.net/)    
 
-## Join discussion
+## 💬 Join discussion    
 
 [Github Discussion](https://github.com/usthe/sureness/discussions)          
 [Gitter Channel](https://gitter.im/usthe/sureness)   
 QQ Group：390083213        
-Dromara社区微信公众号: gh_7eeb0b1b7476      
-Sureness微信公众号：sureness   
+Dromara 社区微信公众号: gh_7eeb0b1b7476      
+Sureness 微信公众号：sureness   
 
 
 
