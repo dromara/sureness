@@ -8,21 +8,21 @@
 
 > A simple and efficient jvm security framework that focus on the protection of REST API.
 
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
-[![Maven](https://img.shields.io/badge/Maven%20Central-1.0.2-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core) 
-![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/tomsun28/sureness/8?label=pull%20checks) 
-[![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness) 
-![GitHub Release Date](https://img.shields.io/github/release-date/tomsun28/sureness?color=blue&logo=figshare&logoColor=red)
-[![star](https://gitee.com/tomsun28/sureness/badge/star.svg?theme=gray)](https://gitee.com/tomsun28/sureness/stargazers)
-[![star](https://img.shields.io/github/stars/usthe/sureness?style=social)](https://github.com/usthe/sureness)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Maven](https://img.shields.io/badge/Maven%20Central-1.0.3-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core)
+![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/dromara/sureness/8?label=pull%20checks)
+[![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness)
+![GitHub Release Date](https://img.shields.io/github/release-date/dromara/sureness?color=blue&logo=figshare&logoColor=red)
+[![star](https://gitee.com/dromara/sureness/badge/star.svg?theme=gray)](https://gitee.com/dromara/sureness/stargazers)
+[![star](https://img.shields.io/github/stars/dromara/sureness?style=social)](https://github.com/dromara/sureness)
 
 <a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt"/></a>
 
-**Home Page: [usthe.com/sureness](https://usthe.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
+**Home Page: [dromara.com/sureness](https://dromara.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
 
 ## 🎡 <font color="green">Introduction</font>
 
-> [Sureness](https://github.com/usthe/sureness) is a simple and efficient open-source security framework that focus on the protection of REST API.  
+> [Sureness](https://github.com/dromara/sureness) is a simple and efficient open-source security framework that focus on the protection of REST API.  
 > Provide authentication and authorization, based on RBAC.   
 > No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, Micronaut and more).    
 > Supports dynamic modification of permissions.   
@@ -235,6 +235,15 @@ See [CONTRIBUTING](CONTRIBUTING.md)
 * **```JustAuth```** A Java library of third-party authorized login: [Github](https://github.com/justauth/JustAuth)    
 * **```MaxKey```** Leading-Edge Enterprise-Class open source IAM Identity and Access management product: [Github](https://github.com/dromara/MaxKey)   
 * **```PhalApi```** PHP Api Framework: [Website](https://www.phalapi.net/)    
+
+## Join discussion
+
+[Github Discussion](https://github.com/usthe/sureness/discussions)      
+[Gitter Channel](https://gitter.im/usthe/sureness)
+QQ Group：390083213    
+Dromara社区微信公众号: gh_7eeb0b1b7476  
+Sureness微信公众号：sureness
+
 
 
 ## 🛡️ License  
