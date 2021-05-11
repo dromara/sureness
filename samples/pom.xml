@@ -23,5 +23,6 @@
         <module>solon-sureness</module>
         <module>solon-plugin-sureness</module>
         <module>spring-gateway-sureness</module>
+        <module>zuul-sureness</module>
     </modules>
 </project>
