@@ -18,7 +18,7 @@
 
 <a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt"/></a>
 
-**主页: [dromara.com/sureness](https://dromara.com/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
+**主页: [dromara.org/sureness](https://dromara.com/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
 
 
 ## 📫 背景         
@@ -243,11 +243,11 @@ sureness提供了下面这些常用接口作为扩展点:
 相关视频：  
 [bilibili-10分钟搭建一个完整认证鉴权项目，原谅第一次的川普和英语](https://www.bilibili.com/video/bv1EU4y1s7Sz)    
 
-QQ交流群：390083213    
-Dromara社区微信公众号: gh_7eeb0b1b7476  
-Sureness微信公众号：sureness
-[Github Discussion](https://github.com/usthe/sureness/discussions)        
-[Gitter Channel](https://gitter.im/usthe/sureness)   
+QQ交流群：390083213       
+Dromara社区微信公众号: gh_7eeb0b1b7476      
+Sureness微信公众号：sureness    
+[Github Discussion](https://github.com/usthe/sureness/discussions)           
+[Gitter Channel](https://gitter.im/usthe/sureness)      
 
 ## 🌞 开源推荐   
 
