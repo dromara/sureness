@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - SurenessAuth
+      routes:
+        - id: route1
+          uri: https://www.bing.com
+          predicates:
+          - Path=/api/**
