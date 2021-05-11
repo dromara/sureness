@@ -9,8 +9,8 @@
 - 支持`Websocket` ,`Http Servlet`和`JAX-RS`  
 - 支持动态权限, 易用急速扩展    
 
-[GitHub](https://github.com/tomsun28/sureness/)
-[Gitee](https://gitee.com/tomsun28/sureness/)
+[GitHub](https://github.com/dromara/sureness/)
+[Gitee](https://gitee.com/dromara/sureness/)
 [Get Started](cn/README.md)
 
 ![color](#e3f1ec)

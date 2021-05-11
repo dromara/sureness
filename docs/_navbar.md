@@ -1,10 +1,10 @@
 - [High Performance](https://github.com/tomsun28/sureness-shiro-spring-security ':ignore')    
 
-- [Community](https://github.com/tomsun28/sureness/discussions ':ignore')
+- [Community](https://github.com/dromara/sureness/discussions ':ignore')
 
 - Repository  
-  - [GITHUB](https://github.com/tomsun28/sureness ':ignore')  
-  - [GITEE](https://gitee.com/tomsun28/sureness ':ignore')  
+  - [GITHUB](https://github.com/dromara/sureness ':ignore')  
+  - [GITEE](https://gitee.com/dromara/sureness ':ignore')  
 
 - :us: English  
   - [:cn: 中文](/cn/)  
@@ -15,5 +15,5 @@
   - [PhalApi](https://www.phalapi.net/ ':ignore')
 
 - Other  
-  - [About Us](https://usthe.com)  
+  - [About Us](https://dromara.org)  
   - [HOME](/)  
