@@ -18,7 +18,7 @@
 
 <a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt"/></a>
 
-**主页: [dromara.org/sureness](https://dromara.com/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
+**主页: [dromara.org/sureness](https://dromara.org/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
 
 
 ## 📫 背景         
@@ -238,10 +238,7 @@ sureness提供了下面这些常用接口作为扩展点:
 相关文章：  
 [REST API 权限设计 - 初探一](https://segmentfault.com/a/1190000038360856)   
 [REST API 权限设计 - 快速搭建权限项目-配置文件方案](https://segmentfault.com/a/1190000039075245)    
-[REST API 权限设计 - sureness集成springboot样例-数据库方案](https://segmentfault.com/a/1190000039191172)     
-
-相关视频：  
-[bilibili-10分钟搭建一个完整认证鉴权项目，原谅第一次的川普和英语](https://www.bilibili.com/video/bv1EU4y1s7Sz)    
+[REST API 权限设计 - sureness集成springboot样例-数据库方案](https://segmentfault.com/a/1190000039191172)   
 
 QQ交流群：390083213       
 Dromara社区微信公众号: gh_7eeb0b1b7476      
