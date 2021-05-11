@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: gateway
+server:
+  port: 8080
+zuul:
+  routes:
+    route:
+      path: /api/**
+      url: https://www.bing.com
