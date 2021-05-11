@@ -18,7 +18,7 @@
 
 <a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt"/></a>
 
-**Home Page: [dromara.com/sureness](https://dromara.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
+**Home Page: [dromara.org/sureness](https://dromara.com/sureness) or [su.usthe.com](https://su.usthe.com/)**  
 
 ## 🎡 <font color="green">Introduction</font>
 
@@ -238,11 +238,11 @@ See [CONTRIBUTING](CONTRIBUTING.md)
 
 ## Join discussion
 
-[Github Discussion](https://github.com/usthe/sureness/discussions)      
-[Gitter Channel](https://gitter.im/usthe/sureness)
-QQ Group：390083213    
-Dromara社区微信公众号: gh_7eeb0b1b7476  
-Sureness微信公众号：sureness
+[Github Discussion](https://github.com/usthe/sureness/discussions)          
+[Gitter Channel](https://gitter.im/usthe/sureness)   
+QQ Group：390083213        
+Dromara社区微信公众号: gh_7eeb0b1b7476      
+Sureness微信公众号：sureness   
 
 
 
