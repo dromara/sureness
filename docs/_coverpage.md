@@ -10,6 +10,7 @@
 - No Framework Dependency, High Performance  
 
 [中文](/cn/)
+[Gitee](https://gitee.com/dromara/sureness/)
 [GitHub](https://github.com/dromara/sureness/)
 [Get Started](README.md)
 

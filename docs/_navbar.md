@@ -1,3 +1,5 @@
+- [Dashboard](https://github.com/dromara/sureness/projects/1 ':ignore')
+
 - [High Performance](https://github.com/tomsun28/sureness-shiro-spring-security ':ignore')    
 
 - [Community](https://github.com/dromara/sureness/discussions ':ignore')
