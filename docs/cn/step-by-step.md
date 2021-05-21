@@ -74,6 +74,11 @@ public class SimulateController {
         return ResponseEntity.ok(SUCCESS_ACCESS_RESOURCE);
     }
 
+    @GetMapping("/api/v2/source2")
+    public ResponseEntity<String> api1Mock12() {
+        return ResponseEntity.ok(SUCCESS_ACCESS_RESOURCE);
+    }
+
 }
 ````
 
@@ -124,14 +129,14 @@ public class SurenessConfiguration {
 ## -- sureness.yml文本数据源 -- ##
 
 # 加载到匹配字典的资源,也就是需要被保护的,设置了所支持角色访问的资源
-# 没有配置的资源也默认被认证保护,但不鉴权
-# eg: /api/v1/source1===get===[role2] 表示 /api/v2/host===post 这条资源支持 role2这一种角色访问
-# eg: /api/v1/source2===get===[] 表示 /api/v1/source2===get 这条资源支持所有角色或无角色访问 前提是认证成功
+# 没有配置的资源也默认被认证保护,但不鉴权，例如/api/v1/source2===get
+# eg: /api/v1/source1===get===[role2] 表示 /api/v1/source1===get 这条资源支持 role2这一种角色访问
+# eg: /api/v2/source2===get===[] 表示 /api/v1/source2===get 这条资源不支持任何角色访问
 resourceRole:
   - /api/v1/source1===get===[role2]
   - /api/v1/source1===delete===[role3]
   - /api/v1/source1===put===[role1,role2]
-  - /api/v1/source2===get===[]
+  - /api/v2/source2===get===[]
   - /api/v1/source2/*/*===get===[role2]
   - /api/v2/source3/*===get===[role2]
 
@@ -286,6 +291,8 @@ public class BootstrapApplication {
 IDEA上启动工程项目。  
 
 ##### basic认证测试  
+
+资源api/v1/source2===get没有配置到文本数据源里，代表所有角色或无角色都可以访问 前提是认证成功，用该资源来做认证测试
 
 **认证成功**：  
 
