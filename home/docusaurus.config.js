@@ -1,17 +1,56 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'Focusing on Protection of REST API.',
+  tagline: 'Sureness are cool',
+  url: 'https://su.usthe.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  favicon: 'img/favicon.png',
+  organizationName: 'dromara', // Usually your GitHub org/user name.
+  projectName: 'Sureness', // Usually your repo name.
+  plugins: [
+    require.resolve("./plugins/fetch-release/index"),
+    require.resolve("./plugins/webpack-ts/index"),
+    require.resolve("./plugins/optimize/index"),
+    require.resolve("./plugins/manifest/index"),
+    [
+      require.resolve("./plugins/tutorial/compiled/index"),
+      {
+        remarkPlugins: [variable],
+      },
+    ],
+    [
+      "@docusaurus/plugin-pwa",
+      {
+        pwaHead: [
+          {
+            tagName: "link",
+            rel: "manifest",
+            href: "/manifest.webmanifest",
+          },
+          {
+            tagName: "meta",
+            name: "theme-color",
+            content: "#d14671",
+          },
+          {
+            tagName: "meta",
+            name: "apple-mobile-web-app-capable",
+            content: "yes",
+          },
+          {
+            tagName: "meta",
+            name: "apple-mobile-web-app-status-bar-style",
+            content: "#21222c",
+          },
+        ],
+      },
+    ],
+  ],
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: 'M',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
@@ -74,7 +113,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Sureness, Inc. Built with Docusaurus.`,
     },
   },
   presets: [
