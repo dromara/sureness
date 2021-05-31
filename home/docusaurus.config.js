@@ -44,9 +44,9 @@ module.exports = {
             darkTheme: require('prism-react-renderer/themes/dracula')
         },
         algolia: {
-            apiKey: '1b22fa823f22b7916528edc0e36d9d4a',
-            indexName: 'webdriver',
-            appId: 'BH4D9OD16A'
+            apiKey: '31a1c9b96ae0df998aa655296167448f',
+            indexName: 'sureness',
+            appId: 'GNVT7Z0UI2'
         },
         announcementBar: {
             id: "github-star",
