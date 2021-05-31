@@ -51,9 +51,9 @@ module.exports = {
         announcementBar: {
             id: "github-star",
             content:
-                '<font style="font-size: medium; font-weight: bolder">If you like Sureness,</font> <a target="_blank" style="font-size: medium; font-weight: bolder" rel="noopener noreferrer" href="#">give us a star on GitHub! </a>⭐️',
-            backgroundColor: '#fafbfc', 
-            textColor: '#091E42', 
+                '<font style="font-size: medium; font-weight: bolder">If you like Sureness,</font> <a target="_blank" style="font-size: medium; font-weight: bolder" rel="noopener noreferrer" href="https://github.com/dromara/sureness">give us a star on GitHub! </a>⭐️',
+            backgroundColor: '#7228B5',
+            textColor: '#fafbfc',
             isCloseable: true, 
         },
         navbar: {
@@ -99,7 +99,7 @@ module.exports = {
             ],
           },
           footer: {
-            style: 'dark',
+            style: 'light',
             links: [
               {
                 title: 'About Sureness',
@@ -147,12 +147,17 @@ module.exports = {
                     to: '/blog',
                   },
                   {
-                    label: 'GitHub',
-                    href: 'https://github.com/facebook/docusaurus',
+                    label: 'USTHE',
+                    href: 'https://github.com/usthe',
                   },
                 ],
               },
             ],
+            logo: {
+              alt: 'Open Source Logo',
+              src: 'img/icon128.svg',
+              href: 'https://github.com/dromara/sureness',
+            },
             copyright: `Apache License, Version 2.0 | Copyright © ${new Date().getFullYear()} USTHE.`,
           },
     },

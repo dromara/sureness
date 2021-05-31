@@ -4,13 +4,13 @@
 @import url(buttons.css);
 
 :root {
-    --ifm-color-primary: #ea5906;
-    --ifm-color-primary-dark: #d35005;
-    --ifm-color-primary-darker: #c74c05;
-    --ifm-color-primary-darkest: #a43e04;
-    --ifm-color-primary-light: #f9640f;
-    --ifm-color-primary-lighter: #f96c1b;
-    --ifm-color-primary-lightest: #fa823e;
+    --ifm-color-primary: #7228B5;
+    --ifm-color-primary-dark: #6228B5;
+    --ifm-color-primary-darker: #5228B5;
+    --ifm-color-primary-darkest: #5128B5;
+    --ifm-color-primary-light: #7228B5;
+    --ifm-color-primary-lighter: #8228B5;
+    --ifm-color-primary-lightest: #9228B5;
     --ifm-navbar-link-hover-color: var(--ifm-color-primary);
     --ifm-background-color: #fafafa;
     --ifm-code-font-size: 95%;

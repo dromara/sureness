@@ -40,30 +40,23 @@ function Home() {
                                 'button button--outline button--secondary button--lg',
                                 styles.getStarted,
                             )}
-                            to={useBaseUrl('/docs/gettingstarted')}>
+                            to="{useBaseUrl('/docs/')}">
                         Get Started
                         </Link>
                         <Link
-                            to="/community/resources#conferencemeetup-talks"
+                            to="https://github.com/dromara/sureness"
                             className={clsx(
                                 'button button--outline button--secondary button--lg',
                                 styles.getStarted,
                             )}
-                        >GITHUB</Link>
+                        >Github</Link>
                         <Link
-                            to="https://leanpub.com/webapp-testing-guidebook"
+                            to="https://gitee.com/dromara/sureness"
                             className={clsx(
                                 'button button--outline button--secondary button--lg',
                                 styles.getStarted,
                             )}
-                        >GITEE</Link>
-                        <Link
-                            to="https://gitter.im/webdriverio/webdriverio"
-                            className={clsx(
-                                'button button--outline button--secondary button--lg',
-                                styles.getStarted,
-                            )}
-                        >Support</Link>
+                        >Gitee</Link>
                     </div>
                 </div>
             </header>
