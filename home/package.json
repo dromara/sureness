@@ -1,5 +1,5 @@
 {
-  "name": "home",
+  "name": "website",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,20 +8,27 @@
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
     "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids"
+    "clear": "docusaurus clear"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.0",
-    "@docusaurus/preset-classic": "2.0.0-beta.0",
+    "@docusaurus/core": "2.0.0-alpha.75",
+    "@docusaurus/plugin-client-redirects": "2.0.0-alpha.75",
+    "@docusaurus/plugin-ideal-image": "2.0.0-alpha.75",
+    "@docusaurus/plugin-pwa": "2.0.0-alpha.75",
+    "@docusaurus/preset-classic": "2.0.0-alpha.75",
+    "@docusaurus/remark-plugin-npm2yarn": "2.0.0-alpha.75",
+    "@docusaurus/theme-search-algolia": "2.0.0-alpha.75",
     "@mdx-js/react": "^1.6.21",
-    "@svgr/webpack": "^5.5.0",
+    "@saucelabs/theme-github-codeblock": "0.0.3",
     "clsx": "^1.1.1",
-    "file-loader": "^6.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "sharp": "^0.27.2",
+    "workbox-routing": "^6.1.0",
+    "workbox-strategies": "^6.1.0",
+    "@svgr/webpack": "^5.5.0",
+    "file-loader": "^6.2.0",
     "url-loader": "^4.1.1"
   },
   "browserslist": {
