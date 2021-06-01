@@ -1,8 +1,7 @@
-package com.usthe.sureness.solon.controller;
+package com.usthe.sureness.solon.demo.controller;
 
 import org.noear.solon.annotation.*;
 import org.noear.solon.core.handle.Context;
-import org.noear.solon.core.handle.ContextUtil;
 
 /**
  * @author tomsun28

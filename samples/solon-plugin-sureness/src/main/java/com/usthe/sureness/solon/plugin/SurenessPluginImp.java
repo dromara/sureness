@@ -36,6 +36,6 @@ public class SurenessPluginImp implements Plugin {
             }
         });
 
-        app.after("**", context -> SurenessContextHolder.unbindSubject());
+        app.after(ctx -> SurenessContextHolder.unbindSubject());
     }
 }

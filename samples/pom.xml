@@ -22,7 +22,18 @@
         <module>jfinal-sureness</module>
         <module>solon-sureness</module>
         <module>solon-plugin-sureness</module>
+        <module>solon-plugin-sureness-demo</module>
         <module>spring-gateway-sureness</module>
         <module>zuul-sureness</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.usthe.sureness</groupId>
+                <artifactId>solon-plugin-sureness</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
