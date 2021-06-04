@@ -43,6 +43,7 @@ module.exports = {
             },
         },
         prism: {
+            // theme: require('prism-react-renderer/themes/github'),
             theme: require('prism-react-renderer/themes/github'),
             darkTheme: require('prism-react-renderer/themes/dracula'),
         },
@@ -118,6 +119,14 @@ module.exports = {
                 title: 'About Sureness',
                 items: [
                   {
+                    label: 'Github',
+                    href: 'https://github.com/dromara/sureness',
+                  },
+                  {
+                    label: 'Gitee',
+                    href: 'https://gitee.com/dromara/sureness',
+                  },
+                  {
                     label: 'High Performance',
                     href: 'https://github.com/tomsun28/sureness-shiro-spring-security-benchmark',
                   },
@@ -130,14 +139,6 @@ module.exports = {
               {
                 title: 'Community',
                 items: [
-                  {
-                    label: 'Github',
-                    href: 'https://github.com/dromara/sureness',
-                  },
-                  {
-                    label: 'Gitee',
-                    href: 'https://gitee.com/dromara/sureness',
-                  },
                   {
                     label: 'Github Discussion',
                     href: 'https://github.com/dromara/sureness/discussions',
@@ -177,19 +178,19 @@ module.exports = {
     presets: [
         [
             '@docusaurus/preset-classic', {
-                // docs: {
-                //     sidebarPath: require.resolve('./sidebars.js'),
-                //     // Please change this to your repo.
-                //     editUrl:`${repoUrl}/edit/${branch}/website/`,
-                //     remarkPlugins: [
-                //         [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
-                //     ],
-                // },
+                docs: {
+                    sidebarPath: require.resolve('./sidebars.json'),
+                    // Please change this to your repo.
+                    editUrl:`${repoUrl}/edit/${branch}/home/`,
+                    remarkPlugins: [
+                        [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
+                    ],
+                },
                 blog: {
                     showReadingTime: true,
                     postsPerPage: 3,
                     // Please change this to your repo.
-                    editUrl: `${repoUrl}/edit/${branch}/website/blog/`,
+                    editUrl: `${repoUrl}/edit/${branch}/home/blog/`,
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
