@@ -24,7 +24,9 @@ module.exports = {
     },
     themeConfig: {
         image: 'img/icon64128.png',
-        // metadatas: [{ name: 'twitter:card', content: 'summary' }],
+        liveCodeBlock: {
+            playgroundPosition: 'bottom',
+        },
         colorMode: {
             defaultMode: 'light',
             disableSwitch: false,
@@ -43,9 +45,9 @@ module.exports = {
             },
         },
         prism: {
-            // theme: require('prism-react-renderer/themes/github'),
             theme: require('prism-react-renderer/themes/github'),
             darkTheme: require('prism-react-renderer/themes/dracula'),
+            additionalLanguages: ['java'],
         },
         algolia: {
             apiKey: '31a1c9b96ae0df998aa655296167448f',
@@ -71,6 +73,11 @@ module.exports = {
                 label: 'Document',
                 position: 'left',
                 to: 'docs/',
+              },
+              {
+                label: 'Blog',
+                position: 'left',
+                to: 'blog',
               },
               {
                 label: 'Dashboard',
@@ -189,15 +196,16 @@ module.exports = {
                 blog: {
                     showReadingTime: true,
                     postsPerPage: 3,
+                    feedOptions: {
+                        type: 'all',
+                        copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
+                    },
                     // Please change this to your repo.
-                    editUrl: `${repoUrl}/edit/${branch}/home/blog/`,
+                    editUrl: `${repoUrl}/edit/${branch}/home/`,
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
                 },
-                // pages: {
-                //     remarkPlugins: [require('@docusaurus/remark-plugin-npm2yarn')],
-                // },
             },
         ],
     ],
@@ -208,76 +216,66 @@ module.exports = {
                 fromExtensions: ['html'],
             }
         ],
-        // [
-        //     '@docusaurus/plugin-content-docs',
-        //     {
-        //         id: 'community',
-        //         path: 'community',
-        //         editUrl: `https://github.com/${organizationName}/${projectName}/edit/${branch}/website/`,
-        //         routeBasePath: 'community',
-        //         sidebarPath: require.resolve('./sidebarsCommunity.js')
-        //     },
-        // ],
-        // '@docusaurus/plugin-ideal-image',
-        // [
-        //     '@docusaurus/plugin-pwa',
-        //     {
-        //         debug: false,
-        //         offlineModeActivationStrategies: ['appInstalled', 'queryString'],
-        //         // swRegister: false,
-        //         swCustom: path.resolve(__dirname, 'src/sw.js'),
-        //         pwaHead: [
-        //             {
-        //                 tagName: 'link',
-        //                 rel: 'icon',
-        //                 href: 'img/logo-webdriver-io.png',
-        //             },
-        //             // {
-        //             //     tagName: 'link',
-        //             //     rel: 'manifest',
-        //             //     href: '/manifest.json',
-        //             // },
-        //             {
-        //                 tagName: 'meta',
-        //                 name: 'theme-color',
-        //                 content: 'rgb(234, 90, 7)',
-        //             },
-        //             {
-        //                 tagName: 'meta',
-        //                 name: 'apple-mobile-web-app-capable',
-        //                 content: 'yes',
-        //             },
-        //             {
-        //                 tagName: 'meta',
-        //                 name: 'apple-mobile-web-app-status-bar-style',
-        //                 content: '#000',
-        //             },
-        //             {
-        //                 tagName: 'link',
-        //                 rel: 'apple-touch-icon',
-        //                 href: 'img/logo-webdriver-io.png',
-        //             },
-        //             {
-        //                 tagName: 'link',
-        //                 rel: 'mask-icon',
-        //                 href: 'img/logo-webdriver-io.svg',
-        //                 color: 'rgb(234, 90, 7)',
-        //             },
-        //             {
-        //                 tagName: 'meta',
-        //                 name: 'msapplication-TileImage',
-        //                 content: 'img/logo-webdriver-io.png',
-        //             },
-        //             {
-        //                 tagName: 'meta',
-        //                 name: 'msapplication-TileColor',
-        //                 content: '#000',
-        //             },
-        //         ],
-        //     },
-        // ],
+        '@docusaurus/plugin-ideal-image',
+        [
+            '@docusaurus/plugin-pwa',
+            {
+                debug: false,
+                offlineModeActivationStrategies: ['appInstalled', 'queryString'],
+                // swRegister: false,
+                swCustom: path.resolve(__dirname, 'src/sw.js'),
+                pwaHead: [
+                    {
+                        tagName: 'link',
+                        rel: 'icon',
+                        href: 'img/icon64.png',
+                    },
+                    {
+                        tagName: 'link',
+                        rel: 'manifest',
+                        href: '/manifest.json',
+                    },
+                    {
+                        tagName: 'meta',
+                        name: 'theme-color',
+                        content: 'rgb(234, 90, 7)',
+                    },
+                    {
+                        tagName: 'meta',
+                        name: 'apple-mobile-web-app-capable',
+                        content: 'yes',
+                    },
+                    {
+                        tagName: 'meta',
+                        name: 'apple-mobile-web-app-status-bar-style',
+                        content: '#000',
+                    },
+                    {
+                        tagName: 'link',
+                        rel: 'apple-touch-icon',
+                        href: 'img/icon64.png',
+                    },
+                    {
+                        tagName: 'link',
+                        rel: 'mask-icon',
+                        href: 'img/icon64.svg',
+                        color: 'rgb(234, 90, 7)',
+                    },
+                    {
+                        tagName: 'meta',
+                        name: 'msapplication-TileImage',
+                        content: 'img/icon64.png',
+                    },
+                    {
+                        tagName: 'meta',
+                        name: 'msapplication-TileColor',
+                        content: '#000',
+                    },
+                ],
+            },
+        ],
     ],
-    themes: ['@saucelabs/theme-github-codeblock'],
+    themes: ['@docusaurus/theme-live-codeblock'],
     stylesheets: [
         'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=block',
         'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=block'
