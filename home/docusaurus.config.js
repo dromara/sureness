@@ -8,8 +8,8 @@ const repoUrl = `https://github.com/${organizationName}/${projectName}`
 module.exports = {
     title: 'Sureness',
     tagline: 'Focusing on Protection of REST API',
-    url: 'https://su.usthe.com',
-    baseUrl: '/',
+    url: 'https://dromara.org',
+    baseUrl: '/sureness/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
     favicon: 'img/icon64.png',
@@ -171,15 +171,19 @@ module.exports = {
                     label: 'USTHE',
                     href: 'https://github.com/usthe',
                   },
+                  {
+                    label: 'Dromara',
+                    href: 'https://dromara.org',
+                  },
                 ],
               },
             ],
             logo: {
               alt: 'Open Source Logo',
-              src: 'img/icon128.svg',
-              href: 'https://github.com/dromara/sureness',
+              src: 'img/dromara.jpg',
+              href: 'https://github.com/dromara',
             },
-            copyright: `Apache License, Version 2.0 | Copyright © ${new Date().getFullYear()} USTHE.`,
+            copyright: `Apache License 2.0 | Copyright © ${new Date().getFullYear()}`,
           },
     },
     presets: [
@@ -198,7 +202,7 @@ module.exports = {
                     postsPerPage: 3,
                     feedOptions: {
                         type: 'all',
-                        copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
+                        copyright: `Copyright © ${new Date().getFullYear()} USTHE, Inc.`,
                     },
                     // Please change this to your repo.
                     editUrl: `${repoUrl}/edit/${branch}/home/`,

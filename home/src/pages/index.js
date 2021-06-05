@@ -25,7 +25,7 @@ function Home() {
             <header className={clsx('hero hero--primary', styles.heroBanner)}>
                 <div className="container">
                     <h1 className="hero__title">
-                        <img src="/img/brand128.svg"/>
+                        <img src="img/brand128.svg"/>
                     </h1>
                     <p className="hero__subtitle">{siteConfig.tagline}</p>
                     <div className={styles.social}>
@@ -91,11 +91,11 @@ function Home() {
                             </p>
                             <div>
                                 <h4>Native Support for:</h4>
-                                <a href="https://reactjs.org/" className={styles.frameworkLogos}><img src="/img/icons/spring-logo.svg" alt="spring" /></a>
-                                <a href="https://www.polymer-project.org/" className={styles.frameworkLogos}><img src="/img/icons/javalin_logo.svg" alt="Javalin" /></a>
-                                <a href="https://angular.io/" className={styles.frameworkLogos}><img src="/img/icons/MicronautLogo.svg" alt="Micronaut" /></a>
-                                <a href="https://vuejs.org/" className={styles.frameworkLogos}><img src="/img/icons/quarkus_logo.svg" alt="Quarkus" /></a>
-                                <a href="https://angular.io/" className={styles.frameworkLogos}><img src="/img/icons/ktor_logo.svg" alt="Ktor" /></a>
+                                <a href="https://reactjs.org/" className={styles.frameworkLogos}><img src="img/icons/spring-logo.svg" alt="spring" /></a>
+                                <a href="https://www.polymer-project.org/" className={styles.frameworkLogos}><img src="img/icons/javalin_logo.svg" alt="Javalin" /></a>
+                                <a href="https://angular.io/" className={styles.frameworkLogos}><img src="img/icons/MicronautLogo.svg" alt="Micronaut" /></a>
+                                <a href="https://vuejs.org/" className={styles.frameworkLogos}><img src="img/icons/quarkus_logo.svg" alt="Quarkus" /></a>
+                                <a href="https://angular.io/" className={styles.frameworkLogos}><img src="img/icons/ktor_logo.svg" alt="Ktor" /></a>
                             </div>
                         </>
                     }
@@ -105,7 +105,7 @@ function Home() {
                         <img
                             width="760"
                             height="445"
-                            src="/img/compare.png"
+                            src="img/compare.png"
                         />
                     }
                     isDark
@@ -135,7 +135,7 @@ function Home() {
                         <img
                             width="560"
                             height="415"
-                            src="/img/benchmark_en.png"
+                            src="img/benchmark_en.png"
                         />
                     }
                     reversed
@@ -160,7 +160,7 @@ function Home() {
                         <img
                             width="760"
                             height="405"
-                            src="/img/PathRoleMatcher.svg"
+                            src="img/PathRoleMatcher.svg"
                         />
                     }
                     isDark
