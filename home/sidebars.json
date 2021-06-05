@@ -1,0 +1,49 @@
+{
+  "docs": [
+    {
+      "type": "category",
+      "label": "Guides",
+      "items": [
+        "introduce",
+        "start/quickstart",
+        "start/path-match",
+        "start/default-datasource",
+        "start/default-auth",
+        "start/default-exception"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced",
+      "items": [
+        "advanced/extend-point",
+        "advanced/custom-subject",
+        "advanced/custom-subject-creator",
+        "advanced/custom-processor",
+        "advanced/custom-datasource"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Integrate",
+      "items": [
+        "integrate/sample-bootstrap",
+        "integrate/sample-tom",
+        "integrate/sample-quarkus",
+        "integrate/sample-javalin",
+        "integrate/sample-spring-webflux",
+        "integrate/sample-ktor",
+        "integrate/sample-micronaut"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Others",
+      "items": [
+        "design",
+        "contributing",
+        "sponsor"
+      ]
+    }
+  ]
+}

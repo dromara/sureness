@@ -1,0 +1,34 @@
+{
+  "title": {
+    "message": " ",
+    "description": "The title in the navbar"
+  },
+  "item.label.Document": {
+    "message": "Document",
+    "description": "Navbar item with label Document"
+  },
+  "item.label.Dashboard": {
+    "message": "Dashboard",
+    "description": "Navbar item with label Dashboard"
+  },
+  "item.label.High Performance": {
+    "message": "High Performance",
+    "description": "Navbar item with label High Performance"
+  },
+  "item.label.Community": {
+    "message": "Community",
+    "description": "Navbar item with label Community"
+  },
+  "item.label.Github Discussion": {
+    "message": "Github Discussion",
+    "description": "Navbar item with label Github Discussion"
+  },
+  "item.label.Gitter Channel": {
+    "message": "Gitter Channel",
+    "description": "Navbar item with label Gitter Channel"
+  },
+  "item.label.QQ Group": {
+    "message": "QQ Group",
+    "description": "Navbar item with label QQ Group"
+  }
+}
