@@ -10,9 +10,10 @@ import Translate, {translate} from '@docusaurus/Translate';
 import Feature from './components/Feature'
 import Section from './components/Section'
 import Highlight from './components/Highlight'
+import LogoCarousel from './components/LogoCarousel'
 
 import styles from './styles.module.css'
-import { features, SetupExample, SurenessIntegration } from '../constants'
+import { features, SetupExample, SurenessIntegration, logos } from '../constants'
 
 function Home() {
     const context = useDocusaurusContext()
@@ -97,7 +98,7 @@ function Home() {
                                 <h4>Native Support for:</h4>
                                 <a href="https://reactjs.org/" className={styles.frameworkLogos}><img src="img/icons/spring-logo.svg" alt="spring" /></a>
                                 <a href="https://www.polymer-project.org/" className={styles.frameworkLogos}><img src="img/icons/javalin_logo.svg" alt="Javalin" /></a>
-                                <a href="https://angular.io/" className={styles.frameworkLogos}><img src="img/icons/MicronautLogo.svg" alt="Micronaut" /></a>
+                                <a href="https://angular.io/" className={styles.frameworkLogos}><img src="img/icons/micronaut_icon.svg" alt="Micronaut" /></a>
                                 <a href="https://vuejs.org/" className={styles.frameworkLogos}><img src="img/icons/quarkus_logo.svg" alt="Quarkus" /></a>
                                 <a href="https://angular.io/" className={styles.frameworkLogos}><img src="img/icons/ktor_logo.svg" alt="Ktor" /></a>
                             </div>
@@ -213,6 +214,10 @@ function Home() {
                         </>
                     }
                 />
+                {/*who is using*/}
+                <Section>
+                    <LogoCarousel logos={logos}></LogoCarousel>
+                </Section>
             </main>
         </Layout>
     )
