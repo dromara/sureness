@@ -5,15 +5,14 @@ import CodeBlock from '@theme/CodeBlock'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import useBaseUrl from '@docusaurus/useBaseUrl'
+import Translate, {translate} from '@docusaurus/Translate';
 
-import LogoCarousel from './components/LogoCarousel'
 import Feature from './components/Feature'
 import Section from './components/Section'
 import Highlight from './components/Highlight'
-import Robot from './components/Robot'
 
 import styles from './styles.module.css'
-import { logos, features, LHIntregrationExample, SetupExample, ReactIntegration, SurenessIntegration } from '../constants'
+import { features, SetupExample, SurenessIntegration } from '../constants'
 
 function Home() {
     const context = useDocusaurusContext()
@@ -41,7 +40,7 @@ function Home() {
                                 styles.getStarted,
                             )}
                             to={useBaseUrl('docs/')}>
-                        Get Started
+                            <Translate>Get Started</Translate>
                         </Link>
                         <Link
                             to="https://github.com/dromara/sureness"
@@ -77,7 +76,12 @@ function Home() {
                         <CodeBlock className="js" children={SurenessIntegration}></CodeBlock>
                     }
                     reversed
-                    title="Support for Jvm Modern Frameworks"
+                    title={
+                        translate({
+                            message: 'Support for Jvm Modern Frameworks'
+                        })
+                    }
+                    // title="Support for Jvm Modern Frameworks"
                     text={
                         <>
                             <p>

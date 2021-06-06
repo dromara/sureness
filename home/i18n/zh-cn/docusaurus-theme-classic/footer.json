@@ -50,5 +50,9 @@
   "copyright": {
     "message": "Apache License, Version 2.0 | Copyright © 2021 USTHE.",
     "description": "The footer copyright"
+  },
+  "link.item.label.Dromara": {
+    "message": "Dromara",
+    "description": "The label of footer link with label=Dromara linking to https://dromara.org"
   }
 }

@@ -4,19 +4,19 @@
     "description": "The title in the navbar"
   },
   "item.label.Document": {
-    "message": "Document",
+    "message": "文档",
     "description": "Navbar item with label Document"
   },
   "item.label.Dashboard": {
-    "message": "Dashboard",
+    "message": "看板",
     "description": "Navbar item with label Dashboard"
   },
   "item.label.High Performance": {
-    "message": "High Performance",
+    "message": "高性能",
     "description": "Navbar item with label High Performance"
   },
   "item.label.Community": {
-    "message": "Community",
+    "message": "社区",
     "description": "Navbar item with label Community"
   },
   "item.label.Github Discussion": {
@@ -30,5 +30,9 @@
   "item.label.QQ Group": {
     "message": "QQ Group",
     "description": "Navbar item with label QQ Group"
+  },
+  "item.label.Blog": {
+    "message": "博客",
+    "description": "Navbar item with label Blog"
   }
 }

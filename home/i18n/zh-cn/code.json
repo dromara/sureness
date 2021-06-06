@@ -190,5 +190,31 @@
   "theme.SearchBar.label": {
     "message": "Search",
     "description": "The ARIA label and placeholder for search button"
+  },
+  "Get Started": {
+    "message": "快速开始"
+  },
+  "theme.PwaReloadPopup.info": {
+    "message": "New version available",
+    "description": "The text for PWA reload popup"
+  },
+  "theme.PwaReloadPopup.refreshButtonText": {
+    "message": "Refresh",
+    "description": "The text for PWA reload button"
+  },
+  "theme.PwaReloadPopup.closeButtonAriaLabel": {
+    "message": "Close",
+    "description": "The ARIA label for close button of PWA reload popup"
+  },
+  "theme.Playground.result": {
+    "message": "Result",
+    "description": "The result label of the live codeblocks"
+  },
+  "theme.Playground.liveEditor": {
+    "message": "Live Editor",
+    "description": "The live editor label of the live codeblocks"
+  },
+  "Support for Jvm Modern Frameworks": {
+    "message": "支持大部分Jvm Web框架"
   }
 }
