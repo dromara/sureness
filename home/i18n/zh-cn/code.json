@@ -216,5 +216,29 @@
   },
   "Support for Jvm Modern Frameworks": {
     "message": "支持大部分Jvm Web框架"
+  },
+  "Focusing on Protection of REST API": {
+    "message": "面向API的高性能认证鉴权框架"
+  },
+  "Extendable": {
+    "message": "可扩展"
+  },
+  "Compatible": {
+    "message": "原生兼容"
+  },
+  "Multi And Fast": {
+    "message": "多支持与高性能"
+  },
+  "Multi Support Samples": {
+    "message": "大量集成样例"
+  },
+  "Benchmark Compare": {
+    "message": "基准性能测试"
+  },
+  "Why Is High Performance": {
+    "message": "为什么高性能"
+  },
+  "Get Started With Sureness within Minutes": {
+    "message": "几分钟入门Sureness"
   }
 }

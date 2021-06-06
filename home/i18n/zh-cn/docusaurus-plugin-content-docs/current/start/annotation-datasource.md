@@ -45,4 +45,4 @@ TreePathRoleMatcher pathRoleMatcher() {
 
 
 当然也我们提供了默认文本数据源，默认文本数据源具体实现，请参考 [默认文本数据源](/docs/start/default-datasource)       
-数据源也可以来自数据库等存储,我们提供了接口让用户轻松的自定义数据源，详见[自定义数据源](/docs/integrate/custom-datasource)  
+数据源也可以来自数据库等存储,我们提供了接口让用户轻松的自定义数据源，详见[自定义数据源](/docs/advanced/custom-datasource)  

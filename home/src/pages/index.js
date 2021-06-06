@@ -26,7 +26,7 @@ function Home() {
                     <h1 className="hero__title">
                         <img src="img/brand128.svg"/>
                     </h1>
-                    <p className="hero__subtitle">{siteConfig.tagline}</p>
+                    <p className="hero__subtitle"><Translate>Focusing on Protection of REST API</Translate></p>
                     <div className={styles.social}>
                         <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg"/></a>
                         <a href="https://search.maven.org/artifact/com.usthe.sureness/sureness-core"><img src="https://img.shields.io/badge/Maven%20Central-1.0.3-blue.svg"/></a>
@@ -113,7 +113,10 @@ function Home() {
                         />
                     }
                     isDark
-                    title="Multi Support Samples"
+                    title={translate({
+                        message:'Multi Support Samples'
+                    })}
+                    // title="Multi Support Samples"
                     text={
                         <>
                             <p>
@@ -143,7 +146,12 @@ function Home() {
                         />
                     }
                     reversed
-                    title="Benchmark Compare"
+                    title={
+                        translate({
+                            message:'Benchmark Compare'
+                        })
+                    }
+                    // title="Benchmark Compare"
                     text={
                         <>
                             <p>
@@ -168,7 +176,12 @@ function Home() {
                         />
                     }
                     isDark
-                    title="Why Is High Performance"
+                    title={
+                        translate({
+                            message:'Why Is High Performance'
+                        })
+                    }
+                    // title="Why Is High Performance"
                     text={
                         <>
                             <p>
@@ -184,7 +197,12 @@ function Home() {
                         <CodeBlock className="bash" children={SetupExample}></CodeBlock>
                     }
                     reversed
-                    title="Get Started With Sureness within Minutes"
+                    title={
+                        translate({
+                            message:'Get Started With Sureness within Minutes'
+                        })
+                    }
+                    // title="Get Started With Sureness within Minutes"
                     text={
                         <>
                             <p>

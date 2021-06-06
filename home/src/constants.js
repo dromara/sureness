@@ -1,7 +1,11 @@
 import React from 'react'
 
+import Translate, {translate} from '@docusaurus/Translate';
+
 export const features = [{
-    title: 'Extendable',
+    title: translate({
+        message: 'Extendable'
+    }),
     description: (
         <>
             Focus on the protection of <strong>REST API</strong>. Based on <strong>RBAC</strong>.<br/>
@@ -10,7 +14,9 @@ export const features = [{
         </>
     ),
 }, {
-    title: 'Compatible',
+    title: translate({
+        message: 'Compatible'
+    }),
     description: (
         <>
             Support <strong>WebSockets</strong>, HTTP containers (<strong>Servlet</strong> and <strong>JAX-RS</strong>).
@@ -21,7 +27,9 @@ export const features = [{
     ),
 },
 {
-    title: 'Multi And Fast',
+    title: translate({
+        message: 'Multi And Fast'
+    }),
     description: (
         <>
             Supports <strong>JWT</strong>, <strong>Basic Auth</strong>, <strong>Digest Auth</strong> etc.<br/>
