@@ -82,25 +82,24 @@ function Home() {
                             message: 'Support for Jvm Modern Frameworks'
                         })
                     }
-                    // title="Support for Jvm Modern Frameworks"
                     text={
                         <>
                             <p>
-                                Sureness allows you to security any server written with jvm modern frameworks such as <a href="https://reactjs.org/">Spring</a>, <a href="https://angular.io/">Spring Boot</a>, <a href="https://www.polymer-project.org/">Javalin</a>,
-                                <a href="https://www.polymer-project.org/">Quarkus</a> or <a href="https://vuejs.org/">Ktor</a> as well as frameworks for Kotlin.
+                                Sureness allows you to security any server written with jvm modern frameworks such as <a href="https://spring.io/">Spring</a>, <a href="https://spring.io/">Spring Boot</a>, <a href="https://javalin.io/">Javalin</a>,
+                                <a href="https://quarkus.io/">Quarkus</a>, <a href="https://micronaut.io/">Micronaut</a>, <a href="https://gitee.com/noear/solon">Solon</a>, <a href="https://jfinal.com/">Jfinal</a> or <a href="https://ktor.io/">Ktor</a> as well as frameworks for Kotlin.
                             </p>
                             <p>
                                 The essence of Sureness is to use <strong>interceptor</strong>(like servlet filter or Spring interceptor)  to intercept all rest requests for authenticating and authorizing.<br/>
                                 So no matter any framework, as long as it has a interceptor, it can integrate sureness.
-                                Sureness uses <strong>exception handling process</strong>, <strong>checkIn()</strong> will return a <strong>SubjectSum</strong>(user information) when auth success, or throw different types of auth exceptions when auth error.
+                                Sureness uses <strong>exception handling process</strong>, <strong>checkIn()</strong> will return <strong>SubjectSum</strong>(user information) when auth success, or throw different types of auth exceptions when auth error.
                             </p>
                             <div>
                                 <h4>Native Support for:</h4>
-                                <a href="https://reactjs.org/" className={styles.frameworkLogos}><img src="img/icons/spring-logo.svg" alt="spring" /></a>
-                                <a href="https://www.polymer-project.org/" className={styles.frameworkLogos}><img src="img/icons/javalin_logo.svg" alt="Javalin" /></a>
-                                <a href="https://angular.io/" className={styles.frameworkLogos}><img src="img/icons/micronaut_icon.svg" alt="Micronaut" /></a>
-                                <a href="https://vuejs.org/" className={styles.frameworkLogos}><img src="img/icons/quarkus_logo.svg" alt="Quarkus" /></a>
-                                <a href="https://angular.io/" className={styles.frameworkLogos}><img src="img/icons/ktor_logo.svg" alt="Ktor" /></a>
+                                <a href="https://spring.io/" className={styles.frameworkLogos}><img src="img/icons/spring-logo.svg" alt="spring" /></a>
+                                <a href="https://javalin.io/" className={styles.frameworkLogos}><img src="img/icons/javalin_logo.svg" alt="Javalin" /></a>
+                                <a href="https://micronaut.io/" className={styles.frameworkLogos}><img src="img/icons/micronaut_logo.png" alt="Micronaut" /></a>
+                                <a href="https://quarkus.io/" className={styles.frameworkLogos}><img src="img/icons/quarkus_logo.svg" alt="Quarkus" /></a>
+                                <a href="https://ktor.io/" className={styles.frameworkLogos}><img src="img/icons/ktor_logo.svg" alt="Ktor" /></a>
                             </div>
                         </>
                     }

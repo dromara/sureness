@@ -132,7 +132,7 @@
     "description": "The label used for the latest version suggestion link label"
   },
   "theme.common.editThisPage": {
-    "message": "Edit this page",
+    "message": "帮助我们修改文档",
     "description": "The link label to edit the current page"
   },
   "theme.common.headingLinkTitle": {
@@ -215,7 +215,7 @@
     "description": "The live editor label of the live codeblocks"
   },
   "Support for Jvm Modern Frameworks": {
-    "message": "支持大部分Jvm Web框架"
+    "message": "适用大部分Jvm Web框架"
   },
   "Focusing on Protection of REST API": {
     "message": "面向API的高性能认证鉴权框架"
@@ -243,5 +243,14 @@
   },
   "Sureness Friends": {
     "message": "Sureness Friends"
+  },
+  "Focus on the protection of {restApi}. Based on {rbac}.{br}Provides {authentication} and {authorization}, etc.{br}Extension custom interface is {simple} and really {useful}.": {
+    "message": "基于 {rbac} (用户-角色-资源)主要关注于对 {restApi} 的安全 (认证与鉴权) 保护。{br} 自定义Subject,Subject Creator,Processor和自定义数据源等良好的{interface}, {sample}和{doc}助急速理解扩展使用。"
+  },
+  "Support {WebSockets}, HTTP containers ({Servlet} and {JaxRs}).{br}No framework dependency.{native} supports {SpringBoot}, {Javalin}, {Quarkus},{Ktor}, {Solon}, {Jfinal}, {Micronaut} etc.": {
+    "message": "支持 {WebSockets} ,主流 HTTP 容器 {Servlet} 和 {JaxRs}。{br} 无特定Web框架依赖, 原生支持 {SpringBoot}, {Javalin}, {Quarkus}, {Ktor}, {Solon}, {Jfinal}, {Micronaut} 等。"
+  },
+  "Supports {jwt}, {basic}, {digest} etc.{br}{dynamic} modification of {perm}.{br}{high} with {tree}.": {
+    "message": "原生拥有 {jwt}, {basic}, {digest} 等认证方式。{br} 支持{dynamicCn}(动态配置每个 API 谁有权访问)。{br} 基于{treeCn}拥有的{highCn}。"
   }
 }

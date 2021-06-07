@@ -36,7 +36,7 @@
     "description": "The label of footer link with label=Gitter Channel linking to https://gitter.im/usthe/sureness"
   },
   "link.item.label.QQ Group": {
-    "message": "QQ Group",
+    "message": "QQ 群 - 282870345",
     "description": "The label of footer link with label=QQ Group linking to https://qm.qq.com/cgi-bin/qm/qr?k=3IpzQjFOztJe464_eMBmDHfT0YTWK5Qa&jump_from=webapi"
   },
   "link.item.label.Blog": {
@@ -48,7 +48,7 @@
     "description": "The label of footer link with label=USTHE linking to https://github.com/usthe"
   },
   "copyright": {
-    "message": "Apache License, Version 2.0 | Copyright © 2021 USTHE.",
+    "message": "Apache License 2.0 | Copyright © 2021",
     "description": "The footer copyright"
   },
   "link.item.label.Dromara": {
