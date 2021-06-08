@@ -1,15 +1,15 @@
 const path = require('path')
 
-const organizationName = 'dromara' // Usually your GitHub org/user name.
+const organizationName = 'usthe' // Usually your GitHub org/user name.
 const projectName = 'sureness' // Usually your repo name.
 const branch = 'master'
-const repoUrl = `https://github.com/${organizationName}/${projectName}`
+const repoUrl = `https://github.com/dromara/${projectName}`
 
 module.exports = {
     title: 'Sureness',
     tagline: 'Focusing on Protection of REST API',
-    url: 'https://su.usthe.com',
-    baseUrl: '/',
+    url: 'https://usthe.com',
+    baseUrl: '/sureness/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
     favicon: 'img/icon64.png',
@@ -52,7 +52,8 @@ module.exports = {
         algolia: {
             apiKey: '31a1c9b96ae0df998aa655296167448f',
             indexName: 'sureness',
-            appId: 'GNVT7Z0UI2'
+            appId: 'GNVT7Z0UI2',
+            contextualSearch: true,
         },
         announcementBar: {
             id: "github-star",
@@ -90,7 +91,7 @@ module.exports = {
                 href: 'https://github.com/tomsun28/sureness-shiro-spring-security-benchmark',
               },
               {
-                label: 'Community',
+                label: 'Discuss',
                 position: 'left',
                 items: [
                   {
@@ -108,6 +109,24 @@ module.exports = {
                 ],
               },
                 {
+                    label: 'Other',
+                    position: 'left',
+                    items: [
+                        {
+                            label: 'Design',
+                            to: 'docs/design',
+                        },
+                        {
+                            label: 'Contributing',
+                            to: 'docs/contributing',
+                        },
+                        {
+                            label: 'Sponsor',
+                            to: 'docs/sponsor',
+                        },
+                    ],
+                },
+                {
                     type: 'localeDropdown',
                     position: 'right',
                 },
@@ -119,7 +138,7 @@ module.exports = {
                 },
             ],
           },
-          footer: {
+        footer: {
             style: 'light',
             links: [
               {
@@ -147,6 +166,10 @@ module.exports = {
                 title: 'Community',
                 items: [
                   {
+                    label: 'Dromara',
+                    href: 'https://dromara.org',
+                  },
+                  {
                     label: 'Github Discussion',
                     href: 'https://github.com/dromara/sureness/discussions',
                   },
@@ -155,7 +178,7 @@ module.exports = {
                     href: 'https://gitter.im/usthe/sureness',
                   },
                   {
-                    label: 'QQ Group',
+                    label: 'QQ Group - 282870345',
                     href: 'https://qm.qq.com/cgi-bin/qm/qr?k=3IpzQjFOztJe464_eMBmDHfT0YTWK5Qa&jump_from=webapi',
                   },
                 ],
@@ -164,22 +187,26 @@ module.exports = {
                 title: 'More',
                 items: [
                   {
-                    label: 'Blog',
-                    to: '/blog',
+                    label: 'Tom Blog',
+                    to: 'https://blog.usthe.com',
                   },
                   {
                     label: 'USTHE',
                     href: 'https://github.com/usthe',
+                  },
+                  {
+                    label: 'Tom',
+                    href: 'https://github.com/tomsun28',
                   },
                 ],
               },
             ],
             logo: {
               alt: 'Open Source Logo',
-              src: 'img/icon128.svg',
-              href: 'https://github.com/dromara/sureness',
+              src: 'img/dromara.jpg',
+              href: 'https://github.com/dromara',
             },
-            copyright: `Apache License, Version 2.0 | Copyright © ${new Date().getFullYear()} USTHE.`,
+            copyright: `Apache License 2.0 | Copyright © ${new Date().getFullYear()}`,
           },
     },
     presets: [
@@ -188,7 +215,9 @@ module.exports = {
                 docs: {
                     sidebarPath: require.resolve('./sidebars.json'),
                     // Please change this to your repo.
-                    editUrl:`${repoUrl}/edit/${branch}/home/`,
+                    // editUrl:'https://github.com/dromara/sureness/edit/master/home/',
+                    editUrl: `${repoUrl}/edit/${branch}/home/`,
+                    editLocalizedFiles: true,
                     remarkPlugins: [
                         [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
                     ],
@@ -198,10 +227,11 @@ module.exports = {
                     postsPerPage: 3,
                     feedOptions: {
                         type: 'all',
-                        copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
+                        copyright: `Copyright © ${new Date().getFullYear()} USTHE, Inc.`,
                     },
                     // Please change this to your repo.
                     editUrl: `${repoUrl}/edit/${branch}/home/`,
+                    editLocalizedFiles: true,
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),

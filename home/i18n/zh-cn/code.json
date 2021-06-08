@@ -132,7 +132,7 @@
     "description": "The label used for the latest version suggestion link label"
   },
   "theme.common.editThisPage": {
-    "message": "Edit this page",
+    "message": "帮助我们修改文档",
     "description": "The link label to edit the current page"
   },
   "theme.common.headingLinkTitle": {
@@ -190,5 +190,82 @@
   "theme.SearchBar.label": {
     "message": "Search",
     "description": "The ARIA label and placeholder for search button"
+  },
+  "Get Started": {
+    "message": "快速开始"
+  },
+  "theme.PwaReloadPopup.info": {
+    "message": "New version available",
+    "description": "The text for PWA reload popup"
+  },
+  "theme.PwaReloadPopup.refreshButtonText": {
+    "message": "Refresh",
+    "description": "The text for PWA reload button"
+  },
+  "theme.PwaReloadPopup.closeButtonAriaLabel": {
+    "message": "Close",
+    "description": "The ARIA label for close button of PWA reload popup"
+  },
+  "theme.Playground.result": {
+    "message": "Result",
+    "description": "The result label of the live codeblocks"
+  },
+  "theme.Playground.liveEditor": {
+    "message": "Live Editor",
+    "description": "The live editor label of the live codeblocks"
+  },
+  "Support for Jvm Modern Frameworks": {
+    "message": "适用大部分Jvm Web框架"
+  },
+  "Focusing on Protection of REST API": {
+    "message": "面向API的高性能认证鉴权框架"
+  },
+  "Extendable": {
+    "message": "可扩展"
+  },
+  "Compatible": {
+    "message": "原生兼容"
+  },
+  "Multi And Fast": {
+    "message": "多支持与高性能"
+  },
+  "Multi Support Samples": {
+    "message": "大量集成样例"
+  },
+  "Benchmark Compare": {
+    "message": "基准性能测试"
+  },
+  "Why Is High Performance": {
+    "message": "为什么高性能"
+  },
+  "Get Started With Sureness within Minutes": {
+    "message": "几分钟入门Sureness"
+  },
+  "Focus on the protection of {restApi}. Based on {rbac}.{br}Provides {authentication} and {authorization}, etc.{br}Extension custom interface is {simple} and really {useful}.": {
+    "message": "基于 {rbac} (用户-角色-资源)主要关注于对 {restApi} 的安全 (认证与鉴权) 保护。{br} 自定义Subject,Subject Creator,Processor和自定义数据源等良好的{interface}, {sample}和{doc}助急速理解扩展使用。"
+  },
+  "Support {WebSockets}, HTTP containers ({Servlet} and {JaxRs}).{br}No framework dependency.{native} supports {SpringBoot}, {Javalin}, {Quarkus},{Ktor}, {Solon}, {Jfinal}, {Micronaut} etc.": {
+    "message": "支持 {WebSockets} ,主流 HTTP 容器 {Servlet} 和 {JaxRs}。{br} 无特定Web框架依赖, 原生支持 {SpringBoot}, {Javalin}, {Quarkus}, {Ktor}, {Solon}, {Jfinal}, {Micronaut} 等。"
+  },
+  "Supports {jwt}, {basic}, {digest} etc.{br}{dynamic} modification of {perm}.{br}{high} with {tree}.": {
+    "message": "原生拥有 {jwt}, {basic}, {digest} 等认证方式。{br} 支持{dynamicCn}(动态配置每个 API 谁有权访问)。{br} 基于{treeCn}拥有的{highCn}。"
+  },
+  "Sureness allows you to security any server written with jvm modern frameworks such as {Spring}, {SpringBoot}, {Javalin}, {Quarkus}, {Micronaut}, {Solon}, {Jfinal} or {Ktor} as well as frameworks for Kotlin.": {
+    "message": "您可以通过使用Sureness来保护大部分JVM系语言的现代化框架搭建的后台服务,比如：Java 语言的 {Spring}, {SpringBoot}, {Javalin}, {Quarkus}, {Micronaut}, {Solon}, {Jfinal} 和 Kotlin 语言的 {Ktor}."
+  },
+  "The essence of Sureness is to use {interceptor}(like servlet filter or Spring interceptor)  to intercept all rest requests for authenticating and authorizing.{br}So no matter any framework, as long as it has a interceptor, it can integrate with sureness. Sureness uses {handling}, {checkIn} will return {SubjectSum}(user information) when auth success, or throw different types of auth exceptions when auth error.": {
+    "message": "Sureness的本质是使用{interceptor}(如 servlet filter or Spring interceptor)拦截所有API请求对其认证鉴权判断。{br} 所以对于任何Web框架，只要其支持拦截器{interceptor}, 就能轻松和Sureness集成。Sureness使用异常处理流程即{handling}, {checkIn} 方法会在认证鉴权成功后返回带有用户信息的 {SubjectSum} 对象，但认证鉴权失败时抛出不同类型的异常，用户根据这些异常来继续后面的流程。"
+  },
+  "{Benchmark} test shows Sureness to lose 0.026ms performance compared to frameless application, Shiro lose 0.088ms, Spring Security lose 0.116ms.{br}In contrast, Sureness basically does not consume performance, and the performance (TPS loss) is {times3} that of Shiro and {times4} that of Spring Security.{br}{increases}.": {
+    "message": "基准测试显示 Sureness 对比无权限框架应用损耗 0.026ms 性能，Shiro 损耗 0.088ms,Spring Security 损耗 0.116ms，相比之下 Sureness 性能(参考TPS损耗)是 Shiro 的 {times3cn}，Spring Security 的 {times4cn}。{br}{increaseCn}。"
+  },
+  "In a large number of requests, we found that the {linear} of the {filter} is a performance bottleneck. {br}So we used a {tree} instead of {ant}.{br}Practice has proved that it is very {effective}.": {
+    "message": "在大量的请求和过滤链匹配下，我们发现主要的性能瓶颈在{linearCn}这。{br} 所以我们使用了{treeCn}来代替其它安全框架常用的{antCn}。{br} 实践效果证明这有效，提升了{effCn}。"
+  },
+  "We provide many tutorials and samples, you can refer to them to builda complete permission project within 10 minutes.{br}Have Fun!": {
+    "message": "我们提供了很多教程和集成样例，您可以参考其中在10分钟之内使用 Sureness 做一个完整功能的认证鉴权项目。{br} Have Fun!"
+  },
+  "Friend Links": {
+    "message": "友情链接"
   }
 }
