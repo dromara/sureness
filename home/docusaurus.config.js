@@ -90,7 +90,7 @@ module.exports = {
                 href: 'https://github.com/tomsun28/sureness-shiro-spring-security-benchmark',
               },
               {
-                label: 'Community',
+                label: 'Discuss',
                 position: 'left',
                 items: [
                   {
@@ -107,6 +107,24 @@ module.exports = {
                   },
                 ],
               },
+                {
+                    label: 'Other',
+                    position: 'left',
+                    items: [
+                        {
+                            label: 'Design',
+                            to: 'docs/design',
+                        },
+                        {
+                            label: 'Contributing',
+                            to: 'docs/contributing',
+                        },
+                        {
+                            label: 'Sponsor',
+                            to: 'docs/sponsor',
+                        },
+                    ],
+                },
                 {
                     type: 'localeDropdown',
                     position: 'right',
@@ -147,6 +165,10 @@ module.exports = {
                 title: 'Community',
                 items: [
                   {
+                    label: 'Dromara',
+                    href: 'https://dromara.org',
+                  },
+                  {
                     label: 'Github Discussion',
                     href: 'https://github.com/dromara/sureness/discussions',
                   },
@@ -155,7 +177,7 @@ module.exports = {
                     href: 'https://gitter.im/usthe/sureness',
                   },
                   {
-                    label: 'QQ Group',
+                    label: 'QQ Group - 282870345',
                     href: 'https://qm.qq.com/cgi-bin/qm/qr?k=3IpzQjFOztJe464_eMBmDHfT0YTWK5Qa&jump_from=webapi',
                   },
                 ],
@@ -164,16 +186,16 @@ module.exports = {
                 title: 'More',
                 items: [
                   {
-                    label: 'Blog',
-                    to: '/blog',
+                    label: 'Tom Blog',
+                    to: 'https://blog.usthe.com',
                   },
                   {
                     label: 'USTHE',
                     href: 'https://github.com/usthe',
                   },
                   {
-                    label: 'Dromara',
-                    href: 'https://dromara.org',
+                    label: 'Tom',
+                    href: 'https://github.com/tomsun28',
                   },
                 ],
               },

@@ -84,6 +84,22 @@ export const features = [{
     ),
 }]
 
+export const friendLinks = [
+    {
+        img: 'justauth_logo.png',
+        alt: 'Justauth',
+        url: 'https://justauth.wiki/'
+    }, {
+        img: 'maxKey_logo.png',
+        alt: 'MaxKey',
+        url: 'https://maxkey.top/'
+    }, {
+        img: 'pha_logo.jfif',
+        alt: 'pha_api',
+        url: 'https://www.phalapi.net/'
+    }
+]
+
 export const logos = [{
 /**
  * Page 1

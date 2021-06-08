@@ -241,9 +241,6 @@
   "Get Started With Sureness within Minutes": {
     "message": "几分钟入门Sureness"
   },
-  "Sureness Friends": {
-    "message": "Sureness Friends"
-  },
   "Focus on the protection of {restApi}. Based on {rbac}.{br}Provides {authentication} and {authorization}, etc.{br}Extension custom interface is {simple} and really {useful}.": {
     "message": "基于 {rbac} (用户-角色-资源)主要关注于对 {restApi} 的安全 (认证与鉴权) 保护。{br} 自定义Subject,Subject Creator,Processor和自定义数据源等良好的{interface}, {sample}和{doc}助急速理解扩展使用。"
   },
@@ -267,5 +264,8 @@
   },
   "We provide many tutorials and samples, you can refer to them to builda complete permission project within 10 minutes.{br}Have Fun!": {
     "message": "我们提供了很多教程和集成样例，您可以参考其中在10分钟之内使用 Sureness 做一个完整功能的认证鉴权项目。{br} Have Fun!"
+  },
+  "Friend Links": {
+    "message": "友情链接"
   }
 }

@@ -15,9 +15,9 @@
     "message": "高性能",
     "description": "Navbar item with label High Performance"
   },
-  "item.label.Community": {
-    "message": "社区",
-    "description": "Navbar item with label Community"
+  "item.label.Discuss": {
+    "message": "讨论",
+    "description": "Navbar item with label Discuss"
   },
   "item.label.Github Discussion": {
     "message": "Github Discussion",
@@ -34,5 +34,21 @@
   "item.label.Blog": {
     "message": "博客",
     "description": "Navbar item with label Blog"
+  },
+  "item.label.Other": {
+    "message": "其它",
+    "description": "Navbar item with label Other"
+  },
+  "item.label.Design": {
+    "message": "设计文档",
+    "description": "Navbar item with label Design"
+  },
+  "item.label.Contributing": {
+    "message": "参与贡献",
+    "description": "Navbar item with label Contributing"
+  },
+  "item.label.Sponsor": {
+    "message": "赞助",
+    "description": "Navbar item with label Sponsor"
   }
 }

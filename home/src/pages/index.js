@@ -13,7 +13,7 @@ import Highlight from './components/Highlight'
 import LogoCarousel from './components/LogoCarousel'
 
 import styles from './styles.module.css'
-import { features, SetupExample, SurenessIntegration, logos } from '../constants'
+import { features, SetupExample, SurenessIntegration, friendLinks } from '../constants'
 
 function Home() {
     const context = useDocusaurusContext()
@@ -298,9 +298,9 @@ function Home() {
                         </>
                     }
                 />
-                {/*who is using*/}
+                {/*Friend Links*/}
                 <Section>
-                    <LogoCarousel logos={logos}></LogoCarousel>
+                    <LogoCarousel logos={friendLinks} headerTitle={translate({message: 'Friend Links'})}></LogoCarousel>
                 </Section>
             </main>
         </Layout>
