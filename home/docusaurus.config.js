@@ -52,7 +52,8 @@ module.exports = {
         algolia: {
             apiKey: '31a1c9b96ae0df998aa655296167448f',
             indexName: 'sureness',
-            appId: 'GNVT7Z0UI2'
+            appId: 'GNVT7Z0UI2',
+            contextualSearch: true,
         },
         announcementBar: {
             id: "github-star",

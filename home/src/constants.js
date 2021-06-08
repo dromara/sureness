@@ -90,7 +90,7 @@ export const friendLinks = [
         alt: 'Justauth',
         url: 'https://justauth.wiki/'
     }, {
-        img: 'maxKey_logo.png',
+        img: 'maxkey_logo.png',
         alt: 'MaxKey',
         url: 'https://maxkey.top/'
     }, {
