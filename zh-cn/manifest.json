@@ -1,0 +1,21 @@
+{
+  "name": "Sureness",
+  "short_name": "Sureness",
+  "theme_color": "#ea5a07",
+  "background_color": "#efefef",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./index.html",
+  "icons": [
+    {
+      "src": "img/icons/brand64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/brand128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ]
+}

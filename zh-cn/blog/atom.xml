@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://dromara.org/blog</id>
+    <title>Sureness Blog</title>
+    <updated>2021-06-06T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://dromara.org/blog"/>
+    <subtitle>Sureness Blog</subtitle>
+    <icon>https://dromara.org/img/icon64.png</icon>
+    <rights>Copyright © 2021 USTHE, Inc.</rights>
+    <entry>
+        <title type="html"><![CDATA[使用Sureness一步一步搭建一个完整认证鉴权项目]]></title>
+        <id>使用Sureness一步一步搭建一个完整认证鉴权项目</id>
+        <link href="https://dromara.org/sureness/zh-cn/blog/2021/06/06/step-by-step"/>
+        <updated>2021-06-06T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[下面我们来一步一步基于springboot,sureness搭建一个如下功能的认证鉴权系统。]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Using Sureness to secure micronaut REST API]]></title>
+        <id>Using Sureness to secure micronaut REST API</id>
+        <link href="https://dromara.org/sureness/zh-cn/blog/2021/04/29/sample-micronaut"/>
+        <updated>2021-04-29T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Using Sureness to secure micronaut REST API by providing authentication(JWT,Basic,Digest) and authorization(RBAC)]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Using Sureness to secure Javalin REST API]]></title>
+        <id>Using Sureness to secure Javalin REST API</id>
+        <link href="https://dromara.org/sureness/zh-cn/blog/2021/04/16/sample-javalin"/>
+        <updated>2021-04-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[javalin-sureness sample repository]]></summary>
+    </entry>
+</feed>
