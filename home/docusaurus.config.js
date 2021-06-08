@@ -138,7 +138,7 @@ module.exports = {
                 },
             ],
           },
-          footer: {
+        footer: {
             style: 'light',
             links: [
               {
@@ -215,7 +215,9 @@ module.exports = {
                 docs: {
                     sidebarPath: require.resolve('./sidebars.json'),
                     // Please change this to your repo.
-                    editUrl:`${repoUrl}/edit/${branch}/home/`,
+                    // editUrl:'https://github.com/dromara/sureness/edit/master/home/',
+                    editUrl: `${repoUrl}/edit/${branch}/home/`,
+                    editLocalizedFiles: true,
                     remarkPlugins: [
                         [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
                     ],
@@ -229,6 +231,7 @@ module.exports = {
                     },
                     // Please change this to your repo.
                     editUrl: `${repoUrl}/edit/${branch}/home/`,
+                    editLocalizedFiles: true,
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
