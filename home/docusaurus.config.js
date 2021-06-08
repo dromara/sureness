@@ -1,14 +1,14 @@
 const path = require('path')
 
-const organizationName = 'dromara' // Usually your GitHub org/user name.
+const organizationName = 'usthe' // Usually your GitHub org/user name.
 const projectName = 'sureness' // Usually your repo name.
 const branch = 'master'
-const repoUrl = `https://github.com/${organizationName}/${projectName}`
+const repoUrl = `https://github.com/dromara/${projectName}`
 
 module.exports = {
     title: 'Sureness',
     tagline: 'Focusing on Protection of REST API',
-    url: 'https://dromara.org',
+    url: 'https://usthe.com',
     baseUrl: '/sureness/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
