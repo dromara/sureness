@@ -8,6 +8,7 @@ tags: [integrate]
 
 Using Sureness to secure micronaut REST API by providing authentication(JWT,Basic,Digest) and authorization(RBAC)
 
+<!--truncate-->
 
 ## What You Will Learn
 

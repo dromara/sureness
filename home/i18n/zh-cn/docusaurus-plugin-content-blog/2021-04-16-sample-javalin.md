@@ -7,13 +7,11 @@ author_image_url: https://avatars.githubusercontent.com/u/24788200?s=400&v=4
 tags: [integrate]  
 ---
 
-
-# Using Sureness to protect the security of Javalin REST API
-
 [javalin-sureness sample repository](https://github.com/tomsun28/sureness/tree/master/samples/javalin-sureness)
 
 Using Sureness to secure Javalin REST API by providing authentication(JWT,Basic,Digest) and authorization(RBAC)
 
+<!--truncate-->
 
 ## What You Will Learn
 

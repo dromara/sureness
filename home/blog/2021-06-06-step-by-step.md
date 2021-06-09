@@ -13,6 +13,8 @@ tags: [integrate,startup]
 2. 系统基于rbac权限模型，支持basic认证，digest认证，jwt认证。  
 3. 能细粒度的控制用户对系统提供的restful api的访问权限，即哪些用户能访问哪些api。  
 
+<!--truncate-->
+
 多说无益，快速开始！  
 
 这里为了照顾到刚入门的同学，图文展示了每一步操作。有基础可直接略过。  

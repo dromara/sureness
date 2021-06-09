@@ -35,14 +35,6 @@
     "message": "Gitter Channel",
     "description": "The label of footer link with label=Gitter Channel linking to https://gitter.im/usthe/sureness"
   },
-  "link.item.label.QQ Group": {
-    "message": "QQ 群 - 282870345",
-    "description": "The label of footer link with label=QQ Group linking to https://qm.qq.com/cgi-bin/qm/qr?k=3IpzQjFOztJe464_eMBmDHfT0YTWK5Qa&jump_from=webapi"
-  },
-  "link.item.label.Blog": {
-    "message": "博客",
-    "description": "The label of footer link with label=Blog linking to /blog"
-  },
   "link.item.label.USTHE": {
     "message": "USTHE",
     "description": "The label of footer link with label=USTHE linking to https://github.com/usthe"
@@ -52,7 +44,19 @@
     "description": "The footer copyright"
   },
   "link.item.label.Dromara": {
-    "message": "Dromara",
+    "message": "Dromara 社区",
     "description": "The label of footer link with label=Dromara linking to https://dromara.org"
+  },
+  "link.item.label.QQ Group - 282870345": {
+    "message": "QQ 群 - 282870345",
+    "description": "The label of footer link with label=QQ Group - 282870345 linking to https://qm.qq.com/cgi-bin/qm/qr?k=3IpzQjFOztJe464_eMBmDHfT0YTWK5Qa&jump_from=webapi"
+  },
+  "link.item.label.Tom Blog": {
+    "message": "Tom 博客",
+    "description": "The label of footer link with label=Tom Blog linking to https://blog.usthe.com"
+  },
+  "link.item.label.Tom": {
+    "message": "Tom",
+    "description": "The label of footer link with label=Tom linking to https://github.com/tomsun28"
   }
 }
