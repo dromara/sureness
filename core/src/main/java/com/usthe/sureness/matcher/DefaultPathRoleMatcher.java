@@ -91,7 +91,6 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     @Override
     public void rebuildTree() {
         checkComponentInit();
-        clearTree();
         Set<String> resources = new HashSet<>();
         Set<String> excludeResources = new HashSet<>();
         for (PathTreeProvider provider : pathTreeProviderList) {
