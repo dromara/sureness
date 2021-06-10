@@ -18,7 +18,7 @@
 
 <a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt"/></a>
 
-**主页: [dromara.org/sureness](https://dromara.org/sureness), 备用网站: [su.usthe.com](https://su.usthe.com/)**  
+**官网: [usthe.com/sureness](https://usthe.com/sureness) | [su.usthe.com](https://su.usthe.com/)**  
 
 
 ## 📫 背景         

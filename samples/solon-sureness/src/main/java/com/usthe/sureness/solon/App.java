@@ -15,10 +15,10 @@ import java.util.UUID;
  * @author tomsun28
  * @date 2021/5/7 19:53
  */
-public class Application {
+public class App {
 
     public static void main(String[] args) {
-        SolonApp app = Solon.start(Application.class, args);
+        SolonApp app = Solon.start(App.class, args);
 
         // issue jwt rest api
         app.get("/auth/token", ctx -> {
@@ -36,6 +36,6 @@ public class Application {
             }
         });
 
-        app.after("**", context -> SurenessContextHolder.unbindSubject());
+        app.after(ctx -> SurenessContextHolder.unbindSubject());
     }
 }
