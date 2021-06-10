@@ -62,7 +62,6 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     public void buildTree() {
         isTreeInit = false;
         checkComponentInit();
-        clearTree();
         Set<String> resources = new HashSet<>();
         Set<String> excludeResources = new HashSet<>();
         for (PathTreeProvider provider : pathTreeProviderList) {
