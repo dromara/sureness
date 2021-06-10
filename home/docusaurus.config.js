@@ -103,7 +103,7 @@ module.exports = {
                     href: 'https://gitter.im/usthe/sureness',
                   },
                   {
-                    label: 'QQ Group - 282870345',
+                    label: 'QQ Group - 390083213',
                     href: 'https://qm.qq.com/cgi-bin/qm/qr?k=3IpzQjFOztJe464_eMBmDHfT0YTWK5Qa&jump_from=webapi',
                   },
                 ],
@@ -178,7 +178,7 @@ module.exports = {
                     href: 'https://gitter.im/usthe/sureness',
                   },
                   {
-                    label: 'QQ Group - 282870345',
+                    label: 'QQ Group - 390083213',
                     href: 'https://qm.qq.com/cgi-bin/qm/qr?k=3IpzQjFOztJe464_eMBmDHfT0YTWK5Qa&jump_from=webapi',
                   },
                 ],
