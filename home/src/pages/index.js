@@ -27,7 +27,7 @@ function Home() {
                     <h1 className="hero__title">
                         <img src="img/brand128.svg"/>
                     </h1>
-                    <p className="hero__subtitle"><Translate>Focusing on Protection of REST API</Translate></p>
+                    <p className="hero__subtitle"><Translate>Focus on Protection of API</Translate></p>
                     <div className={styles.social}>
                         <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img
                             src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg"/></a>
@@ -92,6 +92,7 @@ function Home() {
                                 <Translate values={{
                                     Spring: <a href="https://spring.io/">Spring</a>,
                                     SpringBoot: <a href="https://spring.io/">Spring Boot</a>,
+                                    SpringWebFlux: <a href="https://spring.io">Spring WebFlux</a>,
                                     Javalin: <a href="https://javalin.io/">Javalin</a>,
                                     Quarkus: <a href="https://quarkus.io/">Quarkus</a>,
                                     Micronaut: <a href="https://micronaut.io/">Micronaut</a>,
@@ -100,7 +101,7 @@ function Home() {
                                     Ktor: <a href="https://ktor.io/">Ktor</a>,
                                     br: <br/>
                                 }}>
-                                    {'Sureness allows you to security any server written with jvm modern frameworks such as {Spring}, {SpringBoot}, {Javalin}, ' +
+                                    {'Sureness allows you to security any server written with jvm modern frameworks such as {Spring}, {SpringBoot}, {SpringWebFlux}, {Javalin}, ' +
                                     '{Quarkus}, {Micronaut}, {Solon}, {Jfinal} or {Ktor} as well as frameworks for Kotlin.'
                                     }
                                 </Translate>

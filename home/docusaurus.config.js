@@ -7,7 +7,7 @@ const repoUrl = `https://github.com/dromara/${projectName}`
 
 module.exports = {
     title: 'Sureness',
-    tagline: 'Focusing on Protection of REST API',
+    tagline: 'Focus on Protection of API',
     url: 'https://usthe.com',
     baseUrl: '/sureness/',
     onBrokenLinks: 'throw',
@@ -66,7 +66,7 @@ module.exports = {
         navbar: {
             title: ' ',
             logo: {
-              alt: 'Focusing on Protection of REST API',
+              alt: 'Focus on Protection of API',
               src: 'img/icon128.svg',
             },
             items: [

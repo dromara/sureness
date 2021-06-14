@@ -39,6 +39,7 @@ export const features = [{
                 JaxRs: <strong>JAX-RS</strong>,
                 native: <strong>Native</strong>,
                 SpringBoot: <strong>Spring Boot</strong>,
+                SpringWebFlux: <strong>Spring WebFlux</strong>,
                 Javalin: <strong>Javalin</strong>,
                 Quarkus: <strong>Quarkus</strong>,
                 Ktor: <strong>Ktor</strong>,
@@ -49,7 +50,7 @@ export const features = [{
             }}>
                 {'Support {WebSockets}, HTTP containers ({Servlet} and {JaxRs}).{br}' +
                 'No framework dependency.' +
-                '{native} supports {SpringBoot}, {Javalin}, {Quarkus},' +
+                '{native} supports {SpringBoot}, {SpringWebFlux}, {Javalin}, {Quarkus},' +
                 '{Ktor}, {Solon}, {Jfinal}, {Micronaut} etc.'
                 }
             </Translate>

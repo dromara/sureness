@@ -217,7 +217,7 @@
   "Support for Jvm Modern Frameworks": {
     "message": "适用大部分Jvm Web框架"
   },
-  "Focusing on Protection of REST API": {
+  "Focus on Protection of API": {
     "message": "面向API的高性能认证鉴权框架"
   },
   "Extendable": {
@@ -244,14 +244,14 @@
   "Focus on the protection of {restApi}. Based on {rbac}.{br}Provides {authentication} and {authorization}, etc.{br}Extension custom interface is {simple} and really {useful}.": {
     "message": "基于 {rbac} (用户-角色-资源)主要关注于对 {restApi} 的安全 (认证与鉴权) 保护。{br} 自定义Subject,Subject Creator,Processor和自定义数据源等良好的{interface}, {sample}和{doc}助急速理解扩展使用。"
   },
-  "Support {WebSockets}, HTTP containers ({Servlet} and {JaxRs}).{br}No framework dependency.{native} supports {SpringBoot}, {Javalin}, {Quarkus},{Ktor}, {Solon}, {Jfinal}, {Micronaut} etc.": {
-    "message": "支持 {WebSockets} ,主流 HTTP 容器 {Servlet} 和 {JaxRs}。{br} 无特定Web框架依赖, 原生支持 {SpringBoot}, {Javalin}, {Quarkus}, {Ktor}, {Solon}, {Jfinal}, {Micronaut} 等。"
+  "Support {WebSockets}, HTTP containers ({Servlet} and {JaxRs}).{br}No framework dependency.{native} supports {SpringBoot}, {SpringWebFlux}, {Javalin}, {Quarkus},{Ktor}, {Solon}, {Jfinal}, {Micronaut} etc.": {
+    "message": "支持 {WebSockets} ,主流 HTTP 容器 {Servlet} 和 {JaxRs}。{br} 无特定Web框架依赖, 原生支持 {SpringBoot}, {SpringWebFlux}, {Javalin}, {Quarkus}, {Ktor}, {Solon}, {Jfinal}, {Micronaut} 等。"
   },
   "Supports {jwt}, {basic}, {digest} etc.{br}{dynamic} modification of {perm}.{br}{high} with {tree}.": {
     "message": "原生拥有 {jwt}, {basic}, {digest} 等认证方式。{br} 支持{dynamicCn}(动态配置每个 API 谁有权访问)。{br} 基于{treeCn}拥有的{highCn}。"
   },
-  "Sureness allows you to security any server written with jvm modern frameworks such as {Spring}, {SpringBoot}, {Javalin}, {Quarkus}, {Micronaut}, {Solon}, {Jfinal} or {Ktor} as well as frameworks for Kotlin.": {
-    "message": "您可以通过使用Sureness来保护大部分JVM系语言的现代化框架搭建的后台服务,比如：Java 语言的 {Spring}, {SpringBoot}, {Javalin}, {Quarkus}, {Micronaut}, {Solon}, {Jfinal} 和 Kotlin 语言的 {Ktor}."
+  "Sureness allows you to security any server written with jvm modern frameworks such as {Spring}, {SpringBoot}, {SpringWebFlux}, {Javalin}, {Quarkus}, {Micronaut}, {Solon}, {Jfinal} or {Ktor} as well as frameworks for Kotlin.": {
+    "message": "您可以通过使用Sureness来保护大部分JVM系语言的现代化框架搭建的后台服务,比如：Java 语言的 {Spring}, {SpringBoot}, {SpringWebFlux}, {Javalin}, {Quarkus}, {Micronaut}, {Solon}, {Jfinal} 和 Kotlin 语言的 {Ktor}."
   },
   "The essence of Sureness is to use {interceptor}(like servlet filter or Spring interceptor)  to intercept all rest requests for authenticating and authorizing.{br}So no matter any framework, as long as it has a interceptor, it can integrate with sureness. Sureness uses {handling}, {checkIn} will return {SubjectSum}(user information) when auth success, or throw different types of auth exceptions when auth error.": {
     "message": "Sureness的本质是使用{interceptor}(如 servlet filter or Spring interceptor)拦截所有API请求对其认证鉴权判断。{br} 所以对于任何Web框架，只要其支持拦截器{interceptor}, 就能轻松和Sureness集成。Sureness使用异常处理流程即{handling}, {checkIn} 方法会在认证鉴权成功后返回带有用户信息的 {SubjectSum} 对象，但认证鉴权失败时抛出不同类型的异常，用户根据这些异常来继续后面的流程。"
