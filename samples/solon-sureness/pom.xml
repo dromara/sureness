@@ -14,7 +14,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <solon.ver>1.4.8</solon.ver>
+        <solon.ver>1.5.1</solon.ver>
     </properties>
 
     <dependencies>

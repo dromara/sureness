@@ -21,7 +21,7 @@
     <dependency>
       <groupId>com.usthe.sureness</groupId>
       <artifactId>solon-plugin-sureness</artifactId>
-      <version>${parent.version}</version>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
