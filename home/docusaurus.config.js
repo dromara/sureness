@@ -50,9 +50,9 @@ module.exports = {
             additionalLanguages: ['java'],
         },
         algolia: {
-            apiKey: '31a1c9b96ae0df998aa655296167448f',
+            apiKey: 'c7c84bfcc1495156f5730309d821ba8c',
             indexName: 'sureness',
-            appId: 'GNVT7Z0UI2',
+            // appId: 'GNVT7Z0UI2',
             contextualSearch: true,
         },
         announcementBar: {

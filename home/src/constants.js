@@ -87,17 +87,37 @@ export const features = [{
 
 export const friendLinks = [
     {
-        img: 'justauth_logo.png',
-        alt: 'Justauth',
-        url: 'https://justauth.wiki/'
+        img: 'ShenYu_logo.png',
+        alt: 'ShenYu',
+        url: 'https://dromara.org/projects/soul/overview/'
     }, {
         img: 'maxkey_logo.png',
         alt: 'MaxKey',
         url: 'https://maxkey.top/'
     }, {
+        img: 'tlog_logo.png',
+        alt: 'TLog',
+        url: 'https://yomahub.com/tlog/'
+    }, {
+        img: 'hutool_logo.jpg',
+        alt: 'Hutool',
+        url: 'https://hutool.cn/'
+    }, {
+        img: 'satoken_logo.png',
+        alt: 'Sa-Token',
+        url: 'http://sa-token.dev33.cn/'
+    }, {
+        img: 'justauth_logo.png',
+        alt: 'Justauth',
+        url: 'https://justauth.wiki/'
+    }, {
         img: 'pha_logo.jfif',
         alt: 'pha_api',
         url: 'https://www.phalapi.net/'
+    }, {
+        img: 'liteflow_logo.png',
+        alt: 'LiteFlow',
+        url: 'https://yomahub.com/liteflow/'
     }
 ]
 
