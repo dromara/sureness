@@ -54,12 +54,12 @@ public class SurenessFilter extends ZuulFilter {
                 SurenessContextHolder.bindSubject(subject);
             }
         } catch (IncorrectCredentialsException | UnknownAccountException | ExpiredCredentialsException e1) {
-            logger.debug("request account auth error, maybe username, password or expired credential");
-            responseWrite(context, HttpStatus.UNAUTHORIZED, e1.getMessage(), null);
+            logger.debug("request account auth error, maybe username, password or expired credential, {}", e1.getMessage());
+            responseWrite(context, HttpStatus.UNAUTHORIZED, "request account auth error, maybe username, password or expired credential", null);
             return null;
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            logger.debug("the account is disabled");
-            responseWrite(context, HttpStatus.UNAUTHORIZED, e2.getMessage(), null);
+            logger.debug("the account is disabled, {}", e2.getMessage());
+            responseWrite(context, HttpStatus.UNAUTHORIZED, "Account is disabled", null);
             return null;
         } catch (NeedDigestInfoException e5) {
             logger.debug("you should try once again with digest auth information");
@@ -74,7 +74,7 @@ public class SurenessFilter extends ZuulFilter {
             return null;
         } catch (RuntimeException e) {
             logger.error("other exception happen: ", e);
-            responseWrite(context, HttpStatus.FORBIDDEN, e.getMessage(), null);
+            responseWrite(context, HttpStatus.FORBIDDEN, null, null);
             return null;
         }
         return null;

@@ -55,9 +55,10 @@ public class SurenessFilterExample implements Filter {
                 SurenessContextHolder.bindSubject(subject);
             }
         } catch (IncorrectCredentialsException | UnknownAccountException | ExpiredCredentialsException e1) {
-            logger.debug("this request account info is illegal");
+            logger.debug("this request account info is illegal, {}", e1.getMessage());
             responseWrite(ResponseEntity
-                    .status(HttpStatus.UNAUTHORIZED).body(e1.getMessage()), servletResponse);
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body("Username or password is incorrect or expired"), servletResponse);
             return;
         } catch (NeedDigestInfoException e5) {
             logger.debug("you should try once again with digest auth information");
@@ -66,9 +67,10 @@ public class SurenessFilterExample implements Filter {
                     .header("WWW-Authenticate", e5.getAuthenticate()).build(), servletResponse);
             return;
         } catch (UnauthorizedException e6) {
-            logger.debug("this account can not access this resource");
+            logger.debug("this account can not access this resource, {}", e6.getMessage());
             responseWrite(ResponseEntity
-                    .status(HttpStatus.FORBIDDEN).body(e6.getMessage()), servletResponse);
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("This account has no permission to access this resource"), servletResponse);
             return;
         } catch (RuntimeException e) {
             logger.error("other exception happen: ", e);

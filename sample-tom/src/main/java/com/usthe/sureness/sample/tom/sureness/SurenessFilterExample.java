@@ -52,14 +52,14 @@ public class SurenessFilterExample implements Filter {
                 SurenessContextHolder.bindSubject(subject);
             }
         } catch (IncorrectCredentialsException | UnknownAccountException | ExpiredCredentialsException e1) {
-            logger.debug("this request account info is illegal");
+            logger.debug("this request account info is illegal, {}", e1.getMessage());
             responseWrite(ResponseEntity
-                    .status(HttpStatus.UNAUTHORIZED).body("bad request, can not Auth"), servletResponse);
+                    .status(HttpStatus.UNAUTHORIZED).body("Username or password is incorrect or expired"), servletResponse);
             return;
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
-            logger.debug("the account is disabled");
+            logger.debug("the account is disabled, {}", e2.getMessage());
             responseWrite(ResponseEntity
-                    .status(HttpStatus.UNAUTHORIZED).body(e2.getMessage()), servletResponse);
+                    .status(HttpStatus.UNAUTHORIZED).body("Account is disabled"), servletResponse);
             return;
         } catch (RefreshExpiredTokenException e4) {
             logger.debug("this account credential token is expired, return refresh value");
@@ -68,9 +68,10 @@ public class SurenessFilterExample implements Filter {
                     .status(HttpStatus.UNAUTHORIZED).body(refreshTokenMap), servletResponse);
             return;
         } catch (UnauthorizedException e5) {
-            logger.debug("this account can not access this resource");
+            logger.debug("this account can not access this resource, {}", e5.getMessage());
             responseWrite(ResponseEntity
-                    .status(HttpStatus.FORBIDDEN).body(e5.getMessage()), servletResponse);
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("This account has no permission to access this resource"), servletResponse);
             return;
         } catch (RuntimeException e) {
             logger.error("other exception happen: ", e);
