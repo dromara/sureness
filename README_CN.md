@@ -9,7 +9,7 @@
 > 面向`REST API`的高性能认证鉴权框架   
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Maven](https://img.shields.io/badge/Maven%20Central-1.0.3-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core)
+[![Maven](https://img.shields.io/badge/Maven%20Central-1.0.4-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core)
 ![GitHub pull request check contexts](https://img.shields.io/github/status/contexts/pulls/dromara/sureness/8?label=pull%20checks)
 [![Gitter](https://img.shields.io/gitter/room/usthe/sureness?label=sureness&color=orange&logo=gitter&logoColor=red)](https://gitter.im/usthe/sureness)
 ![GitHub Release Date](https://img.shields.io/github/release-date/dromara/sureness?color=blue&logo=figshare&logoColor=red)
@@ -100,11 +100,11 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.3'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.4'
 ```
 
 #### 🐵 使用默认配置来配置Sureness    
