@@ -29,12 +29,6 @@
             <artifactId>sureness-core</artifactId>
         </dependency>
 
-        <dependency>
-            <artifactId>sureness-spring-autoconfigure</artifactId>
-            <groupId>com.usthe.sureness</groupId>
-            <version>${project.version}</version>
-        </dependency>
-
     </dependencies>
 
 
