@@ -13,6 +13,7 @@
         <module>sample-bootstrap</module>
         <module>sample-tom</module>
         <module>samples</module>
+        <module>support</module>
     </modules>
 
     <properties>
