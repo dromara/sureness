@@ -25,6 +25,7 @@
         <module>solon-plugin-sureness-demo</module>
         <module>spring-gateway-sureness</module>
         <module>zuul-sureness</module>
+        <module>sureness-spring-boot-starter-example</module>
     </modules>
 
     <dependencyManagement>
