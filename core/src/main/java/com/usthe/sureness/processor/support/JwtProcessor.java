@@ -64,18 +64,18 @@ public class JwtProcessor extends BaseProcessor {
             }
             throw new ExpiredCredentialsException("this jwt has expired");
         }
-        JwtSubject.Builder builder = JwtSubject.builder(var)
-                .setPrincipal(claims.getSubject());
+        // attention: need to set subject own roles from account
+        var.setPrincipal(claims.getSubject());
         List<String> ownRoles = claims.get("roles", List.class);
         if (ownRoles != null) {
-            builder.setOwnRoles(ownRoles);
+            var.setOwnRoles(ownRoles);
         }
         PrincipalMap principalMap = new SinglePrincipalMap();
         for (Map.Entry<String, Object> claimEntry : claims.entrySet()) {
             principalMap.setPrincipal(claimEntry.getKey(), claimEntry.getValue());
         }
-        builder.setPrincipalMap(principalMap);
-        return builder.build();
+        var.setPrincipalMap(principalMap);
+        return var;
     }
 
 }

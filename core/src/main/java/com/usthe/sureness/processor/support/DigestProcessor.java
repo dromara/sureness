@@ -82,9 +82,9 @@ public class DigestProcessor extends BaseProcessor {
         if (account.isExcessiveAttempts()) {
             throw new ExcessiveAttemptsException("account is disable due to many time authenticated, try later");
         }
-        return DigestSubject.builder(var)
-                .setOwnRoles(account.getOwnRoles())
-                .build();
+        // attention: need to set subject own roles from account
+        var.setOwnRoles(account.getOwnRoles());
+        return var;
     }
 
     private String getAuthenticate(){
