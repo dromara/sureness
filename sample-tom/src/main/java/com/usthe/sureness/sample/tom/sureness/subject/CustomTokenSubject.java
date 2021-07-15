@@ -51,8 +51,18 @@ public class CustomTokenSubject implements Subject {
     }
 
     @Override
+    public void setPrincipal(Object var1) {
+        this.appId = (String) appId;
+    }
+
+    @Override
     public PrincipalMap getPrincipalMap() {
         return null;
+    }
+
+    @Override
+    public void setPrincipalMap(PrincipalMap var1) {
+
     }
 
     @Override
@@ -61,13 +71,29 @@ public class CustomTokenSubject implements Subject {
     }
 
     @Override
+    public void setCredential(Object var1) {
+        this.token = (String) token;
+    }
+
+    @Override
     public Object getOwnRoles() {
         return this.ownRoles;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void setOwnRoles(Object var1) {
+        this.ownRoles = (List<String>) var1;
     }
 
     @Override
     public Object getTargetResource() {
         return this.targetUri;
+    }
+
+    @Override
+    public void setTargetResource(Object var1) {
+        this.targetUri = (String) targetUri;
     }
 
     @Override
