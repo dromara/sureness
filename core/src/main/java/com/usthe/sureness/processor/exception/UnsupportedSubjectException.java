@@ -16,7 +16,7 @@ public class UnsupportedSubjectException extends SurenessAuthenticationException
      * single instance for UnsupportedSubjectException
      * @return instance exception
      */
-    public static RuntimeException getInstance() {
+    public static RuntimeException getDefaultInstance() {
         return Instance.INSTANCE;
     }
 

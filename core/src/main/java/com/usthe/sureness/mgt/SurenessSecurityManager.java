@@ -69,7 +69,7 @@ public class SurenessSecurityManager implements SecurityManager {
 
         // Create a subject list to try auth one by one
         List<Subject> subjectList = createSubject(request);
-        RuntimeException lastException = UnsupportedSubjectException.getInstance();
+        RuntimeException lastException = UnsupportedSubjectException.getDefaultInstance();
 
         // for the subject keys, try one by one
         // if one success, pass and return directly
