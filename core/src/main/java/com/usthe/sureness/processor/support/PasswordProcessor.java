@@ -67,12 +67,9 @@ public class PasswordProcessor extends BaseProcessor {
         if (account.isExcessiveAttempts()) {
             throw new ExcessiveAttemptsException("account is disable due to many time authenticated, try later");
         }
-        // attention
-        var.setSupportRoles(account.getOwnRoles());
+        // attention: need to set subject own roles from account
+        var.setOwnRoles(account.getOwnRoles());
         return var;
-//        return PasswordSubject.builder(var)
-//                .setOwnRoles(account.getOwnRoles())
-//                .build();
     }
 
     public void setAccountProvider(SurenessAccountProvider provider) {
