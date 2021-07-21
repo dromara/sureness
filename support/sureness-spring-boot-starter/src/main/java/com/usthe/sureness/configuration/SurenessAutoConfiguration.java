@@ -3,6 +3,7 @@ package com.usthe.sureness.configuration;
 import com.usthe.sureness.matcher.DefaultPathRoleMatcher;
 import com.usthe.sureness.matcher.PathTreeProvider;
 import com.usthe.sureness.matcher.TreePathRoleMatcher;
+import com.usthe.sureness.mgt.SecurityManager;
 import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.processor.DefaultProcessorManager;
 import com.usthe.sureness.processor.Processor;
@@ -31,16 +32,20 @@ import com.usthe.sureness.util.JsonWebTokenUtil;
 import com.usthe.sureness.util.SurenessConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
 
+import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -59,9 +64,11 @@ import static com.usthe.sureness.DefaultSurenessConfig.SUPPORT_JAX_RS;
         matchIfMissing = true)
 @ConditionalOnResource(resources = "META-INF/spring.factories")
 @AutoConfigureAfter(value = {SurenessProperties.class})
-public class SurenessAutoConfiguration {
+public class SurenessAutoConfiguration implements ApplicationContextAware {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SurenessAutoConfiguration.class);
+
+    private ApplicationContext applicationContext;
 
     @Bean
     @ConditionalOnMissingBean(SurenessAccountProvider.class)
@@ -119,8 +126,8 @@ public class SurenessAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(SurenessSecurityManager.class)
-    SurenessSecurityManager securityManager(
+    @ConditionalOnMissingBean(SecurityManager.class)
+    SecurityManager securityManager(
             SurenessProperties surenessProperties,
             ProcessorManager processorManager,
             TreePathRoleMatcher pathRoleMatcher,
@@ -180,17 +187,30 @@ public class SurenessAutoConfiguration {
 
     @Bean
     @ConditionalOnWebApplication
-    @ConditionalOnMissingBean(FilterRegistrationBean.class)
+    @ConditionalOnMissingBean(value = FilterRegistrationBean.class, name = "surenessFilter")
     @ConditionalOnProperty(name="sureness.supportType",havingValue = "servlet")
-    public FilterRegistrationBean testFilterRegistration() {
+    public FilterRegistrationBean testFilterRegistration(
+            SecurityManager securityManager
+    ) {
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new SurenessFilter());
+        registration.setFilter(new SurenessFilter(securityManager));
         registration.addUrlPatterns("/*");
-        registration.setName("SurenessFilter");
+        registration.setFilter((Filter)
+                applicationContext.getBean("surenessFilter"));
+        registration.setName("surenessFilter");
         registration.setOrder(1);
         return registration;
     }
 
+    @Bean
+    @ConditionalOnMissingBean(name = "surenessFilter")
+    public Filter surenessFilter(SecurityManager securityManager){
+        return new SurenessFilter(securityManager);
+    }
 
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }
