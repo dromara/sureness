@@ -21,11 +21,23 @@ public interface Subject extends Serializable {
     Object getPrincipal();
 
     /**
+     * set account appId, eg:username
+     * @param var1 principal
+     */
+    void setPrincipal(Object var1);
+
+    /**
      * map for principals, key-value
      * eg: id-idValue, customName-value, issuer-value
      * @return principal map info
      */
     PrincipalMap getPrincipalMap();
+
+    /**
+     * set map for principals, key-value
+     * @param var1 principal map info
+     */
+    void setPrincipalMap(PrincipalMap var1);
 
     /**
      * account credential, eg:password
@@ -35,6 +47,12 @@ public interface Subject extends Serializable {
     Object getCredential();
 
     /**
+     * set account credential, eg:password
+     * @param var1 credential
+     */
+    void setCredential(Object var1);
+
+    /**
      * get the roles owned by this account
      *
      * @return roles
@@ -42,11 +60,23 @@ public interface Subject extends Serializable {
     Object getOwnRoles();
 
     /**
+     * set the roles owned by this account
+     * @param var1 own roles
+     */
+    void setOwnRoles(Object var1);
+
+    /**
      * get the target resource uri which this account want access
      *
      * @return resource uri
      */
     Object getTargetResource();
+
+    /**
+     * set the target resource uri which this account want access
+     * @param var1 resource uri
+     */
+    void setTargetResource(Object var1);
 
     /**
      * get the Roles which can access this resource above-targetUri
