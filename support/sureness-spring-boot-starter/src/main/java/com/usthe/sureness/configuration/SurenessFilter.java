@@ -1,16 +1,14 @@
 package com.usthe.sureness.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.usthe.sureness.mgt.SurenessSecurityManager;
+import com.usthe.sureness.mgt.SecurityManager;
 import com.usthe.sureness.processor.exception.DisabledAccountException;
 import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
 import com.usthe.sureness.processor.exception.ExpiredCredentialsException;
 import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
 import com.usthe.sureness.processor.exception.NeedDigestInfoException;
-import com.usthe.sureness.processor.exception.ProcessorNotFoundException;
 import com.usthe.sureness.processor.exception.UnauthorizedException;
 import com.usthe.sureness.processor.exception.UnknownAccountException;
-import com.usthe.sureness.processor.exception.UnsupportedSubjectException;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.util.SurenessContextHolder;
 import org.slf4j.Logger;
@@ -18,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import javax.annotation.Resource;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -36,8 +33,11 @@ import java.io.PrintWriter;
  */
 public class SurenessFilter implements Filter {
 
-    @Resource
-    private SurenessSecurityManager surenessSecurityManager;
+    private SecurityManager securityManager;
+
+    public SurenessFilter(SecurityManager securityManager) {
+        this.securityManager = securityManager;
+    }
 
     /** logger **/
     private static final Logger logger = LoggerFactory.getLogger(SurenessFilter.class);
@@ -62,7 +62,7 @@ public class SurenessFilter implements Filter {
             throws IOException, ServletException {
 
         try {
-            SubjectSum subject = surenessSecurityManager.checkIn(servletRequest);
+            SubjectSum subject = securityManager.checkIn(servletRequest);
             // You can consider using SurenessContextHolder to bind subject in threadLocal
             // if bind, please remove it when end
             if (subject != null) {
