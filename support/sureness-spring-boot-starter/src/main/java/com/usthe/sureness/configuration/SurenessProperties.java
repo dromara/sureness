@@ -3,7 +3,6 @@ package com.usthe.sureness.configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -14,63 +13,138 @@ import java.util.Set;
 @Component
 @ConfigurationProperties(prefix = "sureness")
 public class SurenessProperties {
+
+    /**
+     * sureness enabled, default true
+     */
+    private boolean enabled = true;
+
     /**
      * 可配置 支持 websocket, servlet, jax-rs或者其它容器协议
      */
-    private String supportType;
+    private Set<SupportType> supportTypes;
 
     /**
-     *   支持的认证方式 Jwt, basic auth, digest auth等其它认证方式
+     * 支持的认证方式 Jwt, basic auth, digest auth等其它认证方式
      */
-    private Set<String> authTypes;
+    private Set<AuthType> authTypes;
 
     /**
-     *     jwt的解析加密密钥
+     * 当 authType 为 jwt 时设置的属性
      */
-    private String token;
+    private JwtProperties jwt;
 
-    private List<String> scanPackages;
+    /**
+     * 是否开启 session
+     */
+    private boolean sessionEnabled = false;
 
-    public List<String> getScanPackages() {
-        return scanPackages;
+    /**
+     * config for Annotation provider
+     */
+    private AnnotationProperties annotation;
+
+    public Set<SupportType> getSupportTypes() {
+        return supportTypes;
     }
 
-    public void setScanPackages(List<String> scanPackages) {
-        this.scanPackages = scanPackages;
+    public void setSupportTypes(Set<SupportType> supportTypes) {
+        this.supportTypes = supportTypes;
     }
 
-    public String getSupportType() {
-        return supportType;
-    }
-
-    public void setSupportType(String supportType) {
-        this.supportType = supportType;
-    }
-
-
-    public Set<String> getAuthTypes() {
+    public Set<AuthType> getAuthTypes() {
         return authTypes;
     }
 
-    public void setAuthTypes(Set<String> authTypes) {
+    public void setAuthTypes(Set<AuthType> authTypes) {
         this.authTypes = authTypes;
     }
 
-    public String getToken() {
-        return token;
+    public JwtProperties getJwt() {
+        return jwt;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setJwt(JwtProperties jwt) {
+        this.jwt = jwt;
     }
 
-    @Override
-    public String toString() {
-        return "SurenessProperties{" +
-                "supportType='" + supportType + '\'' +
-                ", authType='" + Arrays.toString(authTypes.toArray(new String[]{})) + '\'' +
-                ", token='" + token + '\'' +
-                ", scanPackages=" + Arrays.toString(scanPackages.toArray(new String[]{})) +
-                '}';
+    public boolean isSessionEnabled() {
+        return sessionEnabled;
+    }
+
+    public void setSessionEnabled(boolean sessionEnabled) {
+        this.sessionEnabled = sessionEnabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public AnnotationProperties getAnnotation() {
+        return annotation;
+    }
+
+    public void setAnnotation(AnnotationProperties annotation) {
+        this.annotation = annotation;
+    }
+
+    public static enum AuthType {
+        /** json web token auth **/
+        JWT,
+        /** basic auth **/
+        BASIC,
+        /** digest auth **/
+        DIGEST
+    }
+
+    public static enum SupportType {
+        /** http servlet **/
+        Servlet,
+        /** jax-rs **/
+        JAX_RS,
+        /** spring reactor stream **/
+        Spring_Reactor,
+        /** websocket **/
+        WebSocket
+    }
+
+    public static class AnnotationProperties {
+
+        private boolean enable = false;
+
+        private List<String> scanPackages;
+
+        public boolean isEnable() {
+            return enable;
+        }
+
+        public void setEnable(boolean enable) {
+            this.enable = enable;
+        }
+
+        public List<String> getScanPackages() {
+            return scanPackages;
+        }
+
+        public void setScanPackages(List<String> scanPackages) {
+            this.scanPackages = scanPackages;
+        }
+    }
+
+    public static class JwtProperties {
+
+        private String secretKey;
+
+        public String getSecretKey() {
+            return secretKey;
+        }
+
+        public void setSecretKey(String secretKey) {
+            this.secretKey = secretKey;
+        }
     }
 }
