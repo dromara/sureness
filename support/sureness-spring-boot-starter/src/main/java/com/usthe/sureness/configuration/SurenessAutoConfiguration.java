@@ -8,7 +8,11 @@ import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.processor.DefaultProcessorManager;
 import com.usthe.sureness.processor.Processor;
 import com.usthe.sureness.processor.ProcessorManager;
-import com.usthe.sureness.processor.support.*;
+import com.usthe.sureness.processor.support.DigestProcessor;
+import com.usthe.sureness.processor.support.JwtProcessor;
+import com.usthe.sureness.processor.support.NoneProcessor;
+import com.usthe.sureness.processor.support.PasswordProcessor;
+import com.usthe.sureness.processor.support.SessionProcessor;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.provider.annotation.AnnotationPathTreeProvider;
 import com.usthe.sureness.provider.ducument.DocumentAccountProvider;
@@ -16,19 +20,44 @@ import com.usthe.sureness.provider.ducument.DocumentPathTreeProvider;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.SubjectFactory;
 import com.usthe.sureness.subject.SurenessSubjectFactory;
-import com.usthe.sureness.subject.creater.*;
+import com.usthe.sureness.subject.creater.BasicSubjectJaxRsCreator;
+import com.usthe.sureness.subject.creater.BasicSubjectServletCreator;
+import com.usthe.sureness.subject.creater.BasicSubjectSpringReactiveCreator;
+import com.usthe.sureness.subject.creater.DigestSubjectJaxRsCreator;
+import com.usthe.sureness.subject.creater.DigestSubjectServletCreator;
+import com.usthe.sureness.subject.creater.DigestSubjectSpringReactiveCreator;
+import com.usthe.sureness.subject.creater.JwtSubjectJaxRsCreator;
+import com.usthe.sureness.subject.creater.JwtSubjectServletCreator;
+import com.usthe.sureness.subject.creater.JwtSubjectSpringReactiveCreator;
+import com.usthe.sureness.subject.creater.JwtSubjectWsJaxRsCreator;
+import com.usthe.sureness.subject.creater.JwtSubjectWsServletCreator;
+import com.usthe.sureness.subject.creater.JwtSubjectWsSpringReactiveCreator;
+import com.usthe.sureness.subject.creater.NoneSubjectJaxRsCreator;
+import com.usthe.sureness.subject.creater.NoneSubjectServletCreator;
+import com.usthe.sureness.subject.creater.NoneSubjectSpringReactiveCreator;
+import com.usthe.sureness.subject.creater.SessionSubjectServletCreator;
 import com.usthe.sureness.util.JsonWebTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import static com.usthe.sureness.configuration.SurenessProperties.*;
 
@@ -242,8 +271,8 @@ public class SurenessAutoConfiguration {
 
     @Bean
     @ConditionalOnWebApplication
-    @ConditionalOnMissingBean(value = FilterRegistrationBean.class, name = "surenessFilter")
-    @ConditionalOnProperty(name="sureness.supportTypes", havingValue = "servlet")
+    @ConditionalOnMissingBean(value = FilterRegistrationBean.class)
+    @ConditionalOnExpression("'${sureness.support-types}'.contains('com.usthe.sureness.configuration.SupportType.Servlet')")
     public FilterRegistrationBean filterRegistration(
             SecurityManager securityManager
     ) {

@@ -23,4 +23,4 @@ sureness:
   annotation:
     enable: true
     scan-packages:
-      - com.usthe.sureness.bootstrap
+      - com.usthe.sureness.bootstrap.controller
