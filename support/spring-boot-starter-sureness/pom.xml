@@ -52,7 +52,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sureness-core.version>1.0.4-beta</sureness-core.version>
+        <sureness-core.version>1.0.4-beta.1</sureness-core.version>
         <spring-boot.version>2.4.5</spring-boot.version>
     </properties>
 
