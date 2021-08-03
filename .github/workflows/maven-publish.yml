@@ -21,7 +21,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: Release Maven package
+    - name: Release Core Maven package
       uses: samuelmeuli/action-maven-publish@v1.4.0
       with:
         gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
@@ -29,4 +29,14 @@ jobs:
         nexus_username: ${{ secrets.NEXUS_USERNAME }}
         nexus_password: ${{ secrets.NEXUS_PASSWORD }}
         directory: core/
+        server_id: tom
+
+    - name: Release Spring-Boot-Starter Maven package
+      uses: samuelmeuli/action-maven-publish@v1.4.0
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+        nexus_username: ${{ secrets.NEXUS_USERNAME }}
+        nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+        directory: support/spring-boot-starter-sureness/
         server_id: tom
