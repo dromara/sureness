@@ -15,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <spring-boot-starter-sureness.version>1.0.0-beta</spring-boot-starter-sureness.version>
     </properties>
 
     <dependencies>
@@ -30,8 +31,8 @@
         </dependency>
         <dependency>
             <groupId>com.usthe.sureness</groupId>
-            <artifactId>sureness-spring-boot-starter</artifactId>
-            <version>${project.version}</version>
+            <artifactId>spring-boot-starter-sureness</artifactId>
+            <version>${spring-boot-starter-sureness.version}</version>
         </dependency>
     </dependencies>
 

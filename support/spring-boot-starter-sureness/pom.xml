@@ -2,14 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.usthe.sureness</groupId>
-    <artifactId>sureness-core</artifactId>
-    <version>1.0.4-beta</version>
+    <artifactId>spring-boot-starter-sureness</artifactId>
+    <version>1.0.0-beta</version>
     <packaging>jar</packaging>
 
-    <name>sureness</name>
     <inceptionYear>2019</inceptionYear>
     <url>https://github.com/dromara/sureness</url>
     <description>
@@ -24,6 +22,12 @@
     </licenses>
 
     <developers>
+        <developer>
+            <name>ChineseTony</name>
+            <email>13206573871@163.com</email>
+            <organization>meituan</organization>
+            <organizationUrl>meituan.com</organizationUrl>
+        </developer>
         <developer>
             <name>tomsun28</name>
             <email>tomsun28@outlook.com</email>
@@ -48,80 +52,32 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <javax.servlet.version>3.1.0</javax.servlet.version>
-        <javax.ws.rs.version>2.1.1</javax.ws.rs.version>
-        <jjwt.version>0.11.2</jjwt.version>
-        <yaml.version>1.26</yaml.version>
-        <xml.bind.version>2.3.0</xml.bind.version>
-        <slf4j.version>1.7.21</slf4j.version>
-        <junit.version>5.7.0</junit.version>
-        <easymock.version>4.0.2</easymock.version>
+        <sureness-core.version>1.0.4-beta</sureness-core.version>
+        <spring-boot.version>2.4.5</spring-boot.version>
     </properties>
+
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${javax.servlet.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
             <scope>provided</scope>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>${javax.ws.rs.version}</version>
-            <scope>provided</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>5.1.5.RELEASE</version>
-            <scope>provided</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${spring-boot.version}</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${xml.bind.version}</version>
-        </dependency>
-        <!-- jwt util -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>${jjwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>${jjwt.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
-            <version>${jjwt.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- yaml file load -->
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>${yaml.version}</version>
-        </dependency>
-        <!-- Test 3rd-party dependencies: -->
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>${easymock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <groupId>com.usthe.sureness</groupId>
+            <artifactId>sureness-core</artifactId>
+            <version>${sureness-core.version}</version>
         </dependency>
     </dependencies>
 
