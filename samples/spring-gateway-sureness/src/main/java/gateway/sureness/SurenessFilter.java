@@ -56,8 +56,9 @@ public class SurenessFilter implements GatewayFilter, Ordered {
             logger.error("other exception happen: ", e);
             return responseWrite(exchange, HttpStatus.FORBIDDEN, e.getMessage(),null);
         }
+        Mono<Void> voidMono = chain.filter(exchange).doFinally(x -> SurenessContextHolder.unbindSubject());
 
-        return chain.filter(exchange).doFinally(x -> SurenessContextHolder.unbindSubject());
+        return voidMono;
     }
 
     @Override

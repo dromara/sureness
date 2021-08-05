@@ -25,6 +25,8 @@
         <module>solon-plugin-sureness-demo</module>
         <module>spring-gateway-sureness</module>
         <module>zuul-sureness</module>
+        <module>shenyu-sureness</module>
+        <module>shenyu-service</module>
     </modules>
 
     <dependencyManagement>

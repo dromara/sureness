@@ -1,28 +1,36 @@
 server:
-  port: 8081
+  port: 8082
 spring:
   profiles:
     active: dev
+  main:
+    allow-bean-definition-overriding: true
 
 jasypt:
   encryptor:
     password: e!swhdg&d763jo
+soul:
+  exclude:
+    paths: /test/1
+  sync:
+    websocket:
+      urls: ws://localhost:9095/websocket
 
 ---
 spring:
   profiles: dev
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: ENC(vp7cbF0sE/lRsThrcwdiA/WoeG1mIXzy)
-    url: jdbc:mysql://47.110.55.246:3306/tom?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    password: 2365528
+    url: jdbc:mysql://localhost:3306/tom?useUnicode=true&characterEncoding=utf-8&useSSL=false
     platform: mysql
     schema: classpath:db/schema.sql
     data: classpath:db/data.sql
     # 每次重启都会根据data.sql schema.sql重建表数据, 设置 NEVER 就不启动重建
     # Each restart will rebuild the table data according to data.sql schema.sql
     # setting NEVER will not start the reconstruction
-    initialization-mode: always
+    initialization-mode: never
   jpa:
     database: mysql
     show-sql: true
