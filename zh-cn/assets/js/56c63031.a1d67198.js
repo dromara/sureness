@@ -1,0 +1,1 @@
+(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[5684],{1636:function(s){"use strict";s.exports=JSON.parse('{"allTagsPath":"https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/zh-cn/blog/tags","slug":"startup","name":"startup","count":1,"permalink":"https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/zh-cn/blog/tags/startup"}')}}]);
