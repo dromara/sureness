@@ -313,6 +313,6 @@ module.exports = {
         'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=block'
     ],
     scripts: [
-        'https://buttons.github.io/buttons.js'
+        'https://cdn.jsdelivr.net/gh/buttons/buttons.github.io/buttons.js'
     ]
 }
