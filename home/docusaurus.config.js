@@ -4,6 +4,7 @@ const organizationName = 'usthe' // Usually your GitHub org/user name.
 const projectName = 'sureness' // Usually your repo name.
 const branch = 'master'
 const repoUrl = `https://github.com/dromara/${projectName}`
+const cdnUrl = 'https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/'
 
 module.exports = {
     title: 'Sureness',
@@ -16,14 +17,15 @@ module.exports = {
     organizationName,
     projectName,
     customFields: {
-        repoUrl
+        repoUrl,
+        cdnUrl
     },
     i18n: {
         defaultLocale: 'en',
         locales: ['en', 'zh-cn'],
     },
     themeConfig: {
-        image: 'img/icon64128.png',
+        image: 'img/icon128.png',
         liveCodeBlock: {
             playgroundPosition: 'bottom',
         },

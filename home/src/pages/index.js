@@ -11,9 +11,10 @@ import Feature from './components/Feature'
 import Section from './components/Section'
 import Highlight from './components/Highlight'
 import LogoCarousel from './components/LogoCarousel'
+import cdnTransfer from '../CdnTransfer'
 
 import styles from './styles.module.css'
-import { features, SetupExample, SurenessIntegration, friendLinks } from '../constants'
+import { features, SetupExample, SurenessIntegration, friendLinks, mediaPartners } from '../constants'
 
 function Home() {
     const context = useDocusaurusContext()
@@ -25,7 +26,7 @@ function Home() {
             <header className={clsx('hero hero--primary', styles.heroBanner)}>
                 <div className="container">
                     <h1 className="hero__title">
-                        <img src="img/brand128.svg"/>
+                        <img src={cdnTransfer('img/brand128.svg')}/>
                     </h1>
                     <p className="hero__subtitle"><Translate>Focus on Protection of API</Translate></p>
                     <div className={styles.social}>
@@ -141,7 +142,7 @@ function Home() {
                         <img
                             width="760"
                             height="445"
-                            src="img/compare.png"
+                            src={cdnTransfer('img/compare.png')}
                         />
                     }
                     isDark
@@ -200,7 +201,7 @@ function Home() {
                         <img
                             width="560"
                             height="415"
-                            src="img/benchmark_en.png"
+                            src={cdnTransfer('img/benchmark_en.png')}
                         />
                     }
                     reversed
@@ -243,7 +244,7 @@ function Home() {
                         <img
                             width="760"
                             height="405"
-                            src="img/PathRoleMatcher.svg"
+                            src={cdnTransfer('img/PathRoleMatcher.svg')}
                         />
                     }
                     isDark
@@ -302,6 +303,10 @@ function Home() {
                 {/*Friend Links*/}
                 <Section>
                     <LogoCarousel logos={friendLinks} headerTitle={translate({message: 'Friend Links'})}></LogoCarousel>
+                </Section>
+                {/*Media Partners*/}
+                <Section>
+                    <LogoCarousel logos={mediaPartners} headerTitle={translate({message: 'Media Partners'})}></LogoCarousel>
                 </Section>
             </main>
         </Layout>
