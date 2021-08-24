@@ -124,15 +124,15 @@ function Home() {
                             <div>
                                 <h4>Native Support for:</h4>
                                 <a href="https://spring.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/spring-logo.svg" alt="spring"/></a>
+                                    src={cdnTransfer('img/icons/spring-logo.svg')} alt="spring"/></a>
                                 <a href="https://javalin.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/javalin_logo.svg" alt="Javalin"/></a>
+                                    src={cdnTransfer('img/icons/javalin_logo.svg')} alt="Javalin"/></a>
                                 <a href="https://micronaut.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/micronaut_logo.png" alt="Micronaut"/></a>
+                                    src={cdnTransfer('img/icons/micronaut_logo.png')} alt="Micronaut"/></a>
                                 <a href="https://quarkus.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/quarkus_logo.svg" alt="Quarkus"/></a>
+                                    src={cdnTransfer('img/icons/quarkus_logo.svg')} alt="Quarkus"/></a>
                                 <a href="https://ktor.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/ktor_logo.svg" alt="Ktor"/></a>
+                                    src={cdnTransfer('img/icons/ktor_logo.svg')} alt="Ktor"/></a>
                             </div>
                         </>
                     }
