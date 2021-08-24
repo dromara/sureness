@@ -13,7 +13,7 @@ module.exports = {
     baseUrl: '/sureness/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
-    favicon: 'img/icon64.png',
+    favicon: cdnUrl + 'img/icon64.png',
     organizationName,
     projectName,
     customFields: {
@@ -25,7 +25,7 @@ module.exports = {
         locales: ['en', 'zh-cn'],
     },
     themeConfig: {
-        image: 'img/icon128.png',
+        image: cdnUrl + 'img/icon128.png',
         liveCodeBlock: {
             playgroundPosition: 'bottom',
         },
@@ -69,7 +69,7 @@ module.exports = {
             title: ' ',
             logo: {
               alt: 'Focus on Protection of API',
-              src: 'img/icon128.svg',
+              src: cdnUrl + 'img/icon128.svg',
             },
             items: [
               {
@@ -205,7 +205,7 @@ module.exports = {
             ],
             logo: {
               alt: 'Open Source Logo',
-              src: 'img/dromara.jpg',
+              src: cdnUrl + 'img/dromara.jpg',
               href: 'https://github.com/dromara',
             },
             copyright: `Apache License 2.0 | Copyright © ${new Date().getFullYear()}`,
@@ -260,12 +260,12 @@ module.exports = {
                     {
                         tagName: 'link',
                         rel: 'icon',
-                        href: 'img/icon64.png',
+                        href: cdnUrl + 'img/icon64.png',
                     },
                     {
                         tagName: 'link',
                         rel: 'manifest',
-                        href: '/manifest.json',
+                        href: cdnUrl + 'manifest.json',
                     },
                     {
                         tagName: 'meta',
@@ -285,18 +285,18 @@ module.exports = {
                     {
                         tagName: 'link',
                         rel: 'apple-touch-icon',
-                        href: 'img/icon64.png',
+                        href: cdnUrl + 'img/icon64.png',
                     },
                     {
                         tagName: 'link',
                         rel: 'mask-icon',
-                        href: 'img/icon64.svg',
+                        href: cdnUrl + 'img/icon64.svg',
                         color: 'rgb(234, 90, 7)',
                     },
                     {
                         tagName: 'meta',
                         name: 'msapplication-TileImage',
-                        content: 'img/icon64.png',
+                        content: cdnUrl + 'img/icon64.png',
                     },
                     {
                         tagName: 'meta',
@@ -313,6 +313,6 @@ module.exports = {
         'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=block'
     ],
     scripts: [
-        'https://buttons.github.io/buttons.js'
+        'https://cdn.jsdelivr.net/gh/buttons/buttons.github.io/buttons.js'
     ]
 }
