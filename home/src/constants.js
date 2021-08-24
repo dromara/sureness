@@ -1,6 +1,7 @@
 import React from 'react'
 
-import Translate, {translate} from '@docusaurus/Translate';
+import Translate, {translate} from '@docusaurus/Translate'
+
 
 export const features = [{
     title: translate({
@@ -118,6 +119,14 @@ export const friendLinks = [
         img: 'liteflow_logo.png',
         alt: 'LiteFlow',
         url: 'https://yomahub.com/liteflow/'
+    }
+]
+
+export const mediaPartners = [
+    {
+        img: 'JavaHouDuan_logo.png',
+        alt: 'JavaHouDuan',
+        url: 'https://mp.weixin.qq.com/s/Ylq51a7Av8ZRuH811xZnDA'
     }
 ]
 

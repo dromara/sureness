@@ -4,6 +4,7 @@ import styles from './LogoCarousel.module.css'
 
 const INTERVAL_LENGTH = 5000
 const LOGO_WIDTH = 150
+const cdnUrl = 'https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/img/icons/'
 
 let ticks = 0
 
@@ -17,6 +18,8 @@ export default class LogoCarousel extends React.Component {
             pages: Math.ceil(props.logos ? props.logos.length / 6 : 1),
             margin: 70
         }
+
+        this.imgUrl = 
 
         this.containerRef = React.createRef()
     }
@@ -73,7 +76,7 @@ export default class LogoCarousel extends React.Component {
         this.list = () => (
             <ul style={{ transform: `translate(${this.state.position}px, 0px)` }}>
                 {this.props.logos.map((value, index) => (
-                    <li key={index}><a href={value.url} target="_blank" rel="noopener noreferrer"><img src={'img/icons/' + value.img} alt={value.alt} /></a></li>
+                    <li key={index}><a href={value.url} target="_blank" rel="noopener noreferrer"><img src={cdnUrl + value.img} alt={value.alt} /></a></li>
                 ))}
             </ul>
         )
