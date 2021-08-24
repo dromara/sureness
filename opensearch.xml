@@ -4,8 +4,8 @@
   <ShortName>Sureness</ShortName>
   <Description>Search Sureness</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/img/icon64.png</Image>
-  <Url type="text/html" method="get" template="https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/opensearch.xml" />
-  <moz:SearchForm>https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://usthe.com/sureness/img/icon64.png</Image>
+  <Url type="text/html" method="get" template="https://usthe.com/sureness/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://usthe.com/sureness/opensearch.xml" />
+  <moz:SearchForm>https://usthe.com/sureness/</moz:SearchForm>
 </OpenSearchDescription>
