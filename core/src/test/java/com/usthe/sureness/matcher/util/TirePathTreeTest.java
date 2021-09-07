@@ -78,9 +78,12 @@ public class TirePathTreeTest {
         // support ignore http method
         paths.add("/api/school/book===*===[role8]");
         paths.add("/api2/school/*===*===[role18]");
+        // fix issue bug https://github.com/dromara/sureness/issues/132
+        paths.add("/api/v6/book/*===get===[role1]");
+        paths.add("/api/v6/book===post===[role2]");
 
         root.buildTree(paths);
-        assertEquals(33, root.getResourceNum());
+        assertEquals(35, root.getResourceNum());
     }
 
     @Test
@@ -137,6 +140,9 @@ public class TirePathTreeTest {
         assertEquals("[role18]", root.searchPathFilterRoles("/api2/school/book===post"));
         assertEquals("[role18]", root.searchPathFilterRoles("/api2/school/student===get"));
         assertEquals("[role18]", root.searchPathFilterRoles("/api2/school===delete"));
+        // fix issue bug https://github.com/dromara/sureness/issues/132 
+        assertEquals("[role1]", root.searchPathFilterRoles("/api/v6/book/3===get"));
+        assertEquals("[role2]", root.searchPathFilterRoles("/api/v6/book===post"));
 
     }
 }
