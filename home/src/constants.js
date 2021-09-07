@@ -124,6 +124,11 @@ export const friendLinks = [
 
 export const mediaPartners = [
     {
+        img: 'dromara_qr.png',
+        alt: 'Dromara',
+        url: 'https://mp.weixin.qq.com/s/Q3b7ZE802IMF6MwIPJIGQA'
+    },
+    {
         img: 'JavaHouDuan_logo.png',
         alt: 'JavaHouDuan',
         url: 'https://mp.weixin.qq.com/s/Ylq51a7Av8ZRuH811xZnDA'
