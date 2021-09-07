@@ -382,10 +382,15 @@ public class TirePathTree {
         // set node type is NODE_TYPE_MAY_PATH_END
         current.setNodeType(NODE_TYPE_MAY_PATH_END);
         // start insert httpMethod method, if existed, not overwrite and modify the original configuration
-        if (current.getMethodChildren() != null
-                && (current.getMethodChildren().containsKey(method) || current.getMethodChildren().containsKey(MATCH_ALL_METHOD)))  {
-            logger.warn("[sureness]-The path resource: {} has match same method, ignore it.", path);
-            return;
+        if (current.getMethodChildren() != null)  {
+            if (current.getMethodChildren().containsKey(method)) {
+                logger.warn("[sureness]-The path resource: {} has match same resource config, ignore this one.", path);
+                return;
+            }
+            if (current.getMethodChildren().containsKey(MATCH_ALL_METHOD)) {
+                logger.warn("[sureness]-The path resource: {} has match same resource config(* means all http method), ignore this one.", path);
+                return;
+            }
         }
 
         current = current.insertMethodChildren(method);

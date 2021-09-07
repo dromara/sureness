@@ -33,7 +33,7 @@ function Home() {
                         <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img
                             src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg"/></a>
                         <a href="https://search.maven.org/artifact/com.usthe.sureness/sureness-core"><img
-                            src="https://img.shields.io/badge/Maven%20Central-1.0.4-blue.svg"/></a>
+                            src="https://img.shields.io/badge/Maven%20Central-1.0.5-blue.svg"/></a>
                         <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img
                             src="https://img.shields.io/github/release-date/dromara/sureness?color=blue&logo=figshare&logoColor=red"/></a>
                         <a href="https://img.shields.io/github/status/contexts/pulls/dromara/sureness/8?label=pull%20checks"><img
