@@ -26,8 +26,9 @@ public class TirePathTree {
     private static final String NODE_TYPE_METHOD = "methodNode";
     private static final String NODE_TYPE_FILTER_ROLES = "rolesNode";
     private static final String URL_PATH_SPLIT = "/";
-    private static final String MATCH_ONE = "*";
-    private static final String MATCH_ALL = "**";
+    private static final String MATCH_ALL_METHOD = "*";
+    private static final String MATCH_ONE_PATH = "*";
+    private static final String MATCH_MULTI_PATH = "**";
     private static final int PATH_NODE_NUM_3 = 3;
     private static final int PATH_NODE_NUM_2 = 2;
     private static final Pattern PATH_SPLIT_PATTERN = Pattern.compile("/+");
@@ -103,8 +104,8 @@ public class TirePathTree {
         resourceList.add(root);
         while (!resourceList.isEmpty()) {
             Node currentNode = resourceList.poll();
-            if (NODE_TYPE_METHOD.equals(currentNode.nodeType)) {
-                resourceNum ++;
+            if (currentNode.getMethodChildren() != null && !currentNode.getMethodChildren().isEmpty()) {
+                resourceNum += currentNode.getMethodChildren().size();
             }
             if (currentNode.getChildren() != null && !currentNode.getChildren().isEmpty()) {
                 resourceList.addAll(currentNode.getChildren().values());
@@ -166,22 +167,28 @@ public class TirePathTree {
             return null;
         }
         if (currentFlow == urlPac.length - 1 && (NODE_TYPE_MAY_PATH_END.equals(current.getNodeType()))) {
-            Node methodNode = current.getChildren().get(method);
+            Node methodNode = current.getMethodChild(method);
             if (methodNode != null) {
                 if (NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
                     return methodNode.getChildren().keySet().iterator().next();
                 }
             } else {
-                Node nextNode = current.getChildren().get(MATCH_ONE);
+                Node nextNode = current.getMethodChild(MATCH_ALL_METHOD);
                 if (nextNode != null && NODE_TYPE_METHOD.equals(nextNode.getNodeType())) {
                     return nextNode.getChildren().keySet().iterator().next();
                 }
-                if (nextNode == null) {
-                    nextNode = current.getChildren().get(MATCH_ALL);
-                }
+                nextNode = current.getChildren().get(MATCH_ONE_PATH);
                 if (nextNode != null && NODE_TYPE_MAY_PATH_END.equals(nextNode.getNodeType())) {
-                    methodNode = nextNode.getChildren().get(method);
-                    methodNode = methodNode == null ? nextNode.getChildren().get(MATCH_ONE) : methodNode;
+                    methodNode = nextNode.getMethodChild(method);
+                    methodNode = methodNode == null ? nextNode.getMethodChild(MATCH_ALL_METHOD) : methodNode;
+                    if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
+                        return methodNode.getChildren().keySet().iterator().next();
+                    }
+                }
+                nextNode = current.getChildren().get(MATCH_MULTI_PATH);
+                if (nextNode != null && NODE_TYPE_MAY_PATH_END.equals(nextNode.getNodeType())) {
+                    methodNode = nextNode.getMethodChild(method);
+                    methodNode = methodNode == null ? nextNode.getMethodChild(MATCH_ALL_METHOD) : methodNode;
                     if (methodNode != null && NODE_TYPE_METHOD.equals(methodNode.getNodeType())) {
                         return methodNode.getChildren().keySet().iterator().next();
                     }
@@ -196,7 +203,7 @@ public class TirePathTree {
                 return matchRole;
             }
         }
-        if (currentNodeData.equals(MATCH_ONE)) {
+        if (currentNodeData.equals(MATCH_ONE_PATH)) {
             matchRole = searchPathRoleInChildren(current, urlPac, currentFlow - 1, method);
             if (matchRole != null) {
                 return matchRole;
@@ -206,7 +213,7 @@ public class TirePathTree {
                 return matchRole;
             }
         }
-        if (currentNodeData.equals(MATCH_ALL)) {
+        if (currentNodeData.equals(MATCH_MULTI_PATH)) {
             matchRole = searchPathRoleInChildren(current, urlPac, currentFlow - 1, method);
             if (matchRole != null) {
                 return matchRole;
@@ -252,15 +259,15 @@ public class TirePathTree {
                 }
             }
         }
-        if (current.getChildren().containsKey(MATCH_ONE)) {
-            Node matchOneNode = current.getChildren().get(MATCH_ONE);
+        if (current.getChildren().containsKey(MATCH_ONE_PATH)) {
+            Node matchOneNode = current.getChildren().get(MATCH_ONE_PATH);
             matchRole = searchPathRole(matchOneNode, urlPac, currentFlow + 1, method);
             if (matchRole != null) {
                 return matchRole;
             }
         }
-        if (current.getChildren().containsKey(MATCH_ALL)) {
-            Node matchAllNode = current.getChildren().get(MATCH_ALL);
+        if (current.getChildren().containsKey(MATCH_MULTI_PATH)) {
+            Node matchAllNode = current.getChildren().get(MATCH_MULTI_PATH);
             matchRole = searchPathRole(matchAllNode, urlPac, currentFlow + 1, method);
         }
         return matchRole;
@@ -279,8 +286,8 @@ public class TirePathTree {
         if (pattern == null || pathNode == null) {
             return true;
         }
-        if (pattern.equals(pathNode) || MATCH_ONE.equals(pattern)
-                || MATCH_ALL.equals(pattern)) {
+        if (pattern.equals(pathNode) || MATCH_ONE_PATH.equals(pattern)
+                || MATCH_MULTI_PATH.equals(pattern)) {
             return false;
         }
         if (!isPatternStr(pattern)) {
@@ -302,9 +309,9 @@ public class TirePathTree {
      */
     private boolean isPatternStr(String str) {
         return str != null
-                && str.contains(MATCH_ONE)
-                && !MATCH_ONE.equals(str)
-                && !MATCH_ALL.equals(str);
+                && str.contains(MATCH_ONE_PATH)
+                && !MATCH_ONE_PATH.equals(str)
+                && !MATCH_MULTI_PATH.equals(str);
     }
 
     /**
@@ -367,7 +374,7 @@ public class TirePathTree {
             pre = current;
             current = current.getChildren().get(urlData);
         }
-        if (MATCH_ONE.equals(current.getData()) || MATCH_ALL.equals(current.getData())) {
+        if (MATCH_ONE_PATH.equals(current.getData()) || MATCH_MULTI_PATH.equals(current.getData())) {
             // When the last one is * or **, it may match empty,
             // and the previous one may also be NODE_TYPE_MAY_PATH_END type
             pre.setNodeType(NODE_TYPE_MAY_PATH_END);
@@ -375,13 +382,13 @@ public class TirePathTree {
         // set node type is NODE_TYPE_MAY_PATH_END
         current.setNodeType(NODE_TYPE_MAY_PATH_END);
         // start insert httpMethod method, if existed, not overwrite and modify the original configuration
-        if (!current.getChildren().containsKey(method) && !current.getChildren().containsKey(MATCH_ONE)) {
-            current.insertChild(method, NODE_TYPE_METHOD);
-        } else {
-            logger.warn("[sureness]-The path resource: {} has match same method or *, ignore it.", path);
+        if (current.getMethodChildren() != null
+                && (current.getMethodChildren().containsKey(method) || current.getMethodChildren().containsKey(MATCH_ALL_METHOD)))  {
+            logger.warn("[sureness]-The path resource: {} has match same method, ignore it.", path);
             return;
         }
-        current = current.getChildren().get(method);
+
+        current = current.insertMethodChildren(method);
         // Start inserting leaf nodes - supportRoles
         // each resource only mapping a left node, that is, at most one child node under supportRoles--httpMethod
         // if existed, not overwrite and modify the original configuration
@@ -409,6 +416,8 @@ public class TirePathTree {
         /** pattern children list **/
         private List<String> patternChildren;
 
+        private Map<String, Node> methodChildren;
+
         private Node(String data, String nodeType) {
             this.data = data;
             this.nodeType = nodeType;
@@ -433,6 +442,23 @@ public class TirePathTree {
                 patternChildren = new LinkedList<>();
             }
             this.patternChildren.add(data);
+        }
+
+        public Node getMethodChild(String method) {
+            return methodChildren == null ? null : methodChildren.get(method);
+        }
+
+        public Map<String, Node> getMethodChildren() {
+            return methodChildren;
+        }
+
+        public Node insertMethodChildren(String method) {
+            if (methodChildren == null) {
+                methodChildren = new HashMap<>(8);
+            }
+            Node node = new Node(method, NODE_TYPE_METHOD);
+            methodChildren.put(method, node);
+            return node;
         }
 
         private String getNodeType() {
