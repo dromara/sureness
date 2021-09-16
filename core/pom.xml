@@ -52,9 +52,7 @@
         <javax.ws.rs.version>2.1.1</javax.ws.rs.version>
         <jjwt.version>0.11.2</jjwt.version>
         <yaml.version>1.26</yaml.version>
-        <xml.bind.version>2.3.0</xml.bind.version>
         <slf4j.version>1.7.21</slf4j.version>
-        <junit.version>5.7.0</junit.version>
         <easymock.version>4.0.2</easymock.version>
     </properties>
     <dependencies>
@@ -71,20 +69,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>5.1.5.RELEASE</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${xml.bind.version}</version>
         </dependency>
         <!-- jwt util -->
         <dependency>
@@ -115,12 +102,6 @@
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
             <version>${easymock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
