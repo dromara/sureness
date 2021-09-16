@@ -6,7 +6,15 @@ import com.usthe.sureness.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.HashSet;
+import static java.util.Objects.nonNull;
+import static java.util.Objects.isNull;
+
 import java.util.stream.Collectors;
 
 /**
@@ -45,9 +53,8 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> root tree is not init");
         }
         String targetResource = (String) subject.getTargetResource();
-        //[role1,role2,role3], [role1], [], null
         String matchRoleString = root.searchPathFilterRoles(targetResource);
-        if (matchRoleString != null && matchRoleString.startsWith(LEFT_CON)
+        if (nonNull(matchRoleString) && matchRoleString.startsWith(LEFT_CON)
                 && matchRoleString.endsWith(RIGHT_CON)) {
             if (NULL_ROLE.equals(matchRoleString)) {
                 subject.setSupportRoles(new ArrayList<>(0));
@@ -64,20 +71,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         checkComponentInit();
         Set<String> resources = new HashSet<>();
         Set<String> excludeResources = new HashSet<>();
-        for (PathTreeProvider provider : pathTreeProviderList) {
-            Set<String> resourceTmp = provider.providePathData();
-            Set<String> excludeResourceTmp = provider.provideExcludedResource();
-            if (resourceTmp != null) {
-                resources.addAll(resourceTmp);
-            } else {
-                logger.warn("sureness - pathTreeProvider: {} providePathData is null", provider);
-            }
-            if (excludeResourceTmp != null) {
-                excludeResources.addAll(excludeResourceTmp);
-            } else {
-                logger.warn("sureness - pathTreeProvider: {} provideExcludedResource is null", provider);
-            }
-        }
+        iterateOverPathTreeProviderList(resources, excludeResources);
         root.buildTree(resources);
 
         excludeResources = excludeResources.stream()
@@ -92,20 +86,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         checkComponentInit();
         Set<String> resources = new HashSet<>();
         Set<String> excludeResources = new HashSet<>();
-        for (PathTreeProvider provider : pathTreeProviderList) {
-            Set<String> resourceTmp = provider.providePathData();
-            Set<String> excludeResourceTmp = provider.provideExcludedResource();
-            if (resourceTmp != null) {
-                resources.addAll(resourceTmp);
-            } else {
-                logger.warn("sureness - pathTreeProvider: {} providePathData is null", provider);
-            }
-            if (excludeResourceTmp != null) {
-                excludeResources.addAll(excludeResourceTmp);
-            } else {
-                logger.warn("sureness - pathTreeProvider: {} provideExcludedResource is null", provider);
-            }
-        }
+        iterateOverPathTreeProviderList(resources, excludeResources);
         root.rebuildTree(resources);
 
         excludeResources = excludeResources.stream()
@@ -118,22 +99,18 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     public boolean isExcludedResource(Subject request) {
         checkComponentInit();
         String exclude = excludeRoot.searchPathFilterRoles((String) request.getTargetResource());
-        return exclude != null && exclude.equals(EXCLUDE_ROLE);
+        return nonNull(exclude) && exclude.equals(EXCLUDE_ROLE);
     }
 
     private void checkComponentInit() {
-        if (pathTreeProviderList == null) {
+        if (isNull(pathTreeProviderList)) {
             throw new SurenessNoInitException("DefaultPathRoleMatcher init error : component init not complete");
         }
     }
 
-    private void clearTree() {
-        root.clearTree();
-        excludeRoot.clearTree();
-    }
 
     public void setPathTreeProvider(PathTreeProvider pathTreeProvider) {
-        if (pathTreeProviderList == null) {
+        if (isNull(pathTreeProviderList)) {
             pathTreeProviderList = new LinkedList<>();
         }
         pathTreeProviderList.add(pathTreeProvider);
@@ -143,11 +120,22 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
         pathTreeProviderList = providerList;
     }
 
-    public DefaultPathRoleMatcher addPathTreeProvider(PathTreeProvider pathTreeProvider) {
-        if (pathTreeProviderList == null) {
-            pathTreeProviderList = new LinkedList<>();
+
+
+    private void iterateOverPathTreeProviderList(Set<String> resources, Set<String> excludeResources) {
+        for (PathTreeProvider provider : pathTreeProviderList) {
+            Set<String> resourceTmp = provider.providePathData();
+            Set<String> excludeResourceTmp = provider.provideExcludedResource();
+            if (nonNull(resourceTmp)) {
+                resources.addAll(resourceTmp);
+            } else {
+                logger.warn("sureness - pathTreeProvider: {} providePathData is null", provider);
+            }
+            if (nonNull(excludeResourceTmp)) {
+                excludeResources.addAll(excludeResourceTmp);
+            } else {
+                logger.warn("sureness - pathTreeProvider: {} provideExcludedResource is null", provider);
+            }
         }
-        pathTreeProviderList.add(pathTreeProvider);
-        return this;
     }
 }

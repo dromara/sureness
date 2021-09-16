@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 /**
  * the manager for successHandler
@@ -24,7 +26,7 @@ public class HandlerManager {
      * @param request http request
      */
     public void hand(SubjectSum subjectSum, Object request) {
-        if (successHandlers != null) {
+        if (nonNull(successHandlers)) {
             for (SuccessHandler successHandler : successHandlers) {
                 try {
                     successHandler.processHandler(subjectSum, request);
@@ -36,7 +38,7 @@ public class HandlerManager {
     }
 
     public void registerHandler(List<SuccessHandler> handlers) {
-        if (successHandlers == null) {
+        if (isNull(successHandlers)) {
             successHandlers = handlers;
         } else {
             successHandlers.addAll(handlers);
@@ -44,7 +46,7 @@ public class HandlerManager {
     }
 
     public void registerHandler(SuccessHandler handler) {
-        if (successHandlers == null) {
+        if (isNull(successHandlers)) {
             successHandlers = new LinkedList<>();
         }
         successHandlers.add(handler);
