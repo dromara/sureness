@@ -75,6 +75,7 @@ public class DigestProcessor extends BaseProcessor {
         //A1 = MD5("username:realm:password");
         String a1 = calcDigest(appId, digestSubject.getRealm(), account.getPassword());
         String a2 = calcDigest(digestSubject.getHttpMethod(), digestSubject.getUri());
+        //response = MD5("A1:nonce:nc:cNonce:qop:A2");
         String oriResponse = calcDigest(a1, digestSubject.getNonce(), digestSubject.getNc(), digestSubject.getCnonce(),
                 digestSubject.getQop(), a2);
         if (!oriResponse.equals(digestSubject.getCredential())) {
