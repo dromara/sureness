@@ -88,6 +88,7 @@ public class DigestProcessor extends BaseProcessor {
         if (account.isExcessiveAttempts()) {
             throw new ExcessiveAttemptsException("account is disable due to many time authenticated, try later");
         }
+        // attention: need to set subject own roles from account
         var.setOwnRoles(account.getOwnRoles());
         return var;
     }
