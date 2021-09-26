@@ -53,6 +53,7 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
             throw new SurenessNoInitException("DefaultPathRoleMatcher -> root tree is not init");
         }
         String targetResource = (String) subject.getTargetResource();
+        //[role1,role2,role3], [role1], [], null
         String matchRoleString = root.searchPathFilterRoles(targetResource);
         if (nonNull(matchRoleString) && matchRoleString.startsWith(LEFT_CON)
                 && matchRoleString.endsWith(RIGHT_CON)) {
