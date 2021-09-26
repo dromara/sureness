@@ -119,7 +119,13 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
     public void setPathTreeProviderList(List<PathTreeProvider> providerList) {
         pathTreeProviderList = providerList;
     }
-
+    public DefaultPathRoleMatcher addPathTreeProvider(PathTreeProvider pathTreeProvider) {
+        if (pathTreeProviderList == null) {
+            pathTreeProviderList = new LinkedList<>();
+        }
+        pathTreeProviderList.add(pathTreeProvider);
+        return this;
+    }
 
 
     private void iterateOverPathTreeProviderList(Set<String> resources, Set<String> excludeResources) {
