@@ -74,6 +74,7 @@ public class DigestProcessor extends BaseProcessor {
         DigestSubject digestSubject = (DigestSubject) var;
         //A1 = MD5("username:realm:password");
         String a1 = calcDigest(appId, digestSubject.getRealm(), account.getPassword());
+        //A2 = MD5("httpMethod:uri");
         String a2 = calcDigest(digestSubject.getHttpMethod(), digestSubject.getUri());
         //response = MD5("A1:nonce:nc:cNonce:qop:A2");
         String oriResponse = calcDigest(a1, digestSubject.getNonce(), digestSubject.getNc(), digestSubject.getCnonce(),
