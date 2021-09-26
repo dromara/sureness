@@ -128,6 +128,12 @@ public class DigestProcessor extends BaseProcessor {
     public void setAccountProvider(SurenessAccountProvider provider) {
         this.accountProvider = provider;
     }
+    public static void setRealm(String realm) {
+        DigestProcessor.realm = realm;
+    }
 
+    public static void setQop(String qop) {
+        DigestProcessor.qop = qop;
+    }
 
 }
