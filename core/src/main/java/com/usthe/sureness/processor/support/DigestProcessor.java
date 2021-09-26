@@ -72,6 +72,7 @@ public class DigestProcessor extends BaseProcessor {
             throw new UnknownAccountException("do not exist the account: " + appId);
         }
         DigestSubject digestSubject = (DigestSubject) var;
+        //A1 = MD5("username:realm:password");
         String a1 = calcDigest(appId, digestSubject.getRealm(), account.getPassword());
         String a2 = calcDigest(digestSubject.getHttpMethod(), digestSubject.getUri());
         String oriResponse = calcDigest(a1, digestSubject.getNonce(), digestSubject.getNc(), digestSubject.getCnonce(),
