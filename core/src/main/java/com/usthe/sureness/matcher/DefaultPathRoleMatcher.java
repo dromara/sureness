@@ -108,7 +108,11 @@ public class DefaultPathRoleMatcher implements TreePathRoleMatcher {
             throw new SurenessNoInitException("DefaultPathRoleMatcher init error : component init not complete");
         }
     }
-
+    
+    private void clearTree() {
+        root.clearTree();
+        excludeRoot.clearTree();
+    }
 
     public void setPathTreeProvider(PathTreeProvider pathTreeProvider) {
         if (isNull(pathTreeProviderList)) {
