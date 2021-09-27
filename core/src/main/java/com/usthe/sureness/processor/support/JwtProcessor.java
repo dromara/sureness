@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
+import  static java.util.Objects.nonNull;
 
 /**
  * the processor support jwt - JwtSubject
@@ -67,7 +68,7 @@ public class JwtProcessor extends BaseProcessor {
         // attention: need to set subject own roles from account
         var.setPrincipal(claims.getSubject());
         List<String> ownRoles = claims.get("roles", List.class);
-        if (ownRoles != null) {
+        if (nonNull(ownRoles)) {
             var.setOwnRoles(ownRoles);
         }
         PrincipalMap principalMap = new SinglePrincipalMap();
