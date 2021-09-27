@@ -8,7 +8,7 @@ package com.usthe.sureness.processor.exception;
  */
 public class NeedDigestInfoException extends SurenessAuthenticationException {
 
-    private String authenticate;
+    private final String authenticate;
 
     public NeedDigestInfoException(String message, String authenticate) {
         super(message);

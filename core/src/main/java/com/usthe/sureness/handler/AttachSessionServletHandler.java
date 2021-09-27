@@ -5,6 +5,7 @@ import com.usthe.sureness.util.SurenessConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import static java.util.Objects.isNull;
 
 /**
  * attach auth success subject info with servlet request session
@@ -18,12 +19,16 @@ public class AttachSessionServletHandler implements SuccessHandler{
         if (request instanceof HttpServletRequest) {
             HttpServletRequest servletRequest = (HttpServletRequest) request;
             HttpSession httpSession = servletRequest.getSession();
-            if (httpSession.isNew() || httpSession.getAttribute(SurenessConstant.PRINCIPAL) == null) {
+            if (isHttpSessionValid(httpSession)) {
                 httpSession.setAttribute(SurenessConstant.PRINCIPAL, subjectSum.getPrincipal());
                 httpSession.setAttribute(SurenessConstant.PRINCIPALS, subjectSum.getPrincipalMap());
                 httpSession.setAttribute(SurenessConstant.ROLES, subjectSum.getRoles());
             }
         }
 
+    }
+
+    private boolean isHttpSessionValid(HttpSession httpSession) {
+        return httpSession.isNew() || isNull(httpSession.getAttribute(SurenessConstant.PRINCIPAL));
     }
 }

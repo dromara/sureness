@@ -17,7 +17,6 @@ public interface PathTreeProvider {
      *     tomcat context path is: <context path="v2">
      */
     AtomicReference<String> CONTEXT_PATH_REF = new AtomicReference<>();
-
     /**
      * set context path
      * Please sync with your server context path settings here

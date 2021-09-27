@@ -4,7 +4,12 @@ package com.usthe.sureness.matcher.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -478,17 +483,11 @@ public class TirePathTree {
             return data;
         }
 
-        private void setData(String data) {
-            this.data = data;
-        }
 
         private Map<String, Node> getChildren() {
             return children;
         }
 
-        private void setChildren(Map<String, Node> children) {
-            this.children = children;
-        }
 
         public List<String> getPatternChildren() {
             return patternChildren;
