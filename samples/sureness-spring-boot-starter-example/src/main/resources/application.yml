@@ -15,12 +15,12 @@ sureness:
     - digest
     - basic
     - jwt
-  jwt:
-    secret-key: ?::4s9ssf2sf4sed45pf):RnLN7XNn4wARoQXizIv6MHUsIV+EFfiMw/x7R0ntu4aWr/CWuApcFajCyaFv0bwq2Eik0jdrKUtsA6bx3sDJeFV643R+YYzGMRIqcBIp6AKA98GM2RIqcBIp6-?::4390fsf4sdl6opf)4ZI:tdQMtcQQ14pkOAQdQ546
   annotation:
     enable: true
     scan-packages:
       - com.usthe.sureness.bootstrap.controller
   session-enabled: true
   websocket-enabled: true
+  jwt:
+    secret-key: ?::4s9ssf2sf4sed45pf):RnLN7XNn4wARoQXizIv6MHUsIV+EFfiMw/x7R0ntu4aWr/CWuApcFajCyaFv0bwq2Eik0jdrKUtsA6bx3sDJeFV643R+YYzGMRIqcBIp6AKA98GM2RIqcBIp6-?::4390fsf4sdl6opf)4ZI:tdQMtcQQ14pkOAQdQ546
 
