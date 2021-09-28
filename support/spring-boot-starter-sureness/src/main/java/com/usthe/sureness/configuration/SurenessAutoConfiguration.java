@@ -93,11 +93,8 @@ public class SurenessAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(PathTreeProvider.class)
-    PathTreeProvider pathTreeProvider(DefaultPathRoleMatcher pathRoleMatcher){
-        PathTreeProvider pathTreeProvider = new DocumentPathTreeProvider();
-        pathRoleMatcher.setPathTreeProvider(pathTreeProvider);
-        pathRoleMatcher.buildTree();
-        return pathTreeProvider;
+    PathTreeProvider pathTreeProvider(){
+        return new DocumentPathTreeProvider();
     }
 
     @Bean
@@ -237,8 +234,8 @@ public class SurenessAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(TreePathRoleMatcher.class)
-    TreePathRoleMatcher pathRoleMatcher(List<PathTreeProvider> pathTreeProviders,
-                                        DefaultPathRoleMatcher pathRoleMatcher) {
+    TreePathRoleMatcher pathRoleMatcher(List<PathTreeProvider> pathTreeProviders) {
+        DefaultPathRoleMatcher pathRoleMatcher = new DefaultPathRoleMatcher();
         if (pathTreeProviders == null) {
             pathTreeProviders = new ArrayList<>();
         }
@@ -263,23 +260,12 @@ public class SurenessAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(DefaultPathRoleMatcher.class)
-    public DefaultPathRoleMatcher defaultPathRoleMatcher(){
-        return new DefaultPathRoleMatcher();
-    }
-
-    @Bean
     @ConditionalOnWebApplication
-    @ConditionalOnMissingBean(value = FilterRegistrationBean.class)
     @ConditionalOnExpression("'${sureness.container}'.equalsIgnoreCase('servlet')")
-    public FilterRegistrationBean filterRegistration(
-            SecurityManager securityManager
-    ) {
+    public FilterRegistrationBean filterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new SurenessFilter(securityManager));
         registration.addUrlPatterns("/*");
-        registration.setFilter((Filter)
-                applicationContext.getBean("surenessFilter"));
+        registration.setFilter((Filter) applicationContext.getBean("surenessFilter"));
         registration.setName("surenessFilter");
         registration.setOrder(1);
         return registration;
