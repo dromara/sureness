@@ -6,7 +6,8 @@ MicroProfile Starter has generated this MicroProfile application for you.
 
 The generation of the executable jar file can be performed by issuing the following command
 
-    mvn clean package
+    mvn clean package     
+    mvn clean install -Pwildfly 
 
 This will create an executable jar file **demo-wildfly.jar** within the _target_ maven folder. This can be started by executing the following command
 
