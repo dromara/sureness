@@ -26,6 +26,7 @@
         <module>spring-gateway-sureness</module>
         <module>zuul-sureness</module>
         <module>sureness-spring-boot-starter-example</module>
+        <module>micro-profile-sureness</module>
     </modules>
 
     <dependencyManagement>
