@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>samples</artifactId>
+        <groupId>com.usthe.sureness</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>war</packaging>
+    <artifactId>micro-profile-sureness</artifactId>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <version.wildfly>23.0.0.Final</version.wildfly>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <final.name>demo</final.name>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.install.skip>true</maven.install.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>4.0.1</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.usthe.sureness</groupId>
+            <artifactId>sureness-core</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>demo</finalName>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>wildfly</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <defaultGoal>compile</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-jar-maven-plugin</artifactId>
+                        <version>1.0.0.Alpha4</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>package</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <feature-pack-location>wildfly@maven(org.jboss.universe:community-universe)#${version.wildfly}</feature-pack-location>
+                            <layers>
+                                <layer>jaxrs</layer>
+                            </layers>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.spec.javax.ws.rs</groupId>
+                    <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+                    <version>1.0.1.Final</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+            <repositories>
+                <repository>
+                    <id>jboss-public-repository</id>
+                    <name>JBoss Public Maven Repository Group</name>
+                    <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+                </repository>
+                <repository>
+                    <id>Red Hat GA</id>
+                    <name>Red Hat GA</name>
+                    <url>https://maven.repository.redhat.com/ga/</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+</project>

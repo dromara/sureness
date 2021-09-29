@@ -12,8 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
-
+import static java.util.Objects.nonNull;
+import static java.util.Objects.isNull;
 /**
  * Authentication authorization entrance
  * @author tomsun28
@@ -55,8 +58,7 @@ public class SurenessSecurityManager implements SecurityManager {
      * @throws SurenessNoInitException check false not init
      */
     private void checkComponentInit() {
-        if (subjectFactory == null || pathRoleMatcher == null ||
-                processorManager == null) {
+        if (validateSomeOneIsNull(Stream.of(subjectFactory, pathRoleMatcher, processorManager))) {
             logger.error("SecurityManager init error : SurenessSecurityManager not init fill component");
             // The component's own related exceptions or configuration line exceptions are not thrown up
             throw new SurenessNoInitException("SurenessSecurityManager not init fill component");
@@ -83,7 +85,7 @@ public class SurenessSecurityManager implements SecurityManager {
                     return null;
                 }
                 noTryExcluded = false;
-                if (preSubject == null) {
+                if (isNull(preSubject)) {
                     pathRoleMatcher.matchRole(thisSubject);
                     preSubject = thisSubject;
                 } else {
@@ -101,9 +103,13 @@ public class SurenessSecurityManager implements SecurityManager {
     }
 
     private void handSuccess(SubjectSum subjectSum, Object request) {
-        if (handlerManager != null) {
+        if (nonNull(handlerManager)) {
             handlerManager.hand(subjectSum, request);
         }
+    }
+
+    private boolean validateSomeOneIsNull(final Stream stream) {
+        return stream.anyMatch(Objects::isNull);
     }
 
     @Override
@@ -139,9 +145,6 @@ public class SurenessSecurityManager implements SecurityManager {
         return processorManager;
     }
 
-    public HandlerManager getHandlerManager() {
-        return handlerManager;
-    }
 
     /**
      * singleton

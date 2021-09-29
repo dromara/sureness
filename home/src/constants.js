@@ -1,6 +1,7 @@
 import React from 'react'
 
-import Translate, {translate} from '@docusaurus/Translate';
+import Translate, {translate} from '@docusaurus/Translate'
+
 
 export const features = [{
     title: translate({
@@ -121,6 +122,19 @@ export const friendLinks = [
     }
 ]
 
+export const mediaPartners = [
+    {
+        img: 'dromara_qr.png',
+        alt: 'Dromara',
+        url: 'https://mp.weixin.qq.com/s/Q3b7ZE802IMF6MwIPJIGQA'
+    },
+    {
+        img: 'JavaHouDuan_logo.png',
+        alt: 'JavaHouDuan',
+        url: 'https://mp.weixin.qq.com/s/Ylq51a7Av8ZRuH811xZnDA'
+    }
+]
+
 export const logos = [{
 /**
  * Page 1
@@ -213,7 +227,7 @@ export const SetupExample = `
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 
 compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.3'

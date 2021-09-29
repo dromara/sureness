@@ -1,6 +1,5 @@
 package com.usthe.sureness.configuration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.usthe.sureness.mgt.SecurityManager;
 import com.usthe.sureness.processor.exception.DisabledAccountException;
 import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
@@ -25,6 +24,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 
 
 /**
@@ -122,12 +122,7 @@ public class SurenessFilter implements Filter {
                 ((HttpServletResponse) response).addHeader(key, value.get(0)));
         try (PrintWriter printWriter = response.getWriter()) {
             if (content.getBody() != null) {
-                if (content.getBody() instanceof String) {
-                    printWriter.write(content.getBody().toString());
-                } else {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    printWriter.write(objectMapper.writeValueAsString(content.getBody()));
-                }
+                printWriter.write(content.getBody().toString());
             } else {
                 printWriter.flush();
             }
