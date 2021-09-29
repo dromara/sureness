@@ -19,26 +19,31 @@ public class SurenessProperties {
     private boolean enabled = true;
 
     /**
+     * support container type: Servlet, JAX_RS, Spring_Reactor
      * 可配置 支持 Servlet, JAX_RS, Spring_Reactor 容器协议
      */
     private ContainerType container = ContainerType.Servlet;
 
     /**
+     * support auth type: Jwt, basic auth, digest auth
      * 支持的认证方式 Jwt, basic auth, digest auth等其它认证方式
      */
     private AuthType[] authTypes = new AuthType[] {AuthType.BASIC, AuthType.JWT, AuthType.DIGEST};
 
     /**
+     * JWT properties
      * 当 authType 为 JWT 时设置的属性
      */
     private JwtProperties jwt;
 
     /**
+     * whether to enable websocket protect
      * 是否开启 websocket 的认证鉴权
      */
     private boolean websocketEnabled = true;
 
     /**
+     * whether to enable session
      * 是否开启 session
      */
     private boolean sessionEnabled = false;
