@@ -46,7 +46,7 @@ public class PasswordProcessor extends BaseProcessor {
                 logger.debug("PasswordProcessor authenticated fail, no this user: {}",
                         var.getPrincipal());
             }
-            throw new  UnknownAccountException("do not exist the account: " + appId);
+            throw new UnknownAccountException("do not exist the account: " + appId);
         }
         if (var.getCredential() != null && account.getPassword() != null) {
             String password = String.valueOf(var.getCredential());
@@ -67,9 +67,9 @@ public class PasswordProcessor extends BaseProcessor {
         if (account.isExcessiveAttempts()) {
             throw new ExcessiveAttemptsException("account is disable due to many time authenticated, try later");
         }
-        return PasswordSubject.builder(var)
-                .setOwnRoles(account.getOwnRoles())
-                .build();
+        // attention: need to set subject own roles from account
+        var.setOwnRoles(account.getOwnRoles());
+        return var;
     }
 
     public void setAccountProvider(SurenessAccountProvider provider) {

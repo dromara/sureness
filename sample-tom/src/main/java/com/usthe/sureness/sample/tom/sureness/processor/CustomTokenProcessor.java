@@ -49,9 +49,10 @@ public class CustomTokenProcessor extends BaseProcessor {
             // auth passed
             String appId = tokenArr[0];
             SurenessAccount account = accountProvider.loadAccount(appId);
-            return CustomTokenSubject.builder(var)
-                    .setPrincipal(appId)
-                    .setOwnRoles(account.getOwnRoles()).build();
+            // attention: need to set subject own roles from account
+            var.setPrincipal(appId);
+            var.setOwnRoles(account.getOwnRoles());
+            return var;
 
         } else {
             // token expired or not exist, if token can refresh, refresh it

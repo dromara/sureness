@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal</artifactId>
-            <version>4.9.10</version>
+            <version>4.9.11</version>
         </dependency>
         <dependency>
             <groupId>com.usthe.sureness</groupId>

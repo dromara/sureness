@@ -11,4 +11,17 @@ public class UnsupportedSubjectException extends SurenessAuthenticationException
     public UnsupportedSubjectException(String message) {
         super(message);
     }
+
+    /**
+     * single instance for UnsupportedSubjectException
+     * @return instance exception
+     */
+    public static RuntimeException getDefaultInstance() {
+        return Instance.INSTANCE;
+    }
+
+    private static class Instance {
+        private static final RuntimeException INSTANCE = new UnsupportedSubjectException("this request can not " +
+                "create subject by creators,please config no subject creator by default");
+    }
 }

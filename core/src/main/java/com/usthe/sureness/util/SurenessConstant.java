@@ -23,4 +23,6 @@ public class SurenessConstant {
     public static final String BEARER = "Bearer";
     /** Token auth key **/
     public static final String TOKEN = "token";
+    /** JWT auth **/
+    public static final String JWT = "Jwt";
 }

@@ -81,8 +81,18 @@ public class DigestSubject implements Subject {
     }
 
     @Override
+    public void setPrincipal(Object var1) {
+        this.appId = (String) var1;
+    }
+
+    @Override
     public PrincipalMap getPrincipalMap() {
         return principalMap;
+    }
+
+    @Override
+    public void setPrincipalMap(PrincipalMap var1) {
+        this.principalMap = var1;
     }
 
     @Override
@@ -91,13 +101,29 @@ public class DigestSubject implements Subject {
     }
 
     @Override
+    public void setCredential(Object var1) {
+        this.response = (String) var1;
+    }
+
+    @Override
     public Object getOwnRoles() {
         return ownRoles;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void setOwnRoles(Object var1) {
+        this.ownRoles = (List<String>) var1;
     }
 
     @Override
     public Object getTargetResource() {
         return targetUri;
+    }
+
+    @Override
+    public void setTargetResource(Object var1) {
+        this.targetUri = (String) var1;
     }
 
     @Override

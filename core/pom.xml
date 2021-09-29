@@ -6,12 +6,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
 
     <name>sureness</name>
     <inceptionYear>2019</inceptionYear>
-    <url>https://github.com/tomsun28/sureness</url>
+    <url>https://github.com/dromara/sureness</url>
     <description>
         Sureness is a simple and efficient open-source security framework that focus on protection for restful api.
     </description>
@@ -34,13 +34,13 @@
 
     <scm>
         <connection>
-            scm:git:https://github.com/tomsun28/sureness.git
+            scm:git:https://github.com/dromara/sureness.git
         </connection>
         <developerConnection>
-            scm:git:https://github.com/tomsun28/sureness.git
+            scm:git:https://github.com/dromara/sureness.git
         </developerConnection>
-        <url>https://github.com/tomsun28/sureness</url>
-        <tag>1.0.2</tag>
+        <url>https://github.com/dromara/sureness</url>
+        <tag>1.0.5</tag>
     </scm>
 
     <properties>

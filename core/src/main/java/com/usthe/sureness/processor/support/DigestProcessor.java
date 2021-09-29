@@ -1,7 +1,12 @@
 package com.usthe.sureness.processor.support;
 
 import com.usthe.sureness.processor.BaseProcessor;
-import com.usthe.sureness.processor.exception.*;
+import com.usthe.sureness.processor.exception.DisabledAccountException;
+import com.usthe.sureness.processor.exception.ExcessiveAttemptsException;
+import com.usthe.sureness.processor.exception.IncorrectCredentialsException;
+import com.usthe.sureness.processor.exception.UnknownAccountException;
+import com.usthe.sureness.processor.exception.SurenessAuthenticationException;
+import com.usthe.sureness.processor.exception.NeedDigestInfoException;
 import com.usthe.sureness.provider.SurenessAccount;
 import com.usthe.sureness.provider.SurenessAccountProvider;
 import com.usthe.sureness.subject.Subject;
@@ -12,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import static java.util.Objects.nonNull;
 
 /**
  * process digest auth - DigestSubject
@@ -82,19 +88,27 @@ public class DigestProcessor extends BaseProcessor {
         if (account.isExcessiveAttempts()) {
             throw new ExcessiveAttemptsException("account is disable due to many time authenticated, try later");
         }
-        return DigestSubject.builder(var)
-                .setOwnRoles(account.getOwnRoles())
-                .build();
+        // attention: need to set subject own roles from account
+        var.setOwnRoles(account.getOwnRoles());
+        return var;
     }
 
-    private String getAuthenticate(){
+    private String getAuthenticate() {
         String nonce = calcDigest(String.valueOf(System.currentTimeMillis()));
-        return "Digest " + "realm=" + realm + ",nonce=" + nonce + ",qop=" + qop;
+        return new StringBuilder()
+                .append("Digest ")
+                .append("realm=")
+                .append(realm)
+                .append(",nonce=")
+                .append(nonce)
+                .append(",qop=")
+                .append(qop)
+                .toString();
     }
 
     private String calcDigest(String first, String ... args){
         StringBuilder stringBuilder = new StringBuilder(first);
-        if (args != null) {
+        if (nonNull(args)) {
             for (String str : args){
                 stringBuilder.append(':').append(str);
             }
@@ -116,7 +130,6 @@ public class DigestProcessor extends BaseProcessor {
     public void setAccountProvider(SurenessAccountProvider provider) {
         this.accountProvider = provider;
     }
-
     public static void setRealm(String realm) {
         DigestProcessor.realm = realm;
     }
@@ -124,4 +137,5 @@ public class DigestProcessor extends BaseProcessor {
     public static void setQop(String qop) {
         DigestProcessor.qop = qop;
     }
+
 }

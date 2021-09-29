@@ -11,9 +11,10 @@ import Feature from './components/Feature'
 import Section from './components/Section'
 import Highlight from './components/Highlight'
 import LogoCarousel from './components/LogoCarousel'
+import cdnTransfer from '../CdnTransfer'
 
 import styles from './styles.module.css'
-import { features, SetupExample, SurenessIntegration, friendLinks } from '../constants'
+import { features, SetupExample, SurenessIntegration, friendLinks, mediaPartners } from '../constants'
 
 function Home() {
     const context = useDocusaurusContext()
@@ -25,14 +26,14 @@ function Home() {
             <header className={clsx('hero hero--primary', styles.heroBanner)}>
                 <div className="container">
                     <h1 className="hero__title">
-                        <img src="img/brand128.svg"/>
+                        <img src={cdnTransfer('img/brand128.svg')}/>
                     </h1>
                     <p className="hero__subtitle"><Translate>Focus on Protection of API</Translate></p>
                     <div className={styles.social}>
                         <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img
                             src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg"/></a>
                         <a href="https://search.maven.org/artifact/com.usthe.sureness/sureness-core"><img
-                            src="https://img.shields.io/badge/Maven%20Central-1.0.3-blue.svg"/></a>
+                            src="https://img.shields.io/badge/Maven%20Central-1.0.5-blue.svg"/></a>
                         <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img
                             src="https://img.shields.io/github/release-date/dromara/sureness?color=blue&logo=figshare&logoColor=red"/></a>
                         <a href="https://img.shields.io/github/status/contexts/pulls/dromara/sureness/8?label=pull%20checks"><img
@@ -123,15 +124,15 @@ function Home() {
                             <div>
                                 <h4>Native Support for:</h4>
                                 <a href="https://spring.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/spring-logo.svg" alt="spring"/></a>
+                                    src={cdnTransfer('img/icons/spring-logo.svg')} alt="spring"/></a>
                                 <a href="https://javalin.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/javalin_logo.svg" alt="Javalin"/></a>
+                                    src={cdnTransfer('img/icons/javalin_logo.svg')} alt="Javalin"/></a>
                                 <a href="https://micronaut.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/micronaut_logo.png" alt="Micronaut"/></a>
+                                    src={cdnTransfer('img/icons/micronaut_logo.png')} alt="Micronaut"/></a>
                                 <a href="https://quarkus.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/quarkus_logo.svg" alt="Quarkus"/></a>
+                                    src={cdnTransfer('img/icons/quarkus_logo.svg')} alt="Quarkus"/></a>
                                 <a href="https://ktor.io/" className={styles.frameworkLogos}><img
-                                    src="img/icons/ktor_logo.svg" alt="Ktor"/></a>
+                                    src={cdnTransfer('img/icons/ktor_logo.svg')} alt="Ktor"/></a>
                             </div>
                         </>
                     }
@@ -141,7 +142,7 @@ function Home() {
                         <img
                             width="760"
                             height="445"
-                            src="img/compare.png"
+                            src={cdnTransfer('img/compare.png')}
                         />
                     }
                     isDark
@@ -200,7 +201,7 @@ function Home() {
                         <img
                             width="560"
                             height="415"
-                            src="img/benchmark_en.png"
+                            src={cdnTransfer('img/benchmark_en.png')}
                         />
                     }
                     reversed
@@ -243,7 +244,7 @@ function Home() {
                         <img
                             width="760"
                             height="405"
-                            src="img/PathRoleMatcher.svg"
+                            src={cdnTransfer('img/PathRoleMatcher.svg')}
                         />
                     }
                     isDark
@@ -302,6 +303,10 @@ function Home() {
                 {/*Friend Links*/}
                 <Section>
                     <LogoCarousel logos={friendLinks} headerTitle={translate({message: 'Friend Links'})}></LogoCarousel>
+                </Section>
+                {/*Media Partners*/}
+                <Section>
+                    <LogoCarousel logos={mediaPartners} headerTitle={translate({message: 'Media Partners'})}></LogoCarousel>
                 </Section>
             </main>
         </Layout>
