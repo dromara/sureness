@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @title: SurenessConfiguration
  * @Author hqgordon
  * @Date: 2021/7/31 5:13 下午
- * @Description:
+ * @Description: 配置类
  * @Version 1.0
  */
 @Configuration

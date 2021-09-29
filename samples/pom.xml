@@ -27,6 +27,7 @@
         <module>zuul-sureness</module>
         <module>shenyu-sureness</module>
         <module>shenyu-service</module>
+        <module>shenyu-sureness-sql</module>
     </modules>
 
     <dependencyManagement>

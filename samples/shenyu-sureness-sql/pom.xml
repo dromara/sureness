@@ -9,14 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>shenyu-sureness</artifactId>
+    <artifactId>shenyu-sureness-sql</artifactId>
 
     <properties>
-        <java.version>1.8</java.version>
-        <spring-cloud.version>2020.0.2</spring-cloud.version>
-        <sureness-core.version>1.0.3</sureness-core.version>
+        <maven.compiler.source>13</maven.compiler.source>
+        <maven.compiler.target>13</maven.compiler.target>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.yaml</groupId>
@@ -72,6 +70,39 @@
             <artifactId>soul-spring-boot-starter-plugin-divide</artifactId>
             <version>2.3.0-RELEASE</version>
         </dependency>
-    </dependencies>
 
+        <!--        <dependency>-->
+        <!--            <groupId>io.netty</groupId>-->
+        <!--            <artifactId>netty-all</artifactId>-->
+        <!--            <version>4.1.46.Final</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+            <version>2.2.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>2.2.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.47</version>
+            <!--<scope>runtime</scope>-->
+        </dependency>
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
 </project>
