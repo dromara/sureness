@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  * @author wangtao
  */
 @SpringBootApplication
+@ServletComponentScan
 public class BootstrapApplication {
 
     public static void main(String[] args) {

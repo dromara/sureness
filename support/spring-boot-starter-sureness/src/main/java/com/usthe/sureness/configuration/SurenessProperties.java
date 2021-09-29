@@ -4,6 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author wangtao
@@ -19,24 +20,19 @@ public class SurenessProperties {
     private boolean enabled = true;
 
     /**
-     * 可配置 支持 Servlet, JAX_RS, Spring_Reactor 容器协议
+     * 可配置 支持 websocket, servlet, jax-rs或者其它容器协议
      */
-    private ContainerType container = ContainerType.Servlet;
+    private Set<SupportType> supportTypes;
 
     /**
      * 支持的认证方式 Jwt, basic auth, digest auth等其它认证方式
      */
-    private AuthType[] authTypes = new AuthType[] {AuthType.BASIC, AuthType.JWT, AuthType.DIGEST};
+    private Set<AuthType> authTypes;
 
     /**
-     * 当 authType 为 JWT 时设置的属性
+     * 当 authType 为 jwt 时设置的属性
      */
     private JwtProperties jwt;
-
-    /**
-     * 是否开启 websocket 的认证鉴权
-     */
-    private boolean websocketEnabled = true;
 
     /**
      * 是否开启 session
@@ -48,11 +44,19 @@ public class SurenessProperties {
      */
     private AnnotationProperties annotation;
 
-    public AuthType[] getAuthTypes() {
+    public Set<SupportType> getSupportTypes() {
+        return supportTypes;
+    }
+
+    public void setSupportTypes(Set<SupportType> supportTypes) {
+        this.supportTypes = supportTypes;
+    }
+
+    public Set<AuthType> getAuthTypes() {
         return authTypes;
     }
 
-    public void setAuthTypes(AuthType[] authTypes) {
+    public void setAuthTypes(Set<AuthType> authTypes) {
         this.authTypes = authTypes;
     }
 
@@ -88,23 +92,6 @@ public class SurenessProperties {
         this.annotation = annotation;
     }
 
-    public ContainerType getContainer() {
-        return container;
-    }
-
-    public void setContainer(ContainerType container) {
-        this.container = container;
-    }
-
-    public boolean isWebsocketEnabled() {
-        return websocketEnabled;
-    }
-
-    public void setWebsocketEnabled(boolean websocketEnabled) {
-        this.websocketEnabled = websocketEnabled;
-    }
-
-
     public static enum AuthType {
         /** json web token auth **/
         JWT,
@@ -114,13 +101,15 @@ public class SurenessProperties {
         DIGEST
     }
 
-    public static enum ContainerType {
+    public static enum SupportType {
         /** http servlet **/
         Servlet,
         /** jax-rs **/
         JAX_RS,
         /** spring reactor stream **/
         Spring_Reactor,
+        /** websocket **/
+        WebSocket
     }
 
     public static class AnnotationProperties {
