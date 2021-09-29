@@ -5,6 +5,6 @@ spring:
         - SurenessAuth
       routes:
         - id: route1
-          uri: https://www.baidu.com
+          uri: https://www.bing.com
           predicates:
-          - Path=/api/**
+            - Path=/api/**
