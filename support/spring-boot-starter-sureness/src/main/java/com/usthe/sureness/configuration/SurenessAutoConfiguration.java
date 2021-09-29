@@ -54,6 +54,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.servlet.Filter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,8 +76,6 @@ public class SurenessAutoConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SurenessAutoConfiguration.class);
 
-    private static final int NUM_2 = 2;
-
     private ApplicationContext applicationContext;
 
     private SurenessProperties surenessProperties;
@@ -94,11 +93,8 @@ public class SurenessAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(PathTreeProvider.class)
-    PathTreeProvider pathTreeProvider(DefaultPathRoleMatcher pathRoleMatcher){
-        PathTreeProvider pathTreeProvider = new DocumentPathTreeProvider();
-        pathRoleMatcher.setPathTreeProvider(pathTreeProvider);
-        pathRoleMatcher.buildTree();
-        return pathTreeProvider;
+    PathTreeProvider pathTreeProvider(){
+        return new DocumentPathTreeProvider();
     }
 
     @Bean
@@ -107,76 +103,73 @@ public class SurenessAutoConfiguration {
     SubjectFactory subjectFactory() {
         SubjectFactory subjectFactory = new SurenessSubjectFactory();
         List<SubjectCreate> subjectCreates = new ArrayList<>();
-        Set<AuthType> authTypes = surenessProperties.getAuthTypes();
-        if (authTypes == null || authTypes.isEmpty()) {
+        AuthType[] authTypeArr = surenessProperties.getAuthTypes();
+        Set<AuthType> authTypes = authTypeArr == null ? new HashSet<>() : new HashSet<>(Arrays.asList(authTypeArr));
+        if (authTypes.isEmpty()) {
             // if is null, default config is basic auth, jwt auth
             LOGGER.info("[sureness-starter] - use default authTypes: Basic, Jwt");
             authTypes = new HashSet<>(2);
             authTypes.add(AuthType.BASIC);
             authTypes.add(AuthType.JWT);
-            surenessProperties.setAuthTypes(authTypes);
         }
-        Set<SupportType> supportTypes = surenessProperties.getSupportTypes();
-        if (supportTypes == null || supportTypes.isEmpty()) {
-            // if is null, default config is servlet, websocket
+        ContainerType containerType = surenessProperties.getContainer();
+        if (containerType == null) {
+            // if is null, default config is servlet
             LOGGER.info("[sureness-starter] - use default supportTypes: Servlet, Websocket");
-            supportTypes = new HashSet<>(2);
-            supportTypes.add(SupportType.Servlet);
-            supportTypes.add(SupportType.WebSocket);
-            surenessProperties.setSupportTypes(supportTypes);
+            containerType = ContainerType.Servlet;
         }
-        if (supportTypes.size() >= NUM_2 && !supportTypes.contains(SupportType.WebSocket)) {
-            LOGGER.error("[sureness-starter] - supportTypes: Servlet, JAX-RS or Spring-Reactor neither can exist at the same time");
-            throw new SurenessInitException("[sureness-starter] - supportTypes: Servlet, JAX-RS or Spring-Reactor neither can exist at the same time");
-        }
-        if (supportTypes.contains(SupportType.Servlet)) {
-            subjectCreates.add(new NoneSubjectServletCreator());
-            if (supportTypes.contains(SupportType.WebSocket)) {
-                subjectCreates.add(new JwtSubjectWsServletCreator());
-            }
-            if (authTypes.contains(AuthType.BASIC)){
-                subjectCreates.add(new BasicSubjectServletCreator());
-            }
-            if (authTypes.contains(AuthType.JWT)){
-                subjectCreates.add(new JwtSubjectServletCreator());
-                subjectCreates.add(new JwtSubjectWsServletCreator());
-            }
-            if (authTypes.contains(AuthType.DIGEST)){
-                subjectCreates.add(new DigestSubjectServletCreator());
-            }
-            if (surenessProperties.isSessionEnabled()) {
-                subjectCreates.add(new SessionSubjectServletCreator());
-            }
-        } else if (supportTypes.contains(SupportType.JAX_RS)){
-            // other is JAX-RS
-            subjectCreates.add(new NoneSubjectJaxRsCreator());
-            if (supportTypes.contains(SupportType.WebSocket)) {
-                subjectCreates.add(new JwtSubjectWsJaxRsCreator());
-            }
-            if (authTypes.contains(AuthType.BASIC)){
-                subjectCreates.add(new BasicSubjectJaxRsCreator());
-            }
-            if (authTypes.contains(AuthType.JWT)){
-                subjectCreates.add(new JwtSubjectJaxRsCreator());
-                subjectCreates.add(new JwtSubjectWsJaxRsCreator());
-            }
-            if (authTypes.contains(AuthType.DIGEST)){
-                subjectCreates.add(new DigestSubjectJaxRsCreator());
-            }
-        } else if (supportTypes.contains(SupportType.Spring_Reactor)) {
-            subjectCreates.add(new NoneSubjectSpringReactiveCreator());
-            if (supportTypes.contains(SupportType.WebSocket)) {
-                subjectCreates.add(new JwtSubjectWsSpringReactiveCreator());
-            }
-            if (authTypes.contains(AuthType.BASIC)) {
-                subjectCreates.add(new BasicSubjectSpringReactiveCreator());
-            }
-            if (authTypes.contains(AuthType.JWT)) {
-                subjectCreates.add(new JwtSubjectSpringReactiveCreator());
-            }
-            if (authTypes.contains(AuthType.DIGEST)) {
-                subjectCreates.add(new DigestSubjectSpringReactiveCreator());
-            }
+        boolean enableWebsocket = surenessProperties.isWebsocketEnabled();
+        switch (containerType) {
+            case Servlet:
+                subjectCreates.add(new NoneSubjectServletCreator());
+                if (enableWebsocket) {
+                    subjectCreates.add(new JwtSubjectWsServletCreator());
+                }
+                if (authTypes.contains(AuthType.BASIC)){
+                    subjectCreates.add(new BasicSubjectServletCreator());
+                }
+                if (authTypes.contains(AuthType.JWT)){
+                    subjectCreates.add(new JwtSubjectServletCreator());
+                    subjectCreates.add(new JwtSubjectWsServletCreator());
+                }
+                if (authTypes.contains(AuthType.DIGEST)){
+                    subjectCreates.add(new DigestSubjectServletCreator());
+                }
+                if (surenessProperties.isSessionEnabled()) {
+                    subjectCreates.add(new SessionSubjectServletCreator());
+                }
+                break;
+            case JAX_RS:
+                subjectCreates.add(new NoneSubjectJaxRsCreator());
+                if (enableWebsocket) {
+                    subjectCreates.add(new JwtSubjectWsJaxRsCreator());
+                }
+                if (authTypes.contains(AuthType.BASIC)){
+                    subjectCreates.add(new BasicSubjectJaxRsCreator());
+                }
+                if (authTypes.contains(AuthType.JWT)){
+                    subjectCreates.add(new JwtSubjectJaxRsCreator());
+                    subjectCreates.add(new JwtSubjectWsJaxRsCreator());
+                }
+                if (authTypes.contains(AuthType.DIGEST)){
+                    subjectCreates.add(new DigestSubjectJaxRsCreator());
+                }
+                break;
+            case Spring_Reactor:
+                subjectCreates.add(new NoneSubjectSpringReactiveCreator());
+                if (enableWebsocket) {
+                    subjectCreates.add(new JwtSubjectWsSpringReactiveCreator());
+                }
+                if (authTypes.contains(AuthType.BASIC)) {
+                    subjectCreates.add(new BasicSubjectSpringReactiveCreator());
+                }
+                if (authTypes.contains(AuthType.JWT)) {
+                    subjectCreates.add(new JwtSubjectSpringReactiveCreator());
+                }
+                if (authTypes.contains(AuthType.DIGEST)) {
+                    subjectCreates.add(new DigestSubjectSpringReactiveCreator());
+                }
+            default: break;
         }
         subjectFactory.registerSubjectCreator(subjectCreates);
         LOGGER.info("[sureness-starter] - SurenessSubjectFactory init success");
@@ -209,14 +202,14 @@ public class SurenessAutoConfiguration {
         List<Processor> processorList = new LinkedList<>();
         NoneProcessor noneProcessor = new NoneProcessor();
         processorList.add(noneProcessor);
-        Set<AuthType> authTypes = surenessProperties.getAuthTypes();
-        if (authTypes == null || authTypes.isEmpty()) {
+        AuthType[] authTypeArr = surenessProperties.getAuthTypes();
+        Set<AuthType> authTypes = authTypeArr == null ? new HashSet<>() : new HashSet<>(Arrays.asList(authTypeArr));
+        if (authTypes.isEmpty()) {
             // if is null, default config is basic auth, jwt auth
             LOGGER.info("[sureness-starter] - use default authTypes: Basic, Jwt");
             authTypes = new HashSet<>(2);
             authTypes.add(AuthType.BASIC);
             authTypes.add(AuthType.JWT);
-            surenessProperties.setAuthTypes(authTypes);
         }
         if (authTypes.contains(AuthType.JWT)) {
             JwtProcessor jwtProcessor = new JwtProcessor();
@@ -241,12 +234,15 @@ public class SurenessAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(TreePathRoleMatcher.class)
-    TreePathRoleMatcher pathRoleMatcher(PathTreeProvider pathTreeProvider,
-                                        DefaultPathRoleMatcher pathRoleMatcher) {
-        List<PathTreeProvider> providers = new ArrayList<>();
-        providers.add(pathTreeProvider);
-        // add documentProvider default
-        providers.add(new DocumentPathTreeProvider());
+    TreePathRoleMatcher pathRoleMatcher(List<PathTreeProvider> pathTreeProviders) {
+        DefaultPathRoleMatcher pathRoleMatcher = new DefaultPathRoleMatcher();
+        if (pathTreeProviders == null) {
+            pathTreeProviders = new ArrayList<>();
+        }
+        if (pathTreeProviders.isEmpty()) {
+            // add documentProvider default
+            pathTreeProviders.add(new DocumentPathTreeProvider());
+        }
         AnnotationProperties annotationProperties = surenessProperties.getAnnotation();
         if (annotationProperties != null && annotationProperties.isEnable()) {
             List<String> scanPackages = annotationProperties.getScanPackages();
@@ -255,32 +251,21 @@ public class SurenessAutoConfiguration {
             } else {
                 AnnotationPathTreeProvider annotationPathTreeProvider = new AnnotationPathTreeProvider();
                 annotationPathTreeProvider.setScanPackages(scanPackages);
-                providers.add(annotationPathTreeProvider);
+                pathTreeProviders.add(annotationPathTreeProvider);
             }
         }
-        pathRoleMatcher.setPathTreeProviderList(providers);
+        pathRoleMatcher.setPathTreeProviderList(pathTreeProviders);
         pathRoleMatcher.buildTree();
         return pathRoleMatcher;
     }
 
     @Bean
-    @ConditionalOnMissingBean(DefaultPathRoleMatcher.class)
-    public DefaultPathRoleMatcher defaultPathRoleMatcher(){
-        return new DefaultPathRoleMatcher();
-    }
-
-    @Bean
     @ConditionalOnWebApplication
-    @ConditionalOnMissingBean(value = FilterRegistrationBean.class)
-    @ConditionalOnExpression("'${sureness.support-types}'.contains('com.usthe.sureness.configuration.SupportType.Servlet')")
-    public FilterRegistrationBean filterRegistration(
-            SecurityManager securityManager
-    ) {
+    @ConditionalOnExpression("'${sureness.container}'.equalsIgnoreCase('servlet')")
+    public FilterRegistrationBean filterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new SurenessFilter(securityManager));
         registration.addUrlPatterns("/*");
-        registration.setFilter((Filter)
-                applicationContext.getBean("surenessFilter"));
+        registration.setFilter((Filter) applicationContext.getBean("surenessFilter"));
         registration.setName("surenessFilter");
         registration.setOrder(1);
         return registration;
@@ -288,6 +273,7 @@ public class SurenessAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(name = "surenessFilter")
+    @ConditionalOnExpression("'${sureness.container}'.equalsIgnoreCase('servlet')")
     public Filter surenessFilter(SecurityManager securityManager){
         return new SurenessFilter(securityManager);
     }

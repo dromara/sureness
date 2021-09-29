@@ -71,7 +71,7 @@ public class SurenessFilter implements Filter {
             logger.debug("this request account info is illegal, {}", e1.getMessage());
             responseWrite(ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED)
-                    .body("Username or password is incorrect or expired"), servletResponse);
+                    .body("Username or password is incorrect or token expired"), servletResponse);
             return;
         } catch (DisabledAccountException | ExcessiveAttemptsException e2 ) {
             logger.debug("the account is disabled, {}", e2.getMessage());
@@ -96,7 +96,7 @@ public class SurenessFilter implements Filter {
                     servletResponse);
             return;
         }
-        
+
         try {
             // if ok, doFilter and add subject in request
             filterChain.doFilter(servletRequest, servletResponse);
