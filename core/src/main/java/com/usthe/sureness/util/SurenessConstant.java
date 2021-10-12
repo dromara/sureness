@@ -25,4 +25,6 @@ public class SurenessConstant {
     public static final String TOKEN = "token";
     /** JWT auth **/
     public static final String JWT = "Jwt";
+    /** LDAP auth **/
+    public static final String LDAP = "LDAP";
 }

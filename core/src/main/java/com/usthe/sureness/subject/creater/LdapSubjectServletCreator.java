@@ -1,0 +1,73 @@
+package com.usthe.sureness.subject.creater;
+
+import com.usthe.sureness.subject.Subject;
+import com.usthe.sureness.subject.SubjectCreate;
+import com.usthe.sureness.subject.support.LdapSubject;
+import com.usthe.sureness.util.SurenessConstant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
+/**
+ * @author Ed
+ * @create 2021-08-14 11:26
+ */
+public class LdapSubjectServletCreator implements SubjectCreate {
+    private static final Logger logger = LoggerFactory.getLogger(BasicSubjectServletCreator.class);
+
+    private static final int COUNT_2 = 2;
+
+
+    @Override
+    public boolean canSupportSubject(Object context) {
+        // ("Authorization", "Basic YWRtaW46YWRtaW4=")        --- basic auth
+        if (context instanceof HttpServletRequest) {
+            String authorization = ((HttpServletRequest)context).getHeader(SurenessConstant.AUTHORIZATION);
+            return authorization != null && authorization.startsWith(SurenessConstant.LDAP);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public Subject createSubject(Object context) {
+        String authorization = ((HttpServletRequest)context).getHeader(SurenessConstant.AUTHORIZATION);
+        //basic auth + LDAP
+        String basicAuth = authorization.replace(SurenessConstant.LDAP, "").trim();
+        try {
+            basicAuth = new String(Base64.getDecoder().decode(basicAuth), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            if (logger.isInfoEnabled()) {
+                logger.info("can not create basic auth PasswordSubject, due {}", e.getMessage());
+            }
+            return null;
+        }
+        String[] auth = basicAuth.split(":");
+        if (auth.length != COUNT_2) {
+            if (logger.isInfoEnabled()) {
+                logger.info("can not create basic auth PasswordSubject by this request message");
+            }
+            return null;
+        }
+        String username = auth[0];
+        if (username == null || "".equals(username)) {
+            if (logger.isInfoEnabled()) {
+                logger.info("can not create basic auth PasswordSubject by this request message, appId can not null");
+            }
+            return null;
+        }
+        username = username.trim();
+        String password = auth[1] == null ? null : auth[1].trim();
+        String remoteHost = ((HttpServletRequest) context).getRemoteHost();
+        String requestUri = ((HttpServletRequest) context).getRequestURI();
+        String requestType = ((HttpServletRequest) context).getMethod();
+        String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
+        return LdapSubject.builder(username, password)
+                .setRemoteHost(remoteHost)
+                .setTargetResource(targetUri)
+                .build();
+    }
+}
