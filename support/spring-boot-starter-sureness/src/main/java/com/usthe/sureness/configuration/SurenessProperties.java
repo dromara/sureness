@@ -16,7 +16,7 @@ public class SurenessProperties {
     /**
      * sureness enabled, default true
      */
-    private boolean enabled = true;
+    private boolean enable = true;
 
     /**
      * support container type: Servlet, JAX_RS, Spring_Reactor
@@ -28,7 +28,7 @@ public class SurenessProperties {
      * support auth type: Jwt, basic auth, digest auth
      * 支持的认证方式 Jwt, basic auth, digest auth等其它认证方式
      */
-    private AuthType[] authTypes = new AuthType[] {AuthType.BASIC, AuthType.JWT, AuthType.DIGEST};
+    private AuthType[] auths = new AuthType[] {AuthType.BASIC, AuthType.JWT, AuthType.DIGEST};
 
     /**
      * JWT properties
@@ -36,29 +36,21 @@ public class SurenessProperties {
      */
     private JwtProperties jwt;
 
-    /**
-     * whether to enable websocket protect
-     * 是否开启 websocket 的认证鉴权
-     */
-    private boolean websocketEnabled = true;
+    private SessionProperties session;
 
-    /**
-     * whether to enable session
-     * 是否开启 session
-     */
-    private boolean sessionEnabled = false;
+    private WebSocketProperties websocket;
 
     /**
      * config for Annotation provider
      */
     private AnnotationProperties annotation;
 
-    public AuthType[] getAuthTypes() {
-        return authTypes;
+    public AuthType[] getAuths() {
+        return auths;
     }
 
-    public void setAuthTypes(AuthType[] authTypes) {
-        this.authTypes = authTypes;
+    public void setAuths(AuthType[] auths) {
+        this.auths = auths;
     }
 
     public JwtProperties getJwt() {
@@ -69,20 +61,12 @@ public class SurenessProperties {
         this.jwt = jwt;
     }
 
-    public boolean isSessionEnabled() {
-        return sessionEnabled;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setSessionEnabled(boolean sessionEnabled) {
-        this.sessionEnabled = sessionEnabled;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
     public AnnotationProperties getAnnotation() {
@@ -101,14 +85,21 @@ public class SurenessProperties {
         this.container = container;
     }
 
-    public boolean isWebsocketEnabled() {
-        return websocketEnabled;
+    public SessionProperties getSession() {
+        return session;
     }
 
-    public void setWebsocketEnabled(boolean websocketEnabled) {
-        this.websocketEnabled = websocketEnabled;
+    public void setSession(SessionProperties session) {
+        this.session = session;
     }
 
+    public WebSocketProperties getWebsocket() {
+        return websocket;
+    }
+
+    public void setWebsocket(WebSocketProperties websocket) {
+        this.websocket = websocket;
+    }
 
     public static enum AuthType {
         /** json web token auth **/
@@ -153,14 +144,46 @@ public class SurenessProperties {
 
     public static class JwtProperties {
 
-        private String secretKey;
+        private String secret;
 
-        public String getSecretKey() {
-            return secretKey;
+        public String getSecret() {
+            return secret;
         }
 
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
+        public void setSecret(String secret) {
+            this.secret = secret;
+        }
+    }
+
+    public static class SessionProperties {
+        /**
+         * whether to enable session
+         * 是否开启 session
+         */
+        private boolean enable = false;
+
+        public boolean isEnable() {
+            return enable;
+        }
+
+        public void setEnable(boolean enable) {
+            this.enable = enable;
+        }
+    }
+
+    public static class WebSocketProperties {
+        /**
+         * whether to enable websocket protect
+         * 是否开启 websocket 的认证鉴权
+         */
+        private boolean enable = false;
+
+        public boolean isEnable() {
+            return enable;
+        }
+
+        public void setEnable(boolean enable) {
+            this.enable = enable;
         }
     }
 }

@@ -47,11 +47,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.servlet.Filter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,7 +65,7 @@ import static com.usthe.sureness.configuration.SurenessProperties.*;
  * @date 2021/7/3
  */
 @Configuration
-@ConditionalOnProperty(prefix = "sureness", name = "enabled", havingValue = "true",
+@ConditionalOnProperty(prefix = "sureness", name = "enable", havingValue = "true",
         matchIfMissing = true)
 @ConditionalOnResource(resources = "META-INF/spring.factories")
 @AutoConfigureAfter(value = {SurenessProperties.class})
@@ -76,12 +73,9 @@ public class SurenessAutoConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SurenessAutoConfiguration.class);
 
-    private ApplicationContext applicationContext;
-
     private SurenessProperties surenessProperties;
 
-    public SurenessAutoConfiguration(ApplicationContext applicationContext, SurenessProperties properties) {
-        this.applicationContext = applicationContext;
+    public SurenessAutoConfiguration(SurenessProperties properties) {
         this.surenessProperties = properties;
     }
 
@@ -103,7 +97,7 @@ public class SurenessAutoConfiguration {
     SubjectFactory subjectFactory() {
         SubjectFactory subjectFactory = new SurenessSubjectFactory();
         List<SubjectCreate> subjectCreates = new ArrayList<>();
-        AuthType[] authTypeArr = surenessProperties.getAuthTypes();
+        AuthType[] authTypeArr = surenessProperties.getAuths();
         Set<AuthType> authTypes = authTypeArr == null ? new HashSet<>() : new HashSet<>(Arrays.asList(authTypeArr));
         if (authTypes.isEmpty()) {
             // if is null, default config is basic auth, jwt auth
@@ -118,7 +112,8 @@ public class SurenessAutoConfiguration {
             LOGGER.info("[sureness-starter] - use default supportTypes: Servlet, Websocket");
             containerType = ContainerType.Servlet;
         }
-        boolean enableWebsocket = surenessProperties.isWebsocketEnabled();
+        boolean enableWebsocket = surenessProperties.getWebsocket() != null
+                && surenessProperties.getWebsocket().isEnable();
         switch (containerType) {
             case Servlet:
                 subjectCreates.add(new NoneSubjectServletCreator());
@@ -135,7 +130,7 @@ public class SurenessAutoConfiguration {
                 if (authTypes.contains(AuthType.DIGEST)){
                     subjectCreates.add(new DigestSubjectServletCreator());
                 }
-                if (surenessProperties.isSessionEnabled()) {
+                if (surenessProperties.getWebsocket() != null && surenessProperties.getWebsocket().isEnable()) {
                     subjectCreates.add(new SessionSubjectServletCreator());
                 }
                 break;
@@ -183,7 +178,7 @@ public class SurenessAutoConfiguration {
             TreePathRoleMatcher pathRoleMatcher,
             SubjectFactory subjectFactory) {
         if (surenessProperties.getJwt() != null) {
-            String jwtSecret = surenessProperties.getJwt().getSecretKey();
+            String jwtSecret = surenessProperties.getJwt().getSecret();
             if (jwtSecret != null && !"".equals(jwtSecret)) {
                 JsonWebTokenUtil.setDefaultSecretKey(jwtSecret);
             }
@@ -202,7 +197,7 @@ public class SurenessAutoConfiguration {
         List<Processor> processorList = new LinkedList<>();
         NoneProcessor noneProcessor = new NoneProcessor();
         processorList.add(noneProcessor);
-        AuthType[] authTypeArr = surenessProperties.getAuthTypes();
+        AuthType[] authTypeArr = surenessProperties.getAuths();
         Set<AuthType> authTypes = authTypeArr == null ? new HashSet<>() : new HashSet<>(Arrays.asList(authTypeArr));
         if (authTypes.isEmpty()) {
             // if is null, default config is basic auth, jwt auth
@@ -225,7 +220,7 @@ public class SurenessAutoConfiguration {
             digestProcessor.setAccountProvider(accountProvider);
             processorList.add(digestProcessor);
         }
-        if (surenessProperties.isSessionEnabled()) {
+        if (surenessProperties.getSession() != null && surenessProperties.getSession().isEnable()) {
             SessionProcessor sessionProcessor = new SessionProcessor();
             processorList.add(sessionProcessor);
         }
@@ -261,20 +256,14 @@ public class SurenessAutoConfiguration {
 
     @Bean
     @ConditionalOnWebApplication
-    @ConditionalOnExpression("'${sureness.container}'.equalsIgnoreCase('servlet')")
-    public FilterRegistrationBean filterRegistration() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
+    @ConditionalOnExpression("'${sureness.container:servlet}'.equalsIgnoreCase('servlet')")
+    public FilterRegistrationBean<SurenessFilter> filterRegistration(SecurityManager securityManager) {
+        SurenessFilter surenessFilter = new SurenessFilter(securityManager);
+        FilterRegistrationBean<SurenessFilter> registration = new FilterRegistrationBean<>();
         registration.addUrlPatterns("/*");
-        registration.setFilter((Filter) applicationContext.getBean("surenessFilter"));
-        registration.setName("surenessFilter");
-        registration.setOrder(1);
+        registration.setFilter(surenessFilter);
+        registration.setName("SurenessFilter");
+        registration.setOrder(Integer.MAX_VALUE);
         return registration;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(name = "surenessFilter")
-    @ConditionalOnExpression("'${sureness.container}'.equalsIgnoreCase('servlet')")
-    public Filter surenessFilter(SecurityManager securityManager){
-        return new SurenessFilter(securityManager);
     }
 }
