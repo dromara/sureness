@@ -148,6 +148,33 @@ public class JsonWebTokenUtil {
      * issue jwt params
      * @param subject user ID
      * @param period period time(s)
+     * @param roles roles the user has
+     * @return json web token
+     */
+    public static String issueJwt(String subject, Long period, List<String> roles){
+        String id = UUID.randomUUID().toString();
+        String issuer = "sureness-token-server";
+        return issueJwt(id, subject, issuer, period,
+                roles, null);
+    }
+
+    /**
+     * issue jwt params
+     * @param subject user ID
+     * @param period period time(s)
+     * @return json web token
+     */
+    public static String issueJwt(String subject, Long period){
+        String id = UUID.randomUUID().toString();
+        String issuer = "sureness-token-server";
+        return issueJwt(id, subject, issuer, period,
+                null, null);
+    }
+
+    /**
+     * issue jwt params
+     * @param subject user ID
+     * @param period period time(s)
      * @param customClaimMap custom claim param
      * @return json web token
      */
