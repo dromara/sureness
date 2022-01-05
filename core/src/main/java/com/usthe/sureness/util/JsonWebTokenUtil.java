@@ -119,8 +119,9 @@ public class JsonWebTokenUtil {
     public static String issueJwt(String id, String subject, String issuer, Long period,
                                   List<String> roles, Map<String, Object> customClaimMap){
         if (customClaimMap == null) {
-            customClaimMap = Collections.singletonMap(SurenessConstant.ROLES, roles);
-        } else {
+            customClaimMap = new HashMap<>(8);
+        }
+        if (roles != null && !roles.isEmpty()) {
             customClaimMap.put(SurenessConstant.ROLES, roles);
         }
         return issueJwtAll(id, subject, issuer, period, null, null,
