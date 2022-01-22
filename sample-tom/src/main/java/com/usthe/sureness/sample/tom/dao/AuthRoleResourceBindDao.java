@@ -3,6 +3,7 @@ package com.usthe.sureness.sample.tom.dao;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthResourceDO;
 import com.usthe.sureness.sample.tom.pojo.entity.AuthRoleResourceBindDO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -29,6 +30,7 @@ public interface AuthRoleResourceBindDao extends JpaRepository<AuthRoleResourceB
      * @param roleId roleID
      * @param resourceId resourceId
      */
+    @Modifying
     @Query("delete from AuthRoleResourceBindDO bind " +
             "where bind.roleId = :roleId and bind.resourceId = :resourceId")
     void deleteRoleResourceBind(@Param("roleId") Long roleId,@Param("resourceId") Long resourceId);
