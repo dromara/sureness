@@ -43,7 +43,12 @@ public class DocumentResourceAccess {
         Yaml yaml = new Yaml();
         InputStream inputStream = null;
         try {
-            inputStream = DocumentResourceAccess.class.getClassLoader().getResourceAsStream(yamlFileName);
+            // 1. classpath：/config/
+            // 2. classpath: /
+            inputStream = DocumentResourceAccess.class.getClassLoader().getResourceAsStream("config/" + yamlFileName);
+            if (inputStream == null) {
+                inputStream = DocumentResourceAccess.class.getClassLoader().getResourceAsStream(yamlFileName);
+            }
             if (inputStream == null) {
                 inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(yamlFileName);
             }
