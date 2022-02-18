@@ -109,11 +109,11 @@
 <dependency>
     <groupId>com.usthe.sureness</groupId>
     <artifactId>sureness-core</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 ```
-compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.6'
+compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.0.7'
 ```
 
 #### 🐵 使用默认配置来配置Sureness    
