@@ -88,10 +88,6 @@ export const features = [{
 
 export const friendLinks = [
     {
-        img: 'ShenYu_logo.png',
-        alt: 'ShenYu',
-        url: 'https://dromara.org/projects/soul/overview/'
-    }, {
         img: 'maxkey_logo.png',
         alt: 'MaxKey',
         url: 'https://maxkey.top/'
