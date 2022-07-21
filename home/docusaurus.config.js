@@ -1,6 +1,6 @@
 const path = require('path')
 
-const organizationName = 'usthe' // Usually your GitHub org/user name.
+const organizationName = 'dromara' // Usually your GitHub org/user name.
 const projectName = 'sureness' // Usually your repo name.
 const branch = 'master'
 const repoUrl = `https://github.com/dromara/${projectName}`
@@ -9,8 +9,8 @@ const cdnUrl = 'https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/'
 module.exports = {
     title: 'Sureness',
     tagline: 'Focus on Protection of API',
-    url: 'https://usthe.com',
-    baseUrl: '/sureness/',
+    url: 'https://su.usthe.com',
+    baseUrl: '/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
     favicon: cdnUrl + 'img/icon64.png',

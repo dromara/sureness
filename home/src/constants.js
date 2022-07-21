@@ -104,6 +104,14 @@ export const friendLinks = [
         alt: 'Sa-Token',
         url: 'http://sa-token.dev33.cn/'
     }, {
+        img: 'liteflow_logo.png',
+        alt: 'LiteFlow',
+        url: 'https://yomahub.com/liteflow/'
+    }, {
+        img: 'jpom_logo.png',
+        alt: 'jpom',
+        url: 'https://jpom.io/'
+    }, {
         img: 'justauth_logo.png',
         alt: 'Justauth',
         url: 'https://justauth.wiki/'
@@ -111,11 +119,7 @@ export const friendLinks = [
         img: 'pha_logo.jfif',
         alt: 'pha_api',
         url: 'https://www.phalapi.net/'
-    }, {
-        img: 'liteflow_logo.png',
-        alt: 'LiteFlow',
-        url: 'https://yomahub.com/liteflow/'
-    }
+    },
 ]
 
 export const mediaPartners = [
