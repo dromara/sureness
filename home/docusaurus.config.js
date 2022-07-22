@@ -32,19 +32,7 @@ module.exports = {
         colorMode: {
             defaultMode: 'light',
             disableSwitch: false,
-            respectPrefersColorScheme: false,
-            switchConfig: {
-                darkIcon: '🌜',
-                lightIcon: '☀️',
-                // React inline style object
-                // see https://reactjs.org/docs/dom-elements.html#style
-                darkIconStyle: {
-                    marginLeft: '2px',
-                },
-                lightIconStyle: {
-                    marginLeft: '1px',
-                },
-            },
+            respectPrefersColorScheme: true
         },
         prism: {
             theme: require('prism-react-renderer/themes/github'),
@@ -54,7 +42,7 @@ module.exports = {
         algolia: {
             apiKey: 'c7c84bfcc1495156f5730309d821ba8c',
             indexName: 'sureness',
-            // appId: 'GNVT7Z0UI2',
+            appId: 'GNVT7Z0UI2',
             contextualSearch: true,
         },
         announcementBar: {
@@ -63,7 +51,7 @@ module.exports = {
                 '<font style="font-size: medium; font-weight: bolder">If you like Sureness,</font> <a target="_blank" style="font-size: medium; font-weight: bolder" rel="noopener noreferrer" href="https://github.com/dromara/sureness">give us a star on GitHub </a> <font style="font-size: medium; font-weight: bolder"> or </font><a target="_blank" style="font-size: medium; font-weight: bolder" rel="noopener noreferrer" href="https://gitee.com/dromara/sureness">Gitee! </a>⭐️',
             backgroundColor: '#7228B5',
             textColor: '#fafbfc',
-            isCloseable: true, 
+            isCloseable: true,
         },
         navbar: {
             title: ' ',
@@ -205,7 +193,7 @@ module.exports = {
             ],
             logo: {
               alt: 'Open Source Logo',
-              src: cdnUrl + 'img/dromara.jpg',
+              src: cdnUrl + 'img/icon64.svg',
               href: 'https://github.com/dromara',
             },
             copyright: `Apache License 2.0 | Copyright © ${new Date().getFullYear()}`,

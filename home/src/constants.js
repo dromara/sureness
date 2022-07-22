@@ -119,6 +119,10 @@ export const friendLinks = [
         img: 'pha_logo.jfif',
         alt: 'pha_api',
         url: 'https://www.phalapi.net/'
+    }, {
+        img: 'hertzbeat_logo.svg',
+        alt: 'hertzbeat',
+        url: 'https://hertzbeat.com/'
     },
 ]
 

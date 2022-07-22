@@ -305,9 +305,9 @@ function Home() {
                     <LogoCarousel logos={friendLinks} headerTitle={translate({message: 'Friend Links'})}></LogoCarousel>
                 </Section>
                 {/*Media Partners*/}
-                <Section>
-                    <LogoCarousel logos={mediaPartners} headerTitle={translate({message: 'Media Partners'})}></LogoCarousel>
-                </Section>
+                {/*<Section>*/}
+                {/*    <LogoCarousel logos={mediaPartners} headerTitle={translate({message: 'Media Partners'})}></LogoCarousel>*/}
+                {/*</Section>*/}
             </main>
         </Layout>
     )

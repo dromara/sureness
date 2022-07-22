@@ -19,8 +19,6 @@ export default class LogoCarousel extends React.Component {
             margin: 70
         }
 
-        this.imgUrl = 
-
         this.containerRef = React.createRef()
     }
 
