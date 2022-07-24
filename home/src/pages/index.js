@@ -302,12 +302,12 @@ function Home() {
                 />
                 {/*Friend Links*/}
                 <Section>
-                    <LogoCarousel logos={friendLinks} headerTitle={translate({message: 'Friend Links'})}></LogoCarousel>
+                    <LogoCarousel logos={friendLinks} headerTitle={translate({message: 'Friend Links'})}/>
                 </Section>
                 {/*Media Partners*/}
-                <Section>
-                    <LogoCarousel logos={mediaPartners} headerTitle={translate({message: 'Media Partners'})}></LogoCarousel>
-                </Section>
+                {/*<Section>*/}
+                {/*    <LogoCarousel logos={mediaPartners} headerTitle={translate({message: 'Media Partners'})}></LogoCarousel>*/}
+                {/*</Section>*/}
             </main>
         </Layout>
     )
