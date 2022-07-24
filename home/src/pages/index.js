@@ -302,7 +302,7 @@ function Home() {
                 />
                 {/*Friend Links*/}
                 <Section>
-                    <LogoCarousel logos={friendLinks} headerTitle={translate({message: 'Friend Links'})}></LogoCarousel>
+                    <LogoCarousel logos={friendLinks} headerTitle={translate({message: 'Friend Links'})}/>
                 </Section>
                 {/*Media Partners*/}
                 {/*<Section>*/}

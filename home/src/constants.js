@@ -112,6 +112,10 @@ export const friendLinks = [
         alt: 'jpom',
         url: 'https://jpom.io/'
     }, {
+        img: 'fast_request_logo.png',
+        alt: 'fast-request',
+        url: 'https://plugins.sheng90.wang/fast-request/'
+    }, {
         img: 'justauth_logo.png',
         alt: 'Justauth',
         url: 'https://justauth.wiki/'
@@ -123,6 +127,54 @@ export const friendLinks = [
         img: 'hertzbeat_logo.svg',
         alt: 'hertzbeat',
         url: 'https://hertzbeat.com/'
+    }, {
+        img: 'koalas_rpc_logo.png',
+        alt: 'koalas_rpc',
+        url: 'https://gitee.com/dromara/koalas-rpc'
+    }, {
+        img: 'liteflow_logo.png',
+        alt: 'LiteFlow',
+        url: 'https://yomahub.com/liteflow/'
+    }, {
+        img: 'hmily_logo.png',
+        alt: 'hmily',
+        url: 'https://dromara.org/'
+    }, {
+        img: 'forest_logo.png',
+        alt: 'Forest',
+        url: 'https://forest.dtflyx.com/'
+    }, {
+        img: 'cubic_logo.png',
+        alt: 'cubic',
+        url: 'https://cubic.jiagoujishu.com/'
+    }, {
+        img: 'raincat_logo.png',
+        alt: 'Raincat',
+        url: 'https://dromara.org/'
+    }, {
+        img: 'easy_es_logo.png',
+        alt: 'easy-es',
+        url: 'https://www.easy-es.cn/'
+    }, {
+        img: 'dynamic_tp_logo.png',
+        alt: 'dynamic-tp',
+        url: 'https://dynamictp.cn/'
+    }, {
+        img: 'northstar_logo.png',
+        alt: 'northstar',
+        url: 'https://gitee.com/dromara/northstar'
+    }, {
+        img: 'mendmix_logo.png',
+        alt: 'mendmix',
+        url: 'https://www.jeesuite.com/'
+    }, {
+        img: 'gobrs_logo.png',
+        alt: 'Gobrs-Async',
+        url: 'https://async.sizegang.cn/'
+    }, {
+        img: 'easypdf_logo.png',
+        alt: 'easypdf',
+        url: 'https://dromara.gitee.io/x-easypdf/'
     },
 ]
 
