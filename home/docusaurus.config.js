@@ -9,8 +9,8 @@ const cdnUrl = 'https://cdn.jsdelivr.net/gh/usthe/sureness@gh-pages/'
 module.exports = {
     title: 'Sureness',
     tagline: 'Focus on Protection of API',
-    url: 'https://su.usthe.com',
-    baseUrl: '/',
+    url: 'https://dromara.org',
+    baseUrl: '/sureness/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
     favicon: cdnUrl + 'img/icon64.png',
