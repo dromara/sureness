@@ -252,9 +252,12 @@ See [CONTRIBUTING](CONTRIBUTING.md)
 
 [Github Discussion](https://github.com/usthe/sureness/discussions)          
 [Gitter Channel](https://gitter.im/usthe/sureness)   
-QQ Group：390083213        
-Dromara 社区微信公众号: gh_7eeb0b1b7476      
-Sureness 微信公众号：sureness   
+
+<img alt="tan-cloud" src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat/home/static/img/wechat.png" width="400"/>       
+
+<br/>
+
+<img alt="planet" src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/planet.jpg" width="400"/>    
 
 
 

@@ -193,8 +193,8 @@ module.exports = {
             ],
             logo: {
               alt: 'Open Source Logo',
-              src: cdnUrl + 'img/icon64.svg',
-              href: 'https://github.com/dromara',
+              src: 'https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/planet.jpg',
+              href: 'https://github.com/dromara/hertzbeat',
             },
             copyright: `Apache License 2.0 | Copyright © ${new Date().getFullYear()}`,
           },

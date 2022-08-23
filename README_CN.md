@@ -251,9 +251,12 @@ Sureness提供了下面这些常用接口作为扩展点:
 [REST API 权限设计 - 快速搭建权限项目-配置文件方案](https://segmentfault.com/a/1190000039075245)    
 [REST API 权限设计 - Sureness集成Spring Boot样例-数据库方案](https://segmentfault.com/a/1190000039191172)   
 
-QQ 交流群：390083213       
-Dromara 社区微信公众号: gh_7eeb0b1b7476      
-Sureness 微信公众号：sureness    
+<img alt="tan-cloud" src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat/home/static/img/wechat.png" width="400"/>       
+
+<br/>
+
+<img alt="planet" src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/planet.jpg" width="400"/>    
+
 [Github Discussion](https://github.com/usthe/sureness/discussions)           
 [Gitter Channel](https://gitter.im/usthe/sureness)      
 
