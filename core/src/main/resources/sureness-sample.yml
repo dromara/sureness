@@ -50,3 +50,20 @@ account:
   - appId: tom
     credential: 32113
     role: [role3]
+
+# configuration for jwt management, redis and stand-alone map are provided to configure
+# if "enable" attribute is set to be "true", system will use redis as the default tool, otherwise map will be used
+# username,password and ttl are optional, others are required
+# Note: if you set the "ttl" attribute in map, it will globally act as the jwt expiration time
+tokenCache:
+  - type: redis
+    host: 172.17.128.49
+    port: 6379
+    timeout: 3000
+# username and password could be null
+    username:
+    password:
+    enabled: false
+  - type: map
+# ttl: time to live(seconds)
+    ttl:

@@ -1,6 +1,9 @@
 package com.usthe.sureness.util;
 
+import com.usthe.sureness.DefaultSurenessConfig;
+import com.usthe.sureness.provider.ducument.DocumentResourceAccess;
 import io.jsonwebtoken.Claims;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -13,6 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * @date 16:20 2020-03-08
  */
 public class JsonWebTokenUtilTest {
+
+    DefaultSurenessConfig defaultSurenessConfig;
+    @BeforeEach
+    public void init() {
+        DocumentResourceAccess.setYamlName("sureness-sample.yml");
+        defaultSurenessConfig = new DefaultSurenessConfig();
+    }
 
     @Test
     public void issueJwt() {
