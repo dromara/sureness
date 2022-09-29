@@ -66,7 +66,6 @@ public class DefaultRedis {
         for (Map<String, Object> map : documentResourceEntity.getTokenCache()) {
             if (SurenessConstant.TOKEN_CACHE_REDIS.equalsIgnoreCase((String) map.get("type")) && (Boolean) map.get("enabled")) {
                 currentMap = map;
-                isRedisServiceOpen = true;
             }
         }
         if (currentMap == null) {
@@ -91,6 +90,7 @@ public class DefaultRedis {
         }
         RedisClient redisClient = RedisClient.create(redisURI);
         StatefulRedisConnection<String, String> connect = redisClient.connect();
+        isRedisServiceOpen = true;
         return connect.sync();
     }
 
