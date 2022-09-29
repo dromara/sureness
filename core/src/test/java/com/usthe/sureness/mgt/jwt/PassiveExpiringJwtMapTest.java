@@ -112,9 +112,9 @@ public class PassiveExpiringJwtMapTest {
         assertEquals(1, jwtMap.size());
     }
 
-    // Note: when you test this method, please set ttl in your configuration file
     @Test
     public void clear() {
+        jwtMap.loadTimeToLive(1);
         assertTrue(jwtMap.isTTLSetup());
         assertEquals(1, jwtMap.size());
         assertNotEquals(0, jwtMap.getTimeToLive());

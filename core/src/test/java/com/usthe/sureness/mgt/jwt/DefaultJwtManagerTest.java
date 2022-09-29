@@ -3,6 +3,7 @@ package com.usthe.sureness.mgt.jwt;
 import com.usthe.sureness.processor.exception.ExpiredCredentialsException;
 import com.usthe.sureness.provider.ducument.DocumentResourceAccess;
 import com.usthe.sureness.util.JsonWebTokenUtil;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,17 @@ public class DefaultJwtManagerTest {
     void init() {
         DocumentResourceAccess.setYamlName("sureness-sample.yml");
         defaultJwtManager = DefaultJwtManager.getInstance();
+    }
+
+    @AfterEach
+    void destroy() {
+        DefaultRedis defaultRedis = defaultJwtManager.getDefaultRedis();
+        PassiveExpiringJwtMap passiveExpiringJwtMap = defaultJwtManager.getPassiveExpiringJwtMap();
+        if (defaultRedis.isRedisServiceOpen()) {
+            defaultRedis.clear();
+        } else {
+            passiveExpiringJwtMap.clear();
+        }
     }
 
     @Test
