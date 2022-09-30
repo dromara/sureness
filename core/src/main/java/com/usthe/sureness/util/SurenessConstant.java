@@ -25,4 +25,10 @@ public class SurenessConstant {
     public static final String TOKEN = "token";
     /** JWT auth **/
     public static final String JWT = "Jwt";
+    /** JWT cache in map **/
+    public static final String TOKEN_CACHE_MAP = "map";
+    /** JWT cache in redis **/
+    public static final String TOKEN_CACHE_REDIS = "redis";
+    /** JWT cache in time **/
+    public static final int DEFAULT_TOKEN_CACHE_TIME = 30;
 }

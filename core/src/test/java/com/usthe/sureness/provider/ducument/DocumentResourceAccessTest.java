@@ -22,6 +22,7 @@ class DocumentResourceAccessTest {
         assertNotNull(resourceEntity.get().getAccount());
         assertNotNull(resourceEntity.get().getResourceRole());
         assertNotNull(resourceEntity.get().getExcludedResource());
+        assertNotNull(resourceEntity.get().getTokenCache());
     }
 
     @Test

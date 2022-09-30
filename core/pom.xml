@@ -56,6 +56,7 @@
         <slf4j.version>1.7.21</slf4j.version>
         <junit.version>5.7.0</junit.version>
         <easymock.version>4.0.2</easymock.version>
+        <redis.version>6.1.8.RELEASE</redis.version>
     </properties>
     <dependencies>
         <dependency>
@@ -122,6 +123,12 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        <!-- redis for jwt -->
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>${redis.version}</version>
         </dependency>
     </dependencies>
 

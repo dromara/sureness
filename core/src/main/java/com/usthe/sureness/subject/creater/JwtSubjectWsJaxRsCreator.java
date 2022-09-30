@@ -1,5 +1,6 @@
 package com.usthe.sureness.subject.creater;
 
+import com.usthe.sureness.mgt.jwt.DefaultJwtManager;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.JwtSubject;
@@ -34,6 +35,9 @@ public class JwtSubjectWsJaxRsCreator implements SubjectCreate {
         Object token = ((ContainerRequestContext)context).getProperty(SurenessConstant.TOKEN);
         if (token instanceof String) {
             String jwtToken = ((String)token).trim();
+            // add jwtManager to ensure that jwt does not expire
+            DefaultJwtManager defaultJwtManager = DefaultJwtManager.getInstance();
+            defaultJwtManager.checkJwt(jwtToken);
             String requestUri = ((ContainerRequestContext) context).getUriInfo().getPath();
             String requestType = ((ContainerRequestContext) context).getMethod();
             String targetUri = requestUri.concat("===").concat(requestType.toLowerCase());

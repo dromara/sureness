@@ -1,7 +1,8 @@
 package com.usthe.sureness.util;
 
+import com.usthe.sureness.mgt.jwt.DefaultJwtManager;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.*;
+import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 
 import javax.xml.bind.DatatypeConverter;
@@ -237,7 +238,12 @@ public class JsonWebTokenUtil {
         jwtBuilder.compressWith(CompressionCodecs.DEFLATE);
         // set secret key
         jwtBuilder.signWith(secretKey);
-        return jwtBuilder.compact();
+        String issuedJwt = jwtBuilder.compact();
+
+        // get defaultJwtManager instance
+        DefaultJwtManager defaultJwtManager = DefaultJwtManager.getInstance();
+        defaultJwtManager.cacheToken(issuedJwt, period);
+        return issuedJwt;
     }
 
     /**

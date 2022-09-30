@@ -16,6 +16,8 @@ public class DocumentResourceEntity {
 
     private List<Map<String, Object>> account;
 
+    private List<Map<String, Object>> tokenCache;
+
     public List<String> getResourceRole() {
         return resourceRole;
     }
@@ -38,5 +40,13 @@ public class DocumentResourceEntity {
 
     public void setExcludedResource(List<String> excludedResource) {
         this.excludedResource = excludedResource;
+    }
+
+    public List<Map<String, Object>> getTokenCache() {
+        return tokenCache;
+    }
+
+    public void setTokenCache(List<Map<String, Object>> tokenCache) {
+        this.tokenCache = tokenCache;
     }
 }
