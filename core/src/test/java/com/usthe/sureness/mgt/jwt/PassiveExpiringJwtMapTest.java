@@ -68,17 +68,9 @@ public class PassiveExpiringJwtMapTest {
         Long flag2 = jwtMap.get(fakeJwt);
         assertNull(flag2);
         String jwt = "eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJwtzEsKAjEQRdG91DgBU50PyTKcioOOVmG0tSUVRRD3bgzOLofHe8O5FUhgfLbuyKgtMmsbOetIwWibLTsMiO7gQYE8ch-39dq7iIy-0E0L1SfVH84NkvHebkzAOCmg1_0PbhpQZEtcSU6QeF6EFNR1oX61G4EwYIL95wtgySzn.kIG8wFgrxJMH8ZAJKEJkOIxYEKBnaOaFfQOqnld2LGC-OHKHrRhId61JcGoAtaX3UdCi-RncrJkCQ8ih_RRgCA";
-        jwtMap.loadTimeToLive(3);
         jwtMap.put(jwt);
         Long flag3 = jwtMap.get(jwt);
         assertNotNull(flag3);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        Long flag4 = jwtMap.get(jwt);
-        assertNull(flag4);
     }
 
     @Test
@@ -88,14 +80,6 @@ public class PassiveExpiringJwtMapTest {
         assertTrue(flag1);
         boolean flag2 = jwtMap.containsKey(fakeJwt);
         assertFalse(flag2);
-        try {
-            Thread.sleep(3 * 1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        // after 3 seconds, valid jwt expired
-        boolean flag3 = jwtMap.containsKey(testJwt);
-        assertFalse(flag3);
     }
 
     @Test
@@ -104,12 +88,6 @@ public class PassiveExpiringJwtMapTest {
         assertEquals(1, jwtMap.size());
         JsonWebTokenUtil.issueJwt("test", 1L);
         assertEquals(2, jwtMap.size());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        assertEquals(1, jwtMap.size());
     }
 
     @Test
