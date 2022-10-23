@@ -3,6 +3,7 @@ package com.usthe.sureness.subject.creater;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.NoneSubject;
+import com.usthe.sureness.util.ServletUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +23,7 @@ public class NoneSubjectServletCreator implements SubjectCreate {
     @Override
     public Subject createSubject(Object context) {
         String remoteHost = ((HttpServletRequest) context).getRemoteHost();
-        String requestUri = ((HttpServletRequest) context).getRequestURI();
+        String requestUri = ServletUtil.getRequestUri((HttpServletRequest) context);
         String requestType = ((HttpServletRequest) context).getMethod();
         String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
         return NoneSubject.builder().setRemoteHost(remoteHost)

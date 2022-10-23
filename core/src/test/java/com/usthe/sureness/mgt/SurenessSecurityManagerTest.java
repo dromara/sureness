@@ -28,6 +28,14 @@ class SurenessSecurityManagerTest {
     private static final String AUTHORIZATION = "Authorization";
     private static final String BASIC = "Basic";
     private static final String BEARER = "Bearer";
+    private static final String DEFAULT_SECRET_KEY =
+        "MIIEowIBAl+f/dKhaX0csgOCTlCxq20yhmUea6H6JIpST3ST1SE2Rwp" +
+            "LnfKefTjsIfJLBa2YkhEqE/GtcHDTNe4CU6+9y/S5z50Kik70LsP43r" +
+            "RnLN7XNn4wARoQXizIv6MHUsIV+EFfiMw/x7R0ntu4aWr/CWuApcFaj" +
+            "4mWEa6EwrPHTZmbT5Mt45AM2UYhzDHK+0F0rUq3MwH+oXsm+L3F/zjj" +
+            "M6EByXIO+SV5+8tVt4bisXQ13rbN0oxhUZR73+LDj9mxa6rFhMW+lfx" +
+            "CyaFv0bwq2Eik0jdrKUtsA6bx3sDJeFV643R+YYzGMRIqcBIp6AKA98" +
+            "GM2RIqcBIp6-?::4390fsf4sdl6opf)4ZI:tdQMtcQQ14pkOAQdQ546";
 
     private static SecurityManager securityManager;
 
@@ -38,6 +46,7 @@ class SurenessSecurityManagerTest {
         assertDoesNotThrow(SurenessSecurityManager::getInstance);
         securityManager = SurenessSecurityManager.getInstance();
         assertNotNull(securityManager);
+        JsonWebTokenUtil.setDefaultSecretKey(DEFAULT_SECRET_KEY);
     }
 
     @Test
@@ -47,7 +56,7 @@ class SurenessSecurityManagerTest {
 
         expect(request.getHeader(AUTHORIZATION)).andStubReturn(BASIC + " "
                 + new String(Base64.getEncoder().encode("admin:admin".getBytes(StandardCharsets.UTF_8))));
-        expect(request.getRequestURI()).andStubReturn("/api/v2/host");
+        expect(request.getServletPath()).andStubReturn("/api/v2/host");
         expect(request.getMethod()).andStubReturn("put");
         expect(request.getRemoteHost()).andStubReturn("192.167.2.1");
         replay(request);
@@ -63,7 +72,7 @@ class SurenessSecurityManagerTest {
 
         expect(request.getHeader(AUTHORIZATION)).andStubReturn(BASIC + " "
                 + new String(Base64.getEncoder().encode("admin:1234".getBytes(StandardCharsets.UTF_8))));
-        expect(request.getRequestURI()).andStubReturn("/api/v1/book");
+        expect(request.getServletPath()).andStubReturn("/api/v1/book");
         expect(request.getMethod()).andStubReturn("put");
         expect(request.getRemoteHost()).andStubReturn("192.167.2.1");
         replay(request);
@@ -77,7 +86,7 @@ class SurenessSecurityManagerTest {
                 null, Boolean.FALSE);
         HttpServletRequest request = createNiceMock(HttpServletRequest.class);
         expect(request.getHeader(AUTHORIZATION)).andStubReturn(BEARER + " " + jwt);
-        expect(request.getRequestURI()).andStubReturn("/api/v1/source1");
+        expect(request.getServletPath()).andStubReturn("/api/v1/source1");
         expect(request.getMethod()).andStubReturn("get");
         expect(request.getRemoteHost()).andStubReturn("192.167.2.1");
         replay(request);

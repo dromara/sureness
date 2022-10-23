@@ -3,6 +3,7 @@ package com.usthe.sureness.subject.creater;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.DigestSubject;
+import com.usthe.sureness.util.ServletUtil;
 import com.usthe.sureness.util.SurenessConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,7 +78,7 @@ public class DigestSubjectServletCreator implements SubjectCreate {
                     return null;
                 }
                 String remoteHost = ((HttpServletRequest) context).getRemoteHost();
-                String requestUri = ((HttpServletRequest) context).getRequestURI();
+                String requestUri = ServletUtil.getRequestUri((HttpServletRequest) context);
                 String requestType = ((HttpServletRequest) context).getMethod();
                 String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
                 return DigestSubject.builder(username, response)

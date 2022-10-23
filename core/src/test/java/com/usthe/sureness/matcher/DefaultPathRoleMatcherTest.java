@@ -82,19 +82,19 @@ public class DefaultPathRoleMatcherTest {
     public void isExcludedResource() {
         loadExcludedResource();
         HttpServletRequest request = createNiceMock(HttpServletRequest.class);
-        expect(request.getRequestURI()).andReturn("/api/v2/detail");
+        expect(request.getServletPath()).andReturn("/api/v2/detail");
         expect(request.getMethod()).andReturn("put");
         replay(request);
-        Subject subject = NoneSubject.builder().setTargetUri(request.getRequestURI().concat("===")
+        Subject subject = NoneSubject.builder().setTargetUri(request.getServletPath().concat("===")
                 .concat(request.getMethod()).toLowerCase()).build();
         assertTrue(pathRoleMatcher.isExcludedResource(subject));
         verify(request);
 
         request = createNiceMock(HttpServletRequest.class);
-        expect(request.getRequestURI()).andReturn("/book/v2/detail");
+        expect(request.getServletPath()).andReturn("/book/v2/detail");
         expect(request.getMethod()).andReturn("put");
         replay(request);
-        subject = NoneSubject.builder().setTargetUri(request.getRequestURI().concat("===")
+        subject = NoneSubject.builder().setTargetUri(request.getServletPath().concat("===")
                 .concat(request.getMethod()).toLowerCase()).build();
         assertFalse(pathRoleMatcher.isExcludedResource(subject));
         verify(request);
