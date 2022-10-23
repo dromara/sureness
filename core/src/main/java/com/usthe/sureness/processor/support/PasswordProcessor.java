@@ -51,7 +51,11 @@ public class PasswordProcessor extends BaseProcessor {
         if (var.getCredential() != null && account.getPassword() != null) {
             String password = String.valueOf(var.getCredential());
             if (account.getSalt() != null && !"".equals(account.getSalt())) {
+                // Not case-sensitive for salt password
                 password = Md5Util.md5( password + account.getSalt());
+                if (password != null && password.equalsIgnoreCase(account.getPassword())) {
+                    password = account.getPassword();
+                }
             }
             if (password == null || !password.equals(account.getPassword())) {
                 if (logger.isDebugEnabled()) {
