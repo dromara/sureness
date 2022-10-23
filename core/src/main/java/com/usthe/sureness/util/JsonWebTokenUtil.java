@@ -1,5 +1,6 @@
 package com.usthe.sureness.util;
 
+import com.usthe.sureness.processor.exception.ExtSurenessException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.*;
 import io.jsonwebtoken.security.SignatureException;
@@ -36,6 +37,8 @@ public class JsonWebTokenUtil {
 
     /** Encryption and decryption signature **/
     private static Key secretKey;
+
+    private static boolean isUsedDefault = true;
 
     static {
         byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(DEFAULT_SECRET_KEY);
@@ -200,6 +203,9 @@ public class JsonWebTokenUtil {
     public static String issueJwtAll(String id, String subject, String issuer, Long period,
                                      String audience, String payload, Long notBefore,
                                      Map<String, Object> headerMap, Map<String, Object> customClaimMap){
+        if (isUsedDefault) {
+            throw new ExtSurenessException("Please config your custom jwt secret. JsonWebTokenUtil.setDefaultSecretKey | sureness.jwt.secret");
+        }
         long currentTimeMillis = System.currentTimeMillis();
         JwtBuilder jwtBuilder = Jwts.builder();
         if (id != null) {
@@ -295,5 +301,6 @@ public class JsonWebTokenUtil {
     public static void setDefaultSecretKey(String secretNowKeyValue) {
         byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(secretNowKeyValue);
         secretKey = Keys.hmacShaKeyFor(secretKeyBytes);
+        isUsedDefault = false;
     }
 }
