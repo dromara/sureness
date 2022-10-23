@@ -49,7 +49,7 @@ public class BasicSubjectServletCreatorTest {
         HttpServletRequest request = createNiceMock(HttpServletRequest.class);
         expect(request.getHeader(AUTHORIZATION)).andReturn(BASIC + " "
                 + new String(Base64.getEncoder().encode("admin:admin".getBytes(StandardCharsets.UTF_8))));
-        expect(request.getRequestURI()).andReturn("/api/v1/book");
+        expect(request.getServletPath()).andReturn("/api/v1/book");
         expect(request.getMethod()).andReturn("put");
         expect(request.getRemoteHost()).andReturn("192.167.2.1");
         replay(request);

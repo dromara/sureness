@@ -49,7 +49,7 @@ public class JwtSubjectServletCreatorTest {
                 null, Boolean.FALSE);
         HttpServletRequest request = createNiceMock(HttpServletRequest.class);
         expect(request.getHeader(AUTHORIZATION)).andReturn(BEARER + " " + jwt);
-        expect(request.getRequestURI()).andReturn("/api/v1/book");
+        expect(request.getServletPath()).andReturn("/api/v1/book");
         expect(request.getMethod()).andReturn("put");
         expect(request.getRemoteHost()).andReturn("192.167.2.1");
         replay(request);

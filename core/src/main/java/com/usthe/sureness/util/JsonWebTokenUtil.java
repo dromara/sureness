@@ -38,7 +38,7 @@ public class JsonWebTokenUtil {
     /** Encryption and decryption signature **/
     private static Key secretKey;
 
-    private static boolean isUsedDefault = true;
+    private static volatile boolean isUsedDefault = true;
 
     static {
         byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(DEFAULT_SECRET_KEY);

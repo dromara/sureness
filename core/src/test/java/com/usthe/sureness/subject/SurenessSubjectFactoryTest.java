@@ -48,7 +48,7 @@ class SurenessSubjectFactoryTest {
         HttpServletRequest request = createNiceMock(HttpServletRequest.class);
         expect(request.getHeader(AUTHORIZATION)).andStubReturn(BASIC + " "
                 + new String(Base64.getEncoder().encode("admin:admin".getBytes(StandardCharsets.UTF_8))));
-        expect(request.getRequestURI()).andStubReturn("/api/v1/book");
+        expect(request.getServletPath()).andStubReturn("/api/v1/book");
         expect(request.getMethod()).andStubReturn("put");
         expect(request.getRemoteHost()).andStubReturn("192.167.2.1");
         replay(request);

@@ -1,6 +1,8 @@
 package com.usthe.sureness.util;
 
 import io.jsonwebtoken.Claims;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -13,6 +15,20 @@ import static org.junit.jupiter.api.Assertions.*;
  * @date 16:20 2020-03-08
  */
 public class JsonWebTokenUtilTest {
+
+    private static final String DEFAULT_SECRET_KEY =
+        "MIIEowIBAl+f/dKhaX0csgOCTlCxq20yhmUea6H6JIpST3ST1SE2Rwp" +
+            "LnfKefTjsIfJLBa2YkhEqE/GtcHDTNe4CU6+9y/S5z50Kik70LsP43r" +
+            "RnLN7XNn4wARoQXizIv6MHUsIV+EFfiMw/x7R0ntu4aWr/CWuApcFaj" +
+            "4mWEa6EwrPHTZmbT5Mt45AM2UYhzDHK+0F0rUq3MwH+oXsm+L3F/zjj" +
+            "M6EByXIO+SV5+8tVt4bisXQ13rbN0oxhUZR73+LDj9mxa6rFhMW+lfx" +
+            "CyaFv0bwq2Eik0jdrKUtsA6bx3sDJeFV643R+YYzGMRIqcBIp6AKA98" +
+            "GM2RIqcBIp6-?::4390fsf4sdl6opf)4ZI:tdQMtcQQ14pkOAQdQ546";
+
+    @BeforeEach
+    public void before() {
+        JsonWebTokenUtil.setDefaultSecretKey(DEFAULT_SECRET_KEY);
+    }
 
     @Test
     public void issueJwt() {

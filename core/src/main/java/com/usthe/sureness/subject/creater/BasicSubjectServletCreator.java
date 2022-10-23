@@ -3,6 +3,7 @@ package com.usthe.sureness.subject.creater;
 import com.usthe.sureness.subject.Subject;
 import com.usthe.sureness.subject.SubjectCreate;
 import com.usthe.sureness.subject.support.PasswordSubject;
+import com.usthe.sureness.util.ServletUtil;
 import com.usthe.sureness.util.SurenessConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +65,7 @@ public class BasicSubjectServletCreator implements SubjectCreate {
         username = username.trim();
         String password = auth[1] == null ? null : auth[1].trim();
         String remoteHost = ((HttpServletRequest) context).getRemoteHost();
-        String requestUri = ((HttpServletRequest) context).getRequestURI();
+        String requestUri = ServletUtil.getRequestUri((HttpServletRequest) context);
         String requestType = ((HttpServletRequest) context).getMethod();
         String targetUri = requestUri.concat("===").concat(requestType).toLowerCase();
         return PasswordSubject.builder(username, password)
