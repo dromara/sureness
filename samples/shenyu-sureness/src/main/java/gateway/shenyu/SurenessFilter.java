@@ -1,38 +1,53 @@
-package gateway.sureness;
+package gateway.shenyu;
 
 import com.usthe.sureness.mgt.SurenessSecurityManager;
 import com.usthe.sureness.processor.exception.*;
 import com.usthe.sureness.subject.SubjectSum;
 import com.usthe.sureness.util.SurenessContextHolder;
 import io.netty.buffer.UnpooledByteBufAllocator;
+import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cloud.gateway.filter.GatewayFilter;
-import org.springframework.cloud.gateway.filter.GatewayFilterChain;
-import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.NettyDataBufferFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebFilter;
+import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+
+import javax.annotation.Nonnull;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
 
 /**
- * sureness filter
- * @author tomsun28
- * @date 2021/4/28 23:23
+ * @title: SurenessConfiguration
+ * @Author hqgordon
+ * @Date: 2021/7/31 5:13 下午
+ * @Description: sureness过滤器
+ * @Version 1.0
  */
-public class SurenessFilter implements GatewayFilter, Ordered {
+@Component
+@Order(-1)
+public class SurenessFilter implements WebFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(SurenessFilter.class);
-
+    /*
+     * @Author hqgordon
+     * @Description //TODO
+     * @Date 2021/8/4 8:38 上午
+     * @Param [exchange, chain]
+     * @return reactor.core.publisher.Mono<java.lang.Void>
+     **/
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    @Nonnull
+    public Mono<Void> filter(ServerWebExchange exchange, @NonNull WebFilterChain chain) {
         ServerHttpRequest request =  exchange.getRequest();
         try {
             SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(request);
@@ -56,24 +71,18 @@ public class SurenessFilter implements GatewayFilter, Ordered {
             logger.error("other exception happen: ", e);
             return responseWrite(exchange, HttpStatus.FORBIDDEN, e.getMessage(),null);
         }
-
         return chain.filter(exchange).doFinally(x -> SurenessContextHolder.unbindSubject());
-    }
 
-    @Override
-    public int getOrder() {
-        return 0;
     }
-
-    /**
-     * write response json data
-     * @param exchange content
-     * @param statusCode statusCode
-     * @param message message
-     */
+    /*
+     * @Author hqgordon
+     * @Description //TODO
+     * @Date 2021/8/4 8:38 上午
+     * @Param [exchange, statusCode, message, headers]
+     * @return reactor.core.publisher.Mono<java.lang.Void>
+     **/
     private Mono<Void> responseWrite(ServerWebExchange exchange, HttpStatus statusCode,
                                      String message, Map<String,String> headers) {
-
         exchange.getResponse().setStatusCode(statusCode);
         if (headers != null) {
             headers.forEach((key, value) -> exchange.getResponse().getHeaders().add(key, value));
@@ -89,4 +98,5 @@ public class SurenessFilter implements GatewayFilter, Ordered {
             return exchange.getResponse().setComplete();
         }
     }
+
 }

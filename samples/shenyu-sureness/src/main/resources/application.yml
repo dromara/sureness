@@ -1,0 +1,13 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+management:
+  health:
+    defaults:
+      enabled: false
+soul:
+  sync:
+    websocket:
+      urls: ws://localhost:9095/websocket
+server:
+  port: 9195
