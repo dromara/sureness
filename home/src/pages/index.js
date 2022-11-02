@@ -300,6 +300,9 @@ function Home() {
                         </>
                     }
                 />
+                <Section>
+                    <Sponsor headerTitle={translate({ message: 'sponsor' })}/>
+                </Section>
                 {/*Friend Links*/}
                 <Section>
                     <LogoCarousel logos={friendLinks} headerTitle={translate({message: 'Friend Links'})}/>
