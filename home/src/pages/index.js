@@ -15,6 +15,7 @@ import cdnTransfer from '../CdnTransfer'
 
 import styles from './styles.module.css'
 import { features, SetupExample, SurenessIntegration, friendLinks, mediaPartners } from '../constants'
+import Sponsor from "./components/Sponsor";
 
 function Home() {
     const context = useDocusaurusContext()
@@ -66,6 +67,9 @@ function Home() {
                 </div>
             </header>
             <main>
+                <Section>
+                    <Sponsor headerTitle={translate({ message: 'sponsor' })}/>
+                </Section>
                 {features && features.length > 0 && (
                     <Section isDark>
                         {features.map((props, idx) => (

@@ -1,22 +1,22 @@
 {
   "version.label": {
-    "message": "下一篇",
+    "message": "Next",
     "description": "The label for version current"
   },
   "sidebar.docs.category.Guides": {
-    "message": "入门",
+    "message": "Guides",
     "description": "The label for category Guides in sidebar docs"
   },
   "sidebar.docs.category.Advanced": {
-    "message": "进阶扩展",
+    "message": "Advanced",
     "description": "The label for category Advanced in sidebar docs"
   },
   "sidebar.docs.category.Integrate": {
-    "message": "集成案例",
+    "message": "Integrate",
     "description": "The label for category Integrate in sidebar docs"
   },
   "sidebar.docs.category.Others": {
-    "message": "其它",
+    "message": "Others",
     "description": "The label for category Others in sidebar docs"
   }
 }
