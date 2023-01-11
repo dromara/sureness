@@ -1,12 +1,3 @@
-自荐下我们新的全职开源项目  **[HertzBeat赫兹节拍](https://gitee.com/dromara/hertzbeat)** - 易用友好的高性能监控告警系统。  
-网站监测，PING连通性，端口可用性，数据库监控，API监控，自定义监控，阈值告警，告警通知。
-
-**代码仓库: [GITHUB](https://github.com/dromara/hertzbeat) | [GITEE](https://gitee.com/dromara/hertzbeat)**   
-**官网: [hertzbeat.com](https://hertzbeat.com) | [tancloud.cn](https://tancloud.cn)**  
-**[在线使用](https://console.tancloud.cn)** https://console.tancloud.cn    
-
-欢迎使用，点赞，推荐，灰常感谢🙏。
-
 <p align="center">
   <a href="https://github.com/usthe/sureness">
     <img alt="sureness" src="./docs/_media/brand128.svg">
@@ -262,6 +253,7 @@ Sureness提供了下面这些常用接口作为扩展点:
 
 ## 🌞 开源推荐   
 
+* **```HertzBeat```** 易用友好的实时监控系统，无需Agent，强大自定义监控能力: [Github](https://github.com/dromara/hertzbeat)   
 * **```JustAuth```** 小而全而美的第三方登录开源组件: [Gitee](https://gitee.com/yadong.zhang/JustAuth)  
 * **```MaxKey```** 业界领先的企业级开源IAM身份管理和身份认证产品: [Gitee](https://gitee.com/dromara/MaxKey)    
 * **```PhalApi```** 一个轻量级PHP开源接口框架: [官网](https://www.phalapi.net/)    
