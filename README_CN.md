@@ -248,8 +248,9 @@ Sureness提供了下面这些常用接口作为扩展点:
 
 <img alt="planet" src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/planet.jpg" width="400"/>    
 
-[Github Discussion](https://github.com/usthe/sureness/discussions)           
-[Gitter Channel](https://gitter.im/usthe/sureness)      
+QQ Group: 390083213    
+[Github Discussion](https://github.com/dromara/sureness/discussions)             
+[Gitter Channel](https://gitter.im/dromara/sureness)         
 
 ## 🌞 开源推荐   
 
