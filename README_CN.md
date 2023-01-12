@@ -262,3 +262,7 @@ QQ Group: 390083213
 
 ## 🛡️ License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)
+
+## 🎟️ Thanks
+
+[![JetBrains](home/static/img/jb_beam.svg)](https://www.jetbrains.com/community/opensource/#support)   
