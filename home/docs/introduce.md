@@ -64,6 +64,6 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 - [x] Sureness integration **Ktor** sample [sample-ktor](docs/integrate/sample-ktor)    
 - [x] Sureness integration **Spring Webflux** sample [spring-webflux-sureness](docs/integrate/sample-spring-webflux)   
 - [x] Sureness integration **Micronaut** sample [sample-micronaut](docs/integrate/sample-micronaut)  
-- [x] Sureness integration Session sample [sureness-session](https://github.com/usthe/sureness/tree/master/samples/sureness-session)
-- [x] Sureness integration Redis Session cache sample [sureness-redis-session](https://github.com/usthe/sureness/tree/master/samples/sureness-redis-session)
+- [x] Sureness integration Session sample [sureness-session](https://github.com/dromara/sureness/tree/master/samples/sureness-session)
+- [x] Sureness integration Redis Session cache sample [sureness-redis-session](https://github.com/dromara/sureness/tree/master/samples/sureness-redis-session)
 - [x] More samples todo   
