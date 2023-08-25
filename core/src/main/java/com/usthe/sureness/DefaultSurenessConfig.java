@@ -34,6 +34,7 @@ public class DefaultSurenessConfig {
     private static final Logger logger = LoggerFactory.getLogger(DefaultSurenessConfig.class);
 
     public static final String SUPPORT_SERVLET = "servlet";
+    public static final String SUPPORT_JAKARTA_SERVLET = "jakarta-servlet";
     public static final String SUPPORT_JAX_RS = "jax-rs";
     public static final String SUPPORT_SPRING_REACTIVE = "spring-reactive";
 
@@ -94,6 +95,13 @@ public class DefaultSurenessConfig {
                     new BasicSubjectSpringReactiveCreator(),
                     new JwtSubjectSpringReactiveCreator(),
                     new JwtSubjectWsSpringReactiveCreator());
+        } else if (SUPPORT_JAKARTA_SERVLET.equals(supportContainer)) {
+            subjectCreates = Arrays.asList(
+                    new NoneSubjectJakartaServletCreator(),
+                    new DigestSubjectJakartaServletCreator(),
+                    new BasicSubjectJakartaServletCreator(),
+                    new JwtSubjectJakartaServletCreator(),
+                    new JwtSubjectJakartaServletCreator());
         } else {
             subjectCreates = Arrays.asList(
                     new NoneSubjectServletCreator(),
