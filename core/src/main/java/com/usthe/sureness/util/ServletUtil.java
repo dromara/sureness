@@ -20,7 +20,14 @@ public class ServletUtil {
             valueOrEmpty(request.getPathInfo());
         return normalize(decodeAndCleanUriString(request, uri));
 	}
-
+    
+    public static String getRequestUri(jakarta.servlet.http.HttpServletRequest request) {
+        String uri = valueOrEmpty(request.getContextPath()) + "/" +
+                             valueOrEmpty(request.getServletPath()) +
+                             valueOrEmpty(request.getPathInfo());
+        return normalize(decodeAndCleanUriString(request, uri));
+    }
+    
 	public static String valueOrEmpty(String value) {
 		if (value == null) {
 			return "";
@@ -32,6 +39,11 @@ public class ServletUtil {
 		uri = decodeRequestString(request, uri);
 		return removeSemicolon(uri);
 	}
+    
+    private static String decodeAndCleanUriString(jakarta.servlet.http.HttpServletRequest request, String uri) {
+        uri = decodeRequestString(request, uri);
+        return removeSemicolon(uri);
+    }
 
 	private static String removeSemicolon(String uri) {
 		int semicolonIndex = uri.indexOf(';');
@@ -46,6 +58,15 @@ public class ServletUtil {
 			return URLDecoder.decode(source);
 		}
 	}
+    
+    public static String decodeRequestString(jakarta.servlet.http.HttpServletRequest request, String source) {
+        String enc = determineEncoding(request);
+        try {
+            return URLDecoder.decode(source, enc);
+        } catch (UnsupportedEncodingException ex) {
+            return URLDecoder.decode(source);
+        }
+    }
 
 	protected static String determineEncoding(HttpServletRequest request) {
 		String enc = request.getCharacterEncoding();
@@ -54,6 +75,14 @@ public class ServletUtil {
 		}
 		return enc;
 	}
+    
+    protected static String determineEncoding(jakarta.servlet.http.HttpServletRequest request) {
+        String enc = request.getCharacterEncoding();
+        if (enc == null) {
+            enc = DEFAULT_CHARACTER_ENCODING;
+        }
+        return enc;
+    }
 
     private static String normalize(String path) {
 
