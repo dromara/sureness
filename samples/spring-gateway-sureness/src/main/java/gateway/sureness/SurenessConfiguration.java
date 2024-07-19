@@ -1,7 +1,7 @@
 package gateway.sureness;
 
 
-import com.usthe.sureness.DefaultSurenessConfig;
+import org.dromara.sureness.DefaultSurenessConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

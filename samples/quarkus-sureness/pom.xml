@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>samples</artifactId>
-    <groupId>com.usthe.sureness</groupId>
+    <groupId>org.dromara.sureness</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>quarkus-sureness</artifactId>
@@ -34,7 +34,7 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>com.usthe.sureness</groupId>
+      <groupId>org.dromara.sureness</groupId>
       <artifactId>sureness-core</artifactId>
     </dependency>
     <dependency>

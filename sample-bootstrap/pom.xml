@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>sureness</artifactId>
-        <groupId>com.usthe.sureness</groupId>
+        <groupId>org.dromara.sureness</groupId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -33,7 +33,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.usthe.sureness</groupId>
+            <groupId>org.dromara.sureness</groupId>
             <artifactId>sureness-core</artifactId>
         </dependency>
         <dependency>

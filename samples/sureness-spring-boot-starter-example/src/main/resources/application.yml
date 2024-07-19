@@ -20,7 +20,7 @@ sureness:
   annotation:
     enable: true
     scan-packages:
-      - com.usthe.sureness.bootstrap.controller
+      - org.dromara.sureness.bootstrap.controller
   session:
     enable: true
   websocket:

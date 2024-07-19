@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.usthe.sureness</groupId>
+    <groupId>org.dromara.sureness</groupId>
     <artifactId>sureness-core</artifactId>
     <version>1.1.0</version>
     <packaging>jar</packaging>
@@ -27,8 +27,8 @@
         <developer>
             <name>tomsun28</name>
             <email>tomsun28@outlook.com</email>
-            <organization>usthe</organization>
-            <organizationUrl>usthe.com</organizationUrl>
+            <organization>dromara</organization>
+            <organizationUrl>dromara.org</organizationUrl>
         </developer>
     </developers>
 

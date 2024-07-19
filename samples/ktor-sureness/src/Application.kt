@@ -1,9 +1,9 @@
 package com.usthe.sureness.demo
 
-import com.usthe.sureness.DefaultSurenessConfig
-import com.usthe.sureness.mgt.SurenessSecurityManager
-import com.usthe.sureness.processor.exception.*
-import com.usthe.sureness.util.SurenessContextHolder
+import org.dromara.sureness.DefaultSurenessConfig
+import org.dromara.sureness.mgt.SurenessSecurityManager
+import org.dromara.sureness.processor.exception.*
+import org.dromara.sureness.util.SurenessContextHolder
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCallPipeline
 import io.ktor.application.call
