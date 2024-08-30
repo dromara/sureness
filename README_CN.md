@@ -40,7 +40,25 @@
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
-##### 鉴权框架对比     
+##### 框架支持样例    
+
+- [x] Sureness集成**Spring Boot**样例(配置文件方案) [sample-bootstrap](sample-bootstrap)   
+- [x] Sureness集成**Spring Boot**样例(数据库方案) [sample-tom](sample-tom)  
+- [x] Sureness集成**Quarkus**样例 [sample-quarkus](samples/quarkus-sureness)  
+- [x] Sureness集成**Javalin**样例 [sample-javalin](samples/javalin-sureness)    
+- [x] Sureness集成**Ktor**样例 [sample-ktor](samples/ktor-sureness)   
+- [x] Sureness集成**Spring Webflux**样例 [sample-spring-webflux](samples/spring-webflux-sureness)
+- [x] Sureness集成**Micronaut**样例 [sample-micronaut](samples/micronaut-sureness)
+- [x] Sureness集成**Jfinal**样例 [sample-jfinal](samples/jfinal-sureness)
+- [x] Sureness集成**Solon**样例 [sample-solon](samples/solon-sureness)
+- [x] Sureness集成**Spring Gateway**样例 [sample-spring-gateway](samples/spring-gateway-sureness)
+- [x] Sureness集成**Zuul**样例 [sample-zuul](samples/zuul-sureness)
+- [x] Sureness使用Session样例 [sureness-session](samples/sureness-session)  
+- [x] Sureness分布式缓存Session样例 [sureness-redis-session](samples/sureness-redis-session)  
+- [x] More samples todo   
+
+## 鉴权框架对比  
+##### Sureness VS Shiro VS Spring Security
 
 | ~         | Sureness | Shiro | Spring Security |
 | ---       | ---      | ---   | ---  |
@@ -61,26 +79,8 @@
 
 **基准测试显示Sureness对比无权限框架应用损耗0.026ms性能，Shiro损耗0.088ms,Spring Security损耗0.116ms，
 相比之下Sureness性能(参考TPS损耗)是Shiro的3倍，Spring Security的4倍**     
-**性能差距会随着api匹配链的增加而进一步拉大**     
-详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)    
-
-##### 框架支持样例    
-
-- [x] Sureness集成**Spring Boot**样例(配置文件方案) [sample-bootstrap](sample-bootstrap)   
-- [x] Sureness集成**Spring Boot**样例(数据库方案) [sample-tom](sample-tom)  
-- [x] Sureness集成**Quarkus**样例 [sample-quarkus](samples/quarkus-sureness)  
-- [x] Sureness集成**Javalin**样例 [sample-javalin](samples/javalin-sureness)    
-- [x] Sureness集成**Ktor**样例 [sample-ktor](samples/ktor-sureness)   
-- [x] Sureness集成**Spring Webflux**样例 [sample-spring-webflux](samples/spring-webflux-sureness)
-- [x] Sureness集成**Micronaut**样例 [sample-micronaut](samples/micronaut-sureness)
-- [x] Sureness集成**Jfinal**样例 [sample-jfinal](samples/jfinal-sureness)
-- [x] Sureness集成**Solon**样例 [sample-solon](samples/solon-sureness)
-- [x] Sureness集成**Spring Gateway**样例 [sample-spring-gateway](samples/spring-gateway-sureness)
-- [x] Sureness集成**Zuul**样例 [sample-zuul](samples/zuul-sureness)
-- [x] Sureness使用Session样例 [sureness-session](samples/sureness-session)  
-- [x] Sureness分布式缓存Session样例 [sureness-redis-session](samples/sureness-redis-session)  
-- [x] More samples todo   
-
+**性能差距会随着api匹配链的增加而进一步拉大** , 详见[基准测试](https://github.com/tomsun28/sureness-shiro-spring-security)       
+  
 
 ## 快速开始  
 

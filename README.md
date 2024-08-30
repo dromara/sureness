@@ -40,7 +40,25 @@
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
-#####  Compare     
+##### Framework Sample Support  
+
+- [x] Sureness integration **Spring Boot** sample(configuration file scheme) [sample-bootstrap](sample-bootstrap)   
+- [x] Sureness integration **Spring Boot** sample(database scheme) [sample-tom](sample-tom)  
+- [x] Sureness integration **Quarkus** sample [sample-quarkus](samples/quarkus-sureness)  
+- [x] Sureness integration **Javalin** sample [sample-javalin](samples/javalin-sureness)    
+- [x] Sureness integration **Ktor** sample [sample-ktor](samples/ktor-sureness)   
+- [x] Sureness integration **Spring Webflux** sample [sample-spring-webflux](samples/spring-webflux-sureness)
+- [x] Sureness integration **Micronaut** sample [sample-micronaut](samples/micronaut-sureness)
+- [x] Sureness integration **Jfinal** sample [sample-jfinal](samples/jfinal-sureness)
+- [x] Sureness integration **Solon** sample [sample-solon](samples/solon-sureness)
+- [x] Sureness integration **Spring Gateway** sample [sample-spring-gateway](samples/spring-gateway-sureness)  
+- [x] Sureness integration **Zuul** sample [sample-zuul](samples/zuul-sureness)    
+- [x] Sureness integration Session sample [sureness-session](samples/sureness-session)    
+- [x] Sureness integration Redis Session cache sample [sureness-redis-session](samples/sureness-redis-session)  
+- [x] More samples todo  
+
+##  security framework Compare 
+##### Sureness VS Shiro VS Spring Security   
 
 | ~         | Sureness | Shiro | Spring Security |
 | ---       | ---      | ---   | --- |
@@ -61,26 +79,7 @@
 
 **Benchmark test shows Sureness to lose 0.026ms performance compared to frameless application, Shiro lose 0.088ms, Spring Security lose 0.116ms.**    
 **In contrast, Sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of Shiro and 4 times that of Spring Security.**      
-**The performance gap will be further widened as the api matching chain increases.**      
-
-Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark)       
-
-##### Framework Sample Support  
-
-- [x] Sureness integration **Spring Boot** sample(configuration file scheme) [sample-bootstrap](sample-bootstrap)   
-- [x] Sureness integration **Spring Boot** sample(database scheme) [sample-tom](sample-tom)  
-- [x] Sureness integration **Quarkus** sample [sample-quarkus](samples/quarkus-sureness)  
-- [x] Sureness integration **Javalin** sample [sample-javalin](samples/javalin-sureness)    
-- [x] Sureness integration **Ktor** sample [sample-ktor](samples/ktor-sureness)   
-- [x] Sureness integration **Spring Webflux** sample [sample-spring-webflux](samples/spring-webflux-sureness)
-- [x] Sureness integration **Micronaut** sample [sample-micronaut](samples/micronaut-sureness)
-- [x] Sureness integration **Jfinal** sample [sample-jfinal](samples/jfinal-sureness)
-- [x] Sureness integration **Solon** sample [sample-solon](samples/solon-sureness)
-- [x] Sureness integration **Spring Gateway** sample [sample-spring-gateway](samples/spring-gateway-sureness)  
-- [x] Sureness integration **Zuul** sample [sample-zuul](samples/zuul-sureness)    
-- [x] Sureness integration Session sample [sureness-session](samples/sureness-session)    
-- [x] Sureness integration Redis Session cache sample [sureness-redis-session](samples/sureness-redis-session)  
-- [x] More samples todo  
+**The performance gap will be further widened as the api matching chain increases.**Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark)       
 
 ##  Quick Start 
 
