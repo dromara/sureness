@@ -27,16 +27,18 @@
 
 ## <font color="green">Introduction</font>
 
-> [Sureness](https://github.com/dromara/sureness) is a efficient open-source security framework that focus on the protection of REST API.  
-> Provide authentication and authorization, based on RBAC.   
-> No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, Micronaut and more).    
-> Supports dynamic modification of permissions.   
-> Supports WebSockets and HTTP containers (Servlet and JAX-RS).    
-> Supports JWT, Basic Auth, Digest Auth, and can custom auth methods.    
-> High performance with Dictionary Matching Tree.      
-> Good extension interface, demos and documentation.
+**Sureness** is a efficient open-source security framework that focus on the protection of REST API.  
+- Provide authentication and authorization, based on RBAC.   
+- No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, Micronaut and more).    
+- Supports dynamic modification of permissions.   
+- Supports WebSockets and HTTP containers (Servlet and JAX-RS).    
+- Supports JWT, Basic Auth, Digest Auth, and can custom auth methods.    
+- High performance with Dictionary Matching Tree.      
+- Good extension interface, demos and documentation.
 
-> Sureness has a sensible default configuration, is easy to customize, and is not couple to any one framework, which enables developers to quickly and safely protect their projects in multiple scenarios.
+#####  Why Is High Performance  
+
+![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
 #####  Compare     
 
@@ -233,9 +235,7 @@ Components of Repository:
 
 See [CONTRIBUTING](CONTRIBUTING.md)    
 
-####  Why Is High Performance  
 
-![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
 ## Friend's Links   
 

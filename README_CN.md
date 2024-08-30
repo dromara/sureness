@@ -25,27 +25,22 @@
 
 |  <a href="https://gitcode.com/dromara/sureness/overview" target="_blank"><b>GitCode</b></a>        |  <a href="https://gitee.com/dromara/sureness" target="_blank"><b>Gitee</b></a>  |<a href="https://github.com/dromara/sureness" target="_blank"><b>GitHub</b></a>  |
 
-
-
-## 背景         
-
-在主流的前后端分离架构中，如何通过有效快速的认证鉴权来保护后端提供的`REST API`变得尤为重要。
-于是乎`Sureness`诞生了，我们希望能解决这些，提供一个面向**REST API**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。      
-
 ## <font color="green">介绍</font>
 
-> [Sureness](https://github.com/dromara/sureness) 是全新设计开发的一个认证鉴权框架     
-> 面向 `REST API` 的认证鉴权,基于 `RBAC` (用户-角色-资源)主要关注于对 `API` 的安全保护     
-> 无特定Web框架依赖(已有 `Spring Boot,Quarkus,Javalin,Ktor,Micronaut,Jfinal,Solon` 等集成样例)     
-> 支持动态修改权限配置(动态修改配置每个 `API` 谁有权访问)   
-> 支持 `Websocket` ,主流 `HTTP` 容器 `Servlet` 和 `JAX-RS`       
-> 支持多种认证策略, `JWT, Basic Auth, Digest Auth` ... 可扩展自定义认证方式      
-> 基于改进的字典匹配树拥有的高性能       
-> 良好的扩展接口, 样例和文档助急速理解扩展使用   
+**Sureness** 是全新设计开发的一个认证鉴权框架，提供一个面向**REST API**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。     
+- 面向 `REST API` 的认证鉴权,基于 `RBAC` (用户-角色-资源)主要关注于对 `API` 的安全保护     
+- 无特定Web框架依赖(已有 `Spring Boot,Quarkus,Javalin,Ktor,Micronaut,Jfinal,Solon` 等集成样例)     
+- 支持动态修改权限配置(动态修改配置每个 `API` 谁有权访问)   
+- 支持 `Websocket` ,主流 `HTTP` 容器 `Servlet` 和 `JAX-RS`       
+- 支持多种认证策略, `JWT, Basic Auth, Digest Auth` ... 可扩展自定义认证方式      
+- 基于改进的字典匹配树拥有的高性能       
+- 良好的扩展接口, 样例和文档助急速理解扩展使用   
 
-> `Sureness`的低配置，易扩展，不耦合其他框架，希望能对系统多场景快速安全的保护      
+#####  高性能匹配      
 
-##### 对比     
+![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
+
+##### 鉴权框架对比     
 
 | ~         | Sureness | Shiro | Spring Security |
 | ---       | ---      | ---   | ---  |
@@ -235,10 +230,6 @@ Sureness提供了下面这些常用接口作为扩展点:
 - [各个框架使用Sureness的样例项目(Javalin,Ktor,Quarkus)--samples](samples)  
 
 详见 [CONTRIBUTING](CONTRIBUTING.md)   
-
-####  高性能匹配      
-
-![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
 ## 更多相关     
 
