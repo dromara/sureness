@@ -6,7 +6,7 @@
 
 # <font size="14p">Sureness</font> <font size="5p">  | [中文文档](README_CN.md)</font>
 
-> A simple and efficient jvm security framework that focus on the protection of REST API.
+> A efficient security framework that focus on the protection of REST API.
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Maven](https://img.shields.io/badge/Maven%20Central-1.0.5-blue.svg)](https://search.maven.org/artifact/com.usthe.sureness/sureness-core)
@@ -20,14 +20,14 @@
 
 **Home Page: [usthe.com/sureness](https://usthe.com/sureness) | [su.usthe.com](https://su.usthe.com/)**
 
-**Code Hosting **
+**Code Hosting**
 
 |  <a href="https://gitcode.com/dromara/sureness/overview" target="_blank"><b>GitCode</b></a>        |  <a href="https://gitee.com/dromara/sureness" target="_blank"><b>Gitee</b></a>  |<a href="https://github.com/dromara/sureness" target="_blank"><b>GitHub</b></a>  |
 
 
-## 🎡 <font color="green">Introduction</font>
+## <font color="green">Introduction</font>
 
-> [Sureness](https://github.com/dromara/sureness) is a simple and efficient open-source security framework that focus on the protection of REST API.  
+> [Sureness](https://github.com/dromara/sureness) is a efficient open-source security framework that focus on the protection of REST API.  
 > Provide authentication and authorization, based on RBAC.   
 > No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, Micronaut and more).    
 > Supports dynamic modification of permissions.   
@@ -38,7 +38,7 @@
 
 > Sureness has a sensible default configuration, is easy to customize, and is not couple to any one framework, which enables developers to quickly and safely protect their projects in multiple scenarios.
 
-##### 🔍 Compare     
+#####  Compare     
 
 | ~         | Sureness | Shiro | Spring Security |
 | ---       | ---      | ---   | --- |
@@ -53,7 +53,7 @@
 | **Performance** | fast | slower | slower|
 | **Learning Curve** | simple | simple | steep|
 
-##### 📈 Benchmark  
+##### Benchmark  
 
 ![benchmark](docs/_images/benchmark_en.png)  
 
@@ -63,7 +63,7 @@
 
 Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark)       
 
-##### ✌ Framework Sample Support  
+##### Framework Sample Support  
 
 - [x] Sureness integration **Spring Boot** sample(configuration file scheme) [sample-bootstrap](sample-bootstrap)   
 - [x] Sureness integration **Spring Boot** sample(database scheme) [sample-tom](sample-tom)  
@@ -80,9 +80,9 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 - [x] Sureness integration Redis Session cache sample [sureness-redis-session](samples/sureness-redis-session)  
 - [x] More samples todo  
 
-## 🔨 Quick Start 
+##  Quick Start 
 
-#### 🐕 <font color="red">Some Conventions</font>  
+####  <font color="red">Some Conventions</font>  
 
 - Based RBAC, User-Role-Resource.    
 - We treat API requests as a resource, resource format like `requestUri===httpMethod`.   
@@ -92,7 +92,7 @@ Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-se
 
 Resource path matching see: [URI Match](docs/path-match.md)  
 
-#### 🐖 Add Sureness In Your Project  
+####  Add Sureness In Your Project  
 
 When use maven or gradle build project, add coordinate  
 ```
@@ -106,7 +106,7 @@ When use maven or gradle build project, add coordinate
 compile group: 'com.usthe.sureness', name: 'sureness-core', version: '1.1.0'
 ```
 
-#### 🐵 Use the Default Configuration to Configure Sureness  
+####  Use the Default Configuration to Configure Sureness  
 
 The default configuration -`DefaultSurenessConfig` uses the document datasource `sureness.yml` as the auth datasource.  
 It supports JWT auth, Basic auth, Digest authentication.  
@@ -117,7 +117,7 @@ public DefaultSurenessConfig surenessConfig() {
 }
 ```
 
-#### 🐮 Load Auth Config DataSource   
+####  Load Auth Config DataSource   
 
 Sureness authentication requires us to provide our own account data, role permission data, etc. These data may come from text, relational databases, non-relational databases, annotations, etc.   
 We provide interfaces `SurenessAccountProvider`, `PathTreeProvider` for user implement to load data from the dataSource where they want.  
@@ -132,7 +132,7 @@ If the configuration resource data comes from text, please refer to  [Sureness i
 If the configuration resource data comes from dataBase, please refer to  [Sureness integration Spring Boot sample(database scheme)](https://github.com/tomsun28/sureness/tree/master/sample-tom)   
 
 
-#### 🐐 Add an Interceptor Intercepting All Requests  
+####  Add an Interceptor Intercepting All Requests  
 
 The essence of Sureness is to intercept all rest requests for authenticating and authorizing.        
 The interceptor can be a filter or a Spring interceptor, it intercepts all request to check them.  
@@ -140,7 +140,7 @@ The interceptor can be a filter or a Spring interceptor, it intercepts all reque
 SubjectSum subject = SurenessSecurityManager.getInstance().checkIn(servletRequest)
 ```
 
-#### 🐰 Implement Auth Exception Handling Process    
+####  Implement Auth Exception Handling Process    
 
 Sureness uses exception handling process:  
 
@@ -171,7 +171,7 @@ Detail see: [Default Sureness Auth Exception](docs/default-exception.md)
 
 **Have Fun**      
 
-## 🥐 Advanced Use
+##  Advanced Use
 
 Sureness supports custom subject, custom subjectCreator, custom processor and more.  
 
@@ -191,7 +191,7 @@ Sureness provides the following common interfaces as extension points:
 
 Refer to [Extension Point](https://usthe.com/sureness/#/extend-point) for the extended documentation.   
 
-1. 🥊 **Custom Subject**
+1.  **Custom Subject**
 
 `Implment Subject, add custom subject content`  
 `Implment SubjectCreate to create custom subject`  
@@ -199,20 +199,20 @@ Refer to [Extension Point](https://usthe.com/sureness/#/extend-point) for the ex
 
 See [Custom Subject](docs/custom-subject.md)  
 
-2. 🔫 **Custom SubjectCreator**
+2. **Custom SubjectCreator**
 
 `Implment SubjectCreate to create your custom subject`   
 
 See [Custom SubjectCreator](docs/custom-subject-creator.md)  
 
-3. 🪓 **Custom Processor**
+3.  **Custom Processor**
 
 `A subject also can support by different processor, so we can custom processor to support custom subject`
 `Implment Processor, set which subject can support and implment processing details`
 
 See [Custom Processor](docs/custom-processor.md)  
 
-4. 🏹 **Custom Datasource**  
+4.  **Custom Datasource**  
 
 `Implment PathTreeProvider, load in DefaultPathRoleMatcher`   
 `Implment SurenessAccountProvide, load in processor`  
@@ -221,7 +221,7 @@ See [Custom Datasource](docs/custom-datasource.md)
 
 Detail please refer to  [Sureness integration Spring Boot sample(database scheme)](sample-tom)   
 
-## 🙋 Contributing  
+##  Contributing  
 
 Very welcome to Contribute this project, go further and better with Sureness. 
 
@@ -233,18 +233,18 @@ Components of Repository:
 
 See [CONTRIBUTING](CONTRIBUTING.md)    
 
-#### 💪 Why Is High Performance  
+####  Why Is High Performance  
 
 ![pathRoleMatcher](docs/_images/PathRoleMatcher.svg)  
 
-## 🌞 Friend's Links   
+## Friend's Links   
 
 * **```HertzBeat```** An open-source, real-time monitoring system with custom-monitor and agentLess: [Github](https://github.com/dromara/hertzbeat)   
 * **```JustAuth```** A Java library of third-party authorized login: [Github](https://github.com/justauth/JustAuth)    
 * **```MaxKey```** Leading-Edge Enterprise-Class open source IAM Identity and Access management product: [Github](https://github.com/dromara/MaxKey)   
 * **```PhalApi```** PHP Api Framework: [Website](https://www.phalapi.net/)    
 
-## 💬 Join discussion    
+##  Join discussion    
 
 QQ Group: 390083213   
 [Github Discussion](https://github.com/dromara/sureness/discussions)          
@@ -258,10 +258,10 @@ QQ Group: 390083213
 
 
 
-## 🛡️ License  
+##  License  
 [`Apache License, Version 2.0`](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-## 🎟️ Thanks   
+##  Thanks   
 
 [![JetBrains](home/static/img/jb_beam.svg)](https://www.jetbrains.com/community/opensource/#support)   
 
