@@ -29,20 +29,20 @@ import java.util.List;
  * @author tomsun28
  * @date 11:26 2019-05-26
  */
-public class DefaultSurenessConfig {
+public class SurenessDefaultConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(DefaultSurenessConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(SurenessDefaultConfig.class);
 
     public static final String SUPPORT_SERVLET = "servlet";
     public static final String SUPPORT_JAKARTA_SERVLET = "jakarta-servlet";
     public static final String SUPPORT_JAX_RS = "jax-rs";
     public static final String SUPPORT_SPRING_REACTIVE = "spring-reactive";
 
-    public DefaultSurenessConfig() {
+    public SurenessDefaultConfig() {
         this.init(SUPPORT_SERVLET);
     }
 
-    public DefaultSurenessConfig(String supportContainer) {
+    public SurenessDefaultConfig(String supportContainer) {
         this.init(supportContainer);
     }
 
