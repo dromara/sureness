@@ -8,7 +8,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class ExtSurenessException extends RuntimeException {
 
-    public ExtSurenessException(String message) {
+	private static final long serialVersionUID = 8329942117536125620L;
+
+	public ExtSurenessException(String message) {
         super(message);
     }
 }

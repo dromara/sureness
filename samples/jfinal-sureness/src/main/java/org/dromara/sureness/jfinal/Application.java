@@ -1,6 +1,6 @@
 package org.dromara.sureness.jfinal;
 
-import org.dromara.sureness.DefaultSurenessConfig;
+import org.dromara.sureness.SurenessDefaultConfig;
 
 import com.jfinal.config.*;
 import com.jfinal.server.undertow.UndertowServer;
@@ -20,7 +20,7 @@ public class Application extends JFinalConfig {
     @Override
     public void configConstant(Constants me) {
         // init sureness config
-        new DefaultSurenessConfig();
+        new SurenessDefaultConfig();
         me.setDevMode(true);
     }
 

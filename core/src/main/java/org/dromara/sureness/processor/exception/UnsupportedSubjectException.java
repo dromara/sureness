@@ -8,7 +8,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class UnsupportedSubjectException extends SurenessAuthenticationException {
 
-    public UnsupportedSubjectException(String message) {
+	private static final long serialVersionUID = 5193468392686824045L;
+
+	public UnsupportedSubjectException(String message) {
         super(message);
     }
 

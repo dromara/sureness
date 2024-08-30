@@ -5,7 +5,7 @@ import io.quarkus.runtime.Startup;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.dromara.sureness.DefaultSurenessConfig;
+import org.dromara.sureness.SurenessDefaultConfig;
 
 /**
  * sureness config,Use DefaultSurenessConfig
@@ -20,6 +20,6 @@ public class SurenessConfiguration {
      * init sureness default config
      */
     public SurenessConfiguration() {
-        new DefaultSurenessConfig(DefaultSurenessConfig.SUPPORT_JAX_RS);
+        new SurenessDefaultConfig(SurenessDefaultConfig.SUPPORT_JAX_RS);
     }
 }

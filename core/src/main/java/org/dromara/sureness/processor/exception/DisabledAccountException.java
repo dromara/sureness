@@ -7,7 +7,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class DisabledAccountException extends SurenessAuthenticationException {
 
-    public DisabledAccountException(String message) {
+	private static final long serialVersionUID = 8944393703712611088L;
+
+	public DisabledAccountException(String message) {
         super(message);
     }
 }

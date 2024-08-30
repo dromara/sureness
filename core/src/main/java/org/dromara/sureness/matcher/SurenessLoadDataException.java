@@ -9,7 +9,9 @@ import org.dromara.sureness.processor.exception.ExtSurenessException;
  */
 public class SurenessLoadDataException extends ExtSurenessException {
 
-    public SurenessLoadDataException(String message) {
+	private static final long serialVersionUID = -6790251019252141726L;
+
+	public SurenessLoadDataException(String message) {
         super(message);
     }
 }

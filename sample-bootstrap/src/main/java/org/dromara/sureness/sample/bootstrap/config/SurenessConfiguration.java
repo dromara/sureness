@@ -1,6 +1,6 @@
 package org.dromara.sureness.sample.bootstrap.config;
 
-import org.dromara.sureness.DefaultSurenessConfig;
+import org.dromara.sureness.SurenessDefaultConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,8 +17,8 @@ public class SurenessConfiguration {
      * @return default config bean
      */
     @Bean
-    public DefaultSurenessConfig surenessConfig() {
-        return new DefaultSurenessConfig();
+    public SurenessDefaultConfig surenessConfig() {
+        return new SurenessDefaultConfig();
     }
 
 }

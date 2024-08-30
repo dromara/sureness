@@ -8,7 +8,8 @@ package org.dromara.sureness.processor.exception;
  */
 public class NeedDigestInfoException extends SurenessAuthenticationException {
 
-    private final String authenticate;
+	private static final long serialVersionUID = 7651386288955053842L;
+	private final String authenticate;
 
     public NeedDigestInfoException(String message, String authenticate) {
         super(message);

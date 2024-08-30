@@ -7,7 +7,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class UnauthorizedException extends SurenessAuthorizationException {
 
-    public UnauthorizedException(String message) {
+	private static final long serialVersionUID = -7713907539505292238L;
+
+	public UnauthorizedException(String message) {
         super(message);
     }
 }

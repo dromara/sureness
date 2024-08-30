@@ -1,6 +1,6 @@
 package org.dromara.sureness.mgt;
 
-import org.dromara.sureness.DefaultSurenessConfig;
+import org.dromara.sureness.SurenessDefaultConfig;
 import org.dromara.sureness.mgt.SecurityManager;
 import org.dromara.sureness.mgt.SurenessSecurityManager;
 import org.dromara.sureness.processor.exception.IncorrectCredentialsException;
@@ -44,7 +44,7 @@ class SurenessSecurityManagerTest {
     @BeforeAll
     static void setUp() {
         DocumentResourceAccess.setYamlName("sureness-sample.yml");
-        new DefaultSurenessConfig(DefaultSurenessConfig.SUPPORT_SERVLET);
+        new SurenessDefaultConfig(SurenessDefaultConfig.SUPPORT_SERVLET);
         assertDoesNotThrow(SurenessSecurityManager::getInstance);
         securityManager = SurenessSecurityManager.getInstance();
         assertNotNull(securityManager);

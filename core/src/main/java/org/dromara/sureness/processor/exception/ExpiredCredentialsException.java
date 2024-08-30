@@ -7,7 +7,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class ExpiredCredentialsException extends SurenessAuthenticationException {
 
-    public ExpiredCredentialsException(String message) {
+	private static final long serialVersionUID = -6757582855462476662L;
+
+	public ExpiredCredentialsException(String message) {
         super(message);
     }
 }

@@ -7,7 +7,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class IncorrectCredentialsException extends SurenessAuthenticationException {
 
-    public IncorrectCredentialsException(String message) {
+	private static final long serialVersionUID = -283801595997077954L;
+
+	public IncorrectCredentialsException(String message) {
         super(message);
     }
 }

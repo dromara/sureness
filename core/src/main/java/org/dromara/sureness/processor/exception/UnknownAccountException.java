@@ -7,7 +7,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class UnknownAccountException extends SurenessAuthenticationException {
 
-    public UnknownAccountException(String message) {
+	private static final long serialVersionUID = -7424387213268192767L;
+
+	public UnknownAccountException(String message) {
         super(message);
     }
 }

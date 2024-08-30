@@ -2,7 +2,7 @@ package org.dromara.sureness.javalin;
 
 import io.javalin.Javalin;
 
-import org.dromara.sureness.DefaultSurenessConfig;
+import org.dromara.sureness.SurenessDefaultConfig;
 import org.dromara.sureness.mgt.SurenessSecurityManager;
 import org.dromara.sureness.processor.exception.*;
 import org.dromara.sureness.subject.SubjectSum;
@@ -27,7 +27,7 @@ public class Application {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         // init sureness default config
-        new DefaultSurenessConfig();
+        new SurenessDefaultConfig();
 
         // init javalin
         Javalin app = Javalin.create().start(8088);

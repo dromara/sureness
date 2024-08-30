@@ -7,7 +7,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class ProcessorNotFoundException extends BaseSurenessException {
 
-    public ProcessorNotFoundException(String message) {
+	private static final long serialVersionUID = 306924477676292358L;
+
+	public ProcessorNotFoundException(String message) {
         super(message);
     }
 }

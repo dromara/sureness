@@ -8,7 +8,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class SurenessAuthenticationException extends BaseSurenessException {
 
-    public SurenessAuthenticationException(String message) {
+	private static final long serialVersionUID = -2636197665321265226L;
+
+	public SurenessAuthenticationException(String message) {
         super(message);
     }
 }

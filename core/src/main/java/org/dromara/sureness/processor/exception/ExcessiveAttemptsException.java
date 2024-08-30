@@ -7,7 +7,9 @@ package org.dromara.sureness.processor.exception;
  */
 public class ExcessiveAttemptsException extends SurenessAuthenticationException {
 
-    public ExcessiveAttemptsException(String message) {
+	private static final long serialVersionUID = -6803340753339433865L;
+
+	public ExcessiveAttemptsException(String message) {
         super(message);
     }
 }
