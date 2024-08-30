@@ -79,7 +79,7 @@
 
 **Benchmark test shows Sureness to lose 0.026ms performance compared to frameless application, Shiro lose 0.088ms, Spring Security lose 0.116ms.**    
 **In contrast, Sureness basically does not consume performance, and the performance (TPS loss) is 3 times that of Shiro and 4 times that of Spring Security.**      
-**The performance gap will be further widened as the api matching chain increases.**Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark)       
+**The performance gap will be further widened as the api matching chain increases.** Detail see [Benchmark Test](https://github.com/tomsun28/sureness-shiro-spring-security-benchmark)       
 
 ##  Quick Start 
 
