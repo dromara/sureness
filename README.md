@@ -57,7 +57,7 @@
 - [x] Sureness integration Redis Session cache sample [sureness-redis-session](samples/sureness-redis-session)  
 - [x] More samples todo  
 
-##  security framework Compare 
+##  Security Framework Compare 
 ##### Sureness VS Shiro VS Spring Security   
 
 | ~         | Sureness | Shiro | Spring Security |
