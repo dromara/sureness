@@ -18,7 +18,7 @@
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <main.class>io.ktor.server.netty.EngineMain</main.class>
     </properties>
-    <repositories>
+       <repositories>
         <repository>
             <id>repo1</id>
             <url>https://jcenter.bintray.com</url>
