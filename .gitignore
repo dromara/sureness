@@ -34,3 +34,4 @@ nbdist/
 
 ### VS Code ###
 .vscode/
+/.metadata/
