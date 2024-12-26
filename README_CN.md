@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# <font size="14p">Sureness</font> <font size="5p">  | [English Documentation](README.md)</font>
+# <font size="14p">Dromara Sureness</font> <font size="5p">  | [English Documentation](README.md)</font>
 
 > 面向`REST API`的高性能认证鉴权框架   
 
@@ -16,9 +16,7 @@
 [![star](https://gitee.com/dromara/sureness/badge/star.svg?theme=gray)](https://gitee.com/dromara/sureness/stargazers)
 [![star](https://img.shields.io/github/stars/dromara/sureness?style=social)](https://github.com/dromara/sureness)
 
-<a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - security framework that focus on protection of rest api | Product Hunt"/></a>
-
-**官网: [usthe.com/sureness](https://usthe.com/sureness) | [su.usthe.com](https://su.usthe.com/)**  
+**官网: [sureness.dromara.org](https://sureness.dromara.org)**  
 
 
 **代码托管**
@@ -27,7 +25,7 @@
 
 ## <font color="green">介绍</font>
 
-**Sureness** 是全新设计开发的一个认证鉴权框架，提供一个面向**REST API**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。     
+**Dromara Sureness** 是全新设计开发的一个认证鉴权框架，提供一个面向**REST API**，可以**动态修改权限**，**多认证策略**，**更快速度**，**易用易扩展**的认证鉴权框架。     
 - 面向 `REST API` 的认证鉴权,基于 `RBAC` (用户-角色-资源)主要关注于对 `API` 的安全保护     
 - 无特定Web框架依赖(已有 `Spring Boot,Quarkus,Javalin,Ktor,Micronaut,Jfinal,Solon` 等集成样例)     
 - 支持动态修改权限配置(动态修改配置每个 `API` 谁有权访问)   

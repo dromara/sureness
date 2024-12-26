@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# <font size="14p">Sureness</font> <font size="5p">  | [中文文档](README_CN.md)</font>
+# <font size="14p">Dromara Sureness</font> <font size="5p">  | [中文文档](README_CN.md)</font>
 
 > A efficient security framework that focus on the protection of REST API.
 
@@ -16,9 +16,7 @@
 [![star](https://gitee.com/dromara/sureness/badge/star.svg?theme=gray)](https://gitee.com/dromara/sureness/stargazers)
 [![star](https://img.shields.io/github/stars/dromara/sureness?style=social)](https://github.com/dromara/sureness)
 
-<a href="https://www.producthunt.com/posts/sureness?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-sureness" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=287707&theme=light" alt="sureness - Jvm security framework that focus on protection of rest api | Product Hunt"/></a>
-
-**Home Page: [usthe.com/sureness](https://usthe.com/sureness) | [su.usthe.com](https://su.usthe.com/)**
+**Home Page: [sureness.dromara.org](https://sureness.dromara.org)**
 
 **Code Hosting**
 
@@ -27,7 +25,7 @@
 
 ## <font color="green">Introduction</font>
 
-**Sureness** is a efficient open-source security framework that focus on the protection of REST API.  
+**Dromara Sureness** is a efficient open-source security framework that focus on the protection of REST API.  
 - Provide authentication and authorization, based on RBAC.   
 - No specific framework dependency (supports Javalin, Spring Boot, Quarkus, Ktor, Micronaut and more).    
 - Supports dynamic modification of permissions.   
