@@ -5,7 +5,7 @@ import org.dromara.sureness.subject.SubjectCreate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * custom token creator, get token from http request header - {"Token" : "tokenValue"}

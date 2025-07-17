@@ -4,7 +4,7 @@ package org.dromara.sureness.util;
 import org.dromara.sureness.util.SurenessCommonUtil;
 import org.junit.jupiter.api.Test;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import static org.easymock.EasyMock.*;
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -5,7 +5,7 @@ import org.dromara.sureness.subject.creater.DigestSubjectServletCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static org.easymock.EasyMock.*;
 import static org.easymock.EasyMock.verify;

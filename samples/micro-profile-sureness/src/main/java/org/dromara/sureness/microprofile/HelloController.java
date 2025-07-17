@@ -1,6 +1,6 @@
 package org.dromara.sureness.microprofile;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 

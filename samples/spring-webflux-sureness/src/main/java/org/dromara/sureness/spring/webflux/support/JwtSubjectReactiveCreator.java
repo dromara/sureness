@@ -53,7 +53,7 @@ public class JwtSubjectReactiveCreator implements SubjectCreate {
             InetSocketAddress remoteAddress = ((ServerHttpRequest) context).getRemoteAddress();
             String remoteHost = remoteAddress == null ? "" : remoteAddress.getHostString();
             String requestUri = ((ServerHttpRequest) context).getPath().value();
-            String requestType = ((ServerHttpRequest) context).getMethodValue();
+            String requestType = ((ServerHttpRequest) context).getMethod().name();
             String targetUri = requestUri.concat("===").concat(requestType.toLowerCase());
             return JwtSubject.builder(jwtValue)
                     .setRemoteHost(remoteHost)

@@ -1,7 +1,7 @@
 package org.dromara.sureness.handler;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.dromara.sureness.subject.SubjectSum;
 import org.dromara.sureness.util.SurenessConstant;

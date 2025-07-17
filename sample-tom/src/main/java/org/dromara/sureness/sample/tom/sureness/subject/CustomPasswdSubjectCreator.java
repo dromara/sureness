@@ -1,6 +1,6 @@
 package org.dromara.sureness.sample.tom.sureness.subject;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.dromara.sureness.subject.Subject;
 import org.dromara.sureness.subject.SubjectCreate;

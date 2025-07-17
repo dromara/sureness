@@ -1,6 +1,6 @@
 package org.dromara.sureness.util;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -14,14 +14,8 @@ public class ServletUtil {
 
 	private static final String DEFAULT_CHARACTER_ENCODING = "ISO-8859-1";
 
-	public static String getRequestUri(HttpServletRequest request) {
-        String uri = valueOrEmpty(request.getContextPath()) + "/" +
-            valueOrEmpty(request.getServletPath()) +
-            valueOrEmpty(request.getPathInfo());
-        return normalize(decodeAndCleanUriString(request, uri));
-	}
-    
-    public static String getRequestUri(jakarta.servlet.http.HttpServletRequest request) {
+
+    public static String getRequestUri(HttpServletRequest request) {
         String uri = valueOrEmpty(request.getContextPath()) + "/" +
                              valueOrEmpty(request.getServletPath()) +
                              valueOrEmpty(request.getPathInfo());
@@ -35,12 +29,8 @@ public class ServletUtil {
 		return value;
 	}
 
-	private static String decodeAndCleanUriString(HttpServletRequest request, String uri) {
-		uri = decodeRequestString(request, uri);
-		return removeSemicolon(uri);
-	}
     
-    private static String decodeAndCleanUriString(jakarta.servlet.http.HttpServletRequest request, String uri) {
+    private static String decodeAndCleanUriString(HttpServletRequest request, String uri) {
         uri = decodeRequestString(request, uri);
         return removeSemicolon(uri);
     }
@@ -50,16 +40,8 @@ public class ServletUtil {
 		return (semicolonIndex != -1 ? uri.substring(0, semicolonIndex) : uri);
 	}
 
-	public static String decodeRequestString(HttpServletRequest request, String source) {
-		String enc = determineEncoding(request);
-		try {
-			return URLDecoder.decode(source, enc);
-		} catch (UnsupportedEncodingException ex) {
-			return URLDecoder.decode(source);
-		}
-	}
     
-    public static String decodeRequestString(jakarta.servlet.http.HttpServletRequest request, String source) {
+    public static String decodeRequestString(HttpServletRequest request, String source) {
         String enc = determineEncoding(request);
         try {
             return URLDecoder.decode(source, enc);
@@ -68,15 +50,7 @@ public class ServletUtil {
         }
     }
 
-	protected static String determineEncoding(HttpServletRequest request) {
-		String enc = request.getCharacterEncoding();
-		if (enc == null) {
-			enc = DEFAULT_CHARACTER_ENCODING;
-		}
-		return enc;
-	}
-    
-    protected static String determineEncoding(jakarta.servlet.http.HttpServletRequest request) {
+    protected static String determineEncoding(HttpServletRequest request) {
         String enc = request.getCharacterEncoding();
         if (enc == null) {
             enc = DEFAULT_CHARACTER_ENCODING;

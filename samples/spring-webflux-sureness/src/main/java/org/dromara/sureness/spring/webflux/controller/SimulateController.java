@@ -61,7 +61,7 @@ public class SimulateController {
         String requestUri = httpRequest.getPath().value();
         builder.append(requestUri);
         builder.append("--");
-        String requestType = httpRequest.getMethodValue();
+        String requestType = httpRequest.getMethod().name();
         builder.append(requestType);
         builder.append("--");
         return Collections.singletonMap("result", String.format(SUCCESS_ACCESS_RESOURCE, builder.toString()));
