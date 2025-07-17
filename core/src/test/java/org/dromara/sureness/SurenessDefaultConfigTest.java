@@ -17,7 +17,7 @@ public class SurenessDefaultConfigTest {
     @Test
     public void init() {
         DocumentResourceAccess.setYamlName("sureness-sample.yml");
-        assertDoesNotThrow(() -> new SurenessDefaultConfig(SurenessDefaultConfig.SUPPORT_SERVLET));
+        assertDoesNotThrow(() -> new SurenessDefaultConfig(SurenessDefaultConfig.SUPPORT_JAKARTA_SERVLET));
         assertDoesNotThrow(() -> new SurenessDefaultConfig(SurenessDefaultConfig.SUPPORT_JAX_RS));
     }
 }

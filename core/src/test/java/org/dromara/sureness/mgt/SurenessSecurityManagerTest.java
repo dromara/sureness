@@ -44,7 +44,7 @@ class SurenessSecurityManagerTest {
     @BeforeAll
     static void setUp() {
         DocumentResourceAccess.setYamlName("sureness-sample.yml");
-        new SurenessDefaultConfig(SurenessDefaultConfig.SUPPORT_SERVLET);
+        new SurenessDefaultConfig(SurenessDefaultConfig.SUPPORT_JAKARTA_SERVLET);
         assertDoesNotThrow(SurenessSecurityManager::getInstance);
         securityManager = SurenessSecurityManager.getInstance();
         assertNotNull(securityManager);
