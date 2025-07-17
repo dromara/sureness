@@ -20,8 +20,8 @@ public class NoneProcessor extends BaseProcessor {
     private static final Logger logger = LoggerFactory.getLogger(NoneProcessor.class);
 
     @Override
-    public boolean canSupportSubjectClass(Class<?> var) {
-        return var == NoneSubject.class;
+    public boolean canSupportSubjectClass(Class<?> cls) {
+        return cls == NoneSubject.class;
     }
 
     @Override
@@ -31,6 +31,7 @@ public class NoneProcessor extends BaseProcessor {
 
     @Override
     public Subject authenticated(Subject var) throws SurenessAuthenticationException {
+    	logger.error("the request do not have the auth detail, please input your auth");
         throw new UnknownAccountException("the request do not have the auth detail, please input your auth");
     }
 }

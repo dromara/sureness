@@ -8,7 +8,12 @@ package org.dromara.sureness.sample.tom.service.impl;
  */
 public class DataConflictException extends RuntimeException {
 
-    public DataConflictException(String msg) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9018162942771262068L;
+
+	public DataConflictException(String msg) {
         super(msg);
     }
 }

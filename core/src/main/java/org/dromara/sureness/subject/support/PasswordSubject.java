@@ -96,7 +96,11 @@ public class PasswordSubject implements Subject {
         this.targetUri = (String) var1;
     }
 
-    @Override
+    public String getRemoteHost() {
+		return remoteHost;
+	}
+
+	@Override
     public Object getSupportRoles() {
         return supportRoles;
     }

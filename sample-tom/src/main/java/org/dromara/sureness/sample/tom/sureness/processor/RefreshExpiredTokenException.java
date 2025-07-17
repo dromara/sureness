@@ -8,7 +8,12 @@ import org.dromara.sureness.processor.exception.SurenessAuthenticationException;
  * @date 2020-12-03 23:29
  */
 public class RefreshExpiredTokenException extends SurenessAuthenticationException {
-    public RefreshExpiredTokenException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1918264927084522965L;
+
+	public RefreshExpiredTokenException(String message) {
         super(message);
     }
 }
