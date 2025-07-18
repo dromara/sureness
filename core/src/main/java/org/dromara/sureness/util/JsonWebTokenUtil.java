@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.*;
 import io.jsonwebtoken.security.SignatureException;
 
+import javax.crypto.SecretKey;
 import javax.xml.bind.DatatypeConverter;
 
 import org.dromara.sureness.processor.exception.ExtSurenessException;
@@ -211,38 +212,38 @@ public class JsonWebTokenUtil {
         long currentTimeMillis = System.currentTimeMillis();
         JwtBuilder jwtBuilder = Jwts.builder();
         if (id != null) {
-            jwtBuilder.setId(id);
+            jwtBuilder.id(id);
         }
         if (subject != null) {
-            jwtBuilder.setSubject(subject);
+            jwtBuilder.subject(subject);
         }
         if (issuer != null) {
-            jwtBuilder.setIssuer(issuer);
+            jwtBuilder.issuer(issuer);
         }
         // set issue create time
-        jwtBuilder.setIssuedAt(new Date(currentTimeMillis));
+        jwtBuilder.issuedAt(new Date(currentTimeMillis));
         // set expired time
         if (null != period) {
-            jwtBuilder.setExpiration(new Date(currentTimeMillis + period * 1000));
+            jwtBuilder.expiration(new Date(currentTimeMillis + period * 1000));
         }
         if (null != audience) {
-            jwtBuilder.setAudience(audience);
+            jwtBuilder.claim("aud", audience);
         }
         if (null != payload) {
-            jwtBuilder.setPayload(payload);
+            jwtBuilder.content(payload);
         }
         if (null != notBefore){
-            jwtBuilder.setNotBefore(new Date(notBefore * 1000));
+            jwtBuilder.notBefore(new Date(notBefore * 1000));
         }
         if(null != headerMap) {
-            jwtBuilder.setHeader(headerMap);
+            jwtBuilder.header().add(headerMap);
         }
         //claim param, eg: roles, perms, isRefresh
         if (null != customClaimMap) {
             customClaimMap.forEach(jwtBuilder::claim);
         }
         // compress，optional GZIP
-        jwtBuilder.compressWith(CompressionCodecs.DEFLATE);
+        jwtBuilder.compressWith(Jwts.ZIP.DEF);
         // set secret key
         jwtBuilder.signWith(secretKey);
         return jwtBuilder.compact();
@@ -284,8 +285,8 @@ public class JsonWebTokenUtil {
     public static Claims parseJwt(String jwt) throws ExpiredJwtException, UnsupportedJwtException,
             MalformedJwtException, SignatureException, IllegalArgumentException {
 
-        return Jwts.parserBuilder().setSigningKey(secretKey).build()
-                .parseClaimsJws(jwt).getBody();
+        return Jwts.parser().verifyWith((SecretKey)secretKey).build()
+                .parseSignedClaims(jwt).getPayload();
 
         // token ID -- claims.getId()
         // user ID -- claims.getSubject()
@@ -295,6 +296,7 @@ public class JsonWebTokenUtil {
         // Access claim-roles -- claims.get("roles", String.class)
         // Access claim-permissions -- claims.get("perms", String.class)
     }
+    
 
     /**
      * set the jwt secret key

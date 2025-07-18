@@ -50,7 +50,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
         <javax.ws.rs.version>2.1.1</javax.ws.rs.version>
-        <jjwt.version>0.11.2</jjwt.version>
+        <jjwt.version>0.12.6</jjwt.version>
         <yaml.version>1.26</yaml.version>
         <xml.bind.version>2.3.0</xml.bind.version>
         <slf4j.version>1.7.21</slf4j.version>
